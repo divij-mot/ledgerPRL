@@ -1,4 +1,4 @@
-name: Host and native core checks
+name: Host, oracle and Rust core checks
 on:
   push:
     branches: [main, ledger-bitcoin-prl]

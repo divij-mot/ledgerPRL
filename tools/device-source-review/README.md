@@ -6,6 +6,16 @@ SDK/Pearl source. No build, native/emulator execution, capacity test, device
 installation, seed handling, transaction broadcast, or native-source change was
 performed for this review. The paused native-execution lane remains paused.
 
+## Status update: source-only corrections
+
+After this original baseline review, exact leaf-index response consumption and
+empty signature-acknowledgement checks were added. They were independently
+inspected in the [static patch review](../signing-callback-review/static-post-approval-review.md).
+No corrected native build or execution has occurred. Statements below describing
+unfixed source refer to the original reviewed baseline, retained for evidence;
+the original hash inventory has not been overwritten. This does not qualify a
+new firmware artifact.
+
 ## Result
 
 The fork substantially reuses official Ledger Bitcoin code and preserves an

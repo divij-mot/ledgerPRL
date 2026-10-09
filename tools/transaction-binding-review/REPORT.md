@@ -2,11 +2,11 @@
 
 ## Result
 
-No new exploitable transaction-binding defect was reproduced in the reviewed host paths. The 24 new targeted tests passed on three consecutive runs, the 148 selected existing tests passed, and the dedicated strict TypeScript check passed. No production source was changed by this review.
+No new exploitable transaction-binding defect was reproduced in the reviewed host paths. The initial 24 targeted tests passed on three consecutive runs. An additional source-review follow-up added 11 targeted device-error defense cases; the expanded 35-case suite passed on three consecutive runs. The 148 selected existing tests passed, and the dedicated strict TypeScript check passed. No production source was changed by this review.
 
 This is a bounded host-source and mocked-protocol review, not an audit, native-app qualification, physical-device test, or evidence of live-network spendability. Only the published BIP32 vector-one test seed is used. Never fund the test addresses.
 
-Reviewed checkout: `ledger-bitcoin-prl`, HEAD `bef09f0550eda47956e5862a984a8d584a86fd30`, with pre-existing and concurrent worktree changes. `source-hashes.json` and `final-source-hashes.json` bind the reviewed source bytes; their contents match. A branch/commit identifier alone does not describe this dirty checkout.
+Reviewed checkout: `ledger-bitcoin-prl`, HEAD `bef09f0550eda47956e5862a984a8d584a86fd30`, with pre-existing and concurrent worktree changes. `source-hashes.json`, `final-source-hashes.json` and `device-defense-source-hashes.json` bind the reviewed host source bytes; their contents match. A branch/commit identifier alone does not describe this dirty checkout.
 
 ## New checks and their purpose
 
@@ -18,6 +18,19 @@ Reviewed checkout: `ledger-bitcoin-prl`, HEAD `bef09f0550eda47956e5862a984a8d584
 6. **Imported PSBT and recovery handoff.** Mutation of imported PSBT bytes and the caller's account buffers after invocation cannot change the approved payment. A simulated storage failure raises `VerifiedSigningResultError` carrying the exact complete transaction, from which the companion's standard emergency-backup helper produces an importable backup preserving raw bytes, txid and reserved outpoints.
 
 These add independence and cross-layer state combinations beyond the existing isolated amount/parser/Merkle/yield tests. Cryptographic curve operations and BIP32 derivation still use the project's pinned libraries; this is an independent byte/digest oracle, not an independent elliptic-curve implementation.
+
+## Device-error defense follow-up
+
+The parent supplied two source-review findings as the threat model: a postapproval derivation-error path potentially returns account `/0/0` key/signature while the approved input belongs to `/0/7` or `/1/7`; an account-key re-fetch failure potentially returns final `SW_OK` without any signatures. This review does not independently execute or reproduce those native failure paths. It models only their returned host-protocol bytes, using public test keys and no network or device.
+
+Eleven added tests pass:
+
+- Eight wrong-path cases combine approved `/0/7` or `/1/7`, no prior signature or one earlier valid signature, and either the actual fallback `/0/0` public key or a falsely relabeled approved public key. The fallback signature is independently verified as a genuine signature under `/0/0` over the **unchanged approved transaction digest**; it is not an all-zero/malformed signature or a signature over a substituted payment. It fails under the approved input key.
+- The adapter rejects both the wrong returned key and the relabeled wrong signature with `Device signature failed independent verification`. It does not acknowledge the faulty yield, never calls `onVerifiedSigned`, closes the transport, leaves the session failed, and refuses a later command without sending another APDU.
+- Three completion cases return literal final status `0x9000` with zero signatures, only signature 0, or only signature 1 for a two-input `/0/7` + `/1/7` payment. All reject with `Missing native signature`, close the transport, and never call durable completion. An earlier valid signature therefore creates no false complete-transaction result, including out-of-order partial input 1.
+- Every rejection is an ordinary incomplete-signing failure, not `VerifiedSigningResultError`, and carries no `signedTransaction`. A caller must retain its pre-signing uncertainty/reservations; it cannot infer that no device-side signature exists or automatically retry. The already-selected companion lifecycle tests exercise that incomplete-signing reservation behavior.
+
+**Security boundary:** these tests establish a defense in this adapter against the modeled error outputs. They do not fix the native derivation-error behavior, establish native reachability, show that every other host is safe, qualify the device, or justify ignoring an on-device signing invariant violation. No theft or payment substitution is demonstrated by these host tests.
 
 ## Source findings
 
@@ -35,12 +48,14 @@ The adapter accepts the full non-hardened derivation range, including branch-1 i
 
 ## Evidence
 
-- `transaction-binding.test.ts`: 24 new tests.
-- `replay-1.log`, `replay-2.log`, `replay-3.log`: 24/24 passed each; no skips.
+- `transaction-binding.test.ts`: 35 new tests, including 11 device-error defense cases.
+- `replay-1.log`, `replay-2.log`, `replay-3.log`: original 24/24 passed each; no skips.
+- `device-error-defense.log`: the 11 targeted fault-output defenses passed; no skips.
+- `defense-full-replay-1.log`, `defense-full-replay-2.log`, `defense-full-replay-3.log`: expanded 35/35 passed each; no skips.
 - `existing-regressions.log`: 148/148 passed; no skips. This includes SDK, adapter, CLI, companion DMK transport mocks, emergency recovery, and actual-main.ts PSBT/signing-recovery wrappers. The wrappers additionally report 10 + 18 + 19 mocked lifecycle subcases; these are not counted again as top-level tests.
 - `typecheck.log`: empty successful strict typecheck output.
 - `targeted-tests.log`: earlier successful 22-case run before the two queue-interleaving cases were added.
-- `source-hashes.json`, `final-source-hashes.json`, `results.json`, `SHA256SUMS`: source and evidence bindings.
+- `source-hashes.json`, `final-source-hashes.json`, `device-defense-source-hashes.json`, `results.json`, `SHA256SUMS`: source and evidence bindings.
 
 ## Not executed or established
 

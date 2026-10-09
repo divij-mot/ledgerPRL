@@ -34,3 +34,8 @@ __pycache__/
 !tools/website-privacy-review/ui-review.log
 !tools/host-checkpoint-review/check.log
 !tools/host-checkpoint-review/boundaries-check.log
+!tools/transaction-binding-review/*replay*.log
+!tools/transaction-binding-review/targeted-tests.log
+!tools/transaction-binding-review/existing-regressions.log
+!tools/transaction-binding-review/device-error-defense.log
+!tools/transaction-binding-review/typecheck.log

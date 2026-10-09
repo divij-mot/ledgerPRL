@@ -32,3 +32,18 @@ Until a public security contact is designated, report potential vulnerabilities 
 ## Release gates
 
 Current native scope and evidence are in apps/ledger-bitcoin-prl/README.md and tools/bitcoin-prl-port/README.md. The older docs/firmware.md and native-release-qualification evidence describe the earlier Rust app; those results do not qualify the new C signer. Source-bound builds and emulator checks apply only to each recorded source and artifact identity. Remaining gates include actual supported-device/retail-OS compatibility, physical screens/signing/restore and resource measurements, complete loaded-browser/IndexedDB flows, independent human and dependency review, Ledger vendor review, a production builder/distribution process and a selected project license. Software results and registry advisory scans do not establish these gates.
+
+## Native source corrections awaiting qualification
+
+The [continuation review](tools/device-source-review/README.md) records two
+strict-length exceptions. Independent
+[callback](tools/signing-callback-review/static-post-approval-review.md) and
+[approval-binding](tools/device-approval-review/README.md) reviews also identify
+post-approval failures that are not propagated: a failed derivation read can
+select the account's default `/0/0` key, and a failed account-key re-fetch can
+report success without signatures. These findings were source-confirmed. Minimal defensive guards are now applied
+and independently reviewed at source level; they have not been compiled or
+reproduced in native execution. The digest still
+commits the approved transaction; no spendable substitution, approval bypass or
+private-key extraction is established by these findings. Fresh native positive/negative qualification remains a release
+blocker regardless of host validation rejecting invalid or missing signatures.

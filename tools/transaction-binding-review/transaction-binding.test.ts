@@ -55,15 +55,16 @@ function independentFinal(bundle: SigningBundle, signatures: readonly Uint8Array
     vsize: Math.ceil((3 * unsigned.length + signed.length) / 4),
   };
 }
-function independentSign(bundle: SigningBundle) {
+function independentSignatureAtPath(bundle: SigningBundle, inputIndex: number, branch: 0 | 1, addressIndex: number) {
   const child = testAccount(bundle.network, bundle.account).child;
-  return bundle.inputs.map((input, index) => {
-    const key = child.deriveChild(input.branch).deriveChild(input.index);
-    let k = BigInt("0x" + Buffer.from(key.privateKey!).toString("hex"));
-    if (key.publicKey![0] === 3) k = secp256k1.CURVE.n - k;
-    k = (k + BigInt("0x" + h(tagged("TapTweak", key.publicKey!.slice(1))).toString("hex"))) % secp256k1.CURVE.n;
-    return schnorr.sign(independentDigest(bundle, index), Buffer.from(k.toString(16).padStart(64, "0"), "hex"), new Uint8Array(32));
-  });
+  const key = child.deriveChild(branch).deriveChild(addressIndex);
+  let k = BigInt("0x" + Buffer.from(key.privateKey!).toString("hex"));
+  if (key.publicKey![0] === 3) k = secp256k1.CURVE.n - k;
+  k = (k + BigInt("0x" + h(tagged("TapTweak", key.publicKey!.slice(1))).toString("hex"))) % secp256k1.CURVE.n;
+  return schnorr.sign(independentDigest(bundle, inputIndex), Buffer.from(k.toString(16).padStart(64, "0"), "hex"), new Uint8Array(32));
+}
+function independentSign(bundle: SigningBundle) {
+  return bundle.inputs.map((input, index) => independentSignatureAtPath(bundle, index, input.branch, input.index));
 }
 function fixture(name: NetworkName, count: number, total: bigint, p2mr = false) {
   const { account, xpub } = testAccount(name, 3);
@@ -308,5 +309,74 @@ for (const finalSignature of [false, true]) {
     } else await assert.rejects(pending, /Pending continuation queue/);
     assert.equal(saved, finalSignature ? 1 : 0);
     assert.equal(client.sessionState, "failed"); assert(transport.closed);
+  });
+}
+
+// Source-review follow-up: model a failed native path re-derivation yielding
+// account /0/0 over the UNCHANGED approved transaction digest. This does not
+// execute native code or establish the fault's reachability on a device.
+for (const branch of [0, 1] as const) for (const priorValid of [false, true]) for (const reportedKey of ["fallback", "approved"] as const) {
+  test(`device-error defense: approved /${branch}/7, /0/0 signer, priorValid=${priorValid}, key=${reportedKey}`, async () => {
+    const f = fixture("regtest", priorValid ? 2 : 1, 9007199254740993n);
+    const target = priorValid ? 1 : 0;
+    Object.assign(f.bundle.inputs[target]!, { branch, index: 7, scriptPubKey: deriveAddress(f.account, branch, 7).scriptPubKey });
+    f.signatures = independentSign(f.bundle);
+    const approvedDigest = independentDigest(f.bundle, target);
+    const fallbackKey = deriveAddress(f.account, 0, 0).scriptPubKey.slice(2);
+    const approvedKey = f.bundle.inputs[target]!.scriptPubKey.slice(2);
+    const fallbackSignature = independentSignatureAtPath(f.bundle, target, 0, 0);
+    assert.notDeepEqual(fallbackKey, approvedKey);
+    // The hostile response is a genuine /0/0 signature on the approved
+    // transaction, not a dummy/zero signature or an altered-payment digest.
+    assert(schnorr.verify(fallbackSignature, approvedDigest, fallbackKey));
+    assert.equal(schnorr.verify(fallbackSignature, approvedDigest, approvedKey), false);
+    assert.equal(Buffer.from(computeSighash(f.bundle, target)).toString("hex"), approvedDigest.toString("hex"));
+    let saved = 0, yieldedGood = 0, yieldedWrong = 0, faultAcknowledged = false;
+    const transport = transportFor(f, function* () {
+      if (priorValid) { yieldedGood++; yield yieldSignature(f.bundle, f.signatures, 0); }
+      yieldedWrong++;
+      yield b([0x10, target, 32], reportedKey === "fallback" ? fallbackKey : approvedKey, fallbackSignature);
+      faultAcknowledged = true;
+      return undefined;
+    });
+    const client = new LedgerBitcoinPrlClient(transport, "regtest");
+    await assert.rejects(client.signBundle(f.bundle, f.account, { onVerifiedSigned() { saved++; } }), (error: unknown) => {
+      assert(error instanceof Error); assert.match(error.message, /Device signature failed independent verification/);
+      assert.equal(error instanceof VerifiedSigningResultError, false);
+      assert.equal("signedTransaction" in error, false);
+      return true;
+    });
+    assert.equal(yieldedGood, Number(priorValid)); assert.equal(yieldedWrong, 1);
+    assert.equal(saved, 0); assert.equal(faultAcknowledged, false);
+    assert.equal(client.sessionState, "failed"); assert(transport.closed);
+    const calls = transport.commands.length;
+    assert.equal(calls, priorValid ? 5 : 4);
+    await assert.rejects(client.capabilities(), /failed/); assert.equal(transport.commands.length, calls);
+  });
+}
+
+for (const yieldedIndex of [undefined, 0, 1] as const) {
+  test(`device-error defense: SW_OK with ${yieldedIndex === undefined ? "zero signatures" : `only signature ${yieldedIndex}`} never completes payment`, async () => {
+    const f = fixture("regtest", 2, MAX_GRAINS);
+    // Explicit nonzero receive/change paths, matching the reviewed failure context.
+    f.bundle.inputs.forEach((input, i) => Object.assign(input, { branch: i as 0 | 1, index: 7, scriptPubKey: deriveAddress(f.account, i as 0 | 1, 7).scriptPubKey }));
+    f.signatures = independentSign(f.bundle);
+    let saved = 0, swOkReturned = false;
+    const transport = transportFor(f, function* () {
+      if (yieldedIndex !== undefined) yield yieldSignature(f.bundle, f.signatures, yieldedIndex);
+      swOkReturned = true;
+      return undefined; // transportFor converts this to the genuine 0x9000 response.
+    });
+    const client = new LedgerBitcoinPrlClient(transport, "regtest");
+    await assert.rejects(client.signBundle(f.bundle, f.account, { onVerifiedSigned() { saved++; } }), (error: unknown) => {
+      assert(error instanceof Error); assert.match(error.message, /Missing native signature/);
+      assert.equal(error instanceof VerifiedSigningResultError, false);
+      assert.equal("signedTransaction" in error, false);
+      return true;
+    });
+    assert(swOkReturned); assert.equal(saved, 0); assert.equal(client.sessionState, "failed"); assert(transport.closed);
+    const calls = transport.commands.length;
+    assert.equal(calls, yieldedIndex === undefined ? 4 : 5);
+    await assert.rejects(client.capabilities(), /failed/); assert.equal(transport.commands.length, calls);
   });
 }

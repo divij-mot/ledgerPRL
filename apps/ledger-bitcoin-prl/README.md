@@ -73,11 +73,20 @@ claim about Pearl's other textual extended-key conventions.
 Standard app-bitcoin CLA `e1`, protocol version/P2 `01`, P1 `00` is used for
 GET_EXTENDED_PUBKEY (`00`), GET_WALLET_ADDRESS (`03`), SIGN_PSBT (`04`) and
 GET_MASTER_FINGERPRINT (`05`). Merkle continuations use CLA `f8`, INS `01`.
-Top-level command bodies are consumed exactly. Merkle proof/preimage payloads
-are length-checked, but leaf-index replies still accept trailing bytes, and
-signature-yield acknowledgements do not yet require an empty body. These
-remaining protocol-hardening gaps are recorded in
-[`../../tools/device-source-review/README.md`](../../tools/device-source-review/README.md).
+Top-level command bodies are consumed exactly. The latest source adds exact
+leaf-index reply consumption and empty signature-acknowledgement checks to the
+existing proof/preimage bounds. These source corrections have not been compiled
+or exercised in native execution; earlier artifacts do not include them. The
+original findings remain in the
+[source review](../../tools/device-source-review/README.md).
+
+Post-approval source guards now also reject failed key re-authentication and
+derivation callbacks before signing, and script construction propagates a
+Taproot-tweak failure. See the
+[approval-binding review](../../tools/device-approval-review/README.md) and
+[independent callback review](../../tools/signing-callback-review/static-post-approval-review.md).
+These are unqualified source changes. Native/emulator execution remains paused;
+fresh builds and positive/negative qualification are required before use.
 
 Custom GET_NETWORK_INFO (`e1 06 00 01 00`) returns 58 bytes:
 

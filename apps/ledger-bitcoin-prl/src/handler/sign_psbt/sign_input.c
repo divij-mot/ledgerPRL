@@ -84,6 +84,11 @@ static bool __attribute__((noinline)) yield_signature(dispatcher_context_t *dc,
         SEND_SW(dc, SW_BAD_STATE);
         return false;
     }
+    if (dc->read_buffer.size != 0) {
+        // The signature is already released; malformed ACK data cannot revoke it.
+        SEND_SW(dc, SW_INCORRECT_DATA);
+        return false;
+    }
     return true;
 }
 
@@ -666,7 +671,10 @@ bool __attribute__((noinline)) sign_transaction(
 
     bool keyexpr_to_process[MAX_INTERNAL_KEY_EXPRESSIONS] = {0};
     if (!select_keyexprs_to_process(dc, st, -1, keyexpr_to_process)) {
-        return true;
+        // Preprocessing requires one signable internal key expression in Pearl.
+        // A failed re-authentication must not become successful empty signing.
+        SEND_SW(dc, SW_INCORRECT_DATA);
+        return false;
     }
 
     // Iterate over all internal inputs
@@ -687,7 +695,11 @@ bool __attribute__((noinline)) sign_transaction(
             i,
             (merkle_tree_elements_callback_t) input_keys_callback,
             &input.in_out.map);
-        if (res < 0) {
+        // The key walker has a void callback: a failed derivation-value read is
+        // recorded on the input, not in res. Never sign using its zero defaults.
+        if (res < 0 || input.in_out.unexpected_pubkey_error ||
+            !input.in_out.key_expression_found || input.in_out.prl_derivation_count != 1 ||
+            !input.in_out.prl_internal_key_present || !input.has_witnessUtxo) {
             SEND_SW(dc, SW_INCORRECT_DATA);
             return false;
         }

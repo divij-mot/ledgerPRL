@@ -32,7 +32,8 @@ int call_get_merkle_leaf_index(dispatcher_context_t *dispatcher_context,
 
     if (!buffer_read_u8(&dispatcher_context->read_buffer, &found) ||
         !buffer_read_varint(&dispatcher_context->read_buffer, &index) || index > INT_MAX ||
-        index >= (uint64_t) size) {
+        index >= (uint64_t) size ||
+        dispatcher_context->read_buffer.offset != dispatcher_context->read_buffer.size) {
         PRINTF("Malformed response, or index out of range.\n");
         return MERKLE_LEAF_ERROR;
     }

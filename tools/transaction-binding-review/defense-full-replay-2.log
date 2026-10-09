@@ -1,0 +1,43 @@
+✔ independent exact digest/finalization: mainnet, 16 inputs, MAX_GRAINS, P2MR (643.607869ms)
+✔ independent exact digest/finalization: testnet, 16 inputs, MAX_GRAINS, P2MR (543.81782ms)
+✔ independent exact digest/finalization: testnet2, 16 inputs, MAX_GRAINS, P2MR (532.980795ms)
+✔ independent exact digest/finalization: regtest, 16 inputs, MAX_GRAINS, P2MR (517.153676ms)
+✔ independent exact digest/finalization: simnet, 16 inputs, MAX_GRAINS, P2MR (516.99013ms)
+✔ all signatures bind another input and output fields at >2^53 granularity, including input/output permutation (132.145126ms)
+✔ Merkle-served PSBT reconstructs exact input order, recipient/change and chunked previous transactions despite caller mutation (168.007735ms)
+✔ partial signature set followed by hostile duplicate is terminal and preserves only complete bytes (61.382479ms)
+✔ partial signature set followed by hostile unknown-root is terminal and preserves only complete bytes (58.615347ms)
+✔ partial signature set followed by hostile noncanonical-proof is terminal and preserves only complete bytes (56.592445ms)
+✔ partial signature set followed by hostile empty-more is terminal and preserves only complete bytes (59.019396ms)
+✔ partial signature set followed by hostile truncated-yield is terminal and preserves only complete bytes (57.617276ms)
+✔ partial signature set followed by hostile extra-yield-byte is terminal and preserves only complete bytes (57.944409ms)
+✔ partial signature set followed by hostile empty-interrupt is terminal and preserves only complete bytes (61.600243ms)
+✔ complete signature set followed by hostile duplicate is terminal and preserves only complete bytes (101.507136ms)
+✔ complete signature set followed by hostile unknown-root is terminal and preserves only complete bytes (94.552743ms)
+✔ complete signature set followed by hostile noncanonical-proof is terminal and preserves only complete bytes (97.170826ms)
+✔ complete signature set followed by hostile empty-more is terminal and preserves only complete bytes (91.88158ms)
+✔ complete signature set followed by hostile truncated-yield is terminal and preserves only complete bytes (98.892695ms)
+✔ complete signature set followed by hostile extra-yield-byte is terminal and preserves only complete bytes (96.093074ms)
+✔ complete signature set followed by hostile empty-interrupt is terminal and preserves only complete bytes (96.232724ms)
+✔ imported PSBT bytes/account cannot change during async signing, and storage failure yields an importable exact recovery backup (140.013412ms)
+✔ signature yield interrupts undrained preimage queue: complete=false, no continuation escapes (70.700944ms)
+✔ signature yield interrupts undrained preimage queue: complete=true, no continuation escapes (106.898296ms)
+✔ device-error defense: approved /0/7, /0/0 signer, priorValid=false, key=fallback (54.861753ms)
+✔ device-error defense: approved /0/7, /0/0 signer, priorValid=false, key=approved (57.144747ms)
+✔ device-error defense: approved /0/7, /0/0 signer, priorValid=true, key=fallback (80.531049ms)
+✔ device-error defense: approved /0/7, /0/0 signer, priorValid=true, key=approved (87.66908ms)
+✔ device-error defense: approved /1/7, /0/0 signer, priorValid=false, key=fallback (58.070228ms)
+✔ device-error defense: approved /1/7, /0/0 signer, priorValid=false, key=approved (62.979302ms)
+✔ device-error defense: approved /1/7, /0/0 signer, priorValid=true, key=fallback (82.616475ms)
+✔ device-error defense: approved /1/7, /0/0 signer, priorValid=true, key=approved (84.084313ms)
+✔ device-error defense: SW_OK with zero signatures never completes payment (69.032485ms)
+✔ device-error defense: SW_OK with only signature 0 never completes payment (77.989076ms)
+✔ device-error defense: SW_OK with only signature 1 never completes payment (72.463335ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5620.417655

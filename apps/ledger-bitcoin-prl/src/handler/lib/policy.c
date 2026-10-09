@@ -1162,7 +1162,9 @@ int get_wallet_script(dispatcher_context_t *dispatcher_context,
         }
 
         uint8_t parity;
-        crypto_tr_tweak_pubkey(compressed_pubkey + 1, h, h_length, &parity, out + 2);
+        if (crypto_tr_tweak_pubkey(compressed_pubkey + 1, h, h_length, &parity, out + 2) < 0) {
+            return -1;
+        }
 
         return 34;
     }

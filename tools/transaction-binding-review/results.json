@@ -4,12 +4,12 @@
   "branch": "ledger-bitcoin-prl",
   "node": "v24.19.0",
   "new_tests": {
-    "distinct": 24,
+    "distinct": 35,
     "runs": 3,
     "passed_per_run": [
-      24,
-      24,
-      24
+      35,
+      35,
+      35
     ],
     "failures": 0,
     "skips": 0
@@ -31,5 +31,28 @@
     "live indexer",
     "live transaction",
     "deployment"
-  ]
+  ],
+  "initial_new_tests": {
+    "distinct": 24,
+    "runs": 3,
+    "passed_per_run": [
+      24,
+      24,
+      24
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  "device_error_defense": {
+    "targeted_cases": 11,
+    "passed": 11,
+    "wrong_path_cases": 8,
+    "sw_ok_incomplete_cases": 3,
+    "native_executed": false,
+    "threat_model_source": "Parent-provided independent native source reviews; mocked fault outputs only",
+    "wrong_signature_digest": "unchanged approved transaction",
+    "partial_signatures_create_complete_result": false,
+    "complete_durability_callbacks_on_fault": 0,
+    "production_fix_made": false
+  }
 }

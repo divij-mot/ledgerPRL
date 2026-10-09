@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "review_date_utc": "2026-10-09",
+  "scope": "Static source review and explicitly authorized narrow source-only defensive guards; no native execution",
+  "local_baseline_commit": "9a20a1b8dfce40870bc0def0ef0583ae0dc0ee69",
+  "local_baseline_tree": "d2309835da0b71f92ba2279cacf2ddf2a2047173",
+  "remote_baseline_supplied": "5e7b68be4c0464685d2f1a43b9a0b7dfab50f39e",
+  "remote_baseline_note": "Reported by parent as the same tree as local baseline; remote object unavailable locally and not fetched, so not independently reverified in this review",
+  "pinned_app_upstream_commit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+  "sdk_head_verified_locally": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "pre_correction_sha256": {
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/sign_input.c": "c1ed4ba47b3dd2eb482f8ddf2eb616bb50a3254ff3176ad0ee37993a095a0f77",
+    "apps/ledger-bitcoin-prl/src/handler/lib/policy.c": "55795ba444f16f490de0fead4ca0e24471e99772e253aeb8fc5289c32ce561f7"
+  },
+  "final_inspected_sha256": {
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/sign_input.c": "2b667957a5944e44cdc494cfcb5876de53d7048dfecea4556c6c2f7a7b78e5d8",
+    "apps/ledger-bitcoin-prl/src/handler/lib/policy.c": "ca51d7abd135d3c8a9ce259010afb00f77869b34aa1ca21ca4173bc8ab394f9e",
+    "apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_index.c": "2715f9b45e742852dd3f0fd323779a1f39b14a0e00478e90cec12568724ff022",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt.c": "1d5a3614ac5a3774e7596e80f8c9fcdf96a4c21fefe93d1c0e759ed016a90fda",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/txhashes.c": "544998664139b9732f61840371c75d2cc214876a1b5d47ed41a0527a9184102e",
+    "apps/ledger-bitcoin-prl/src/ui/display_nbgl.c": "453e82fc55702c260e58220bd61022a9432a2c261b7adee177be1e8515d2fb67"
+  },
+  "final_hash_note": "sign_input.c includes the root's separately authored signature-ACK check; get_merkle_leaf_index.c is the root's separate continuation guard. This review authored only callback/selection guards and the policy tweak-return guard.",
+  "qualification": {
+    "native_compilation": "not run",
+    "native_tests": "not run",
+    "emulator": "not run",
+    "hardware": "not run",
+    "binary_provenance_for_changed_sources": "not established"
+  }
+}
