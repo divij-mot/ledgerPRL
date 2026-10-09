@@ -1,0 +1,43 @@
+✔ corrupt signed reservations abort before a mutation callback can reuse inputs (8.103932ms)
+▶ post-update integrity checks prevent malformed local changes from being written
+  ✔ invalid update (5.712668ms)
+  ✔ invalid update (1.660146ms)
+  ✔ invalid update (1.523591ms)
+  ✔ invalid update (1.564311ms)
+✔ post-update integrity checks prevent malformed local changes from being written (11.390143ms)
+✔ null persisted row rejects rather than creating empty reservations (0.620372ms)
+✔ removeSavedSnapshot deletes only its fixed optional key after transaction completion (9.074842ms)
+✔ removeSavedSnapshot also completes when no optional snapshot exists (4.475057ms)
+▶ removeSavedSnapshot request, transaction and abort failures settle without claiming deletion
+  ✔ request (4.833356ms)
+  ✔ transaction (2.111624ms)
+  ✔ abort (2.354851ms)
+  ✔ abort-with-error (4.867597ms)
+✔ removeSavedSnapshot request, transaction and abort failures settle without claiming deletion (14.914802ms)
+▶ removeSavedSnapshot synchronous delete and transaction-open failures reject
+  ✔ deleteFailure (2.267979ms)
+  ✔ transactionFailure (1.869871ms)
+✔ removeSavedSnapshot synchronous delete and transaction-open failures reject (4.477822ms)
+✔ stored-row validation distinguishes absent storage from corrupt null and retains legacy rows (5.18239ms)
+✔ stored recovery bounds are bounded safe integers, with no null or unknown-field default (0.420973ms)
+✔ stored older input recovery ranges grow conservatively only after all records pass (3.65211ms)
+✔ stored canonical reservations reject missing, changed, duplicate, cross-payment and reordered inputs (6.027281ms)
+✔ stored local signing owner and archive survive checks without restoring or stripping authority (2.919078ms)
+✔ stored state and signed-byte identity cannot be made discardable or mismatch the bundle (6.936968ms)
+✔ stored signed bytes bind every unsigned field even with a matching recomputed transaction ID (17.655401ms)
+✔ local byte checks retain signature uncertainty; backup import still independently verifies signatures (48.333398ms)
+✔ stored payment schema, optional metadata and capacity remain strict on warm cache hits (22.946134ms)
+✔ immutable validation cache reuses bytes, rechecks mutable reservations and evicts at its bound (1711.696682ms)
+✔ failed late backup conflict is atomic for both target and source and retains object identity (24.166489ms)
+✔ late merge failure cannot revoke a live signing callback owner or upgrade a state (0.788736ms)
+✔ late conflict rolls back an earlier signed upgrade, callback revocation and high-water changes (21.823126ms)
+✔ successful atomic merge preserves existing payment identities and detaches additions from the source (1.079934ms)
+✔ merged capacity failure leaves all 2000 records and bounds unchanged (16.282357ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2174.009273

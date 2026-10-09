@@ -59,6 +59,7 @@ const built = await build({
     async mutate(k,fn){const j=await this.journal(k);await this.context.hook?.('before-update',j);const result=fn(j);await this.context.hook?.('before-commit',j);this.context.rows.set(k,structuredClone(j));this.context.mutations++;return result;}
     async save(k,v){this.context.cache.set(k,structuredClone(v));this.context.saves++;}
     async load(k){return structuredClone(this.context.cache.get(k));}
+    async removeSavedSnapshot(){if(this.context.clearFailure)throw this.context.clearFailure;this.context.cache.delete('last-snapshot');}
   }`
               : "",
         }));
@@ -634,5 +635,36 @@ for (const mode of ["owner", "network", "source", "payment", "signed-bytes"]) {
   assert.match(t.app.auditState().notification, /changed|review|approve/i);
   console.log(
     `PASS: broadcast approval cannot survive a concurrent ${mode} change or submit bytes outside its approved scope`,
+  );
+}
+
+// Optional watch-cache deletion is a privacy action, never a payment-journal reset.
+for (const fail of [false, true]) {
+  const journal = wallet.emptyJournal();
+  wallet.reservePayment(journal, bundle, "retained-payment", 1000);
+  wallet.transitionPayment(journal, "retained-payment", "signing");
+  wallet.transitionPayment(journal, "retained-payment", "signed", {
+    rawTx: f.rawTx,
+    txid: f.txid,
+  });
+  const t = await setup({ rows: new Map([[ownerId, journal]]) });
+  t.context.cache.set("last-snapshot", "synthetic optional snapshot");
+  t.context.cache.set("other-entry", "untouched");
+  if (fail) t.context.clearFailure = Error("Modeled snapshot deletion failed");
+  await t.app.auditLoadWatch(account, bundle);
+  t.app.auditShow("overview");
+  const before = structuredClone(t.context.rows);
+  await t.click("clear-cache");
+  assert.deepEqual(t.context.rows, before);
+  assert.equal(t.context.cache.get("other-entry"), "untouched");
+  assert.equal(t.context.cache.has("last-snapshot"), fail);
+  assert.equal(t.context.requests.length, 0);
+  assert.equal(t.context.endpoint.commands.length, 0);
+  assert.match(
+    t.app.auditState().notification,
+    fail ? /failed/ : /recovery records are unchanged/,
+  );
+  console.log(
+    `PASS: optional snapshot clear ${fail ? "failure" : "success"} never touches payment journals or sends a request`,
   );
 }

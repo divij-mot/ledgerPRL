@@ -1,0 +1,141 @@
+{
+  "startedAt": "2026-10-09T22:07:06.584Z",
+  "finishedAt": "2026-10-09T22:07:23.541Z",
+  "seed": 12648430,
+  "seedHex": "0xc0ffee",
+  "rng": "xorshift32",
+  "node": "v24.19.0",
+  "baseCommit": "3080142d6f6baf0084413925aba49ff82070108e",
+  "initialHashes": {
+    "packages/sdk/src/amount.ts": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "packages/sdk/src/bytes.ts": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+    "packages/sdk/src/device.ts": "7e11c7cff4dc70b1b3eecde4772f041845f8690eb784d08975bd3e10b95f312d",
+    "packages/sdk/src/http.ts": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+    "packages/sdk/src/index.ts": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/wallet/src/discovery.ts": "ecb3f6cd3ba62789963bfba6642cee0970bc23b41dcd16967ec2e427e6425100",
+    "packages/wallet/src/index.ts": "4fa0b29aa2407cb5c1d0600adf75785710d9ef3af4dcef90a3b4247c5288e1c5",
+    "packages/wallet/src/journal.ts": "a211d8ccf8986243f874a289afe00a58daf57b4a41b84f608c4bb84cbe6ee047",
+    "packages/wallet/src/policy.ts": "22e31418395be68588e19cd9a4b4e6a56bbe1906252de645e53198e34b2e8005",
+    "packages/wallet/src/recovery.ts": "867e8a02eb2b27a1dc29328d3ba93ac2dfada9d06a36c3c1f7b219d5435819c4",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "apps/companion/src/storage.ts": "a09978046c8391da7dae3e73b98d40740eefa1ca5e4105e5e8b3dc03390e2c0f",
+    "apps/companion/src/signed-recovery.ts": "13a4b69dc7540dfc60281b3c6277bd82950ee26c494658574989fb41e283f8e7",
+    "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
+    "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
+    "apps/companion/src/main.ts": "a18e37475887ad2e750bf0eb1d23b6ad034269eefd62380e388e93c8deca8831",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+    "package-lock.json": "816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea"
+  },
+  "finalHashes": {
+    "packages/sdk/src/amount.ts": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "packages/sdk/src/bytes.ts": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+    "packages/sdk/src/device.ts": "7e11c7cff4dc70b1b3eecde4772f041845f8690eb784d08975bd3e10b95f312d",
+    "packages/sdk/src/http.ts": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+    "packages/sdk/src/index.ts": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/wallet/src/discovery.ts": "ecb3f6cd3ba62789963bfba6642cee0970bc23b41dcd16967ec2e427e6425100",
+    "packages/wallet/src/index.ts": "4fa0b29aa2407cb5c1d0600adf75785710d9ef3af4dcef90a3b4247c5288e1c5",
+    "packages/wallet/src/journal.ts": "a211d8ccf8986243f874a289afe00a58daf57b4a41b84f608c4bb84cbe6ee047",
+    "packages/wallet/src/policy.ts": "22e31418395be68588e19cd9a4b4e6a56bbe1906252de645e53198e34b2e8005",
+    "packages/wallet/src/recovery.ts": "867e8a02eb2b27a1dc29328d3ba93ac2dfada9d06a36c3c1f7b219d5435819c4",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "apps/companion/src/storage.ts": "a09978046c8391da7dae3e73b98d40740eefa1ca5e4105e5e8b3dc03390e2c0f",
+    "apps/companion/src/signed-recovery.ts": "13a4b69dc7540dfc60281b3c6277bd82950ee26c494658574989fb41e283f8e7",
+    "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
+    "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
+    "apps/companion/src/main.ts": "a18e37475887ad2e750bf0eb1d23b6ad034269eefd62380e388e93c8deca8831",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+    "package-lock.json": "816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea"
+  },
+  "sourceChangedDuringRun": [],
+  "results": [
+    {
+      "name": "all stale-state pairs preserve reservations, exact signed bytes and uncertainty",
+      "cases": 25,
+      "durationMs": 29,
+      "outcome": "pass"
+    },
+    {
+      "name": "seeded replay sequences are idempotent and retain irreversible signing ambiguity",
+      "cases": 1000,
+      "durationMs": 13465,
+      "outcome": "pass"
+    },
+    {
+      "name": "merge failure leaves its target unchanged after a later reservation conflict",
+      "cases": 1,
+      "durationMs": 57,
+      "outcome": "pass"
+    },
+    {
+      "name": "amount oracle covers exact 64-bit bounds and 5000 seeded canonical round trips",
+      "cases": 5018,
+      "durationMs": 10,
+      "outcome": "pass"
+    },
+    {
+      "name": "amount parsers reject suffix/prefix Unicode, exponent, sign, precision and nonstring mutations",
+      "cases": 1200,
+      "durationMs": 12,
+      "outcome": "pass"
+    },
+    {
+      "name": "relay integer oracle matches floor, fallback, int64 overflow and monetary cap",
+      "cases": 4000,
+      "durationMs": 2,
+      "outcome": "pass"
+    },
+    {
+      "name": "seeded malformed backup schemas always reject before use",
+      "cases": 512,
+      "durationMs": 1242,
+      "outcome": "pass"
+    },
+    {
+      "name": "signed witness and byte corruption cannot survive backup import",
+      "cases": 160,
+      "durationMs": 1700,
+      "outcome": "pass"
+    },
+    {
+      "name": "signed emergency backup requires exact verified result and survives roundtrip",
+      "cases": 24,
+      "durationMs": 214,
+      "outcome": "pass"
+    },
+    {
+      "name": "invalid/replayed rejection ownership cannot release uncertainty",
+      "cases": 500,
+      "durationMs": 217,
+      "outcome": "pass"
+    },
+    {
+      "name": "corrupt stored signed reservation list fails closed before input reuse",
+      "cases": 1,
+      "durationMs": 2,
+      "outcome": "pass"
+    },
+    {
+      "name": "corrupt local high-water bounds fail closed",
+      "cases": 6,
+      "durationMs": 0,
+      "outcome": "pass"
+    }
+  ],
+  "cases": 12447,
+  "failures": 0,
+  "limitations": [
+    "Offline frozen public fixture. No real device, seed, funded account, browser profile, server or network broadcast.",
+    "IndexedDB event source is modeled. No claim of actual IndexedDB scheduling, rollback, quota, crash or power-loss behavior.",
+    "Public merge API atomicity finding may be contained by application's enclosing IndexedDB transaction abort.",
+    "Persisted-row corruption tests assume malformed local data already exists; no source of corruption or external attack path is demonstrated.",
+    "No absolute security conclusion. Case counts describe bounded deterministic assertions, not independent vulnerabilities or physical tests."
+  ]
+}

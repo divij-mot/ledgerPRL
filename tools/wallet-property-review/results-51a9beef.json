@@ -1,0 +1,144 @@
+{
+  "startedAt": "2026-10-09T21:47:17.815Z",
+  "finishedAt": "2026-10-09T21:47:34.588Z",
+  "seed": 1370078959,
+  "seedHex": "0x51a9beef",
+  "rng": "xorshift32",
+  "node": "v24.19.0",
+  "baseCommit": "7a332f6e2a8e654720c104a5c58ed65cf9414257",
+  "initialHashes": {
+    "packages/sdk/src/amount.ts": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "packages/sdk/src/bytes.ts": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+    "packages/sdk/src/device.ts": "7e11c7cff4dc70b1b3eecde4772f041845f8690eb784d08975bd3e10b95f312d",
+    "packages/sdk/src/http.ts": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+    "packages/sdk/src/index.ts": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/wallet/src/discovery.ts": "ecb3f6cd3ba62789963bfba6642cee0970bc23b41dcd16967ec2e427e6425100",
+    "packages/wallet/src/index.ts": "4fa0b29aa2407cb5c1d0600adf75785710d9ef3af4dcef90a3b4247c5288e1c5",
+    "packages/wallet/src/journal.ts": "4e4fb50ec5058d25895bfde0a5459514792aa560d1d1a9d46444caeb5a000b4f",
+    "packages/wallet/src/policy.ts": "22e31418395be68588e19cd9a4b4e6a56bbe1906252de645e53198e34b2e8005",
+    "packages/wallet/src/recovery.ts": "9ab76005ef1d4793a8e8a501e265cdeba5c5a73fc3e8ca37180544c96f4b5cc4",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "apps/companion/src/storage.ts": "3b84bd8013448c325ad7aad49d1f1f38ddbd6a2ee74eb6e8ef35435141648891",
+    "apps/companion/src/signed-recovery.ts": "13a4b69dc7540dfc60281b3c6277bd82950ee26c494658574989fb41e283f8e7",
+    "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
+    "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
+    "apps/companion/src/main.ts": "a18e37475887ad2e750bf0eb1d23b6ad034269eefd62380e388e93c8deca8831",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+    "package-lock.json": "816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea"
+  },
+  "finalHashes": {
+    "packages/sdk/src/amount.ts": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "packages/sdk/src/bytes.ts": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+    "packages/sdk/src/device.ts": "7e11c7cff4dc70b1b3eecde4772f041845f8690eb784d08975bd3e10b95f312d",
+    "packages/sdk/src/http.ts": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+    "packages/sdk/src/index.ts": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/wallet/src/discovery.ts": "ecb3f6cd3ba62789963bfba6642cee0970bc23b41dcd16967ec2e427e6425100",
+    "packages/wallet/src/index.ts": "4fa0b29aa2407cb5c1d0600adf75785710d9ef3af4dcef90a3b4247c5288e1c5",
+    "packages/wallet/src/journal.ts": "4e4fb50ec5058d25895bfde0a5459514792aa560d1d1a9d46444caeb5a000b4f",
+    "packages/wallet/src/policy.ts": "22e31418395be68588e19cd9a4b4e6a56bbe1906252de645e53198e34b2e8005",
+    "packages/wallet/src/recovery.ts": "9ab76005ef1d4793a8e8a501e265cdeba5c5a73fc3e8ca37180544c96f4b5cc4",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "apps/companion/src/storage.ts": "3b84bd8013448c325ad7aad49d1f1f38ddbd6a2ee74eb6e8ef35435141648891",
+    "apps/companion/src/signed-recovery.ts": "13a4b69dc7540dfc60281b3c6277bd82950ee26c494658574989fb41e283f8e7",
+    "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
+    "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
+    "apps/companion/src/main.ts": "a18e37475887ad2e750bf0eb1d23b6ad034269eefd62380e388e93c8deca8831",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+    "package-lock.json": "816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea"
+  },
+  "sourceChangedDuringRun": [],
+  "results": [
+    {
+      "name": "all stale-state pairs preserve reservations, exact signed bytes and uncertainty",
+      "cases": 25,
+      "durationMs": 34,
+      "outcome": "pass"
+    },
+    {
+      "name": "seeded replay sequences are idempotent and retain irreversible signing ambiguity",
+      "cases": 1000,
+      "durationMs": 13315,
+      "outcome": "pass"
+    },
+    {
+      "name": "merge failure leaves its target unchanged after a later reservation conflict",
+      "cases": 1,
+      "durationMs": 54,
+      "outcome": "fail",
+      "detail": "AssertionError [ERR_ASSERTION]: Atomic-merge public API changed the target despite rejecting the merge\n+ actual - expected\n... Skipped lines\n\n  {\n    issuedReceiveThrough: 7,\n    nextChangeIndex: 1,\n    payments: [\n      {\n...\n      },\n+     {\n+       bundleHex: '50524c310300000000010000000000000002022100000000000000000000000000000000000000000000000000000000000000010000000100000000002000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000022000000000000000000000000000000000000000000000000000000000000000300000000ca9a3b0000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045ffffffff000700000020fcffffffff1f0051205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f000000000000f9c99a3b000000005120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d010100000000',\n+       createdAt: 1000,\n+       id: 'unique-payment-2',\n+       outpoints: [\n+         '0000000000000000000000000000000000000000000000000000000000000021:1',\n+         '0000000000000000000000000000000000000000000000000000000000000022:3'\n+       ],\n+       state: 'draft'\n+     }\n    ],\n    schema: 1\n  }\n\n    at <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:127:10)\n    at check (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:44:11)\n    at <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:117:7)"
+    },
+    {
+      "name": "amount oracle covers exact 64-bit bounds and 5000 seeded canonical round trips",
+      "cases": 5018,
+      "durationMs": 11,
+      "outcome": "pass"
+    },
+    {
+      "name": "amount parsers reject suffix/prefix Unicode, exponent, sign, precision and nonstring mutations",
+      "cases": 1200,
+      "durationMs": 10,
+      "outcome": "pass"
+    },
+    {
+      "name": "relay integer oracle matches floor, fallback, int64 overflow and monetary cap",
+      "cases": 4000,
+      "durationMs": 3,
+      "outcome": "pass"
+    },
+    {
+      "name": "seeded malformed backup schemas always reject before use",
+      "cases": 512,
+      "durationMs": 1200,
+      "outcome": "pass"
+    },
+    {
+      "name": "signed witness and byte corruption cannot survive backup import",
+      "cases": 160,
+      "durationMs": 1692,
+      "outcome": "pass"
+    },
+    {
+      "name": "signed emergency backup requires exact verified result and survives roundtrip",
+      "cases": 24,
+      "durationMs": 214,
+      "outcome": "pass"
+    },
+    {
+      "name": "invalid/replayed rejection ownership cannot release uncertainty",
+      "cases": 500,
+      "durationMs": 227,
+      "outcome": "pass"
+    },
+    {
+      "name": "corrupt stored signed reservation list fails closed before input reuse",
+      "cases": 1,
+      "durationMs": 9,
+      "outcome": "fail",
+      "detail": "AssertionError [ERR_ASSERTION]: Missing expected exception: Corrupt signed record was trusted and the same two inputs were reserved for a second payment\n    at <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:273:10)\n    at async check (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:44:5)\n    at async <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:263:1)"
+    },
+    {
+      "name": "corrupt local high-water bounds fail closed",
+      "cases": 6,
+      "durationMs": 1,
+      "outcome": "fail",
+      "detail": "AssertionError [ERR_ASSERTION]: Missing expected rejection.\n    at async <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:287:5)\n    at async check (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:44:5)\n    at async <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:277:1)"
+    }
+  ],
+  "cases": 12447,
+  "failures": 3,
+  "limitations": [
+    "Offline frozen public fixture. No real device, seed, funded account, browser profile, server or network broadcast.",
+    "IndexedDB event source is modeled. No claim of actual IndexedDB scheduling, rollback, quota, crash or power-loss behavior.",
+    "Public merge API atomicity finding may be contained by application's enclosing IndexedDB transaction abort.",
+    "Persisted-row corruption tests assume malformed local data already exists; no source of corruption or external attack path is demonstrated.",
+    "No absolute security conclusion. Case counts describe bounded deterministic assertions, not independent vulnerabilities or physical tests."
+  ]
+}

@@ -13,7 +13,7 @@ import {
 } from "@pearl-ledger/wallet";
 
 /** Public recovery artifact for a verified signature whose normal storage failed.
- * The standard backup importer revalidates it. No seed or signing authority is included.
+ * The standard backup importer revalidates it. No seed or private signing key is included; signed bytes authorize broadcasting this exact payment.
  */
 export function signedRecoveryBackup(
   account: AccountPublicKey,

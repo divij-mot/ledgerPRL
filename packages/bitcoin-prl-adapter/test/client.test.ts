@@ -273,6 +273,29 @@ test("complete signed bytes survive missing/rejected final ACK, abort, and post-
     await assert.rejects(client.capabilities(), /failed/);
   }
 });
+test("a failing final progress observer cannot discard complete verified signed bytes", async () => {
+  let persisted: FinalizedTransaction | undefined;
+  let acknowledgements = 0;
+  const { transport, bundle, account, txid } = signingTransport({
+    finalAck: () => { acknowledgements++; return ok(); },
+  });
+  const client = new LedgerBitcoinPrlClient(transport, account.network);
+  const final = await client.signBundle(bundle, account, {
+    onVerifiedSigned: (transaction) => { persisted = transaction; },
+    onProgress: (phase, completed, total) => {
+      if (phase === "signatures" && completed === total) {
+        assert.equal(persisted?.txid, txid);
+        throw new Error("UI progress observer failed");
+      }
+    },
+  });
+  assert.equal(final.txid, txid);
+  assert.equal(final.rawTx, persisted?.rawTx);
+  assert.equal(final.completionWarning, "device-acknowledgement-unconfirmed");
+  assert.equal(acknowledgements, 0);
+  assert.equal(client.sessionState, "failed");
+  assert.equal(transport.closed, true);
+});
 test("cancellation triggered by final received yield still persists it without sending continuation", async () => {
   const abort = new AbortController();
   let saved = 0;

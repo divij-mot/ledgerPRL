@@ -21,3 +21,15 @@ __pycache__/
 !tools/native-release-qualification/packages/unit-tests.log
 !tools/native-final-memory/builds/*.log
 !tools/wallet-recovery-review/**/*.log
+
+# Bounded public-fixture review evidence; no runtime or personal wallet logs.
+!tools/wallet-property-review/campaign-51a9beef.log
+!tools/wallet-property-review/review-focused.log
+!tools/wallet-property-review/review-full-check.log
+!tools/public-indexer-review/offline-tests.log
+!tools/public-indexer-review/boundary-tests.log
+!tools/website-privacy-review/build-review.log
+!tools/website-privacy-review/dependency-review.log
+!tools/website-privacy-review/focused-tests.log
+!tools/website-privacy-review/ui-review.log
+!tools/host-checkpoint-review/check.log

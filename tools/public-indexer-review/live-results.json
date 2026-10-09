@@ -1,0 +1,13 @@
+{
+  "status": "blocked_cancelled",
+  "recordedAt": "2026-10-09T22:42:22Z",
+  "command": "node --import tsx tools/public-indexer-review/probe.ts",
+  "executionSession": 96531,
+  "completedObservations": 0,
+  "requestCount": null,
+  "error": "Unified exec process failed: automatic approval review was cancelled",
+  "successfulLiveQualification": false,
+  "retried": false,
+  "alternateAccessAttempted": false,
+  "note": "The cancelled execution yielded no usable live response evidence. The number of HTTP requests that may have reached a service is unknown. This file records the blocker and is not a successful probe result."
+}

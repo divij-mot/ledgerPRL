@@ -1,0 +1,133 @@
+{
+  "checkedAt": "2026-10-09T22:38:49.995Z",
+  "scope": "Official read-only GitHub metadata and source identity comparison; no consensus, mining, SPV proof or hardware execution.",
+  "repository": {
+    "url": "https://github.com/pearl-research-labs/pearl",
+    "default_branch": "master",
+    "pushed_at": "2026-10-09T16:37:24Z"
+  },
+  "master": {
+    "ref": "master",
+    "sha": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+    "message": "chore(node): add mainnet checkpoint 120000 and update Go deps (#359)"
+  },
+  "release": {
+    "url": "https://github.com/pearl-research-labs/pearl/releases/tag/v1.4.11",
+    "tag": "v1.4.11",
+    "published_at": "2026-09-29T19:49:34Z",
+    "ref": "refs/tags/v1.4.11",
+    "sha": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4",
+    "type": "commit"
+  },
+  "fp8": {
+    "url": "https://github.com/pearl-research-labs/pearl/pull/311",
+    "state": "open",
+    "merged": false,
+    "head": "684f7045f3b3b7c5b7598f46c06b7dceb506f74b",
+    "base": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+    "updated_at": "2026-10-05T15:59:55Z"
+  },
+  "sourceIdentity": {
+    "released": {
+      "ref": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4",
+      "sourceRoots": [
+        {
+          "path": "node/btcec",
+          "sha": "c632cc55b04db030de0c5d8c73e91b8fe8c5a7e1",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4/node/btcec"
+        },
+        {
+          "path": "node/btcutil",
+          "sha": "cbff73069142274b993e82832cf3c6e5d4ee1bc3",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4/node/btcutil"
+        },
+        {
+          "path": "node/mempool",
+          "sha": "24ef248b459891a4097656f5eed51e779471b652",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4/node/mempool"
+        },
+        {
+          "path": "node/txscript",
+          "sha": "2b34519315c4e6a6c86caf7865238d171f3558d1",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4/node/txscript"
+        }
+      ],
+      "msgTxBlob": "84a76dd6a82f9e1ab4642d4ef1334da26b43171d"
+    },
+    "master": {
+      "ref": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+      "sourceRoots": [
+        {
+          "path": "node/btcec",
+          "sha": "c632cc55b04db030de0c5d8c73e91b8fe8c5a7e1",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/node/btcec"
+        },
+        {
+          "path": "node/btcutil",
+          "sha": "cbff73069142274b993e82832cf3c6e5d4ee1bc3",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/node/btcutil"
+        },
+        {
+          "path": "node/mempool",
+          "sha": "24ef248b459891a4097656f5eed51e779471b652",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/node/mempool"
+        },
+        {
+          "path": "node/txscript",
+          "sha": "2b34519315c4e6a6c86caf7865238d171f3558d1",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/node/txscript"
+        }
+      ],
+      "msgTxBlob": "84a76dd6a82f9e1ab4642d4ef1334da26b43171d"
+    },
+    "fp8": {
+      "ref": "684f7045f3b3b7c5b7598f46c06b7dceb506f74b",
+      "sourceRoots": [
+        {
+          "path": "node/btcec",
+          "sha": "c632cc55b04db030de0c5d8c73e91b8fe8c5a7e1",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/684f7045f3b3b7c5b7598f46c06b7dceb506f74b/node/btcec"
+        },
+        {
+          "path": "node/btcutil",
+          "sha": "cbff73069142274b993e82832cf3c6e5d4ee1bc3",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/684f7045f3b3b7c5b7598f46c06b7dceb506f74b/node/btcutil"
+        },
+        {
+          "path": "node/mempool",
+          "sha": "24ef248b459891a4097656f5eed51e779471b652",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/684f7045f3b3b7c5b7598f46c06b7dceb506f74b/node/mempool"
+        },
+        {
+          "path": "node/txscript",
+          "sha": "2b34519315c4e6a6c86caf7865238d171f3558d1",
+          "type": "dir",
+          "html_url": "https://github.com/pearl-research-labs/pearl/tree/684f7045f3b3b7c5b7598f46c06b7dceb506f74b/node/txscript"
+        }
+      ],
+      "msgTxBlob": "84a76dd6a82f9e1ab4642d4ef1334da26b43171d"
+    }
+  },
+  "fp8ChainParameters": {
+    "path": "node/chaincfg/params.go",
+    "ref": "684f7045f3b3b7c5b7598f46c06b7dceb506f74b",
+    "blob": "23ba77d2e0d20f4c44acabb06f75ab743b7c892c",
+    "mainnet": 0,
+    "testnet": 0,
+    "testnet2": 0,
+    "regtest": 1,
+    "simnet": 1,
+    "note": "0 disables FP8; zero on public networks is the implicit Go zero value because the struct initializer omits Fp8ForkHeight. regtest and simnet explicitly set 1."
+  }
+}

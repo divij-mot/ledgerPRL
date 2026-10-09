@@ -43,7 +43,7 @@ cargo +1.99.0 clippy --locked --workspace --all-targets -- -D warnings
 (cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json)
 ```
 
-The oracle requires Go 1.26.6 and pins the upstream Pearl implementation. Runtime code has no software signer; deterministic test signing stays in test-only fixture generation. Never fund published test addresses.
+The oracle requires Go 1.26.6 and pins the upstream Pearl implementation. The wallet has no software-signing workflow, private-key input or software-signing fallback. General-purpose cryptographic dependencies also contain signing APIs, but production wallet flows do not call them; deterministic test signing stays in test-only fixture generation. Never fund published test addresses.
 
 The current device port is documented in [Ledger Bitcoin PRL port](apps/ledger-bitcoin-prl/README.md), with [redesign boundaries](docs/ledger-bitcoin-redesign.md). The earlier Rust app, its protocol and historical evidence remain in the repository as a reference; those results do not qualify the new C app. Native builds are separate from host tests. See [historical firmware build and verification](docs/firmware.md). No command in the default host test/build flow installs an app on a physical Ledger, updates firmware or broadcasts money.
 

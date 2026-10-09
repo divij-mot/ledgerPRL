@@ -1,0 +1,13 @@
+{
+  "scope": "Actual main.ts handlers with modelled DOM/storage; no browser or device",
+  "closeAccountClearsAccount": true,
+  "retainedAfterClose": {
+    "recipient": "PUBLIC-RECIPIENT-CANARY",
+    "amount": "12.34567890",
+    "fee": "0.00200000",
+    "changeIndex": "0"
+  },
+  "displayedAfterReopen": true,
+  "optionalClearLeavesJournalUntouched": true,
+  "note": "Recipient, amount, and fee remain only in module memory and reappear in the next opened Send view. This is a low-severity privacy/context-reset finding, not a signing-key leak or an automatic payment."
+}

@@ -25,7 +25,7 @@ test("mocked DOM/storage/source/device: direct website receive/send, consent and
   assert.equal(result.status, 0, diagnostic);
   assert.equal(
     result.stdout.split("\n").filter((line) => line.startsWith("PASS:")).length,
-    19,
+    21,
     diagnostic,
   );
 });

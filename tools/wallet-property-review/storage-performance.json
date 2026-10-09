@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-09T22:27:08.122Z",
+  "records": 2000,
+  "inputs": 32000,
+  "constructionMs": 7396,
+  "validationMs": [
+    4729,
+    24,
+    14
+  ],
+  "sourceHashes": {
+    "packages/wallet/src/journal.ts": "388c2240eebaa1da8940b62d6c5ec33234512b358aa4763d00566af9cc3eee87",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "apps/companion/src/storage.ts": "a09978046c8391da7dae3e73b98d40740eefa1ca5e4105e5e8b3dc03390e2c0f"
+  },
+  "bytes": 15822960,
+  "node": "v24.19.0",
+  "boundary": "Synthetic canonical serialization with repeated owned public scripts and dummy witnesses; performance only, no valid-signature, account-ownership or real-world latency claim."
+}

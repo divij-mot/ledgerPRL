@@ -105,6 +105,15 @@ let emergencySignedRecovery: {
 let journalRefreshGeneration = 0;
 const selected = new Set<string>();
 const form = { recipient: "", amount: "", fee: "0.00001000", changeIndex: "0" };
+function clearPaymentForm() {
+  Object.assign(form, {
+    recipient: "",
+    amount: "",
+    fee: "0.00001000",
+    changeIndex: "0",
+  });
+  receiveIndex = 0;
+}
 const e = (value: unknown) =>
   String(value).replace(
     /[&<>"']/g,
@@ -421,7 +430,7 @@ function overview(b: ReturnType<typeof balances> | null) {
     .map((n) => `<option ${network === n ? "selected" : ""}>${n}</option>`)
     .join(
       "",
-    )}</select></div><div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div></div>${account ? `<dl class="data-list"><div><dt>Derivation</dt><dd class="mono">${e(deriveAddress(account, 0, 0).path.replace("/0/0", ""))}</dd></div><div><dt>Fingerprint</dt><dd class="mono">${hex(account.masterFingerprint)}</dd></div><div><dt>Public key</dt><dd class="mono">${hex(account.publicKey)}</dd></div></dl><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy)}>Back up full watch wallet</button><button id="export-public" class="secondary" ${disabled(busy)}>Export public recovery record</button><button id="save-cache" class="secondary" ${disabled(busy || !snapshot)}>Save watch data locally</button><button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button></div><p class="hint">Saving exposes addresses and balances to anyone using this browser profile. Recovery exports can link all account addresses; full backups also contain signed payments that anyone holding the file can broadcast. Keep exports private. Payment reservations stay local to prevent accidental reuse.</p>` : `<div class="empty"><div class="symbol" aria-hidden="true">◇</div><h3>Start with your Ledger</h3><p>Open the matching Pearl app, then connect and approve the public account export. Your device stays in charge of every signature.</p><button id="connect-inline" ${disabled(busy)}>Connect Ledger</button></div>`}</section>${snapshot ? `<section class="card"><div class="section-head"><h2>${syncComplete ? "Synced watch account" : "Watch data"}</h2><span class="tag ${validation ? "ok" : "warn"}">${validation ? (sourceMode === "public" ? "HTTPS indexer checked" : "Node checked") : "Chain metadata unverified"}</span></div><dl class="data-list"><div><dt>Snapshot block</dt><dd>${snapshot.tip.height}<br><span class="mono">${snapshot.tip.hash}</span></dd></div><div><dt>Address coverage</dt><dd>Receive 0–${snapshot.coverage.externalScannedThrough}; change 0–${snapshot.coverage.changeScannedThrough}; gap ${snapshot.coverage.gapLimit}</dd></div><div><dt>Outputs</dt><dd>${snapshot.coins.length} · ${money(b!.total)} observed total</dd></div></dl><p class="hint">${syncComplete ? "Scanned both branches through a gap of 20 unused addresses. This trusts the selected indexer and is not SPV." : "Imported data is not a complete scan or proof of chain inclusion."} Coinbase outputs need 100 confirmations. Reorgs invalidate detached outputs; reserved inputs remain locked.</p><button id="check-node" class="secondary" ${disabled(busy)}>Refresh input status</button></section>` : ""}</div><div>${lightCard()}<section class="card"><p class="eyebrow">Three deliberate steps</p><h2>Your device is the signer</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Verify your receive address</b><span class="muted">Compare the full address on your Ledger before using it for payouts.</span></div></div><div class="step"><span class="number">2</span><div><b>Review every detail</b><span class="muted">Choose inputs, recipient, amount, exact fee and derived change.</span></div></div><div class="step"><span class="number">3</span><div><b>Sign, then broadcast</b><span class="muted">Signatures are verified independently. Broadcast is a separate explicit action.</span></div></div></div></section><section class="card"><h2>Import public watch data</h2><p class="hint">Use the documented JSON snapshot format. Raw transactions are parsed locally to check exact grain amounts, transaction IDs and ownership. Never import a seed or private key.</p><div class="field"><label for="backup-file">Complete watch-wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account / range recovery JSON</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Public snapshot JSON</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved data</button>${hostedMode ? "" : `<button id="load-demo" class="ghost" ${disabled(busy)}>Explore public example</button>`}</div></section><section class="card"><h2>Browser support</h2><p class="hint">Ledger connection uses current DMK + WebHID. Desktop Chrome / Edge on localhost or HTTPS are the intended test targets. Mobile, Safari and Firefox are not qualified.</p><p class="hint">${window.isSecureContext && "hid" in navigator ? "WebHID is available in this browser." : "WebHID is unavailable here. Public watch data remains viewable."}</p></section></div></div>`;
+    )}</select></div><div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div></div>${account ? `<dl class="data-list"><div><dt>Derivation</dt><dd class="mono">${e(deriveAddress(account, 0, 0).path.replace("/0/0", ""))}</dd></div><div><dt>Fingerprint</dt><dd class="mono">${hex(account.masterFingerprint)}</dd></div><div><dt>Public key</dt><dd class="mono">${hex(account.publicKey)}</dd></div></dl><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy)}>Back up full watch wallet</button><button id="export-public" class="secondary" ${disabled(busy)}>Export public recovery record</button><button id="save-cache" class="secondary" ${disabled(busy || !snapshot)}>Save watch data locally</button><button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button></div><p class="hint">Saving exposes addresses and balances to anyone using this browser profile. Recovery exports can link all account addresses; full backups also contain signed payments that anyone holding the file can broadcast. Keep exports private. Payment reservations stay local to prevent accidental reuse.</p>` : `<div class="empty"><div class="symbol" aria-hidden="true">◇</div><h3>Start with your Ledger</h3><p>Open the matching Pearl app, then connect and approve the public account export. Your device stays in charge of every signature.</p><button id="connect-inline" ${disabled(busy)}>Connect Ledger</button></div>`}</section>${snapshot ? `<section class="card"><div class="section-head"><h2>${syncComplete ? "Synced watch account" : "Watch data"}</h2><span class="tag ${validation ? "ok" : "warn"}">${validation ? (sourceMode === "public" ? "HTTPS indexer checked" : "Node checked") : "Chain metadata unverified"}</span></div><dl class="data-list"><div><dt>Snapshot block</dt><dd>${snapshot.tip.height}<br><span class="mono">${snapshot.tip.hash}</span></dd></div><div><dt>Address coverage</dt><dd>Receive 0–${snapshot.coverage.externalScannedThrough}; change 0–${snapshot.coverage.changeScannedThrough}; gap ${snapshot.coverage.gapLimit}</dd></div><div><dt>Outputs</dt><dd>${snapshot.coins.length} · ${money(b!.total)} observed total</dd></div></dl><p class="hint">${syncComplete ? "Scanned both branches through a gap of 20 unused addresses. This trusts the selected indexer and is not SPV." : "Imported data is not a complete scan or proof of chain inclusion."} Coinbase outputs need 100 confirmations. Reorgs invalidate detached outputs; reserved inputs remain locked.</p><button id="check-node" class="secondary" ${disabled(busy)}>Refresh input status</button></section>` : ""}</div><div>${lightCard()}<section class="card"><p class="eyebrow">Three deliberate steps</p><h2>Your device is the signer</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Verify your receive address</b><span class="muted">Compare the full address on your Ledger before using it for payouts.</span></div></div><div class="step"><span class="number">2</span><div><b>Review every detail</b><span class="muted">Choose inputs, recipient, amount, exact fee and derived change.</span></div></div><div class="step"><span class="number">3</span><div><b>Sign, then broadcast</b><span class="muted">Signatures are verified independently. Broadcast is a separate explicit action.</span></div></div></div></section><section class="card"><h2>Import public watch data</h2><p class="hint">Use the documented JSON snapshot format. Raw transactions are parsed locally to check exact grain amounts, transaction IDs and ownership. Never import a seed or private key.</p><div class="field"><label for="backup-file">Complete watch-wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account / range recovery JSON</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Public snapshot JSON</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved data</button><button id="clear-cache" class="ghost" ${disabled(busy)}>Clear saved watch copy</button>${hostedMode ? "" : `<button id="load-demo" class="ghost" ${disabled(busy)}>Explore public example</button>`}</div></section><section class="card"><h2>Browser support</h2><p class="hint">Ledger connection uses current DMK + WebHID. Desktop Chrome / Edge on localhost or HTTPS are the intended test targets. Mobile, Safari and Firefox are not qualified.</p><p class="hint">${window.isSecureContext && "hid" in navigator ? "WebHID is available in this browser." : "WebHID is unavailable here. Public watch data remains viewable."}</p></section></div></div>`;
 }
 function receive() {
   if (!account)
@@ -541,6 +550,7 @@ function bind() {
         await transport?.close();
         transport = null;
         client = null;
+        clearPaymentForm();
         account = a;
         network = a.network;
         accountIndex = a.account;
@@ -616,6 +626,7 @@ function bind() {
           client = null;
           verifiedReceive = null;
           requireOpen();
+          clearPaymentForm();
           account = backup.account;
           network = account.network;
           accountIndex = account.account;
@@ -680,6 +691,7 @@ function bind() {
         transport = null;
         client = null;
         account = null;
+        clearPaymentForm();
         snapshot = null;
         validation = null;
         history = [];
@@ -694,6 +706,8 @@ function bind() {
   );
   document.getElementById("network")?.addEventListener("change", (event) => {
     network = (event.target as HTMLSelectElement).value as NetworkName;
+    clearPaymentForm();
+    verifiedReceive = null;
     render();
   });
   document
@@ -736,6 +750,15 @@ function bind() {
         await importSnapshot(text);
         notification =
           "Restored public watch data. Device verification and node freshness have been cleared.";
+      }),
+  );
+  click(
+    "clear-cache",
+    () =>
+      void run("Removing the optional saved watch copy", async () => {
+        await store.removeSavedSnapshot();
+        notification =
+          "Saved watch snapshot removed. The current account and payment recovery records are unchanged.";
       }),
   );
   click(
@@ -957,6 +980,8 @@ async function importSnapshot(text: string) {
   history = [];
   lastUsed = [-1, -1];
   privacyConsent = false;
+  if (!account || accountId(account) !== accountId(imported.account))
+    clearPaymentForm();
   account = imported.account;
   network = account.network;
   accountIndex = account.account;
@@ -1003,6 +1028,7 @@ async function connect() {
         const exported = await client.exportAccount(accountIndex, signal);
         signal.throwIfAborted();
         if (account && accountId(account) !== accountId(exported)) {
+          clearPaymentForm();
           snapshot = null;
           validation = null;
           activePayment = null;
