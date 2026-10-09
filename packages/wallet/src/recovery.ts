@@ -320,7 +320,16 @@ export function mergeRestoredJournal(
         current.rawTx === restored.rawTx && current.txid === restored.txid,
         "Conflicting signed transaction bytes",
       );
-    if (rank[restored.state] > rank[current.state])
+    // Accepted can become uncertain again after an explicit same-byte retry.
+    // A backup is not a fresh node response: uncertainty wins in either merge
+    // direction until live reconciliation or submission establishes the result.
+    if (
+      (rank[restored.state] > rank[current.state] &&
+        !(
+          current.state === "broadcast-unknown" && restored.state === "accepted"
+        )) ||
+      (current.state === "accepted" && restored.state === "broadcast-unknown")
+    )
       Object.assign(current, structuredClone(restored));
   }
   existing.nextChangeIndex = Math.max(

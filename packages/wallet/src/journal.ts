@@ -122,21 +122,28 @@ export function transitionPayment(
     signing: ["signed"],
     signed: ["broadcast-unknown"],
     "broadcast-unknown": ["broadcast-unknown", "accepted"],
-    accepted: [],
+    accepted: ["broadcast-unknown"],
   };
   assert(
     transitions[payment.state].includes(next),
     `Cannot move payment from ${payment.state} to ${next}`,
   );
+  if (next === "broadcast-unknown")
+    assert(
+      !payment.archived,
+      "Archived payment requires reconciliation before rebroadcast",
+    );
   if (next === "signed")
     assert(
       typeof data.rawTx === "string" && typeof data.txid === "string",
       "Signed transaction bytes and txid required",
     );
-  if (payment.rawTx && data.rawTx)
+  if (payment.rawTx !== undefined && Object.hasOwn(data, "rawTx"))
+    assert(data.rawTx === payment.rawTx, "Cannot replace a signed transaction");
+  if (payment.txid !== undefined && Object.hasOwn(data, "txid"))
     assert(
-      payment.rawTx === data.rawTx && payment.txid === data.txid,
-      "Cannot replace a signed transaction",
+      data.txid === payment.txid,
+      "Cannot replace a signed transaction ID",
     );
   Object.assign(payment, data, { state: next });
   return payment;

@@ -268,3 +268,72 @@ test("known paths beyond the light discovery bound require an extended scan", as
   );
   assert.equal(addresses, 0);
 });
+
+test("accepted same-byte retry returns to uncertain state without releasing reservations", () => {
+  const journal = signedJournal();
+  transitionPayment(journal, "payment-fixture", "accepted");
+  const points = [...reservedOutpoints(journal)];
+  transitionPayment(journal, "payment-fixture", "broadcast-unknown");
+  assert.equal(journal.payments[0]!.state, "broadcast-unknown");
+  assert.equal(journal.payments[0]!.rawTx, vector.rawTx);
+  assert.equal(journal.payments[0]!.txid, vector.txid);
+  assert.deepEqual([...reservedOutpoints(journal)], points);
+  assert.throws(() => transitionPayment(journal, "payment-fixture", "signing"));
+});
+test("archival receipt must be reconciled before a same-byte retry transition", () => {
+  const journal = signedJournal();
+  transitionPayment(journal, "payment-fixture", "accepted");
+  journal.payments[0]!.archived = {
+    status: "confirmed",
+    block: { height: 95, hash: "ab".repeat(32) },
+    checkedAt: 1000,
+  };
+  const before = structuredClone(journal);
+  assert.throws(
+    () => transitionPayment(journal, "payment-fixture", "broadcast-unknown"),
+    /Archived/,
+  );
+  assert.deepEqual(journal, before);
+});
+test("signed bytes and txid cannot be individually replaced or unset by a state transition", () => {
+  for (const data of [
+    { txid: "ab".repeat(32) },
+    { rawTx: "" },
+    { rawTx: undefined },
+    { txid: undefined },
+  ]) {
+    const journal = signedJournal();
+    transitionPayment(journal, "payment-fixture", "accepted");
+    const before = structuredClone(journal);
+    assert.throws(
+      () =>
+        transitionPayment(
+          journal,
+          "payment-fixture",
+          "broadcast-unknown",
+          data as Parameters<typeof transitionPayment>[3],
+        ),
+      /Cannot replace/,
+    );
+    assert.deepEqual(journal, before);
+  }
+});
+test("backup merging cannot clear retry uncertainty in either matching-byte direction", () => {
+  const uncertain = signedJournal();
+  const accepted = structuredClone(uncertain);
+  transitionPayment(accepted, "payment-fixture", "accepted");
+  for (const [local, backup] of [
+    [uncertain, accepted],
+    [accepted, uncertain],
+  ]) {
+    const merged = structuredClone(local!);
+    const restored = importWalletBackup(
+      exportWalletBackup(account, backup!),
+    ).journal;
+    mergeRestoredJournal(merged, restored);
+    assert.equal(merged.payments[0]!.state, "broadcast-unknown");
+    assert.equal(merged.payments[0]!.rawTx, vector.rawTx);
+    assert.equal(merged.payments[0]!.txid, vector.txid);
+    assert.equal(reservedOutpoints(merged).size, 2);
+  }
+});

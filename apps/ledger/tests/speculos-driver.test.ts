@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { mkdtemp, writeFile, readFile, rm } from "node:fs/promises";
+import { mkdtemp, writeFile, readFile, rm, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import type { ChildProcess } from "node:child_process";
@@ -43,6 +43,27 @@ test("an existing immutable snapshot is never overwritten", async () => {
       await readFile(join(root, "screens.json"), "utf8"),
       "original UI evidence",
     );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("bounded-log write failure still terminates emulator child", async () => {
+  const root = await mkdtemp(join(tmpdir(), "pearl-driver-bounded-log-"));
+  try {
+    await mkdir(join(root, "speculos.log"));
+    const emulator = new Emulator("nanosp", "unused", root, 5031, 256 * 1024);
+    let killed = false;
+    emulator.child = {
+      kill(signal: string) {
+        assert.equal(signal, "SIGTERM");
+        killed = true;
+        return true;
+      },
+    } as unknown as ChildProcess;
+    await assert.rejects(emulator.stop());
+    assert(killed);
+    assert.equal(await readFile(join(root, "screens.json"), "utf8"), "[]");
   } finally {
     await rm(root, { recursive: true, force: true });
   }

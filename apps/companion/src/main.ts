@@ -219,7 +219,9 @@ function paymentStatus(payment: PaymentRecord): string {
     ? `confirmed (${snapshot ? Math.max(0, snapshot.tip.height - tx.block!.height + 1) : "?"})`
     : tx?.state === "detached"
       ? "detached / conflicted; review required"
-      : payment.state;
+      : payment.state === "accepted"
+        ? "previously accepted; current confirmation unverified"
+        : payment.state;
 }
 function historyCard(): string {
   if (!history.length) return "";
@@ -362,7 +364,7 @@ function review(payment: PaymentRecord) {
   const total = bundle.inputs.reduce((s, i) => s + i.amount, 0n),
     fee = total - bundle.outputs.reduce((s, o) => s + o.amount, 0n);
   const highFee = fee > 100_000n && fee * 10n >= total;
-  return `<div class="grid"><section class="card review"><div class="section-head"><h2>Review the exact payment</h2><span class="tag">${e(payment.state)}</span></div>${highFee ? '<div class="notice error"><b>Unusually high fee.</b> The fee exceeds 100,000 grains and is at least 10% of the selected input value. Review the fee carefully on the Ledger.</div>' : ""}<dl class="data-list"><div><dt>Network</dt><dd>${bundle.network}</dd></div><div><dt>Recipient</dt><dd class="mono">${scriptToAddress(recipient.scriptPubKey, bundle.network)}</dd></div><div><dt>Amount</dt><dd>${money(recipient.amount)}</dd></div><div><dt>Exact fee</dt><dd>${money(fee)}</dd></div><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span><br>Branch 1 / index ${change.index}` : ""}</dd></div><div><dt>Inputs</dt><dd>${bundle.inputs.length} reserved outputs</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl>${payment.state === "draft" ? `<button id="sign" ${disabled(busy || client?.sessionState !== "ready")}>Review & sign on Ledger</button> <button id="discard" class="ghost" ${disabled(busy)}>Discard unsigned draft</button>` : payment.state === "signed" || payment.state === "broadcast-unknown" ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Signatures independently verified. Nothing has been broadcast by this app." : "Broadcast outcome may be unknown. This exact transaction may already be accepted. Keep inputs reserved; never construct a replacement payment just because of a timeout."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve broadcasting these exact signed bytes to ${sourceMode === "public" ? "the public Pearl Blockbook service" : "the configured local node"} on ${bundle.network}.</label><button id="broadcast" disabled>${payment.state === "broadcast-unknown" ? "Explicitly rebroadcast exact bytes" : "Broadcast signed transaction"}</button>` : payment.state === "accepted" ? '<div class="notice success">The node returned the expected transaction ID. Acceptance is not confirmation. Refresh the node scan to track inclusion or a reorg.</div>' : '<div class="notice error">Signing was started. The result may be unknown after an interruption. Inputs remain reserved. Inspect the device and reconcile the transaction before reusing funds.</div>'}</section><section class="card"><h2>Check your Ledger screen</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Network and full recipient</b><span class="muted">Compare the entire address, not only its first or last characters.</span></div></div><div class="step"><span class="number">2</span><div><b>Amount, fee and change</b><span class="muted">The device recomputes the signing digest from this complete transaction.</span></div></div><div class="step"><span class="number">3</span><div><b>Physical approval</b><span class="muted">Reject if any detail differs. No blind-sign or software-signing fallback exists.</span></div></div></div><button id="back-payments" class="ghost" ${disabled(busy)}>Back to activity</button></section></div>`;
+  return `<div class="grid"><section class="card review"><div class="section-head"><h2>Review the exact payment</h2><span class="tag">${e(paymentStatus(payment))}</span></div>${highFee ? '<div class="notice error"><b>Unusually high fee.</b> The fee exceeds 100,000 grains and is at least 10% of the selected input value. Review the fee carefully on the Ledger.</div>' : ""}<dl class="data-list"><div><dt>Network</dt><dd>${bundle.network}</dd></div><div><dt>Recipient</dt><dd class="mono">${scriptToAddress(recipient.scriptPubKey, bundle.network)}</dd></div><div><dt>Amount</dt><dd>${money(recipient.amount)}</dd></div><div><dt>Exact fee</dt><dd>${money(fee)}</dd></div><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span><br>Branch 1 / index ${change.index}` : ""}</dd></div><div><dt>Inputs</dt><dd>${bundle.inputs.length} reserved outputs</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl>${payment.state === "draft" ? `<button id="sign" ${disabled(busy || client?.sessionState !== "ready")}>Review & sign on Ledger</button> <button id="discard" class="ghost" ${disabled(busy)}>Discard unsigned draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Signatures independently verified. Nothing has been broadcast by this app." : payment.state === "accepted" ? "Previously accepted by the node; current confirmation is unverified. An explicit retry sends only these same signed bytes and transaction ID." : "Broadcast outcome may be unknown. This exact transaction may already be accepted. Keep inputs reserved; never construct a replacement payment just because of a timeout."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve broadcasting these exact signed bytes to ${sourceMode === "public" ? "the public Pearl Blockbook service" : "the configured local node"} on ${bundle.network}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Explicitly rebroadcast exact bytes" : "Broadcast signed transaction"}</button>` : payment.archived ? '<div class="notice success">A confirmed receipt is archived. Reconcile its current chain status before retrying these bytes; all input locks remain retained.</div>' : '<div class="notice error">Signing was started. The result may be unknown after an interruption. Inputs remain reserved. Inspect the device and reconcile the transaction before reusing funds.</div>'}</section><section class="card"><h2>Check your Ledger screen</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Network and full recipient</b><span class="muted">Compare the entire address, not only its first or last characters.</span></div></div><div class="step"><span class="number">2</span><div><b>Amount, fee and change</b><span class="muted">The device recomputes the signing digest from this complete transaction.</span></div></div><div class="step"><span class="number">3</span><div><b>Physical approval</b><span class="muted">Reject if any detail differs. No blind-sign or software-signing fallback exists.</span></div></div></div><button id="back-payments" class="ghost" ${disabled(busy)}>Back to activity</button></section></div>`;
 }
 function activity() {
   return `<section class="card"><div class="section-head"><h2>Reserved payments</h2><span class="tag">${journal.payments.length} records</span></div><p class="hint">Reservations are shared atomically across this browser's tabs and persist after restart. They do not coordinate separate browser profiles or computers. Signed or interrupted payments never auto-expire. Browser eviction or profile loss can remove this state: export a complete backup before switching profiles.</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy || !account)}>Back up full watch wallet</button><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Archive confirmed records</button></div><p class="hint">Archival requires six confirmations in a completed source view. Archived exact bytes and outpoint locks are retained through reorgs; they no longer count against the 100-active-payment limit. Conflicted/unknown records remain reserved.</p>${
@@ -1152,30 +1154,58 @@ async function reconcileNodePayments(signal: AbortSignal) {
   channel.postMessage("journal");
   notification = `${signed.length} known signed payments checked against the configured node at block ${tip.height}; ${count} confirmed records archived. ${signed.length - count} records remain active or unresolved, including ${detached} detached. All exact bytes and input locks retained. This trusts the node's chain view; a later reorg can change confirmation.`;
 }
-async function broadcast() {
+async function broadcast(
+  signal: AbortSignal | undefined = currentAbort?.signal,
+) {
   assert(account && activePayment, "No signed payment");
-  const payment = (await store.journal(accountId(account))).payments.find(
-    (p) => p.id === activePayment,
+  const owner = account,
+    ownerId = accountId(owner),
+    paymentId = activePayment;
+  assert(
+    network === owner.network,
+    "Selected broadcast network differs from account",
   );
+  signal?.throwIfAborted();
+  const payment = (await store.journal(ownerId)).payments.find(
+    (p) => p.id === paymentId,
+  );
+  signal?.throwIfAborted();
   assert(
     payment &&
-      (payment.state === "signed" || payment.state === "broadcast-unknown") &&
+      ["signed", "broadcast-unknown", "accepted"].includes(payment.state) &&
       payment.rawTx &&
       payment.txid,
     "No verified signed transaction",
   );
+  assert(
+    !payment.archived,
+    "Reconcile the archived payment before an explicit rebroadcast",
+  );
+  const bundle = paymentBundle(payment);
+  validateBundle(bundle, owner);
   const parsed = parseTransaction(payment.rawTx),
     checked = finalizeTransaction(
-      paymentBundle(payment),
+      bundle,
       parsed.inputs.map((i) => i.witness[0]!),
     );
   assert(
     checked.rawTx === payment.rawTx && checked.txid === payment.txid,
     "Persisted signed transaction failed verification",
   );
-  await store.mutate(accountId(account), (j) =>
-    transitionPayment(j, activePayment!, "broadcast-unknown"),
-  );
+  await store.mutate(ownerId, (j) => {
+    signal?.throwIfAborted();
+    const current = j.payments.find((p) => p.id === paymentId);
+    assert(
+      current && !current.archived,
+      "Reconcile the archived payment before an explicit rebroadcast",
+    );
+    assert(
+      JSON.stringify(current) === JSON.stringify(payment),
+      "Payment changed before broadcast; review and retry",
+    );
+    transitionPayment(j, paymentId, "broadcast-unknown");
+  });
+  signal?.throwIfAborted();
   channel.postMessage("journal");
   const payload = {
     bundleHex: payment.bundleHex,
@@ -1185,8 +1215,9 @@ async function broadcast() {
   const result = await post(
     sourceMode === "public" ? "/api/light/broadcast" : "/api/broadcast",
     sourceMode === "public"
-      ? { network, consent: privacyConsent, payment: payload }
+      ? { network: owner.network, consent: privacyConsent, payment: payload }
       : payload,
+    signal,
   );
   assert(
     result &&
@@ -1195,9 +1226,18 @@ async function broadcast() {
       result.txid === payment.txid,
     "Unexpected node response; acceptance remains unknown",
   );
-  await store.mutate(accountId(account), (j) =>
-    transitionPayment(j, activePayment!, "accepted"),
-  );
+  await store.mutate(ownerId, (j) => {
+    const current = j.payments.find((p) => p.id === paymentId);
+    assert(
+      current &&
+        current.rawTx === payment.rawTx &&
+        current.txid === payment.txid &&
+        current.bundleHex === payment.bundleHex,
+      "Payment changed after submission; preserve the signed bytes and reconcile",
+    );
+    if (current.state !== "accepted")
+      transitionPayment(j, paymentId, "accepted");
+  });
   channel.postMessage("journal");
   notification =
     "Node accepted the exact signed transaction. Confirmation is still pending.";

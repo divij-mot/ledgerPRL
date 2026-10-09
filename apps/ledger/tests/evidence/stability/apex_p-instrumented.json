@@ -1,0 +1,436 @@
+{
+  "status": "passed",
+  "model": "apex_p",
+  "buildKind": "instrumented-resource-replay",
+  "firmware": {
+    "model": "apex_p",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/memory-measurement/pearl-apex_p-simnet-INSTRUMENTED.elf",
+    "testedSnapshot": "/workspace/shared/pearl-ledger-stability-20261009/instrumented/apex_p/tested-firmware.elf",
+    "sha256": "7b3d332c06a73e3f1a8d836648a85760f2c023af18e762550c7ba70526e7f61a",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "fixtureDescription": "PUBLIC TEST VECTOR ONLY. BIP32 vector 1 public seed. Never deposit funds at these addresses.",
+  "generator": "Pearl-stability-v1 deterministic round/index derivation",
+  "requestedSessions": 20,
+  "completedSessions": 20,
+  "startedAt": "2026-10-09T16:39:16.434Z",
+  "finishedAt": "2026-10-09T16:40:53.573Z",
+  "wallMs": 97138.059671,
+  "apduCount": 186,
+  "checkedSignatures": {
+    "complete": 44,
+    "partial": 2
+  },
+  "sessionKinds": {
+    "sign": 4,
+    "address": 2,
+    "abort-upload": 2,
+    "reject-review": 2,
+    "invalid-ownership-or-point": 2,
+    "partial-signature-abort": 2,
+    "invalid-upload": 2,
+    "export": 2,
+    "max16": 2
+  },
+  "groupLatency": {
+    "sign": {
+      "count": 4,
+      "minMs": 5775.059519,
+      "medianMs": 8310.318073000002,
+      "p95Ms": 8568.186563000003,
+      "maxMs": 8568.186563000003
+    },
+    "address": {
+      "count": 2,
+      "minMs": 1625.2494259999949,
+      "medianMs": 1630.8441729999995,
+      "p95Ms": 1630.8441729999995,
+      "maxMs": 1630.8441729999995
+    },
+    "abort-upload": {
+      "count": 2,
+      "minMs": 718.0195289999974,
+      "medianMs": 719.6579249999995,
+      "p95Ms": 719.6579249999995,
+      "maxMs": 719.6579249999995
+    },
+    "reject-review": {
+      "count": 2,
+      "minMs": 2086.7293219999992,
+      "medianMs": 2454.1397099999995,
+      "p95Ms": 2454.1397099999995,
+      "maxMs": 2454.1397099999995
+    },
+    "invalid-ownership-or-point": {
+      "count": 2,
+      "minMs": 715.4673480000001,
+      "medianMs": 1109.0011190000005,
+      "p95Ms": 1109.0011190000005,
+      "maxMs": 1109.0011190000005
+    },
+    "partial-signature-abort": {
+      "count": 2,
+      "minMs": 6248.032926,
+      "medianMs": 6660.057168999998,
+      "p95Ms": 6660.057168999998,
+      "maxMs": 6660.057168999998
+    },
+    "invalid-upload": {
+      "count": 2,
+      "minMs": 579.0418099999988,
+      "medianMs": 842.143624999997,
+      "p95Ms": 842.143624999997,
+      "maxMs": 842.143624999997
+    },
+    "export": {
+      "count": 2,
+      "minMs": 4326.081659000003,
+      "medianMs": 4428.824068000002,
+      "p95Ms": 4428.824068000002,
+      "maxMs": 4428.824068000002
+    },
+    "max16": {
+      "count": 2,
+      "minMs": 16393.64543,
+      "medianMs": 16454.29720100001,
+      "p95Ms": 16454.29720100001,
+      "maxMs": 16454.29720100001
+    }
+  },
+  "approvalGestureToVerifiedResultMs": {
+    "count": 12,
+    "min": 106.38674100000208,
+    "median": 1742.8971700000038,
+    "p95": 9384.361095,
+    "max": 9384.361095
+  },
+  "drift": {
+    "emulatorRssWarmBaselineCompletedSessions": 10,
+    "emulatorRssWarmBaselineKiB": 64432,
+    "emulatorRssFinalKiB": 66220,
+    "emulatorRssWarmToFinalDeltaKiB": 1788,
+    "appHeapInitialBytes": 160,
+    "appHeapFinalBytes": 160,
+    "appHeapIdleDeltaBytes": 0,
+    "appHeapPeakBytes": 1672,
+    "appHeapCapacityBytes": 8192,
+    "appStackHighWaterBytes": 12576
+  },
+  "resources": [
+    {
+      "completed": 0,
+      "emulatorProcessRssKiB": 54048,
+      "hostHarnessHeapBytes": 14550768,
+      "stackHighWater": 11640,
+      "heapPeak": 160,
+      "heapCurrent": 160,
+      "heapCapacity": 8192
+    },
+    {
+      "completed": 10,
+      "emulatorProcessRssKiB": 64432,
+      "hostHarnessHeapBytes": 21698240,
+      "stackHighWater": 12576,
+      "heapPeak": 1672,
+      "heapCurrent": 160,
+      "heapCapacity": 8192
+    },
+    {
+      "completed": 20,
+      "emulatorProcessRssKiB": 66220,
+      "hostHarnessHeapBytes": 17516544,
+      "stackHighWater": 12576,
+      "heapPeak": 1672,
+      "heapCurrent": 160,
+      "heapCapacity": 8192
+    }
+  ],
+  "records": [
+    {
+      "round": 1,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "7d239fcf383e65de4c631e1a338bd1599d881767c05bd5501f57e72c56592268",
+      "verifiedSignatures": 1,
+      "wallMs": 5775.059519,
+      "approvalTimings": [
+        {
+          "label": "0-sign",
+          "gestureToResultMs": 1704.477144,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "f7f65b6982d2793919db394db2e1f846caad6196352a99d664445068379f566e",
+      "verifiedSignatures": 0,
+      "wallMs": 1630.8441729999995,
+      "approvalTimings": [
+        {
+          "label": "1-address",
+          "gestureToResultMs": 111.65736599999946,
+          "gesture": "touch confirmation"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "b133f82e5c875cbc70d62ad4fe57342a431937b9e5c590e19b3b6753eca667b4",
+      "verifiedSignatures": 0,
+      "wallMs": 719.6579249999995,
+      "approvalTimings": []
+    },
+    {
+      "round": 4,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "7d7715409ca8b48306971b37bbef9522c13ed4861d990c461536e694d48e268b",
+      "verifiedSignatures": 0,
+      "wallMs": 2454.1397099999995,
+      "approvalTimings": []
+    },
+    {
+      "round": 5,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "c172b88171dea1ff7866b089aa1a01a6ce1c09936899383bec3be3bceee05c28",
+      "verifiedSignatures": 0,
+      "wallMs": 715.4673480000001,
+      "approvalTimings": []
+    },
+    {
+      "round": 6,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "304196e0a4fa0c67099ca6832cc73397cae9113e6755d185c8419694ab268081",
+      "verifiedSignatures": 1,
+      "wallMs": 6660.057168999998,
+      "approvalTimings": [
+        {
+          "label": "5-partial-signature",
+          "gestureToResultMs": 1895.9664360000006,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 7,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "94e3a42aa3799902226c0fd5dd4d2c486a3de5231ef54379601db97b46512994",
+      "verifiedSignatures": 0,
+      "wallMs": 579.0418099999988,
+      "approvalTimings": []
+    },
+    {
+      "round": 8,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "5847a8b4634b6d830e1b624deb58d8c3a148efcf7ce3b6344829e948086c2a89",
+      "verifiedSignatures": 0,
+      "wallMs": 4428.824068000002,
+      "approvalTimings": [
+        {
+          "label": "7-export",
+          "gestureToResultMs": 1316.5866580000002,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 9,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "b48addda67b145c7df9d278c2a3697954c707aff50416b24b13455cb5e6f03fa",
+      "verifiedSignatures": 1,
+      "wallMs": 5825.118848999999,
+      "approvalTimings": [
+        {
+          "label": "8-sign",
+          "gestureToResultMs": 1626.1377439999997,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 10,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "8f120ed348939f3e190cb72f19fca88966701b9b359319fc085b602660bd6aa7",
+      "verifiedSignatures": 16,
+      "wallMs": 16393.64543,
+      "approvalTimings": [
+        {
+          "label": "9-max16",
+          "gestureToResultMs": 9210.441862,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 11,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "b0858a8d7e5ad2336d394df53191f1c4fd2f433e4ff8438a460e53f0767abdc7",
+      "verifiedSignatures": 5,
+      "wallMs": 8568.186563000003,
+      "approvalTimings": [
+        {
+          "label": "10-sign",
+          "gestureToResultMs": 3612.4086590000006,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 12,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "a3260ecf72a8400d610271bd6a655609b1391416f0ab8d5ea3b515efd2208c71",
+      "verifiedSignatures": 0,
+      "wallMs": 1625.2494259999949,
+      "approvalTimings": [
+        {
+          "label": "11-address",
+          "gestureToResultMs": 106.38674100000208,
+          "gesture": "touch confirmation"
+        }
+      ]
+    },
+    {
+      "round": 13,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "14e463e2f57ac774a98d63cab4f37a40b26cd06594eca59f300820f32f1b0761",
+      "verifiedSignatures": 0,
+      "wallMs": 718.0195289999974,
+      "approvalTimings": []
+    },
+    {
+      "round": 14,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "34d7f411c18ee54ef6665bbbfb17a5eba55cd105a75d58748feafea1fd281b70",
+      "verifiedSignatures": 0,
+      "wallMs": 2086.7293219999992,
+      "approvalTimings": []
+    },
+    {
+      "round": 15,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "d6a79adf09ab306a4c05f8d05efd19570790839d005c6a7e000df3ecf77458d3",
+      "verifiedSignatures": 0,
+      "wallMs": 1109.0011190000005,
+      "approvalTimings": []
+    },
+    {
+      "round": 16,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "d01cda0db8ccfd7362b72003292e3f89597a8b25d1a8eab1a91f88771d96cda9",
+      "verifiedSignatures": 1,
+      "wallMs": 6248.032926,
+      "approvalTimings": [
+        {
+          "label": "15-partial-signature",
+          "gestureToResultMs": 1742.8971700000038,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 17,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "901d138fc445398fef1761f9404951eec8f2df4238dd6efe8a991ad8a8f98fc2",
+      "verifiedSignatures": 0,
+      "wallMs": 842.143624999997,
+      "approvalTimings": []
+    },
+    {
+      "round": 18,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "88f41b28bab6b59947785a7fca5dfde6d50824f1b9ffda1940ae0fcf20ca530a",
+      "verifiedSignatures": 0,
+      "wallMs": 4326.081659000003,
+      "approvalTimings": [
+        {
+          "label": "17-export",
+          "gestureToResultMs": 1219.9494129999948,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 19,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "bff130c98337f8e1ffc9330db3ef6197dc1001cbe8cfc245c4dcc44ac40e16d6",
+      "verifiedSignatures": 5,
+      "wallMs": 8310.318073000002,
+      "approvalTimings": [
+        {
+          "label": "18-sign",
+          "gestureToResultMs": 3562.253819000005,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    },
+    {
+      "round": 20,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "e9810f43feb7d69af2a79cc6db701be09683337faf7fcaad235935e9fc22b70e",
+      "verifiedSignatures": 16,
+      "wallMs": 16454.29720100001,
+      "approvalTimings": [
+        {
+          "label": "19-max16",
+          "gestureToResultMs": 9384.361095,
+          "gesture": "2.5-second hold"
+        }
+      ]
+    }
+  ],
+  "failure": null,
+  "scope": "Emulated device UI only; synthetic public-test outpoints; no broadcasts, physical hardware, external transactions or hardware performance claims",
+  "resourceScope": "SDK app-stack/allocator measurements from separately instrumented ELF; not OS/syscall memory",
+  "observerMaintenance": "Bounded 256 KiB Speculos log tail and 64 UI observations; official DELETE /events clears historical OCR observations after each idle session without changing current screen or firmware state",
+  "sourceSha256": {
+    "harness": "99bc588374523e93b1221903c47133cc5ad59e8a9f667239dc86375fc44a2cd6",
+    "driver": "ab3d5d8a1638b9ee2841a2467f21f0cef33eab0d1ec0e6df4a5d67cfbf0f8fdf",
+    "fixture": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+    "dependencyLock": "e07e6d210196b3e2ad94274b41618d9b993d69fc2e86e9ddc94106eb712cd047"
+  },
+  "sourceUnchanged": true
+}

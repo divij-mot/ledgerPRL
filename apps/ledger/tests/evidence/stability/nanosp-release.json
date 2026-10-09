@@ -1,0 +1,1546 @@
+{
+  "status": "passed",
+  "model": "nanosp",
+  "buildKind": "release-stability",
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-nanosplus-simnet.elf",
+    "testedSnapshot": "/workspace/shared/pearl-ledger-stability-20261009/release/nanosp/tested-firmware.elf",
+    "sha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "fixtureDescription": "PUBLIC TEST VECTOR ONLY. BIP32 vector 1 public seed. Never deposit funds at these addresses.",
+  "generator": "Pearl-stability-v1 deterministic round/index derivation",
+  "requestedSessions": 100,
+  "completedSessions": 100,
+  "startedAt": "2026-10-09T16:30:51.079Z",
+  "finishedAt": "2026-10-09T16:38:27.890Z",
+  "wallMs": 456810.288214,
+  "apduCount": 914,
+  "checkedSignatures": {
+    "complete": 216,
+    "partial": 10
+  },
+  "sessionKinds": {
+    "sign": 20,
+    "address": 10,
+    "abort-upload": 10,
+    "reject-review": 10,
+    "invalid-ownership-or-point": 10,
+    "partial-signature-abort": 10,
+    "invalid-upload": 10,
+    "export": 10,
+    "max16": 10
+  },
+  "groupLatency": {
+    "sign": {
+      "count": 20,
+      "minMs": 4951.659077999997,
+      "medianMs": 6598.794799999989,
+      "p95Ms": 8132.519138000003,
+      "maxMs": 8132.519138000003
+    },
+    "address": {
+      "count": 10,
+      "minMs": 3100.6131330000353,
+      "medianMs": 3284.656963000016,
+      "p95Ms": 3306.1377159999975,
+      "maxMs": 3306.1377159999975
+    },
+    "abort-upload": {
+      "count": 10,
+      "minMs": 26.30724100000225,
+      "medianMs": 34.49293800001033,
+      "p95Ms": 133.81121499999426,
+      "maxMs": 133.81121499999426
+    },
+    "reject-review": {
+      "count": 10,
+      "minMs": 5229.999422000023,
+      "medianMs": 5996.533618999994,
+      "p95Ms": 6601.025261000032,
+      "maxMs": 6601.025261000032
+    },
+    "invalid-ownership-or-point": {
+      "count": 10,
+      "minMs": 35.38792399999875,
+      "medianMs": 208.31409999999596,
+      "p95Ms": 1035.0541220000014,
+      "maxMs": 1035.0541220000014
+    },
+    "partial-signature-abort": {
+      "count": 10,
+      "minMs": 5570.141294000001,
+      "medianMs": 6155.268031,
+      "p95Ms": 7510.714462000004,
+      "maxMs": 7510.714462000004
+    },
+    "invalid-upload": {
+      "count": 10,
+      "minMs": 21.45847599999979,
+      "medianMs": 40.026608999993186,
+      "p95Ms": 89.57519600001979,
+      "maxMs": 89.57519600001979
+    },
+    "export": {
+      "count": 10,
+      "minMs": 2710.759739000001,
+      "medianMs": 2719.830239999981,
+      "p95Ms": 2742.4409619999933,
+      "maxMs": 2742.4409619999933
+    },
+    "max16": {
+      "count": 10,
+      "minMs": 13340.854086000007,
+      "medianMs": 13949.333247000002,
+      "p95Ms": 14544.219954999979,
+      "maxMs": 14544.219954999979
+    }
+  },
+  "approvalGestureToVerifiedResultMs": {
+    "count": 60,
+    "min": 103.32159200000024,
+    "median": 837.749456000005,
+    "p95": 6353.15507800004,
+    "max": 6692.4333240000415
+  },
+  "drift": {
+    "emulatorRssWarmBaselineCompletedSessions": 10,
+    "emulatorRssWarmBaselineKiB": 46356,
+    "emulatorRssFinalKiB": 48688,
+    "emulatorRssWarmToFinalDeltaKiB": 2332
+  },
+  "resources": [
+    {
+      "completed": 0,
+      "emulatorProcessRssKiB": 43552,
+      "hostHarnessHeapBytes": 14571544
+    },
+    {
+      "completed": 10,
+      "emulatorProcessRssKiB": 46356,
+      "hostHarnessHeapBytes": 20448736
+    },
+    {
+      "completed": 20,
+      "emulatorProcessRssKiB": 46916,
+      "hostHarnessHeapBytes": 22860104
+    },
+    {
+      "completed": 30,
+      "emulatorProcessRssKiB": 47088,
+      "hostHarnessHeapBytes": 18766520
+    },
+    {
+      "completed": 40,
+      "emulatorProcessRssKiB": 47300,
+      "hostHarnessHeapBytes": 23172256
+    },
+    {
+      "completed": 50,
+      "emulatorProcessRssKiB": 47432,
+      "hostHarnessHeapBytes": 19428288
+    },
+    {
+      "completed": 60,
+      "emulatorProcessRssKiB": 47680,
+      "hostHarnessHeapBytes": 20432448
+    },
+    {
+      "completed": 70,
+      "emulatorProcessRssKiB": 47884,
+      "hostHarnessHeapBytes": 17643776
+    },
+    {
+      "completed": 80,
+      "emulatorProcessRssKiB": 48032,
+      "hostHarnessHeapBytes": 21557768
+    },
+    {
+      "completed": 90,
+      "emulatorProcessRssKiB": 48300,
+      "hostHarnessHeapBytes": 18959248
+    },
+    {
+      "completed": 100,
+      "emulatorProcessRssKiB": 48688,
+      "hostHarnessHeapBytes": 26524000
+    }
+  ],
+  "records": [
+    {
+      "round": 1,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "7d239fcf383e65de4c631e1a338bd1599d881767c05bd5501f57e72c56592268",
+      "verifiedSignatures": 1,
+      "wallMs": 6714.372719,
+      "approvalTimings": [
+        {
+          "label": "0-sign",
+          "gestureToResultMs": 490.59316600000056,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "f7f65b6982d2793919db394db2e1f846caad6196352a99d664445068379f566e",
+      "verifiedSignatures": 0,
+      "wallMs": 3289.4563310000003,
+      "approvalTimings": [
+        {
+          "label": "1-address",
+          "gestureToResultMs": 105.3164510000006,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "b133f82e5c875cbc70d62ad4fe57342a431937b9e5c590e19b3b6753eca667b4",
+      "verifiedSignatures": 0,
+      "wallMs": 27.810644999999568,
+      "approvalTimings": []
+    },
+    {
+      "round": 4,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "7d7715409ca8b48306971b37bbef9522c13ed4861d990c461536e694d48e268b",
+      "verifiedSignatures": 0,
+      "wallMs": 5801.307376999999,
+      "approvalTimings": []
+    },
+    {
+      "round": 5,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "c172b88171dea1ff7866b089aa1a01a6ce1c09936899383bec3be3bceee05c28",
+      "verifiedSignatures": 0,
+      "wallMs": 35.38792399999875,
+      "approvalTimings": []
+    },
+    {
+      "round": 6,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "304196e0a4fa0c67099ca6832cc73397cae9113e6755d185c8419694ab268081",
+      "verifiedSignatures": 1,
+      "wallMs": 6149.820034,
+      "approvalTimings": [
+        {
+          "label": "5-partial-signature",
+          "gestureToResultMs": 869.1756179999975,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 7,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "94e3a42aa3799902226c0fd5dd4d2c486a3de5231ef54379601db97b46512994",
+      "verifiedSignatures": 0,
+      "wallMs": 21.45847599999979,
+      "approvalTimings": []
+    },
+    {
+      "round": 8,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "5847a8b4634b6d830e1b624deb58d8c3a148efcf7ce3b6344829e948086c2a89",
+      "verifiedSignatures": 0,
+      "wallMs": 2730.6047770000005,
+      "approvalTimings": [
+        {
+          "label": "7-export",
+          "gestureToResultMs": 105.38774300000296,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 9,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "b48addda67b145c7df9d278c2a3697954c707aff50416b24b13455cb5e6f03fa",
+      "verifiedSignatures": 1,
+      "wallMs": 5838.374337000001,
+      "approvalTimings": [
+        {
+          "label": "8-sign",
+          "gestureToResultMs": 542.8933490000018,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 10,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "8f120ed348939f3e190cb72f19fca88966701b9b359319fc085b602660bd6aa7",
+      "verifiedSignatures": 16,
+      "wallMs": 13967.733031,
+      "approvalTimings": [
+        {
+          "label": "9-max16",
+          "gestureToResultMs": 6294.186821000003,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 11,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "b0858a8d7e5ad2336d394df53191f1c4fd2f433e4ff8438a460e53f0767abdc7",
+      "verifiedSignatures": 5,
+      "wallMs": 7585.852380000004,
+      "approvalTimings": [
+        {
+          "label": "10-sign",
+          "gestureToResultMs": 1816.2097090000025,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 12,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "a3260ecf72a8400d610271bd6a655609b1391416f0ab8d5ea3b515efd2208c71",
+      "verifiedSignatures": 0,
+      "wallMs": 3106.790205999998,
+      "approvalTimings": [
+        {
+          "label": "11-address",
+          "gestureToResultMs": 103.32159200000024,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 13,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "14e463e2f57ac774a98d63cab4f37a40b26cd06594eca59f300820f32f1b0761",
+      "verifiedSignatures": 0,
+      "wallMs": 29.625825000002806,
+      "approvalTimings": []
+    },
+    {
+      "round": 14,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "34d7f411c18ee54ef6665bbbfb17a5eba55cd105a75d58748feafea1fd281b70",
+      "verifiedSignatures": 0,
+      "wallMs": 6004.393789999995,
+      "approvalTimings": []
+    },
+    {
+      "round": 15,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "d6a79adf09ab306a4c05f8d05efd19570790839d005c6a7e000df3ecf77458d3",
+      "verifiedSignatures": 0,
+      "wallMs": 208.31409999999596,
+      "approvalTimings": []
+    },
+    {
+      "round": 16,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "d01cda0db8ccfd7362b72003292e3f89597a8b25d1a8eab1a91f88771d96cda9",
+      "verifiedSignatures": 1,
+      "wallMs": 5570.141294000001,
+      "approvalTimings": [
+        {
+          "label": "15-partial-signature",
+          "gestureToResultMs": 847.5911690000066,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 17,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "901d138fc445398fef1761f9404951eec8f2df4238dd6efe8a991ad8a8f98fc2",
+      "verifiedSignatures": 0,
+      "wallMs": 40.375007000009646,
+      "approvalTimings": []
+    },
+    {
+      "round": 18,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "88f41b28bab6b59947785a7fca5dfde6d50824f1b9ffda1940ae0fcf20ca530a",
+      "verifiedSignatures": 0,
+      "wallMs": 2716.3013340000034,
+      "approvalTimings": [
+        {
+          "label": "17-export",
+          "gestureToResultMs": 104.0557140000019,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 19,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "bff130c98337f8e1ffc9330db3ef6197dc1001cbe8cfc245c4dcc44ac40e16d6",
+      "verifiedSignatures": 5,
+      "wallMs": 7126.861684999996,
+      "approvalTimings": [
+        {
+          "label": "18-sign",
+          "gestureToResultMs": 1921.1892610000068,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 20,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "e9810f43feb7d69af2a79cc6db701be09683337faf7fcaad235935e9fc22b70e",
+      "verifiedSignatures": 16,
+      "wallMs": 13606.917165000006,
+      "approvalTimings": [
+        {
+          "label": "19-max16",
+          "gestureToResultMs": 5747.403728999998,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 21,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "1c16bc2d23ed1880c9e9a93a96d78dc8e4a0f2901fd1a867d8fc9d4c6b8e2cc9",
+      "verifiedSignatures": 3,
+      "wallMs": 6598.794799999989,
+      "approvalTimings": [
+        {
+          "label": "20-sign",
+          "gestureToResultMs": 1173.7014849999978,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 22,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "d1a15aff0a674439db9423922d5d9f79ef9983aa2d1f0a3303b3ab4b6dbd1a5e",
+      "verifiedSignatures": 0,
+      "wallMs": 3306.1377159999975,
+      "approvalTimings": [
+        {
+          "label": "21-address",
+          "gestureToResultMs": 104.9695950000023,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 23,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "ee2cfd5a13b6b6b17f95f6db7bf5446dcb550040e4f482f0bcbd6431683bff52",
+      "verifiedSignatures": 0,
+      "wallMs": 28.86608900000283,
+      "approvalTimings": []
+    },
+    {
+      "round": 24,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "abba39f564e51a959ebf921adcb26ffc3e027add315fe27c92d18137d203c10f",
+      "verifiedSignatures": 0,
+      "wallMs": 6003.1947660000005,
+      "approvalTimings": []
+    },
+    {
+      "round": 25,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "338c7baa90855385c4551bc898d758097316bf5b1f551884d385ac164c2e16c1",
+      "verifiedSignatures": 0,
+      "wallMs": 743.1481510000012,
+      "approvalTimings": []
+    },
+    {
+      "round": 26,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "f43143ac6bb5e890cf4d73aba90503315f759c46569aca4605d3aaccd4e6cedc",
+      "verifiedSignatures": 1,
+      "wallMs": 6155.268031,
+      "approvalTimings": [
+        {
+          "label": "25-partial-signature",
+          "gestureToResultMs": 837.749456000005,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 27,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "da1414635bcabf836f1a4597ff5033fd678ef9adfe16c477fd681bad0139ff8f",
+      "verifiedSignatures": 0,
+      "wallMs": 24.57132200000342,
+      "approvalTimings": []
+    },
+    {
+      "round": 28,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "1c18a99d4b43ccb6d7abee90dd5542458eb6773f1fc3ed4a029cf9c51d119027",
+      "verifiedSignatures": 0,
+      "wallMs": 2721.515624000007,
+      "approvalTimings": [
+        {
+          "label": "27-export",
+          "gestureToResultMs": 104.50969500000065,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 29,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "70ab330b60f2fc0b95fbfc2a053d3a0bbae7c1255119940a780dfd8d5ba8c617",
+      "verifiedSignatures": 3,
+      "wallMs": 6820.312310999987,
+      "approvalTimings": [
+        {
+          "label": "28-sign",
+          "gestureToResultMs": 1234.5055599999905,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 30,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "c0daa68bcd7ff66765dc98609a2f3ff308a0fcfe358e2d8b23b2c55004464d8e",
+      "verifiedSignatures": 16,
+      "wallMs": 14340.441164999997,
+      "approvalTimings": [
+        {
+          "label": "29-max16",
+          "gestureToResultMs": 6089.915525999997,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 31,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "b11cb1206d704dc4a2d60b67517825d69b1f570e893c9b4829bb3e09a1903d8c",
+      "verifiedSignatures": 2,
+      "wallMs": 5738.940302000003,
+      "approvalTimings": [
+        {
+          "label": "30-sign",
+          "gestureToResultMs": 895.2654469999834,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 32,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "1aed5462e45209ebe35c4b8ae7935eabce75e4ed78055cb4752fb2f3a94fa323",
+      "verifiedSignatures": 0,
+      "wallMs": 3121.7536839999957,
+      "approvalTimings": [
+        {
+          "label": "31-address",
+          "gestureToResultMs": 111.34304700000212,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 33,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "e504e56f004e3a5cc3ff43ab98959347f0747c76c0c4e6cf8b8f07064836bb7d",
+      "verifiedSignatures": 0,
+      "wallMs": 133.81121499999426,
+      "approvalTimings": []
+    },
+    {
+      "round": 34,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "f896ab324efb54ef0ba07faeb23c3c512ba67f2e4f7c661b71c5d7eb536ad0c9",
+      "verifiedSignatures": 0,
+      "wallMs": 5276.795155,
+      "approvalTimings": []
+    },
+    {
+      "round": 35,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "918be628e3ddb53398b519eab5e1293517f4cab222d62114b868fd3e31a546ac",
+      "verifiedSignatures": 0,
+      "wallMs": 49.60625800001435,
+      "approvalTimings": []
+    },
+    {
+      "round": 36,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "34e2b885b5c3c75b9ca4466950bff2705a72f96d4926c281e9fb3f68b0a6f080",
+      "verifiedSignatures": 1,
+      "wallMs": 6378.840572999994,
+      "approvalTimings": [
+        {
+          "label": "35-partial-signature",
+          "gestureToResultMs": 841.477486000018,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 37,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "fecc17f69a869b79e867c8aa1da9508afc1d02ec2383f49b1a6ccdb2aaf100c6",
+      "verifiedSignatures": 0,
+      "wallMs": 30.08665199999814,
+      "approvalTimings": []
+    },
+    {
+      "round": 38,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "f53e770715543af9712e2e859e3950796e7edc31327ead9ecabbccf53172bf2c",
+      "verifiedSignatures": 0,
+      "wallMs": 2710.759739000001,
+      "approvalTimings": [
+        {
+          "label": "37-export",
+          "gestureToResultMs": 104.77984799997648,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 39,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "1436d4365d26576859d50cb0ff6105c0318312489c8bec1c7a0585bda83bdbf4",
+      "verifiedSignatures": 2,
+      "wallMs": 6008.028783999995,
+      "approvalTimings": [
+        {
+          "label": "38-sign",
+          "gestureToResultMs": 759.0202240000071,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 40,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "597e5b0e96216f3f437e78b18c16b1e6067a7e3aa3c386ddc790c4806522fa98",
+      "verifiedSignatures": 16,
+      "wallMs": 13362.526366000006,
+      "approvalTimings": [
+        {
+          "label": "39-max16",
+          "gestureToResultMs": 6286.9816500000015,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 41,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "8cb5566e94231f066e01324cab26e21a8143b41357f3ae17b4050e21e13e3980",
+      "verifiedSignatures": 1,
+      "wallMs": 5539.159761000017,
+      "approvalTimings": [
+        {
+          "label": "40-sign",
+          "gestureToResultMs": 488.5344240000122,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 42,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "cf1d382b12a84247fcf7402be9976ca4c11347f286588c10d0abaad16f771a51",
+      "verifiedSignatures": 0,
+      "wallMs": 3294.610554999992,
+      "approvalTimings": [
+        {
+          "label": "41-address",
+          "gestureToResultMs": 108.67863899999065,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 43,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "552ce1e4f826ca35bfdbfc1343ee5b5f27e136df82511e487c12b4c14b92795a",
+      "verifiedSignatures": 0,
+      "wallMs": 26.30724100000225,
+      "approvalTimings": []
+    },
+    {
+      "round": 44,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "8b9826411d32111a7e1f869f9deae2d0d08275e9fd79bf3a26b85554e75cda64",
+      "verifiedSignatures": 0,
+      "wallMs": 6372.968742999976,
+      "approvalTimings": []
+    },
+    {
+      "round": 45,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "7ef599fee3287b4d982c73cb6083df61b74b7b7aa1c7ea4f053147d1a64a03d6",
+      "verifiedSignatures": 0,
+      "wallMs": 209.2264139999752,
+      "approvalTimings": []
+    },
+    {
+      "round": 46,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "da43193f6179967af1e54c5d42f4ec64a62dbdcb8b4d637dc5e8919c90fa3577",
+      "verifiedSignatures": 1,
+      "wallMs": 5576.084015,
+      "approvalTimings": [
+        {
+          "label": "45-partial-signature",
+          "gestureToResultMs": 785.0078700000013,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 47,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "24aad0483cf6039df3167dc846dedc09199fb6eb441f89ec848c3198a75baa8b",
+      "verifiedSignatures": 0,
+      "wallMs": 26.676997999980813,
+      "approvalTimings": []
+    },
+    {
+      "round": 48,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "fbe859229d50fb3f649670400eb8ee48b2e4fe3d6777a4dbff9da59c0e75c9e8",
+      "verifiedSignatures": 0,
+      "wallMs": 2713.412363999989,
+      "approvalTimings": [
+        {
+          "label": "47-export",
+          "gestureToResultMs": 106.05285300000105,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 49,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "9ef9c8f5439a285a60ab2452c43cd1089f5deebabdb7517e7d91cecf83024ffc",
+      "verifiedSignatures": 1,
+      "wallMs": 4951.659077999997,
+      "approvalTimings": [
+        {
+          "label": "48-sign",
+          "gestureToResultMs": 497.4855690000113,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 50,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "a46751db7f95416df6c3c7166bd2378fb58e3c14ece2e4c838f65c3364019878",
+      "verifiedSignatures": 16,
+      "wallMs": 14041.032867000002,
+      "approvalTimings": [
+        {
+          "label": "49-max16",
+          "gestureToResultMs": 6403.737406,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 51,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "3a40cff98b3062a729b4197054b1c237251e3f2ef001166cd9ba42ff00296edd",
+      "verifiedSignatures": 5,
+      "wallMs": 8132.519138000003,
+      "approvalTimings": [
+        {
+          "label": "50-sign",
+          "gestureToResultMs": 1852.4637180000136,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 52,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "514eb062ce55acf27ccc49c335501fb4b2a83c0368c6ee8f956bf6d66409d846",
+      "verifiedSignatures": 0,
+      "wallMs": 3104.684221000003,
+      "approvalTimings": [
+        {
+          "label": "51-address",
+          "gestureToResultMs": 105.31948400000692,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 53,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "3dc1cb52cdbc559c600fb454de9bceaa0e69859f2fc9f774fc3af78d73b13a97",
+      "verifiedSignatures": 0,
+      "wallMs": 39.06975500000408,
+      "approvalTimings": []
+    },
+    {
+      "round": 54,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "8eaba23f049987e918bea538420a824a108843b0eb2e4f6d78cc0a7d82dd737d",
+      "verifiedSignatures": 0,
+      "wallMs": 5996.533618999994,
+      "approvalTimings": []
+    },
+    {
+      "round": 55,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "60ad6a8c69a6bcf725076ce54e8b714849ceec3b09a835cb416120290863874e",
+      "verifiedSignatures": 0,
+      "wallMs": 1035.0541220000014,
+      "approvalTimings": []
+    },
+    {
+      "round": 56,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "5fdf9ba4c8a39a109268564482a4e4c368d092c7cac29c4109d8722abab17c4e",
+      "verifiedSignatures": 1,
+      "wallMs": 6840.755132999999,
+      "approvalTimings": [
+        {
+          "label": "55-partial-signature",
+          "gestureToResultMs": 858.416310999979,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 57,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "d7217357585bceef61c5205b14b319a73ab9db35aa864328d7408416c9d955d3",
+      "verifiedSignatures": 0,
+      "wallMs": 89.57519600001979,
+      "approvalTimings": []
+    },
+    {
+      "round": 58,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "27e27eb5e908762b3c21c0b9f31d3a3358a53b470d82d578a84b944154ff818d",
+      "verifiedSignatures": 0,
+      "wallMs": 2711.943658000004,
+      "approvalTimings": [
+        {
+          "label": "57-export",
+          "gestureToResultMs": 105.29902600002242,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 59,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "46b2c249ac116546ba909a2fb52c6297353d1d35d02ec4ddd0fafdaff820fd0b",
+      "verifiedSignatures": 5,
+      "wallMs": 7680.456330000015,
+      "approvalTimings": [
+        {
+          "label": "58-sign",
+          "gestureToResultMs": 1877.0941029999813,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 60,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "ea23fffd2add49bed4a0708ca0a12187373d086e23ff20f0b0d6b558ee729f71",
+      "verifiedSignatures": 16,
+      "wallMs": 13949.333247000002,
+      "approvalTimings": [
+        {
+          "label": "59-max16",
+          "gestureToResultMs": 6309.207517999981,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 61,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "c502247516f496e39732486585525df45a01c24ed5f642aa38cce85bf9ce5de2",
+      "verifiedSignatures": 3,
+      "wallMs": 6158.084132999997,
+      "approvalTimings": [
+        {
+          "label": "60-sign",
+          "gestureToResultMs": 1315.121240999957,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 62,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "8ac1e4a87f4166677b4c83051b1413740c6ab031fd4a45fa27d03ada0ad1f718",
+      "verifiedSignatures": 0,
+      "wallMs": 3284.656963000016,
+      "approvalTimings": [
+        {
+          "label": "61-address",
+          "gestureToResultMs": 105.16466000000946,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 63,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "0f1269c419703daf026ed08aa5d4aacee90ce99faf315d0e33298b9320c07406",
+      "verifiedSignatures": 0,
+      "wallMs": 28.850020999962,
+      "approvalTimings": []
+    },
+    {
+      "round": 64,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "6fecf733e1a6f1d1a020e7d4c3ba6970192f59a5e0aeb8054001fd2e1dca9025",
+      "verifiedSignatures": 0,
+      "wallMs": 5229.999422000023,
+      "approvalTimings": []
+    },
+    {
+      "round": 65,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "a487740ec35c52f3af97bf8558545b6cffb59bc4b8428e0634db8a7a5a9d9b84",
+      "verifiedSignatures": 0,
+      "wallMs": 44.004240999987815,
+      "approvalTimings": []
+    },
+    {
+      "round": 66,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "1c245110ab83d32f361b8230510f67e72b73151cd390d219898e5b8c901b56e5",
+      "verifiedSignatures": 1,
+      "wallMs": 6296.999109000026,
+      "approvalTimings": [
+        {
+          "label": "65-partial-signature",
+          "gestureToResultMs": 950.838163999957,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 67,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "b39579b2b9827759c3ae2cb1a7fa739205d0f4e28d7db4c293552514621bb5db",
+      "verifiedSignatures": 0,
+      "wallMs": 50.76947499997914,
+      "approvalTimings": []
+    },
+    {
+      "round": 68,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "c967c0f9bfe06b3d519268b53e5e6e669a89b83bdbce639b4c6b1053909aaaa1",
+      "verifiedSignatures": 0,
+      "wallMs": 2742.4409619999933,
+      "approvalTimings": [
+        {
+          "label": "67-export",
+          "gestureToResultMs": 106.17958299996099,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 69,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "df0ae35131078215e2a7d039ba8dffb94a842aaed1eb60367a38f1cb44c73136",
+      "verifiedSignatures": 3,
+      "wallMs": 8006.269911000039,
+      "approvalTimings": [
+        {
+          "label": "68-sign",
+          "gestureToResultMs": 1208.6677059999784,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 70,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "73ead224711c807a298b758f8e657b32d2173222aef2d744c6063a649cfc3b78",
+      "verifiedSignatures": 16,
+      "wallMs": 13793.999076999957,
+      "approvalTimings": [
+        {
+          "label": "69-max16",
+          "gestureToResultMs": 6353.15507800004,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 71,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "732713ad1a5d8998352811041fac93abbca78e200bd748ea1b38731d3a9c6aad",
+      "verifiedSignatures": 2,
+      "wallMs": 6228.50604899996,
+      "approvalTimings": [
+        {
+          "label": "70-sign",
+          "gestureToResultMs": 762.7324570000055,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 72,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "c1778a142d5bd74795288e2e5c274541a2a57f0aad91501121d58f7e60ed288a",
+      "verifiedSignatures": 0,
+      "wallMs": 3288.346265,
+      "approvalTimings": [
+        {
+          "label": "71-address",
+          "gestureToResultMs": 109.68558600003598,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 73,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "7803444b08336c09114f4160b431cf65d986bd27a80f7caa3515b95a7ca1b541",
+      "verifiedSignatures": 0,
+      "wallMs": 41.90875999996206,
+      "approvalTimings": []
+    },
+    {
+      "round": 74,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "f5bcf82e31835cf51a78a78e4875b79daff2605b77a8408140183c4cbd4b93b7",
+      "verifiedSignatures": 0,
+      "wallMs": 5821.23903300002,
+      "approvalTimings": []
+    },
+    {
+      "round": 75,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "d49c917e6ca74a78c1ac9d179e61060bde2045640876b67d0144b74b720addca",
+      "verifiedSignatures": 0,
+      "wallMs": 203.969402000017,
+      "approvalTimings": []
+    },
+    {
+      "round": 76,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "e633a57644798d8f50770f9012dbdfa1597781eaa9ad514d99825345518763e4",
+      "verifiedSignatures": 1,
+      "wallMs": 5762.407180000038,
+      "approvalTimings": [
+        {
+          "label": "75-partial-signature",
+          "gestureToResultMs": 867.8182410000009,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 77,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "e2ddec85f71b6c5f0045bce4e5e2e2a8b5234aed6250a55b1aa5a7907960eaab",
+      "verifiedSignatures": 0,
+      "wallMs": 54.81722699996317,
+      "approvalTimings": []
+    },
+    {
+      "round": 78,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "b092873a49eab292250f5c545721ecba51c2ae933e4680b567223972f76c5ac2",
+      "verifiedSignatures": 0,
+      "wallMs": 2722.058232999989,
+      "approvalTimings": [
+        {
+          "label": "77-export",
+          "gestureToResultMs": 108.72999299998628,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 79,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "1d40e534c5d510e7ad8bf81d9eee7a0e9ca546f8befbbe377d37fa70a7c5796f",
+      "verifiedSignatures": 2,
+      "wallMs": 5750.268054999993,
+      "approvalTimings": [
+        {
+          "label": "78-sign",
+          "gestureToResultMs": 840.0193890000228,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 80,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "74428c7287070a65be093d89dd622559072355cbf73fea04ba6a37e5b855c484",
+      "verifiedSignatures": 16,
+      "wallMs": 13554.234401999973,
+      "approvalTimings": [
+        {
+          "label": "79-max16",
+          "gestureToResultMs": 5910.500461000018,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 81,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "0bba2451826b1bfb5c3afcd0d87095bf930d3c196d197b290f78b36e54411aff",
+      "verifiedSignatures": 1,
+      "wallMs": 5821.130563999992,
+      "approvalTimings": [
+        {
+          "label": "80-sign",
+          "gestureToResultMs": 554.9032439999864,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 82,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "939a462074813f6d5565d88fab147579ab0bb6bc6feb01222ea6b01e9194dbe2",
+      "verifiedSignatures": 0,
+      "wallMs": 3105.3795910000335,
+      "approvalTimings": [
+        {
+          "label": "81-address",
+          "gestureToResultMs": 107.5144980000332,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 83,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "fbd72cd4ff24c18af811cb89affb7fdd69214821f58bf25f7447c757b2aab889",
+      "verifiedSignatures": 0,
+      "wallMs": 41.28192200005287,
+      "approvalTimings": []
+    },
+    {
+      "round": 84,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "56b429ceabca816eb8fc05dd843b1c1fac85dd70a165ab0c60c8376a438a9a34",
+      "verifiedSignatures": 0,
+      "wallMs": 6601.025261000032,
+      "approvalTimings": []
+    },
+    {
+      "round": 85,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "1efad19e1498f5b1fe26c6c8b709fbc3d383977a58a99b0c8494d77f506926d6",
+      "verifiedSignatures": 0,
+      "wallMs": 446.13878400000976,
+      "approvalTimings": []
+    },
+    {
+      "round": 86,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "71ce7a53923b4b6b420988e453742d9587d7a47111edfb2b0d62df71acb33801",
+      "verifiedSignatures": 1,
+      "wallMs": 7510.714462000004,
+      "approvalTimings": [
+        {
+          "label": "85-partial-signature",
+          "gestureToResultMs": 857.3665289999917,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 87,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "41998b9a71e65edd3041cee2f671c2cf2fbfd14405f856859d2246b5ddd218e3",
+      "verifiedSignatures": 0,
+      "wallMs": 30.25750700000208,
+      "approvalTimings": []
+    },
+    {
+      "round": 88,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "b9aa6b3f1e81d271d216dbd3e6eb4564ab2c50244830efd363511b0201f39f1f",
+      "verifiedSignatures": 0,
+      "wallMs": 2719.830239999981,
+      "approvalTimings": [
+        {
+          "label": "87-export",
+          "gestureToResultMs": 106.98519599996507,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 89,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "7d31ec22c641d2e11bd2194c7e7fdf4e355b171e166b978e8bbfe8d65575d00a",
+      "verifiedSignatures": 1,
+      "wallMs": 5833.728270000021,
+      "approvalTimings": [
+        {
+          "label": "88-sign",
+          "gestureToResultMs": 513.7084669999895,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 90,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "c93d2d13e76000e459cecaadaa8bbf418348a54f1d3842890441145efd8c008d",
+      "verifiedSignatures": 16,
+      "wallMs": 14544.219954999979,
+      "approvalTimings": [
+        {
+          "label": "89-max16",
+          "gestureToResultMs": 6692.4333240000415,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 91,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "19e3e63cc61541251d0348c4dd50cfad34d8ce352c8b68f1f7a5b83590c50b72",
+      "verifiedSignatures": 5,
+      "wallMs": 7308.383739999961,
+      "approvalTimings": [
+        {
+          "label": "90-sign",
+          "gestureToResultMs": 1916.243936999992,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 92,
+      "kind": "address",
+      "status": "passed",
+      "inputs": 1,
+      "bundleSha256": "8549caed55627b9b7798c1148a7cab7eba8fff88c0fd4132b07d9fcbe3b0e123",
+      "verifiedSignatures": 0,
+      "wallMs": 3100.6131330000353,
+      "approvalTimings": [
+        {
+          "label": "91-address",
+          "gestureToResultMs": 106.25005000003148,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 93,
+      "kind": "abort-upload",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "4d3fbdbd0192b4ee98096a9d545997f85a46809f4a0ca489b1d70972f6101dac",
+      "verifiedSignatures": 0,
+      "wallMs": 34.49293800001033,
+      "approvalTimings": []
+    },
+    {
+      "round": 94,
+      "kind": "reject-review",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "d25b993483dd49f396f9da43450953592c4c9d2f3f18141511518014253a3fbc",
+      "verifiedSignatures": 0,
+      "wallMs": 5603.252129999979,
+      "approvalTimings": []
+    },
+    {
+      "round": 95,
+      "kind": "invalid-ownership-or-point",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "bddd86c6e22a9ec61ce7430d0732f4fb5449179e6e378261acee945261ad80f8",
+      "verifiedSignatures": 0,
+      "wallMs": 51.33730299997842,
+      "approvalTimings": []
+    },
+    {
+      "round": 96,
+      "kind": "partial-signature-abort",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "20db4d34f02307a2e3053adfdeeca1309d8fa69d7387e9a1a2dbb258c3695f85",
+      "verifiedSignatures": 1,
+      "wallMs": 6058.468886999995,
+      "approvalTimings": [
+        {
+          "label": "95-partial-signature",
+          "gestureToResultMs": 747.3537670000223,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 97,
+      "kind": "invalid-upload",
+      "status": "passed",
+      "inputs": 2,
+      "bundleSha256": "c70be22a44a4897f2b00099b4607e1b9f27746fcf764a6785ec7fa010ecea773",
+      "verifiedSignatures": 0,
+      "wallMs": 40.026608999993186,
+      "approvalTimings": []
+    },
+    {
+      "round": 98,
+      "kind": "export",
+      "status": "passed",
+      "inputs": 3,
+      "bundleSha256": "b4ce18866844009689f9c0a143d66cb4a28417f7adbd6d3ecbf744418f518668",
+      "verifiedSignatures": 0,
+      "wallMs": 2717.987826000026,
+      "approvalTimings": [
+        {
+          "label": "97-export",
+          "gestureToResultMs": 106.09056699997745,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 99,
+      "kind": "sign",
+      "status": "passed",
+      "inputs": 5,
+      "bundleSha256": "b786ff40c5cfbdf0c3cc2db11a8600815b372607e41df1d1549036c15c480196",
+      "verifiedSignatures": 5,
+      "wallMs": 7572.978446000023,
+      "approvalTimings": [
+        {
+          "label": "98-sign",
+          "gestureToResultMs": 1772.2343659999897,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    },
+    {
+      "round": 100,
+      "kind": "max16",
+      "status": "passed",
+      "inputs": 16,
+      "bundleSha256": "fde91ac12b7755ed2a493d191531bd58d2034d10e762fd540d9b65399cc06a3c",
+      "verifiedSignatures": 16,
+      "wallMs": 13340.854086000007,
+      "approvalTimings": [
+        {
+          "label": "99-max16",
+          "gestureToResultMs": 6284.136355999974,
+          "gesture": "both-button press-and-release"
+        }
+      ]
+    }
+  ],
+  "failure": null,
+  "scope": "Emulated device UI only; synthetic public-test outpoints; no broadcasts, physical hardware, external transactions or hardware performance claims",
+  "resourceScope": "Emulator process RSS and host harness heap only; not native app allocation measurements",
+  "observerMaintenance": "Bounded 256 KiB Speculos log tail and 64 UI observations; official DELETE /events clears historical OCR observations after each idle session without changing current screen or firmware state",
+  "sourceSha256": {
+    "harness": "99bc588374523e93b1221903c47133cc5ad59e8a9f667239dc86375fc44a2cd6",
+    "driver": "ab3d5d8a1638b9ee2841a2467f21f0cef33eab0d1ec0e6df4a5d67cfbf0f8fdf",
+    "fixture": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+    "dependencyLock": "e07e6d210196b3e2ad94274b41618d9b993d69fc2e86e9ddc94106eb712cd047"
+  },
+  "sourceUnchanged": true
+}

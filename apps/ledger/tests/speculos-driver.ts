@@ -1,4 +1,4 @@
-/** Public-test-only physical UI driver. Does not patch the firmware or bypass consent. */
+/** Public-test-only emulated device UI driver. Does not patch firmware or bypass consent. */
 import assert from "node:assert/strict";
 import { spawn, execFileSync, type ChildProcess } from "node:child_process";
 import { createWriteStream, constants } from "node:fs";
@@ -25,6 +25,7 @@ export class Emulator {
   child?: ChildProcess;
   readonly url: string;
   provenance: unknown;
+  private logTail = Buffer.alloc(0);
   readonly approvalTimings: {
     label: string;
     gestureToResultMs: number;
@@ -37,6 +38,7 @@ export class Emulator {
     readonly elf: string,
     readonly output: string,
     readonly port = 5031,
+    readonly logLimitBytes?: number,
   ) {
     this.url = `http://127.0.0.1:${port}`;
   }
@@ -48,7 +50,10 @@ export class Emulator {
     // existing snapshot that another live emulator may have mapped.
     await copyFile(this.elf, snapshot, constants.COPYFILE_EXCL);
     console.log(`EVIDENCE ${this.output}`);
-    const log = createWriteStream(join(this.output, "speculos.log"));
+    const log =
+      this.logLimitBytes === undefined
+        ? createWriteStream(join(this.output, "speculos.log"))
+        : undefined;
     const injector = process.env.SPECULOS_INJECTOR;
     const sha256 = (data: Uint8Array) =>
       createHash("sha256").update(data).digest("hex");
@@ -105,8 +110,18 @@ export class Emulator {
       ],
       { env: process.env, stdio: ["ignore", "pipe", "pipe"] },
     );
-    this.child.stdout!.pipe(log);
-    this.child.stderr!.pipe(log);
+    if (log) {
+      this.child.stdout!.pipe(log);
+      this.child.stderr!.pipe(log);
+    } else {
+      const retain = (chunk: Buffer) => {
+        this.logTail = Buffer.concat([this.logTail, chunk]).subarray(
+          -this.logLimitBytes!,
+        );
+      };
+      this.child.stdout!.on("data", retain);
+      this.child.stderr!.on("data", retain);
+    }
     let startupError: unknown;
     for (let i = 0; i < 100; i++) {
       if (this.child.exitCode !== null)
@@ -132,6 +147,8 @@ export class Emulator {
         join(this.output, "screens.json"),
         JSON.stringify(this.screens, null, 2),
       );
+      if (this.logLimitBytes !== undefined)
+        await writeFile(join(this.output, "speculos.log"), this.logTail);
     } finally {
       // Evidence storage failure must never leak an emulator process.
       this.child?.kill("SIGTERM");
@@ -246,7 +263,10 @@ export class Emulator {
     }
     assert(done, `${label}: UI did not finish`);
     const result = await pending;
-    assert(approved, `${label}: no explicit physical final approval observed`);
+    assert(
+      approved,
+      `${label}: no explicit emulated device UI approval observed`,
+    );
     assert(gestureStarted !== undefined);
     this.approvalTimings.push({
       label,

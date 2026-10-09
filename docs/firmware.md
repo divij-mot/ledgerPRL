@@ -105,7 +105,7 @@ node --import tsx --test apps/ledger/tests/speculos-driver.test.ts
 
 Repeat with `nanox`, `stax`, `flex` and `apex_p` (the build/lint target for emulator `nanosp` is `nanosplus`). Native Clippy treats warnings as errors except two explicitly documented syntax-style suggestions: the reviewed nested warning branch and explicit division/remainder fee threshold. Defaults create a fresh temporary output directory and print its path. Set `PEARL_EVIDENCE` to a fresh directory on a sufficiently large filesystem for retained/concurrent runs. An existing ELF snapshot is never overwritten, and an evidence-write failure still terminates the emulator child. Each run stores an immutable ELF snapshot, exact SHA256, Speculos version, public-seed identifier, UI text and screenshots. The fault suite additionally records the injector source SHA256. Its small Python wrapper permits numeric SEPH tags absent from upstream’s Python enum; it changes only test input generation, never firmware, crypto, syscalls or approval logic. A Python emulator exception cannot count as a passing fault test: the suite requires the native app’s explicit fail-closed exit.
 
-Retained current-binary summaries and compact node screenshots are in `apps/ledger/tests/evidence/`; the reusable node-roundtrip harness and earlier checkpoint evidence are in `tests/e2e/`. Native smoke tests reject zero/all-FF recipient x-only keys in the SDK, then perform a valid address/sign operation to exercise BN-resource cleanup. Warning tests require extra physical-button/touch approval for account 101, index 50,001 and a 20% fee. Fault tests exercise final-approval races, malformed/nested/BOLOS commands, malformed SEPH, reported USB power loss, actual 1,200-tick timeout and benign partial button release.
+Retained current-binary summaries and compact node screenshots are in `apps/ledger/tests/evidence/`; the reusable node-roundtrip harness and earlier checkpoint evidence are in `tests/e2e/`. Native smoke tests reject zero/all-FF recipient x-only keys in the SDK, then perform a valid address/sign operation to exercise BN-resource cleanup. Warning tests require extra emulated device UI button/touch approval for account 101, index 50,001 and a 20% fee. Fault tests exercise final-approval races, malformed/nested/BOLOS commands, malformed SEPH, reported USB power loss, actual 1,200-tick timeout and benign partial button release.
 
 ## Instrumented memory measurements
 
@@ -131,6 +131,30 @@ Ordinary-flow heap peak was 1,668 B; the longer warning flow reached 1,672 B; ab
 ## Repeated-session timing
 
 Five successive maximum-16-input sign/fetch/verify sessions passed on each release model. Median elapsed time from starting the final approval gesture through retrieving and independently verifying all signatures was 5.57 s (Nano S Plus), 5.95 s (Nano X), 7.63 s (Stax), 7.87 s (Flex), and 8.47 s (Nano Gen5). Touchscreen values include the 2.5-second hold gesture. These are host-observed Speculos timings under concurrent development workload, not secure-element CPU benchmarks or hardware timing guarantees. Exact per-round values and ELF hashes are retained in `apps/ledger/tests/evidence/<model>/latency.json`.
+
+## Mixed-session stability replay
+
+`apps/ledger/tests/native-stability.ts` keeps one immutable app snapshot and one emulator process alive for the whole run. The deterministic ten-session cycle mixes full signing, address verification, account export, partial/full upload cancellation, visible review rejection, forged ownership/invalid point rejection, offset/hash errors, partial-signature cancellation, and a 16-input maximum. Transaction shapes vary input branches/indices, output ordering, change presence, fee boundaries and exact amounts above JavaScript’s safe-integer range. Every completed cycle must return to idle, canceled/rejected approvals must be unusable, and every exported signature is independently verified.
+
+Run release and instrumented replays separately, with fresh output directories on a filesystem large enough for immutable ELF snapshots:
+
+```sh
+# Existing simnet release artifact; 100 successive mixed sessions by default.
+SPECULOS_MODEL=nanox PEARL_EVIDENCE=/path/to/fresh-release-evidence \
+  node --import tsx apps/ledger/tests/native-stability.ts
+
+# Separately named instrumented artifact; 20 mixed sessions by default.
+# Build it first with ledger-build-instrumented.sh if not already available.
+SPECULOS_MODEL=nanox PEARL_INSTRUMENTED=1 \
+  PEARL_EVIDENCE=/path/to/fresh-instrumented-evidence \
+  node --import tsx apps/ledger/tests/native-stability.ts
+```
+
+Repeat for `nanosp`, `stax`, `flex` and `apex_p`. Concurrent runs need distinct `SPECULOS_API_PORT` values with gaps of at least two. The harness refuses bulk `/tmp` evidence and existing snapshots. It retains a 256 KiB emulator-log tail, 64 recent UI observations, 32 recent APDUs and at most eight sampled screenshots. Official Speculos `DELETE /events` clears historical OCR observations after each idle session; it does not alter current screen content, firmware state or consent. This bounds an emulator-side observation cache rather than mistaking its intentional growth for native leakage.
+
+Release reports include exact ELF and test-source hashes, all session results, signature counts, latency distributions and emulator process RSS sampled after each ten-session cycle. RSS and host JavaScript heap are **not native app allocator measurements**. The separate instrumented replay initializes app-stack/allocator measurement once, keeps cumulative peaks across the run, and checks that every sampled idle heap baseline equals its initial value. It reports app-stack high-water and allocator occupancy, subject to the instrumented-memory limitations above. All interaction is emulated device UI; no physical Ledger is attached. Timings include host contention, rendering, gestures, transport and verification and do not estimate physical-device performance.
+
+All five models passed 100 successive mixed release sessions and a separate 20-session instrumented replay on 2026-10-09. The release runs verified 1,130 signatures. Instrumented idle heap stayed at 160 B at initialization and sessions 10/20; cumulative peak remained 1,672 B after the first cycle. Host emulator RSS increased by 2.2–8.4 MiB over release sessions 10–100, which is retained separately and is not attributed to native allocation. Full distributions, hashes, limitations and replay commands are in `apps/ledger/tests/evidence/stability/README.md`.
 
 ## Required release validation
 
