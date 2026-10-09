@@ -11,7 +11,10 @@ These retained machine-readable results come from real ARM Ledger application ex
 - `<model>/latency.json`, when present: five successive maximum-16-input signing sessions. Wall time includes the final approval gesture, emulator, transport, signature fetching and host verification; it is not hardware CPU timing.
 - `stability/`: 100 successive mixed release sessions and 20 separate instrumented sessions per model, exact hashes, all case results, latency distributions and explicit host-RSS/native-heap distinctions. See its README for measured results and replay.
 - `packaging/`: thirteen offline-verified ELF/HEX/install-APDU package reports, effective permissions and canonical application hashes. No physical loading or vendor authorization is implied.
+- `trusted-display/`: five-model mainnet/simnet display and approval review, 125 flows, exact field/warning comparisons and selected original screenshots. No physical-screen qualification is implied.
 - `artifact-race.json`: isolated dummy-file regression proving copy-time generation changes fail closed.
 - `build-locks.json`: independent held-lock checks for preparation/build/staging, followed by successful isolated build/stage.
 
 Temporary snapshot/screenshot paths in the JSON identify the original run locations; those paths are not portable attachments. Exact ELF hashes remain verifiable after rebuilding. The reusable node-roundtrip harness and earlier checkpoint/parity evidence are in `tests/e2e/`; current exact-binary results here are described in `docs/firmware.md`.
+
+Reports that identify a local source commit can be matched to its published GitHub commit through `docs/checkpoints.json`. Each pair was verified to have the exact same Git tree; commit IDs can differ because commit metadata differs.

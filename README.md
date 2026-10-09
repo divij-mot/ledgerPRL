@@ -18,6 +18,8 @@ Only ordinary no-script BIP86 P2TR owned inputs/change, one recipient, at most o
 
 Requirements: Node.js 24.19 or newer compatible 24.x release and npm. Use a WebHID-capable desktop browser such as current Chromium. Hardware connection requires a compatible app already running on the Ledger; development installation is a separate gated step.
 
+Current build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround. See the [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate).
+
 ```sh
 npm ci --ignore-scripts
 npm run dev

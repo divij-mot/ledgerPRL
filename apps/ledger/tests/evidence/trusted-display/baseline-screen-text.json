@@ -1,0 +1,1938 @@
+[
+  {
+    "directory": "baseline-apex_p-mainnet-r1",
+    "model": "apex_p",
+    "network": "mainnet",
+    "sha256": "18b2dbb03f384f122eb8c0d3ae5a22a8258f094e2af516bc0302ec960464b89c",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Network | Pearl mainnet | Account path | m/86'/808276'/0' | Master fingerprint | 3442193e | Reject | 2 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Privacy | Companion can view al | l addresses in this acc | ount | Reject | 3 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address | prl1pdmqd2wzd3e2un | rkvq880t24acsrf8zffz | qjqr356pmd93cve9eq | s4u7tjx | Show as QR | Cancel | 2 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl mainnet | Derivation | m/86'/808276'/0'/0/0 | Type | BIP86 no-script Tapro | ot | Cancel | 3 of 3 | Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/808276'/2147483647' | Reject | Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl mainnet | Account path | m/86'/808276'/21474 | 83647' | Master fingerprint | 3442193e | Reject | 2 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Privacy | Companion can view al | l addresses in this acc | ount | Reject | 3 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "address-max",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path | m/86'/808276'/2147483647'/1 | /2147483647 | Reject | Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Address | prl1ppg4pv3qh9w49z | palrrjwpzqxspx3ayn3 | c6xrwverymkpdxp3vz | 9qpqwt7w | Show as QR | Cancel | 2 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl mainnet | Derivation | m/86'/808276'/21474 | 83647'/1/2147483647 | Cancel | 3 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Type | BIP86 no-script Tapro | ot | Cancel | 4 of 4 | Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8sfm7dk5 | Reject | 2 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Amount | 20999999999.999999 | 98 PRL | Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Reject | 3 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change address | prl1p7ear3npj7rlxjdpm | r8kxjxendgw9kzqj2c0 | fdppggs4z8kumxs0sw | 26w9t | Change path | m/86'/808276'/0'/1/0 | Reject | 4 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee | Fee 20999999999.99999999  | PRL is at least 10% of inputs | Reject | Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8sfm7dk5 | Reject | 2 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Amount | 0.00000001 PRL | Fee | 20999999999.999999 | 99 PRL | Change | None | Change address | None | Reject | 3 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change path | None | Reject | 4 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-apex_p-simnet-r1",
+    "model": "apex_p",
+    "network": "simnet",
+    "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "  | Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "account-0",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "account-0",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl simnet | Account path | m/86'/1'/0' | Master fingerprint | 3442193e | Reject | 2 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Privacy | Companion can view al | l addresses in this acc | ount | Reject | 3 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address | rprl1pzh75rtx74l85v2x | qfr5uln7mhy40vyqzm | 68ml4yngcqy9v085tq | qjd9fxm | Show as QR | Cancel | 2 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl simnet | Derivation | m/86'/1'/0'/0/0 | Type | BIP86 no-script Tapro | ot | Cancel | 3 of 3 | Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/1'/2147483647' | Reject | Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl simnet | Account path | m/86'/1'/2147483647' | Master fingerprint | 3442193e | Reject | 2 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Privacy | Companion can view al | l addresses in this acc | ount | Reject | 3 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "address-max",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path | m/86'/1'/2147483647'/1/21474 | 83647 | Reject | Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Address | rprl1p677tp90yr88r9q | uvhr4ty5930cjaaysaw | 5y4t5qa0thlnjy0vzys | wjl55h | Show as QR | Cancel | 2 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl simnet | Derivation | m/86'/1'/2147483647'/ | 1/2147483647 | Cancel | 3 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Type | BIP86 no-script Tapro | ot | Cancel | 4 of 4 | Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8scdxtvf | Reject | 2 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Amount | 20999999999.999999 | 98 PRL | Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Reject | 3 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change address | rprl1pe2avzwvk5fxvan | ucwcwfkrklzajt6r82g2 | f9eqktmtuxtzmpkp7sm | y9l6m | Change path | m/86'/1'/0'/1/0 | Reject | 4 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee | Fee 20999999999.99999999  | PRL is at least 10% of inputs | Reject | Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8scdxtvf | Reject | 2 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Amount | 0.00000001 PRL | Fee | 20999999999.999999 | 99 PRL | Change | None | Change address | None | Reject | 3 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change path | None | Reject | 4 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-flex-mainnet-r1",
+    "model": "flex",
+    "network": "mainnet",
+    "sha256": "35c89f2eecdebe6cc203bea1fe3ee87e6bb207de916ea2c2ae4ff5ffbdf65976",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "account-0",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl mainnet | Account path | m/86'/808276'/0' | Master fingerprint | 3442193e | Reject | 2 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Privacy | Companion can view all |  addresses in this acco | unt | Reject | 3 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address | prl1pdmqd2wzd3e2unr | kvq880t24acsrf8zffzqj | qr356pmd93cve9eqs4 | u7tjx | Show as QR | Cancel | 2 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl mainnet | Derivation | m/86'/808276'/0'/0/0 | Type | BIP86 no-script Taproo | t | Cancel | 3 of 3 | Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/808276'/2147483647' | Reject | Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl mainnet | Account path | m/86'/808276'/214748 | 3647' | Master fingerprint | 3442193e | Reject | 2 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Privacy | Companion can view all |  addresses in this acco | unt | Reject | 3 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "address-max",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path | m/86'/808276'/2147483647'/1/ | 2147483647 | Reject | Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Address | prl1ppg4pv3qh9w49zp | alrrjwpzqxspx3ayn3c6x | rwverymkpdxp3vz9qpq | wt7w | Show as QR | Cancel | 2 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl mainnet | Derivation | m/86'/808276'/214748 | 3647'/1/2147483647 | Cancel | 3 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Type | BIP86 no-script Taproo | t | Cancel | 4 of 4 | Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5qf | 3j9q2uk9cmyc8n0u29d | 3eyhf8q069j924e8sfm | 7dk5 | Reject | 2 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Amount | 20999999999.999999 | 98 PRL | Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Reject | 3 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change address | prl1p7ear3npj7rlxjdpmr | 8kxjxendgw9kzqj2c0fd | ppggs4z8kumxs0sw26 | w9t | Change path | m/86'/808276'/0'/1/0 | Reject | 4 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee | Fee 20999999999.99999999  | PRL is at least 10% of inputs | Reject | Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5qf | 3j9q2uk9cmyc8n0u29d | 3eyhf8q069j924e8sfm | 7dk5 | Reject | 2 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Amount | 0.00000001 PRL | Fee | 20999999999.999999 | 99 PRL | Change | None | Change address | None | Reject | 3 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change path | None | Reject | 4 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-flex-simnet-r1",
+    "model": "flex",
+    "network": "simnet",
+    "sha256": "07405a1c64c6fadfa289ede2fa1d9c4593cb29f784d85a219ac8a672d7b4b8fd",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "account-0",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl simnet | Account path | m/86'/1'/0' | Master fingerprint | 3442193e | Reject | 2 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Privacy | Companion can view all |  addresses in this acco | unt | Reject | 3 of 4"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address | rprl1pzh75rtx74l85v2xq | fr5uln7mhy40vyqzm68 | ml4yngcqy9v085tqqjd9 | fxm | Show as QR | Cancel | 2 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl simnet | Derivation | m/86'/1'/0'/0/0 | Type | BIP86 no-script Taproo | t | Cancel | 3 of 3 | Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/1'/2147483647' | Reject | Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl simnet | Account path | m/86'/1'/2147483647' | Master fingerprint | 3442193e | Reject | 2 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Privacy | Companion can view all |  addresses in this acco | unt | Reject | 3 of 4"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "address-max",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path | m/86'/1'/2147483647'/1/21474 | 83647 | Reject | Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Address | rprl1p677tp90yr88r9qu | vhr4ty5930cjaaysaw5y | 4t5qa0thlnjy0vzyswjl55 | h | Show as QR | Cancel | 2 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl simnet | Derivation | m/86'/1'/2147483647'/1 | /2147483647 | Cancel | 3 of 4"
+      },
+      {
+        "label": "address-max",
+        "text": "Type | BIP86 no-script Taproo | t | Cancel | 4 of 4 | Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1ptkfg5hcsgxwuu5q | f3j9q2uk9cmyc8n0u29 | d3eyhf8q069j924e8sc | dxtvf | Reject | 2 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Amount | 20999999999.999999 | 98 PRL | Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Reject | 3 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change address | rprl1pe2avzwvk5fxvanu | cwcwfkrklzajt6r82g2f9 | eqktmtuxtzmpkp7smy9l | 6m | Change path | m/86'/1'/0'/1/0 | Reject | 4 of 5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee | Fee 20999999999.99999999  | PRL is at least 10% of inputs | Reject | Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1ptkfg5hcsgxwuu5q | f3j9q2uk9cmyc8n0u29 | d3eyhf8q069j924e8sc | dxtvf | Reject | 2 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Amount | 0.00000001 PRL | Fee | 20999999999.999999 | 99 PRL | Change | None | Change address | None | Reject | 3 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change path | None | Reject | 4 of 5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-nanosp-mainnet-r1",
+    "model": "nanosp",
+    "network": "mainnet",
+    "sha256": "470b2edadffd7c73897ff09f6e8e3e15df675919acbf15801c5a2188f2a59ab3",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Export Pearl account"
+      },
+      {
+        "label": "account-0",
+        "text": "Watch-only public  | data"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "account-0",
+        "text": "Account path | m/86'/808276'/0'"
+      },
+      {
+        "label": "account-0",
+        "text": "Master fingerprint | 3442193e"
+      },
+      {
+        "label": "account-0",
+        "text": "Privacy | Companion can view  | all addresses in this  | account"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl mainnet | app is ready"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address"
+      },
+      {
+        "label": "receive-0",
+        "text": "Compare the full  | address"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address (1/2) | prl1pdmqd2wzd3e2u | nrkvq880t24acsrf8zff | zqjqr356pmd93cve9e"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address (2/2) | qs4u7tjx"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "receive-0",
+        "text": "Derivation | m/86'/808276'/0'/0/0"
+      },
+      {
+        "label": "receive-0",
+        "text": "Type | BIP86 no-script  | Taproot"
+      },
+      {
+        "label": "receive-0",
+        "text": "Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/808276'/214748 | 3647'"
+      },
+      {
+        "label": "account-max",
+        "text": "Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account"
+      },
+      {
+        "label": "account-max",
+        "text": "Watch-only public  | data"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "account-max",
+        "text": "Account path | m/86'/808276'/214748 | 3647'"
+      },
+      {
+        "label": "account-max",
+        "text": "Master fingerprint | 3442193e"
+      },
+      {
+        "label": "account-max",
+        "text": "Privacy | Companion can view  | all addresses in this  | account"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual...ess path | m/86'/808276'/214748 | 3647'/1/2147483647"
+      },
+      {
+        "label": "address-max",
+        "text": "Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address"
+      },
+      {
+        "label": "address-max",
+        "text": "Compare the full  | address"
+      },
+      {
+        "label": "address-max",
+        "text": "Address (1/2) | prl1ppg4pv3qh9w49 | zpalrrjwpzqxspx3ayn | 3c6xrwverymkpdxp3v"
+      },
+      {
+        "label": "address-max",
+        "text": "Address (2/2) | z9qpqwt7w"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "address-max",
+        "text": "Derivation | m/86'/808276'/214748 | 3647'/1/2147483647"
+      },
+      {
+        "label": "address-max",
+        "text": "Type | BIP86 no-script  | Taproot"
+      },
+      {
+        "label": "address-max",
+        "text": "Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl mainnet | app is ready"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer"
+      },
+      {
+        "label": "max-amount",
+        "text": "Check address,  | amount and fee"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "max-amount",
+        "text": "From account | m/86'/808276'/0'"
+      },
+      {
+        "label": "max-amount",
+        "text": "Recipient (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e"
+      },
+      {
+        "label": "max-amount",
+        "text": "Recipient (2/2) | 8sfm7dk5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Amount | 20999999999.9999999 | 8 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Fee | 0.00000001 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change | 0.00000001 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change...ess (1/2) | prl1p7ear3npj7rlxjdp | mr8kxjxendgw9kzqj2c | 0fdppggs4z8kumxs0s"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change...ss (2/2) | w26w9t"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change path | m/86'/808276'/0'/1/0"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl mainnet | app is ready"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee"
+      },
+      {
+        "label": "max-fee",
+        "text": "High tr...ee (1/2) | Fee  | 20999999999.9999999 | 9 PRL is at least 10% "
+      },
+      {
+        "label": "max-fee",
+        "text": "High tr...ee (2/2) | of inputs"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer"
+      },
+      {
+        "label": "max-fee",
+        "text": "Check address,  | amount and fee"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "max-fee",
+        "text": "From account | m/86'/808276'/0'"
+      },
+      {
+        "label": "max-fee",
+        "text": "Recipient (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e"
+      },
+      {
+        "label": "max-fee",
+        "text": "Recipient (2/2) | 8sfm7dk5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Amount | 0.00000001 PRL"
+      },
+      {
+        "label": "max-fee",
+        "text": "Fee | 20999999999.9999999 | 9 PRL"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change address | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change path | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-nanosp-simnet-r1",
+    "model": "nanosp",
+    "network": "simnet",
+    "sha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Export Pearl account"
+      },
+      {
+        "label": "account-0",
+        "text": "Watch-only public  | data"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "account-0",
+        "text": "Account path | m/86'/1'/0'"
+      },
+      {
+        "label": "account-0",
+        "text": "Master fingerprint | 3442193e"
+      },
+      {
+        "label": "account-0",
+        "text": "Privacy | Companion can view  | all addresses in this  | account"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl simnet | app is ready"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address"
+      },
+      {
+        "label": "receive-0",
+        "text": "Compare the full  | address"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address (1/2) | rprl1pzh75rtx74l85v2 | xqfr5uln7mhy40vyqz | m68ml4yngcqy9v085t"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address (2/2) | qqjd9fxm"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "receive-0",
+        "text": "Derivation | m/86'/1'/0'/0/0"
+      },
+      {
+        "label": "receive-0",
+        "text": "Type | BIP86 no-script  | Taproot"
+      },
+      {
+        "label": "receive-0",
+        "text": "Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/1'/2147483647'"
+      },
+      {
+        "label": "account-max",
+        "text": "Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account"
+      },
+      {
+        "label": "account-max",
+        "text": "Watch-only public  | data"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "account-max",
+        "text": "Account path | m/86'/1'/2147483647'"
+      },
+      {
+        "label": "account-max",
+        "text": "Master fingerprint | 3442193e"
+      },
+      {
+        "label": "account-max",
+        "text": "Privacy | Companion can view  | all addresses in this  | account"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual...ess path | m/86'/1'/2147483647' | /1/2147483647"
+      },
+      {
+        "label": "address-max",
+        "text": "Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address"
+      },
+      {
+        "label": "address-max",
+        "text": "Compare the full  | address"
+      },
+      {
+        "label": "address-max",
+        "text": "Address (1/2) | rprl1p677tp90yr88r9q | uvhr4ty5930cjaaysaw | 5y4t5qa0thlnjy0vzys"
+      },
+      {
+        "label": "address-max",
+        "text": "Address (2/2) | wjl55h"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "address-max",
+        "text": "Derivation | m/86'/1'/2147483647' | /1/2147483647"
+      },
+      {
+        "label": "address-max",
+        "text": "Type | BIP86 no-script  | Taproot"
+      },
+      {
+        "label": "address-max",
+        "text": "Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl simnet | app is ready"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer"
+      },
+      {
+        "label": "max-amount",
+        "text": "Check address,  | amount and fee"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "max-amount",
+        "text": "From account | m/86'/1'/0'"
+      },
+      {
+        "label": "max-amount",
+        "text": "Recipient (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924"
+      },
+      {
+        "label": "max-amount",
+        "text": "Recipient (2/2) | e8scdxtvf"
+      },
+      {
+        "label": "max-amount",
+        "text": "Amount | 20999999999.9999999 | 8 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Fee | 0.00000001 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change | 0.00000001 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change...ss (2/2) | smy9l6m"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change path | m/86'/1'/0'/1/0"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl simnet | app is ready"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee"
+      },
+      {
+        "label": "max-fee",
+        "text": "High tr...ee (1/2) | Fee  | 20999999999.9999999 | 9 PRL is at least 10% "
+      },
+      {
+        "label": "max-fee",
+        "text": "High tr...ee (2/2) | of inputs"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer"
+      },
+      {
+        "label": "max-fee",
+        "text": "Check address,  | amount and fee"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "max-fee",
+        "text": "From account | m/86'/1'/0'"
+      },
+      {
+        "label": "max-fee",
+        "text": "Recipient (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924"
+      },
+      {
+        "label": "max-fee",
+        "text": "Recipient (2/2) | e8scdxtvf"
+      },
+      {
+        "label": "max-fee",
+        "text": "Amount | 0.00000001 PRL"
+      },
+      {
+        "label": "max-fee",
+        "text": "Fee | 20999999999.9999999 | 9 PRL"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change address | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change path | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-nanox-mainnet-r1",
+    "model": "nanox",
+    "network": "mainnet",
+    "sha256": "eef809c66260c4e6f5916a1480f50bacd8e990189696eeab60d28c8dd3329e92",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Export Pearl account"
+      },
+      {
+        "label": "account-0",
+        "text": "Watch-only public  | data"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "account-0",
+        "text": "Account path | m/86'/808276'/0'"
+      },
+      {
+        "label": "account-0",
+        "text": "Master fingerprint | 3442193e"
+      },
+      {
+        "label": "account-0",
+        "text": "Privacy | Companion can view  | all addresses in this  | account"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl mainnet | app is ready"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address"
+      },
+      {
+        "label": "receive-0",
+        "text": "Compare the full  | address"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address (1/2) | prl1pdmqd2wzd3e2u | nrkvq880t24acsrf8zff | zqjqr356pmd93cve9e"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address (2/2) | qs4u7tjx"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "receive-0",
+        "text": "Derivation | m/86'/808276'/0'/0/0"
+      },
+      {
+        "label": "receive-0",
+        "text": "Type | BIP86 no-script  | Taproot"
+      },
+      {
+        "label": "receive-0",
+        "text": "Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/808276'/214748 | 3647'"
+      },
+      {
+        "label": "account-max",
+        "text": "Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account"
+      },
+      {
+        "label": "account-max",
+        "text": "Watch-only public  | data"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "account-max",
+        "text": "Account path | m/86'/808276'/214748 | 3647'"
+      },
+      {
+        "label": "account-max",
+        "text": "Master fingerprint | 3442193e"
+      },
+      {
+        "label": "account-max",
+        "text": "Privacy | Companion can view  | all addresses in this  | account"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual...ess path | m/86'/808276'/214748 | 3647'/1/2147483647"
+      },
+      {
+        "label": "address-max",
+        "text": "Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address"
+      },
+      {
+        "label": "address-max",
+        "text": "Compare the full  | address"
+      },
+      {
+        "label": "address-max",
+        "text": "Address (1/2) | prl1ppg4pv3qh9w49 | zpalrrjwpzqxspx3ayn | 3c6xrwverymkpdxp3v"
+      },
+      {
+        "label": "address-max",
+        "text": "Address (2/2) | z9qpqwt7w"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "address-max",
+        "text": "Derivation | m/86'/808276'/214748 | 3647'/1/2147483647"
+      },
+      {
+        "label": "address-max",
+        "text": "Type | BIP86 no-script  | Taproot"
+      },
+      {
+        "label": "address-max",
+        "text": "Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl mainnet | app is ready"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer"
+      },
+      {
+        "label": "max-amount",
+        "text": "Check address,  | amount and fee"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "max-amount",
+        "text": "From account | m/86'/808276'/0'"
+      },
+      {
+        "label": "max-amount",
+        "text": "Recipient (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e"
+      },
+      {
+        "label": "max-amount",
+        "text": "Recipient (2/2) | 8sfm7dk5"
+      },
+      {
+        "label": "max-amount",
+        "text": "Amount | 20999999999.9999999 | 8 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Fee | 0.00000001 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change | 0.00000001 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change...ess (1/2) | prl1p7ear3npj7rlxjdp | mr8kxjxendgw9kzqj2c | 0fdppggs4z8kumxs0s"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change...ss (2/2) | w26w9t"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change path | m/86'/808276'/0'/1/0"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl mainnet | app is ready"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee"
+      },
+      {
+        "label": "max-fee",
+        "text": "High tr...ee (1/2) | Fee  | 20999999999.9999999 | 9 PRL is at least 10% "
+      },
+      {
+        "label": "max-fee",
+        "text": "High tr...ee (2/2) | of inputs"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer"
+      },
+      {
+        "label": "max-fee",
+        "text": "Check address,  | amount and fee"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl mainnet"
+      },
+      {
+        "label": "max-fee",
+        "text": "From account | m/86'/808276'/0'"
+      },
+      {
+        "label": "max-fee",
+        "text": "Recipient (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e"
+      },
+      {
+        "label": "max-fee",
+        "text": "Recipient (2/2) | 8sfm7dk5"
+      },
+      {
+        "label": "max-fee",
+        "text": "Amount | 0.00000001 PRL"
+      },
+      {
+        "label": "max-fee",
+        "text": "Fee | 20999999999.9999999 | 9 PRL"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change address | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change path | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-nanox-simnet-r1",
+    "model": "nanox",
+    "network": "simnet",
+    "sha256": "4771a8b5349042bfac313e33e5b66229c2e76e327469e8af01c86dede68356a0",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Export Pearl account"
+      },
+      {
+        "label": "account-0",
+        "text": "Watch-only public  | data"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "account-0",
+        "text": "Account path | m/86'/1'/0'"
+      },
+      {
+        "label": "account-0",
+        "text": "Master fingerprint | 3442193e"
+      },
+      {
+        "label": "account-0",
+        "text": "Privacy | Companion can view  | all addresses in this  | account"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl simnet | app is ready"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address"
+      },
+      {
+        "label": "receive-0",
+        "text": "Compare the full  | address"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address (1/2) | rprl1pzh75rtx74l85v2 | xqfr5uln7mhy40vyqz | m68ml4yngcqy9v085t"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address (2/2) | qqjd9fxm"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "receive-0",
+        "text": "Derivation | m/86'/1'/0'/0/0"
+      },
+      {
+        "label": "receive-0",
+        "text": "Type | BIP86 no-script  | Taproot"
+      },
+      {
+        "label": "receive-0",
+        "text": "Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/1'/2147483647'"
+      },
+      {
+        "label": "account-max",
+        "text": "Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account"
+      },
+      {
+        "label": "account-max",
+        "text": "Watch-only public  | data"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "account-max",
+        "text": "Account path | m/86'/1'/2147483647'"
+      },
+      {
+        "label": "account-max",
+        "text": "Master fingerprint | 3442193e"
+      },
+      {
+        "label": "account-max",
+        "text": "Privacy | Companion can view  | all addresses in this  | account"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export"
+      },
+      {
+        "label": "address-max",
+        "text": "Pearl simnet | app is ready"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual...ess path | m/86'/1'/2147483647' | /1/2147483647"
+      },
+      {
+        "label": "address-max",
+        "text": "Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address"
+      },
+      {
+        "label": "address-max",
+        "text": "Compare the full  | address"
+      },
+      {
+        "label": "address-max",
+        "text": "Address (1/2) | rprl1p677tp90yr88r9q | uvhr4ty5930cjaaysaw | 5y4t5qa0thlnjy0vzys"
+      },
+      {
+        "label": "address-max",
+        "text": "Address (2/2) | wjl55h"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "address-max",
+        "text": "Derivation | m/86'/1'/2147483647' | /1/2147483647"
+      },
+      {
+        "label": "address-max",
+        "text": "Type | BIP86 no-script  | Taproot"
+      },
+      {
+        "label": "address-max",
+        "text": "Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl simnet | app is ready"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer"
+      },
+      {
+        "label": "max-amount",
+        "text": "Check address,  | amount and fee"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "max-amount",
+        "text": "From account | m/86'/1'/0'"
+      },
+      {
+        "label": "max-amount",
+        "text": "Recipient (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924"
+      },
+      {
+        "label": "max-amount",
+        "text": "Recipient (2/2) | e8scdxtvf"
+      },
+      {
+        "label": "max-amount",
+        "text": "Amount | 20999999999.9999999 | 8 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Fee | 0.00000001 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change | 0.00000001 PRL"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change...ss (2/2) | smy9l6m"
+      },
+      {
+        "label": "max-amount",
+        "text": "Change path | m/86'/1'/0'/1/0"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl simnet | app is ready"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee"
+      },
+      {
+        "label": "max-fee",
+        "text": "High tr...ee (1/2) | Fee  | 20999999999.9999999 | 9 PRL is at least 10% "
+      },
+      {
+        "label": "max-fee",
+        "text": "High tr...ee (2/2) | of inputs"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer"
+      },
+      {
+        "label": "max-fee",
+        "text": "Check address,  | amount and fee"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl simnet"
+      },
+      {
+        "label": "max-fee",
+        "text": "From account | m/86'/1'/0'"
+      },
+      {
+        "label": "max-fee",
+        "text": "Recipient (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924"
+      },
+      {
+        "label": "max-fee",
+        "text": "Recipient (2/2) | e8scdxtvf"
+      },
+      {
+        "label": "max-fee",
+        "text": "Amount | 0.00000001 PRL"
+      },
+      {
+        "label": "max-fee",
+        "text": "Fee | 20999999999.9999999 | 9 PRL"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change address | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Change path | None"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-stax-mainnet-r1",
+    "model": "stax",
+    "network": "mainnet",
+    "sha256": "6ee46090a74c48ce999edc140aa3a1f5067ea9fe3281c4c76a562c0d52dbb7c9",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "account-0",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 3"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl mainnet | Account path | m/86'/808276'/0' | Master fingerprint | 3442193e | Privacy | Companion can view al | l addresses in this acc | ount | Reject | 2 of 3"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export | Reject | 3 of 3 | Hold to sign"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address | prl1pdmqd2wzd3e2un | rkvq880t24acsrf8zffz | qjqr356pmd93cve9eq | s4u7tjx | Show as QR | Cancel | 2 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl mainnet | Derivation | m/86'/808276'/0'/0/0 | Type | BIP86 no-script Tapro | ot | Cancel | 3 of 3 | Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/808276'/2147483647' | Reject | Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 3"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl mainnet | Account path | m/86'/808276'/21474 | 83647' | Master fingerprint | 3442193e | Privacy | Companion can view al | l addresses in this acc | ount | Reject | 2 of 3"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export | Reject | 3 of 3 | Hold to sign"
+      },
+      {
+        "label": "address-max",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path | m/86'/808276'/2147483647'/1 | /2147483647 | Reject | Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3"
+      },
+      {
+        "label": "address-max",
+        "text": "Address | prl1ppg4pv3qh9w49z | palrrjwpzqxspx3ayn3c | 6xrwverymkpdxp3vz9 | qpqwt7w | Show as QR | Cancel | 2 of 3"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl mainnet | Derivation | m/86'/808276'/21474 | 83647'/1/2147483647 | Type | BIP86 no-script Tapro | ot | Cancel | 3 of 3 | Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8sfm7dk5 | Amount | 20999999999.999999 | 98 PRL | Reject | 2 of 4"
+      },
+      {
+        "label": "max-amount",
+        "text": "Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Change address | prl1p7ear3npj7rlxjdpm | r8kxjxendgw9kzqj2c0 | fdppggs4z8kumxs0sw | 26w9t | Change path | m/86'/808276'/0'/1/0 | Reject | 3 of 4"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl mainnet | This app enables signing | transactions on the | Pearl mainnet network. | Quit app"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee | Fee 20999999999.99999999  | PRL is at least 10% of inputs | Reject | Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8sfm7dk5 | Amount | 0.00000001 PRL | Reject | 2 of 4"
+      },
+      {
+        "label": "max-fee",
+        "text": "Fee | 20999999999.999999 | 99 PRL | Change | None | Change address | None | Change path | None | Reject | 3 of 4"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer | Reject | 4 of 4 | Hold to sign"
+      }
+    ]
+  },
+  {
+    "directory": "baseline-stax-simnet-r1",
+    "model": "stax",
+    "network": "simnet",
+    "sha256": "7232fb09694fc9d2f27040ed19685277fb7065c6dfe9e6aa28647391e7fcc678",
+    "screens": [
+      {
+        "label": "account-0",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "account-0",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 3"
+      },
+      {
+        "label": "account-0",
+        "text": "Network | Pearl simnet | Account path | m/86'/1'/0' | Master fingerprint | 3442193e | Privacy | Companion can view al | l addresses in this acc | ount | Reject | 2 of 3"
+      },
+      {
+        "label": "account-0",
+        "text": "Approve export | Reject | 3 of 3 | Hold to sign"
+      },
+      {
+        "label": "receive-0",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "receive-0",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Address | rprl1pzh75rtx74l85v2x | qfr5uln7mhy40vyqzm | 68ml4yngcqy9v085tq | qjd9fxm | Show as QR | Cancel | 2 of 3"
+      },
+      {
+        "label": "receive-0",
+        "text": "Network | Pearl simnet | Derivation | m/86'/1'/0'/0/0 | Type | BIP86 no-script Tapro | ot | Cancel | 3 of 3 | Confirm"
+      },
+      {
+        "label": "account-max",
+        "text": "Unusual account | m/86'/1'/2147483647' | Reject | Review anyway"
+      },
+      {
+        "label": "account-max",
+        "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 3"
+      },
+      {
+        "label": "account-max",
+        "text": "Network | Pearl simnet | Account path | m/86'/1'/2147483647' | Master fingerprint | 3442193e | Privacy | Companion can view al | l addresses in this acc | ount | Reject | 2 of 3"
+      },
+      {
+        "label": "account-max",
+        "text": "Approve export | Reject | 3 of 3 | Hold to sign"
+      },
+      {
+        "label": "address-max",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "address-max",
+        "text": "Unusual address path | m/86'/1'/2147483647'/1/21474 | 83647 | Reject | Review anyway"
+      },
+      {
+        "label": "address-max",
+        "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3"
+      },
+      {
+        "label": "address-max",
+        "text": "Address | rprl1p677tp90yr88r9q | uvhr4ty5930cjaaysaw | 5y4t5qa0thlnjy0vzys | wjl55h | Show as QR | Cancel | 2 of 3"
+      },
+      {
+        "label": "address-max",
+        "text": "Network | Pearl simnet | Derivation | m/86'/1'/2147483647'/ | 1/2147483647 | Type | BIP86 no-script Tapro | ot | Cancel | 3 of 3 | Confirm"
+      },
+      {
+        "label": "max-amount",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "max-amount",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "max-amount",
+        "text": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8scdxtvf | Amount | 20999999999.999999 | 98 PRL | Reject | 2 of 4"
+      },
+      {
+        "label": "max-amount",
+        "text": "Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Change address | rprl1pe2avzwvk5fxvan | ucwcwfkrklzajt6r82g2 | f9eqktmtuxtzmpkp7s | my9l6m | Change path | m/86'/1'/0'/1/0 | Reject | 3 of 4"
+      },
+      {
+        "label": "max-amount",
+        "text": "Sign Pearl transfer | Reject | 4 of 4 | Hold to sign"
+      },
+      {
+        "label": "max-fee",
+        "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app"
+      },
+      {
+        "label": "max-fee",
+        "text": "High transaction fee | Fee 20999999999.99999999  | PRL is at least 10% of inputs | Reject | Review anyway"
+      },
+      {
+        "label": "max-fee",
+        "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 4"
+      },
+      {
+        "label": "max-fee",
+        "text": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8scdxtvf | Amount | 0.00000001 PRL | Reject | 2 of 4"
+      },
+      {
+        "label": "max-fee",
+        "text": "Fee | 20999999999.999999 | 99 PRL | Change | None | Change address | None | Change path | None | Reject | 3 of 4"
+      },
+      {
+        "label": "max-fee",
+        "text": "Sign Pearl transfer | Reject | 4 of 4 | Hold to sign"
+      }
+    ]
+  }
+]

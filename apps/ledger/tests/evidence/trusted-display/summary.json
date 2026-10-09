@@ -1,0 +1,942 @@
+{
+  "status": "passed",
+  "reviewDateUtc": "2026-10-09",
+  "repoHeadAtSnapshot": "87ca040566122a290c79a0a1fbd7590723b9da81",
+  "scope": "Independent source review and official Speculos emulator tests. No physical-screen, hardware, installation, OS, or external-audit qualification. Native code and SDK unchanged.",
+  "publicFixtureSeed": "000102030405060708090a0b0c0d0e0f",
+  "speculosVersion": "0.27.1",
+  "speculosInjector": null,
+  "rustSdkCommit": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+  "secureSdkCommit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "sourceHashes": {
+    "apps/ledger/src/ui.rs": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+    "apps/ledger/src/crypto.rs": "e29384e20151aca794771c2026aa93ac710ad796ac6c44f0f1ca4ae3a378f563",
+    "apps/ledger/src/main.rs": "57079dd2255e69cf81432f9b774711c2d2bf97ce1ea3bc0eaf1b931145af882f",
+    "apps/ledger/src/warnings.rs": "6f9ca1b8ea830f45f0c5757e790d5bc7e5cadc2727666ce55bb58fdbd4e54f0e",
+    "crates/pearl-core/src/address.rs": "b86f02682901e5ca163f8a7f09a54ce018185a16ad59643caf0e33bffff45d1b",
+    "crates/pearl-core/src/session.rs": "8d3daa41ebf7f46a655cddfc537629bc9527eea6cb6960d124c4e52bc3fdd6d7",
+    "crates/pearl-core/src/amount.rs": "725716c8b18eb85597dbae481c6e5c3b74f09261387ef134651f19ad5fc6c815",
+    "crates/pearl-core/src/transaction.rs": "8b2ec2cf6608961182de5a103749aa0813eb541a698509c8da9f6cf4487250e1",
+    "crates/pearl-core/src/network.rs": "0e36b43efc30e8cb3109ff663dd9e1cf342a7e347ab269d884f15c38da93cb6d",
+    "crates/pearl-core/src/error.rs": "ba5a82fc377758b12a188e8db04ebb00832b07b63cec3e2e6a2977e8047656da",
+    "crates/pearl-core/src/lib.rs": "9bfd2b2e4fbdeef87e86e7bda17d443d0ec9fcbb905e6b023696d42a25f1fc57",
+    "apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/nbgl/nbgl_address_review.rs": "a124bf859f556f564e5f980874bed9f8c2ea519cc881f82686c6ae68b22dd2a8",
+    "apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/nbgl/nbgl_choice.rs": "0f8b7c23f3ded602a31a6379c32b250b5ea222d94e7170c5514d2ff305d9296b",
+    "apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/nbgl/nbgl_tag_value.rs": "71f41a8277ce5a2424f4d5e5781bb969147052ffa5a954f3f8ebe87cc1dbfbff",
+    "apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/nbgl/nbgl_review.rs": "b369e101f8a948ad54b2b3c8c3e92c1a2fb474a89ac05da16af7fa18085e3a26",
+    "apps/ledger/vendor/ledger-secure-sdk/lib_nbgl/src/nbgl_use_case_nanos.c": "efa7d472556a43aea1b5119530a8d1f8b52429d97e214efb0e9823e118c960aa",
+    "apps/ledger/vendor/ledger-secure-sdk/lib_nbgl/src/nbgl_use_case.c": "8a2e6fd04099cdc9642b8c6fa65422b04744102318239422e40f95fbd1b27757",
+    "apps/ledger/vendor/ledger-secure-sdk/lib_nbgl/src/nbgl_step.c": "fc75ba41690ef8b0d4fc7824ed30ad3f5a6388a60092245d91b54121864515ca"
+  },
+  "baseline": [
+    {
+      "directory": "baseline-apex_p-mainnet-r1",
+      "model": "apex_p",
+      "sha256": "18b2dbb03f384f122eb8c0d3ae5a22a8258f094e2af516bc0302ec960464b89c",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "a25ddf38d126bd1fae1a3abfbc2ccd70a3060c7c6e7fa7bbc7bcaf35a1f72e92"
+    },
+    {
+      "directory": "baseline-apex_p-simnet-r1",
+      "model": "apex_p",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "dc874066c015e59fb91f0f5cd82b1221db41b97c8362991765b604007a4868e8"
+    },
+    {
+      "directory": "baseline-flex-mainnet-r1",
+      "model": "flex",
+      "sha256": "35c89f2eecdebe6cc203bea1fe3ee87e6bb207de916ea2c2ae4ff5ffbdf65976",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "9cac37577e8a9b8121789ac5f8966e52ce7aaaf19fa1efcfeb13c7adeef26704"
+    },
+    {
+      "directory": "baseline-flex-simnet-r1",
+      "model": "flex",
+      "sha256": "07405a1c64c6fadfa289ede2fa1d9c4593cb29f784d85a219ac8a672d7b4b8fd",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "71e74fcf4a03a2b26a454459e6dd472d2e871f38c77b2e8dcccea026da7791eb"
+    },
+    {
+      "directory": "baseline-nanosp-mainnet-r1",
+      "model": "nanosp",
+      "sha256": "470b2edadffd7c73897ff09f6e8e3e15df675919acbf15801c5a2188f2a59ab3",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "61a78681033f1756fec91a055cef669598bf495adda54baa2a1840e9cc8659c3"
+    },
+    {
+      "directory": "baseline-nanosp-simnet-r1",
+      "model": "nanosp",
+      "sha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "2c2ba568ece8d741db0edd4a0fed068b7711447d6e11fa1969216a160e59442b"
+    },
+    {
+      "directory": "baseline-nanox-mainnet-r1",
+      "model": "nanox",
+      "sha256": "eef809c66260c4e6f5916a1480f50bacd8e990189696eeab60d28c8dd3329e92",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "61a78681033f1756fec91a055cef669598bf495adda54baa2a1840e9cc8659c3"
+    },
+    {
+      "directory": "baseline-nanox-simnet-r1",
+      "model": "nanox",
+      "sha256": "4771a8b5349042bfac313e33e5b66229c2e76e327469e8af01c86dede68356a0",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "a50423b68992f7a460becba6a35555733ec2fcc3836de8f363785256283c8c81"
+    },
+    {
+      "directory": "baseline-stax-mainnet-r1",
+      "model": "stax",
+      "sha256": "6ee46090a74c48ce999edc140aa3a1f5067ea9fe3281c4c76a562c0d52dbb7c9",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "d43a52a7a88fc6ab4e7d3043285d39bb0be7e41f830f0196779052ecfb2d087d"
+    },
+    {
+      "directory": "baseline-stax-simnet-r1",
+      "model": "stax",
+      "sha256": "7232fb09694fc9d2f27040ed19685277fb7065c6dfe9e6aa28647391e7fcc678",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "333c2db48933db35b4d1368c228337f5174adae53af4f0c391eee501ce6ffc21"
+    }
+  ],
+  "interactions": [
+    {
+      "status": "passed",
+      "model": "nanosp",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-nanosplus-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/interactions-nanosp-r1/tested-firmware.elf",
+        "sha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": false,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "660548c81de39c329c6f2a47b2f37019de0902dcc4e2f029f820e276e8674c0d"
+    },
+    {
+      "status": "passed",
+      "model": "nanox",
+      "firmware": {
+        "model": "nanox",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-nanox-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/interactions-nanox-r2/tested-firmware.elf",
+        "sha256": "4771a8b5349042bfac313e33e5b66229c2e76e327469e8af01c86dede68356a0",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": false,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "b46d1989ce06507b0cb3759d5f713eba933443dfcfccd613b03bfedb12efbaf1"
+    },
+    {
+      "status": "passed",
+      "model": "stax",
+      "firmware": {
+        "model": "stax",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-stax-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/interactions-stax-r2/tested-firmware.elf",
+        "sha256": "7232fb09694fc9d2f27040ed19685277fb7065c6dfe9e6aa28647391e7fcc678",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": true,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "ce3110f3451777ba6e2e416ce2b9e610d3e68ce18125f328b8bab559e1a9e0af"
+    },
+    {
+      "status": "passed",
+      "model": "flex",
+      "firmware": {
+        "model": "flex",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-flex-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/interactions-flex-r2/tested-firmware.elf",
+        "sha256": "07405a1c64c6fadfa289ede2fa1d9c4593cb29f784d85a219ac8a672d7b4b8fd",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": true,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "08dea5c06058c1e876dac05f5bb2398da543e2d905d18e91b44d5ee673b8ddfb"
+    },
+    {
+      "status": "passed",
+      "model": "apex_p",
+      "firmware": {
+        "model": "apex_p",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-apex_p-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/interactions-apex_p-r3/tested-firmware.elf",
+        "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": true,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "14f6db9a1336b6521df4337c05c11cbebf7f9e512aed36e5b0809a01cf94621b"
+    }
+  ],
+  "boundaries": [
+    {
+      "status": "passed",
+      "model": "nanosp",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-nanosplus-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/extreme-paths-nanosp-r1/tested-firmware.elf",
+        "sha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "b03e53444142d569b7a67d7facb430f1813535dde3e36b909ff133f6217cd4ed"
+    },
+    {
+      "status": "passed",
+      "model": "nanox",
+      "firmware": {
+        "model": "nanox",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-nanox-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/extreme-paths-nanox-r1/tested-firmware.elf",
+        "sha256": "4771a8b5349042bfac313e33e5b66229c2e76e327469e8af01c86dede68356a0",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "ab5bf43d464e2a66d3569f6f6170a89af4feaa831cd59ea5afce9e5e6a4703e9"
+    },
+    {
+      "status": "passed",
+      "model": "stax",
+      "firmware": {
+        "model": "stax",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-stax-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/extreme-paths-stax-r1/tested-firmware.elf",
+        "sha256": "7232fb09694fc9d2f27040ed19685277fb7065c6dfe9e6aa28647391e7fcc678",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "4486521895071dd2bb9a5ce26d5fa73b9c2fb2aa5ed3d13194ed84afe9e7261a"
+    },
+    {
+      "status": "passed",
+      "model": "flex",
+      "firmware": {
+        "model": "flex",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-flex-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/extreme-paths-flex-r1/tested-firmware.elf",
+        "sha256": "07405a1c64c6fadfa289ede2fa1d9c4593cb29f784d85a219ac8a672d7b4b8fd",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "b148480235c16cdcbea4956bff649b3a7ec5fb4a5b95b9d7ab8e228d2648a139"
+    },
+    {
+      "status": "passed",
+      "model": "apex_p",
+      "firmware": {
+        "model": "apex_p",
+        "sourceElf": "/workspace/shared/prl-trusted-display-review/immutable/pearl-apex_p-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-review/extreme-paths-apex_p-r1/tested-firmware.elf",
+        "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "7b2c5a185390303180f4c4d3c4f7f8882df6feae022360b1fc06c3fd0227b3d2"
+    }
+  ],
+  "boundaryFieldVerification": [
+    {
+      "model": "nanosp",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661"
+    },
+    {
+      "model": "nanox",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "4771a8b5349042bfac313e33e5b66229c2e76e327469e8af01c86dede68356a0"
+    },
+    {
+      "model": "stax",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "7232fb09694fc9d2f27040ed19685277fb7065c6dfe9e6aa28647391e7fcc678"
+    },
+    {
+      "model": "flex",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "07405a1c64c6fadfa289ede2fa1d9c4593cb29f784d85a219ac8a672d7b4b8fd"
+    },
+    {
+      "model": "apex_p",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592"
+    }
+  ],
+  "totals": {
+    "baselineModelNetworkPairs": 10,
+    "baselineFlows": 60,
+    "interactionFlows": 35,
+    "boundaryFlows": 30,
+    "exactFieldComparisons": 400,
+    "exactWarningDetailComparisons": 20,
+    "totalFlows": 125
+  },
+  "harnessNotes": [
+    "Initial start lacked QEMU on PATH; no app execution occurred. Corrected by using the already installed QEMU path.",
+    "Two early Gen5 interaction attempts used overlapping API gestures and failed harness expectations. After waiting for gesture completion, all-five interaction probes passed; production firmware was unchanged."
+  ],
+  "selectedScreenshots": [
+    {
+      "file": "nanosp-recipient-page-1.png",
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "043-max-amount.png",
+      "sha256": "393bf6c0dd1cec6b019036e8a08869df67529cd2666661e1ead6c81d97ababa1",
+      "screenText": "Recipient (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e"
+    },
+    {
+      "file": "nanosp-recipient-page-2.png",
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "044-max-amount.png",
+      "sha256": "087328d4834b612286ffd1613269d914c25e8296c44273672f5df9fb0b8170ce",
+      "screenText": "Recipient (2/2) | 8sfm7dk5"
+    },
+    {
+      "file": "nanosp-maximum-amount.png",
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "045-max-amount.png",
+      "sha256": "5dc17ef5a7ffcd729d27816c5cd24ea16634ee351e9d56aea7f111009fc33a7e",
+      "screenText": "Amount | 20999999999.9999999 | 8 PRL"
+    },
+    {
+      "file": "nanox-recipient-page-1.png",
+      "model": "nanox",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanox-mainnet-r1",
+      "sourceFile": "043-max-amount.png",
+      "sha256": "393bf6c0dd1cec6b019036e8a08869df67529cd2666661e1ead6c81d97ababa1",
+      "screenText": "Recipient (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e"
+    },
+    {
+      "file": "nanox-recipient-page-2.png",
+      "model": "nanox",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanox-mainnet-r1",
+      "sourceFile": "044-max-amount.png",
+      "sha256": "087328d4834b612286ffd1613269d914c25e8296c44273672f5df9fb0b8170ce",
+      "screenText": "Recipient (2/2) | 8sfm7dk5"
+    },
+    {
+      "file": "nanox-maximum-amount.png",
+      "model": "nanox",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanox-mainnet-r1",
+      "sourceFile": "045-max-amount.png",
+      "sha256": "5dc17ef5a7ffcd729d27816c5cd24ea16634ee351e9d56aea7f111009fc33a7e",
+      "screenText": "Amount | 20999999999.9999999 | 8 PRL"
+    },
+    {
+      "file": "stax-recipient-and-amount.png",
+      "model": "stax",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-stax-mainnet-r1",
+      "sourceFile": "021-max-amount.png",
+      "sha256": "2d29cded28ba9b4700b7dcb9e7cafd2357c3d71ce124e054e51f88690be9dfb0",
+      "screenText": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8sfm7dk5 | Amount | 20999999999.999999 | 98 PRL | Reject | 2 of 4"
+    },
+    {
+      "file": "stax-fee-and-change.png",
+      "model": "stax",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-stax-mainnet-r1",
+      "sourceFile": "022-max-amount.png",
+      "sha256": "ac7d7b072a90d9a0ed985839c0f9313a47bbfdd8bd3b00791fe854d024e3b7a4",
+      "screenText": "Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Change address | prl1p7ear3npj7rlxjdpm | r8kxjxendgw9kzqj2c0 | fdppggs4z8kumxs0sw | 26w9t | Change path | m/86'/808276'/0'/1/0 | Reject | 3 of 4"
+    },
+    {
+      "file": "flex-recipient.png",
+      "model": "flex",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-flex-mainnet-r1",
+      "sourceFile": "023-max-amount.png",
+      "sha256": "013f4deaf89584fb15d80b59e698a30d991c205e0d82dbc34f862e16b208ec42",
+      "screenText": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5qf | 3j9q2uk9cmyc8n0u29d | 3eyhf8q069j924e8sfm | 7dk5 | Reject | 2 of 5"
+    },
+    {
+      "file": "flex-maximum-amount.png",
+      "model": "flex",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-flex-mainnet-r1",
+      "sourceFile": "024-max-amount.png",
+      "sha256": "aa4d02e50601d6c10e57a18835a42b151a8c04eae7d53abef7a1f40577be8126",
+      "screenText": "Amount | 20999999999.999999 | 98 PRL | Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Reject | 3 of 5"
+    },
+    {
+      "file": "apex_p-recipient.png",
+      "model": "apex_p",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-apex_p-mainnet-r1",
+      "sourceFile": "022-max-amount.png",
+      "sha256": "1171d7082bf4a3319d35b899a1b632cc54cbbbc6da2e6959c06c97cc34d9f947",
+      "screenText": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8sfm7dk5 | Reject | 2 of 5"
+    },
+    {
+      "file": "apex_p-maximum-amount.png",
+      "model": "apex_p",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-apex_p-mainnet-r1",
+      "sourceFile": "023-max-amount.png",
+      "sha256": "babcaeb81a93544066a3153a918d11f91c275027d68d720ad327cfebf6933a10",
+      "screenText": "Amount | 20999999999.999999 | 98 PRL | Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Reject | 3 of 5"
+    },
+    {
+      "file": "apex_p-change.png",
+      "model": "apex_p",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-apex_p-mainnet-r1",
+      "sourceFile": "024-max-amount.png",
+      "sha256": "dce9d39ad1c39daa7ad585f80d49ee943d6c1c914a963093675bf3718f0aa53c",
+      "screenText": "Change address | prl1p7ear3npj7rlxjdpm | r8kxjxendgw9kzqj2c0 | fdppggs4z8kumxs0sw | 26w9t | Change path | m/86'/808276'/0'/1/0 | Reject | 4 of 5"
+    },
+    {
+      "file": "nanosp-maximum-fee-warning-1.png",
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "054-max-fee.png",
+      "sha256": "f2aa045bb434d79b7e23d4059da1aa3f75fc44eb144546b348ef03eba15964ee",
+      "screenText": "High tr...ee (1/2) | Fee  | 20999999999.9999999 | 9 PRL is at least 10% "
+    },
+    {
+      "file": "nanosp-maximum-fee-warning-2.png",
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "055-max-fee.png",
+      "sha256": "c58581f80bf1ef2176de7ab3c30039ff8c48f9be54eb2ccf687d962ca493add8",
+      "screenText": "High tr...ee (2/2) | of inputs"
+    },
+    {
+      "file": "apex_p-maximum-fee-warning-1.png",
+      "model": "apex_p",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-apex_p-mainnet-r1",
+      "sourceFile": "027-max-fee.png",
+      "sha256": "36eab75db1f381e73a2f7d2040694b8212557021ea11c1596be7e3acc7df99c4",
+      "screenText": "High transaction fee | Fee 20999999999.99999999  | PRL is at least 10% of inputs | Reject | Review anyway"
+    },
+    {
+      "file": "apex_p-export-generic-hold.png",
+      "model": "apex_p",
+      "network": "simnet",
+      "sourceDirectory": "baseline-apex_p-simnet-r1",
+      "sourceFile": "006-account-0.png",
+      "sha256": "39c1067f4f8c1069fe1d4862a50943233f131c02528ac2b315f6617779fed961",
+      "screenText": "Approve export | Reject | 4 of 4 | Hold to sign"
+    }
+  ]
+}
