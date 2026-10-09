@@ -1,0 +1,14 @@
+✔ fixed D1: prior verified receive clears after terminal rejected-ack, preserving signed bytes (328.513292ms)
+✔ fixed D1: prior verified receive clears after terminal lost-ack, preserving signed bytes (324.084724ms)
+✔ control: device review rejection before any signatures clears the prior verified receive label (170.130583ms)
+✔ failed signed-storage render stays unverified while the next journal read is stalled (236.115276ms)
+✔ ordinary successful signing preserves valid same-session receive verification (254.257915ms)
+✔ lost final ACK immediately clears the displayed label before a stalled journal refresh (264.418945ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2078.21583

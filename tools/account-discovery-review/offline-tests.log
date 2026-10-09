@@ -1,0 +1,31 @@
+✔ CONTROL: account import rejects unexpected fields, invalid networks, indexes and public keys (3.388113ms)
+✔ CONTROL: Ledger policy xpub checks exact payload, checksum, network version, depth and child (3.970258ms)
+✔ BOUNDARY: imported path/fingerprint labels do not authenticate hardened ancestry (13.273824ms)
+✔ CONTROL: receive/change derivation matches an independent public CKD and TapTweak calculation (43.944831ms)
+✔ CONTROL: empty account scans exactly 20 indexes on both branches (79.34971ms)
+✔ CONTROL: spent history extends the gap on both branches without current UTXOs (263.872265ms)
+✔ BOUNDARY: bare public import misses funds beyond a clean gap; saved ranges recover both branches (830.820078ms)
+✔ CONTROL: index 980 recovery requirement rejects instead of returning a partial balance (0.303246ms)
+✔ CONTROL: wrong source network/genesis, outpoint txid and output ownership fail closed (343.430161ms)
+✔ CONTROL: parsed pending spends remove stale confirmed UTXOs from balances and selection (162.942017ms)
+✔ FIX AD-01: history for receive /0/0 cannot mark change /1/19 as used (233.691314ms)
+✔ FIX AD-01: relabeling one raw output cannot return a poisoned maximum recovery range (3703.789723ms)
+✔ FIX AD-02: confirmed owned output omission without supplied spend rejects the result (73.044156ms)
+✔ FIX AD-02: extra UTXO absent from address history never becomes selectable (30.065056ms)
+✔ CONTROL: a legitimate overlapping receive/change history is retained once (313.78762ms)
+✔ CONTROL: pending spend permits omitted confirmed UTXO and needs only its known owned prevout (74.133563ms)
+✔ CONTROL: a directly received output needs no unrelated external prevout lookup (138.396819ms)
+✔ CONTROL: zero-only owned history establishes usage with UTXO omitted (106.392147ms)
+✔ CONTROL: zero-only owned history establishes usage with UTXO listed (204.421853ms)
+✔ CONTROL: zero-valued candidate still requires consistent block metadata (133.189981ms)
+✔ BOUNDARY: omitted pending outputs are not inferred as spendable or required by consistency checks (72.094598ms)
+✔ CONTROL: detached transactions and changed chain tips still fail closed (257.572543ms)
+✔ BOUNDARY: consistently fabricated inclusion/unspent claims can pass selection and freshness (173.641753ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7626.986564

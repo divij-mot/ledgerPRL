@@ -1,0 +1,21 @@
+{
+  "baselineHead": "83be58f9288e35022b5cc43eff8288983ced5bc3",
+  "productionEditedByThisReview": [
+    "packages/wallet/src/discovery.ts"
+  ],
+  "concurrentParentEdit": "apps/companion/src/main.ts",
+  "sources": {
+    "packages/wallet/src/discovery.ts": "4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "packages/wallet/src/recovery.ts": "ae0ec6a09963e05359ec70a744a023735c14d9dd9ed99d64004e62e6b4295fac",
+    "packages/wallet/src/journal.ts": "0c60e801c630b18a731c7ed7f83f23cefdd8df05dd98cdc7c55a4d02ab1ce718",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "packages/bitcoin-prl-adapter/src/policy.ts": "31e0276b65e1d8d7775c1df702336594e3abb10b71a711e82579e3612b5990f4",
+    "packages/bitcoin-prl-adapter/src/client.ts": "cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db",
+    "apps/companion/src/blockbook-source.ts": "d9375942a172c391214386338acdbddf29253a432208a0accec2ce824d5fc8cb",
+    "apps/companion/src/main.ts": "ce0b26e6520f210bf57f633469da5ab1821f18e423926422ffc5c4568cce3292",
+    "tools/account-discovery-review/account-discovery.test.ts": "c2ee6bd275ad7f2bf4cacc133ee799988ab7365884c5dc9a15045f99dab1edfb",
+    "packages/wallet/test/discovery-integrity.test.ts": "a5b6442bdfdfb05a9344ba0c08a26bd9de7bab3b7e1cbe3119a788c290a82eca"
+  }
+}

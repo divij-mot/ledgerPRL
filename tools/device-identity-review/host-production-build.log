@@ -1,0 +1,25 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> pearl-ledger@0.1.0 build
+> npm run build --workspaces --if-present
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @pearl-ledger/metamask-snap@0.1.0 build
+> node scripts/build.mjs
+
+Built local-only PRL Snap: 178415 bytes; Snap checksum M2XVs5hC6/9vIV/s/htfkvzHF2vXGx+/jevm7xrpzOQ=
+
+> @pearl-ledger/companion@0.1.0 build
+> node --import tsx ../../node_modules/vite/bin/vite.js build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 615 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                 0.73 kB │ gzip:   0.42 kB
+dist/assets/backup-import.worker-Dtrkqa4Y.js   72.73 kB
+dist/assets/index-DK-3_Qur.css                  7.50 kB │ gzip:   2.48 kB
+dist/assets/index-d0S-5XX6.js                 475.84 kB │ gzip: 144.29 kB
+✓ built in 2.05s

@@ -1,0 +1,23 @@
+✔ CONTROL: account import rejects unexpected fields, invalid networks, indexes and public keys (3.675415ms)
+✔ CONTROL: Ledger policy xpub checks exact payload, checksum, network version, depth and child (2.714911ms)
+✔ BOUNDARY: imported path/fingerprint labels do not authenticate hardened ancestry (9.73922ms)
+✔ CONTROL: receive/change derivation matches an independent public CKD and TapTweak calculation (40.836878ms)
+✔ CONTROL: empty account scans exactly 20 indexes on both branches (77.387641ms)
+✔ CONTROL: spent history extends the gap on both branches without current UTXOs (237.869286ms)
+✔ BOUNDARY: bare public import misses funds beyond a clean gap; saved ranges recover both branches (820.812408ms)
+✔ CONTROL: index 980 recovery requirement rejects instead of returning a partial balance (0.343085ms)
+✔ CONTROL: wrong source network/genesis, outpoint txid and output ownership fail closed (350.183868ms)
+✔ CONTROL: parsed pending spends remove stale confirmed UTXOs from balances and selection (173.16733ms)
+✔ GAP AD-01: history for receive /0/0 falsely marks change /1/19 as used (254.130726ms)
+✔ GAP AD-01: relabeling one real raw output can exhaust the saved light-mode change range (6784.871969ms)
+✔ GAP AD-02: omitted UTXO contradicting supplied complete history returns final zero balance (77.028882ms)
+✔ GAP AD-02: extra UTXO absent from supposedly complete address history becomes selectable (223.715917ms)
+✔ BOUNDARY: consistently fabricated inclusion/unspent claims can pass selection and freshness (162.346484ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9568.396422

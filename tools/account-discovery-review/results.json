@@ -1,0 +1,51 @@
+{
+  "scope": "Offline synthetic public account discovery/recovery consistency",
+  "productionSource": "packages/wallet/src/discovery.ts",
+  "productionSha256": "4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2",
+  "standardRegressionSource": "packages/wallet/test/discovery-integrity.test.ts",
+  "standardRegressionSha256": "a5b6442bdfdfb05a9344ba0c08a26bd9de7bab3b7e1cbe3119a788c290a82eca",
+  "checks": [
+    {
+      "label": "Baseline acceptance probes",
+      "passed": 15,
+      "log": "before-fix-tests.log"
+    },
+    {
+      "label": "Final review probes",
+      "passed": 23,
+      "log": "offline-tests.log"
+    },
+    {
+      "label": "Standard wallet suite",
+      "passed": 99,
+      "log": "wallet-tests.log"
+    },
+    {
+      "label": "Related existing regressions",
+      "passed": 52,
+      "log": "targeted-regressions.log"
+    },
+    {
+      "label": "Review TypeScript",
+      "exitCode": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "label": "Wallet TypeScript",
+      "exitCode": 0,
+      "log": "wallet-typecheck.log"
+    }
+  ],
+  "independentReview": "../discovery-consistency-review/report.md",
+  "corrected": [
+    "Per-address history attribution before durable recovery bounds",
+    "Confirmed output/history/UTXO inconsistency detection",
+    "Zero-value script usage without selectable zero coins"
+  ],
+  "notEstablished": [
+    "Honest/complete indexer or mempool",
+    "Authenticated chain inclusion or consensus",
+    "Full recovery beyond gap/index/account bounds",
+    "Native, browser, hardware or live service qualification"
+  ]
+}

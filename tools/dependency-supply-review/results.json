@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "reviewedOn": "2026-10-09",
-  "head": "b908b15be8ca95a850c551d138ce646475517621",
+  "head": "83be58f9288e35022b5cc43eff8288983ced5bc3",
   "nodeVersion": "v24.19.0",
   "lockfileSha256": "816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea",
   "checks": [
@@ -2531,7 +2531,7 @@
   ],
   "noticeObservations": [
     {
-      "file": "assets/index-CpBl0wyO.js",
+      "file": "assets/index-d0S-5XX6.js",
       "presentLicenseMarkers": []
     },
     {
@@ -2549,10 +2549,10 @@
   ],
   "chunks": [
     {
-      "file": "assets/index-CpBl0wyO.js",
+      "file": "assets/index-d0S-5XX6.js",
       "type": "chunk",
-      "bytes": 474877,
-      "sha256": "84e04058b1565b0fa73d84360ada84868c32b2e7e5637e6b2dcca4a8131236d3"
+      "bytes": 475838,
+      "sha256": "4202b471db46fbd8b8f0d58136ea54994775d34eb7e5a2bded55c606267e7ea1"
     },
     {
       "file": "assets/index-DK-3_Qur.css",
@@ -2570,7 +2570,7 @@
       "file": "index.html",
       "type": "asset",
       "bytes": 727,
-      "sha256": "27801f0f14d54db2a43c8a8c4599d0567a69a343bb545ee34ef189cb1c9c1042"
+      "sha256": "c695b50e2c657051ce3b6bad47f6e1b548b28d5430404adb28c185e0106e5823"
     }
   ],
   "workflows": [
@@ -4564,7 +4564,7 @@
     "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
     "apps/companion/src/blockbook-source.ts": "d9375942a172c391214386338acdbddf29253a432208a0accec2ce824d5fc8cb",
     "apps/companion/src/ledger.ts": "e6f6599e650f0f61038319f582aa611bc4b3461315b9d3e26ca0c31da9df8207",
-    "apps/companion/src/main.ts": "a1bfd6960626b1d397ffa4db5366da7633af6a47f656392319da650823bf12b7",
+    "apps/companion/src/main.ts": "ce0b26e6520f210bf57f633469da5ab1821f18e423926422ffc5c4568cce3292",
     "apps/companion/src/public-source.ts": "143b87ee1dde056f35f574ebdf2ab3be58de93a7d9b98d409fc9f3b8e19fd6c2",
     "apps/companion/src/signed-recovery.ts": "be11a29f37f50a953ce9f94b1fd9520886ea7444b54d7826f68d5588ef47af4c",
     "apps/companion/src/storage.ts": "fa43760192f8b77457674d947cdaf8162ef8adb4e126ec1d7cfa3197e1c684d4",
@@ -4900,7 +4900,7 @@
     "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
     "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
     "packages/wallet/package.json": "84c226f3f130aa54f919b6f2298e9bcadd6f4264afbdd85ef15b10850e7bd039",
-    "packages/wallet/src/discovery.ts": "ecb3f6cd3ba62789963bfba6642cee0970bc23b41dcd16967ec2e427e6425100",
+    "packages/wallet/src/discovery.ts": "4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2",
     "packages/wallet/src/journal.ts": "0c60e801c630b18a731c7ed7f83f23cefdd8df05dd98cdc7c55a4d02ab1ce718",
     "packages/wallet/src/policy.ts": "22e31418395be68588e19cd9a4b4e6a56bbe1906252de645e53198e34b2e8005",
     "packages/wallet/src/recovery.ts": "ae0ec6a09963e05359ec70a744a023735c14d9dd9ed99d64004e62e6b4295fac",

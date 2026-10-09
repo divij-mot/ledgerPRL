@@ -1,0 +1,4 @@
+4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2  packages/wallet/src/discovery.ts
+a5b6442bdfdfb05a9344ba0c08a26bd9de7bab3b7e1cbe3119a788c290a82eca  packages/wallet/test/discovery-integrity.test.ts
+c2ee6bd275ad7f2bf4cacc133ee799988ab7365884c5dc9a15045f99dab1edfb  tools/account-discovery-review/account-discovery.test.ts
+d1424cfefcfe857fde4c474d4d4e4fa00db437a7003e1b3c1d38b653b47cc440  tools/account-discovery-review/discovery.patch

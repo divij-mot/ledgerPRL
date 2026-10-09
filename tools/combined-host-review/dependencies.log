@@ -1,0 +1,74 @@
+{
+  "pass": 419,
+  "counts": {
+    "registryRecords": 198,
+    "installedRegistryRecords": 124,
+    "missingOptionalPlatformPackages": 74,
+    "browserMainModules": 341,
+    "browserWorkerModules": 27,
+    "browserUnionModules": 342,
+    "browserPackages": 25
+  },
+  "installLifecycle": [
+    {
+      "location": "node_modules/esbuild",
+      "lockedVersion": "0.25.12",
+      "hasInstallScript": true,
+      "lifecycle": {
+        "postinstall": "node install.js"
+      }
+    },
+    {
+      "location": "node_modules/vite/node_modules/esbuild",
+      "lockedVersion": "0.28.2",
+      "hasInstallScript": true,
+      "lifecycle": {
+        "postinstall": "node install.js"
+      }
+    }
+  ],
+  "noticeObservations": [
+    {
+      "file": "assets/index-d0S-5XX6.js",
+      "presentLicenseMarkers": []
+    },
+    {
+      "file": "assets/index-DK-3_Qur.css",
+      "presentLicenseMarkers": []
+    },
+    {
+      "file": "assets/backup-import.worker-Dtrkqa4Y.js",
+      "presentLicenseMarkers": []
+    },
+    {
+      "file": "index.html",
+      "presentLicenseMarkers": []
+    }
+  ],
+  "chunks": [
+    {
+      "file": "assets/index-d0S-5XX6.js",
+      "type": "chunk",
+      "bytes": 475838,
+      "sha256": "4202b471db46fbd8b8f0d58136ea54994775d34eb7e5a2bded55c606267e7ea1"
+    },
+    {
+      "file": "assets/index-DK-3_Qur.css",
+      "type": "asset",
+      "bytes": 7501,
+      "sha256": "c27f84cbb4fd6700195c4d74f962fe6c3904456c1e48db88ab4cd68c0b705546"
+    },
+    {
+      "file": "assets/backup-import.worker-Dtrkqa4Y.js",
+      "type": "asset",
+      "bytes": 72732,
+      "sha256": "574f3999066984fc8b2d8674bc790097bd8b8ec54bf2b184664c5f5e94d42f4b"
+    },
+    {
+      "file": "index.html",
+      "type": "asset",
+      "bytes": 727,
+      "sha256": "c695b50e2c657051ce3b6bad47f6e1b548b28d5430404adb28c185e0106e5823"
+    }
+  ]
+}

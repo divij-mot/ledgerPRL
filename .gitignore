@@ -41,3 +41,8 @@ __pycache__/
 !tools/transaction-binding-review/typecheck.log
 !tools/browser-operation-review/*.log
 !tools/browser-race-fix-review/*.log
+!tools/device-identity-review/*.log
+!tools/device-session-review/*.log
+!tools/account-discovery-review/*.log
+!tools/discovery-consistency-review/*.log
+!tools/combined-host-review/*.log

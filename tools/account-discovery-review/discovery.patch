@@ -1,0 +1,158 @@
+diff --git a/packages/wallet/src/discovery.ts b/packages/wallet/src/discovery.ts
+index e287cf9..42ad31b 100644
+--- a/packages/wallet/src/discovery.ts
++++ b/packages/wallet/src/discovery.ts
+@@ -84,7 +84,10 @@ export async function discoverAccount(
+   );
+   const scripts = new Map<string, { branch: 0 | 1; index: number }>(),
+     txids = new Set<string>();
+-  const addressHistories: AddressActivity[] = [];
++  const addressHistories: {
++    script: string;
++    activity: AddressActivity;
++  }[] = [];
+   let historyReferences = 0,
+     rawHistoryBytes = 0;
+   const candidates = new Map<
+@@ -122,11 +125,16 @@ export async function discoverAccount(
+       const results = await Promise.all(
+         batch.map(async (i) => {
+           const derived = deriveAddress(account, branch, i);
+-          scripts.set(hex(derived.scriptPubKey), { branch, index: i });
+-          return { index: i, activity: await source.address(derived.address) };
++          const script = hex(derived.scriptPubKey);
++          scripts.set(script, { branch, index: i });
++          return {
++            index: i,
++            script,
++            activity: await source.address(derived.address),
++          };
+         }),
+       );
+-      for (const { index: i, activity } of results) {
++      for (const { index: i, script, activity } of results) {
+         safeInteger(activity.confirmedTxCount);
+         safeInteger(activity.pendingTxCount);
+         historyReferences += activity.txids.length;
+@@ -134,13 +142,19 @@ export async function discoverAccount(
+           historyReferences <= MAX_HISTORY_REFERENCES,
+           "Aggregate address history exceeds safe scan budget",
+         );
+-        addressHistories.push(activity);
++        addressHistories.push({ script, activity });
+         assert(
+           typeof activity.used === "boolean" &&
+             Array.isArray(activity.txids) &&
+             Array.isArray(activity.utxos),
+           "Malformed address activity",
+         );
++        const addressTxids = new Set(activity.txids);
++        assert(
++          addressTxids.size === activity.txids.length &&
++            activity.used === (activity.txids.length > 0),
++          "Address usage contradicts its transaction history",
++        );
+         if (activity.used) {
+           lastUsed[branch] = i;
+           target = Math.max(target, i + DISCOVERY_GAP);
+@@ -158,6 +172,10 @@ export async function discoverAccount(
+         }
+         for (const u of activity.utxos) {
+           hash(u.txid);
++          assert(
++            addressTxids.has(u.txid),
++            "Indexer UTXO is missing from its address history; retry discovery",
++          );
+           safeInteger(u.vout);
+           if (u.height !== null) safeInteger(u.height);
+           const key = outpoint(u);
+@@ -227,12 +245,36 @@ export async function discoverAccount(
+       rawTransaction: data.rawTransaction,
+     });
+   }
+-  for (const activity of addressHistories) {
++  // Bind each history claim to the queried script, not merely to some address
++  // in the account. Unknown external prevouts need no additional lookup when
++  // the transaction directly creates a watched output. Zero-valued matching
++  // outputs still establish address usage, but never become spendable coins.
++  const involvedScripts = new Map<string, Set<string>>();
++  for (const [txid, tx] of transactions) {
++    const involved = new Set<string>();
++    for (const output of tx.parsed.outputs) {
++      const script = hex(output.scriptPubKey);
++      if (scripts.has(script)) involved.add(script);
++    }
++    for (const input of tx.parsed.inputs) {
++      const previous = transactions.get(input.txid)?.parsed.outputs[input.vout];
++      if (previous) {
++        const script = hex(previous.scriptPubKey);
++        if (scripts.has(script)) involved.add(script);
++      }
++    }
++    involvedScripts.set(txid, involved);
++  }
++  for (const { script, activity } of addressHistories) {
+     let confirmed = 0,
+       pending = 0;
+     for (const id of activity.txids) {
+       const tx = transactions.get(id);
+       assert(tx, "Missing address history transaction");
++      assert(
++        involvedScripts.get(id)!.has(script),
++        "Indexer history transaction does not involve the queried address",
++      );
+       tx.block ? confirmed++ : pending++;
+     }
+     assert(
+@@ -244,6 +286,21 @@ export async function discoverAccount(
+   const spentByHistory = new Set<string>();
+   for (const tx of transactions.values())
+     for (const input of tx.parsed.inputs) spentByHistory.add(outpoint(input));
++  // Detect contradictions within the supplied view. Do not infer spendable
++  // coins from history, authenticate inclusion, or assume a complete mempool.
++  // A parsed pending spend overrides an omitted/stale confirmed UTXO, and
++  // pending outputs are not required to appear in an endpoint's UTXO view.
++  for (const [txid, tx] of transactions) {
++    if (!tx.block) continue;
++    tx.parsed.outputs.forEach((output, vout) => {
++      if (output.amount <= 0n || !scripts.has(hex(output.scriptPubKey))) return;
++      const point = outpoint({ txid, vout });
++      assert(
++        spentByHistory.has(point) || candidates.has(point),
++        "Confirmed owned output is missing from the UTXO view without a supplied spend; retry discovery",
++      );
++    });
++  }
+   const coins: WatchCoin[] = [];
+   for (const u of candidates.values()) {
+     // A stale UTXO endpoint must never override a parsed pending or confirmed spend.
+@@ -253,15 +310,17 @@ export async function discoverAccount(
+     const output = tx.parsed.outputs[u.vout];
+     assert(output, "UTXO index outside raw transaction");
+     assert(
+-      output.amount > 0n &&
+-        hex(output.scriptPubKey) ===
+-          hex(deriveAddress(account, u.branch, u.index).scriptPubKey),
++      hex(output.scriptPubKey) ===
++        hex(deriveAddress(account, u.branch, u.index).scriptPubKey),
+       "Indexer UTXO ownership mismatch",
+     );
+     assert(
+       (tx.block?.height ?? null) === u.height,
+       "Indexer UTXO block height mismatch",
+     );
++    // A remaining unspent candidate can legitimately have zero value and mark
++    // an address as used. Its path/height must match, but it is not selectable.
++    if (output.amount === 0n) continue;
+     coins.push({
+       txid: u.txid,
+       vout: u.vout,
+@@ -288,7 +347,7 @@ export async function discoverAccount(
+     }
+     // History source must actually involve a watched output or spend; reject injected unrelated records.
+     assert(
+-      received > 0n || spent > 0n,
++      involvedScripts.get(txid)!.size > 0,
+       "Indexer returned unrelated or incomplete account history",
+     );
+     history.push({

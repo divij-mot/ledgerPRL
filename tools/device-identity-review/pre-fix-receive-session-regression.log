@@ -1,0 +1,11 @@
+✔ CONFIRMED D1: prior verified receive survives a terminal rejected-ack after full verified signing (318.327434ms)
+✔ CONFIRMED D1: prior verified receive survives a terminal lost-ack after full verified signing (315.190448ms)
+✔ control: device review rejection before any signatures clears the prior verified receive label (160.696823ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1234.064954

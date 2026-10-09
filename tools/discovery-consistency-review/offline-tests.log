@@ -1,0 +1,40 @@
+✔ honest empty source scans exactly both initial gaps (124.03984ms)
+✔ honest received outputs on both branches are preserved exactly (115.880925ms)
+✔ funding attributed to an unrelated change address fails closed (136.549055ms)
+✔ repeated cross-branch attribution cannot return a poisoned high-water checkpoint (1954.996696ms)
+✔ spent-only history proves use from a known matching prevout (181.769967ms)
+✔ unknown unrelated inputs do not invalidate a transaction paying a watched script (91.899561ms)
+✔ one known watched prevout suffices alongside an unknown unrelated input (89.179096ms)
+✔ spent-only claim with an unavailable prevout cannot prove queried address ownership (67.279901ms)
+✔ a spend of receive does not prove unrelated change-address history (85.247752ms)
+✔ omitted positive confirmed owned output fails rather than inventing a UTXO (73.726101ms)
+✔ partial omission of two outputs to the same address fails closed (82.30969ms)
+✔ an omitted output to another scanned owned script fails closed (78.080617ms)
+✔ a candidate transaction absent from that address history is rejected (22.587205ms)
+✔ pending spends suppress stale confirmed candidates and satisfy omission consistency (154.225575ms)
+✔ pending output omission is allowed because endpoint need not return mempool outputs (76.157776ms)
+✔ reported pending outputs remain pending and never enter confirmed validation (73.723117ms)
+✔ overlapping receive/change histories and shared transactions are counted once (113.883249ms)
+✔ zero-only owned output proves activity without requiring or inventing a coin (98.191224ms)
+✔ mixed zero and positive owned outputs require only the positive unspent output (99.6018ms)
+✔ a correctly bound zero-valued candidate is checked then excluded from coins (105.710983ms)
+✔ zero-valued candidates retain ownership and height checks before exclusion (192.613578ms)
+✔ used and history metadata cannot disagree (12.411032ms)
+✔ reorg and confirmation inconsistencies still reject the entire scan (285.735311ms)
+✔ recovery and options are not mutated on an integrity rejection (126.536265ms)
+✔ successful detachment does not mutate previous history entries (70.613652ms)
+✔ recovery requirement beyond 979 fails before any address query (0.383837ms)
+✔ more than 256 candidates rejects before transaction fetching (1395.667748ms)
+✔ more than 2000 unique history transactions rejects before fetching (11.689623ms)
+✔ over 20000 aggregate history references rejects before fetching (79.296475ms)
+✔ oversized raw transaction rejects without returning a partial result (73.867684ms)
+✔ aggregate raw history retains its 3 MiB hex budget (505.325863ms)
+✔ self-consistently omitted history remains a stated source-trust boundary (89.75704ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6987.280647

@@ -165,11 +165,13 @@ async function run(
     notification = error instanceof Error ? error.message : "Operation failed";
     notificationType = "error";
     if (client?.sessionState === "failed") {
-      verifiedReceive = null;
       notification +=
         " Exit and reopen the Pearl app on your Ledger before reconnecting. Closing this page does not cancel a review still shown on the device.";
     }
   } finally {
+    // A completed signed result can still leave a failed session. Render its
+    // invalidation before storage waits, while controls are still busy.
+    if (client?.sessionState === "failed") render();
     busy = false;
     busyText = "";
     currentAbort = null;
@@ -287,6 +289,8 @@ async function checkNode(signal?: AbortSignal) {
   notificationType = result.removed ? "error" : "success";
 }
 function render() {
+  // Recovery warnings may render before the operation's final cleanup.
+  if (client?.sessionState === "failed") verifiedReceive = null;
   const active = getPayment(),
     b = snapshot ? balances(snapshot, reservedOutpoints(journal)) : null;
   app.innerHTML = `<div class="layout"><aside class="sidebar"><div><div class="brand"><span class="pearl" aria-hidden="true"></span>pearl</div><div class="subtitle">Ledger companion</div></div><nav class="nav" aria-label="Main navigation">${(["overview", "receive", "send", "activity"] as const).map((p, i) => `<button data-nav="${p}" class="${page === p ? "active" : ""}" ${disabled(busy)}><span aria-hidden="true">${["◫", "↙", "↗", "≋"][i]}</span>${p[0]!.toUpperCase() + p.slice(1)}</button>`).join("")}</nav><div class="sidebar-bottom"><span class="status-dot"></span>Watch-only by design<br>Your keys stay on your Ledger.<br><br>PSBT signer · Development build<br>No recovery phrase needed.</div></aside><main class="main"><header class="topbar"><div><p class="eyebrow">Your Pearl, under your control</p><h1>${{ overview: "Account overview", receive: "Receive Pearl", send: "Send with confidence", activity: "Payment activity" }[page]}</h1></div><div class="actions"><span class="tag ${network === "mainnet" ? "warn" : ""}">${e(network)}</span><button id="connect" ${disabled(busy)}>${client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger"}</button></div></header><div class="notice">Development prototype. Not audited, Ledger-approved or verified on physical hardware. Use disposable test funds only. Classical Taproot custody; no post-quantum claim.</div>${emergencySignedRecovery ? `<section class="notice ${emergencySignedRecovery.pending ? "busy" : "error"}" role="${emergencySignedRecovery.pending ? "status" : "alert"}"><strong>${emergencySignedRecovery.pending ? "Saving signed payment" : "Signed payment needs a recovery backup"}</strong><p>${emergencySignedRecovery.pending ? "Exact signed bytes are being saved. Keep this page open. If saving stalls, download the recovery copy below." : "Signed bytes have not been confirmed in local storage. Do not close or refresh this page. Download the signed-payment backup before continuing."} Keep it private: anyone with these signed bytes can broadcast this exact payment. Inputs remain reserved; do not create a replacement payment.</p><p class="mono">${e(emergencySignedRecovery.txid)}</p><button id="download-signed-recovery">Download signed-payment backup</button></section>` : ""}${notification ? `<div role="status" class="notice ${notificationType}">${e(notification)} <button id="dismiss" class="ghost" aria-label="Dismiss notification">Dismiss</button></div>` : ""}${busy ? `<div role="status" class="notice busy">${e(busyText)}${currentAbort ? '<button id="cancel-device" class="ghost">Cancel operation</button>' : ""}</div>` : ""}${page === "overview" ? overview(b) : page === "receive" ? receive() : page === "send" ? send(active) : activity()}<footer class="footer"><span>Public data only. Never enter recovery words or private keys.</span><span>BIP86 accounts · PRL PSBT protocol · <a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></span></footer></main></div>`;

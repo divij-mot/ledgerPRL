@@ -227,3 +227,22 @@ host behavior conditional on that model, not actual browser scheduling, rollback
 quota or crash durability. An optional stale-callback injection probe is disabled
 by default; it is not evidence that a closed real WebHID listener can fire. No
 browser, physical device, native firmware, remote service or real broadcast runs.
+
+## Device identity and terminal-session receive verification
+
+`device-identity-boundaries.test.ts` runs the pure-host review suites in
+`tools/device-identity-review/` as part of the ordinary companion tests. The
+35 checks include every byte of the live PRL network/profile binding across
+account export, receive verification and both signing APIs; wrong-app/legacy
+responses, account changes, rejected or cancelled device UI, and no automatic
+protocol fallback. The actual `main.ts` and PSBT adapter run against frozen
+public APDU/signature fixtures with explicit DOM, storage and source mocks.
+
+The receive regressions cover a complete signed result followed by a lost or
+rejected final acknowledgement, rejection before signatures, and signed-storage
+failure, including stalled journal reads after either failure. A failed session must clear
+its previous receive-verification label and disable copying without discarding
+exact signed recovery bytes or input reservations. Normal success keeps valid
+same-session verification. These checks establish host protocol and UI behavior,
+not firmware authenticity, app-build version enforcement, physical approval or
+trusted-screen behavior.
