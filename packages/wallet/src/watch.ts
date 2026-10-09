@@ -20,9 +20,16 @@ import {
   validateBundle,
 } from "@pearl-ledger/sdk";
 
+import {
+  assertPaymentPolicy,
+  inspectPaymentPolicy,
+  DEFAULT_RELAY_POLICY,
+  type RelayPolicy,
+} from "./policy.js";
+
 export const COINBASE_MATURITY = 100;
 export const MIN_CONFIRMATIONS = 1;
-export const DEFAULT_DUST_GRAINS = 333n;
+export { DEFAULT_DUST_GRAINS } from "./policy.js";
 export const MAX_WATCH_COINS = 256;
 export const MAX_SNAPSHOT_BYTES = 4 * 1024 * 1024;
 export interface ChainTip {
@@ -275,7 +282,7 @@ export interface PaymentRequest {
   feePrl: string;
   changeIndex: number;
 }
-export function preparePayment(
+function buildPayment(
   snapshot: WatchSnapshot,
   request: PaymentRequest,
   reserved: ReadonlySet<string> = new Set(),
@@ -298,18 +305,9 @@ export function preparePayment(
   });
   const amount = parsePrl(request.amountPrl),
     fee = parsePrl(request.feePrl);
-  assert(
-    amount >= DEFAULT_DUST_GRAINS,
-    "Recipient amount is below the default 333-grain dust threshold",
-  );
-  assert(fee > 0n, "Choose an explicit positive fee");
   const total = sumGrains(coins.map((c) => c.amount));
   assert(amount + fee <= total, "Selected inputs do not cover amount and fee");
   const change = total - amount - fee;
-  assert(
-    change === 0n || change >= DEFAULT_DUST_GRAINS,
-    "Change is dust; choose a different amount, fee or inputs",
-  );
   checkedIndex(request.changeIndex);
   const outputs: SigningBundle["outputs"] = [
     {
@@ -349,6 +347,30 @@ export function preparePayment(
     outputs,
   };
   validateBundle(bundle, snapshot.account);
+  return bundle;
+}
+export function previewPaymentPolicy(
+  snapshot: WatchSnapshot,
+  request: PaymentRequest,
+  reserved: ReadonlySet<string> = new Set(),
+  policy: RelayPolicy = DEFAULT_RELAY_POLICY,
+) {
+  return inspectPaymentPolicy(
+    buildPayment(snapshot, request, reserved),
+    policy,
+  );
+}
+export function preparePayment(
+  snapshot: WatchSnapshot,
+  request: PaymentRequest,
+  reserved: ReadonlySet<string> = new Set(),
+  policy: RelayPolicy = DEFAULT_RELAY_POLICY,
+): SigningBundle {
+  const bundle = buildPayment(snapshot, request, reserved);
+  assert(
+    assertPaymentPolicy(bundle, policy).fee > 0n,
+    "Choose an explicit positive fee",
+  );
   return bundle;
 }
 export interface ValidationCoin {

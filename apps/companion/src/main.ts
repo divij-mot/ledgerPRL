@@ -39,6 +39,9 @@ import {
   coinEligibility,
   outpoint,
   preparePayment,
+  previewPaymentPolicy,
+  inspectPaymentPolicy,
+  assertPaymentPolicy,
   reservedOutpoints,
   reservePayment,
   transitionPayment,
@@ -338,6 +341,28 @@ function receive() {
   const derived = deriveAddress(account, 0, receiveIndex);
   return `<div class="grid"><section class="card"><div class="section-head"><h2>Receive address</h2><span class="tag ${verifiedReceive === derived.address ? "ok" : "warn"}">${verifiedReceive === derived.address ? "Verified on device" : "Not device verified"}</span></div><div class="field"><label for="receive-index">Receive index</label><input id="receive-index" type="number" min="0" max="${Math.min(979, journal.issuedReceiveThrough + 1)}" value="${receiveIndex}" ${disabled(busy)}></div><p class="mono muted">${e(derived.path)}</p>${receiveIndex > Math.min(979, journal.issuedReceiveThrough + 1) ? '<div class="notice error">This address is outside the saved consecutive recovery range. Use the next receive index, or restore a public recovery record. The bounded companion supports issued indexes 0–979.</div>' : ""}<div class="address">${e(derived.address)}</div><div class="actions"><button id="verify-receive" ${disabled(busy || client?.sessionState !== "ready" || receiveIndex > Math.min(979, journal.issuedReceiveThrough + 1))}>Verify on Ledger</button><button id="copy-address" class="secondary" ${disabled(busy || verifiedReceive !== derived.address)}>Copy verified address</button></div><p class="hint">Latest saved receive index: ${journal.issuedReceiveThrough < 0 ? "none" : journal.issuedReceiveThrough}. Export your public recovery record after issuing addresses; it records skipped/unused ranges for a restored browser. Use consecutive receive indexes to preserve gap-limit recovery. Skipping 20 or more unused addresses requires an extended recovery scan. Verify the full address on the Ledger screen. This label is cleared when you change account, address index or device session.</p></section><section class="card"><h2>Mining payouts</h2><p class="hint">A verified public receive address can be used for compatible Pearl miner or pool payouts. Mining stays on your host. Ledger only derives addresses and signs spending transactions.</p><p class="hint">Coinbase rewards remain immature until 100 confirmations. Imported chain metadata alone cannot establish spendability.</p></section></div>`;
 }
+function feePolicyHint(): string {
+  if (!snapshot || !selected.size)
+    return "Select inputs and enter a recipient, amount and fee to calculate the exact relay-policy minimum.";
+  try {
+    const p = previewPaymentPolicy(
+      snapshot,
+      {
+        selected: [...selected],
+        recipient: form.recipient.trim(),
+        amountPrl: form.amount,
+        feePrl: form.fee,
+        changeIndex: Number(form.changeIndex),
+      },
+      reservedOutpoints(journal),
+    );
+    return `${p.vsize} vB (${p.inputCount} inputs, ${p.outputCount} outputs). Declared default minimum fee: ${formatPrl(p.minimumFee)} PRL (${p.minimumFee} grains); P2TR dust minimum: ${p.dustThreshold} grains. ${p.fee < p.minimumFee ? "Entered fee is below this minimum. " : ""}Node policy can differ; this is not a fee estimate. Your amount and fee are never changed automatically.`;
+  } catch (error) {
+    return error instanceof Error
+      ? error.message
+      : "Complete the payment fields to calculate the policy minimum.";
+  }
+}
 function send(active: PaymentRecord | undefined) {
   if (active) return review(active);
   if (!snapshot)
@@ -355,7 +380,7 @@ function send(active: PaymentRecord | undefined) {
           })
           .join("")
       : '<p class="hint">No outputs in this watch snapshot.</p>'
-  }<p class="hint">${selected.size} inputs selected. Balances and confirmations reflect the current imported/node view.</p><button id="check-node" class="secondary" ${disabled(busy)}>Refresh node status</button></section><section class="card"><h2>2. Set the payment</h2><div class="field"><label for="recipient">Recipient P2TR address</label><input id="recipient" value="${e(form.recipient)}" autocomplete="off" spellcheck="false" placeholder="${NETWORKS[network].hrp}1p…" ${disabled(busy)}></div><div class="field"><label for="amount">Amount in PRL</label><input id="amount" value="${e(form.amount)}" inputmode="decimal" placeholder="0.00000000" ${disabled(busy)}></div><div class="field"><label for="fee">Exact total fee in PRL</label><input id="fee" value="${e(form.fee)}" inputmode="decimal" ${disabled(busy)}></div><div class="field"><label for="change-index">Change index (branch 1)</label><input id="change-index" value="${e(form.changeIndex)}" type="number" min="${journal.nextChangeIndex}" max="2147483646" ${disabled(busy)}></div><p class="hint">Remaining value returns to the device-derived change address. Fee is explicit, not a market estimate. Dust under the default policy is rejected.</p><button id="prepare" ${disabled(busy || !selected.size)}>Prepare & reserve inputs</button><p class="hint">Preparation saves public transaction details and input reservations in this browser profile. Signing requires a fresh authenticated node check.</p></section></div>`;
+  }<p class="hint">${selected.size} inputs selected. Balances and confirmations reflect the current imported/node view.</p><button id="check-node" class="secondary" ${disabled(busy)}>Refresh node status</button></section><section class="card"><h2>2. Set the payment</h2><div class="field"><label for="recipient">Recipient P2TR address</label><input id="recipient" value="${e(form.recipient)}" autocomplete="off" spellcheck="false" placeholder="${NETWORKS[network].hrp}1p…" ${disabled(busy)}></div><div class="field"><label for="amount">Amount in PRL</label><input id="amount" value="${e(form.amount)}" inputmode="decimal" placeholder="0.00000000" ${disabled(busy)}></div><div class="field"><label for="fee">Exact total fee in PRL</label><input id="fee" value="${e(form.fee)}" inputmode="decimal" ${disabled(busy)}></div><div class="field"><label for="change-index">Change index (branch 1)</label><input id="change-index" value="${e(form.changeIndex)}" type="number" min="${journal.nextChangeIndex}" max="2147483646" ${disabled(busy)}></div><p id="fee-policy" class="hint">${e(feePolicyHint())}</p><p class="hint">Remaining value returns to the device-derived change address. Fee is explicit, not a market estimate. Dust under the default policy is rejected.</p><button id="prepare" ${disabled(busy || !selected.size)}>Prepare & reserve inputs</button><p class="hint">Preparation saves public transaction details and input reservations in this browser profile. Signing requires a fresh authenticated node check.</p></section></div>`;
 }
 function review(payment: PaymentRecord) {
   const bundle = paymentBundle(payment),
@@ -364,7 +389,8 @@ function review(payment: PaymentRecord) {
   const total = bundle.inputs.reduce((s, i) => s + i.amount, 0n),
     fee = total - bundle.outputs.reduce((s, o) => s + o.amount, 0n);
   const highFee = fee > 100_000n && fee * 10n >= total;
-  return `<div class="grid"><section class="card review"><div class="section-head"><h2>Review the exact payment</h2><span class="tag">${e(paymentStatus(payment))}</span></div>${highFee ? '<div class="notice error"><b>Unusually high fee.</b> The fee exceeds 100,000 grains and is at least 10% of the selected input value. Review the fee carefully on the Ledger.</div>' : ""}<dl class="data-list"><div><dt>Network</dt><dd>${bundle.network}</dd></div><div><dt>Recipient</dt><dd class="mono">${scriptToAddress(recipient.scriptPubKey, bundle.network)}</dd></div><div><dt>Amount</dt><dd>${money(recipient.amount)}</dd></div><div><dt>Exact fee</dt><dd>${money(fee)}</dd></div><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span><br>Branch 1 / index ${change.index}` : ""}</dd></div><div><dt>Inputs</dt><dd>${bundle.inputs.length} reserved outputs</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl>${payment.state === "draft" ? `<button id="sign" ${disabled(busy || client?.sessionState !== "ready")}>Review & sign on Ledger</button> <button id="discard" class="ghost" ${disabled(busy)}>Discard unsigned draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Signatures independently verified. Nothing has been broadcast by this app." : payment.state === "accepted" ? "Previously accepted by the node; current confirmation is unverified. An explicit retry sends only these same signed bytes and transaction ID." : "Broadcast outcome may be unknown. This exact transaction may already be accepted. Keep inputs reserved; never construct a replacement payment just because of a timeout."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve broadcasting these exact signed bytes to ${sourceMode === "public" ? "the public Pearl Blockbook service" : "the configured local node"} on ${bundle.network}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Explicitly rebroadcast exact bytes" : "Broadcast signed transaction"}</button>` : payment.archived ? '<div class="notice success">A confirmed receipt is archived. Reconcile its current chain status before retrying these bytes; all input locks remain retained.</div>' : '<div class="notice error">Signing was started. The result may be unknown after an interruption. Inputs remain reserved. Inspect the device and reconcile the transaction before reusing funds.</div>'}</section><section class="card"><h2>Check your Ledger screen</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Network and full recipient</b><span class="muted">Compare the entire address, not only its first or last characters.</span></div></div><div class="step"><span class="number">2</span><div><b>Amount, fee and change</b><span class="muted">The device recomputes the signing digest from this complete transaction.</span></div></div><div class="step"><span class="number">3</span><div><b>Physical approval</b><span class="muted">Reject if any detail differs. No blind-sign or software-signing fallback exists.</span></div></div></div><button id="back-payments" class="ghost" ${disabled(busy)}>Back to activity</button></section></div>`;
+  const policy = inspectPaymentPolicy(bundle);
+  return `<div class="grid"><section class="card review"><div class="section-head"><h2>Review the exact payment</h2><span class="tag">${e(paymentStatus(payment))}</span></div>${highFee ? '<div class="notice error"><b>Unusually high fee.</b> The fee exceeds 100,000 grains and is at least 10% of the selected input value. Review the fee carefully on the Ledger.</div>' : ""}<dl class="data-list"><div><dt>Network</dt><dd>${bundle.network}</dd></div><div><dt>Recipient</dt><dd class="mono">${scriptToAddress(recipient.scriptPubKey, bundle.network)}</dd></div><div><dt>Amount</dt><dd>${money(recipient.amount)}</dd></div><div><dt>Exact fee</dt><dd>${money(fee)}</dd></div><div><dt>Default relay policy</dt><dd>${policy.vsize} vB; minimum ${money(policy.minimumFee)}; dust ${policy.dustThreshold} grains. Node policy may differ.</dd></div><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span><br>Branch 1 / index ${change.index}` : ""}</dd></div><div><dt>Inputs</dt><dd>${bundle.inputs.length} reserved outputs</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl>${payment.state === "draft" ? `<button id="sign" ${disabled(busy || client?.sessionState !== "ready")}>Review & sign on Ledger</button> <button id="discard" class="ghost" ${disabled(busy)}>Discard unsigned draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Signatures independently verified. Nothing has been broadcast by this app." : payment.state === "accepted" ? "Previously accepted by the node; current confirmation is unverified. An explicit retry sends only these same signed bytes and transaction ID." : "Broadcast outcome may be unknown. This exact transaction may already be accepted. Keep inputs reserved; never construct a replacement payment just because of a timeout."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve broadcasting these exact signed bytes to ${sourceMode === "public" ? "the public Pearl Blockbook service" : "the configured local node"} on ${bundle.network}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Explicitly rebroadcast exact bytes" : "Broadcast signed transaction"}</button>` : payment.archived ? '<div class="notice success">A confirmed receipt is archived. Reconcile its current chain status before retrying these bytes; all input locks remain retained.</div>' : '<div class="notice error">Signing was started. The result may be unknown after an interruption. Inputs remain reserved. Inspect the device and reconcile the transaction before reusing funds.</div>'}</section><section class="card"><h2>Check your Ledger screen</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Network and full recipient</b><span class="muted">Compare the entire address, not only its first or last characters.</span></div></div><div class="step"><span class="number">2</span><div><b>Amount, fee and change</b><span class="muted">The device recomputes the signing digest from this complete transaction.</span></div></div><div class="step"><span class="number">3</span><div><b>Physical approval</b><span class="muted">Reject if any detail differs. No blind-sign or software-signing fallback exists.</span></div></div></div><button id="back-payments" class="ghost" ${disabled(busy)}>Back to activity</button></section></div>`;
 }
 function activity() {
   return `<section class="card"><div class="section-head"><h2>Reserved payments</h2><span class="tag">${journal.payments.length} records</span></div><p class="hint">Reservations are shared atomically across this browser's tabs and persist after restart. They do not coordinate separate browser profiles or computers. Signed or interrupted payments never auto-expire. Browser eviction or profile loss can remove this state: export a complete backup before switching profiles.</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy || !account)}>Back up full watch wallet</button><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Archive confirmed records</button></div><p class="hint">Archival requires six confirmations in a completed source view. Archived exact bytes and outpoint locks are retained through reorgs; they no longer count against the 100-active-payment limit. Conflicted/unknown records remain reserved.</p>${
@@ -687,6 +713,8 @@ function bind() {
   ] as const)
     document.getElementById(id)?.addEventListener("input", (event) => {
       form[key] = (event.target as HTMLInputElement).value;
+      const hint = document.getElementById("fee-policy");
+      if (hint) hint.textContent = feePolicyHint();
     });
   document.querySelectorAll<HTMLInputElement>("[data-coin]").forEach(
     (el) =>
@@ -867,11 +895,18 @@ async function sign(signal: AbortSignal) {
     "Only a fresh unsigned draft may be signed",
   );
   const bundle = paymentBundle(payment);
+  assertPaymentPolicy(bundle);
   await checkNode();
   signal.throwIfAborted();
   requireFreshValidation(snapshot, validation, bundle);
   await store.mutate(accountId(account), (j) => {
     signal.throwIfAborted();
+    const current = j.payments.find((p) => p.id === activePayment);
+    assert(
+      current?.bundleHex === payment.bundleHex,
+      "Draft changed during input validation; review it again",
+    );
+    assertPaymentPolicy(paymentBundle(current));
     transitionPayment(j, activePayment!, "signing");
   });
   signal.throwIfAborted();
