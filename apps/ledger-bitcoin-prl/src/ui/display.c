@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #pragma GCC diagnostic ignored "-Wformat-invalid-specifier"  // snprintf
 #pragma GCC diagnostic ignored "-Wformat-extra-args"         // snprintf
 

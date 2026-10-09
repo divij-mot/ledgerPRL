@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 /*****************************************************************************
  *   Ledger App Bitcoin.
  *   (c) 2025, 2026 Ledger SAS.
@@ -29,6 +30,7 @@
 /* Local headers */
 #include "bitvector.h"
 #include "buffer.h"
+#include "buffer_ext.h"
 #include "check_merkle_tree_sorted.h"
 #include "compare_wallet_script_at_path.h"
 #include "constants.h"
@@ -65,7 +67,7 @@ static bool __attribute__((noinline)) parse_sign_psbt_apdu(dispatcher_context_t 
                                                            sign_psbt_state_t *st,
                                                            uint8_t wallet_id[static 32],
                                                            uint8_t wallet_hmac[static 32]) {
-    if (!buffer_read_varint(&dc->read_buffer, &st->global_map.size)) {
+    if (!buffer_read_varint_canonical(&dc->read_buffer, &st->global_map.size)) {
         SEND_SW(dc, SW_WRONG_DATA_LENGTH);
         return false;
     }
@@ -79,7 +81,7 @@ static bool __attribute__((noinline)) parse_sign_psbt_apdu(dispatcher_context_t 
     // we already know n_inputs and n_outputs, so we skip reading from the global map
 
     uint64_t n_inputs_u64;
-    if (!buffer_read_varint(&dc->read_buffer, &n_inputs_u64) ||
+    if (!buffer_read_varint_canonical(&dc->read_buffer, &n_inputs_u64) ||
         !buffer_read_bytes(&dc->read_buffer, st->inputs_root, 32)) {
         SEND_SW(dc, SW_WRONG_DATA_LENGTH);
         return false;
@@ -93,7 +95,7 @@ static bool __attribute__((noinline)) parse_sign_psbt_apdu(dispatcher_context_t 
     st->n_inputs = (unsigned int) n_inputs_u64;
 
     uint64_t n_outputs_u64;
-    if (!buffer_read_varint(&dc->read_buffer, &n_outputs_u64) ||
+    if (!buffer_read_varint_canonical(&dc->read_buffer, &n_outputs_u64) ||
         !buffer_read_bytes(&dc->read_buffer, st->outputs_root, 32)) {
         SEND_SW(dc, SW_WRONG_DATA_LENGTH);
         return false;

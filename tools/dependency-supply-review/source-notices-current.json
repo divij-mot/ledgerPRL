@@ -1,0 +1,813 @@
+{
+  "schema": 1,
+  "reviewDate": "2026-10-09",
+  "scope": "Technical presence/location review of modification notices, not legal certification or a choice of project license.",
+  "upstreamCommit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+  "upstreamTreeSha256": "c9341199651ab43eaa2d0248a5c011c70bec639e77225b9f26aaebdff3cef1b3",
+  "licenseSha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+  "counts": {
+    "modifiedUpstreamCOrHeaders": 34,
+    "missingProminentChangeNotice": 0,
+    "unchangedUpstreamCOrHeaders": 132,
+    "absentUpstreamCOrHeaders": 12,
+    "newLocalCOrHeaders": 6,
+    "copiedHostModulesWithChangeNotices": 6
+  },
+  "modifiedUpstreamFiles": [
+    {
+      "file": "apps/ledger-bitcoin-prl/src/boilerplate/dispatcher.c",
+      "upstreamBlob": "f4d9b1d62f04b0689d3bf0171341be666bb7ed00",
+      "currentBlob": "e229a019c8e589e22b0a33147556b15bbc008372",
+      "currentSha256": "82d0b0cb3ab3b5de2fccb2d6dffdf84d16628eb036d03b98244265b60006329e",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/commands.h",
+      "upstreamBlob": "4de0d4910c53c7d2c4a4d8785787675788dd6112",
+      "currentBlob": "378f2d551616046f13d0359e86fee3b4017ab386",
+      "currentSha256": "a902acfefd26e2baad8c2ac86acd2a0c8c88d53ef626a03b242e551a6f623e8d",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/buffer_ext.c",
+      "upstreamBlob": "65ee2f135a5ec4e2f8ecb27b33943c019acf6c87",
+      "currentBlob": "3888a5cac88ffc635ac025c6ad06b009baf0a8f6",
+      "currentSha256": "8f6dbd9964854064343b46fb6080ebf346269568d345df4f23c8d3ce40a7c0fc",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/buffer_ext.h",
+      "upstreamBlob": "27d7a618dff84631b578ce17fd29c6d4d686a755",
+      "currentBlob": "28824c2c7c7e206d8b690375afb0ace2dcc6d19e",
+      "currentSha256": "1f11d2bca01f19e0e0e1d9dd9af21bd48b20b42b953061e57bed7dc99de10f3e",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/parser_ext.c",
+      "upstreamBlob": "a6f83c50ad00169b71f1344488742a8e04099f9d",
+      "currentBlob": "29c65d98165c97e39aedba638588ea92ee9785b9",
+      "currentSha256": "6abcec1c2e35235f8a1a1eccead8efb8edf9e5c365b1ad2adf884fa6f474030c",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/parser_ext.h",
+      "upstreamBlob": "aa8314fd237399c260e31e603eb45e353062d3da",
+      "currentBlob": "a19425b0151f85b86a82b02908933c044f4092c5",
+      "currentSha256": "bcf468b86e7656bd52513e6c2d08ffe5ad0062aa41e9362ecab8cfdcd88174dc",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/wallet.c",
+      "upstreamBlob": "4f707d39481159cee0ff1cb9624240509a851880",
+      "currentBlob": "7f9ea25b6a60aa0ae8d3a4b1aa844801b0a0bcd9",
+      "currentSha256": "14afea81b9a1ea3ed56d0da1d1fe3972d07e4dfc6807b919ac7aaae79d0ed5c0",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/constants.h",
+      "upstreamBlob": "15127fac1cbdeded4a106eb0a1e0a36f3881e2ad",
+      "currentBlob": "711e32e2edca77f0982464fffb08eb242f541881",
+      "currentSha256": "62cadabdf5f29ca188efdb4b8b8692a1a09cf6f8e6c28a8ba1b052510685fe26",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        },
+        {
+          "line": 142,
+          "text": "/* inherited identifier, Pearl units */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/get_extended_pubkey.c",
+      "upstreamBlob": "e98ed1f140d3bc6cccf8800491da757101afa180",
+      "currentBlob": "0e54710ef9a7af7f937a02d3a254c0af468e5168",
+      "currentSha256": "58623c1f3e585b5a99ced3130fd6d7b6c809af6206a50ea328d5a845fc801a49",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/get_master_fingerprint.c",
+      "upstreamBlob": "5941bb6208fbcea88dd5dfa9f0ab68b14b8608c8",
+      "currentBlob": "34e954f4596a94efc53e6788814f1bf504babc30",
+      "currentSha256": "0bb86c45b51b905277bc9d4aa7e6d08b5bcc5039d9f2e4d0b5aaa55bd10f6c17",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/get_wallet_address.c",
+      "upstreamBlob": "5ad60474f64de9ee727fe075eaefce086113ce17",
+      "currentBlob": "19f9817bd6913e1103c66a6b2dd55a20be65647f",
+      "currentSha256": "6f2e41e7889d4cddb3f2ed9fb956ed238b6d06509cf1f7ba019d34cfe7296eee",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        },
+        {
+          "line": 143,
+          "text": "/* registration/HMAC policies are unavailable in Pearl */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/handlers.h",
+      "upstreamBlob": "4e302f273200935bfd2adb23943cee1d647d3688",
+      "currentBlob": "207c75d895dae0ff3e1df010ebed2aa626e9c092",
+      "currentSha256": "816c1935537ce4965bbe9a2446c7ac3580034e155a85517d91e44e26db6a4a33",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_hash.c",
+      "upstreamBlob": "322ff5b6a5f237bfce24bf0cd7aaef63c6d0c731",
+      "currentBlob": "d3c30cd0655c50c58d4650df2792ea0a1240d1e6",
+      "currentSha256": "07f359dfa4143d86de143ca20c254960a76d338eb4f83e50636a54c4e2b3aa35",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_index.c",
+      "upstreamBlob": "c92333ba157070678bec71553b244ac34d9efbf3",
+      "currentBlob": "5328e7d0ebb0983e656752709ee15994e03a91fa",
+      "currentSha256": "636df897760bf011a0eac7a5010dff9d6a0df57ed1d51c34a87c472a2faa51ae",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_preimage.c",
+      "upstreamBlob": "3a1ba0245f13d9ab8a6e3843c59afa4167fd7b6b",
+      "currentBlob": "31be3f19ab64da5593479a4b86078ea9fb62566d",
+      "currentSha256": "dcdf7c2ae94eece4e5c9869e7af049008fe378d137fb888469b6b1ea255e50dc",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_merkleized_map.c",
+      "upstreamBlob": "1e446457498481bf0741566f721e5f16dcdc4a8c",
+      "currentBlob": "917e2042e9527b6931cd5301669175dafc460d2b",
+      "currentSha256": "fa3a4cd83d409c6fa7500a13148373965a662010f136b7b1570ad64ba5fdf896",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_preimage.c",
+      "upstreamBlob": "bd54e00d8854aeee8f7205036355587453033a44",
+      "currentBlob": "f73cdb10eb1c41675630a51327331988ca726ff8",
+      "currentSha256": "cb2ea0d3ecaba096784c82c635e07d0f1f98add4f47b11c551799422f1b556dd",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/policy.c",
+      "upstreamBlob": "7e3c0e42d618607c6b5e1b499a8b446cce305bed",
+      "currentBlob": "3fef3c1755e621ac470404f8b37144c62e2d4d8c",
+      "currentSha256": "9160f5145ff0148bc2c6c0d2dd2980e53937be1e3f5d11c2ff673880af32cc31",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/psbt_parse_rawtx.c",
+      "upstreamBlob": "cc9dd4ff9b646bf2382dea113f45b0e3be2e456e",
+      "currentBlob": "bfd1a213f475bf53e19751e9034483acda7d8610",
+      "currentSha256": "9667e39bfaec68ba7170c7d0a52a4f1dfbafbf395c34f7641ac69e40d7840a65",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/stream_preimage.c",
+      "upstreamBlob": "318d4300b299eb453ebeee41f6b110e548a09346",
+      "currentBlob": "ea7f01e2bf1dc93b256460174fb774c3193de90f",
+      "currentSha256": "2a5b48cd10479363a692ef9d941090951d7e35f5faecdd6330ea1ce7d5c53bea",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt.c",
+      "upstreamBlob": "57f8dec047d88353238fa74a575688fad6a92ac8",
+      "currentBlob": "5fd2f1b8077ad59e460b301365ceb8350d64cd4b",
+      "currentSha256": "c4b1b12825683db34f44260fce74cecd3b730878041ace467b4a9bf8785c2c4a",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt.h",
+      "upstreamBlob": "e15152a9ce14a1aa422b3f17f4f87029d529a5a7",
+      "currentBlob": "c899121559116f414d6830051d6c50159b1e5306",
+      "currentSha256": "ecebee00ac6d1b4c9e19ef11c4cd5526443f5c5c30e3d0f116cdd8016bdd08b8",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/extract_bip32_derivation.c",
+      "upstreamBlob": "03ffdc959bf653247c7dcaba7a475818086d4923",
+      "currentBlob": "24f27018fb57b63168a1151a4abda3926a03e6c5",
+      "currentSha256": "2927aa05408d4fe6267ee94b6e6a58d9583ef87151432f3c9e160d54206addca",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/init_global_state.c",
+      "upstreamBlob": "38a15a358ea41655fbaea86a5d299740fe67196b",
+      "currentBlob": "5f669b49b4071bc036483eb2be16e5ad2dd9a50a",
+      "currentSha256": "f5bc9d640eadf734feb76cf0eb937c8535ec2ad19eb1a7fb0cc2e8e321d3e7f1",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/preprocess_inputs.c",
+      "upstreamBlob": "bcbba3696a21fcc5d15296828b6f83b0a37495e8",
+      "currentBlob": "25ebd2fff8e5911c97f0e9d36716d3e144f5ec11",
+      "currentSha256": "f3ed6c4d94968fd9ed2dfd75c99a7460c252ac291ab1e2e66e2ce93ec56d63b1",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/preprocess_outputs.c",
+      "upstreamBlob": "d9eefefc682f868cba1df53f58cf4bdecf01da46",
+      "currentBlob": "c86afb0f15fe49b366e83b89289de50a112ca76c",
+      "currentSha256": "4d827e9e6e012bde4d72d4f11cafe34204474ec732ac77d028e6de8f033de733",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/process_in_outs.c",
+      "upstreamBlob": "cc93214f43d38d9954425a18bd0bc485074c1643",
+      "currentBlob": "1fe1dda54a7f65e42bbab4809046380cd0222cfa",
+      "currentSha256": "9c414dfe522eb6915b15e1ed022fc7629902ff0253535e0cbea543cd70f304b3",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/sign_input.c",
+      "upstreamBlob": "16f78ecd0b313c438288ebf6a27701ec731ba1b5",
+      "currentBlob": "39a1b96daf6f06988a83043065b13afb28be5acf",
+      "currentSha256": "cab97c361169298fe2f71b0033c555cb0580b66722bed1d8cf67fe40a64ddedf",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        },
+        {
+          "line": 675,
+          "text": "// Preprocessing requires one signable internal key expression in Pearl."
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/transaction_display.c",
+      "upstreamBlob": "386a3050b41a3deca4eb9b1095f201cf75b412ba",
+      "currentBlob": "a7385da7bd74d93295df0b050a76451b46aaa57a",
+      "currentSha256": "4fc03a890f4875189e8b7ce8c8b3e20f51cf4eccd7ed4870de0208173b46d7e7",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/main.c",
+      "upstreamBlob": "c2d6e5cacf92fd3e1906b53456f2288664499708",
+      "currentBlob": "7661cedc820042d3cc55fe69a94132b99f16b7a7",
+      "currentSha256": "363eb976be16da216266c148dc7e1bd693bd200bf60040ffcab2e4ce7eb08035",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/ui/display.c",
+      "upstreamBlob": "d773dcdbb6735461e590df4ef6c3ef771c1db020",
+      "currentBlob": "ac68904ff8c7e8f7fd8d7b181dda208f7a46e6be",
+      "currentSha256": "d34126a4363530370800eeb45d3817e423c03a2253cccf1459edeff469796766",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/ui/display.h",
+      "upstreamBlob": "1a3a16a96efdbf023bcaf9252c00a8939772dfeb",
+      "currentBlob": "f463e0f758dfd11f5c989bde360099fca060aa6d",
+      "currentSha256": "5781fe59cff514654d01800a76b19d93f378fae6456890e8b02034aab1349524",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/ui/display_nbgl.c",
+      "upstreamBlob": "a1d4142003f3eb1125ff58164d4ff0b34b6b85fa",
+      "currentBlob": "04c9d58c3d816e85efb13027086f5c4e58edd759",
+      "currentSha256": "1572dfed5ed372455bc45830ac5ca393c25c87b9d5f0d4bc4a9d3c3cd07cdc0d",
+      "localContextComments": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 1,
+          "text": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/ui/menu_nbgl.c",
+      "upstreamBlob": "8a3f0c07579796f1a280af288c9b8e9cfc59e5bd",
+      "currentBlob": "7ea77f9c57e73b6ec5a3fce8b47410e0cc465ae4",
+      "currentSha256": "07819758800e46605ada47b115d9d22bdebe8075d619ec485c5b1cf21c671d74",
+      "localContextComments": [
+        {
+          "line": 18,
+          "text": "/* Pearl adaptation: no mutable signing modes or NVM wallet registration. */"
+        }
+      ],
+      "prominentChangeNotice": [
+        {
+          "line": 18,
+          "text": "/* Pearl adaptation: no mutable signing modes or NVM wallet registration. */"
+        }
+      ],
+      "minimumRecommendation": "No additional change notice identified as necessary in this engineering check"
+    }
+  ],
+  "minimumMissingNoticeFiles": [],
+  "newLocalFiles": [
+    {
+      "file": "apps/ledger-bitcoin-prl/src/boilerplate/prl_review_io.c",
+      "sha256": "3ec5f9279c29a1d67d9afdd7fbd919520460aeddd0b7ced8395721cff1512363",
+      "firstLines": [
+        "/* SPDX-License-Identifier: Apache-2.0",
+        " * Narrow adaptation of SDK v27.1.2 io_seproxyhal_io_heartbeat.",
+        " * (c) Ledger SAS, with Pearl review-session validation changes.",
+        " * The SDK's UI handlers are retained. A fault exits the app on nested requests,",
+        " * reported disconnect, lock or expiry. Browser-only abort is not a device event.",
+        " */"
+      ]
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/boilerplate/prl_review_io.h",
+      "sha256": "7dc22a5bfe854ae2477003402b8478a8bffa094a6d8ada03389cf3b3db4972d1",
+      "firstLines": [
+        "/* SPDX-License-Identifier: Apache-2.0 */",
+        "#pragma once",
+        "#include <stdint.h>",
+        "",
+        "/* Only called while a trusted UI review is active. No private key is live. */",
+        "void prl_review_heartbeat(uint16_t start_tick);"
+      ]
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/get_network_info.c",
+      "sha256": "f1b7cb188bc2748f4b731c5401c248a56ba8e56dbc0b45ab5ae9f3b9078322e0",
+      "firstLines": [
+        "/* SPDX-License-Identifier: Apache-2.0 */",
+        "#include <string.h>",
+        "#include \"commands.h\"",
+        "#include \"constants.h\"",
+        "#include \"dispatcher.h\"",
+        "#include \"prl.h\""
+      ]
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/prl_psbt.c",
+      "sha256": "94edbd97014b7de51ade07284ac55211bb2a5f501f5f3118f1079d448cb79f65",
+      "firstLines": [
+        "/* SPDX-License-Identifier: Apache-2.0",
+        " * Closed PSBTv2 profile: no ignored signing controls or host-selected network.",
+        " */",
+        "#include <string.h>",
+        "#include \"prl_psbt.h\"",
+        "#include \"check_merkle_tree_sorted.h\""
+      ]
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/prl_psbt.h",
+      "sha256": "8a8f92ce7b448f683e8107d88a00789fb576f92259d98845ebd7008e396136ad",
+      "firstLines": [
+        "/* SPDX-License-Identifier: Apache-2.0 */",
+        "#pragma once",
+        "#include \"dispatcher.h\"",
+        "#include \"merkle.h\"",
+        "",
+        "bool prl_validate_global_map(dispatcher_context_t *dc,"
+      ]
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/prl.h",
+      "sha256": "1932be875dd14d0cba6afad49b36b8118dcd31e9623b6a50e8ca5756a055c50c",
+      "firstLines": [
+        "/* SPDX-License-Identifier: Apache-2.0",
+        " * Pearl adaptation of Ledger app-bitcoin. Experimental, not Ledger approved.",
+        " * These are application policy checks, not a consensus replay-protection domain.",
+        " */",
+        "#pragma once",
+        ""
+      ]
+    }
+  ],
+  "copiedHostModules": [
+    {
+      "file": "packages/bitcoin-prl-adapter/src/upstream/buffertools.ts",
+      "sha256": "c42f2af89bebd8abd77b23009cf089fb41aabf841ce1111dedb420dae31b99b3",
+      "changeNoticeLines": [
+        "// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.",
+        "// Apache-2.0; local changes recorded in provenance/upstream.patch."
+      ],
+      "minimumRecommendation": "Retain existing prominent change notice"
+    },
+    {
+      "file": "packages/bitcoin-prl-adapter/src/upstream/clientCommands.ts",
+      "sha256": "3087e3e6c8e3e70138e8f9135e9f95b53586f965a9eddc139679385cf5a6114b",
+      "changeNoticeLines": [
+        "// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.",
+        "// Apache-2.0; local changes recorded in provenance/upstream.patch."
+      ],
+      "minimumRecommendation": "Retain existing prominent change notice"
+    },
+    {
+      "file": "packages/bitcoin-prl-adapter/src/upstream/merkle.ts",
+      "sha256": "46845ef8d1ced9ed44aeb76ae62307b975ab5c80b96d86051a5c2d2ab7c7c7c3",
+      "changeNoticeLines": [
+        "// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.",
+        "// Apache-2.0; local changes recorded in provenance/upstream.patch."
+      ],
+      "minimumRecommendation": "Retain existing prominent change notice"
+    },
+    {
+      "file": "packages/bitcoin-prl-adapter/src/upstream/merkleMap.ts",
+      "sha256": "d6c02c5820d7e4b4650ce35a4b84e59ff86b5a33c2ccb7529ffa3739f130d969",
+      "changeNoticeLines": [
+        "// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.",
+        "// Apache-2.0; local changes recorded in provenance/upstream.patch."
+      ],
+      "minimumRecommendation": "Retain existing prominent change notice"
+    },
+    {
+      "file": "packages/bitcoin-prl-adapter/src/upstream/policy.ts",
+      "sha256": "894a7e1b8b0822f45da6233caff5c2b01cfd9d029a21d4e10e1e57c50dba46eb",
+      "changeNoticeLines": [
+        "// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.",
+        "// Apache-2.0; local changes recorded in provenance/upstream.patch."
+      ],
+      "minimumRecommendation": "Retain existing prominent change notice"
+    },
+    {
+      "file": "packages/bitcoin-prl-adapter/src/upstream/varint.ts",
+      "sha256": "ad1c86d8591caa1ac1321b14765ac006ea997c8e69b2596ab25244fe82b8c112",
+      "changeNoticeLines": [
+        "// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.",
+        "// Apache-2.0; local changes recorded in provenance/upstream.patch."
+      ],
+      "minimumRecommendation": "Retain existing prominent change notice"
+    }
+  ],
+  "limitations": [
+    "Comparison is against retained upstream Git-blob metadata, with no refetch.",
+    "Absence of a same-path upstream file does not establish wholly original authorship.",
+    "Comments are manually assessed for an explicit early change statement; incidental PRL identifiers and late policy comments are not treated as such a statement.",
+    "Source is changing concurrently; hashes identify this inspection, not later edits."
+  ]
+}

@@ -15,3 +15,5 @@ tools/wallet-recovery-review/independent/typecheck.log whitespace=-blank-at-eof
 # Preserve embedded upstream license bodies and their original line endings.
 apps/companion/public/third-party-notices.txt -text whitespace=-blank-at-eol,-blank-at-eof
 tools/dependency-supply-review/THIRD-PARTY-NOTICES.proposed.txt -text whitespace=-blank-at-eol,-blank-at-eof
+# Retained source diff context is intentionally byte-exact.
+tools/native-parser-review/source-only.patch whitespace=-blank-at-eol

@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 /*****************************************************************************
  *   (c) 2026 Ledger SAS.
  *
@@ -26,6 +27,23 @@
 #include "read.h"
 #include "varint.h"
 #include "write.h"
+
+bool buffer_read_varint_canonical(buffer_t *buffer, uint64_t *value) {
+    if (buffer->offset >= buffer->size) {
+        return false;
+    }
+
+    buffer_t cursor = *buffer;
+    uint64_t decoded;
+    if (!buffer_read_varint(&cursor, &decoded) ||
+        cursor.offset - buffer->offset != varint_size(decoded)) {
+        return false;
+    }
+
+    buffer->offset = cursor.offset;
+    *value = decoded;
+    return true;
+}
 
 void *buffer_alloc(buffer_t *buffer, size_t size, bool aligned) {
     size_t padding_size = 0;

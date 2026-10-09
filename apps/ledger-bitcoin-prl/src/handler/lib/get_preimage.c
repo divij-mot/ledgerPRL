@@ -1,7 +1,9 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #include <string.h>
 #include <limits.h>
 
 /* Local headers */
+#include "buffer_ext.h"
 #include "client_commands.h"
 #include "crypto.h"
 #include "stream_preimage.h"
@@ -29,7 +31,7 @@ static int get_preimage(dispatcher_context_t *dispatcher_context,
 
     uint8_t partial_data_len;
 
-    if (!buffer_read_varint(&dispatcher_context->read_buffer, &preimage_len_u64) ||
+    if (!buffer_read_varint_canonical(&dispatcher_context->read_buffer, &preimage_len_u64) ||
         !buffer_read_u8(&dispatcher_context->read_buffer, &partial_data_len) ||
         !buffer_can_read(&dispatcher_context->read_buffer, partial_data_len) ||
         dispatcher_context->read_buffer.size - dispatcher_context->read_buffer.offset != partial_data_len) {

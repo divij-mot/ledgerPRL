@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #include <stdlib.h>
 #include <string.h>
 
@@ -102,9 +103,9 @@ static int parse_rawtxinput_vout(parse_rawtxinput_state_t *state, buffer_t *buff
 
 static int parse_rawtxinput_scriptsig_size(parse_rawtxinput_state_t *state, buffer_t *buffers[2]) {
     uint64_t scriptsig_size;
-    bool result = dbuffer_read_varint(buffers, &scriptsig_size);
+    int result = dbuffer_read_varint(buffers, &scriptsig_size);
 
-    if (result) {
+    if (result == 1) {
         // The scriptSig is streamed and hashed, but never stored; still, the size must fit in the
         // counters used to track the parsing progress.
         if (scriptsig_size > UINT32_MAX) {
@@ -197,8 +198,8 @@ static int parse_rawtxoutput_value(parse_rawtxoutput_state_t *state, buffer_t *b
 static int parse_rawtxoutput_scriptpubkey_size(parse_rawtxoutput_state_t *state,
                                                buffer_t *buffers[2]) {
     uint64_t scriptpubkey_size;
-    bool result = dbuffer_read_varint(buffers, &scriptpubkey_size);
-    if (result) {
+    int result = dbuffer_read_varint(buffers, &scriptpubkey_size);
+    if (result == 1) {
         // Every output is streamed and hashed here, since that is what the txid is computed from;
         // therefore, we have to tolerate sizes larger than MAX_PREVOUT_SCRIPTPUBKEY_LEN
         if (scriptpubkey_size > UINT32_MAX) {
@@ -342,8 +343,8 @@ static int parse_rawtx_check_segwit(parse_rawtx_state_t *state, buffer_t *buffer
 
 static int parse_rawtx_input_count(parse_rawtx_state_t *state, buffer_t *buffers[2]) {
     uint64_t n_inputs;
-    bool result = dbuffer_read_varint(buffers, &n_inputs);
-    if (result) {
+    int result = dbuffer_read_varint(buffers, &n_inputs);
+    if (result == 1) {
         if (n_inputs > UINT32_MAX) {
             return -1;
         }
@@ -389,8 +390,8 @@ static int parse_rawtx_inputs(parse_rawtx_state_t *state, buffer_t *buffers[2]) 
 
 static int parse_rawtx_output_count(parse_rawtx_state_t *state, buffer_t *buffers[2]) {
     uint64_t n_outputs;
-    bool result = dbuffer_read_varint(buffers, &n_outputs);
-    if (result) {
+    int result = dbuffer_read_varint(buffers, &n_outputs);
+    if (result == 1) {
         if (n_outputs > UINT32_MAX) {
             return -1;
         }
@@ -455,8 +456,9 @@ static int parse_rawtx_witnesses(parse_rawtx_state_t *state, buffer_t *buffers[2
         if (!state->is_cur_wit_stack_elements_read) {
             // read the number of stack elements
             uint64_t cur_wit_stack_elements;
-            if (!dbuffer_read_varint(buffers, &cur_wit_stack_elements)) {
-                return 0;  // incomplete, read more data
+            int result = dbuffer_read_varint(buffers, &cur_wit_stack_elements);
+            if (result != 1) {
+                return result;
             }
             if (cur_wit_stack_elements > UINT32_MAX) {
                 return -1;
@@ -473,8 +475,9 @@ static int parse_rawtx_witnesses(parse_rawtx_state_t *state, buffer_t *buffers[2
             if (!state->is_cur_wit_elem_len_read) {
                 // read the length of the next stack elements
                 uint64_t cur_wit_elem_len;
-                if (!dbuffer_read_varint(buffers, &cur_wit_elem_len)) {
-                    return 0;  // incomplete, read more data
+                int result = dbuffer_read_varint(buffers, &cur_wit_elem_len);
+                if (result != 1) {
+                    return result;
                 }
                 if (cur_wit_elem_len > UINT32_MAX) {
                     return -1;

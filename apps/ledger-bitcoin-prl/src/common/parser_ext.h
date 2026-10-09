@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #pragma once
 
 #include <stdint.h>
@@ -89,15 +90,16 @@ bool dbuffer_read_u16(buffer_t *buffers[2], uint16_t *out, endianness_t endianne
 bool dbuffer_read_u32(buffer_t *buffers[2], uint32_t *out, endianness_t endianness);
 
 /**
- * Read a Bitcoin-style variable-length integer from the concatenation of two buffers.
- * The encoding uses 1, 3, 5, or 9 bytes depending on the value prefix.
+ * Read a minimally encoded CompactSize integer from the concatenation of two buffers.
+ * The encoding uses 1, 3, 5, or 9 bytes depending on the value prefix. On an
+ * incomplete or malformed read, both buffer offsets and the output are unchanged.
  *
  * @param[in]  buffers Array of two pointers to buffers.
  * @param[out] out     Pointer to store the decoded value.
  *
- * @return true on success, false if there are not enough bytes available.
+ * @return 1 on canonical success, 0 if more bytes are needed, -1 for a nonminimal encoding.
  */
-bool dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out);
+int dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out);
 
 /**
  * Initialize a parser context, resetting the step counter and setting the state pointer.

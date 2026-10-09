@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 /*****************************************************************************
  *   Ledger App Bitcoin.
  *   (c) 2025 Ledger SAS.

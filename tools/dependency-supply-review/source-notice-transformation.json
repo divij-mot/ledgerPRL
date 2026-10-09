@@ -1,0 +1,315 @@
+{
+  "schema": 1,
+  "reviewDate": "2026-10-09",
+  "upstreamCommit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+  "notice": "/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */\n",
+  "noticeBytes": 68,
+  "filesChanged": 33,
+  "mapping": [
+    {
+      "file": "apps/ledger-bitcoin-prl/src/boilerplate/dispatcher.c",
+      "upstreamBlob": "f4d9b1d62f04b0689d3bf0171341be666bb7ed00",
+      "beforeSha256": "029043a4971d3491871bc4d372bea1ccc0f78883facff29b53f23f4eb7c9694c",
+      "afterSha256": "82d0b0cb3ab3b5de2fccb2d6dffdf84d16628eb036d03b98244265b60006329e",
+      "beforeBytes": 6714,
+      "afterBytes": 6782,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/commands.h",
+      "upstreamBlob": "4de0d4910c53c7d2c4a4d8785787675788dd6112",
+      "beforeSha256": "4ae4bb687ce1840c3905046ae2481551579c3a78ffdea556a81680a7c7fabf79",
+      "afterSha256": "a902acfefd26e2baad8c2ac86acd2a0c8c88d53ef626a03b242e551a6f623e8d",
+      "beforeBytes": 494,
+      "afterBytes": 562,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/buffer_ext.c",
+      "upstreamBlob": "65ee2f135a5ec4e2f8ecb27b33943c019acf6c87",
+      "beforeSha256": "ede55b3974fbf9f98ef8e2f16ffbe12d0bf5678b8d8df9b6fbbb6fc9fda16443",
+      "afterSha256": "8f6dbd9964854064343b46fb6080ebf346269568d345df4f23c8d3ce40a7c0fc",
+      "beforeBytes": 1882,
+      "afterBytes": 1950,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/buffer_ext.h",
+      "upstreamBlob": "27d7a618dff84631b578ce17fd29c6d4d686a755",
+      "beforeSha256": "77b0f50020a164276a5cd2c72ce288a5d69470d3d3dd8f5999ceb13224ea636f",
+      "afterSha256": "1f11d2bca01f19e0e0e1d9dd9af21bd48b20b42b953061e57bed7dc99de10f3e",
+      "beforeBytes": 1508,
+      "afterBytes": 1576,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/parser_ext.c",
+      "upstreamBlob": "a6f83c50ad00169b71f1344488742a8e04099f9d",
+      "beforeSha256": "1e2ff0a33dea7515488a391f78cfca13f034fd33853c66565769df3d85be2412",
+      "afterSha256": "6abcec1c2e35235f8a1a1eccead8efb8edf9e5c365b1ad2adf884fa6f474030c",
+      "beforeBytes": 4520,
+      "afterBytes": 4588,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/parser_ext.h",
+      "upstreamBlob": "aa8314fd237399c260e31e603eb45e353062d3da",
+      "beforeSha256": "f5f9334a9dbb11ce2dd49b6d74470f2222fe122d510d11f2dac00a26bbc2d879",
+      "afterSha256": "bcf468b86e7656bd52513e6c2d08ffe5ad0062aa41e9362ecab8cfdcd88174dc",
+      "beforeBytes": 5645,
+      "afterBytes": 5713,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/common/wallet.c",
+      "upstreamBlob": "4f707d39481159cee0ff1cb9624240509a851880",
+      "beforeSha256": "ceb4b7fca9d47111f6ae2d9a7d1254a88002a4cc9c00c358d7aec77d5c40df62",
+      "afterSha256": "14afea81b9a1ea3ed56d0da1d1fe3972d07e4dfc6807b919ac7aaae79d0ed5c0",
+      "beforeBytes": 114062,
+      "afterBytes": 114130,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/constants.h",
+      "upstreamBlob": "15127fac1cbdeded4a106eb0a1e0a36f3881e2ad",
+      "beforeSha256": "0b2271518201e18250a155abf5623fdfc5d01df9df70d754292f849505ebf17c",
+      "afterSha256": "62cadabdf5f29ca188efdb4b8b8692a1a09cf6f8e6c28a8ba1b052510685fe26",
+      "beforeBytes": 4095,
+      "afterBytes": 4163,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/get_extended_pubkey.c",
+      "upstreamBlob": "e98ed1f140d3bc6cccf8800491da757101afa180",
+      "beforeSha256": "64c919cd6618369997fb8e141f2f25405d8eae4420ece4ef1852424d982b3110",
+      "afterSha256": "58623c1f3e585b5a99ced3130fd6d7b6c809af6206a50ea328d5a845fc801a49",
+      "beforeBytes": 3716,
+      "afterBytes": 3784,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/get_master_fingerprint.c",
+      "upstreamBlob": "5941bb6208fbcea88dd5dfa9f0ab68b14b8608c8",
+      "beforeSha256": "c2533e2fa8639ba2a8f9a734f12147a19b73dd022f4d3840df9311f6a6198977",
+      "afterSha256": "0bb86c45b51b905277bc9d4aa7e6d08b5bcc5039d9f2e4d0b5aaa55bd10f6c17",
+      "beforeBytes": 1465,
+      "afterBytes": 1533,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/get_wallet_address.c",
+      "upstreamBlob": "5ad60474f64de9ee727fe075eaefce086113ce17",
+      "beforeSha256": "3f86908aa495c61f417d8b007f960c238c3c41c4904090b84d0ab85975a2403a",
+      "afterSha256": "6f2e41e7889d4cddb3f2ed9fb956ed238b6d06509cf1f7ba019d34cfe7296eee",
+      "beforeBytes": 7137,
+      "afterBytes": 7205,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/handlers.h",
+      "upstreamBlob": "4e302f273200935bfd2adb23943cee1d647d3688",
+      "beforeSha256": "208eddac34cead50ccfb4afdf2df1ed1d62a753cb82a0c05790cc480ad167da4",
+      "afterSha256": "816c1935537ce4965bbe9a2446c7ac3580034e155a85517d91e44e26db6a4a33",
+      "beforeBytes": 653,
+      "afterBytes": 721,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_hash.c",
+      "upstreamBlob": "322ff5b6a5f237bfce24bf0cd7aaef63c6d0c731",
+      "beforeSha256": "b549a18edeb2fd0566cf8c01763721824311cbc61b55d2c7e14b1e8710024234",
+      "afterSha256": "07f359dfa4143d86de143ca20c254960a76d338eb4f83e50636a54c4e2b3aa35",
+      "beforeBytes": 5845,
+      "afterBytes": 5913,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_index.c",
+      "upstreamBlob": "c92333ba157070678bec71553b244ac34d9efbf3",
+      "beforeSha256": "d4a210c5b7e598e3a18d12053719ae8870a4841493eac780ce9394eda7b1ff5f",
+      "afterSha256": "636df897760bf011a0eac7a5010dff9d6a0df57ed1d51c34a87c472a2faa51ae",
+      "beforeBytes": 2251,
+      "afterBytes": 2319,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_preimage.c",
+      "upstreamBlob": "3a1ba0245f13d9ab8a6e3843c59afa4167fd7b6b",
+      "beforeSha256": "f950c9f0f8cd11f92fa94e52ae8fd7a89c428a2ce989dcca780e6835e3bf551e",
+      "afterSha256": "dcdf7c2ae94eece4e5c9869e7af049008fe378d137fb888469b6b1ea255e50dc",
+      "beforeBytes": 4681,
+      "afterBytes": 4749,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_merkleized_map.c",
+      "upstreamBlob": "1e446457498481bf0741566f721e5f16dcdc4a8c",
+      "beforeSha256": "3a8976ccfb8d9a7b91331125e18447555515700b5bea84d4769f2d7820d993b4",
+      "afterSha256": "fa3a4cd83d409c6fa7500a13148373965a662010f136b7b1570ad64ba5fdf896",
+      "beforeBytes": 2431,
+      "afterBytes": 2499,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/get_preimage.c",
+      "upstreamBlob": "bd54e00d8854aeee8f7205036355587453033a44",
+      "beforeSha256": "3d0cd9b9e23d52276a1a0f856d475008466f861fcc121e1d020caeedd3f37169",
+      "afterSha256": "cb2ea0d3ecaba096784c82c635e07d0f1f98add4f47b11c551799422f1b556dd",
+      "beforeBytes": 4644,
+      "afterBytes": 4712,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/policy.c",
+      "upstreamBlob": "7e3c0e42d618607c6b5e1b499a8b446cce305bed",
+      "beforeSha256": "ca51d7abd135d3c8a9ce259010afb00f77869b34aa1ca21ca4173bc8ab394f9e",
+      "afterSha256": "9160f5145ff0148bc2c6c0d2dd2980e53937be1e3f5d11c2ff673880af32cc31",
+      "beforeBytes": 85890,
+      "afterBytes": 85958,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/psbt_parse_rawtx.c",
+      "upstreamBlob": "cc9dd4ff9b646bf2382dea113f45b0e3be2e456e",
+      "beforeSha256": "4fa5cc95a39a60948ecdbe4c72fde760afc4a9f81adb4528cd2aeaae48d2bc97",
+      "afterSha256": "9667e39bfaec68ba7170c7d0a52a4f1dfbafbf395c34f7641ac69e40d7840a65",
+      "beforeBytes": 23104,
+      "afterBytes": 23172,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/lib/stream_preimage.c",
+      "upstreamBlob": "318d4300b299eb453ebeee41f6b110e548a09346",
+      "beforeSha256": "9873b32cb8950a4a5206fb67c0288fb7c1b3844826909fe483148b147bb7d448",
+      "afterSha256": "2a5b48cd10479363a692ef9d941090951d7e35f5faecdd6330ea1ce7d5c53bea",
+      "beforeBytes": 4445,
+      "afterBytes": 4513,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt.c",
+      "upstreamBlob": "57f8dec047d88353238fa74a575688fad6a92ac8",
+      "beforeSha256": "1d5a3614ac5a3774e7596e80f8c9fcdf96a4c21fefe93d1c0e759ed016a90fda",
+      "afterSha256": "c4b1b12825683db34f44260fce74cecd3b730878041ace467b4a9bf8785c2c4a",
+      "beforeBytes": 3084,
+      "afterBytes": 3152,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt.h",
+      "upstreamBlob": "e15152a9ce14a1aa422b3f17f4f87029d529a5a7",
+      "beforeSha256": "2f66b66e31cfd2cc8808dcedd188658124e401be05366c9fc03e9a89541d09b3",
+      "afterSha256": "ecebee00ac6d1b4c9e19ef11c4cd5526443f5c5c30e3d0f116cdd8016bdd08b8",
+      "beforeBytes": 7772,
+      "afterBytes": 7840,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/extract_bip32_derivation.c",
+      "upstreamBlob": "03ffdc959bf653247c7dcaba7a475818086d4923",
+      "beforeSha256": "cfd581f6b35ad74589e5dfe1f208f5bd2bf6510420700677ff9345f64701c3aa",
+      "afterSha256": "2927aa05408d4fe6267ee94b6e6a58d9583ef87151432f3c9e160d54206addca",
+      "beforeBytes": 6659,
+      "afterBytes": 6727,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/init_global_state.c",
+      "upstreamBlob": "38a15a358ea41655fbaea86a5d299740fe67196b",
+      "beforeSha256": "c2cb61c3bb4c0f15675ff3556bc7f8aa76f7426e725152921b805f98384e3e12",
+      "afterSha256": "f5bc9d640eadf734feb76cf0eb937c8535ec2ad19eb1a7fb0cc2e8e321d3e7f1",
+      "beforeBytes": 17448,
+      "afterBytes": 17516,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/preprocess_inputs.c",
+      "upstreamBlob": "bcbba3696a21fcc5d15296828b6f83b0a37495e8",
+      "beforeSha256": "0f2b9152c485f57c75fc29a6d3b938ff0ffa1281c035373207fc6331bd1af994",
+      "afterSha256": "f3ed6c4d94968fd9ed2dfd75c99a7460c252ac291ab1e2e66e2ce93ec56d63b1",
+      "beforeBytes": 18497,
+      "afterBytes": 18565,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/preprocess_outputs.c",
+      "upstreamBlob": "d9eefefc682f868cba1df53f58cf4bdecf01da46",
+      "beforeSha256": "b21754f02bee41aa4760abea49408e6dc6bd3285d8bf393f804fd23590911510",
+      "afterSha256": "4d827e9e6e012bde4d72d4f11cafe34204474ec732ac77d028e6de8f033de733",
+      "beforeBytes": 11598,
+      "afterBytes": 11666,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/process_in_outs.c",
+      "upstreamBlob": "cc93214f43d38d9954425a18bd0bc485074c1643",
+      "beforeSha256": "27cc1c9cb25959667e3911328983e9a43f261e1fd4bfa6d3182f7903189cb84f",
+      "afterSha256": "9c414dfe522eb6915b15e1ed022fc7629902ff0253535e0cbea543cd70f304b3",
+      "beforeBytes": 5376,
+      "afterBytes": 5444,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/sign_input.c",
+      "upstreamBlob": "16f78ecd0b313c438288ebf6a27701ec731ba1b5",
+      "beforeSha256": "2b667957a5944e44cdc494cfcb5876de53d7048dfecea4556c6c2f7a7b78e5d8",
+      "afterSha256": "cab97c361169298fe2f71b0033c555cb0580b66722bed1d8cf67fe40a64ddedf",
+      "beforeBytes": 31502,
+      "afterBytes": 31570,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/handler/sign_psbt/transaction_display.c",
+      "upstreamBlob": "386a3050b41a3deca4eb9b1095f201cf75b412ba",
+      "beforeSha256": "ec42c12fcbd7d670bae7cd92e4eb7cb1610772fafd10079d2d5b74633ff720ee",
+      "afterSha256": "4fc03a890f4875189e8b7ce8c8b3e20f51cf4eccd7ed4870de0208173b46d7e7",
+      "beforeBytes": 17401,
+      "afterBytes": 17469,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/main.c",
+      "upstreamBlob": "c2d6e5cacf92fd3e1906b53456f2288664499708",
+      "beforeSha256": "1b305aa123efb6afaf14a98d13ecc39dabdb7a8eca4fae515bca8ac7b6edd746",
+      "afterSha256": "363eb976be16da216266c148dc7e1bd693bd200bf60040ffcab2e4ce7eb08035",
+      "beforeBytes": 5325,
+      "afterBytes": 5393,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/ui/display.c",
+      "upstreamBlob": "d773dcdbb6735461e590df4ef6c3ef771c1db020",
+      "beforeSha256": "e9b648c33b6a20f4af54685ae694a948ac6783dc2a7d41201cc36f317dbdcf95",
+      "afterSha256": "d34126a4363530370800eeb45d3817e423c03a2253cccf1459edeff469796766",
+      "beforeBytes": 16200,
+      "afterBytes": 16268,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/ui/display.h",
+      "upstreamBlob": "1a3a16a96efdbf023bcaf9252c00a8939772dfeb",
+      "beforeSha256": "6276becc74061a3b418bcd8421098f8efde6405500181b7857dcd7766e7f3faf",
+      "afterSha256": "5781fe59cff514654d01800a76b19d93f378fae6456890e8b02034aab1349524",
+      "beforeBytes": 13133,
+      "afterBytes": 13201,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    },
+    {
+      "file": "apps/ledger-bitcoin-prl/src/ui/display_nbgl.c",
+      "upstreamBlob": "a1d4142003f3eb1125ff58164d4ff0b34b6b85fa",
+      "beforeSha256": "453e82fc55702c260e58220bd61022a9432a2c261b7adee177be1e8515d2fb67",
+      "afterSha256": "1572dfed5ed372455bc45830ac5ca393c25c87b9d5f0d4bc4a9d3c3cd07cdc0d",
+      "beforeBytes": 28580,
+      "afterBytes": 28648,
+      "check": "PASS: removing exactly the prepended notice restores every original byte"
+    }
+  ],
+  "transformation": "Prepend one C block-comment line. Preserve the complete original file as an identical byte suffix.",
+  "verification": "All 33 exact prefix-and-original-suffix equality checks passed. This is stronger than a token/whitespace-only comparison and preserves all original copyright/license bodies.",
+  "limits": [
+    "No copied TypeScript host module was edited.",
+    "No native build, emulator, firmware, or C execution occurred.",
+    "Comments shift source line numbers and change source hashes; prior binary/source qualification is not silently rebound to these files.",
+    "This is attribution bookkeeping, not legal certification or a selected project license."
+  ]
+}

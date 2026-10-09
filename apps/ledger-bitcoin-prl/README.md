@@ -85,6 +85,13 @@ derivation callbacks before signing, and script construction propagates a
 Taproot-tweak failure. See the
 [approval-binding review](../../tools/device-approval-review/README.md) and
 [independent callback review](../../tools/signing-callback-review/static-post-approval-review.md).
+The current source also requires minimally encoded CompactSize at all reachable
+APDU/Merkle/wallet fields and previous-transaction lengths/counts. The streaming
+reader distinguishes incomplete input from fatal malformed input, and xpub
+parsing requires the exact decoded length before checksum access. See the
+[parser findings and patch](../../tools/native-parser-review/PATCH.md) and
+[independent static review](../../tools/canonical-parser-review/REPORT.md).
+
 These are unqualified source changes. Native/emulator execution remains paused;
 fresh builds and positive/negative qualification are required before use.
 

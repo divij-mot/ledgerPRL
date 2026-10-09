@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #include <limits.h>
 #include <stdint.h>
 #include <string.h>
@@ -117,7 +118,7 @@ int read_wallet_policy_header(buffer_t *buffer, policy_map_wallet_header_t *head
     header->name[header->name_len] = '\0';
 
     uint64_t descriptor_template_len;
-    if (!buffer_read_varint(buffer, &descriptor_template_len)) {
+    if (!buffer_read_varint_canonical(buffer, &descriptor_template_len)) {
         return WITH_ERROR(-1, "Invalid wallet policy header");
     }
 
@@ -143,7 +144,7 @@ int read_wallet_policy_header(buffer_t *buffer, policy_map_wallet_header_t *head
     header->descriptor_template_len = (uint16_t) descriptor_template_len;
 
     uint64_t n_keys;
-    if (!buffer_read_varint(buffer, &n_keys) || n_keys > 252) {
+    if (!buffer_read_varint_canonical(buffer, &n_keys) || n_keys > 252) {
         return WITH_ERROR(-1, "Invalid wallet policy header");
     }
     header->n_keys = (uint16_t) n_keys;
@@ -370,11 +371,11 @@ int parse_policy_map_key_info(buffer_t *buffer, policy_map_key_info_t *out, int 
         return WITH_ERROR(-1, "Invalid extended pubkey length");
     }
 
-    serialized_extended_pubkey_check_t ext_pubkey_check;
+    serialized_extended_pubkey_check_t ext_pubkey_check = {0};
     if (base58_decode(ext_pubkey_str,
                       ext_pubkey_len,
                       (uint8_t *) &ext_pubkey_check,
-                      sizeof(ext_pubkey_check)) < 0) {
+                      sizeof(ext_pubkey_check)) != (int) sizeof(ext_pubkey_check)) {
         return WITH_ERROR(-1, "Error decoding serialized extended pubkey");
     }
 

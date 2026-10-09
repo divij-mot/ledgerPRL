@@ -1,9 +1,11 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #include <stdio.h>
 
 #include "parser_ext.h"
 
 /* SDK headers */
 #include "read.h"
+#include "varint.h"
 
 size_t dbuffer_get_length(buffer_t *buffers[2]) {
     return (buffers[0]->size - buffers[0]->offset) + (buffers[1]->size - buffers[1]->offset);
@@ -64,9 +66,9 @@ bool dbuffer_read_u32(buffer_t *buffers[2], uint32_t *out, endianness_t endianne
     return true;
 }
 
-bool dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out) {
+int dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out) {
     if (!dbuffer_can_read(buffers, 1)) {
-        return false;
+        return 0;
     }
 
     // peek the first byte without changing the offsets
@@ -89,22 +91,34 @@ bool dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out) {
     }
 
     if (!dbuffer_can_read(buffers, 1 + len)) {
-        return false;
+        return 0;
     }
 
-    dbuffer_read_u8(buffers, &first_byte);  // redundant, just to skip 1 byte
-
-    if (first_byte <= 0xfc) {
-        *out = first_byte;
-        return true;
+    buffer_t cursor0 = *buffers[0], cursor1 = *buffers[1];
+    buffer_t *cursors[2] = {&cursor0, &cursor1};
+    if (!dbuffer_read_u8(cursors, &first_byte)) {
+        return 0;
     }
 
-    uint8_t data[8] = {0};
-    dbuffer_read_bytes(buffers, data, len);
+    uint64_t decoded = first_byte;
+    if (len > 0) {
+        uint8_t data[8] = {0};
+        if (!dbuffer_read_bytes(cursors, data, len)) {
+            return 0;
+        }
 
-    // Since data was zeroed, parsing the entire array as a little-endian works for any size
-    *out = read_u64_le(data, 0);
-    return true;
+        // Zero extension allows one little-endian read for all payload widths.
+        decoded = read_u64_le(data, 0);
+    }
+
+    if (1 + len != varint_size(decoded)) {
+        return -1;
+    }
+
+    buffers[0]->offset = cursor0.offset;
+    buffers[1]->offset = cursor1.offset;
+    *out = decoded;
+    return 1;
 }
 
 bool parser_consolidate_buffers(buffer_t *buffers[2], size_t max_size) {

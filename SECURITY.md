@@ -47,3 +47,10 @@ reproduced in native execution. The digest still
 commits the approved transaction; no spendable substitution, approval bypass or
 private-key extraction is established by these findings. Fresh native positive/negative qualification remains a release
 blocker regardless of host validation rejecting invalid or missing signatures.
+
+The subsequent [parser review](tools/native-parser-review/REPORT.md) prompted
+app-local canonical CompactSize readers with explicit streaming error
+propagation, plus exact xpub decoded-length validation. An
+[independent static review](tools/canonical-parser-review/REPORT.md) inspected
+those corrections. The SDK remains unchanged. These source changes also remain
+uncompiled and runtime-unqualified; host CI does not compile the C signer.

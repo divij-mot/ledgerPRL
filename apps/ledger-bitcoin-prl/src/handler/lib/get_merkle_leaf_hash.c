@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #include <string.h>
 
 #include "get_merkle_leaf_hash.h"

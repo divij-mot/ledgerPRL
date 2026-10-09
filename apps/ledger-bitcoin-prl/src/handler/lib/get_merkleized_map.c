@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #include <string.h>
 
 #include "get_merkleized_map.h"
@@ -6,6 +7,7 @@
 #include "buffer.h"
 
 /* Local headers */
+#include "buffer_ext.h"
 #include "check_merkle_tree_sorted.h"
 #include "get_merkle_leaf_element.h"
 #include "prl.h"
@@ -36,7 +38,7 @@ int call_get_merkleized_map_with_callback(dispatcher_context_t *dispatcher_conte
     }
 
     buffer_t buf = buffer_create(raw_output, el_len);
-    if (!buffer_read_varint(&buf, &out_ptr->size) ||
+    if (!buffer_read_varint_canonical(&buf, &out_ptr->size) ||
         !buffer_read_bytes(&buf, out_ptr->keys_root, 32) ||
         !buffer_read_bytes(&buf, out_ptr->values_root, 32) ||
         buf.offset != buf.size || out_ptr->size == 0 ||

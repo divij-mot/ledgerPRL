@@ -1,3 +1,4 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
 #pragma once
 
 #include <stdbool.h>
@@ -6,6 +7,12 @@
 
 /* SDK headers */
 #include "buffer.h"
+
+/**
+ * Read a minimally encoded CompactSize integer. On failure (truncation or
+ * nonminimal encoding), leave both the buffer offset and output unchanged.
+ */
+bool buffer_read_varint_canonical(buffer_t *buffer, uint64_t *value);
 
 /**
  * Returns a pointer to the current position in the buffer if at least `size` bytes are available in
