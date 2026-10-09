@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "reviewedOn": "2026-10-09",
-  "head": "bef09f0550eda47956e5862a984a8d584a86fd30",
+  "head": "b908b15be8ca95a850c551d138ce646475517621",
   "nodeVersion": "v24.19.0",
   "lockfileSha256": "816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea",
   "checks": [
@@ -2531,7 +2531,7 @@
   ],
   "noticeObservations": [
     {
-      "file": "assets/index-BPR0Pkw2.js",
+      "file": "assets/index-CpBl0wyO.js",
       "presentLicenseMarkers": []
     },
     {
@@ -2549,10 +2549,10 @@
   ],
   "chunks": [
     {
-      "file": "assets/index-BPR0Pkw2.js",
+      "file": "assets/index-CpBl0wyO.js",
       "type": "chunk",
-      "bytes": 473430,
-      "sha256": "ce60e968b9f4ade7e04b5b929481f3522ef44b01ae8afa93d1250af5e67da1ba"
+      "bytes": 474877,
+      "sha256": "84e04058b1565b0fa73d84360ada84868c32b2e7e5637e6b2dcca4a8131236d3"
     },
     {
       "file": "assets/index-DK-3_Qur.css",
@@ -2570,13 +2570,13 @@
       "file": "index.html",
       "type": "asset",
       "bytes": 727,
-      "sha256": "de0a514d156c826c2b3be0e5091ed01c55a8fb4d740db9e02d74f13f2c621bf0"
+      "sha256": "27801f0f14d54db2a43c8a8c4599d0567a69a343bb545ee34ef189cb1c9c1042"
     }
   ],
   "workflows": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "c0e130c61ebea7a30c791b41f05d847e80fde1f87c979ef66f847ed970f10cbc",
+      "sha256": "a11a70ecd5cf14290b539492382d74af583b07996c3f95a33c49dbea18dc2908",
       "actions": [
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
         "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
@@ -4553,10 +4553,10 @@
     }
   ],
   "sourceHashes": {
-    ".github/workflows/ci.yml": "c0e130c61ebea7a30c791b41f05d847e80fde1f87c979ef66f847ed970f10cbc",
+    ".github/workflows/ci.yml": "a11a70ecd5cf14290b539492382d74af583b07996c3f95a33c49dbea18dc2908",
     ".github/workflows/ledger-review.yml": "36e3a4536fe2460242c63eed46dcf96361cbfd470b7f90dec81c7f071eb744a4",
     "README.md": "0a706fc05194b5f32ce7406046265a1a1ad8efcf558c1acbae7b5046a19f10d1",
-    "SECURITY.md": "d84a27ceb00f0ea5f16cf52f48c6a30f27fb54814ec01f8aef348e467446a43f",
+    "SECURITY.md": "53cd5ec8b0f907d3eec1e9d457a3968d8a4c0809edb9eab42ebb478875af36c5",
     "apps/cli/package.json": "23fd6bc66bc6d89d622ad3f2d7bdeb4fb9de5a26deb99315e155b19f8c99dad5",
     "apps/companion/index.html": "96ad7bc9e85d38d85e8b9d920f46acee1a4415f40d59974cfba0aa5e8c463930",
     "apps/companion/package.json": "dcc2bbb5a72c02348944fcb73848a5fba9e4c6515bf588883b9862c098f0b972",
@@ -4564,7 +4564,7 @@
     "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
     "apps/companion/src/blockbook-source.ts": "d9375942a172c391214386338acdbddf29253a432208a0accec2ce824d5fc8cb",
     "apps/companion/src/ledger.ts": "e6f6599e650f0f61038319f582aa611bc4b3461315b9d3e26ca0c31da9df8207",
-    "apps/companion/src/main.ts": "37dc54afaf002c2444143fd8ff9bed0bbf0563fcfa92bc4695f3c11fd3fe33ed",
+    "apps/companion/src/main.ts": "a1bfd6960626b1d397ffa4db5366da7633af6a47f656392319da650823bf12b7",
     "apps/companion/src/public-source.ts": "143b87ee1dde056f35f574ebdf2ab3be58de93a7d9b98d409fc9f3b8e19fd6c2",
     "apps/companion/src/signed-recovery.ts": "be11a29f37f50a953ce9f94b1fd9520886ea7444b54d7826f68d5588ef47af4c",
     "apps/companion/src/storage.ts": "fa43760192f8b77457674d947cdaf8162ef8adb4e126ec1d7cfa3197e1c684d4",
@@ -4574,7 +4574,7 @@
     "apps/ledger-bitcoin-prl/UPSTREAM.json": "7c4d361fe5e6355f22b8f40e4a9ad993d88aad49a3b0d5631481ef211aa432a8",
     "apps/ledger-bitcoin-prl/UPSTREAM_TREE.txt": "c9341199651ab43eaa2d0248a5c011c70bec639e77225b9f26aaebdff3cef1b3",
     "apps/ledger/packaging-requirements.txt": "af04b740c42c3e42ddcb673471deaab3c3b67f7c3a0b1622b5c464ccd982fee9",
-    "docs/implementation-status.md": "f499c1ea1c3f4bba19e2a7b3956249e8cd2eeae2f106886f305702fa2a1c7cd9",
+    "docs/implementation-status.md": "b0ea5ed0e021d564e4893ab369c5f952da138119ddd472722c56234a458258bd",
     "docs/licensing.md": "0145fe001e68952f2d6d02c4edcc956ba17003149a8363390944503904f18a5b",
     "docs/test-evidence.md": "a75efdd5e3eecf06d60641f11776848241b5b79292d6ca36e3b5d5f4b2c82fdb",
     "node_modules/@inversifyjs/common/lib/esm/index.js": "96cf7f4bdbd75fa6b10472bb534562056d7892d9fa980dbc0dcc5f3adb7863a8",

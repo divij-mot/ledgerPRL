@@ -1,0 +1,24 @@
+✔ REGRESSION B1: broadcast owner change before-update rejects submission (100.751157ms)
+✔ REGRESSION B1: broadcast network change before-update rejects submission (82.910767ms)
+✔ REGRESSION B1: broadcast source change before-update rejects submission (86.313812ms)
+✔ REGRESSION B1: broadcast payment change before-update rejects submission (91.894881ms)
+✔ REGRESSION B1: broadcast owner change after-update rejects submission (98.815394ms)
+✔ REGRESSION B1: broadcast network change after-update rejects submission (90.137228ms)
+✔ REGRESSION B1: broadcast source change after-update rejects submission (109.604158ms)
+✔ REGRESSION B1: broadcast payment change after-update rejects submission (80.172929ms)
+✔ CONTROL: Cancel after broadcast update and before completion prevents submission but preserves uncertainty (83.284696ms)
+✔ REGRESSION B2: consent revoked while broadcast waits prevents any signed-payload transmission (90.546724ms)
+✔ REGRESSION C1: public-account import honors Cancel during file-read (32.364856ms)
+✔ REGRESSION C1: public-account import honors Cancel during before-update (33.150792ms)
+✔ REGRESSION C2: preparing a payment honors Cancel before the storage update (101.551317ms)
+﹣ MODEL ONLY D1: an injected superseded disconnect callback clears the new connection (0.172529ms) # SKIP
+✔ MODEL ONLY E1: unordered late write failure cannot overwrite the staged newer recovery copy (219.238783ms)
+✔ REGRESSION E2: unload warns while verified signatures await storage completion (225.067465ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 1949.920778

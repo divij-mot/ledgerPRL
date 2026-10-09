@@ -2,6 +2,8 @@
 
 Review date: 2026-10-09. Read-only production inspection and an in-memory host build. This is a bounded source review, not an independent human audit, dependency-authenticity proof, Ledger approval, physical qualification, or a release certification. No firmware, emulator, native build, live indexer, device, real seed, deployment, or funds were used.
 
+Later explicitly authorized attribution-only work is documented in [SOURCE-ATTRIBUTION.md](SOURCE-ATTRIBUTION.md): 33 modified upstream C/header files received one prominent change-notice comment, with all original bytes preserved and before/after hashes retained. That follow-up did not execute native code or alter copied TypeScript modules.
+
 ## Useful result
 
 The npm/CI baseline is already deliberately constrained: exact direct versions, consistent lock metadata, official-registry tarball integrity fields, suppressed install hooks, pinned CI action commits, read-only workflow permissions, and no production-browser import of MetaMask, CLI, private-node bridge, tests or fixture modules. The official-registry advisory lookup returned **zero known npm advisories** for this lockfile. This does not imply no vulnerabilities.

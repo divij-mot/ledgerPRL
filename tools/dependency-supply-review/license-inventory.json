@@ -1,15 +1,15 @@
 {
   "schema": 1,
   "reviewedOn": "2026-10-09",
-  "sourceHead": "bef09f0550eda47956e5862a984a8d584a86fd30",
+  "sourceHead": "b908b15be8ca95a850c551d138ce646475517621",
   "lockfileSha256": "816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea",
   "scope": "Actual Rollup main and worker graph, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
   "bundles": [
     {
-      "file": "assets/index-BPR0Pkw2.js",
+      "file": "assets/index-CpBl0wyO.js",
       "type": "chunk",
-      "bytes": 473430,
-      "sha256": "ce60e968b9f4ade7e04b5b929481f3522ef44b01ae8afa93d1250af5e67da1ba",
+      "bytes": 474877,
+      "sha256": "84e04058b1565b0fa73d84360ada84868c32b2e7e5637e6b2dcca4a8131236d3",
       "components": [
         "node_modules/@inversifyjs/common@1.5.0",
         "node_modules/@inversifyjs/container@1.9.1",
@@ -69,7 +69,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/common",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -92,7 +92,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/container",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -115,7 +115,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/core",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -138,7 +138,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/reflect-metadata-utils",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -161,7 +161,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/device-management-kit",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -306,7 +306,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/device-transport-kit-web-hid",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -332,7 +332,7 @@
       "license": "MIT",
       "directory": "node_modules/@noble/curves",
       "bundles": [
-        "assets/index-BPR0Pkw2.js",
+        "assets/index-CpBl0wyO.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -368,7 +368,7 @@
       "license": "MIT",
       "directory": "node_modules/@noble/hashes",
       "bundles": [
-        "assets/index-BPR0Pkw2.js",
+        "assets/index-CpBl0wyO.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -408,7 +408,7 @@
       "license": "MIT",
       "directory": "node_modules/@scure/base",
       "bundles": [
-        "assets/index-BPR0Pkw2.js",
+        "assets/index-CpBl0wyO.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -434,7 +434,7 @@
       "license": "MIT",
       "directory": "node_modules/@scure/bip32",
       "bundles": [
-        "assets/index-BPR0Pkw2.js",
+        "assets/index-CpBl0wyO.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -460,7 +460,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/hub",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -486,7 +486,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/minimal",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -509,7 +509,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/utils",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -541,7 +541,7 @@
       "license": "MIT",
       "directory": "node_modules/base64-js",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -565,7 +565,7 @@
       "license": "MIT",
       "directory": "node_modules/buffer",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -590,7 +590,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/ieee754",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -614,7 +614,7 @@
       "license": "MIT",
       "directory": "node_modules/isomorphic-ws",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -637,7 +637,7 @@
       "license": "ISC",
       "directory": "node_modules/purify-ts",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -663,7 +663,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/reflect-metadata",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -692,7 +692,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/rxjs",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -789,7 +789,7 @@
       "license": "0BSD",
       "directory": "node_modules/rxjs/node_modules/tslib",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -816,7 +816,7 @@
       "license": "ISC",
       "directory": "node_modules/semver",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -885,7 +885,7 @@
       "license": "0BSD",
       "directory": "node_modules/tslib",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -912,7 +912,7 @@
       "license": "MIT",
       "directory": "node_modules/uuid",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -938,7 +938,7 @@
       "license": "MIT",
       "directory": "node_modules/xstate",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -963,7 +963,7 @@
       "kind": "bundler-generated-runtime",
       "license": "MIT",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "sourceModules": {
         "main": [
@@ -987,7 +987,7 @@
       "kind": "copied-source",
       "license": "Apache-2.0",
       "bundles": [
-        "assets/index-BPR0Pkw2.js"
+        "assets/index-CpBl0wyO.js"
       ],
       "repository": "https://github.com/LedgerHQ/app-bitcoin",
       "revision": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",

@@ -1,0 +1,37 @@
+✔ REGRESSION B1: broadcast owner change before-update rejects submission (125.4ms)
+✔ REGRESSION B1: broadcast network change before-update rejects submission (102.347626ms)
+✔ REGRESSION B1: broadcast source change before-update rejects submission (137.760095ms)
+✔ REGRESSION B1: broadcast payment change before-update rejects submission (111.014044ms)
+✔ REGRESSION B1: broadcast owner change after-update rejects submission (100.617176ms)
+✔ REGRESSION B1: broadcast network change after-update rejects submission (96.807353ms)
+✔ REGRESSION B1: broadcast source change after-update rejects submission (89.002901ms)
+✔ REGRESSION B1: broadcast payment change after-update rejects submission (86.656854ms)
+✔ CONTROL: Cancel after broadcast update and before completion prevents submission but preserves uncertainty (85.95901ms)
+✔ REGRESSION B2: consent revoked while broadcast waits prevents any signed-payload transmission (98.372209ms)
+✔ REGRESSION C1: public-account import honors Cancel during file-read (30.557627ms)
+✔ REGRESSION C1: public-account import honors Cancel during before-update (34.131849ms)
+✔ REGRESSION C2: preparing a payment honors Cancel before the storage update (121.556402ms)
+﹣ MODEL ONLY D1: an injected superseded disconnect callback clears the new connection (0.364298ms) # SKIP
+✔ MODEL ONLY E1: unordered late write failure cannot overwrite the staged newer recovery copy (246.669411ms)
+✔ REGRESSION E2: unload warns while verified signatures await storage completion (286.64122ms)
+✔ REGRESSION C1: Cancel after-update preserves committed public ranges without opening an account (43.867375ms)
+✔ REGRESSION C2: Cancel after-update preserves the prepared unsigned reservation (112.692978ms)
+✔ REGRESSION C1: Cancel after-commit preserves committed public ranges without opening an account (45.009131ms)
+✔ REGRESSION C2: Cancel after-commit preserves the prepared unsigned reservation (113.803527ms)
+✔ REGRESSION C3: snapshot import Cancel during file-read cannot apply a stale view (42.957557ms)
+✔ REGRESSION C3: snapshot import Cancel during before-update cannot apply a stale view (75.059154ms)
+✔ REGRESSION C3: snapshot import Cancel during after-update cannot apply a stale view (96.804734ms)
+✔ REGRESSION C2: queued input events cannot mutate the payment preparation snapshot (135.469527ms)
+✔ REGRESSION E2: closing the account after signed-storage failure cannot discard recovery or its unload guard (247.28768ms)
+✔ REGRESSION E3: settled signed write with failed read-back retains a warning and cannot claim success (236.804771ms)
+✔ modeled two-tab ordering: only one competing reservation commits; both request strict durability (15.58588ms)
+✔ modeled two-tab ordering: range import and receive issuance preserve both monotonic high-water marks (2.739999ms)
+✔ modeled atomic rollback: a cancelled update never publishes its partial journal or blocks later writers (10.994137ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 5162.342151

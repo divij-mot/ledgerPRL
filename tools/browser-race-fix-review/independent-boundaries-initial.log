@@ -1,0 +1,38 @@
+✖ independent: settled signed write with failed read-back must leave a recovery warning, not perpetual saving (235.825246ms)
+✔ independent: successful exact-match read-back clears recovery and unload warning (233.226013ms)
+✔ independent: read-back missing cannot clear the sole verified recovery copy (233.229142ms)
+✔ independent: read-back partial cannot clear the sole verified recovery copy (224.951438ms)
+✔ independent: read-back payment-id cannot clear the sole verified recovery copy (232.945667ms)
+✔ independent: read-back created-at cannot clear the sole verified recovery copy (250.789301ms)
+✔ independent: read-back outpoints cannot clear the sole verified recovery copy (248.673319ms)
+✔ independent: read-back bundle cannot clear the sole verified recovery copy (234.941026ms)
+✔ independent: read-back txid cannot clear the sole verified recovery copy (285.506209ms)
+✔ independent: read-back raw-signature cannot clear the sole verified recovery copy (255.112209ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2953.197633
+
+✖ failing tests:
+
+test at tools/browser-race-fix-review/independent-boundaries.test.ts:34:2998
+✖ independent: settled signed write with failed read-back must leave a recovery warning, not perpetual saving (235.825246ms)
+  AssertionError [ERR_ASSERTION]: read-back has failed and signing settled; no storage task remains pending
+  
+  true !== false
+  
+      at TestContext.<anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/browser-race-fix-review/independent-boundaries.test.ts:226:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

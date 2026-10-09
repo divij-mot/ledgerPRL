@@ -203,3 +203,27 @@ the first saved completion.
 All of this is host-side modeled-boundary evidence. It does not establish a real
 browser's WebHID, clipboard, CSP, IndexedDB rollback/quota/power-loss behavior,
 trusted-screen/native firmware correctness, or physical-device qualification.
+
+## Async authority and pre-commit signed recovery
+
+`browser-operation-boundaries.test.ts` runs the focused pure-host probes in
+`tools/browser-operation-review`. They test actual `main.ts` against injected
+DOM, storage completion and public fixture device boundaries. Frozen broadcast
+approval is rechecked both inside the atomic update and after its completion;
+revoked disclosure consent cannot send the signed payload. Public/snapshot
+imports and preparation honor cancellation before mutation and retain already
+committed recovery ranges or reservations after cancellation. Preparation uses a
+snapshot of the requested inputs/amount/fee/change rather than later DOM events.
+
+A real PSBT adapter/public endpoint fixture also verifies that the signed recovery
+copy and unload warning exist before signed storage completes. The ordinary
+lifecycle suite separately retains failed/hung write, final-ACK loss, independent
+backup validation and exact durable read-back coverage. Signed copies are cleared
+only after verified read-back, never merely after clicking Download.
+
+The focused `WatchStorage` tests use an explicit FIFO transaction/rollback model
+for two-tab reservation competition and monotonic recovery ranges. They establish
+host behavior conditional on that model, not actual browser scheduling, rollback,
+quota or crash durability. An optional stale-callback injection probe is disabled
+by default; it is not evidence that a closed real WebHID listener can fire. No
+browser, physical device, native firmware, remote service or real broadcast runs.

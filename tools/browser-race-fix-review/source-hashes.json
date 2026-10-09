@@ -1,0 +1,17 @@
+{
+  "reviewed_at_utc": "2026-10-09T23:22:48.090806+00:00",
+  "base_commit": "03112c09890fb08c48a83e743d842fdbd791c29c",
+  "initial_main_sha256": "5b20820e8246f9526c487ac42520e5286e9ae6b08268703a6157eeed146cd1a7",
+  "final_files": {
+    "apps/companion/src/main.ts": "a1bfd6960626b1d397ffa4db5366da7633af6a47f656392319da650823bf12b7",
+    "apps/companion/src/storage.ts": "fa43760192f8b77457674d947cdaf8162ef8adb4e126ec1d7cfa3197e1c684d4",
+    "apps/companion/src/signed-recovery.ts": "be11a29f37f50a953ce9f94b1fd9520886ea7444b54d7826f68d5588ef47af4c",
+    "packages/bitcoin-prl-adapter/src/client.ts": "cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db",
+    "tools/browser-operation-review/operation-boundaries.test.ts": "2777c14726ed716e34ae39d74deb965f89efd39edb53ba8f929cc54347793d2c",
+    "tools/browser-operation-review/storage-serialization.test.ts": "b13f270d45f253090ce18d0b097989c6164d25bddca633819d32054436039e56",
+    "apps/companion/test/browser-operation-boundaries.test.ts": "94ba0429e57d7a607eafb3a69722eb6a91d28111f6ec56c38b83cc5603cd75b7",
+    "tools/browser-race-fix-review/independent-boundaries.test.ts": "889331e06c5259380540d40d15f83b77831f83233d209c4b94d69db3d6677059"
+  },
+  "scope": "Pure host source/mocked tests with frozen public fixtures. No browser/profile, external network, uploads, native/emulator/physical device, secrets or deployment.",
+  "workspace_head_at_verification": "b908b15be8ca95a850c551d138ce646475517621"
+}

@@ -39,3 +39,5 @@ __pycache__/
 !tools/transaction-binding-review/existing-regressions.log
 !tools/transaction-binding-review/device-error-defense.log
 !tools/transaction-binding-review/typecheck.log
+!tools/browser-operation-review/*.log
+!tools/browser-race-fix-review/*.log

@@ -17,3 +17,6 @@ apps/companion/public/third-party-notices.txt -text whitespace=-blank-at-eol,-bl
 tools/dependency-supply-review/THIRD-PARTY-NOTICES.proposed.txt -text whitespace=-blank-at-eol,-blank-at-eof
 # Retained source diff context is intentionally byte-exact.
 tools/native-parser-review/source-only.patch whitespace=-blank-at-eol
+# Preserve bounded public-fixture test diagnostics verbatim.
+tools/browser-operation-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/browser-race-fix-review/*.log whitespace=-blank-at-eol,-blank-at-eof
