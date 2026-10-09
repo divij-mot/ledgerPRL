@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-09T17:37:30Z",
+  "release": {
+    "tag": "v1.4.11",
+    "published": "2026-09-29T19:49:34Z",
+    "sha": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4",
+    "url": "https://github.com/pearl-research-labs/pearl/releases/tag/v1.4.11"
+  },
+  "master": {
+    "sha": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+    "url": "https://github.com/pearl-research-labs/pearl/tree/master"
+  },
+  "fp8": {
+    "sha": "684f7045f3b3b7c5b7598f46c06b7dceb506f74b",
+    "state": "open",
+    "merged": false,
+    "updated": "2026-10-05T15:59:55Z",
+    "url": "https://github.com/pearl-research-labs/pearl/pull/311"
+  }
+}

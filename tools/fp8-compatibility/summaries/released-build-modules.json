@@ -1,0 +1,372 @@
+{
+  "edge": {
+    "binarySha256": "6083b2032a64834dae2a874577dd18f8e82623fd39c582505bb93861b93718b6",
+    "moduleEdges": [
+      [
+        "github.com/decred/dcrd/dcrec/secp256k1/v4",
+        "github.com/decred/dcrd/crypto/blake256"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/aead/siphash"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/btcsuite/btclog"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/davecgh/go-spew"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/decred/dcrd/dcrec/secp256k1/v4"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/kkdai/bstream"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/stretchr/testify"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "golang.org/x/crypto"
+      ],
+      [
+        "github.com/stretchr/testify",
+        "github.com/davecgh/go-spew"
+      ],
+      [
+        "github.com/stretchr/testify",
+        "github.com/pmezard/go-difflib"
+      ],
+      [
+        "github.com/stretchr/testify",
+        "github.com/stretchr/objx"
+      ],
+      [
+        "github.com/stretchr/testify",
+        "gopkg.in/yaml.v3"
+      ],
+      [
+        "golang.org/x/crypto",
+        "golang.org/x/sys"
+      ],
+      [
+        "prl-fp8-compat-edge",
+        "github.com/pearl-research-labs/pearl"
+      ]
+    ],
+    "modules": [
+      {
+        "GoModSum": "h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=",
+        "Path": "github.com/aead/siphash",
+        "Sum": "h1:FwHfE/T45KPKYuuSAKyyvE+oPWcaQ+CUmFW0bPlM+kg=",
+        "Version": "v1.0.1"
+      },
+      {
+        "GoModSum": "h1:w7xnGOhwT3lmrS4H3b/D1XAXxvh+tbhUm8xeHN2y3TQ=",
+        "Path": "github.com/btcsuite/btclog",
+        "Sum": "h1:sEkpKJMmfGiyZjADwEIgB1NSwMyfdD1FB8v6+w1T0Ns=",
+        "Version": "v1.0.0"
+      },
+      {
+        "GoModSum": "h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=",
+        "Path": "github.com/davecgh/go-spew",
+        "Sum": "h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=",
+        "Version": "v1.1.2-0.20180830191138-d8f796af33cc"
+      },
+      {
+        "GoModSum": "h1:2OfgNZ5wDpcsFmHmCK5gZTPcCXqlm2ArzUIkw9czNJo=",
+        "Path": "github.com/decred/dcrd/crypto/blake256",
+        "Sum": "h1:zPMNGQCm0g4QTY27fOCorQW7EryeQ/U0x++OzVrdms8=",
+        "Version": "v1.1.0"
+      },
+      {
+        "GoModSum": "h1:ZXNYxsqcloTdSy/rNShjYzMhyjf0LaoftYK0p+A3h40=",
+        "Path": "github.com/decred/dcrd/dcrec/secp256k1/v4",
+        "Sum": "h1:5RVFMOWjMyRy8cARdy79nAmgYw3hK/4HUq48LQ6Wwqo=",
+        "Version": "v4.4.1"
+      },
+      {
+        "GoModSum": "h1:FDnDOHt5Yx4p3FaHcioFT0QjDOtgUpvjeZqAs+NVZZA=",
+        "Path": "github.com/kkdai/bstream",
+        "Sum": "h1:Se5gHwgp2VT2uHfDrkbbgbgEvV9cimLELwrPJctSjg8=",
+        "Version": "v1.0.0"
+      },
+      {
+        "Path": "github.com/pearl-research-labs/pearl",
+        "Version": "v0.0.0",
+        "upstreamCommit": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4"
+      },
+      {
+        "GoModSum": "h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=",
+        "Path": "github.com/pmezard/go-difflib",
+        "Sum": "h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=",
+        "Version": "v1.0.1-0.20181226105442-5d4384ee4fb2"
+      },
+      {
+        "GoModSum": "h1:FRsXN1f5AsAjCGJKqEizvkpNtU+EGNCLh3NxZ/8L+MA=",
+        "Path": "github.com/stretchr/objx",
+        "Sum": "h1:xuMeJ0Sdp5ZMRXx/aWO6RZxdr3beISkG5/G/aIRr3pY=",
+        "Version": "v0.5.2"
+      },
+      {
+        "GoModSum": "h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=",
+        "Path": "github.com/stretchr/testify",
+        "Sum": "h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=",
+        "Version": "v1.11.1"
+      },
+      {
+        "GoModSum": "h1:uq0V9dE/fzQuJtbnL+2EhWOE63vo164FY8xqEnV9xis=",
+        "Path": "golang.org/x/crypto",
+        "Sum": "h1:+KWHjbgOaAQ66dh/YlkZKHlz9ZUlq61AFirAR9ntP8M=",
+        "Version": "v0.55.0"
+      },
+      {
+        "GoModSum": "h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=",
+        "Path": "golang.org/x/sys",
+        "Sum": "h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs=",
+        "Version": "v0.47.0"
+      },
+      {
+        "GoModSum": "h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=",
+        "Path": "gopkg.in/yaml.v3",
+        "Sum": "h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=",
+        "Version": "v3.0.1"
+      },
+      {
+        "Path": "prl-fp8-compat-edge"
+      }
+    ],
+    "nonStandardPackageCount": 39,
+    "originalBuildDepsSha256": "42ca76b709c808a2c6f31b781362227102f5449f56aafa7471ec2e4e51efcc1e",
+    "originalBuildInfoSha256": "ed4249db7871a8e2ee391bdb76fd5734c40656e4d03dd602a6f903741313ffb1",
+    "originalGoModSha256": "f2e697afb8f69ac7a13ce49d982a7438b946ac3928a5ab04407c5bd340cb9a35",
+    "originalGoSumSha256": "ffff17198da2a7cdd7c6d5285d3e90b29522f0f1e658c8e8c6b80930b3a26f8d"
+  },
+  "oracle": {
+    "binarySha256": "9381c50c1bcc238e77551cab5fa6a803d526523ea11d3e8f959a90c825d3c2e0",
+    "moduleEdges": [
+      [
+        "github.com/decred/dcrd/dcrec/secp256k1/v4",
+        "github.com/decred/dcrd/crypto/blake256"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/btcsuite/btclog"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/decred/dcrd/dcrec/secp256k1/v4"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "golang.org/x/crypto"
+      ],
+      [
+        "golang.org/x/crypto",
+        "golang.org/x/sys"
+      ],
+      [
+        "prl-fp8-compat-oracle",
+        "github.com/pearl-research-labs/pearl"
+      ]
+    ],
+    "modules": [
+      {
+        "GoModSum": "h1:w7xnGOhwT3lmrS4H3b/D1XAXxvh+tbhUm8xeHN2y3TQ=",
+        "Path": "github.com/btcsuite/btclog",
+        "Sum": "h1:sEkpKJMmfGiyZjADwEIgB1NSwMyfdD1FB8v6+w1T0Ns=",
+        "Version": "v1.0.0"
+      },
+      {
+        "GoModSum": "h1:2OfgNZ5wDpcsFmHmCK5gZTPcCXqlm2ArzUIkw9czNJo=",
+        "Path": "github.com/decred/dcrd/crypto/blake256",
+        "Sum": "h1:zPMNGQCm0g4QTY27fOCorQW7EryeQ/U0x++OzVrdms8=",
+        "Version": "v1.1.0"
+      },
+      {
+        "GoModSum": "h1:ZXNYxsqcloTdSy/rNShjYzMhyjf0LaoftYK0p+A3h40=",
+        "Path": "github.com/decred/dcrd/dcrec/secp256k1/v4",
+        "Sum": "h1:5RVFMOWjMyRy8cARdy79nAmgYw3hK/4HUq48LQ6Wwqo=",
+        "Version": "v4.4.1"
+      },
+      {
+        "Path": "github.com/pearl-research-labs/pearl",
+        "Version": "v0.0.0",
+        "upstreamCommit": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4"
+      },
+      {
+        "GoModSum": "h1:uq0V9dE/fzQuJtbnL+2EhWOE63vo164FY8xqEnV9xis=",
+        "Path": "golang.org/x/crypto",
+        "Sum": "h1:+KWHjbgOaAQ66dh/YlkZKHlz9ZUlq61AFirAR9ntP8M=",
+        "Version": "v0.55.0"
+      },
+      {
+        "GoModSum": "h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=",
+        "Path": "golang.org/x/sys",
+        "Sum": "h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs=",
+        "Version": "v0.47.0"
+      },
+      {
+        "Path": "prl-fp8-compat-oracle"
+      }
+    ],
+    "nonStandardPackageCount": 20,
+    "originalBuildDepsSha256": "921e6751da9bec784d5bf3357ab6af62e82b0b2db8ba47fc087ebf56fde70c48",
+    "originalBuildInfoSha256": "a0cbdf802cbd908e7f4c2a7d08dec5a944e65a524bc0d7c0f158ba918b1f0e49",
+    "originalGoModSha256": "bb5e1608c1c838c66197dbe38388515f7d6983391873e5b274357bf821428b87",
+    "originalGoSumSha256": "852ba67b1a1133a6cc0bb7356b488bf00b7d981ebc818e9e4a5c4d6baef43b16"
+  },
+  "policy": {
+    "binarySha256": "7a8e385a8bb3d263804bfc2721cda18667f1e0141f3d004cc6bdf6ada3dcff55",
+    "moduleEdges": [
+      [
+        "github.com/decred/dcrd/dcrec/secp256k1/v4",
+        "github.com/decred/dcrd/crypto/blake256"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/aead/siphash"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/btcsuite/btclog"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/davecgh/go-spew"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/decred/dcrd/dcrec/secp256k1/v4"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/kkdai/bstream"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "github.com/stretchr/testify"
+      ],
+      [
+        "github.com/pearl-research-labs/pearl",
+        "golang.org/x/crypto"
+      ],
+      [
+        "github.com/stretchr/testify",
+        "github.com/davecgh/go-spew"
+      ],
+      [
+        "github.com/stretchr/testify",
+        "github.com/pmezard/go-difflib"
+      ],
+      [
+        "github.com/stretchr/testify",
+        "github.com/stretchr/objx"
+      ],
+      [
+        "github.com/stretchr/testify",
+        "gopkg.in/yaml.v3"
+      ],
+      [
+        "golang.org/x/crypto",
+        "golang.org/x/sys"
+      ],
+      [
+        "prl-fp8-compat-policy",
+        "github.com/pearl-research-labs/pearl"
+      ]
+    ],
+    "modules": [
+      {
+        "GoModSum": "h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=",
+        "Path": "github.com/aead/siphash",
+        "Sum": "h1:FwHfE/T45KPKYuuSAKyyvE+oPWcaQ+CUmFW0bPlM+kg=",
+        "Version": "v1.0.1"
+      },
+      {
+        "GoModSum": "h1:w7xnGOhwT3lmrS4H3b/D1XAXxvh+tbhUm8xeHN2y3TQ=",
+        "Path": "github.com/btcsuite/btclog",
+        "Sum": "h1:sEkpKJMmfGiyZjADwEIgB1NSwMyfdD1FB8v6+w1T0Ns=",
+        "Version": "v1.0.0"
+      },
+      {
+        "GoModSum": "h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=",
+        "Path": "github.com/davecgh/go-spew",
+        "Sum": "h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=",
+        "Version": "v1.1.2-0.20180830191138-d8f796af33cc"
+      },
+      {
+        "GoModSum": "h1:2OfgNZ5wDpcsFmHmCK5gZTPcCXqlm2ArzUIkw9czNJo=",
+        "Path": "github.com/decred/dcrd/crypto/blake256",
+        "Sum": "h1:zPMNGQCm0g4QTY27fOCorQW7EryeQ/U0x++OzVrdms8=",
+        "Version": "v1.1.0"
+      },
+      {
+        "GoModSum": "h1:ZXNYxsqcloTdSy/rNShjYzMhyjf0LaoftYK0p+A3h40=",
+        "Path": "github.com/decred/dcrd/dcrec/secp256k1/v4",
+        "Sum": "h1:5RVFMOWjMyRy8cARdy79nAmgYw3hK/4HUq48LQ6Wwqo=",
+        "Version": "v4.4.1"
+      },
+      {
+        "GoModSum": "h1:FDnDOHt5Yx4p3FaHcioFT0QjDOtgUpvjeZqAs+NVZZA=",
+        "Path": "github.com/kkdai/bstream",
+        "Sum": "h1:Se5gHwgp2VT2uHfDrkbbgbgEvV9cimLELwrPJctSjg8=",
+        "Version": "v1.0.0"
+      },
+      {
+        "Path": "github.com/pearl-research-labs/pearl",
+        "Version": "v0.0.0",
+        "upstreamCommit": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4"
+      },
+      {
+        "GoModSum": "h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=",
+        "Path": "github.com/pmezard/go-difflib",
+        "Sum": "h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=",
+        "Version": "v1.0.1-0.20181226105442-5d4384ee4fb2"
+      },
+      {
+        "GoModSum": "h1:FRsXN1f5AsAjCGJKqEizvkpNtU+EGNCLh3NxZ/8L+MA=",
+        "Path": "github.com/stretchr/objx",
+        "Sum": "h1:xuMeJ0Sdp5ZMRXx/aWO6RZxdr3beISkG5/G/aIRr3pY=",
+        "Version": "v0.5.2"
+      },
+      {
+        "GoModSum": "h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=",
+        "Path": "github.com/stretchr/testify",
+        "Sum": "h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=",
+        "Version": "v1.11.1"
+      },
+      {
+        "GoModSum": "h1:uq0V9dE/fzQuJtbnL+2EhWOE63vo164FY8xqEnV9xis=",
+        "Path": "golang.org/x/crypto",
+        "Sum": "h1:+KWHjbgOaAQ66dh/YlkZKHlz9ZUlq61AFirAR9ntP8M=",
+        "Version": "v0.55.0"
+      },
+      {
+        "GoModSum": "h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=",
+        "Path": "golang.org/x/sys",
+        "Sum": "h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs=",
+        "Version": "v0.47.0"
+      },
+      {
+        "GoModSum": "h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=",
+        "Path": "gopkg.in/yaml.v3",
+        "Sum": "h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=",
+        "Version": "v3.0.1"
+      },
+      {
+        "Path": "prl-fp8-compat-policy"
+      }
+    ],
+    "nonStandardPackageCount": 38,
+    "originalBuildDepsSha256": "8e4eb611113cdd441e16b7117f228eb7114ae6cacf829e755dac00e08307b432",
+    "originalBuildInfoSha256": "c4eaefd0c317634c7e278cfc34de9fe690715818dbf608cf528fd3c575890113",
+    "originalGoModSha256": "c63fbf0d291598460a4f1c2f1c028325ba123a1c2c2030643c56d4a6bc4ed56f",
+    "originalGoSumSha256": "ffff17198da2a7cdd7c6d5285d3e90b29522f0f1e658c8e8c6b80930b3a26f8d"
+  }
+}

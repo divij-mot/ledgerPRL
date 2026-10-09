@@ -1,0 +1,23 @@
+{
+  "correctedReleaseDependencies": {
+    "github.com/stretchr/testify": "v1.11.1",
+    "golang.org/x/crypto": "v0.55.0",
+    "golang.org/x/sys": "v0.47.0"
+  },
+  "countedInFinalMatrix": false,
+  "description": "Initial release-source runs accidentally retained current transitive requirements. They passed, but were superseded by corrected exact-release dependency runs. The mismatch was subsequently reproduced to retain a separate auditable result. This is not an additional exact-release pass.",
+  "initialCurrentDependencies": {
+    "github.com/stretchr/testify": "v1.12.1",
+    "golang.org/x/crypto": "v0.57.0",
+    "golang.org/x/sys": "v0.48.0"
+  },
+  "initialRequirementsFileSha256": "0517465280d4775b003d9ab2d98e3c62f4dc1c848df8cb82bbc8223af0cc6c1d",
+  "reproducedEdgeExpectedRejections": 3455,
+  "reproducedEdgeOutputSha256": "2b8a6a82c8dd2dae1c3a59278b9f9651e523c869d2f1d654e1533d05a4d09730",
+  "reproducedPolicyOutcomes": {
+    "accept": 74,
+    "dust": 2,
+    "fee": 4,
+    "immature": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "allSourceSetChecksStable": true,
+  "commit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+  "compiledFromFreshPrivateArchive": true,
+  "directories": 296,
+  "emptyGitlinks": {
+    "miner/pearl-gemm/third_party/cutlass": "291300ffffa3533a78ee104f08a8490a29ce9ccb"
+  },
+  "freshProbeModules": 3,
+  "sourceSetSha256": "a3eb726aabba3b2189c53d039ef82a1a8b043049b9b300081ab9fdbbf0fb7cc8",
+  "trackedBlobs": 4621,
+  "unexpectedEntriesAllowed": 0,
+  "verifiedAfterEachProbe": true,
+  "verifiedAfterFocusedTests": true
+}

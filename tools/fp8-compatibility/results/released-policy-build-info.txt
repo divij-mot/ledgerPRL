@@ -1,0 +1,28 @@
+/workspace/shared/prl-fp8-compat-review/builds/released-policy: go1.26.6
+	path	prl-fp8-compat-policy
+	mod	prl-fp8-compat-policy	(devel)	
+	dep	github.com/aead/siphash	v1.0.1	h1:FwHfE/T45KPKYuuSAKyyvE+oPWcaQ+CUmFW0bPlM+kg=
+	dep	github.com/btcsuite/btclog	v1.0.0	h1:sEkpKJMmfGiyZjADwEIgB1NSwMyfdD1FB8v6+w1T0Ns=
+	dep	github.com/davecgh/go-spew	v1.1.2-0.20180830191138-d8f796af33cc	h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
+	dep	github.com/decred/dcrd/crypto/blake256	v1.1.0	h1:zPMNGQCm0g4QTY27fOCorQW7EryeQ/U0x++OzVrdms8=
+	dep	github.com/decred/dcrd/dcrec/secp256k1/v4	v4.4.1	h1:5RVFMOWjMyRy8cARdy79nAmgYw3hK/4HUq48LQ6Wwqo=
+	dep	github.com/kkdai/bstream	v1.0.0	h1:Se5gHwgp2VT2uHfDrkbbgbgEvV9cimLELwrPJctSjg8=
+	dep	github.com/pearl-research-labs/pearl	v0.0.0
+	=>	/workspace/shared/prl-fp8-compat-review/snapshots/released	(devel)	
+	
+	dep	github.com/pmezard/go-difflib	v1.0.1-0.20181226105442-5d4384ee4fb2	h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=
+	dep	github.com/stretchr/objx	v0.5.2	h1:xuMeJ0Sdp5ZMRXx/aWO6RZxdr3beISkG5/G/aIRr3pY=
+	dep	github.com/stretchr/testify	v1.11.1	h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
+	dep	golang.org/x/crypto	v0.55.0	h1:+KWHjbgOaAQ66dh/YlkZKHlz9ZUlq61AFirAR9ntP8M=
+	dep	golang.org/x/sys	v0.47.0	h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs=
+	dep	gopkg.in/yaml.v3	v3.0.1	h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	CGO_ENABLED=1
+	build	CGO_CFLAGS=
+	build	CGO_CPPFLAGS=
+	build	CGO_CXXFLAGS=
+	build	CGO_LDFLAGS=
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1

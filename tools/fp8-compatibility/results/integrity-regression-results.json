@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "case": "clean official snapshot",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "case": "unexpected Go source rejected",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Unexpected source entry: node/txscript/zzz_untracked.go"
+    },
+    {
+      "case": "replay rejects extra Go source before compiler; GO_BIN path contains spaces",
+      "exitCode": 1,
+      "compilerInvoked": false,
+      "diagnostic": "Unexpected source entry: node/txscript/zzz_untracked.go"
+    },
+    {
+      "case": "unexpected dangling symlink rejected",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Unexpected source entry: node/txscript/zzz_untracked.go"
+    },
+    {
+      "case": "unexpected empty directory rejected",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Unexpected directory: unexpected-empty-directory"
+    },
+    {
+      "case": "substituted directory symlink rejected without following it",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Unexpected source entry: node"
+    },
+    {
+      "case": "tracked regular file substituted with symlink rejected",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Expected regular source file: node/wire/msgtx.go"
+    },
+    {
+      "case": "tracked content mutation rejected",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Upstream snapshot content mismatch: node/wire/msgtx.go"
+    },
+    {
+      "case": "wrong Git executable mode rejected",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Git executable mode mismatch: node/wire/msgtx.go"
+    },
+    {
+      "case": "missing source rejected",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Missing source entry: node/wire/msgtx.go"
+    },
+    {
+      "case": "unverified gitlink contents rejected",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "diagnostic": "Unexpected source entry: miner/pearl-gemm/third_party/cutlass/unverified.go"
+    },
+    {
+      "case": "restored snapshot and source hash stable",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "case": "pinned symlink target verified without dereferencing outside directory",
+      "expectedSuccess": true
+    },
+    {
+      "case": "wrong pinned symlink target rejected",
+      "expectedSuccess": false,
+      "diagnostic": "Upstream snapshot content mismatch: pinned-link"
+    }
+  ],
+  "allControlsPassed": true,
+  "productionSourceModified": false,
+  "upstreamCommit": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4"
+}

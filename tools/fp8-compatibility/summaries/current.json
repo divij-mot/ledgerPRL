@@ -1,0 +1,102 @@
+{
+  "caseResultsSha256": "833f75c72121a37abf6fad39c80f106aedc7867b1261e9c7e2fae14746bd5886",
+  "edgeChecks": {
+    "addressDecodings": 100,
+    "addressVectors": 50,
+    "defaultMinRelayTxFee": 1000,
+    "expectedRejections": {
+      "aggregate output limit": 81,
+      "changed output": 610,
+      "changed prevout amount": 610,
+      "changed sequence": 610,
+      "corrupt signature": 610,
+      "missing witness": 610,
+      "out-of-range input": 81,
+      "out-of-range output": 162,
+      "truncated transaction": 81
+    },
+    "grainPerPearl": 100000000,
+    "maxGrain": 2100000000000000000,
+    "networks": {
+      "mainnet": {
+        "coinType": 808276,
+        "coinbaseMaturity": 100,
+        "fp8ForkHeight": null,
+        "genesisHash": "a18d3093b7ff618f0cdd073fa3d10374e2e0105fe7ef53ff48b55f41c58dadd7",
+        "hrp": "prl",
+        "requiredCertVersionAt0": 1,
+        "requiredCertVersionAt1": 1,
+        "requiredCertVersionAt200": 1
+      },
+      "regtest": {
+        "coinType": 1,
+        "coinbaseMaturity": 100,
+        "fp8ForkHeight": null,
+        "genesisHash": "78d0ab27df6a51a8e9dbbdefffca1ebbbeb3818cb083ce2c2f43b047247e5832",
+        "hrp": "rprl",
+        "requiredCertVersionAt0": 1,
+        "requiredCertVersionAt1": 3,
+        "requiredCertVersionAt200": 3
+      },
+      "simnet": {
+        "coinType": 1,
+        "coinbaseMaturity": 100,
+        "fp8ForkHeight": null,
+        "genesisHash": "78d0ab27df6a51a8e9dbbdefffca1ebbbeb3818cb083ce2c2f43b047247e5832",
+        "hrp": "rprl",
+        "requiredCertVersionAt0": 1,
+        "requiredCertVersionAt1": 3,
+        "requiredCertVersionAt200": 3
+      },
+      "testnet": {
+        "coinType": 1,
+        "coinbaseMaturity": 100,
+        "fp8ForkHeight": null,
+        "genesisHash": "10f0be7be9950f74021d0f7c62989d1e2541c4d46f3c95b74e61679864b43d18",
+        "hrp": "tprl",
+        "requiredCertVersionAt0": 1,
+        "requiredCertVersionAt1": 2,
+        "requiredCertVersionAt200": 2
+      },
+      "testnet2": {
+        "coinType": 1,
+        "coinbaseMaturity": 100,
+        "fp8ForkHeight": null,
+        "genesisHash": "b0c86d0cd8825f4d72260d2de46f470429eece413811d5d82b5f2e2ea0336f96",
+        "hrp": "tprl",
+        "requiredCertVersionAt0": 1,
+        "requiredCertVersionAt1": 1,
+        "requiredCertVersionAt200": 1
+      }
+    },
+    "transactionRoundtrips": 81,
+    "upstreamCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+    "validScriptExecutions": 610
+  },
+  "edgeResultsSha256": "345feac6195b52aa90e84828caa6a9b07e8635542ceef2300e680917af7db6f1",
+  "focusedUpstreamTests": "passed; see focused-tests.log",
+  "lockHashes": {
+    "edge": {
+      "go.mod": "5b33d4c25dbcc432be0ac3eaa32206e103747bed1b744aeee958bfd6ca4c47fa",
+      "go.sum": "d9f06c76ed77463410ef5de03958fe6f0708ce073b89f565d9cb918f78de586b"
+    },
+    "oracle": {
+      "go.mod": "5b33d4c25dbcc432be0ac3eaa32206e103747bed1b744aeee958bfd6ca4c47fa",
+      "go.sum": "d9f06c76ed77463410ef5de03958fe6f0708ce073b89f565d9cb918f78de586b"
+    },
+    "policy": {
+      "go.mod": "5b33d4c25dbcc432be0ac3eaa32206e103747bed1b744aeee958bfd6ca4c47fa",
+      "go.sum": "d9f06c76ed77463410ef5de03958fe6f0708ce073b89f565d9cb918f78de586b"
+    }
+  },
+  "oracle": "pass: 2 BIP341 digests, 2 BIP340 signatures/script executions, account key/BIP86 scripts/address/txid/wtxid",
+  "passedWithCorrectRefDependencies": true,
+  "policyCases": 81,
+  "policyOutcomes": {
+    "accept": 74,
+    "dust": 2,
+    "fee": 4,
+    "immature": 1
+  },
+  "upstreamCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701"
+}

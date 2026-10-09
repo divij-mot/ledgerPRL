@@ -1,0 +1,21 @@
+/workspace/shared/prl-fp8-compat-review/builds/current-oracle: go1.26.6
+	path	construction-review
+	mod	construction-review	(devel)	
+	dep	github.com/btcsuite/btclog	v1.0.0	h1:sEkpKJMmfGiyZjADwEIgB1NSwMyfdD1FB8v6+w1T0Ns=
+	dep	github.com/decred/dcrd/crypto/blake256	v1.1.0	h1:zPMNGQCm0g4QTY27fOCorQW7EryeQ/U0x++OzVrdms8=
+	dep	github.com/decred/dcrd/dcrec/secp256k1/v4	v4.4.1	h1:5RVFMOWjMyRy8cARdy79nAmgYw3hK/4HUq48LQ6Wwqo=
+	dep	github.com/pearl-research-labs/pearl	v0.0.0
+	=>	/workspace/shared/prl-fp8-compat-review/snapshots/current	(devel)	
+	
+	dep	golang.org/x/crypto	v0.57.0	h1:3ZVCjf8Ggz7zneR/EHRVx68Ctf+2pmIMP2UFhh9cC6M=
+	dep	golang.org/x/sys	v0.48.0	h1:bbX/i/6MgT9BVLM9RT1thmxL04yeTAhbEz4SyadbXoo=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	CGO_ENABLED=1
+	build	CGO_CFLAGS=
+	build	CGO_CPPFLAGS=
+	build	CGO_CXXFLAGS=
+	build	CGO_LDFLAGS=
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1

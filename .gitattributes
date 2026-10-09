@@ -1,0 +1,4 @@
+# Preserve byte-exact, hash-bound `go version -m` output, including empty tab fields.
+tools/fp8-compatibility/results/*-build-info.txt whitespace=-blank-at-eol
+# Keep hash-bound upstream test diagnostics byte-for-byte as recorded.
+tools/fp8-compatibility/results/*.log whitespace=-blank-at-eol,-space-before-tab

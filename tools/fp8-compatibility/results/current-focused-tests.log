@@ -1,0 +1,6 @@
+ok  	github.com/pearl-research-labs/pearl/node/txscript	1.588s
+ok  	github.com/pearl-research-labs/pearl/node/btcutil/hdkeychain	0.044s
+ok  	github.com/pearl-research-labs/pearl/node/chaincfg	0.007s
+ok  	github.com/pearl-research-labs/pearl/node/mempool	0.169s
+ok  	github.com/pearl-research-labs/pearl/node/wire	0.004s
+ok  	github.com/pearl-research-labs/pearl/node/btcutil	0.010s

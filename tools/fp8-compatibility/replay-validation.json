@@ -1,0 +1,22 @@
+{
+  "validatedAt": "2026-10-09T18:06:07Z",
+  "portableReplay": "passed",
+  "focusedUpstreamTestsEnabled": true,
+  "refs": [
+    "released",
+    "current",
+    "fp8"
+  ],
+  "comparison": "identical complete per-case policy outcomes across refs; all edge results match saved per-ref summaries",
+  "sourceHashesStillMatchTestedWallet": true,
+  "allNineDependencyLockPairsMatchSavedHashes": true,
+  "provenanceControlsPassed": 14,
+  "extraGoFileRejectedBeforeCompiler": true,
+  "compilerPathContainsSpaces": true,
+  "workPathContainsSpaces": true,
+  "freshPrivateSourceArchives": true,
+  "freshPrivateProbeModules": true,
+  "sourceSetVerifiedBeforeAndAfterEachProbe": true,
+  "sourceSetVerifiedAfterFocusedTests": true,
+  "partialSourceCacheAttempt": "failed closed before current compilation; missing official Git blobs were fetched into the isolated upstream cache, then the full replay passed"
+}

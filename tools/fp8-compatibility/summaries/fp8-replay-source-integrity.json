@@ -1,0 +1,13 @@
+{
+  "allSourceSetChecksStable": true,
+  "commit": "684f7045f3b3b7c5b7598f46c06b7dceb506f74b",
+  "compiledFromFreshPrivateArchive": true,
+  "directories": 321,
+  "emptyGitlinks": {},
+  "freshProbeModules": 3,
+  "sourceSetSha256": "28b034c783ad538d8d1167be3c95aad86a06e8b32e7a13945bb1523b63b48808",
+  "trackedBlobs": 4770,
+  "unexpectedEntriesAllowed": 0,
+  "verifiedAfterEachProbe": true,
+  "verifiedAfterFocusedTests": true
+}

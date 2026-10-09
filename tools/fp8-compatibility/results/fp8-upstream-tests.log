@@ -1,0 +1,73 @@
+--- FAIL: TestCertificateV2SerializeDeserialize (0.00s)
+    certificate_test.go:63: 
+        	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:50
+        	            				/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:63
+        	Error:      	Received unexpected error:
+        	            	zkpow: build with -tags zkpow to enable mining
+        	Test:       	TestCertificateV2SerializeDeserialize
+        	Messages:   	mining should succeed
+--- FAIL: TestCertificateV2Verify (0.00s)
+    certificate_test.go:86: 
+        	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:50
+        	            				/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:86
+        	Error:      	Received unexpected error:
+        	            	zkpow: build with -tags zkpow to enable mining
+        	Test:       	TestCertificateV2Verify
+        	Messages:   	mining should succeed
+--- FAIL: TestCertificateV2VerifyErrors (0.00s)
+    certificate_test.go:95: 
+        	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:50
+        	            				/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:95
+        	Error:      	Received unexpected error:
+        	            	zkpow: build with -tags zkpow to enable mining
+        	Test:       	TestCertificateV2VerifyErrors
+        	Messages:   	mining should succeed
+--- FAIL: TestMsgCertificateMoERoundTrip (0.00s)
+    certificate_test.go:151: 
+        	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:50
+        	            				/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:151
+        	Error:      	Received unexpected error:
+        	            	zkpow: build with -tags zkpow to enable mining
+        	Test:       	TestMsgCertificateMoERoundTrip
+        	Messages:   	mining should succeed
+--- FAIL: TestCertificateV3MineVerifyRoundTrip (0.00s)
+    certificate_test.go:182: 
+        	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/wire/certificate_test.go:182
+        	Error:      	Received unexpected error:
+        	            	zkpow: build with -tags zkpow to enable mining
+        	Test:       	TestCertificateV3MineVerifyRoundTrip
+        	Messages:   	V3 mining should succeed
+FAIL
+FAIL	github.com/pearl-research-labs/pearl/node/wire	0.306s
+ok  	github.com/pearl-research-labs/pearl/node/txscript	1.813s
+--- FAIL: TestNewTLSCertPair (0.00s)
+    certgen_test.go:32: 
+        	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/btcutil/certgen_test.go:32
+        	Error:      	Received unexpected error:
+        	            	route ip+net: netlinkrib: operation not permitted
+        	Test:       	TestNewTLSCertPair
+--- FAIL: TestWriteTLSCertPair (0.00s)
+    --- FAIL: TestWriteTLSCertPair/writes_a_loadable_pair_with_strict_perms (0.00s)
+        certgen_test.go:106: 
+            	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/btcutil/certgen_test.go:106
+            	Error:      	Received unexpected error:
+            	            	route ip+net: netlinkrib: operation not permitted
+            	Test:       	TestWriteTLSCertPair/writes_a_loadable_pair_with_strict_perms
+    --- FAIL: TestWriteTLSCertPair/tightens_an_existing_loose_key_to_0600 (0.00s)
+        certgen_test.go:130: 
+            	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/btcutil/certgen_test.go:130
+            	Error:      	Received unexpected error:
+            	            	route ip+net: netlinkrib: operation not permitted
+            	Test:       	TestWriteTLSCertPair/tightens_an_existing_loose_key_to_0600
+    --- FAIL: TestWriteTLSCertPair/one-time_key_is_not_persisted (0.00s)
+        certgen_test.go:141: 
+            	Error Trace:	/workspace/shared/prl-fp8-compat-review/snapshots/fp8/node/btcutil/certgen_test.go:141
+            	Error:      	Received unexpected error:
+            	            	route ip+net: netlinkrib: operation not permitted
+            	Test:       	TestWriteTLSCertPair/one-time_key_is_not_persisted
+FAIL
+FAIL	github.com/pearl-research-labs/pearl/node/btcutil	0.023s
+ok  	github.com/pearl-research-labs/pearl/node/btcutil/hdkeychain	0.044s
+ok  	github.com/pearl-research-labs/pearl/node/chaincfg	0.007s
+ok  	github.com/pearl-research-labs/pearl/node/mempool	0.169s
+FAIL

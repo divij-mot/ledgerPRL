@@ -11,3 +11,5 @@ __pycache__/
 .venv/
 .tools/
 *.log
+# Frozen public-fixture evidence; runtime replay output remains ignored.
+!tools/fp8-compatibility/results/*.log

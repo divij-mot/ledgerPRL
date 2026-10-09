@@ -1,0 +1,31 @@
+go: downloading github.com/stretchr/testify v1.11.1
+go: downloading golang.org/x/crypto v0.55.0
+# github.com/pearl-research-labs/pearl/node/wire
+node/wire/netaddressv2.go:13:2: module lookup disabled by GOPROXY=off
+FAIL	github.com/pearl-research-labs/pearl/node/wire [setup failed]
+# github.com/pearl-research-labs/pearl/node/txscript
+node/wire/netaddressv2.go:13:2: module lookup disabled by GOPROXY=off
+# github.com/pearl-research-labs/pearl/node/txscript
+node/btcutil/hash160.go:11:2: module lookup disabled by GOPROXY=off
+FAIL	github.com/pearl-research-labs/pearl/node/txscript [setup failed]
+# github.com/pearl-research-labs/pearl/node/btcutil
+node/wire/netaddressv2.go:13:2: module lookup disabled by GOPROXY=off
+# github.com/pearl-research-labs/pearl/node/btcutil
+node/btcutil/hash160.go:11:2: module lookup disabled by GOPROXY=off
+FAIL	github.com/pearl-research-labs/pearl/node/btcutil [setup failed]
+# github.com/pearl-research-labs/pearl/node/btcutil/hdkeychain
+node/wire/netaddressv2.go:13:2: module lookup disabled by GOPROXY=off
+# github.com/pearl-research-labs/pearl/node/btcutil/hdkeychain
+node/btcutil/hash160.go:11:2: module lookup disabled by GOPROXY=off
+FAIL	github.com/pearl-research-labs/pearl/node/btcutil/hdkeychain [setup failed]
+# github.com/pearl-research-labs/pearl/node/chaincfg
+node/wire/netaddressv2.go:13:2: module lookup disabled by GOPROXY=off
+FAIL	github.com/pearl-research-labs/pearl/node/chaincfg [setup failed]
+# github.com/pearl-research-labs/pearl/node/mempool
+node/wire/netaddressv2.go:13:2: module lookup disabled by GOPROXY=off
+# github.com/pearl-research-labs/pearl/node/mempool
+node/btcutil/hash160.go:11:2: module lookup disabled by GOPROXY=off
+# github.com/pearl-research-labs/pearl/node/mempool
+node/mempool/mocks.go:10:2: module lookup disabled by GOPROXY=off
+FAIL	github.com/pearl-research-labs/pearl/node/mempool [setup failed]
+FAIL

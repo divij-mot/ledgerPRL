@@ -1,0 +1,10 @@
+{
+  "checkpoint": "87ca040566122a290c79a0a1fbd7590723b9da81; exact source in wallet-source-sha256.json",
+  "cases": 81,
+  "assertions": 2469,
+  "default16InputChange": {
+    "vsize": 1017,
+    "fee": 1000
+  },
+  "networkFree": true
+}
