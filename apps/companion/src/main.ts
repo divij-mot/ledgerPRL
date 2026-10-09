@@ -179,7 +179,7 @@ async function post(
     );
   return value;
 }
-async function checkNode() {
+async function checkNode(signal?: AbortSignal) {
   assert(snapshot, "Import or discover public watch data first");
   const result = applyValidation(
     snapshot,
@@ -192,6 +192,7 @@ async function checkNode() {
             snapshot: JSON.parse(snapshotToJson(snapshot)),
           }
         : JSON.parse(snapshotToJson(snapshot)),
+      signal,
     ),
   );
   snapshot = result.snapshot;
@@ -390,7 +391,7 @@ function review(payment: PaymentRecord) {
     fee = total - bundle.outputs.reduce((s, o) => s + o.amount, 0n);
   const highFee = fee > 100_000n && fee * 10n >= total;
   const policy = inspectPaymentPolicy(bundle);
-  return `<div class="grid"><section class="card review"><div class="section-head"><h2>Review the exact payment</h2><span class="tag">${e(paymentStatus(payment))}</span></div>${highFee ? '<div class="notice error"><b>Unusually high fee.</b> The fee exceeds 100,000 grains and is at least 10% of the selected input value. Review the fee carefully on the Ledger.</div>' : ""}<dl class="data-list"><div><dt>Network</dt><dd>${bundle.network}</dd></div><div><dt>Recipient</dt><dd class="mono">${scriptToAddress(recipient.scriptPubKey, bundle.network)}</dd></div><div><dt>Amount</dt><dd>${money(recipient.amount)}</dd></div><div><dt>Exact fee</dt><dd>${money(fee)}</dd></div><div><dt>Default relay policy</dt><dd>${policy.vsize} vB; minimum ${money(policy.minimumFee)}; dust ${policy.dustThreshold} grains. Node policy may differ.</dd></div><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span><br>Branch 1 / index ${change.index}` : ""}</dd></div><div><dt>Inputs</dt><dd>${bundle.inputs.length} reserved outputs</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl>${payment.state === "draft" ? `<button id="sign" ${disabled(busy || client?.sessionState !== "ready")}>Review & sign on Ledger</button> <button id="discard" class="ghost" ${disabled(busy)}>Discard unsigned draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Signatures independently verified. Nothing has been broadcast by this app." : payment.state === "accepted" ? "Previously accepted by the node; current confirmation is unverified. An explicit retry sends only these same signed bytes and transaction ID." : "Broadcast outcome may be unknown. This exact transaction may already be accepted. Keep inputs reserved; never construct a replacement payment just because of a timeout."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve broadcasting these exact signed bytes to ${sourceMode === "public" ? "the public Pearl Blockbook service" : "the configured local node"} on ${bundle.network}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Explicitly rebroadcast exact bytes" : "Broadcast signed transaction"}</button>` : payment.archived ? '<div class="notice success">A confirmed receipt is archived. Reconcile its current chain status before retrying these bytes; all input locks remain retained.</div>' : '<div class="notice error">Signing was started. The result may be unknown after an interruption. Inputs remain reserved. Inspect the device and reconcile the transaction before reusing funds.</div>'}</section><section class="card"><h2>Check your Ledger screen</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Network and full recipient</b><span class="muted">Compare the entire address, not only its first or last characters.</span></div></div><div class="step"><span class="number">2</span><div><b>Amount, fee and change</b><span class="muted">The device recomputes the signing digest from this complete transaction.</span></div></div><div class="step"><span class="number">3</span><div><b>Physical approval</b><span class="muted">Reject if any detail differs. No blind-sign or software-signing fallback exists.</span></div></div></div><button id="back-payments" class="ghost" ${disabled(busy)}>Back to activity</button></section></div>`;
+  return `<div class="grid"><section class="card review"><div class="section-head"><h2>Review the exact payment</h2><span class="tag">${e(paymentStatus(payment))}</span></div>${highFee ? '<div class="notice error"><b>Unusually high fee.</b> The fee exceeds 100,000 grains and is at least 10% of the selected input value. Review the fee carefully on the Ledger.</div>' : ""}<dl class="data-list"><div><dt>Network</dt><dd>${bundle.network}</dd></div><div><dt>Recipient</dt><dd class="mono">${scriptToAddress(recipient.scriptPubKey, bundle.network)}</dd></div><div><dt>Amount</dt><dd>${money(recipient.amount)}</dd></div><div><dt>Exact fee</dt><dd>${money(fee)}</dd></div><div><dt>Default relay policy</dt><dd>${policy.vsize} vB; minimum ${money(policy.minimumFee)}; dust ${policy.dustThreshold} grains. Node policy may differ.</dd></div><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span><br>Branch 1 / index ${change.index}` : ""}</dd></div><div><dt>Inputs</dt><dd>${bundle.inputs.length} reserved outputs</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl>${payment.state === "draft" ? `<button id="sign" ${disabled(busy || client?.sessionState !== "ready")}>Review & sign on Ledger</button> <button id="discard" class="ghost" ${disabled(busy)}>Discard unsigned draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Signatures independently verified. Nothing has been broadcast by this app." : payment.state === "accepted" ? "Previously accepted by the node; current confirmation is unverified. An explicit retry sends only these same signed bytes and transaction ID." : "Broadcast outcome may be unknown. This exact transaction may already be accepted. Keep inputs reserved; never construct a replacement payment just because of a timeout."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve broadcasting these exact signed bytes to ${sourceMode === "public" ? "the public Pearl Blockbook service" : "the configured local node"} on ${bundle.network}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Explicitly rebroadcast exact bytes" : "Broadcast signed transaction"}</button>` : payment.archived ? '<div class="notice success">A confirmed receipt is archived. Reconcile its current chain status before retrying these bytes; all input locks remain retained.</div>' : `<div class="notice error">Signing was started. The result may be unknown after an interruption. Inputs remain reserved. If every original input is still verified unspent, you can explicitly recover this identical payment with fresh Ledger account approval and full review. A rejection cannot clear the earlier uncertainty.</div><button id="recover-signing" ${disabled(busy || client?.sessionState !== "ready" || !snapshot)}>Recover identical payment on Ledger</button>`}</section><section class="card"><h2>Check your Ledger screen</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Network and full recipient</b><span class="muted">Compare the entire address, not only its first or last characters.</span></div></div><div class="step"><span class="number">2</span><div><b>Amount, fee and change</b><span class="muted">The device recomputes the signing digest from this complete transaction.</span></div></div><div class="step"><span class="number">3</span><div><b>Physical approval</b><span class="muted">Reject if any detail differs. No blind-sign or software-signing fallback exists.</span></div></div></div><button id="back-payments" class="ghost" ${disabled(busy)}>Back to activity</button></section></div>`;
 }
 function activity() {
   return `<section class="card"><div class="section-head"><h2>Reserved payments</h2><span class="tag">${journal.payments.length} records</span></div><p class="hint">Reservations are shared atomically across this browser's tabs and persist after restart. They do not coordinate separate browser profiles or computers. Signed or interrupted payments never auto-expire. Browser eviction or profile loss can remove this state: export a complete backup before switching profiles.</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy || !account)}>Back up full watch wallet</button><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Archive confirmed records</button></div><p class="hint">Archival requires six confirmations in a completed source view. Archived exact bytes and outpoint locks are retained through reorgs; they no longer count against the 100-active-payment limit. Conflicted/unknown records remain reserved.</p>${
@@ -775,6 +776,13 @@ function bind() {
     "sign",
     () => void run("Rechecking inputs, then review on Ledger", sign),
   );
+  click(
+    "recover-signing",
+    () =>
+      void run("Recovering only the identical reserved payment", (signal) =>
+        sign(signal, true),
+      ),
+  );
   click("cancel-device", () => currentAbort?.abort());
   document
     .getElementById("broadcast-approval")
@@ -880,79 +888,174 @@ async function connect() {
     },
   );
 }
-async function sign(signal: AbortSignal) {
+async function sign(signal: AbortSignal, recovery = false) {
   assert(
     client && account && snapshot && activePayment,
-    "Connect Ledger and prepare a payment",
+    "Connect Ledger and load the reserved payment's watch data",
+  );
+  const owner = account,
+    ownerId = accountId(owner),
+    paymentId = activePayment,
+    device = client;
+  assert(
+    device.sessionState === "ready",
+    "Reconnect your Ledger before signing",
+  );
+  assert(
+    network === owner.network && accountId(snapshot.account) === ownerId,
+    "Signing account or network differs from watch data",
   );
   signal.throwIfAborted();
-  let payment = (await store.journal(accountId(account))).payments.find(
-    (p) => p.id === activePayment,
+  const payment = (await store.journal(ownerId)).payments.find(
+    (p) => p.id === paymentId,
   );
   signal.throwIfAborted();
   assert(
-    payment?.state === "draft",
-    "Only a fresh unsigned draft may be signed",
+    payment?.state === (recovery ? "signing" : "draft") &&
+      payment.rawTx === undefined &&
+      payment.txid === undefined &&
+      !payment.archived,
+    recovery
+      ? "Only an interrupted signing record without saved bytes can be recovered"
+      : "Only a fresh unsigned draft may be signed",
   );
   const bundle = paymentBundle(payment);
+  validateBundle(bundle, owner);
+  assert(
+    JSON.stringify(payment.outpoints) ===
+      JSON.stringify(bundle.inputs.map(outpoint)),
+    "Saved reservations differ from the canonical payment",
+  );
   assertPaymentPolicy(bundle);
-  await checkNode();
+  await checkNode(signal);
   signal.throwIfAborted();
   requireFreshValidation(snapshot, validation, bundle);
-  await store.mutate(accountId(account), (j) => {
+  const attemptId = crypto.randomUUID();
+  const signingRecord = await store.mutate(ownerId, (j) => {
     signal.throwIfAborted();
-    const current = j.payments.find((p) => p.id === activePayment);
+    const current = j.payments.find((p) => p.id === paymentId);
     assert(
-      current?.bundleHex === payment.bundleHex,
-      "Draft changed during input validation; review it again",
+      current && JSON.stringify(current) === JSON.stringify(payment),
+      "Payment changed during input validation; review it again",
     );
     assertPaymentPolicy(paymentBundle(current));
-    transitionPayment(j, activePayment!, "signing");
+    if (!recovery) transitionPayment(j, paymentId, "signing");
+    current.signingAttempt = { id: attemptId, recovery };
+    return JSON.stringify(current);
   });
   signal.throwIfAborted();
   await refreshJournal();
   signal.throwIfAborted();
   channel.postMessage("journal");
+  if (recovery) {
+    // Claim callback ownership before any recovery APDU. Failed sessions must
+    // reconnect; ready sessions still require fresh device-approved identity.
+    const exported = await device.exportAccount(owner.account, signal);
+    signal.throwIfAborted();
+    assert(
+      accountId(exported) === ownerId,
+      "Recovery Ledger account does not match the reserved payment",
+    );
+    const now = Date.now();
+    if (
+      !validation ||
+      now < validation.checkedAt ||
+      now - validation.checkedAt > 60_000
+    ) {
+      // Human approval can take longer than the input-check lifetime. Refresh
+      // once, never loop or infer unspent status from an unavailable source.
+      await checkNode(signal);
+      signal.throwIfAborted();
+    }
+    const current = (await store.journal(ownerId)).payments.find(
+      (p) => p.id === paymentId,
+    );
+    signal.throwIfAborted();
+    assert(
+      JSON.stringify(current) === signingRecord,
+      "Payment changed during recovery approval; review its current state",
+    );
+  }
+  // An account-export approval can take longer than the source-check lifetime.
+  requireFreshValidation(snapshot, validation, bundle);
+  signal.throwIfAborted();
   busyText = "Check network, recipient, amount, fee and change on your Ledger";
   render();
   let result;
   try {
-    result = await client.signBundle(bundle, account, {
-      signal,
-    });
+    result = await device.signBundle(bundle, owner, { signal });
   } catch (error) {
     if (
+      !recovery &&
       error instanceof DeviceError &&
       error.status === 0x6985 &&
       error.instruction === INS.REVIEW
     ) {
-      await store.mutate(accountId(account), (j) =>
-        rejectBeforeSigning(j, activePayment!),
-      );
+      const reset = await store.mutate(ownerId, (j) => {
+        const current = j.payments.find((p) => p.id === paymentId);
+        if (JSON.stringify(current) !== signingRecord) return false;
+        rejectBeforeSigning(j, paymentId, attemptId);
+        return true;
+      });
       channel.postMessage("journal");
       throw new Error(
-        "Payment rejected on the Ledger before signing. The unsigned draft remains reserved; discard it or reconnect to review again.",
+        reset
+          ? "Payment rejected on the Ledger before signing. The unsigned draft remains reserved; discard it or reconnect to review again."
+          : "Ledger rejected this attempt, but the payment changed during review. Its current state and reservations were preserved; inspect activity before continuing.",
       );
     }
     throw error;
   }
-  // Once signatures have returned, cancellation must not discard exact signed
-  // bytes or release reservations. Complete verification and durable storage.
-  // The SDK verified every Schnorr signature; re-run finalization before persistence too.
+  // Once signatures return, cancellation cannot discard independently verified
+  // bytes. Concurrent completions may have a different valid witness, but must
+  // describe exactly the same canonical payment and transaction ID.
   const checked = finalizeTransaction(bundle, result.signatures);
   assert(
     checked.rawTx === result.rawTx && checked.txid === result.txid,
     "Final transaction mismatch",
   );
-  await store.mutate(accountId(account), (j) =>
-    transitionPayment(j, activePayment!, "signed", {
+  const retained = await store.mutate(ownerId, (j) => {
+    const current = j.payments.find((p) => p.id === paymentId);
+    assert(
+      current &&
+        current.bundleHex === payment.bundleHex &&
+        current.createdAt === payment.createdAt &&
+        JSON.stringify(current.outpoints) === JSON.stringify(payment.outpoints),
+      "Reserved payment changed before signed storage; existing record retained",
+    );
+    if (current.rawTx !== undefined || current.txid !== undefined) {
+      assert(
+        ["signed", "broadcast-unknown", "accepted"].includes(current.state) &&
+          current.rawTx &&
+          current.txid,
+        "Inconsistent saved signed payment; existing record retained",
+      );
+      const saved = finalizeTransaction(
+        bundle,
+        parseTransaction(current.rawTx).inputs.map((i) => i.witness[0]!),
+      );
+      assert(
+        saved.rawTx === current.rawTx &&
+          saved.txid === current.txid &&
+          saved.txid === checked.txid,
+        "Concurrent signed payment failed verification; existing record retained",
+      );
+      return true;
+    }
+    assert(
+      current.state === "signing" && !current.archived,
+      "Signing reservation changed; existing record retained",
+    );
+    transitionPayment(j, paymentId, "signed", {
       rawTx: checked.rawTx,
       txid: checked.txid,
-    }),
-  );
+    });
+    return false;
+  });
   channel.postMessage("journal");
-  notification =
-    "Signatures independently verified and exact signed bytes saved. Broadcast requires a separate approval.";
+  notification = retained
+    ? "Another tab's independently verified signed bytes were preserved. Broadcast still requires separate explicit approval."
+    : "Signatures independently verified and exact signed bytes saved. Broadcast requires a separate approval.";
 }
 /** Recheck known local-node payments without claiming a complete account scan. */
 async function reconcileNodePayments(signal: AbortSignal) {

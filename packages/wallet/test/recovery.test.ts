@@ -126,10 +126,102 @@ test("consecutive receive issuance and public recovery ranges survive export", (
 test("proven review rejection becomes discardable unsigned draft; generic signed state cannot reset", () => {
   const journal = emptyJournal();
   reservePayment(journal, bundle, "payment-fixture");
-  transitionPayment(journal, "payment-fixture", "signing");
-  rejectBeforeSigning(journal, "payment-fixture");
+  const attemptId = "00000000-0000-4000-8000-000000000001";
+  transitionPayment(journal, "payment-fixture", "signing").signingAttempt = {
+    id: attemptId,
+    recovery: false,
+  };
+  rejectBeforeSigning(journal, "payment-fixture", attemptId);
   assert.equal(journal.payments[0]!.state, "draft");
-  assert.throws(() => rejectBeforeSigning(signedJournal(), "payment-fixture"));
+  assert.equal(journal.payments[0]!.signingAttempt, undefined);
+  assert.throws(() =>
+    rejectBeforeSigning(signedJournal(), "payment-fixture", attemptId),
+  );
+});
+
+test("interrupted signing requires owned initial rejection; recovery and old records cannot reset", () => {
+  const j = emptyJournal(),
+    id = "payment-fixture",
+    attemptId = "00000000-0000-4000-8000-000000000001";
+  reservePayment(j, bundle, id);
+  const p = transitionPayment(j, id, "signing");
+  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  p.signingAttempt = { id: attemptId, recovery: true };
+  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  p.signingAttempt.recovery = false;
+  assert.throws(() =>
+    rejectBeforeSigning(j, id, "00000000-0000-4000-8000-000000000002"),
+  );
+  p.rawTx = "";
+  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  delete p.rawTx;
+  p.txid = vector.txid;
+  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  delete p.txid;
+  assert.equal(p.state, "signing");
+  assert.equal(reservedOutpoints(j).size, bundle.inputs.length);
+});
+
+test("backup ownership is strictly validated then stripped; legacy signing ambiguity survives", () => {
+  const j = emptyJournal();
+  reservePayment(j, bundle, "payment-fixture");
+  const p = transitionPayment(j, "payment-fixture", "signing");
+  p.signingAttempt = {
+    id: "00000000-0000-4000-8000-000000000001",
+    recovery: true,
+  };
+  const backup = exportWalletBackup(account, j);
+  assert(!backup.includes("signingAttempt"));
+  assert(p.signingAttempt, "export must not mutate the live attempt");
+  const restored = importWalletBackup(backup).journal;
+  assert.equal(restored.payments[0]!.state, "signing");
+  assert.equal(restored.payments[0]!.signingAttempt, undefined);
+  assert.equal(reservedOutpoints(restored).size, 2);
+  const input = JSON.parse(backup);
+  input.journal.payments[0].signingAttempt = p.signingAttempt;
+  assert.equal(
+    importWalletBackup(JSON.stringify(input)).journal.payments[0]!
+      .signingAttempt,
+    undefined,
+  );
+  for (const invalid of [
+    { id: "bad", recovery: true },
+    { id: p.signingAttempt.id, recovery: "yes" },
+    { ...p.signingAttempt, extra: 1 },
+  ]) {
+    input.journal.payments[0].signingAttempt = invalid;
+    assert.throws(() => importWalletBackup(JSON.stringify(input)));
+  }
+});
+
+test("equal-state ambiguous backup merge revokes rollback without importing ownership", () => {
+  const j = emptyJournal(),
+    id = "payment-fixture",
+    attemptId = "00000000-0000-4000-8000-000000000001";
+  reservePayment(j, bundle, id);
+  const p = transitionPayment(j, id, "signing");
+  p.signingAttempt = { id: attemptId, recovery: false };
+  const incoming = structuredClone(j),
+    before = structuredClone(j);
+  incoming.payments[0]!.signingAttempt = {
+    id: "00000000-0000-4000-8000-000000000002",
+    recovery: true,
+  };
+  mergeRestoredJournal(j, incoming);
+  assert.equal(p.signingAttempt, undefined);
+  delete before.payments[0]!.signingAttempt;
+  assert.deepEqual(j, before);
+  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  const empty = emptyJournal();
+  mergeRestoredJournal(empty, incoming);
+  assert.equal(empty.payments[0]!.signingAttempt, undefined);
+  assert.equal(empty.payments[0]!.state, "signing");
+  const draft = emptyJournal();
+  reservePayment(draft, bundle, id);
+  mergeRestoredJournal(draft, incoming);
+  assert.equal(draft.payments[0]!.state, "signing");
+  assert.equal(draft.payments[0]!.signingAttempt, undefined);
+  assert.throws(() => rejectBeforeSigning(draft, id, attemptId));
 });
 
 import {

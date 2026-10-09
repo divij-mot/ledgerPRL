@@ -1,0 +1,72 @@
+{
+  "description": "PUBLIC TEST VECTOR ONE ONLY: alternate aux randomness, identical persisted canonical payment",
+  "publicAccount": {
+    "network": "regtest",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "bundle": {
+    "network": "regtest",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "vout": 1,
+        "amount": "9007199254740993",
+        "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "txid": "2222222222222222222222222222222222222222222222222222222222222222",
+        "vout": 3,
+        "amount": "1000000000",
+        "scriptPubKey": "51204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 7
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "9007199254740000",
+        "scriptPubKey": "51205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "amount": "999999993",
+        "scriptPubKey": "5120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d",
+        "role": "change",
+        "branch": 1,
+        "index": 0
+      }
+    ]
+  },
+  "bundleHex": "50524c310300000000010000000000000002021111111111111111111111111111111111111111111111111111111111111111010000000100000000002000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000022222222222222222222222222222222222222222222222222222222222222220300000000ca9a3b0000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045ffffffff000700000020fcffffffff1f0051205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f000000000000f9c99a3b000000005120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d010100000000",
+  "bundleSha256": "a64ba26c78499dc85a8724953e5fe071ee73e68ab5fc095de9ff0f88a85cc5d1",
+  "sighashes": [
+    "65a237337a646ae6cc208b8d7ddbc77c68979e53a467aa9bff6fe82bc4f53c3d",
+    "42a644ebc5608fefb261c201951e466f6ca9fc98c220a79207b9fc5c88318037"
+  ],
+  "addresses": {
+    "input": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+    "second": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+    "recipient": "rprl1ptkfg5hcsgxwuu5qf3j9q2uk9cmyc8n0u29d3eyhf8q069j924e8scdxtvf",
+    "change": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+  },
+  "signatures": [
+    "b1f4c63193156d31d7006e3e6e610bceec807aaca20f06ccd214fcc9609c6c2fd4d4ea5d7aa4923dc6a588ffec0941d077dc1df6be50084717848a6ca618f09f",
+    "dc8ccc2e0ad3e177f481d3c0452ea0b598897b0e0f059ea55ea5442f5173a0587dd9730412cfa782a7a9bbc860376a5d1e4dcad5ebd1f454cd3e2ab5ebd97a45"
+  ],
+  "rawTx": "0100000000010211111111111111111111111111111111111111111111111111111111111111110100000000ffffffff22222222222222222222222222222222222222222222222222222222222222220300000000ffffffff0220fcffffffff1f002251205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4ff9c99a3b00000000225120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d0140b1f4c63193156d31d7006e3e6e610bceec807aaca20f06ccd214fcc9609c6c2fd4d4ea5d7aa4923dc6a588ffec0941d077dc1df6be50084717848a6ca618f09f0140dc8ccc2e0ad3e177f481d3c0452ea0b598897b0e0f059ea55ea5442f5173a0587dd9730412cfa782a7a9bbc860376a5d1e4dcad5ebd1f454cd3e2ab5ebd97a4500000000",
+  "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f",
+  "wtxid": "20b9e8123420099e6255058f6bbbb33208ac6f718249573a3743ceb8a55ea62e",
+  "vsize": 212
+}

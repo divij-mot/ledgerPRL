@@ -23,6 +23,8 @@ export interface PaymentRecord {
   txid?: string;
   rawTx?: string;
   lastError?: string;
+  /** Local callback ownership only; backups cannot restore this authority. */
+  signingAttempt?: { id: string; recovery: boolean };
   archived?: {
     status: "confirmed";
     block: import("./watch.js").ChainTip;
@@ -146,6 +148,7 @@ export function transitionPayment(
       "Cannot replace a signed transaction ID",
     );
   Object.assign(payment, data, { state: next });
+  if (next === "signed") delete payment.signingAttempt;
   return payment;
 }
 export function discardDraft(journal: WalletJournal, id: string): void {
@@ -158,14 +161,27 @@ export function discardDraft(journal: WalletJournal, id: string): void {
   journal.payments = journal.payments.filter((p) => p.id !== id);
 }
 
-/** Only invoke for a protocol-proven REVIEW rejection before any signature is released. */
-export function rejectBeforeSigning(journal: WalletJournal, id: string): void {
+/** Only the owning initial attempt may undo its protocol-proven REVIEW rejection. */
+export function rejectBeforeSigning(
+  journal: WalletJournal,
+  id: string,
+  attemptId: string,
+): void {
   const payment = journal.payments.find((p) => p.id === id);
   assert(
-    payment?.state === "signing" && !payment.rawTx,
+    payment?.state === "signing" &&
+      payment.rawTx === undefined &&
+      payment.txid === undefined &&
+      typeof attemptId === "string" &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(
+        attemptId,
+      ) &&
+      payment.signingAttempt?.id === attemptId &&
+      payment.signingAttempt.recovery === false,
     "Cannot reset an uncertain or signed payment",
   );
   payment.state = "draft";
+  delete payment.signingAttempt;
 }
 
 /**

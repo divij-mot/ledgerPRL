@@ -126,6 +126,7 @@ export function validateRestoredJournal(
       "txid",
       "rawTx",
       "lastError",
+      "signingAttempt",
       "archived",
     ];
     assert(
@@ -151,6 +152,20 @@ export function validateRestoredJournal(
       "Invalid payment state",
     );
     const createdAt = safeInteger(p.createdAt, Number.MAX_SAFE_INTEGER);
+    if (p.signingAttempt !== undefined) {
+      const attempt = record(p.signingAttempt, "signing attempt");
+      exactKeys(attempt, ["id", "recovery"], "signing attempt");
+      assert(
+        p.state === "signing" &&
+          typeof attempt.id === "string" &&
+          /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(
+            attempt.id,
+          ) &&
+          typeof attempt.recovery === "boolean",
+        "Invalid signing-attempt metadata",
+      );
+      // A backup carries ambiguity, never authority for a live callback to undo it.
+    }
     assert(
       typeof p.bundleHex === "string" && p.bundleHex.length <= 3014,
       "Invalid backup bundle",
@@ -255,7 +270,12 @@ export function exportWalletBackup(
       schema: 2,
       kind: "pearl-watch-backup",
       account: accountToJson(account),
-      journal,
+      journal: {
+        ...journal,
+        payments: journal.payments.map(
+          ({ signingAttempt: _localOnly, ...payment }) => payment,
+        ),
+      },
     },
     null,
     2,
@@ -298,6 +318,9 @@ export function mergeRestoredJournal(
     accepted: 4,
   };
   for (const restored of incoming.payments) {
+    // Even direct merge callers cannot import local callback ownership.
+    const restoredPayment = structuredClone(restored);
+    delete restoredPayment.signingAttempt;
     const current = existing.payments.find((p) => p.id === restored.id);
     if (!current) {
       assert(
@@ -306,7 +329,7 @@ export function mergeRestoredJournal(
         ),
         "Restored payment conflicts with an existing reservation; neither journal was replaced",
       );
-      existing.payments.push(structuredClone(restored));
+      existing.payments.push(restoredPayment);
       continue;
     }
     assert(
@@ -320,6 +343,8 @@ export function mergeRestoredJournal(
         current.rawTx === restored.rawTx && current.txid === restored.txid,
         "Conflicting signed transaction bytes",
       );
+    if (current.state === "signing" && restored.state === "signing")
+      delete current.signingAttempt;
     // Accepted can become uncertain again after an explicit same-byte retry.
     // A backup is not a fresh node response: uncertainty wins in either merge
     // direction until live reconciliation or submission establishes the result.
@@ -329,8 +354,10 @@ export function mergeRestoredJournal(
           current.state === "broadcast-unknown" && restored.state === "accepted"
         )) ||
       (current.state === "accepted" && restored.state === "broadcast-unknown")
-    )
-      Object.assign(current, structuredClone(restored));
+    ) {
+      delete current.signingAttempt;
+      Object.assign(current, restoredPayment);
+    }
   }
   existing.nextChangeIndex = Math.max(
     existing.nextChangeIndex,
