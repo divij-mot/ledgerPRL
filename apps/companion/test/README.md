@@ -105,3 +105,13 @@ or replace a newer journal/change-index view. `serving-policy.test.ts` resolves
 the pinned Vite configuration and checks anti-framing headers in development and
 preview, including the inherited node-bridge proxy. These checks do not establish
 browser clickjacking resistance or real IndexedDB crash durability.
+
+`storage.test.ts` exercises the actual `WatchStorage` class with a modeled
+IndexedDB event source. Public-cache saves wait for transaction completion and
+reject an abort even when no error event precedes it, preserving the transaction
+error when one is available. Journal reads use readonly transactions and export
+signed/uncertain records without writes under an imposed write-failure fixture;
+they retain normalization and reject validation, request, transaction and abort
+failures. This does not claim that a real browser rejects unchanged-row writes at
+its quota. These handler checks do not establish real browser scheduling,
+cross-tab serialization, quota behavior, rollback or crash durability.

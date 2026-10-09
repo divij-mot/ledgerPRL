@@ -1,6 +1,18 @@
 import { assert } from "@pearl-ledger/sdk";
 import { emptyJournal, type WalletJournal } from "@pearl-ledger/wallet";
 const DB = "pearl-ledger-watch-v1";
+function normalizeJournal(value: unknown): WalletJournal {
+  const journal = (value ?? emptyJournal()) as WalletJournal;
+  if (journal.issuedReceiveThrough === undefined)
+    journal.issuedReceiveThrough = -1;
+  assert(
+    journal.schema === 1 &&
+      Array.isArray(journal.payments) &&
+      Number.isInteger(journal.nextChangeIndex),
+    "Corrupt payment journal; do not clear storage or reuse inputs",
+  );
+  return journal;
+}
 export class WatchStorage {
   private db: Promise<IDBDatabase>;
   constructor() {
@@ -20,7 +32,26 @@ export class WatchStorage {
     });
   }
   async journal(account: string): Promise<WalletJournal> {
-    return this.mutate(account, (j) => structuredClone(j));
+    const db = await this.db;
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("journals", "readonly"),
+        request = tx.objectStore("journals").get(account);
+      let journal: WalletJournal;
+      request.onsuccess = () => {
+        try {
+          journal = normalizeJournal(request.result);
+        } catch (error) {
+          tx.abort();
+          reject(error);
+        }
+      };
+      request.onerror = () => reject(request.error);
+      tx.oncomplete = () => resolve(journal);
+      tx.onerror = () =>
+        reject(tx.error ?? new Error("Failed to read payment reservations"));
+      tx.onabort = () =>
+        reject(tx.error ?? new Error("Payment storage transaction aborted"));
+    });
   }
   async mutate<T>(
     account: string,
@@ -36,15 +67,7 @@ export class WatchStorage {
       const request = store.get(account);
       request.onsuccess = () => {
         try {
-          const journal = (request.result ?? emptyJournal()) as WalletJournal;
-          if (journal.issuedReceiveThrough === undefined)
-            journal.issuedReceiveThrough = -1;
-          assert(
-            journal.schema === 1 &&
-              Array.isArray(journal.payments) &&
-              Number.isInteger(journal.nextChangeIndex),
-            "Corrupt payment journal; do not clear storage or reuse inputs",
-          );
+          const journal = normalizeJournal(request.result);
           result = update(journal);
           store.put(journal, account);
         } catch (error) {
@@ -67,6 +90,11 @@ export class WatchStorage {
       tx.objectStore("public-cache").put(value, key);
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error);
+      tx.onabort = () =>
+        reject(
+          tx.error ??
+            new Error("Public watch data storage transaction aborted"),
+        );
     });
   }
   async load<T>(key: string): Promise<T | undefined> {
