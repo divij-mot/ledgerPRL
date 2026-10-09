@@ -4,6 +4,8 @@ The companion can be hosted as a standalone website that connects directly to a 
 
 **Development software, not a production security certification.** Physical devices/OS combinations, independent human review and Ledger approval remain release gates. Do not use valuable funds. HTTPS and successful tests do not make a compromised frontend, dishonest indexer or unreviewed firmware safe.
 
+Device connection is **USB-only**. The current C app disables Bluetooth, and this website registers only WebHID. Desktop Chrome/Edge on HTTPS or loopback are intended test targets; mobile, Safari and Firefox are not qualified. A compatible PRL app must already be installed and open. The website does not install apps or update Ledger OS. See the [separate distribution and model gates](../tools/ledger-distribution-review/README.md).
+
 ## Hosting model
 
 Use one dedicated HTTPS origin, for example `https://wallet.example.com`. Do not share this origin with another app, unrelated uploads, third-party scripts, an existing service worker, analytics or session cookies. The browser's account/recovery journal is origin-scoped; changing the hostname is a migration, not a transparent restart.

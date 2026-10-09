@@ -6,6 +6,7 @@ The current release candidate is the [Ledger Bitcoin-based C port](../apps/ledge
 
 ## Source, packaging and publication configuration
 
+- [ ] Confirm the accepted implementation route with Ledger. Its [current policy](https://developers.ledger.com/docs/device-app/getting-started) requires Rust for new device apps; the [Bitcoin clone guide](https://developers.ledger.com/docs/device-app/integration/how-to/clone) describes Layer-2 extensions and does not establish an exception for this separate-chain C fork. Existing Bitcoin approval, C tooling support and archived clone templates are not admission evidence. No outreach or submission is authorized by this checklist.
 - [ ] Owner selects a project license and approves any disclosure; preserve dependency/upstream notices. SDK-inherited workspace license metadata is not a license choice for Pearl.
 - [ ] Freeze source, SDK/toolchain versions, dependency locks and a builder image digest; reproduce every required model/network.
 - [ ] Record each device's actual retail OS/API and update eligibility separately from SDK tags. API-27 SDK mapping alone does not prove rollout or device compatibility.
@@ -15,12 +16,14 @@ The current release candidate is the [Ledger Bitcoin-based C port](../apps/ledge
 - [ ] Qualify official workflow integration for the C-port source and protocol, including pinned SDK/builder inputs, preparation hooks, permissions and accepted functional tests. `apps/ledger/publication/official-gates.json` records earlier Rust-integration blockers, not current C-port compliance.
 - [ ] Obtain actual passing official guidelines-enforcer, native build and accepted functional-test results. The manual read-only offline preflight is not a substitute or a submission-compliance badge.
 - [ ] Keep the current C-port PSBT/Merkle protocol and host adapter documentation consistent. Label `docs/apdu.md` and `docs/protocol-v1.md` as the previous Rust protocol wherever linked; do not use them as the C-port APDU specification.
+- [ ] Assign unique versions to qualified releases and bind them to exact reviewed artifacts. Current `0.1.0-prl-dev` and the public network/profile response cannot distinguish source revisions. A standard app-name/version check is a compatibility gate, not binary/source attestation; it cannot prove the latest fixes are installed. See the [distribution and identity limits](../tools/ledger-distribution-review/README.md#6-a-standard-version-response-is-not-source-attestation).
 
 ## Software and dedicated-device validation
 
 - [ ] Reproduce native Speculos account/address/signing/rejection/lifecycle tests on all five targets and every network/load-permission variant.
 - [ ] Reproduce signing vectors and actual isolated Pearl acceptance/confirmation/reorg evidence against exact artifacts.
-- [ ] Resolve the two open continuation-body checks in the [static C-port source review](../tools/device-source-review/README.md), then qualify authorized changes against newly source-bound native artifacts. Static inspection is not native execution evidence.
+- [ ] Qualify the latest continuation-body, callback and parser source corrections against newly source-bound native artifacts. The [static C-port source review](../tools/device-source-review/README.md) records the original findings and subsequent source-only disposition; those fixes have not been compiled or exercised natively. Static inspection is not native execution evidence.
+- [ ] Qualify USB WebHID on each intended desktop/browser/device combination. The current C app disables Bluetooth and the companion registers only WebHID. Desktop Chrome/Edge on HTTPS or loopback are intended test targets; mobile, Safari, Firefox and Bluetooth are not supported/qualified routes. Website hosting does not install the app or update Ledger OS.
 - [ ] Complete loaded-account browser imports, cross-tab locking, crash/eviction/interrupted-signing recovery and supported viewport/OS coverage. The [12-case real-browser public-fixture review](../apps/companion/test/evidence/website-qa/astra-real-browser-2026-10-09.md) covers bounded restore/cache/form/reload behavior; it does not qualify those remaining flows or Ledger WebHID signing.
 - [ ] Qualify the real public TLS/reverse-proxy deployment and fresh production-client indexer compatibility. [Hosting tests](website-hosting.md#automated-verification-scope) use loopback fixtures; the latest [live-indexer probe](../tools/public-indexer-review/README.md) was cancelled with zero usable observations.
 - [ ] Obtain a Ledger-controlled physical-test/distribution arrangement for **retail Nano X**, which cannot ordinarily sideload. A special-development-device host option is not a retail workaround. Pearl is not deployed to a vendor test provider.

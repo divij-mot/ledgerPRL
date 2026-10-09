@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "review_date_utc": "2026-10-09",
+  "base_commit": "ce97b530051179def6035a716afbaa076fb1d1b0",
+  "scope": "Official documentation and local source reading; documentation-only changes. No code execution/build/native/emulator/device/install/submission operations.",
+  "inspected_local_files_sha256": {
+    "apps/ledger-bitcoin-prl/UPSTREAM.json": "7c4d361fe5e6355f22b8f40e4a9ad993d88aad49a3b0d5631481ef211aa432a8",
+    "apps/ledger-bitcoin-prl/Makefile": "768e756113154e2592681e58d2fa852cfb29eff41425ba5d09c1aac62628a562",
+    "apps/ledger-bitcoin-prl/ledger_app.toml": "cb6035e1c4e417e800fe28a6bbab73d49d80645945059f2655e697eb5c78e48d",
+    "apps/ledger-bitcoin-prl/README.md": "e804505b9fe4786bb7825f28c5f5f5ec2677272d675d8bac2112fe7ccf032007",
+    "apps/ledger-bitcoin-prl/src/prl.h": "1932be875dd14d0cba6afad49b36b8118dcd31e9623b6a50e8ca5756a055c50c",
+    "apps/ledger-bitcoin-prl/src/handler/get_network_info.c": "f1b7cb188bc2748f4b731c5401c248a56ba8e56dbc0b45ab5ae9f3b9078322e0",
+    "ledger_app.toml": "d00fab2890e9564da529ed80b590461c61b806bb134500c6af3622ff6b1af7a6",
+    "apps/companion/src/ledger.ts": "e6f6599e650f0f61038319f582aa611bc4b3461315b9d3e26ca0c31da9df8207",
+    "packages/bitcoin-prl-adapter/src/client.ts": "cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db",
+    "packages/bitcoin-prl-adapter/src/policy.ts": "31e0276b65e1d8d7775c1df702336594e3abb10b71a711e82579e3612b5990f4",
+    "apps/ledger/vendor/ledger-secure-sdk/Makefile.defines": "e10580fa43b98802d6be9157d952137f9ef6e73fb5b7c04041ea78d9c28cfa43",
+    "apps/ledger/vendor/ledger-secure-sdk/io/src/os_io_default_apdu.c": "cc8476eeb6260d2b1e379b9df840657f7113cc2becdb6b0d4b84d5a98264debb",
+    "tools/device-identity-review/REPORT.md": "0c88e64f516b008e87a0693099e681c8c1e0cedb4eda45e485ab51b680311a46",
+    "tools/bitcoin-prl-independent-review/README.md": "fa034d48d9b2dabb2fdd09123ccd8576292536a089b1ce2c68db76f539ef1f72",
+    "tools/bitcoin-prl-port/README.md": "0815c76300d3b906b13bd7ee69c6e853ed12e4f83fb5bc5d3140c069e340a5fd",
+    "docs/test-evidence.md": "a75efdd5e3eecf06d60641f11776848241b5b79292d6ca36e3b5d5f4b2c82fdb"
+  },
+  "changed_documents": {
+    "README.md": {
+      "before_sha256": "0a706fc05194b5f32ce7406046265a1a1ad8efcf558c1acbae7b5046a19f10d1",
+      "after_sha256": "cc9b2ca8234561f1610fefa77d016b7f3d9c44cd6211c0b92d99cc42c1740e78"
+    },
+    "docs/firmware.md": {
+      "before_sha256": "aca7eefb91e93a16e0414a6b9a90c7e469a4e0b1576f962d2854096a74ae2dab",
+      "after_sha256": "6c9d55b9ad9c38c18d2125b692df6a76004221abf82f0a21349e55b2b104008d"
+    },
+    "docs/submission-checklist.md": {
+      "before_sha256": "833f46087f4d7d61e9abf3728474b4d778534b1ff776dc1a6b1360d1ab671761",
+      "after_sha256": "32b29f9405de1ab589c27d8a29d3b8151507435deb2a963ab46d49de25f0823f"
+    },
+    "docs/website-hosting.md": {
+      "before_sha256": "69e8f093fc8e6c1e0c967ad2e1855358d0d6ba2450c6d63339036e997b61b8be",
+      "after_sha256": "75c252e1efede6ee107d7f215b089dae999b15b7bb0bea500aef876b6d7bb6b1"
+    }
+  },
+  "report_sha256": "4d32821dc29b40d160c5a7e0a534491725ca6da736226c8a9b0f41ca0ac6c790",
+  "official_sources": [
+    {
+      "url": "https://developers.ledger.com/docs/device-app/getting-started",
+      "observed_update": "2026-09-30",
+      "supports": "New apps require Rust; existing C maintenance; autonomous audit/listing versus Ledger Wallet integration"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-app/integration/how-to/clone",
+      "observed_update": "2026-09-01",
+      "supports": "Bitcoin instructions describe Layer-2 extension apps, not proof of PRL exception"
+    },
+    {
+      "url": "https://github.com/LedgerHQ/app-btcext-boilerplate",
+      "supports": "Specialized Bitcoin transactions and extension hooks"
+    },
+    {
+      "url": "https://github.com/LedgerHQ/app-bitcoin-clone-boilerplate",
+      "supports": "Deprecated; repository archive date 2026-03-13"
+    },
+    {
+      "url": "https://github.com/LedgerHQ/ledger-secure-sdk#about-api_level-branches",
+      "supports": "OS/API mapping and C target names; API27 is active mapping"
+    },
+    {
+      "url": "https://support.ledger.com/pt-BR/article/4494540771997-zd",
+      "supports": "Nano S Plus 1.7.0 release notes list 2026-10-01; no all-model rollout conclusion"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-app/beginner/vscode-extension",
+      "observed_update": "2026-09-23",
+      "supports": "Tool supports C/Rust, excludes Nano X sideloading, generic setup seed warning"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-app/explanation/gen5-porting",
+      "observed_update": "2026-09-23",
+      "supports": "Gen5 apex_p metadata, icons, tests and app database target"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-app/submission-process/process",
+      "observed_update": "2026-09-23",
+      "supports": "Required deliverables, Ledger repository fork/test distribution, release not endorsement"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-app/integration/requirements/development",
+      "observed_update": "2026-09-01",
+      "supports": "Root manifest and mandatory green workflows; functional tests; Ragger option"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-app/submission-process/deliverables/security-audit",
+      "supports": "Functional validation before approved-partner audit; human and AI scope; four-model wording needs Gen5 reconciliation"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-interaction/dmk-ts/beginner/setup",
+      "supports": "WebHID browser requirement"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-interaction/dmk-ts/integration/migrations/ledgerjs-to-dmk",
+      "supports": "Separate WebHID and Web BLE transport integrations"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/capabilities/hid",
+      "supports": "Explicit device permission and host-system HID constraints"
+    },
+    {
+      "url": "https://developers.ledger.com/docs/device-interaction/dmk-ts/beginner/exchange_data",
+      "supports": "Standard GetAppAndVersionCommand name/version output"
+    }
+  ],
+  "limitations": [
+    "No current-source native or physical qualification",
+    "No all-five-model current retail rollout/owner eligibility verification",
+    "Pinned Rust sideload README could not be retrieved through web tool: cache miss",
+    "PRL admission/classification requires Ledger decision",
+    "Version metadata is not authenticated source/binary attestation"
+  ]
+}

@@ -19,7 +19,11 @@ Only ordinary no-script BIP86 P2TR owned inputs/change, one recipient, at most o
 
 Requirements: Node.js 24.19 or newer compatible 24.x release and npm. Use a WebHID-capable desktop browser such as current Chromium. Hardware connection requires a compatible app already running on the Ledger; development installation is a separate gated step.
 
-Current build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround. See the [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate).
+Intended build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. Latest C-source corrections are not compiled or native-tested; no current-source full matrix or physical-device support is qualified. SDK/API mappings do not guarantee current retail rollout or compatibility with future OS versions. Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround. See the [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate).
+
+The current app and companion are **USB-only**: Bluetooth is disabled in the C app and the website uses WebHID. Desktop Chrome/Edge on HTTPS or loopback are intended test targets; mobile, Safari and Firefox are not qualified. The website does not install the Ledger app or update Ledger OS.
+
+**Publication route unresolved:** Ledger's [current policy](https://developers.ledger.com/docs/device-app/getting-started) requires Rust for new device apps. Its [Bitcoin clone guidance](https://developers.ledger.com/docs/device-app/integration/how-to/clone) describes Layer-2 extensions, which does not establish an exception for this separate-chain C fork. Ledger must confirm the accepted route. My Ledger app listing requires its review/audit process and does not itself provide Pearl asset management inside Ledger Wallet. See the [distribution review](tools/ledger-distribution-review/README.md).
 
 ```sh
 npm ci --ignore-scripts

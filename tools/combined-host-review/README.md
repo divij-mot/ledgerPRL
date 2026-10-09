@@ -13,9 +13,10 @@ This check binds the independently reviewed device-session and account-discovery
 
 ## Independent reviews
 
+- [Exact-build real-browser smoke](../../apps/companion/test/evidence/website-qa/astra-real-browser-combined-smoke-2026-10-09.md): final bundle identity, public-fixture restore/navigation, preserved draft and disabled unverified receive controls, Close/reload. No hardware, live discovery or timing-race claim.
 - [Device identity and session owner](../device-identity-review/REPORT.md)
 - [Independent session verification](../device-session-review/README.md): 10 cases, including stalled storage after terminal signing results
 - [Discovery owner](../account-discovery-review/REPORT.md)
 - [Independent discovery verification](../discovery-consistency-review/report.md): 32 offline cases
 
-No real funds, mainnet broadcast, seed handling, native firmware execution, physical installation or external indexer request was performed by this combined validation. Local public fixtures and mock transport/storage boundaries cannot qualify actual device screens, browser crash durability or backend truth. Exact-published-commit CI remains a separate check after upload.
+No real funds, mainnet broadcast, seed handling, native firmware execution, physical installation or external indexer request was performed by this combined validation. Local public fixtures and mock transport/storage boundaries cannot qualify actual device screens, browser crash durability or backend truth. The exact published checkpoint `766a3f7ff1d61c7ff0e60d5484ef7c4250545aad` passed [host/oracle/Rust CI](https://github.com/divij-mot/ledgerPRL/actions/runs/38006393030), verified at 23:55 UTC. That workflow does not build or qualify the current C firmware.

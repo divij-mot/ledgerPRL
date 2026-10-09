@@ -1,4 +1,16 @@
-# Native Ledger development app
+# Current app status and historical Rust evidence
+
+## Current C app: unqualified development source
+
+The current signer is the [Ledger Bitcoin-based C port](../apps/ledger-bitcoin-prl/README.md). It declares unmodified Ledger secure SDK v27.1.2 / API 27, commit `6709cd2bdfebb224ee070f7c1211b54254262579`, and app version `0.1.0-prl-dev`. Its latest source corrections have not been compiled or executed; native/emulator work remains paused. Earlier C artifacts and the Rust results below do not qualify current source. No physical-device installation or validation is established.
+
+The intended targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5; original Nano S is unsupported. The [official SDK mapping](https://github.com/LedgerHQ/ledger-secure-sdk#about-api_level-branches), observed 9 October 2026, maps API 27 to OS versions 1.7.0, 2.8.0, 1.11.0, 1.7.0 and 1.2.0 respectively. This is not an all-device retail rollout, latest-OS or physical compatibility guarantee. Record each test device's actual OS/API and qualify exact artifacts separately. The C app disables Bluetooth; the companion uses USB WebHID only.
+
+Ledger's [current new-app policy](https://developers.ledger.com/docs/device-app/getting-started) requires Rust. The documented [Bitcoin clone route](https://developers.ledger.com/docs/device-app/integration/how-to/clone) concerns Layer-2 Bitcoin extensions and does not establish eligibility for this PRL C fork. Obtain Ledger's classification and accepted implementation route before claiming submission readiness. Listing a signer in My Ledger and integrating Pearl asset management into Ledger Wallet are separate outcomes. See the [distribution review](../tools/ledger-distribution-review/README.md) and [submission gates](submission-checklist.md).
+
+## Historical Rust application
+
+The remaining build, packaging, permissions, SDK-patch, runtime and resource evidence on this page describes the previous Rust implementation at `apps/ledger`. It is retained for provenance, not as current C-app qualification. Installation/trust cautions remain relevant; historical commands do not authorize resuming the paused native lane.
 
 Development app build. Do not use with valuable funds. This is a native Rust Ledger application, not a host signer or an ECDSA substitute. There is no seed entry, secret-key export, raw-digest signing command, software signing fallback, or broadcast implementation in the app.
 
