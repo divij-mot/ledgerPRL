@@ -1,12 +1,14 @@
 {
-  "startedAt": "2026-10-09T14:58:41.711Z",
+  "startedAt": "2026-10-09T15:10:53.790Z",
   "network": "simnet",
-  "inputCount": 2,
+  "inputCount": 16,
   "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
   "firmware": {
     "path": "apps/ledger/target/artifacts/pearl-stax-simnet.elf",
-    "sha256": "f446ad22325302d230f03803312e87c9c915b242fb572e1dc4e36f57b579bdb3",
-    "model": "stax"
+    "snapshot": "native-snapshot.elf",
+    "sha256": "562f0426052cbc21e4f0da03f78373a28e5127b0ae70d295fee19a8d6e2dfba3",
+    "model": "stax",
+    "snapshotRetainedInRepository": false
   },
   "pearlNode": {
     "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
@@ -33,7 +35,7 @@
       "status": "passed"
     },
     {
-      "name": "mine 101 native Pearl simnet blocks to device-derived address",
+      "name": "mine 115 native Pearl simnet blocks to device-derived address",
       "status": "passed"
     },
     {
@@ -61,7 +63,15 @@
       "status": "passed"
     },
     {
-      "name": "native 2-input BIP340 signing and independent host verification",
+      "name": "native explicit abort before review clears transferred bundle",
+      "status": "passed"
+    },
+    {
+      "name": "native abort after approval and partial signature export wipes remainder",
+      "status": "passed"
+    },
+    {
+      "name": "native 16-input BIP340 signing and independent host verification",
       "status": "passed"
     },
     {
@@ -101,8 +111,8 @@
     "maxBundleSize": 1507
   },
   "accountTiming": {
-    "totalWallMs": 3724,
-    "afterApprovalWallMs": 2507
+    "totalWallMs": 3727,
+    "afterApprovalWallMs": 2510
   },
   "account": {
     "network": "simnet",
@@ -112,31 +122,49 @@
     "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
   },
   "addressTiming": {
-    "totalWallMs": 1457,
-    "afterApprovalWallMs": 264
+    "totalWallMs": 1488,
+    "afterApprovalWallMs": 265
   },
-  "minedFirstBlock": "6f04f837bcb57c4608221e409d47895dbe8e9aa9699c9a62cd0269e34fcb8dd7",
+  "minedFirstBlock": "a30e5fa43367b19d0a50e9c67e5c9b6de7de02e243924b34f4b5e8ea64013238",
+  "partial-exportTiming": {
+    "totalWallMs": 12340,
+    "afterApprovalWallMs": 7926
+  },
   "signTiming": {
-    "totalWallMs": 5243,
-    "afterApprovalWallMs": 3107
+    "totalWallMs": 13966,
+    "afterApprovalWallMs": 9169
   },
   "transaction": {
-    "bundleBytes": 289,
-    "txid": "8f108f5b034cce42886f1857eb9a2183a7a7354cbb07f6e02c0c8012806435bf",
-    "wtxid": "310677ac1ac7552df8d6b8cf861f6f81cc233396acca6ff0559646f528b01f18",
-    "vsize": 212,
-    "inputs": 2,
+    "bundleBytes": 1507,
+    "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+    "wtxid": "d39dcd0ce890d9f205660bc10d796ac38fb57a1adbd360fb39f4843e559f14d8",
+    "vsize": 1017,
+    "inputs": 16,
     "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
     "amountGrains": "123456789",
-    "feeGrains": "1000",
+    "feeGrains": "10000",
     "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
     "signatures": [
-      "4d949744ad4836daf73bad391eaaa3b08642d505a0f55e7bac7d7b2b1a6da09696cb179fe1e3ce9f056435a745ec9b2aa02acddffe0bb892e33ee00dc8ed7299",
-      "e8ad3156e1f9a155f7fa83b2410049981f9ead1ab8b3183baf941d007168009a900c6cb11edd5a89e357d54b536bc3f6028e8f949a0274b59ffcb24b570087d4"
+      "abb9ee1df2fd168a2ddda8a24aa1e3b1a4280fb06524da1bee0d22760dfeae61a971f829ff05ebee050ce7e04080b5fe53fb3059925eee17a3f99653c6170341",
+      "2af14dd5ace7ea92230c201b6bd2d4feacf631e43c279577932605e022e989a85803bdf69ee01c449cf77d4487a8d139a019351d1665971fc94f5ad627ed4f1c",
+      "d503e1d0ddd20ac9823645eb29165209afc885c5f4f3b15ce6d3c072837ce677f54b3250e65618d2ea03901492608e9ef0974b1fbe92b306a507c9cb0f088f97",
+      "df4bace1f7ea395a35d53423699a035947aea4bf62b9513626bbc16f41209cfd807b0f2f700b024e4b15f1339b9c923244ed62ea556597ddff4b044d5ca13696",
+      "6ed1a7084205cb0008c074de904af00fdde98d1f682f6b7f5d545bfe725695a40942f29660159c7a207fabc732964c09efc819f5c60a526f4972e26a131fe3f1",
+      "5f524ee2b41799fd848285d8920d13177d6581c402ef9a13172e38948ed4e17e8ff9e4133a246739863aa93bbc44721ff20f09a56c60322e87065da752f1d88a",
+      "a1e8584b8b1e8acf9bd72968e3239d90a71d94465d01d3e437d9dd6b2ea9000d2d723e4ed427c694e157ac40c3c9a3aad1673b55a94d48159ec1b98130d13a13",
+      "f1a5e2ec598154381966e3999a6d829bdffb68cf559de95e71b75cd76865d669155db2a3c33edcce1f129903ebb669f462814e0fc6a980d32e5414bed6e6dc77",
+      "2833c0738647e1f009ba1e75e9e27c56ac0db75da3fa2de0aa55b5e833f96d1bbb623244ae3598ed1d9221023afcf4f3a4a0c56318146964bcd2feff4ab98c5e",
+      "aef429bbce916f68d6d353c38d21d275aafdf318f0fe5dcee87eab03cb1e0803973bce99e415e19a6913274775390d7408f5138150299a510a68830b4f3c387f",
+      "a0fbff849fce45dc054c4e8ac93fb46939c7645fd38652a4ee95ad3f96b1a68129a09c295c402bf7b94c12d7540611ac3717e9b6ca65faeaadf3bb79e857ee2c",
+      "8bbc6d7d317c27cb0ddac198e80360d1d63bbbbc9f0c711c5beb9d2449cd12f305244383a764bd5438628fe51a1f69f4de30fbd3239b805ede8047f5d3c30731",
+      "5f3b1dc4278c603334563cfc8fd63fb6d25770d1727452927abd7852fec13b06b05988ff50392cbd61375f8816c8728e0d3673d0de6a94a1fc36fa5aec0e1895",
+      "1bed9a32df61c1d4b563809b55e3a71b62542e49a898776bf1d1fab7c1cdd6be437d9908b563d3a7ba3a374c4e03a726c1ac0d8a97a842bb1fd897c6f113911d",
+      "375b0c8d016740b5d8b1143e5bd85e7b0e6cd486a1cb854910497119855c62735015986c6ce5179788dbbe31b79b29bb6ed1df5b44215435f8069a0fb7cbd424",
+      "99544a26e33cb44a390e90c0048ccd1f6f51f5d66e2d4aa9c72fdda4384325a4d8b68d884a1e77c04ea8b27e30194144b71defddf8504af3e3a61bc6eaf99449"
     ]
   },
   "status": "passed",
-  "finishedAt": "2026-10-09T14:58:59.009Z",
+  "finishedAt": "2026-10-09T15:11:41.551Z",
   "provenance": {
     "pearlCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
     "ledgerRustSdkCommit": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
@@ -144,6 +172,6 @@
     "ledgerApiLevel": 27,
     "speculosVersion": "0.27.1",
     "pearlNodeHarnessOnlyChange": "defaultHomeDir is redirected by PEARL_TEST_HOME; no consensus changes",
-    "originalRunRecordSha256": "a5ac82a0bd6985cb9ae2aaddc9826e6d0996b5b470f13948a2588b0a3dac1bb4"
+    "originalRunRecordSha256": "7c57fc260bfc9e08e4712059fa7beb554fdbd87c3407106ceb7007f21bc15922"
   }
 }

@@ -26,6 +26,8 @@ import {
   discoverAccount,
   outpoint,
   MAX_HISTORY_TRANSACTIONS,
+  MAX_RAW_HISTORY_HEX,
+  MAX_HISTORY_REFERENCES,
   exactKeys,
 } from "@pearl-ledger/wallet";
 import { verifyBroadcastPayload } from "./bridge.js";
@@ -133,7 +135,9 @@ export class BlockbookSource implements WatchSource {
       page = 1,
       pages = 1,
       expectedTotal: number | undefined,
-      expectedPages: number | undefined;
+      expectedPages: number | undefined,
+      expectedConfirmed: number | undefined,
+      expectedPending: number | undefined;
     do {
       const value = record(
         await this.get(
@@ -145,6 +149,14 @@ export class BlockbookSource implements WatchSource {
       const confirmed = safeInteger(value.txs),
         pending = safeInteger(value.unconfirmedTxs ?? 0);
       used = confirmed > 0 || pending > 0;
+      if (expectedConfirmed === undefined) {
+        expectedConfirmed = confirmed;
+        expectedPending = pending;
+      } else
+        assert(
+          expectedConfirmed === confirmed && expectedPending === pending,
+          "Address confirmation categories changed during pagination",
+        );
       const total = confirmed + pending;
       assert(
         total <= MAX_HISTORY_TRANSACTIONS,
@@ -191,7 +203,13 @@ export class BlockbookSource implements WatchSource {
       txids.length === expectedTotal,
       "Truncated account history; scan incomplete",
     );
-    return { used, txids, utxos: used ? await this.unspent(address) : [] };
+    return {
+      used,
+      confirmedTxCount: expectedConfirmed!,
+      pendingTxCount: expectedPending!,
+      txids,
+      utxos: used ? await this.unspent(address) : [],
+    };
   }
   async transaction(txid: string): Promise<PublicTransaction> {
     const tx = record(
@@ -210,7 +228,7 @@ export class BlockbookSource implements WatchSource {
         ? null
         : chainTip({ height: tx.blockHeight, hash: tx.blockHash });
     // Amounts are always re-parsed from the raw bytes by the wallet core.
-    return { rawTransaction: tx.hex, block };
+    return { rawTransaction: tx.hex, block, confirmations: conf };
   }
 }
 export async function checkLightSnapshot(
@@ -226,8 +244,11 @@ export async function checkLightSnapshot(
   const coins: ValidationCoin[] = [];
   const spent = new Set<string>();
   const checkedTransactions = new Map<string, PublicTransaction>();
+  let rawHistoryBytes = 0,
+    historyReferences = 0;
+  // Gather the complete spent set before classifying any coin: a later address's
+  // pending transaction can spend an earlier address's otherwise confirmed UTXO.
   for (const coin of snapshot.coins) {
-    const point = outpoint(coin);
     const address = deriveAddress(
       snapshot.account,
       coin.branch,
@@ -235,19 +256,54 @@ export async function checkLightSnapshot(
     ).address;
     if (!addresses.has(address)) {
       const activity = await source.address(address);
+      historyReferences += activity.txids.length;
+      assert(
+        historyReferences <= MAX_HISTORY_REFERENCES,
+        "Aggregate input history exceeds safe validation budget",
+      );
       addresses.set(address, activity);
       // Do not assume utxo() excludes mempool-spent outputs. Parse complete address history.
+      let confirmedCount = 0,
+        pendingCount = 0;
       for (const id of activity.txids) {
         let tx = checkedTransactions.get(id);
         if (!tx) {
+          assert(
+            checkedTransactions.size < MAX_HISTORY_TRANSACTIONS,
+            "Input history transaction limit exceeded",
+          );
           tx = await source.transaction(id);
+          rawHistoryBytes += tx.rawTransaction.length;
+          assert(
+            rawHistoryBytes <= MAX_RAW_HISTORY_HEX,
+            "Aggregate input history exceeds 3 MiB; inputs unverified",
+          );
           checkedTransactions.set(id, tx);
         }
+        tx.block ? confirmedCount++ : pendingCount++;
+        if (tx.block)
+          assert(
+            tx.confirmations === start.tip.height - tx.block.height + 1,
+            "History confirmation count contradicts tip",
+          );
         const parsed = parseTransaction(tx.rawTransaction);
         assert(parsed.txid === id, "History transaction mismatch");
         for (const input of parsed.inputs) spent.add(outpoint(input));
       }
+      assert(
+        confirmedCount === activity.confirmedTxCount &&
+          pendingCount === activity.pendingTxCount,
+        "Address confirmed/pending categories contradict returned history",
+      );
     }
+  }
+  for (const coin of snapshot.coins) {
+    const point = outpoint(coin);
+    const address = deriveAddress(
+      snapshot.account,
+      coin.branch,
+      coin.index,
+    ).address;
     const match = addresses
       .get(address)!
       .utxos.find((u) => outpoint(u) === point);
@@ -304,6 +360,22 @@ export async function checkLightSnapshot(
       confirmations: start.tip.height - tx.block.height + 1,
     });
   }
+  // A stable chain tip does not freeze the mempool or indexer's UTXO view. Take
+  // one bounded consistency pass and reject any observed change, including a
+  // same-count transaction replacement. Ordering alone is not a view change.
+  const view = (activity: AddressActivity) =>
+    JSON.stringify({
+      used: activity.used,
+      confirmed: activity.confirmedTxCount,
+      pending: activity.pendingTxCount,
+      txids: [...activity.txids].sort(),
+      utxos: activity.utxos.map((u) => `${outpoint(u)}:${u.height}`).sort(),
+    });
+  for (const [address, activity] of addresses)
+    assert(
+      view(await source.address(address)) === view(activity),
+      "Address history or UTXO view changed; retry the input check",
+    );
   const end = await source.tip();
   assert(
     end.tip.hash === start.tip.hash && end.tip.height === start.tip.height,
@@ -319,13 +391,18 @@ export async function checkLightSnapshot(
 }
 function send(response: ServerResponse, status: number, body: unknown) {
   if (response.destroyed || response.writableEnded) return;
+  const text = JSON.stringify(body);
+  assert(
+    new TextEncoder().encode(text).length <= 4 * 1024 * 1024,
+    "Response exceeds 4 MiB; scan incomplete",
+  );
   response.writeHead(status, {
     "content-type": "application/json",
     "cache-control": "no-store",
     "x-content-type-options": "nosniff",
     "referrer-policy": "no-referrer",
   });
-  response.end(JSON.stringify(body));
+  response.end(text);
 }
 async function bodyOf(request: IncomingMessage) {
   assert(
@@ -417,6 +494,7 @@ export function lightMiddleware(origin = "http://127.0.0.1:5173") {
           return v;
         }) as [number, number];
         const result = await discoverAccount(source, account, { minimumIndex });
+        parseWatchSnapshot(snapshotToJson(result.snapshot));
         send(response, 200, {
           snapshot: JSON.parse(snapshotToJson(result.snapshot)),
           validation: result.validation,

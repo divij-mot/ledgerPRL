@@ -10,7 +10,7 @@ for network in mainnet simnet; do
     "$ROOT/scripts/ledger-build.sh" "$device" "$network" > "$OUT/build-$device-$network.log" 2>&1 || {
       tail -80 "$OUT/build-$device-$network.log" >&2; exit 1;
     }
-    cp "$ROOT/apps/ledger/target/$device/release/pearl-ledger" "$OUT/pearl-$device-$network.elf"
+    "$ROOT/scripts/ledger-stage-artifact.sh" "$device" "$network"
     printf 'PASS %s %s ' "$device" "$network"
     sha256sum "$OUT/pearl-$device-$network.elf" | cut -d' ' -f1
   done

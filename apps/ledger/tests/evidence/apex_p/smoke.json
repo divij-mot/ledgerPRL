@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "apex_p",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+    "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-smoke/tested-firmware.elf",
+    "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "checks": [
+    "exact-public-account-fixture",
+    "invalid-xonly-zero",
+    "invalid-xonly-ff",
+    "SDK-BN-cleanup-recovery",
+    "verified-full-address",
+    "two-native-BIP340-signatures"
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "startedAt": "2026-10-09T15:03:56.862Z",
+  "network": "simnet",
+  "inputCount": 4,
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "firmware": {
+    "path": "apps/ledger/target/artifacts/pearl-nanosplus-simnet.elf",
+    "sha256": "5b41fde59cc55a1536a05423e46dd298dd5cd70899fb127690d213938142ec3e",
+    "model": "nanosp"
+  },
+  "pearlNode": {
+    "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+  },
+  "cases": [
+    {
+      "name": "native firmware advertises simnet and protocol bounds",
+      "status": "passed"
+    },
+    {
+      "name": "device public account export requires UI approval",
+      "status": "passed"
+    },
+    {
+      "name": "device receive address matches public-only BIP86 derivation",
+      "status": "passed"
+    },
+    {
+      "name": "native out-of-order signature and malformed transfer fail closed",
+      "status": "passed"
+    },
+    {
+      "name": "isolated Pearl simnet genesis and no peers",
+      "status": "passed"
+    },
+    {
+      "name": "mine 200 native Pearl simnet blocks to device-derived address",
+      "status": "passed"
+    },
+    {
+      "name": "public-account discovery scans both branches and exact UTXOs",
+      "status": "passed"
+    },
+    {
+      "name": "production bridge validates exact mined prevouts before signing",
+      "status": "passed"
+    },
+    {
+      "name": "native wrong network bundle rejected before signing",
+      "status": "passed"
+    },
+    {
+      "name": "native input ownership and change ownership independently reject substitutions",
+      "status": "passed"
+    },
+    {
+      "name": "native bundle hash mismatch clears session before review",
+      "status": "passed"
+    },
+    {
+      "name": "native user rejection releases no signature and clears session",
+      "status": "passed"
+    },
+    {
+      "name": "native explicit abort before review clears transferred bundle",
+      "status": "passed"
+    },
+    {
+      "name": "native abort after approval and partial signature export wipes remainder",
+      "status": "passed"
+    },
+    {
+      "name": "native 4-input BIP340 signing and independent host verification",
+      "status": "failed",
+      "detail": "TypeError: fetch failed"
+    }
+  ],
+  "capabilities": {
+    "protocol": 1,
+    "version": "0.1.0",
+    "network": "simnet",
+    "maxInputs": 16,
+    "maxBundleSize": 1507
+  },
+  "accountTiming": {
+    "totalWallMs": 2631,
+    "afterApprovalWallMs": 204
+  },
+  "account": {
+    "network": "simnet",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "parityCoverage": [
+    {
+      "address": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+      "branch": 0,
+      "compressedInternalKey": "0383f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de154",
+      "compressedOutputKey": "0215fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+      "index": 0,
+      "internalParity": 1,
+      "outputParity": 0,
+      "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0"
+    },
+    {
+      "address": "rprl1p2nxuyp0u25rds6nkpezmapwn6k4lle8wsj7rpq3km297cdz8rw7q52c8k0",
+      "branch": 0,
+      "compressedInternalKey": "02af7dbbf9b9f39f147487fbd85453b683112ee5cb1d52230c5af280448a8815d3",
+      "compressedOutputKey": "0254cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+      "index": 3,
+      "internalParity": 0,
+      "outputParity": 0,
+      "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc"
+    },
+    {
+      "address": "rprl1pkhp60ypj33vcs27xtsqpylsr8w2qw7ggvy9cckzs04my8fdnvgkqjfr7jf",
+      "branch": 0,
+      "compressedInternalKey": "031a192d2a88f6df9b748e298310cda31231065b379338fa6844481c9e8d9c0738",
+      "compressedOutputKey": "03b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+      "index": 4,
+      "internalParity": 1,
+      "outputParity": 1,
+      "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c"
+    },
+    {
+      "address": "rprl1pyst6awqhkr252kza7tg7emu8lrpa56ayq8jaenvqsp4560ckvgrq4e45yt",
+      "branch": 0,
+      "compressedInternalKey": "02d3d8b7aedbfae27bc84bfead5712aae8467a9697db53fdb60f53439c91405460",
+      "compressedOutputKey": "032417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+      "index": 9,
+      "internalParity": 0,
+      "outputParity": 1,
+      "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206"
+    }
+  ],
+  "addressTiming": {
+    "totalWallMs": 3190,
+    "afterApprovalWallMs": 203
+  },
+  "minedFirstBlock": "28bc9fa94c9489914a2ab795244befd19304b53b18df5bd9bf6bcb12391c7a54",
+  "partial-exportTiming": {
+    "totalWallMs": 7321,
+    "afterApprovalWallMs": 1714
+  },
+  "status": "failed",
+  "failedStage": "signing",
+  "error": "TypeError: fetch failed",
+  "finishedAt": "2026-10-09T15:04:23.881Z",
+  "classification": "Inconclusive firmware result: shared ELF inode was concurrently overwritten by a build. Immutable snapshot rerun passed. See docs/e2e-evidence.md."
+}

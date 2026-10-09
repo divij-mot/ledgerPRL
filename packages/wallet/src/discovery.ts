@@ -22,12 +22,17 @@ import {
 export const DISCOVERY_GAP = 20;
 export const MAX_DISCOVERY_INDEX = 999;
 export const MAX_HISTORY_TRANSACTIONS = 2000;
+export const MAX_RAW_HISTORY_HEX = 3 * 1024 * 1024;
+export const MAX_HISTORY_REFERENCES = 20_000;
 export interface AddressActivity {
   used: boolean;
+  confirmedTxCount: number;
+  pendingTxCount: number;
   txids: string[];
   utxos: { txid: string; vout: number; height: number | null }[];
 }
 export interface PublicTransaction {
+  confirmations: number;
   rawTransaction: string;
   block: ChainTip | null;
 }
@@ -79,6 +84,9 @@ export async function discoverAccount(
   );
   const scripts = new Map<string, { branch: 0 | 1; index: number }>(),
     txids = new Set<string>();
+  const addressHistories: AddressActivity[] = [];
+  let historyReferences = 0,
+    rawHistoryBytes = 0;
   const candidates = new Map<
     string,
     {
@@ -119,6 +127,14 @@ export async function discoverAccount(
         }),
       );
       for (const { index: i, activity } of results) {
+        safeInteger(activity.confirmedTxCount);
+        safeInteger(activity.pendingTxCount);
+        historyReferences += activity.txids.length;
+        assert(
+          historyReferences <= MAX_HISTORY_REFERENCES,
+          "Aggregate address history exceeds safe scan budget",
+        );
+        addressHistories.push(activity);
         assert(
           typeof activity.used === "boolean" &&
             Array.isArray(activity.txids) &&
@@ -175,6 +191,11 @@ export async function discoverAccount(
   >();
   for (const txid of txids) {
     const data = await source.transaction(txid);
+    rawHistoryBytes += data.rawTransaction.length;
+    assert(
+      rawHistoryBytes <= MAX_RAW_HISTORY_HEX,
+      "Aggregate raw transaction scan exceeds 3 MiB; incomplete result",
+    );
     assert(
       data.rawTransaction.length <= 1_000_000,
       "Raw transaction too large",
@@ -182,7 +203,15 @@ export async function discoverAccount(
     const parsed = parseTransaction(data.rawTransaction);
     assert(parsed.txid === txid, "Indexer raw transaction ID mismatch");
     const block = data.block === null ? null : chainTip(data.block);
+    assert(
+      block !== null || data.confirmations === 0,
+      "Pending transaction has confirmed count",
+    );
     if (block) {
+      assert(
+        data.confirmations === start.tip.height - block.height + 1,
+        "Transaction confirmation count contradicts scan tip",
+      );
       assert(
         block.height <= start.tip.height,
         "History is ahead of the scan tip; retry",
@@ -197,6 +226,20 @@ export async function discoverAccount(
       block,
       rawTransaction: data.rawTransaction,
     });
+  }
+  for (const activity of addressHistories) {
+    let confirmed = 0,
+      pending = 0;
+    for (const id of activity.txids) {
+      const tx = transactions.get(id);
+      assert(tx, "Missing address history transaction");
+      tx.block ? confirmed++ : pending++;
+    }
+    assert(
+      confirmed === activity.confirmedTxCount &&
+        pending === activity.pendingTxCount,
+      "Address confirmed/pending counts contradict raw transaction history",
+    );
   }
   const spentByHistory = new Set<string>();
   for (const tx of transactions.values())

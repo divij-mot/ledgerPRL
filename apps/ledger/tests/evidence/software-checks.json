@@ -1,0 +1,69 @@
+{
+  "nativeClippy": {
+    "models": [
+      "nanosplus",
+      "nanox",
+      "stax",
+      "flex",
+      "apex_p"
+    ],
+    "toolchain": "nightly-2025-12-05",
+    "result": "passed",
+    "arguments": [
+      "-D warnings",
+      "-A clippy::collapsible_if",
+      "-A clippy::manual_is_multiple_of"
+    ],
+    "scope": "Two syntax-style exemptions only; no runtime source changes"
+  },
+  "warningBoundaryTests": {
+    "result": "passed",
+    "count": 5
+  },
+  "typescriptHarnessCheck": {
+    "result": "passed",
+    "command": "node_modules/.bin/tsc -p apps/ledger/tests/tsconfig.json --noEmit"
+  },
+  "sdkPreparationRegression": {
+    "result": "passed",
+    "cases": [
+      "fresh checkout",
+      "idempotence",
+      "modified secure SDK rejection",
+      "staged Rust SDK edit rejection"
+    ]
+  },
+  "artifactRegression": {
+    "result": "passed",
+    "cases": [
+      "exact artifact",
+      "wrong network rejection",
+      "changed ELF rejection",
+      "changed source rejection",
+      "partial copy race rejection",
+      "complete cross-network generation race rejection"
+    ]
+  },
+  "productionPatchSha256": "49b0ebcd4632c59a5312ed49966b14c51104bb400c9e7917f28f2b560507f09b",
+  "nativeCryptoSourceSha256": "e29384e20151aca794771c2026aa93ac710ad796ac6c44f0f1ca4ae3a378f563",
+  "lintScriptSha256": "a31484b05729f20e641047ddbac483cfb5be1396bbe73db3e11aadefc26e8574",
+  "emulatorDriverUnitTests": {
+    "result": "passed",
+    "count": 2,
+    "cases": [
+      "evidence-write failure always terminates child",
+      "existing snapshot and UI evidence cannot be overwritten by rejected start"
+    ]
+  },
+  "harnessSources": {
+    "apps/ledger/tests/native-faults.ts": "7bcbedf70021f9be0e38e218ade685dfca01d608590542933956f87ee7f07e46",
+    "apps/ledger/tests/native-latency.ts": "f59a9ccf7b831d89e786320304f8e5c3159546e11c39e49779cdde0d62783399",
+    "apps/ledger/tests/native-memory.ts": "ed0c720a4eb06ae94395f249c562e229657c6f750d85c113b0e0d08bd76fa1bf",
+    "apps/ledger/tests/native-smoke.ts": "028b860540be8d4b4c99f0559dac5e3721d72ab3f9791a4635b5936899ae00bf",
+    "apps/ledger/tests/native-warnings.ts": "659426f82e2d38d9e9efdb500a09b3de3bb63640c79460a2bbbcae425b9c81b3",
+    "apps/ledger/tests/speculos-driver.test.ts": "b41efd95390f088b92c9d48921705faacb039d36ae1696de595248a14995850f",
+    "apps/ledger/tests/speculos-driver.ts": "fd83c3ee5a2494fb88b1a94ad6fbff7bb74221df4dd3ac811d133cc9a73c1aa8",
+    "apps/ledger/tests/speculos-injector.py": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8"
+  },
+  "packageLockSha256": "e07e6d210196b3e2ad94274b41618d9b993d69fc2e86e9ddc94106eb712cd047"
+}

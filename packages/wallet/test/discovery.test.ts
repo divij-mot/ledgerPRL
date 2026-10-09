@@ -76,6 +76,8 @@ function sourceWithActivity(
       const pending = pendingId && (index === 0 || index === 1);
       return {
         used: !!tx || !!pending,
+        confirmedTxCount: tx ? 1 : 0,
+        pendingTxCount: pending ? 1 : 0,
         txids: [...(tx ? [tx.txid] : []), ...(pending ? [pendingId!] : [])],
         utxos: tx ? [{ txid: tx.txid, vout: 0, height: 1 }] : [],
       };
@@ -84,8 +86,12 @@ function sourceWithActivity(
       const tx = txMap.get(id);
       assert(tx);
       return options.badRaw
-        ? { ...tx, rawTransaction: records[1]?.rawTransaction ?? "00" }
-        : tx;
+        ? {
+            ...tx,
+            confirmations: tx.block ? 200 : 0,
+            rawTransaction: records[1]?.rawTransaction ?? "00",
+          }
+        : { ...tx, confirmations: tx.block ? 200 : 0 };
     },
   };
 }

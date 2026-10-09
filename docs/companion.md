@@ -12,7 +12,7 @@ npm run dev --workspace @pearl-ledger/companion
 
 Open **http://127.0.0.1:5173/**. The local Vite server includes the narrow public-indexer adapter, so light mode needs no RPC credentials or local full node. `npm run build --workspace @pearl-ledger/companion` followed by `npm run preview --workspace @pearl-ledger/companion` serves the built app and the same adapter. Do not serve the static `dist` directory alone and expect the adapter to exist. Do not expose the server to a LAN or the public internet.
 
-The package scripts load `tsx` before Vite so the server-side middleware can resolve workspace TypeScript exports, including the SDK's `.js` ESM specifiers. Node 22 or newer is required. No hot-wallet daemon, recovery words or seed import is used.
+The package scripts load `tsx` before Vite so the server-side middleware can resolve workspace TypeScript exports, including the SDK's `.js` ESM specifiers. Node 24.19.0 or a newer compatible 24.x release is required. No hot-wallet daemon, recovery words or seed import is used.
 
 ### Public light mode
 

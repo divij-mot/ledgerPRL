@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "flex",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/memory-measurement/pearl-flex-simnet-INSTRUMENTED.elf",
+    "testedSnapshot": "/workspace/shared/pearl-ledger-native-absolute/flex/tested-firmware.elf",
+    "sha256": "3017fb666359320c785093d05789df6cbc471372c345bbc33f663632b14c08a9",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "instrumentationPatchSha256": "239aee20dac28c21562a7f99ca1e2ccf872d2d99da2c9dca520dedb3b903427b",
+  "releasePatchSha256": "49b0ebcd4632c59a5312ed49966b14c51104bb400c9e7917f28f2b560507f09b",
+  "compiler": "nightly-2025-12-05",
+  "features": [
+    "simnet",
+    "ledger_device_sdk/stack_usage"
+  ],
+  "measurement": "SDK stack paint/high-water and allocator used() sampled after every allocation",
+  "limitations": [
+    "Separate instrumented ELF, not release binary",
+    "OS/syscall stack unmeasured",
+    "Allocator peak occupancy does not establish worst-case fragmentation",
+    "Speculos does not establish physical device margin"
+  ],
+  "measurements": [
+    {
+      "flow": "max16-ordinary",
+      "stackSpan": 26772,
+      "stackUsed": 12576,
+      "stackRemaining": 14196,
+      "heapPeak": 1668,
+      "heapCurrent": 160,
+      "heapCapacity": 8192,
+      "heapRemaining": 6524
+    },
+    {
+      "flow": "max16-all-warnings",
+      "stackSpan": 26772,
+      "stackUsed": 12576,
+      "stackRemaining": 14196,
+      "heapPeak": 1672,
+      "heapCurrent": 160,
+      "heapCapacity": 8192,
+      "heapRemaining": 6520
+    },
+    {
+      "flow": "max16-absolute-bounds",
+      "stackSpan": 26772,
+      "stackUsed": 12576,
+      "stackRemaining": 14196,
+      "heapPeak": 1836,
+      "heapCurrent": 160,
+      "heapCapacity": 8192,
+      "heapRemaining": 6356
+    }
+  ]
+}

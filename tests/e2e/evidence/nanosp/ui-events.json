@@ -186,6 +186,21 @@
   {
     "label": "address",
     "step": 1,
+    "screen": "Verify Pearl address",
+    "events": [
+      {
+        "text": "Verify Pearl address",
+        "x": 12,
+        "y": 27,
+        "w": 103,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "step": 2,
     "screen": "Compare the full  | address",
     "events": [
       {
@@ -208,7 +223,7 @@
   },
   {
     "label": "address",
-    "step": 2,
+    "step": 3,
     "screen": "Address (1/2) | rprl1pzh75rtx74l85v2 | xqfr5uln7mhy40vyqz | m68ml4yngcqy9v085t",
     "events": [
       {
@@ -247,7 +262,7 @@
   },
   {
     "label": "address",
-    "step": 3,
+    "step": 4,
     "screen": "Address (2/2) | qqjd9fxm",
     "events": [
       {
@@ -270,7 +285,7 @@
   },
   {
     "label": "address",
-    "step": 4,
+    "step": 5,
     "screen": "Network | Pearl simnet",
     "events": [
       {
@@ -293,7 +308,7 @@
   },
   {
     "label": "address",
-    "step": 5,
+    "step": 6,
     "screen": "Derivation | m/86'/1'/0'/0/0",
     "events": [
       {
@@ -316,7 +331,7 @@
   },
   {
     "label": "address",
-    "step": 6,
+    "step": 7,
     "screen": "Type | BIP86 no-script  | Taproot",
     "events": [
       {
@@ -347,7 +362,7 @@
   },
   {
     "label": "address",
-    "step": 7,
+    "step": 8,
     "screen": "Confirm",
     "events": [
       {
@@ -385,7 +400,22 @@
   },
   {
     "label": "reject",
-    "step": 1,
+    "step": 19,
+    "screen": "Review Pearl transfer",
+    "events": [
+      {
+        "text": "Review Pearl transfer",
+        "x": 9,
+        "y": 27,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "reject",
+    "step": 20,
     "screen": "Check address,  | amount and fee",
     "events": [
       {
@@ -408,7 +438,7 @@
   },
   {
     "label": "reject",
-    "step": 2,
+    "step": 21,
     "screen": "Network | Pearl simnet",
     "events": [
       {
@@ -431,7 +461,7 @@
   },
   {
     "label": "reject",
-    "step": 3,
+    "step": 22,
     "screen": "From account | m/86'/1'/0'",
     "events": [
       {
@@ -454,7 +484,7 @@
   },
   {
     "label": "reject",
-    "step": 4,
+    "step": 23,
     "screen": "Recipient (1/2) | rprl1pgsursm2qfzenc | 524cr364gzt8jcp5wj5c | wmcfmk6vds2p7lakp",
     "events": [
       {
@@ -493,7 +523,7 @@
   },
   {
     "label": "reject",
-    "step": 5,
+    "step": 24,
     "screen": "Recipient (2/2) | zsj5ntyl",
     "events": [
       {
@@ -516,7 +546,7 @@
   },
   {
     "label": "reject",
-    "step": 6,
+    "step": 25,
     "screen": "Amount | 1.23456789 PRL",
     "events": [
       {
@@ -539,7 +569,7 @@
   },
   {
     "label": "reject",
-    "step": 7,
+    "step": 26,
     "screen": "Fee | 0.00010000 PRL",
     "events": [
       {
@@ -562,7 +592,7 @@
   },
   {
     "label": "reject",
-    "step": 8,
+    "step": 27,
     "screen": "Change | 51671.83474310 PRL",
     "events": [
       {
@@ -585,7 +615,7 @@
   },
   {
     "label": "reject",
-    "step": 9,
+    "step": 28,
     "screen": "Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7",
     "events": [
       {
@@ -624,7 +654,7 @@
   },
   {
     "label": "reject",
-    "step": 10,
+    "step": 29,
     "screen": "Change...ss (2/2) | smy9l6m",
     "events": [
       {
@@ -647,7 +677,7 @@
   },
   {
     "label": "reject",
-    "step": 11,
+    "step": 30,
     "screen": "Change path | m/86'/1'/0'/1/0",
     "events": [
       {
@@ -670,7 +700,7 @@
   },
   {
     "label": "reject",
-    "step": 12,
+    "step": 31,
     "screen": "Sign Pearl transfer",
     "events": [
       {
@@ -685,7 +715,7 @@
   },
   {
     "label": "reject",
-    "step": 13,
+    "step": 32,
     "screen": "Reject transaction",
     "events": [
       {
@@ -693,6 +723,344 @@
         "x": 11,
         "y": 34,
         "w": 106,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 0,
+    "screen": "Pearl simnet | app is ready",
+    "events": [
+      {
+        "text": "Pearl simnet",
+        "x": 28,
+        "y": 19,
+        "w": 72,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "app is ready",
+        "x": 32,
+        "y": 35,
+        "w": 63,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 19,
+    "screen": "Review Pearl transfer",
+    "events": [
+      {
+        "text": "Review Pearl transfer",
+        "x": 9,
+        "y": 27,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 20,
+    "screen": "Check address,  | amount and fee",
+    "events": [
+      {
+        "text": "Check address, ",
+        "x": 25,
+        "y": 18,
+        "w": 77,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "amount and fee",
+        "x": 22,
+        "y": 32,
+        "w": 84,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 21,
+    "screen": "Network | Pearl simnet",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 32,
+        "y": 33,
+        "w": 64,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 22,
+    "screen": "From account | m/86'/1'/0'",
+    "events": [
+      {
+        "text": "From account",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'",
+        "x": 38,
+        "y": 33,
+        "w": 52,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 23,
+    "screen": "Recipient (1/2) | rprl1pgsursm2qfzenc | 524cr364gzt8jcp5wj5c | wmcfmk6vds2p7lakp",
+    "events": [
+      {
+        "text": "Recipient (1/2)",
+        "x": 22,
+        "y": 3,
+        "w": 84,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1pgsursm2qfzenc",
+        "x": 9,
+        "y": 19,
+        "w": 109,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "524cr364gzt8jcp5wj5c",
+        "x": 7,
+        "y": 33,
+        "w": 114,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "wmcfmk6vds2p7lakp",
+        "x": 9,
+        "y": 47,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 24,
+    "screen": "Recipient (2/2) | zsj5ntyl",
+    "events": [
+      {
+        "text": "Recipient (2/2)",
+        "x": 21,
+        "y": 3,
+        "w": 85,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "zsj5ntyl",
+        "x": 44,
+        "y": 33,
+        "w": 39,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 25,
+    "screen": "Amount | 1.23456789 PRL",
+    "events": [
+      {
+        "text": "Amount",
+        "x": 42,
+        "y": 3,
+        "w": 44,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "1.23456789 PRL",
+        "x": 23,
+        "y": 33,
+        "w": 82,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 26,
+    "screen": "Fee | 0.00010000 PRL",
+    "events": [
+      {
+        "text": "Fee",
+        "x": 54,
+        "y": 3,
+        "w": 20,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "0.00010000 PRL",
+        "x": 24,
+        "y": 33,
+        "w": 80,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 27,
+    "screen": "Change | 51671.83474310 PRL",
+    "events": [
+      {
+        "text": "Change",
+        "x": 43,
+        "y": 3,
+        "w": 42,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "51671.83474310 PRL",
+        "x": 10,
+        "y": 33,
+        "w": 108,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 28,
+    "screen": "Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7",
+    "events": [
+      {
+        "text": "Change...ess (1/2)",
+        "x": 14,
+        "y": 3,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1pe2avzwvk5fxva",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "nucwcwfkrklzajt6r82g",
+        "x": 8,
+        "y": 33,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "2f9eqktmtuxtzmpkp7",
+        "x": 8,
+        "y": 47,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 29,
+    "screen": "Change...ss (2/2) | smy9l6m",
+    "events": [
+      {
+        "text": "Change...ss (2/2)",
+        "x": 17,
+        "y": 3,
+        "w": 93,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "smy9l6m",
+        "x": 41,
+        "y": 33,
+        "w": 46,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 30,
+    "screen": "Change path | m/86'/1'/0'/1/0",
+    "events": [
+      {
+        "text": "Change path",
+        "x": 28,
+        "y": 3,
+        "w": 71,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/1/0",
+        "x": 28,
+        "y": 33,
+        "w": 72,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "partial-export",
+    "step": 31,
+    "screen": "Sign Pearl transfer",
+    "events": [
+      {
+        "text": "Sign Pearl transfer",
+        "x": 10,
+        "y": 34,
+        "w": 108,
         "h": 14,
         "clear": false
       }
@@ -723,7 +1091,22 @@
   },
   {
     "label": "sign",
-    "step": 1,
+    "step": 17,
+    "screen": "Review Pearl transfer",
+    "events": [
+      {
+        "text": "Review Pearl transfer",
+        "x": 9,
+        "y": 27,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "step": 18,
     "screen": "Check address,  | amount and fee",
     "events": [
       {
@@ -746,7 +1129,7 @@
   },
   {
     "label": "sign",
-    "step": 2,
+    "step": 19,
     "screen": "Network | Pearl simnet",
     "events": [
       {
@@ -769,7 +1152,7 @@
   },
   {
     "label": "sign",
-    "step": 3,
+    "step": 20,
     "screen": "From account | m/86'/1'/0'",
     "events": [
       {
@@ -792,7 +1175,7 @@
   },
   {
     "label": "sign",
-    "step": 4,
+    "step": 21,
     "screen": "Recipient (1/2) | rprl1pgsursm2qfzenc | 524cr364gzt8jcp5wj5c | wmcfmk6vds2p7lakp",
     "events": [
       {
@@ -831,7 +1214,7 @@
   },
   {
     "label": "sign",
-    "step": 5,
+    "step": 22,
     "screen": "Recipient (2/2) | zsj5ntyl",
     "events": [
       {
@@ -854,7 +1237,7 @@
   },
   {
     "label": "sign",
-    "step": 6,
+    "step": 23,
     "screen": "Amount | 1.23456789 PRL",
     "events": [
       {
@@ -877,7 +1260,7 @@
   },
   {
     "label": "sign",
-    "step": 7,
+    "step": 24,
     "screen": "Fee | 0.00010000 PRL",
     "events": [
       {
@@ -900,7 +1283,7 @@
   },
   {
     "label": "sign",
-    "step": 8,
+    "step": 25,
     "screen": "Change | 51671.83474310 PRL",
     "events": [
       {
@@ -923,7 +1306,7 @@
   },
   {
     "label": "sign",
-    "step": 9,
+    "step": 26,
     "screen": "Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7",
     "events": [
       {
@@ -962,7 +1345,7 @@
   },
   {
     "label": "sign",
-    "step": 10,
+    "step": 27,
     "screen": "Change...ss (2/2) | smy9l6m",
     "events": [
       {
@@ -985,7 +1368,7 @@
   },
   {
     "label": "sign",
-    "step": 11,
+    "step": 28,
     "screen": "Change path | m/86'/1'/0'/1/0",
     "events": [
       {
@@ -1008,7 +1391,7 @@
   },
   {
     "label": "sign",
-    "step": 12,
+    "step": 29,
     "screen": "Sign Pearl transfer",
     "events": [
       {

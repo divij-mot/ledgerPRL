@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-nanosplus-simnet.elf",
+    "testedSnapshot": "/tmp/pearl-native-final-ct-nanosp-latency/tested-firmware.elf",
+    "sha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "inputCount": 16,
+  "rounds": 5,
+  "measurements": [
+    {
+      "label": "max16-round-1",
+      "gestureToResultMs": 5564.543279000001,
+      "gesture": "both-button press-and-release"
+    },
+    {
+      "label": "max16-round-2",
+      "gestureToResultMs": 5326.900383,
+      "gesture": "both-button press-and-release"
+    },
+    {
+      "label": "max16-round-3",
+      "gestureToResultMs": 5573.378708999997,
+      "gesture": "both-button press-and-release"
+    },
+    {
+      "label": "max16-round-4",
+      "gestureToResultMs": 5684.447864000002,
+      "gesture": "both-button press-and-release"
+    },
+    {
+      "label": "max16-round-5",
+      "gestureToResultMs": 5577.348742999995,
+      "gesture": "both-button press-and-release"
+    }
+  ],
+  "minMs": 5326.900383,
+  "medianMs": 5573.378708999997,
+  "maxMs": 5684.447864000002,
+  "scope": "Emulator wall time from starting final physical approval gesture through fetching and independently verifying all16 signatures; not device CPU or hardware timing",
+  "gestureIncludes": "default button press/release delay"
+}

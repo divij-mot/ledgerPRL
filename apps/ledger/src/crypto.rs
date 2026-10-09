@@ -42,6 +42,7 @@ fn check(result: u32) -> Result<(), Error> {
 // The function is compiled by the SDK's existing C bridge with SDK target
 // flags. Only the checked Ledger wrapper crosses C's exception boundary.
 unsafe extern "C" {
+    fn pearl_scalar_is_zero(scalar: *const u8) -> bool;
     fn pearl_derive_bip32_no_throw(
         path: *const u32,
         path_len: usize,
@@ -139,7 +140,10 @@ fn tweaked_key(path: &DerivationPath, key: &mut PrivateKey) -> Result<(), Error>
             32,
         )
     })?;
-    if key.0.d.iter().all(|b| *b == 0) {
+    // SAFETY: valid 32-byte scalar. The C bridge binds cx_math_is_zero's fixed
+    // full-length OR reduction with no throwing path. A short-circuit Rust
+    // predicate would leak leading-zero information about this secret scalar.
+    if unsafe { pearl_scalar_is_zero(key.0.d.as_ptr()) } {
         return Err(Error::Crypto);
     }
     Ok(())

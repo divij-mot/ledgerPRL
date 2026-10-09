@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "nanox",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-nanox-simnet.elf",
+    "testedSnapshot": "/tmp/pearl-native-final-ct-nanox-warnings/tested-firmware.elf",
+    "sha256": "4771a8b5349042bfac313e33e5b66229c2e76e327469e8af01c86dede68356a0",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "checks": [
+    "account-101",
+    "address-index-50001",
+    "high-fee-20-percent",
+    "input-index-50001",
+    "change-index-50001"
+  ]
+}

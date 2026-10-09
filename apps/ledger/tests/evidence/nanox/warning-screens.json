@@ -1,0 +1,1216 @@
+[
+  {
+    "label": "unusual-account",
+    "text": "Unusual account",
+    "events": [
+      {
+        "text": "Unusual account",
+        "x": 20,
+        "y": 27,
+        "w": 87,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Unusual account | m/86'/1'/101'",
+    "events": [
+      {
+        "text": "Unusual account",
+        "x": 17,
+        "y": 3,
+        "w": 94,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/101'",
+        "x": 32,
+        "y": 33,
+        "w": 64,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Review anyway",
+    "events": [
+      {
+        "text": "Review anyway",
+        "x": 18,
+        "y": 34,
+        "w": 91,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Export Pearl account",
+    "events": [
+      {
+        "text": "Export Pearl account",
+        "x": 10,
+        "y": 27,
+        "w": 107,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Watch-only public  | data",
+    "events": [
+      {
+        "text": "Watch-only public ",
+        "x": 17,
+        "y": 18,
+        "w": 94,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "data",
+        "x": 52,
+        "y": 32,
+        "w": 23,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Network | Pearl simnet",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 32,
+        "y": 33,
+        "w": 64,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Account path | m/86'/1'/101'",
+    "events": [
+      {
+        "text": "Account path",
+        "x": 26,
+        "y": 3,
+        "w": 75,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/101'",
+        "x": 32,
+        "y": 33,
+        "w": 64,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Master fingerprint | 3442193e",
+    "events": [
+      {
+        "text": "Master fingerprint",
+        "x": 10,
+        "y": 3,
+        "w": 108,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "3442193e",
+        "x": 38,
+        "y": 33,
+        "w": 52,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Privacy | Companion can view  | all addresses in this  | account",
+    "events": [
+      {
+        "text": "Privacy",
+        "x": 42,
+        "y": 3,
+        "w": 43,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Companion can view ",
+        "x": 9,
+        "y": 19,
+        "w": 109,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "all addresses in this ",
+        "x": 13,
+        "y": 33,
+        "w": 101,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "account",
+        "x": 43,
+        "y": 47,
+        "w": 41,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Approve export",
+    "events": [
+      {
+        "text": "Approve export",
+        "x": 19,
+        "y": 34,
+        "w": 89,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Unusual address path",
+    "events": [
+      {
+        "text": "Unusual address path",
+        "x": 7,
+        "y": 27,
+        "w": 113,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Unusual...ess path | m/86'/1'/0'/0/50001",
+    "events": [
+      {
+        "text": "Unusual...ess path",
+        "x": 12,
+        "y": 3,
+        "w": 103,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/0/50001",
+        "x": 16,
+        "y": 33,
+        "w": 96,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Review anyway",
+    "events": [
+      {
+        "text": "Review anyway",
+        "x": 18,
+        "y": 34,
+        "w": 91,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Verify Pearl address",
+    "events": [
+      {
+        "text": "Verify Pearl address",
+        "x": 12,
+        "y": 27,
+        "w": 103,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Compare the full  | address",
+    "events": [
+      {
+        "text": "Compare the full ",
+        "x": 20,
+        "y": 18,
+        "w": 88,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "address",
+        "x": 44,
+        "y": 32,
+        "w": 40,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Address (1/2) | rprl1pv76y9lk3pvwq8j | vw9zldnz4j5p4pwfqs | lxjqqmupxgr2s22mjn",
+    "events": [
+      {
+        "text": "Address (1/2)",
+        "x": 26,
+        "y": 3,
+        "w": 75,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1pv76y9lk3pvwq8j",
+        "x": 7,
+        "y": 19,
+        "w": 114,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "vw9zldnz4j5p4pwfqs",
+        "x": 7,
+        "y": 33,
+        "w": 113,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "lxjqqmupxgr2s22mjn",
+        "x": 9,
+        "y": 47,
+        "w": 109,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Address (2/2) | 3ssz9qyr",
+    "events": [
+      {
+        "text": "Address (2/2)",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "3ssz9qyr",
+        "x": 42,
+        "y": 33,
+        "w": 44,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Network | Pearl simnet",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 32,
+        "y": 33,
+        "w": 64,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Derivation | m/86'/1'/0'/0/50001",
+    "events": [
+      {
+        "text": "Derivation",
+        "x": 33,
+        "y": 3,
+        "w": 61,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/0/50001",
+        "x": 16,
+        "y": 33,
+        "w": 96,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Type | BIP86 no-script  | Taproot",
+    "events": [
+      {
+        "text": "Type",
+        "x": 50,
+        "y": 3,
+        "w": 27,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "BIP86 no-script ",
+        "x": 25,
+        "y": 26,
+        "w": 78,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Taproot",
+        "x": 43,
+        "y": 40,
+        "w": 42,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Confirm",
+    "events": [
+      {
+        "text": "Confirm",
+        "x": 41,
+        "y": 34,
+        "w": 46,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Pearl simnet | app is ready",
+    "events": [
+      {
+        "text": "Pearl simnet",
+        "x": 28,
+        "y": 19,
+        "w": 72,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "app is ready",
+        "x": 32,
+        "y": 35,
+        "w": 63,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "High transaction fee",
+    "events": [
+      {
+        "text": "High transaction fee",
+        "x": 11,
+        "y": 27,
+        "w": 105,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "High tr...tion fee | Fee 0.00200000 PRL is  | at least 10% of inputs",
+    "events": [
+      {
+        "text": "High tr...tion fee",
+        "x": 17,
+        "y": 3,
+        "w": 94,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Fee 0.00200000 PRL is ",
+        "x": 8,
+        "y": 26,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "at least 10% of inputs",
+        "x": 8,
+        "y": 40,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Review anyway",
+    "events": [
+      {
+        "text": "Review anyway",
+        "x": 18,
+        "y": 34,
+        "w": 91,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Review Pearl transfer",
+    "events": [
+      {
+        "text": "Review Pearl transfer",
+        "x": 9,
+        "y": 27,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Check address,  | amount and fee",
+    "events": [
+      {
+        "text": "Check address, ",
+        "x": 25,
+        "y": 18,
+        "w": 77,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "amount and fee",
+        "x": 22,
+        "y": 32,
+        "w": 84,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Network | Pearl simnet",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 32,
+        "y": 33,
+        "w": 64,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "From account | m/86'/1'/0'",
+    "events": [
+      {
+        "text": "From account",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'",
+        "x": 38,
+        "y": 33,
+        "w": 52,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Recipient (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924",
+    "events": [
+      {
+        "text": "Recipient (1/2)",
+        "x": 22,
+        "y": 3,
+        "w": 84,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1ptkfg5hcsgxwuu",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "5qf3j9q2uk9cmyc8n0",
+        "x": 9,
+        "y": 33,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "u29d3eyhf8q069j924",
+        "x": 9,
+        "y": 47,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Recipient (2/2) | e8scdxtvf",
+    "events": [
+      {
+        "text": "Recipient (2/2)",
+        "x": 21,
+        "y": 3,
+        "w": 85,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "e8scdxtvf",
+        "x": 39,
+        "y": 33,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Amount | 0.00800000 PRL",
+    "events": [
+      {
+        "text": "Amount",
+        "x": 42,
+        "y": 3,
+        "w": 44,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "0.00800000 PRL",
+        "x": 24,
+        "y": 33,
+        "w": 80,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Fee | 0.00200000 PRL",
+    "events": [
+      {
+        "text": "Fee",
+        "x": 54,
+        "y": 3,
+        "w": 20,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "0.00200000 PRL",
+        "x": 24,
+        "y": 33,
+        "w": 80,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Change | None",
+    "events": [
+      {
+        "text": "Change",
+        "x": 43,
+        "y": 3,
+        "w": 42,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "None",
+        "x": 50,
+        "y": 33,
+        "w": 28,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Change address | None",
+    "events": [
+      {
+        "text": "Change address",
+        "x": 19,
+        "y": 3,
+        "w": 90,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "None",
+        "x": 50,
+        "y": 33,
+        "w": 28,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Change path | None",
+    "events": [
+      {
+        "text": "Change path",
+        "x": 28,
+        "y": 3,
+        "w": 71,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "None",
+        "x": 50,
+        "y": 33,
+        "w": 28,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Sign Pearl transfer",
+    "events": [
+      {
+        "text": "Sign Pearl transfer",
+        "x": 10,
+        "y": 34,
+        "w": 108,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Pearl simnet | app is ready",
+    "events": [
+      {
+        "text": "Pearl simnet",
+        "x": 28,
+        "y": 19,
+        "w": 72,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "app is ready",
+        "x": 32,
+        "y": 35,
+        "w": 63,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Unusual input path",
+    "events": [
+      {
+        "text": "Unusual input path",
+        "x": 13,
+        "y": 27,
+        "w": 101,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Unusual input path | m/86'/1'/0'/0/50001",
+    "events": [
+      {
+        "text": "Unusual input path",
+        "x": 10,
+        "y": 3,
+        "w": 108,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/0/50001",
+        "x": 16,
+        "y": 33,
+        "w": 96,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Review anyway",
+    "events": [
+      {
+        "text": "Review anyway",
+        "x": 18,
+        "y": 34,
+        "w": 91,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Unusual change path",
+    "events": [
+      {
+        "text": "Unusual change path",
+        "x": 9,
+        "y": 27,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Unusual...ge path | m/86'/1'/0'/1/50001",
+    "events": [
+      {
+        "text": "Unusual...ge path",
+        "x": 15,
+        "y": 3,
+        "w": 98,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/1/50001",
+        "x": 16,
+        "y": 33,
+        "w": 96,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Review anyway",
+    "events": [
+      {
+        "text": "Review anyway",
+        "x": 18,
+        "y": 34,
+        "w": 91,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Review Pearl transfer",
+    "events": [
+      {
+        "text": "Review Pearl transfer",
+        "x": 9,
+        "y": 27,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Check address,  | amount and fee",
+    "events": [
+      {
+        "text": "Check address, ",
+        "x": 25,
+        "y": 18,
+        "w": 77,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "amount and fee",
+        "x": 22,
+        "y": 32,
+        "w": 84,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Network | Pearl simnet",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 32,
+        "y": 33,
+        "w": 64,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "From account | m/86'/1'/0'",
+    "events": [
+      {
+        "text": "From account",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'",
+        "x": 38,
+        "y": 33,
+        "w": 52,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Recipient (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924",
+    "events": [
+      {
+        "text": "Recipient (1/2)",
+        "x": 22,
+        "y": 3,
+        "w": 84,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1ptkfg5hcsgxwuu",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "5qf3j9q2uk9cmyc8n0",
+        "x": 9,
+        "y": 33,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "u29d3eyhf8q069j924",
+        "x": 9,
+        "y": 47,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Recipient (2/2) | e8scdxtvf",
+    "events": [
+      {
+        "text": "Recipient (2/2)",
+        "x": 21,
+        "y": 3,
+        "w": 85,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "e8scdxtvf",
+        "x": 39,
+        "y": 33,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Amount | 90071992.54740000  | PRL",
+    "events": [
+      {
+        "text": "Amount",
+        "x": 42,
+        "y": 3,
+        "w": 44,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "90071992.54740000 ",
+        "x": 12,
+        "y": 26,
+        "w": 103,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "PRL",
+        "x": 54,
+        "y": 40,
+        "w": 20,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Fee | 0.00001000 PRL",
+    "events": [
+      {
+        "text": "Fee",
+        "x": 54,
+        "y": 3,
+        "w": 20,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "0.00001000 PRL",
+        "x": 24,
+        "y": 33,
+        "w": 80,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Change | 9.99999993 PRL",
+    "events": [
+      {
+        "text": "Change",
+        "x": 43,
+        "y": 3,
+        "w": 42,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "9.99999993 PRL",
+        "x": 24,
+        "y": 33,
+        "w": 80,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Change...ess (1/2) | rprl1pxkmzccmyd595c | 8qyujuksnf9r85yyf7m | p24hjcwu53nj59t45x",
+    "events": [
+      {
+        "text": "Change...ess (1/2)",
+        "x": 14,
+        "y": 3,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1pxkmzccmyd595c",
+        "x": 7,
+        "y": 19,
+        "w": 114,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "8qyujuksnf9r85yyf7m",
+        "x": 7,
+        "y": 33,
+        "w": 114,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "p24hjcwu53nj59t45x",
+        "x": 9,
+        "y": 47,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Change...ss (2/2) | xqtltxz3",
+    "events": [
+      {
+        "text": "Change...ss (2/2)",
+        "x": 17,
+        "y": 3,
+        "w": 93,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "xqtltxz3",
+        "x": 43,
+        "y": 33,
+        "w": 41,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Change path | m/86'/1'/0'/1/50001",
+    "events": [
+      {
+        "text": "Change path",
+        "x": 28,
+        "y": 3,
+        "w": 71,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/1/50001",
+        "x": 16,
+        "y": 33,
+        "w": 96,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Sign Pearl transfer",
+    "events": [
+      {
+        "text": "Sign Pearl transfer",
+        "x": 10,
+        "y": 34,
+        "w": 108,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  }
+]

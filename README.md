@@ -29,10 +29,12 @@ The frontend and narrow light-service proxy run locally together. No public web 
 
 ## Verify source and fixtures
 
+Host Rust tests use Rust 1.99.0 with Clippy and rustfmt, matching CI. The core library declares Rust 1.81, but its locked test dependencies need newer Rust; that library minimum is not a supported host-test toolchain. Native firmware uses its separate pinned nightly described below.
+
 ```sh
 npm run check
-cargo test --locked --workspace
-cargo clippy --locked --workspace --all-targets -- -D warnings
+cargo +1.99.0 test --locked --workspace
+cargo +1.99.0 clippy --locked --workspace --all-targets -- -D warnings
 (cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json)
 ```
 

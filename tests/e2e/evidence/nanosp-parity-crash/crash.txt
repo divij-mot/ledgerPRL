@@ -1,0 +1,4 @@
+[*] using API_LEVEL version 27 on nanosp
+[*] Env app name: 'Pearl Sim Dev'
+[*] Env app version: '0.1.0'
+[-] The app crashed with signal 11

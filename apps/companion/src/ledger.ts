@@ -51,16 +51,33 @@ export class PearlCommand implements Command<Uint8Array> {
 export class DmkPearlTransport implements ApduTransport {
   private closed = false;
   private busy = false;
+  private readonly terminal = new AbortController();
+  private readonly disconnected = () => {
+    void this.close();
+    this.onDisconnect?.();
+  };
   constructor(
     private readonly dmk: DeviceManagementKit,
     private readonly sessionId: string,
-  ) {}
+    private readonly disconnectEvents:
+      | EventTarget
+      | undefined = typeof navigator !== "undefined"
+      ? (navigator as Navigator & { hid?: EventTarget }).hid
+      : undefined,
+    private readonly onDisconnect?: () => void,
+  ) {
+    this.disconnectEvents?.addEventListener("disconnect", this.disconnected);
+  }
   async exchange(apdu: Uint8Array, signal?: AbortSignal): Promise<Uint8Array> {
     assert(!this.closed && !this.busy, "Device session closed or busy");
     if (signal?.aborted) {
       await this.close();
       throw new Error("Device operation cancelled; reconnect before retrying");
     }
+    signal = AbortSignal.any([
+      this.terminal.signal,
+      ...(signal ? [signal] : []),
+    ]);
     this.busy = true;
     let abort: (() => void) | undefined;
     try {
@@ -98,6 +115,10 @@ export class DmkPearlTransport implements ApduTransport {
   async close(): Promise<void> {
     if (this.closed) return;
     this.closed = true;
+    this.disconnectEvents?.removeEventListener("disconnect", this.disconnected);
+    this.terminal.abort(
+      new Error("Physical disconnect ended the Pearl session"),
+    );
     try {
       let timer: ReturnType<typeof setTimeout> | undefined;
       try {
@@ -120,7 +141,9 @@ export class DmkPearlTransport implements ApduTransport {
     }
   }
 }
-export async function connectLedger(): Promise<DmkPearlTransport> {
+export async function connectLedger(
+  onDisconnect?: () => void,
+): Promise<DmkPearlTransport> {
   assert(
     window.isSecureContext && "hid" in navigator,
     "WebHID is unavailable. Use desktop Chrome or Edge on localhost or HTTPS.",
@@ -138,7 +161,12 @@ export async function connectLedger(): Promise<DmkPearlTransport> {
       device,
       sessionRefresherOptions: { isRefresherDisabled: true },
     });
-    return new DmkPearlTransport(dmk, sessionId);
+    return new DmkPearlTransport(
+      dmk,
+      sessionId,
+      (navigator as Navigator & { hid: EventTarget }).hid,
+      onDisconnect,
+    );
   } catch (error) {
     dmk.close();
     throw error;

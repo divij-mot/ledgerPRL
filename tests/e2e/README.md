@@ -6,7 +6,7 @@ Use development emulators only. The deterministic seed is the **public BIP32 vec
 
 ## Dependencies
 
-- Node.js 22+ and the repository's locked npm dependencies
+- Node.js 24.19.0 or a newer compatible 24.x release and the repository's locked npm dependencies
 - Pinned native Ledger SDKs and target toolchain, installed by the firmware build workflow
 - Speculos 0.27.1 and QEMU runtime libraries
 - A Pearl `pearld` binary built from the source pin in `docs/e2e-evidence.md`
@@ -21,22 +21,35 @@ The runner's defaults match the isolated implementation environment. Override pa
     PEARL_E2E_OUTPUT=/fresh/output/directory \
     node --import tsx tests/e2e/native-node-roundtrip.ts
 
-`SPECULOS_MODEL=nanosp` is the default. `nanox` uses the button driver; `stax`, `flex`, and `apex_p` use physical swipe/tap/hold automation. `SPECULOS_API_LEVEL`, `SPECULOS_API_PORT`, and `PEARL_RPC_PORT` can be changed for the installed runtime. Set `PEARL_E2E_INPUTS=16` for the full 1,507-byte input-cap test (default: two inputs).
+`SPECULOS_MODEL=nanosp` is the default. `nanox` uses the button driver; `stax`, `flex`, and `apex_p` use emulated swipe/tap/hold automation. `SPECULOS_API_LEVEL`, `SPECULOS_API_PORT`, and `PEARL_RPC_PORT` can be changed for the installed runtime. Set `PEARL_E2E_INPUTS=16` for the full 1,507-byte input-cap test (default: two inputs).
 
 Run the entire harness in one process tree: sandbox executor calls can have separate network namespaces. It spawns both servers and the client itself, uses fresh data directories, verifies the simnet genesis and zero peers, and terminates both children. The RPC credentials are public test-only strings. Speculos exposes its test API and must run in an isolated development environment.
 
 ## Assertions and evidence
 
 1. Native capabilities advertise the expected simnet network and protocol bounds.
-2. Physically simulated export approval returns the expected public test account.
+2. Emulated button/touch export approval returns the expected public test account.
 3. Device-approved receive address matches public-only BIP86 derivation.
 4. Out-of-order commands fail closed and do not release signatures.
 5. Pearl mines 101 blocks (115 for the 16-input cap) to the device-derived address; account discovery scans receive and change branches and reconstructs exact amounts from raw transactions.
-6. A wrong-network bundle is rejected before signing; user rejection releases no signature.
-7. A two- or 16-input send, with an exact eight-decimal recipient amount and change, is reviewed and signed on the native app. The SDK independently verifies both 64-byte BIP340 witnesses.
+6. Wrong-network, forged input/change and bundle-hash substitutions are rejected before signing. User rejection, abort before review and abort after one exported signature clear the remaining session; consumed signatures cannot be replayed.
+7. A two- or 16-input send, with an exact eight-decimal recipient amount and change, is reviewed and signed on the native app. The SDK independently verifies every 64-byte BIP340 witness.
 8. Pearl rejects a bit-flipped witness, accepts the genuine transaction, and mines it. Exact raw transaction bytes, recipient/change, and input removal are checked.
 9. A fresh discovery finds recipient/change and removes spent coins. Invalidating/reconsidering the confirmation block tests detachment and restoration.
 
 Outputs include JSON status for every case actually reached, public APDU transcript, captured review screens, node/emulator logs, watch snapshots, canonical signing bundle and signed transaction. A failure is recorded with its stage; subsequent cases are **not run**, never presumed passing. The runner exits nonzero on any failure.
 
-The node's `gettxout` RPC does not remove confirmed outputs spent only in its mempool. This harness checks input removal after mining; production freshness logic must separately account for mempool spends. The test source is not a production RPC wallet adapter.
+The node's `gettxout` RPC does not remove confirmed outputs spent only in its mempool. This harness verifies that production `checkSnapshot` independently excludes those mempool spends before mining, and that confirmed input removal works after mining. The test source is not a production RPC wallet adapter.
+
+## Immutable artifacts and parity coverage
+
+Every run copies the ELF into its fresh output directory, hashes the copied bytes, and executes that snapshot. Never overwrite an ELF inode while Speculos maps it. The compact retention tool verifies the snapshot hash before retaining public evidence and deliberately excludes binary files:
+
+    python3 tests/e2e/retain-evidence.py /fresh/run/output nanosp
+
+Set `PEARL_E2E_PARITY=1` for a separate four-input run spending receive indices 0, 3, 4 and 9. It mines 200 blocks among four derived addresses and selects mature outputs covering every internal-key/output-key Y-parity combination. `parity-vectors.json` was generated with the pinned Pearl implementation by the public-only `parity-oracle/main.go`; it derives from account public key and chain code, never a seed or private key. To regenerate:
+
+    cd tools/pearl-oracle
+    go run ../../tests/e2e/parity-oracle/main.go /absolute/path/to/account-public.json
+
+The account JSON can be the public export retained by the native runner. The parity run also requires the device export to match the published test vector. Final validation still uses genuine native signatures and the actual Pearl consensus engine.

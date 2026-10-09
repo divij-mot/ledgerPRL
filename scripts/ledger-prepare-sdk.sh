@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
+command -v flock >/dev/null || { echo "Missing flock (util-linux); use the official Linux Ledger builder" >&2; exit 1; }
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 VENDOR="$ROOT/apps/ledger/vendor"
 RUST_REV=4123d2dc85a2085115e6a36826460a9fe742cfb1
 SECURE_REV=6709cd2bdfebb224ee070f7c1211b54254262579
 mkdir -p "$VENDOR"
+# Different device builds may prepare the same pinned checkouts concurrently.
+exec 8>"$VENDOR/.prepare.lock"
+flock 8
 checkout() {
   local name="$1" revision="$2"
   if [[ ! -d "$VENDOR/$name/.git" ]]; then

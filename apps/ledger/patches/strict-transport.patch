@@ -1,5 +1,5 @@
 diff --git a/ledger_device_sdk/src/io_new.rs b/ledger_device_sdk/src/io_new.rs
-index ac67196..c5d7bae 100644
+index ac67196..50f6b36 100644
 --- a/ledger_device_sdk/src/io_new.rs
 +++ b/ledger_device_sdk/src/io_new.rs
 @@ -133,6 +133,10 @@ pub enum Event<'a, const N: usize = DEFAULT_BUF_SIZE> {
@@ -46,11 +46,12 @@ index ac67196..c5d7bae 100644
      }
  
      /// Receive the next event, answering on the spot the APDUs that are not for
-@@ -305,7 +319,40 @@ impl<const N: usize> Comm<N> {
+@@ -305,13 +319,64 @@ impl<const N: usize> Comm<N> {
          let in_flight_apdu_type = self.apdu_type;
          let in_progress = self.apdu_in_progress;
  
 -        let sw: Reply = match self.recv_event() {
+-            RawEvent::Apdu { header, .. }
 +        let event = self.recv_event();
 +        if matches!(event, RawEvent::SessionFault) {
 +            self.strict_faulted = true;
@@ -85,19 +86,46 @@ index ac67196..c5d7bae 100644
 +            }
 +        }
 +        let sw: Reply = match event {
-             RawEvent::Apdu { header, .. }
++            RawEvent::Apdu { header, length, .. }
                  if header.cla == 0xB0
                      && (!in_progress
-@@ -333,7 +380,7 @@ impl<const N: usize> Comm<N> {
+                         || is_bolos_apdu_allowed_in_flight(header.cla, header.ins)) =>
+             {
+-                handle_bolos_apdu::<N>(self, header.ins, header.p1, header.p2);
++                // Pearl does not use PKI/trusted-name certificates or swaps.
++                // Keep only the standard idle information/quit surface. Debug
++                // stack measurement exists solely in instrumented binaries.
++                let allowed = matches!(header.ins, 0x01 | 0xa7)
++                    || cfg!(feature = "stack_usage") && header.ins == 0x57;
++                let parameters_ok = if header.ins == 0x57 {
++                    header.p1 <= 1 && header.p2 == 1
++                } else {
++                    header.p1 == 0 && header.p2 == 0
++                };
++                if !allowed {
++                    self.reject_apdu(self.apdu_type, Reply(0x6d00));
++                } else if length != 0 {
++                    self.reject_apdu(self.apdu_type, Reply(0x6700));
++                } else if !parameters_ok {
++                    self.reject_apdu(self.apdu_type, Reply(0x6a86));
++                } else {
++                    handle_bolos_apdu::<N>(self, header.ins, header.p1, header.p2);
++                }
+                 // The BOLOS reply must not be taken for the reply to the
+                 // command in flight.
+                 self.apdu_in_progress = in_progress;
+@@ -333,7 +398,9 @@ impl<const N: usize> Comm<N> {
              {
                  StatusWords::CmdNotAccepted.into()
              }
 -            RawEvent::ApduError { error, .. } => StatusWords::from(error).into(),
-+            RawEvent::ApduError { .. } => Reply(0x6700), // Pearl wrong-length status
++            RawEvent::ApduError { error, .. } => match error {
++                ApduError::BadLen => Reply(0x6700), // Pearl wrong-length status
++            },
              event => return event,
          };
          self.reject_apdu(self.apdu_type, sw);
-@@ -380,6 +427,8 @@ impl<const N: usize> Comm<N> {
+@@ -380,6 +447,8 @@ impl<const N: usize> Comm<N> {
              #[cfg(any(target_os = "stax", target_os = "flex", target_os = "apex_p"))]
              RawEvent::Touch => Event::Touch,
              RawEvent::Ticker => Event::Ticker,
@@ -106,7 +134,7 @@ index ac67196..c5d7bae 100644
              RawEvent::ApduError { .. } | RawEvent::Ignored => Event::Internal,
          }
      }
-@@ -412,6 +461,17 @@ impl<const N: usize> Comm<N> {
+@@ -412,6 +481,17 @@ impl<const N: usize> Comm<N> {
      /// let mut comm = Comm::new();
      /// comm.set_expected_cla(0xE0);
      /// ```
@@ -140,7 +168,7 @@ index 5945a7c..7f15af5 100644
      }
  }
 diff --git a/ledger_device_sdk/src/io_new/event.rs b/ledger_device_sdk/src/io_new/event.rs
-index 57a2e1e..f6f9331 100644
+index 57a2e1e..4064e80 100644
 --- a/ledger_device_sdk/src/io_new/event.rs
 +++ b/ledger_device_sdk/src/io_new/event.rs
 @@ -35,6 +35,8 @@ pub(crate) enum RawEvent {
@@ -164,17 +192,49 @@ index 57a2e1e..f6f9331 100644
          }
  
          let pt = comm.buf[0];
-@@ -56,6 +61,9 @@ impl RawEvent {
+@@ -56,6 +61,12 @@ impl RawEvent {
                  // Copy out SEPH payload (like original) or reinterpret in place.
                  // Optimization: we can borrow slice without copying because io_buffer stores
                  // [packet_type][payload...].
-+                if len < 4 || 4 + u16::from_be_bytes([comm.buf[2], comm.buf[3]]) as usize > len {
-+                    return RawEvent::Ignored;
++                if len < 4 || 4 + u16::from_be_bytes([comm.buf[2], comm.buf[3]]) as usize != len {
++                    return RawEvent::SessionFault;
++                }
++                if !Self::valid_seph_payload(comm.buf[1], &comm.buf[4..len]) {
++                    return RawEvent::SessionFault;
 +                }
                  Self::decode_seph_event(comm, 1)
              }
              PacketTypes::PacketTypeRawApdu
-@@ -102,7 +110,7 @@ impl RawEvent {
+@@ -78,6 +89,28 @@ impl RawEvent {
+         }
+     }
+ 
++    // Validate the actual received payload before any Rust index or C UX
++    // handler can read it. Never let stale bytes in Comm impersonate UI input.
++    fn valid_seph_payload(tag: u8, data: &[u8]) -> bool {
++        match tag as u32 {
++            SEPROXYHAL_TAG_BUTTON_PUSH_EVENT => data.len() == 1 && data[0] & !6 == 0,
++            // Current pinned targets do not enable HAVE_HW_TOUCH_SWIPE.
++            SEPROXYHAL_TAG_FINGER_EVENT => data.len() == 5 && matches!(data[0], 1 | 2),
++            SEPROXYHAL_TAG_TICKER_EVENT | SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT => data.is_empty(),
++            SEPROXYHAL_TAG_STATUS_EVENT => data.len() == 4,
++            SEPROXYHAL_TAG_ITC_EVENT => {
++                if data.is_empty() { return false; }
++                match data[0] {
++                    ITC_UX_REDISPLAY => data.len() == 1,
++                    ITC_UX_ASK_BLE_PAIRING => (2..=17).contains(&data.len()) && data[1] <= 1,
++                    ITC_UX_BLE_PAIRING_STATUS => data.len() == 2,
++                    _ => true,
++                }
++            }
++            _ => true,
++        }
++    }
++
+     /// True if a PIN is set and has not been validated yet.
+     fn is_device_locked() -> bool {
+         unsafe {
+@@ -102,7 +135,7 @@ impl RawEvent {
                  if let Some(btn_evt) = get_button_event(&mut comm.buttons, button_info) {
                      return RawEvent::Button(btn_evt);
                  }
@@ -183,7 +243,7 @@ index 57a2e1e..f6f9331 100644
              }
  
              // SCREEN TOUCH EVENT
-@@ -172,7 +180,7 @@ impl RawEvent {
+@@ -172,7 +205,7 @@ impl RawEvent {
                      }
                      _ => {}
                  }
@@ -192,7 +252,7 @@ index 57a2e1e..f6f9331 100644
              }
              // DEFAULT EVENT
              _ => {
-@@ -189,7 +197,20 @@ impl RawEvent {
+@@ -189,7 +222,20 @@ impl RawEvent {
                  if !cfg!(feature = "nano_nbgl") {
                      crate::uxapp::UxEvent::Event.request();
                  }
@@ -214,7 +274,7 @@ index 57a2e1e..f6f9331 100644
              }
          }
      }
-@@ -221,31 +242,16 @@ impl RawEvent {
+@@ -221,31 +267,16 @@ impl RawEvent {
              p1: apdu_buffer[2],
              p2: apdu_buffer[3],
          };
@@ -276,10 +336,10 @@ index d90e877..c26a9a5 100644
  static mut G_CONFIRM_ASK_WHEN_FALSE: bool = false;
  
 diff --git a/ledger_secure_sdk_sys/src/c/src.c b/ledger_secure_sdk_sys/src/c/src.c
-index cd171f2..9400580 100644
+index cd171f2..06c156f 100644
 --- a/ledger_secure_sdk_sys/src/c/src.c
 +++ b/ledger_secure_sdk_sys/src/c/src.c
-@@ -396,3 +396,20 @@ int c_main(int arg0) {
+@@ -396,3 +396,25 @@ int c_main(int arg0) {
    }
    return 0;
  }
@@ -299,4 +359,9 @@ index cd171f2..9400580 100644
 +    }
 +    return os_derive_bip32_no_throw(CX_CURVE_SECP256K1, path,
 +                                     (unsigned int) path_len, raw_private, chain_code);
++}
++
++/* Fixed-length SDK zero predicate: constant-time and no exception path. */
++bool pearl_scalar_is_zero(const uint8_t scalar[static 32]) {
++    return cx_math_is_zero(scalar, 32);
 +}

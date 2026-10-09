@@ -143,11 +143,17 @@ async function readMempool(
   const ids = value.map(hash).sort();
   assert(new Set(ids).size === ids.length, "Duplicate mempool transaction");
   const spent = new Map<string, string>();
+  let rawMempoolBytes = 0;
   for (const id of ids) {
     const raw = await rpc("getrawtransaction", [id, 0]);
     assert(
       typeof raw === "string" && raw.length <= 1_000_000,
       "Mempool transaction unavailable",
+    );
+    rawMempoolBytes += raw.length;
+    assert(
+      rawMempoolBytes <= 3 * 1024 * 1024,
+      "Aggregate raw mempool exceeds validation budget",
     );
     const tx = parseTransaction(raw);
     assert(tx.txid === id, "Mempool raw transaction mismatch");

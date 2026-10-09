@@ -1,12 +1,14 @@
 {
-  "startedAt": "2026-10-09T14:57:53.227Z",
+  "startedAt": "2026-10-09T15:10:50.584Z",
   "network": "simnet",
   "inputCount": 16,
   "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
   "firmware": {
     "path": "apps/ledger/target/artifacts/pearl-nanosplus-simnet.elf",
-    "sha256": "47081ea7a102740b881d0b3b20007128135273024c40388354f002e461e534b0",
-    "model": "nanosp"
+    "snapshot": "native-snapshot.elf",
+    "sha256": "36b555b44b5bb73e926ae2c06696a08d9de4d10d7cace69df8142548688d11be",
+    "model": "nanosp",
+    "snapshotRetainedInRepository": false
   },
   "pearlNode": {
     "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
@@ -61,6 +63,14 @@
       "status": "passed"
     },
     {
+      "name": "native explicit abort before review clears transferred bundle",
+      "status": "passed"
+    },
+    {
+      "name": "native abort after approval and partial signature export wipes remainder",
+      "status": "passed"
+    },
+    {
       "name": "native 16-input BIP340 signing and independent host verification",
       "status": "passed"
     },
@@ -101,7 +111,7 @@
     "maxBundleSize": 1507
   },
   "accountTiming": {
-    "totalWallMs": 2620,
+    "totalWallMs": 2610,
     "afterApprovalWallMs": 204
   },
   "account": {
@@ -112,18 +122,22 @@
     "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
   },
   "addressTiming": {
-    "totalWallMs": 2984,
-    "afterApprovalWallMs": 204
+    "totalWallMs": 3146,
+    "afterApprovalWallMs": 205
   },
-  "minedFirstBlock": "3a94c674bd7fd9bed09e89d27c9c3466e30bc44ea38b51737f2268846750a63d",
+  "minedFirstBlock": "1b5bf2ba306824846a80efb43beaed135d02550371e55fe3eef0d0a9810653fe",
+  "partial-exportTiming": {
+    "totalWallMs": 13534,
+    "afterApprovalWallMs": 5810
+  },
   "signTiming": {
-    "totalWallMs": 12874,
-    "afterApprovalWallMs": 5600
+    "totalWallMs": 13543,
+    "afterApprovalWallMs": 6084
   },
   "transaction": {
     "bundleBytes": 1507,
     "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
-    "wtxid": "d495f1df3d20acebcbada43e114aded00fa10648a539accb8bf6aa22e492aa1b",
+    "wtxid": "c62b370e25343327e3f5c09134e018f41004f8176a680f2efcd4a27158f33c7a",
     "vsize": 1017,
     "inputs": 16,
     "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
@@ -131,26 +145,26 @@
     "feeGrains": "10000",
     "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
     "signatures": [
-      "66e8c0814c7bb3d8e262bb35e21be790767f17245aa2535bdbc13d2e1f162f0b1db79877cde7b4a1f20efa408a3b7e51c48260adc8fc043ee70af15038434da9",
-      "1143942dca03d9846fc3e8c48db90a6a4e376a665692ccf622b4a5b4ed9efeaa741168de0a8a98b4d2d86256016494a36cc47a107005d497433a5b94df7f9765",
-      "3e10bf1ad67c52e1a8e1ffd69e53f48a2a57b3d89d9ecfac7039ba205a372136f6d312ff5d48efa5936969ce93d4258cbf68bc5bb5b3e23c89c711d61d5bf96b",
-      "e2276aca2e146fae7f863eb3b25eeb27b3d7dc14ae05cf6834a5fcc7a09b9ad778347102b73a846a0f8476a6a8307af981a33f7d889be872b0fd52461772a3f9",
-      "46afe35e6144638a1b4e874b827329acc2a3f9e99b25579b64da48e8ab0c4ec707a621a7c07b6df18c03c8438b89c2565f37a8c8713a7f15586f5b45273778d4",
-      "e6e0b3c2aa6b348434cd2cc3ef2ec992b6f1e8affaa27c5178e2a8bc05fc3607d40dbcc3ed0a13d75155346312bf0764438d9ab5bb8b7abf88da7ae2c6b02866",
-      "ae899179f49426cfdb4d0649b4a8a399798a00cacc9f6715cb102912308c5cd6920480ab07d8a5f808ddf76dfec1d9b8cdf48f902167c8f4388a356152f9859f",
-      "2cf603964f910a5581aa2c0468f4b03fb676db934eaba9b0ccfad0626396d29f16e3b68bda07866af11ea85cde90bb4f7412325af9d873853bb4e9b3cb0429a0",
-      "b5534e872667d8fbb50afd0f1a0273719e117851f81c077b045ee8f55fa52231364ceefecfd30beac83611ee648aacfb7ba08b2be0eb09879b9e9fa390a17d55",
-      "ba7b31ae74472121b99b1284df4f681bfd1dcd768b10f8e642cf13c3ebc098a09fa6ce577bebbeb6e00e1f923b88cc803bb51b89115ef5bd0a97825f857badf4",
-      "7566596a95ffb6eafe50e18ce220697e7e5843f6d17b689f4c1700f010d249a59836c15b5f21dac862a51c0908bccacc57afee18ae6894745dabfdb0d13a07dd",
-      "edf5c751f05794f40432d6579c3ade759b1a7c024662a1a021dd1e0a92610a5a68dbfc78763d03947b57d99f5e4abb1010a640d6cfbfe0c9d0ffc2b981c1f495",
-      "fe20d5250b9d4916d185e0af1caeb59e545700596f3e814a61b48125d3d741d1af20cba2b8856625eb937b0c1cbcee7c85c8b8661618558e8d82ce2c9905554a",
-      "3270d36890729f4ed79a5f15fc96295f34c15eccba142f63f1a60adc7d5bbf669a5c804940d5d7bd7e33873d288a6f83b6a686b391ac81092b1024b0a47b56a6",
-      "d273fde52172776ca0bb43f00f7b42fb6bd529620d8544e0829320728b033bbdab5ab1c8535c2effe4c513733226c4953f9e6f1e5fe7f4789a2dbae23b235ac4",
-      "ecf38de998707fd3ec927613770fb45ff856d75f03eb290e2d0b6e7229e5f68cbbdf0c014eb66d376ef1f4261175e36ae3dc51f15a31b3af1aec10a0895f7674"
+      "a3dfa1cd8bdb7d53757fd629436243cda65b55b7095e475d385fa046adb9dbf5bf2101963988f18e2a4b10c1b947bbce0233466df027c11fd052cc3b8396f2ad",
+      "07943516aa4ff889e2d9ea755f14d91bcf041d8d386a848ce49bf59a2a0335a2ab1eb8abd6c2b7e357d0d56769eab09dfc7c9e4c261d3d60a359c56334e85c68",
+      "293b39d82f2fac10ff21beef6c68f26a94bf1dd9559d69162c18b7159a699005aeeb15635daa771d027f2a0a92a806d895536c31d4d6eee7503eea8c4b248de7",
+      "873fc5769677aebcc759169318f3d315ba12c849dd4307f6ebe0291f67a5b3a645d1fa69b780f7abe7e8546e12a727108ece4bcd276a8e0154ab0b46272c1426",
+      "741e3b534ce6a3280e1c534ddb673797e44ba5a79577b532b8b4c217cef737060e77f6def5d77e73ed8a2cf8b50e224cb74c33e923e62256da036cbf28f139fd",
+      "e3eaeaa3f9456784935a1573a51b62ac7ea12e03011a433bb6c08d303a579b4eca7d63f280eec2f82f292af67dab57c4da20d10c04aa035ee1c43f50772a73cf",
+      "2084615783f778fa375880bdfbf9d02dd232958f9223474ce4b0f16304ff3d6f2d6730263564099e391de2765a84c53baff212ed58b821a4d07d9020ba51cef1",
+      "1f9412afc5d570208188c0c24f912f3cbda4fe69010a137be9c353d9bc21cd72a43efbecfdfb43099c472553b060500e805a038bb15bd21f2709a511dca39436",
+      "c92b48ee9b3b9d7695a9d29a9b4447d272243c6e30684f58c221be28232fcde556d684d50123bb68bc50756a356198a23c4379aec3725c355a62078af911749e",
+      "70dd1d8c6dca52dba4f1bf07bdb28ad04353d86ef5219eafe9c0820ae955831db32213fead448e1c9769c2861d8a3b241ced0345ac6879e2f332baa4921c7bd7",
+      "cab7d919f8763a06fe100b4217f0519cc40bd88408092fe77a62ae5220dfa21b26f1c94d1dbf1d037543365ff7df0d448d3ef1ed904010beaba09bc139a9825f",
+      "0930dd0fcb9b5fb3de590c1feed0a46f685b87a426b48d1962a131990d096e712c08074875fe4fdfb8435c7279153dfdabcfa6768ea4dbcd848d668a8138d83c",
+      "eb960def6e34d00f323cfd8b54ad65c9baa5d63d8c69df0731531a23b7af563dcdff24ca7bac4d043fdc3b85d20e865f8c13145871853ebd8b6f897d2b999562",
+      "dd15ea62b83dcab280e971a85e8aabc957dc97ba4d11b856998fe50a637f1a869a2e80099b028147784746e54c1de873d13b50a65b22f7bd0c7a3967c3b6a570",
+      "fc46c24b238012d88f90f4012d3fed0e9bd1a5c46fb470ce39f44d9f4e54fbbf2342dc5f81c7d4e402df8e5755011af6e6ff6e119aa1e1eb81533743763c767b",
+      "d227f0035fde1cb4eaa495b1d05a0712829955d856fc23f387b7014ccd370a86fa43b5ebe487c721990c1499b2460b992242791e2615ddc5512824bc87b8d14a"
     ]
   },
   "status": "passed",
-  "finishedAt": "2026-10-09T14:58:28.138Z",
+  "finishedAt": "2026-10-09T15:11:41.092Z",
   "provenance": {
     "pearlCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
     "ledgerRustSdkCommit": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
@@ -158,6 +172,6 @@
     "ledgerApiLevel": 27,
     "speculosVersion": "0.27.1",
     "pearlNodeHarnessOnlyChange": "defaultHomeDir is redirected by PEARL_TEST_HOME; no consensus changes",
-    "originalRunRecordSha256": "58b21d765c5bee2afb7fd3c130124987c70265fd5d4c2511a35bfa0410adbd25"
+    "originalRunRecordSha256": "37090f7cb9c49125196190427125f92b29680f6d2f3d602635097f05df105f5a"
   }
 }

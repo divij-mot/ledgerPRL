@@ -1,0 +1,257 @@
+[
+  {
+    "name": "strict-short-apdu",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/strict-short-apdu/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "idle-bolos-allowlist",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/idle-bolos-allowlist/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "interleaved-account-wipes-transfer",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/interleaved-account-wipes-transfer/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "nested-apdu-at-approval",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/nested-apdu-at-approval/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "bolos-version-at-approval",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/bolos-version-at-approval/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "bolos-quit-at-approval",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/bolos-quit-at-approval/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "malformed-apdu-at-approval",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/malformed-apdu-at-approval/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "extended-apdu-at-approval",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/extended-apdu-at-approval/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "usb-power-loss-at-approval",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/usb-power-loss-at-approval/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "empty-button-event",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/empty-button-event/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "short-finger-event",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/short-finger-event/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "empty-itc-event",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/empty-itc-event/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "short-pairing-event",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/short-pairing-event/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "oversized-pairing-event",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/oversized-pairing-event/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  },
+  {
+    "name": "timeout-during-review",
+    "status": "passed",
+    "firmware": {
+      "model": "apex_p",
+      "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+      "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-faults/timeout-during-review/tested-firmware.elf",
+      "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "speculos": "0.27.1",
+      "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+      "injector": {
+        "path": "apps/ledger/tests/speculos-injector.py",
+        "sha256": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+        "purpose": "Numeric SEPH input generator only; firmware and syscalls unmodified"
+      }
+    }
+  }
+]

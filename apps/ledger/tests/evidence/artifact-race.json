@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "elf-only",
+    "stageExitCode": 1,
+    "stageStderr": "ELF changed during staging; retry after the build completes\n",
+    "published": false,
+    "temporaryDirectory": "/tmp/pearl-stage-race-audit-m82pqilw"
+  },
+  {
+    "mode": "complete-network-generation",
+    "stageExitCode": 1,
+    "stageStderr": "Build generation changed target/network during staging; retry\n",
+    "published": false,
+    "temporaryDirectory": "/tmp/pearl-stage-race-audit-psp9saon"
+  }
+]

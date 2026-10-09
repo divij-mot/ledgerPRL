@@ -27,6 +27,7 @@ import {
   parseTransaction,
   sha256,
   SpeculosTransport,
+  verifySignature,
   u16,
   concat,
   type AccountPublicKey,
@@ -47,9 +48,12 @@ const output =
   process.env.PEARL_E2E_OUTPUT ||
   (await mkdtemp(join(tmpdir(), "pearl-native-e2e-")));
 await mkdir(output, { recursive: true });
-const elf =
+const elfSource =
   process.env.PEARL_APP_ELF ||
   join(root, "apps/ledger/target/nanosplus/release/pearl-ledger");
+const elfBytes = readFileSync(elfSource);
+const elf = join(output, "native-snapshot.elf");
+await writeFile(elf, elfBytes, { mode: 0o700, flag: "wx" });
 const nodeBin = process.env.PEARLD_BIN || "/tmp/pearl-pearld-test";
 const speculos =
   process.env.SPECULOS_BIN || "/tmp/pearl-speculos-venv/bin/speculos";
@@ -62,12 +66,24 @@ const api = Number(process.env.SPECULOS_API_PORT || 5021);
 const rpcPort = Number(process.env.PEARL_RPC_PORT || 19557);
 const emulatorUrl = `http://127.0.0.1:${api}`;
 const rpcUrl = `http://127.0.0.1:${rpcPort}`;
-const inputCount = Number(process.env.PEARL_E2E_INPUTS || 2);
+const parityCoverage = process.env.PEARL_E2E_PARITY === "1";
+const inputCount = parityCoverage
+  ? 4
+  : Number(process.env.PEARL_E2E_INPUTS || 2);
 assert(
-  [2, 16].includes(inputCount),
+  [2, 4, 16].includes(inputCount),
   "Use exactly 2 or 16 inputs for this regression suite",
 );
-const fundingBlocks = 99 + inputCount;
+const fundingBlocks = parityCoverage ? 200 : 99 + inputCount;
+const parityVectors: {
+  index: number;
+  internalParity: number;
+  outputParity: number;
+  address: string;
+  scriptPubKey: string;
+}[] = JSON.parse(
+  readFileSync(join(root, "tests/e2e/parity-vectors.json"), "utf8"),
+);
 const PUBLIC_TEST_SEED = "000102030405060708090a0b0c0d0e0f";
 const children: ChildProcess[] = [];
 const cases: { name: string; status: string; detail?: unknown }[] = [];
@@ -79,8 +95,9 @@ const evidence: Record<string, unknown> = {
   inputCount,
   publicTestSeed: PUBLIC_TEST_SEED,
   firmware: {
-    path: elf,
-    sha256: createHash("sha256").update(readFileSync(elf)).digest("hex"),
+    path: elfSource,
+    snapshot: "native-snapshot.elf",
+    sha256: createHash("sha256").update(elfBytes).digest("hex"),
     model,
   },
   pearlNode: {
@@ -298,7 +315,7 @@ async function review<T>(
   };
   assert(
     approved,
-    `${label}: operation completed without observing and pressing expected physical approval`,
+    `${label}: operation completed without observing and pressing expected emulated approval`,
   );
   return result;
 }
@@ -335,6 +352,7 @@ const source: WatchSource = {
       ? await rpc("getblockheader", [tx.blockhash, true])
       : null;
     return {
+      confirmations: tx.confirmations || 0,
       rawTransaction: tx.hex,
       block: header ? { height: header.height, hash: tx.blockhash } : null,
     };
@@ -345,7 +363,13 @@ const source: WatchSource = {
       history = await rpc("searchrawtransactions", [address, 1, 0, 1000]);
     } catch (error) {
       if (error instanceof RpcError && error.code === -5)
-        return { used: false, txids: [], utxos: [] };
+        return {
+          used: false,
+          confirmedTxCount: 0,
+          pendingTxCount: 0,
+          txids: [],
+          utxos: [],
+        };
       throw error;
     }
     const script = hex(addressToScript(address, "simnet"));
@@ -363,7 +387,13 @@ const source: WatchSource = {
           utxos.push({ txid: tx.txid, vout, height: block?.height ?? null });
         }
     }
-    return { used: true, txids: history.map((tx) => tx.txid), utxos };
+    return {
+      used: true,
+      confirmedTxCount: history.filter((tx) => !!tx.blockhash).length,
+      pendingTxCount: history.filter((tx) => !tx.blockhash).length,
+      txids: history.map((tx) => tx.txid),
+      utxos,
+    };
   },
 };
 let currentStage = "startup";
@@ -419,6 +449,19 @@ try {
     join(output, "account-public.json"),
     JSON.stringify(evidence.account, null, 2),
   );
+  if (parityCoverage) {
+    evidence.parityCoverage = parityVectors;
+    assert.equal(
+      new Set(parityVectors.map((p) => `${p.internalParity}/${p.outputParity}`))
+        .size,
+      4,
+    );
+    for (const p of parityVectors) {
+      const derived = deriveAddress(account, 0, p.index);
+      assert.equal(derived.address, p.address);
+      assert.equal(hex(derived.scriptPubKey), p.scriptPubKey);
+    }
+  }
   const receive = deriveAddress(account, 0, 0),
     recipient = deriveAddress(account, 0, 7);
   currentStage = "address";
@@ -455,7 +498,10 @@ try {
       `--logdir=${home}/logs`,
       `--rpccert=${home}/rpc.cert`,
       `--rpckey=${home}/rpc.key`,
-      `--miningaddr=${receive.address}`,
+      ...(parityCoverage
+        ? parityVectors.map((p) => p.address)
+        : [receive.address]
+      ).map((address) => `--miningaddr=${address}`),
       "--txindex",
       "--addrindex",
     ],
@@ -481,7 +527,10 @@ try {
       const found = await discoverAccount(source, account);
       assert.equal(found.snapshot.coins.length, fundingBlocks);
       assert(balances(found.snapshot).available > 0n);
-      assert.equal(found.lastUsed[0], 0);
+      assert.equal(
+        found.lastUsed[0],
+        parityCoverage ? Math.max(...parityVectors.map((p) => p.index)) : 0,
+      );
       assert.equal(found.lastUsed[1], -1);
       return found;
     });
@@ -489,9 +538,20 @@ try {
     join(output, "watch-before.json"),
     snapshotToJson(discovery.snapshot),
   );
-  const selected = discovery.snapshot.coins
-    .filter((c) => c.block && c.block.height <= inputCount)
-    .map(outpoint);
+  const selected = parityCoverage
+    ? parityVectors.map((p) => {
+        const coin = discovery.snapshot.coins.find(
+          (c) =>
+            c.index === p.index &&
+            c.block &&
+            c.block.height <= fundingBlocks - 99,
+        );
+        assert(coin, `No mature coin for independent parity vector ${p.index}`);
+        return outpoint(coin);
+      })
+    : discovery.snapshot.coins
+        .filter((c) => c.block && c.block.height <= inputCount)
+        .map(outpoint);
   assert.equal(selected.length, inputCount);
   const bundle = preparePayment(discovery.snapshot, {
     selected,
@@ -547,6 +607,33 @@ try {
       review(() => client().signBundle(bundle, account), /Reject/, "reject"),
       /0x6985/,
     );
+    await malformed(0x13, Uint8Array.of(0), "6986");
+  });
+  await test("native explicit abort before review clears transferred bundle", async () => {
+    await nativeUpload(encodeBundle(bundle));
+    await malformed(0x14, new Uint8Array(), "9000");
+    await malformed(0x12, new Uint8Array(), "6986");
+  });
+  await test("native abort after approval and partial signature export wipes remainder", async () => {
+    const bytes = encodeBundle(bundle),
+      transport = new AuditedTransport(emulatorUrl);
+    await nativeUpload(bytes);
+    await review(
+      async () => {
+        const result = await transport.exchange(command(0x12));
+        assert.equal(hex(result.slice(-2)), "9000");
+        assert.equal(result[0], bundle.inputs.length);
+        assert.equal(hex(result.slice(1, -2)), hex(sha256(bytes)));
+        return result;
+      },
+      /Sign Pearl transfer/,
+      "partial-export",
+    );
+    const first = await transport.exchange(command(0x13, Uint8Array.of(0)));
+    assert.equal(hex(first.slice(-2)), "9000");
+    assert(verifySignature(bundle, 0, first.slice(0, -2)));
+    await malformed(0x14, new Uint8Array(), "9000");
+    await malformed(0x13, Uint8Array.of(1), "6986");
     await malformed(0x13, Uint8Array.of(0), "6986");
   });
   currentStage = "signing";

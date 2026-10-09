@@ -80,7 +80,7 @@ import {
   finalizeTransaction,
   parseTransaction,
 } from "@pearl-ledger/sdk";
-import { type PaymentRecord, emptyJournal } from "./journal.js";
+import { type PaymentRecord, recordRecoveryPaths } from "./journal.js";
 import { chainTip, outpoint } from "./watch.js";
 export const MAX_BACKUP_BYTES = 16 * 1024 * 1024;
 export interface WalletBackup {
@@ -114,6 +114,7 @@ export function validateRestoredJournal(
   );
   const ids = new Set<string>(),
     reserved = new Set<string>();
+  const knownPaths: { branch: 0 | 1; index: number }[] = [];
   const payments = v.payments.map((value): PaymentRecord => {
     const p = record(value, "payment");
     const allowed = [
@@ -175,6 +176,7 @@ export function validateRestoredJournal(
       !change || change.index < nextChangeIndex,
       "Change allocation was not preserved in backup",
     );
+    knownPaths.push(...bundle.inputs, ...(change ? [change] : []));
     const payment: PaymentRecord = {
       id: p.id,
       state: p.state as PaymentRecord["state"],
@@ -235,12 +237,14 @@ export function validateRestoredJournal(
     }
     return payment;
   });
-  return {
+  const restored: WalletJournal = {
     schema: 1,
     nextChangeIndex,
     issuedReceiveThrough: v.issuedReceiveThrough,
     payments,
   };
+  recordRecoveryPaths(restored, knownPaths);
+  return restored;
 }
 export function exportWalletBackup(
   account: AccountPublicKey,

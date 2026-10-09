@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "flex",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-flex-simnet.elf",
+    "testedSnapshot": "/tmp/pearl-native-final-ct-flex-latency/tested-firmware.elf",
+    "sha256": "07405a1c64c6fadfa289ede2fa1d9c4593cb29f784d85a219ac8a672d7b4b8fd",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "inputCount": 16,
+  "rounds": 5,
+  "measurements": [
+    {
+      "label": "max16-round-1",
+      "gestureToResultMs": 7870.330693999999,
+      "gesture": "2.5-second hold"
+    },
+    {
+      "label": "max16-round-2",
+      "gestureToResultMs": 8214.798727999998,
+      "gesture": "2.5-second hold"
+    },
+    {
+      "label": "max16-round-3",
+      "gestureToResultMs": 7830.807343,
+      "gesture": "2.5-second hold"
+    },
+    {
+      "label": "max16-round-4",
+      "gestureToResultMs": 7930.463241000005,
+      "gesture": "2.5-second hold"
+    },
+    {
+      "label": "max16-round-5",
+      "gestureToResultMs": 7746.451245999997,
+      "gesture": "2.5-second hold"
+    }
+  ],
+  "minMs": 7746.451245999997,
+  "medianMs": 7870.330693999999,
+  "maxMs": 8214.798727999998,
+  "scope": "Emulator wall time from starting final physical approval gesture through fetching and independently verifying all16 signatures; not device CPU or hardware timing",
+  "gestureIncludes": "2.5-second touch hold"
+}

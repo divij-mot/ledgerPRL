@@ -644,7 +644,7 @@
     ]
   },
   {
-    "label": "sign",
+    "label": "partial-export",
     "step": 0,
     "screen": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app",
     "events": [
@@ -691,8 +691,8 @@
     ]
   },
   {
-    "label": "sign",
-    "step": 24,
+    "label": "partial-export",
+    "step": 20,
     "screen": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5",
     "events": [
       {
@@ -746,8 +746,8 @@
     ]
   },
   {
-    "label": "sign",
-    "step": 25,
+    "label": "partial-export",
+    "step": 21,
     "screen": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1pgsursm2qfzenc5 | 24cr364gzt8jcp5wj5c | wmcfmk6vds2p7lakpz | sj5ntyl | Reject | 2 of 5",
     "events": [
       {
@@ -841,8 +841,8 @@
     ]
   },
   {
-    "label": "sign",
-    "step": 26,
+    "label": "partial-export",
+    "step": 22,
     "screen": "Amount | 1.23456789 PRL | Fee | 0.00010000 PRL | Change | 51671.83474310 PRL | Reject | 3 of 5",
     "events": [
       {
@@ -912,8 +912,8 @@
     ]
   },
   {
-    "label": "sign",
-    "step": 27,
+    "label": "partial-export",
+    "step": 23,
     "screen": "Change address | rprl1pe2avzwvk5fxvan | ucwcwfkrklzajt6r82g2 | f9eqktmtuxtzmpkp7sm | y9l6m | Change path | m/86'/1'/0'/1/0 | Reject | 4 of 5",
     "events": [
       {
@@ -991,8 +991,220 @@
     ]
   },
   {
+    "label": "partial-export",
+    "step": 24,
+    "screen": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign",
+    "events": [
+      {
+        "text": "Sign Pearl transfer",
+        "x": 42,
+        "y": 120,
+        "w": 216,
+        "h": 28,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 30,
+        "y": 359,
+        "w": 60,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "5 of 5",
+        "x": 185,
+        "y": 359,
+        "w": 50,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "Hold to sign",
+        "x": 16,
+        "y": 282,
+        "w": 138,
+        "h": 28,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "step": 0,
+    "screen": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app",
+    "events": [
+      {
+        "text": "Pearl simnet",
+        "x": 79,
+        "y": 137,
+        "w": 142,
+        "h": 28,
+        "clear": false
+      },
+      {
+        "text": "This app enables signing",
+        "x": 43,
+        "y": 177,
+        "w": 213,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "transactions on the",
+        "x": 67,
+        "y": 199,
+        "w": 166,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet network.",
+        "x": 55,
+        "y": 221,
+        "w": 189,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "Quit app",
+        "x": 112,
+        "y": 359,
+        "w": 75,
+        "h": 22,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "step": 26,
+    "screen": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 5",
+    "events": [
+      {
+        "text": "Review Pearl transfer",
+        "x": 26,
+        "y": 121,
+        "w": 248,
+        "h": 28,
+        "clear": false
+      },
+      {
+        "text": "Check address, amount and ",
+        "x": 29,
+        "y": 161,
+        "w": 242,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "fee",
+        "x": 135,
+        "y": 183,
+        "w": 29,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "Swipe to review",
+        "x": 81,
+        "y": 229,
+        "w": 138,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 30,
+        "y": 359,
+        "w": 60,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "1 of 5",
+        "x": 187,
+        "y": 359,
+        "w": 46,
+        "h": 22,
+        "clear": false
+      }
+    ]
+  },
+  {
     "label": "sign",
     "step": 28,
+    "screen": "Amount | 1.23456789 PRL | Fee | 0.00010000 PRL | Change | 51671.83474310 PRL | Reject | 3 of 5",
+    "events": [
+      {
+        "text": "Amount",
+        "x": 16,
+        "y": 24,
+        "w": 68,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "1.23456789 PRL",
+        "x": 16,
+        "y": 50,
+        "w": 189,
+        "h": 28,
+        "clear": false
+      },
+      {
+        "text": "Fee",
+        "x": 16,
+        "y": 94,
+        "w": 33,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "0.00010000 PRL",
+        "x": 16,
+        "y": 120,
+        "w": 197,
+        "h": 28,
+        "clear": false
+      },
+      {
+        "text": "Change",
+        "x": 16,
+        "y": 164,
+        "w": 67,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "51671.83474310 PRL",
+        "x": 16,
+        "y": 190,
+        "w": 240,
+        "h": 28,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 30,
+        "y": 359,
+        "w": 60,
+        "h": 22,
+        "clear": false
+      },
+      {
+        "text": "3 of 5",
+        "x": 185,
+        "y": 359,
+        "w": 50,
+        "h": 22,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "step": 30,
     "screen": "Sign Pearl transfer | Reject | 5 of 5 | Hold to sign",
     "events": [
       {

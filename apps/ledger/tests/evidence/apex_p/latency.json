@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "apex_p",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-apex_p-simnet.elf",
+    "testedSnapshot": "/tmp/pearl-native-final-ct-apex_p-latency/tested-firmware.elf",
+    "sha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "inputCount": 16,
+  "rounds": 5,
+  "measurements": [
+    {
+      "label": "max16-round-1",
+      "gestureToResultMs": 8561.038559,
+      "gesture": "2.5-second hold"
+    },
+    {
+      "label": "max16-round-2",
+      "gestureToResultMs": 8162.6215900000025,
+      "gesture": "2.5-second hold"
+    },
+    {
+      "label": "max16-round-3",
+      "gestureToResultMs": 8459.589905999994,
+      "gesture": "2.5-second hold"
+    },
+    {
+      "label": "max16-round-4",
+      "gestureToResultMs": 8535.409070000002,
+      "gesture": "2.5-second hold"
+    },
+    {
+      "label": "max16-round-5",
+      "gestureToResultMs": 8469.72498900001,
+      "gesture": "2.5-second hold"
+    }
+  ],
+  "minMs": 8162.6215900000025,
+  "medianMs": 8469.72498900001,
+  "maxMs": 8561.038559,
+  "scope": "Emulator wall time from starting final physical approval gesture through fetching and independently verifying all16 signatures; not device CPU or hardware timing",
+  "gestureIncludes": "2.5-second touch hold"
+}

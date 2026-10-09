@@ -1,0 +1,1380 @@
+[
+  {
+    "label": "unusual-account",
+    "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app",
+    "events": [
+      {
+        "text": "Pearl simnet",
+        "x": 105,
+        "y": 242,
+        "w": 189,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "This app enables signing",
+        "x": 57,
+        "y": 298,
+        "w": 286,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "transactions on the",
+        "x": 89,
+        "y": 330,
+        "w": 221,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet network.",
+        "x": 75,
+        "y": 362,
+        "w": 249,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Quit app",
+        "x": 150,
+        "y": 610,
+        "w": 99,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Unusual account | m/86'/1'/101' | Reject | Review anyway",
+    "events": [
+      {
+        "text": "Unusual account",
+        "x": 72,
+        "y": 236,
+        "w": 256,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/101'",
+        "x": 129,
+        "y": 292,
+        "w": 141,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 163,
+        "y": 612,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      },
+      {
+        "text": "Review anyway",
+        "x": 109,
+        "y": 528,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Export Pearl account | Watch-only public data | Swipe to review | Reject | 1 of 3",
+    "events": [
+      {
+        "text": "Export Pearl account",
+        "x": 41,
+        "y": 242,
+        "w": 317,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Watch-only public data",
+        "x": 67,
+        "y": 298,
+        "w": 266,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Swipe to review",
+        "x": 108,
+        "y": 354,
+        "w": 183,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "1 of 3",
+        "x": 248,
+        "y": 610,
+        "w": 63,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Network | Pearl simnet | Account path | m/86'/1'/101' | Master fingerprint | 3442193e | Privacy | Companion can view al | l addresses in this acc | ount | Reject | 2 of 3",
+    "events": [
+      {
+        "text": "Network",
+        "x": 24,
+        "y": 56,
+        "w": 97,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 24,
+        "y": 92,
+        "w": 189,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Account path",
+        "x": 24,
+        "y": 144,
+        "w": 152,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/101'",
+        "x": 24,
+        "y": 180,
+        "w": 191,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Master fingerprint",
+        "x": 24,
+        "y": 232,
+        "w": 207,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "3442193e",
+        "x": 24,
+        "y": 268,
+        "w": 158,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Privacy",
+        "x": 24,
+        "y": 320,
+        "w": 83,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Companion can view al",
+        "x": 24,
+        "y": 356,
+        "w": 351,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "l addresses in this acc",
+        "x": 24,
+        "y": 396,
+        "w": 337,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "ount",
+        "x": 24,
+        "y": 436,
+        "w": 69,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "2 of 3",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-account",
+    "text": "Approve export | Reject | 3 of 3 | Hold to sign",
+    "events": [
+      {
+        "text": "Approve export",
+        "x": 81,
+        "y": 218,
+        "w": 238,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "3 of 3",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Hold to sign",
+        "x": 24,
+        "y": 496,
+        "w": 183,
+        "h": 40,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app",
+    "events": [
+      {
+        "text": "Pearl simnet",
+        "x": 105,
+        "y": 242,
+        "w": 189,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "This app enables signing",
+        "x": 57,
+        "y": 298,
+        "w": 286,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "transactions on the",
+        "x": 89,
+        "y": 330,
+        "w": 221,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet network.",
+        "x": 75,
+        "y": 362,
+        "w": 249,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Quit app",
+        "x": 150,
+        "y": 610,
+        "w": 99,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Unusual address path | m/86'/1'/0'/0/50001 | Reject | Review anyway",
+    "events": [
+      {
+        "text": "Unusual address path",
+        "x": 33,
+        "y": 236,
+        "w": 333,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/0/50001",
+        "x": 88,
+        "y": 292,
+        "w": 223,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 163,
+        "y": 612,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      },
+      {
+        "text": "Review anyway",
+        "x": 109,
+        "y": 528,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Verify Pearl address | Compare the full address | Swipe to continue | Cancel | 1 of 3",
+    "events": [
+      {
+        "text": "Verify Pearl address",
+        "x": 46,
+        "y": 242,
+        "w": 308,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Compare the full address",
+        "x": 55,
+        "y": 298,
+        "w": 290,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Swipe to continue",
+        "x": 97,
+        "y": 354,
+        "w": 205,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Cancel",
+        "x": 39,
+        "y": 610,
+        "w": 82,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "1 of 3",
+        "x": 248,
+        "y": 610,
+        "w": 63,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Address | rprl1pv76y9lk3pvwq8j | vw9zldnz4j5p4pwfqsl | xjqqmupxgr2s22mjn3 | ssz9qyr | Show as QR | Cancel | 2 of 3",
+    "events": [
+      {
+        "text": "Address",
+        "x": 24,
+        "y": 56,
+        "w": 95,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "rprl1pv76y9lk3pvwq8j",
+        "x": 24,
+        "y": 92,
+        "w": 343,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "vw9zldnz4j5p4pwfqsl",
+        "x": 24,
+        "y": 132,
+        "w": 342,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "xjqqmupxgr2s22mjn3",
+        "x": 24,
+        "y": 172,
+        "w": 336,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "ssz9qyr",
+        "x": 24,
+        "y": 212,
+        "w": 122,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Show as QR",
+        "x": 152,
+        "y": 280,
+        "w": 204,
+        "h": 32,
+        "clear": false
+      },
+      {
+        "text": "Cancel",
+        "x": 39,
+        "y": 610,
+        "w": 82,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "2 of 3",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-address",
+    "text": "Network | Pearl simnet | Derivation | m/86'/1'/0'/0/50001 | Type | BIP86 no-script Tapro | ot | Cancel | 3 of 3 | Confirm",
+    "events": [
+      {
+        "text": "Network",
+        "x": 24,
+        "y": 56,
+        "w": 97,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 24,
+        "y": 92,
+        "w": 189,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Derivation",
+        "x": 24,
+        "y": 144,
+        "w": 116,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/0/50001",
+        "x": 24,
+        "y": 180,
+        "w": 304,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Type",
+        "x": 24,
+        "y": 232,
+        "w": 57,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "BIP86 no-script Tapro",
+        "x": 24,
+        "y": 268,
+        "w": 342,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "ot",
+        "x": 24,
+        "y": 308,
+        "w": 31,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Cancel",
+        "x": 39,
+        "y": 610,
+        "w": 82,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "3 of 3",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Confirm",
+        "x": 152,
+        "y": 504,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app",
+    "events": [
+      {
+        "text": "Pearl simnet",
+        "x": 105,
+        "y": 242,
+        "w": 189,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "This app enables signing",
+        "x": 57,
+        "y": 298,
+        "w": 286,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "transactions on the",
+        "x": 89,
+        "y": 330,
+        "w": 221,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet network.",
+        "x": 75,
+        "y": 362,
+        "w": 249,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Quit app",
+        "x": 150,
+        "y": 610,
+        "w": 99,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "High transaction fee | Fee 0.00200000 PRL is at  | least 10% of inputs | Reject | Review anyway",
+    "events": [
+      {
+        "text": "High transaction fee",
+        "x": 45,
+        "y": 220,
+        "w": 309,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Fee 0.00200000 PRL is at ",
+        "x": 51,
+        "y": 276,
+        "w": 298,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "least 10% of inputs",
+        "x": 91,
+        "y": 308,
+        "w": 217,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 163,
+        "y": 612,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      },
+      {
+        "text": "Review anyway",
+        "x": 109,
+        "y": 528,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 4",
+    "events": [
+      {
+        "text": "Review Pearl transfer",
+        "x": 37,
+        "y": 226,
+        "w": 326,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Check address, amount and ",
+        "x": 39,
+        "y": 282,
+        "w": 321,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "fee",
+        "x": 181,
+        "y": 314,
+        "w": 37,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Swipe to review",
+        "x": 108,
+        "y": 370,
+        "w": 183,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "1 of 4",
+        "x": 248,
+        "y": 610,
+        "w": 63,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8scdxtvf | Amount | 0.00800000 PRL | Reject | 2 of 4",
+    "events": [
+      {
+        "text": "Network",
+        "x": 24,
+        "y": 56,
+        "w": 97,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 24,
+        "y": 92,
+        "w": 189,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "From account",
+        "x": 24,
+        "y": 144,
+        "w": 156,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'",
+        "x": 24,
+        "y": 180,
+        "w": 161,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Recipient",
+        "x": 24,
+        "y": 232,
+        "w": 106,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "rprl1ptkfg5hcsgxwuu5",
+        "x": 24,
+        "y": 268,
+        "w": 346,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "qf3j9q2uk9cmyc8n0u",
+        "x": 24,
+        "y": 308,
+        "w": 339,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "29d3eyhf8q069j924e",
+        "x": 24,
+        "y": 348,
+        "w": 338,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "8scdxtvf",
+        "x": 24,
+        "y": 388,
+        "w": 135,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Amount",
+        "x": 24,
+        "y": 440,
+        "w": 88,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "0.00800000 PRL",
+        "x": 24,
+        "y": 476,
+        "w": 264,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "2 of 4",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Fee | 0.00200000 PRL | Change | None | Change address | None | Change path | None | Reject | 3 of 4",
+    "events": [
+      {
+        "text": "Fee",
+        "x": 24,
+        "y": 56,
+        "w": 42,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "0.00200000 PRL",
+        "x": 24,
+        "y": 92,
+        "w": 264,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Change",
+        "x": 24,
+        "y": 144,
+        "w": 88,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "None",
+        "x": 24,
+        "y": 180,
+        "w": 81,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Change address",
+        "x": 24,
+        "y": 232,
+        "w": 188,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "None",
+        "x": 24,
+        "y": 268,
+        "w": 81,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Change path",
+        "x": 24,
+        "y": 320,
+        "w": 147,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "None",
+        "x": 24,
+        "y": 356,
+        "w": 81,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "3 of 4",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "high-fee",
+    "text": "Sign Pearl transfer | Reject | 4 of 4 | Hold to sign",
+    "events": [
+      {
+        "text": "Sign Pearl transfer",
+        "x": 58,
+        "y": 218,
+        "w": 283,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "4 of 4",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Hold to sign",
+        "x": 24,
+        "y": 496,
+        "w": 183,
+        "h": 40,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Pearl simnet | This app enables signing | transactions on the | Pearl simnet network. | Quit app",
+    "events": [
+      {
+        "text": "Pearl simnet",
+        "x": 105,
+        "y": 242,
+        "w": 189,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "This app enables signing",
+        "x": 57,
+        "y": 298,
+        "w": 286,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "transactions on the",
+        "x": 89,
+        "y": 330,
+        "w": 221,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet network.",
+        "x": 75,
+        "y": 362,
+        "w": 249,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Quit app",
+        "x": 150,
+        "y": 610,
+        "w": 99,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Unusual input path | m/86'/1'/0'/0/50001 | Reject | Review anyway",
+    "events": [
+      {
+        "text": "Unusual input path",
+        "x": 56,
+        "y": 236,
+        "w": 288,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/0/50001",
+        "x": 88,
+        "y": 292,
+        "w": 223,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 163,
+        "y": 612,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      },
+      {
+        "text": "Review anyway",
+        "x": 109,
+        "y": 528,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Unusual change path | m/86'/1'/0'/1/50001 | Reject | Review anyway",
+    "events": [
+      {
+        "text": "Unusual change path",
+        "x": 38,
+        "y": 236,
+        "w": 323,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/1/50001",
+        "x": 90,
+        "y": 292,
+        "w": 219,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 163,
+        "y": 612,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      },
+      {
+        "text": "Review anyway",
+        "x": 109,
+        "y": 528,
+        "w": 352,
+        "h": 32,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Review Pearl transfer | Check address, amount and  | fee | Swipe to review | Reject | 1 of 4",
+    "events": [
+      {
+        "text": "Review Pearl transfer",
+        "x": 37,
+        "y": 226,
+        "w": 326,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Check address, amount and ",
+        "x": 39,
+        "y": 282,
+        "w": 321,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "fee",
+        "x": 181,
+        "y": 314,
+        "w": 37,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Swipe to review",
+        "x": 108,
+        "y": 370,
+        "w": 183,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "1 of 4",
+        "x": 248,
+        "y": 610,
+        "w": 63,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Network | Pearl simnet | From account | m/86'/1'/0' | Recipient | rprl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8scdxtvf | Amount | 90071992.54740000  | PRL | Reject | 2 of 4",
+    "events": [
+      {
+        "text": "Network",
+        "x": 24,
+        "y": 56,
+        "w": 97,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Pearl simnet",
+        "x": 24,
+        "y": 92,
+        "w": 189,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "From account",
+        "x": 24,
+        "y": 144,
+        "w": 156,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'",
+        "x": 24,
+        "y": 180,
+        "w": 161,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Recipient",
+        "x": 24,
+        "y": 232,
+        "w": 106,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "rprl1ptkfg5hcsgxwuu5",
+        "x": 24,
+        "y": 268,
+        "w": 346,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "qf3j9q2uk9cmyc8n0u",
+        "x": 24,
+        "y": 308,
+        "w": 339,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "29d3eyhf8q069j924e",
+        "x": 24,
+        "y": 348,
+        "w": 338,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "8scdxtvf",
+        "x": 24,
+        "y": 388,
+        "w": 135,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Amount",
+        "x": 24,
+        "y": 440,
+        "w": 88,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "90071992.54740000 ",
+        "x": 24,
+        "y": 476,
+        "w": 338,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "PRL",
+        "x": 24,
+        "y": 516,
+        "w": 59,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "2 of 4",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Fee | 0.00001000 PRL | Change | 9.99999993 PRL | Change address | rprl1pxkmzccmyd595c | 8qyujuksnf9r85yyf7m | p24hjcwu53nj59t45xx | qtltxz3 | Change path | m/86'/1'/0'/1/50001 | Reject | 3 of 4",
+    "events": [
+      {
+        "text": "Fee",
+        "x": 24,
+        "y": 56,
+        "w": 42,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "0.00001000 PRL",
+        "x": 24,
+        "y": 92,
+        "w": 259,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Change",
+        "x": 24,
+        "y": 144,
+        "w": 88,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "9.99999993 PRL",
+        "x": 24,
+        "y": 180,
+        "w": 257,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Change address",
+        "x": 24,
+        "y": 232,
+        "w": 188,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "rprl1pxkmzccmyd595c",
+        "x": 24,
+        "y": 268,
+        "w": 350,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "8qyujuksnf9r85yyf7m",
+        "x": 24,
+        "y": 308,
+        "w": 337,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "p24hjcwu53nj59t45xx",
+        "x": 24,
+        "y": 348,
+        "w": 348,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "qtltxz3",
+        "x": 24,
+        "y": 388,
+        "w": 110,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Change path",
+        "x": 24,
+        "y": 440,
+        "w": 147,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/1/50001",
+        "x": 24,
+        "y": 476,
+        "w": 298,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "3 of 4",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "unusual-sign-paths",
+    "text": "Sign Pearl transfer | Reject | 4 of 4 | Hold to sign",
+    "events": [
+      {
+        "text": "Sign Pearl transfer",
+        "x": 58,
+        "y": 218,
+        "w": 283,
+        "h": 40,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 43,
+        "y": 610,
+        "w": 73,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "4 of 4",
+        "x": 246,
+        "y": 610,
+        "w": 67,
+        "h": 31,
+        "clear": false
+      },
+      {
+        "text": "Hold to sign",
+        "x": 24,
+        "y": 496,
+        "w": 183,
+        "h": 40,
+        "clear": false
+      }
+    ]
+  }
+]

@@ -4,6 +4,7 @@ import {
   hex,
   decodeBundle,
   fromHex,
+  checkedIndex,
   type SigningBundle,
 } from "@pearl-ledger/sdk";
 import { outpoint } from "./watch.js";
@@ -45,6 +46,25 @@ export function emptyJournal(): WalletJournal {
 export function reservedOutpoints(journal: WalletJournal): Set<string> {
   return new Set(journal.payments.flatMap((p) => p.outpoints));
 }
+/** Record only account-owned paths from validated snapshots or canonical bundles, never claimed scan coverage. */
+export function recordRecoveryPaths(
+  journal: WalletJournal,
+  paths: ReadonlyArray<{ branch: 0 | 1; index: number }>,
+): void {
+  let receive = journal.issuedReceiveThrough,
+    change = journal.nextChangeIndex;
+  for (const path of paths) {
+    checkedIndex(path.index);
+    assert(path.branch === 0 || path.branch === 1, "Invalid recovery branch");
+    if (path.branch === 0) receive = Math.max(receive, path.index);
+    else {
+      assert(path.index < 0x7fffffff, "Change index exhausted");
+      change = Math.max(change, path.index + 1);
+    }
+  }
+  journal.issuedReceiveThrough = receive;
+  journal.nextChangeIndex = change;
+}
 export function reservePayment(
   journal: WalletJournal,
   bundle: SigningBundle,
@@ -74,7 +94,6 @@ export function reservePayment(
       "Change index was already allocated; choose the next index",
     );
     assert(change.index < 0x7fffffff, "Change index exhausted");
-    journal.nextChangeIndex = change.index + 1;
   }
   const payment: PaymentRecord = {
     id,
@@ -83,6 +102,7 @@ export function reservePayment(
     bundleHex: hex(encodeBundle(bundle)),
     outpoints: points,
   };
+  recordRecoveryPaths(journal, [...bundle.inputs, ...(change ? [change] : [])]);
   journal.payments.push(payment);
   return payment;
 }

@@ -1,0 +1,23 @@
+[
+  {
+    "test": "prepare waits for its external exclusive lock, resumes after release",
+    "blockedWhileHeld": true,
+    "exitAfterRelease": 0
+  },
+  {
+    "test": "build waits for its external exclusive lock, resumes after release",
+    "blockedWhileHeld": true,
+    "exitAfterRelease": 0
+  },
+  {
+    "test": "stage waits for its external exclusive lock, resumes after release",
+    "blockedWhileHeld": true,
+    "exitAfterRelease": 0
+  },
+  {
+    "test": "post-lock staged artifact identity",
+    "device": "nanosplus",
+    "network": "regtest",
+    "elfMatchesManifest": true
+  }
+]
