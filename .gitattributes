@@ -12,3 +12,6 @@ tools/native-release-qualification/source-snapshot/apps/ledger/patches/strict-tr
 tools/native-final-memory/sources/memory-instrumentation.patch whitespace=-blank-at-eol,-blank-at-eof
 tools/native-final-memory/sources/strict-transport.patch whitespace=-blank-at-eol
 tools/wallet-recovery-review/independent/typecheck.log whitespace=-blank-at-eof
+# Preserve embedded upstream license bodies and their original line endings.
+apps/companion/public/third-party-notices.txt -text whitespace=-blank-at-eol,-blank-at-eof
+tools/dependency-supply-review/THIRD-PARTY-NOTICES.proposed.txt -text whitespace=-blank-at-eol,-blank-at-eof

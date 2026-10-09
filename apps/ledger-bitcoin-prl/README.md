@@ -73,21 +73,25 @@ claim about Pearl's other textual extended-key conventions.
 Standard app-bitcoin CLA `e1`, protocol version/P2 `01`, P1 `00` is used for
 GET_EXTENDED_PUBKEY (`00`), GET_WALLET_ADDRESS (`03`), SIGN_PSBT (`04`) and
 GET_MASTER_FINGERPRINT (`05`). Merkle continuations use CLA `f8`, INS `01`.
-All request bodies must be consumed exactly.
+Top-level command bodies are consumed exactly. Merkle proof/preimage payloads
+are length-checked, but leaf-index replies still accept trailing bytes, and
+signature-yield acknowledgements do not yet require an empty body. These
+remaining protocol-hardening gaps are recorded in
+[`../../tools/device-source-review/README.md`](../../tools/device-source-review/README.md).
 
 Custom GET_NETWORK_INFO (`e1 06 00 01 00`) returns 58 bytes:
 
-| Offset | Encoding |
-|---|---|
-| 0 | ASCII `PRLB` (4 bytes) |
-| 4 | schema 1 (u8) |
-| 5 | network ID (u8) |
-| 6 | coin type (u32 BE) |
-| 10 | genesis (32 bytes, displayed hash order) |
-| 42 | maximum grains (u64 BE) |
-| 50 | maximum inputs, 16 (u16 BE) |
-| 52 | maximum outputs, 2 (u16 BE) |
-| 54 | flags 3 (u32 BE): bit 0 strict profile; bit 1 external P2MR |
+| Offset | Encoding                                                    |
+| ------ | ----------------------------------------------------------- |
+| 0      | ASCII `PRLB` (4 bytes)                                      |
+| 4      | schema 1 (u8)                                               |
+| 5      | network ID (u8)                                             |
+| 6      | coin type (u32 BE)                                          |
+| 10     | genesis (32 bytes, displayed hash order)                    |
+| 42     | maximum grains (u64 BE)                                     |
+| 50     | maximum inputs, 16 (u16 BE)                                 |
+| 52     | maximum outputs, 2 (u16 BE)                                 |
+| 54     | flags 3 (u32 BE): bit 0 strict profile; bit 1 external P2MR |
 
 Every signed PSBTv2 includes global proprietary key `fc0350524c01` with value
 `01 || network_id || genesis_display_order_32`. Other global/input/output keys

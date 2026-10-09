@@ -5,7 +5,7 @@ import {
   checkLightSnapshot,
   lightMiddleware,
 } from "../src/blockbook.js";
-import { deriveAddress, NETWORKS } from "@pearl-ledger/sdk";
+import { deriveAddress, NETWORKS, scriptToAddress } from "@pearl-ledger/sdk";
 import {
   publicAccount,
   blockHash,
@@ -20,6 +20,72 @@ const response = (body: unknown) =>
 function fake(get: (url: string) => unknown) {
   return (async (input: any) => response(get(String(input)))) as typeof fetch;
 }
+test("address routes validate public address network and checksum before disclosure", async () => {
+  let calls = 0;
+  const source = new BlockbookSource(
+    "mainnet",
+    fake(() => {
+      calls++;
+      return {};
+    }),
+  );
+  const wrongNetwork = deriveAddress(
+    { ...publicAccount, network: "testnet2" },
+    0,
+    0,
+  ).address;
+  const badChecksum =
+    address.slice(0, -1) + (address.endsWith("q") ? "p" : "q");
+  for (const invalid of [
+    "a",
+    "xpub" + "A".repeat(107),
+    "02" + "11".repeat(32),
+    wrongNetwork,
+    badChecksum,
+  ])
+    for (const path of [
+      `/api/v2/utxo/${invalid}`,
+      `/api/v2/address/${invalid}?details=txids&pageSize=1000&page=1`,
+    ])
+      await assert.rejects(source.get(path));
+  for (const path of [
+    "/api/v2/\n",
+    "/api/v2/block-index/0\r\n",
+    `/api/v2/tx/${"aa".repeat(32)}\n`,
+  ])
+    await assert.rejects(source.get(path), /Unsupported read-only/);
+  assert.equal(calls, 0);
+});
+test("read routes retain valid P2TR and P2MR addresses on both public networks", async () => {
+  for (const network of ["mainnet", "testnet2"] as const) {
+    const addresses = [
+      deriveAddress({ ...publicAccount, network }, 0, 0).address,
+      scriptToAddress(
+        concat(Uint8Array.of(0x52, 0x20), new Uint8Array(32).fill(0x42)),
+        network,
+      ),
+    ];
+    const seen: string[] = [];
+    const source = new BlockbookSource(
+      network,
+      fake((url) => {
+        seen.push(url);
+        return {};
+      }),
+    );
+    for (const value of addresses.flatMap((address) => [
+      address,
+      address.toUpperCase(),
+    ]))
+      for (const path of [
+        `/api/v2/utxo/${value}`,
+        `/api/v2/address/${value}?details=txids&pageSize=1000&page=1`,
+        `/api/v2/address/${value}?details=txids&pageSize=1000&page=2`,
+      ])
+        await source.get(path);
+    assert.equal(seen.length, 12);
+  }
+});
 test("read-only source rejects all broadcast/proxy paths before issuing fetch", async () => {
   let calls = 0;
   const source = new BlockbookSource(

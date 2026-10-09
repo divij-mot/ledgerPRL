@@ -1,5 +1,6 @@
 import {
   assert,
+  addressToScript,
   deriveAddress,
   hex,
   NETWORKS,
@@ -48,12 +49,18 @@ export class BlockbookSource implements WatchSource {
     this.base = BLOCKBOOK_HOSTS[this.network];
   }
   async get(path: string): Promise<unknown> {
-    assert(
-      /^\/api\/v2\/(?:$|block-index\/[0-9]+$|utxo\/[a-zA-Z0-9]+$|tx\/[0-9a-f]{64}$|address\/[a-zA-Z0-9]+\?details=txids&pageSize=1000&page=[1-2]$)/.test(
+    const route =
+      /^\/api\/v2\/(?:|block-index\/[0-9]+|utxo\/([a-zA-Z0-9]+)|tx\/[0-9a-f]{64}|address\/([a-zA-Z0-9]+)\?details=txids&pageSize=1000&page=[1-2])$/.exec(
         path,
-      ),
+      );
+    assert(
+      route !== null && route[0] === path,
       "Unsupported read-only indexer path",
     );
+    // Reject arbitrary alphanumeric data (including extended account keys),
+    // wrong-network addresses and invalid checksums before any disclosure.
+    const address = route[1] ?? route[2];
+    if (address !== undefined) addressToScript(address, this.network);
     const response = await this.fetcher(this.base + path, {
       redirect: "error",
       signal: this.signal

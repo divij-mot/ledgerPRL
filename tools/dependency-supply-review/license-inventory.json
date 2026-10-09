@@ -1,0 +1,1024 @@
+{
+  "schema": 1,
+  "reviewedOn": "2026-10-09",
+  "sourceHead": "bef09f0550eda47956e5862a984a8d584a86fd30",
+  "lockfileSha256": "816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea",
+  "scope": "Actual Rollup main and worker graph, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
+  "bundles": [
+    {
+      "file": "assets/index-BPR0Pkw2.js",
+      "type": "chunk",
+      "bytes": 473430,
+      "sha256": "ce60e968b9f4ade7e04b5b929481f3522ef44b01ae8afa93d1250af5e67da1ba",
+      "components": [
+        "node_modules/@inversifyjs/common@1.5.0",
+        "node_modules/@inversifyjs/container@1.9.1",
+        "node_modules/@inversifyjs/core@5.2.0",
+        "node_modules/@inversifyjs/reflect-metadata-utils@1.1.0",
+        "node_modules/@ledgerhq/device-management-kit@1.11.0",
+        "node_modules/@ledgerhq/device-transport-kit-web-hid@1.2.4",
+        "node_modules/@noble/curves@1.9.7",
+        "node_modules/@noble/hashes@1.8.0",
+        "node_modules/@scure/base@1.2.6",
+        "node_modules/@scure/bip32@1.7.0",
+        "node_modules/@sentry/hub@6.19.7",
+        "node_modules/@sentry/minimal@6.19.7",
+        "node_modules/@sentry/utils@6.19.7",
+        "node_modules/base64-js@1.5.1",
+        "node_modules/buffer@6.0.3",
+        "node_modules/ieee754@1.2.1",
+        "node_modules/isomorphic-ws@5.0.0",
+        "node_modules/purify-ts@2.1.0",
+        "node_modules/reflect-metadata@0.2.2",
+        "node_modules/rxjs@7.8.2",
+        "node_modules/rxjs/node_modules/tslib@2.8.1",
+        "node_modules/semver@7.7.2",
+        "node_modules/tslib@1.14.1",
+        "node_modules/uuid@11.1.1",
+        "node_modules/xstate@5.19.2",
+        "generated-runtime:vite@7.3.7",
+        "source:LedgerHQ/app-bitcoin@44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a"
+      ]
+    },
+    {
+      "file": "assets/backup-import.worker-Dtrkqa4Y.js",
+      "type": "asset",
+      "bytes": 72732,
+      "sha256": "574f3999066984fc8b2d8674bc790097bd8b8ec54bf2b184664c5f5e94d42f4b",
+      "components": [
+        "node_modules/@noble/curves@1.9.7",
+        "node_modules/@noble/hashes@1.8.0",
+        "node_modules/@scure/base@1.2.6",
+        "node_modules/@scure/bip32@1.7.0"
+      ]
+    }
+  ],
+  "counts": {
+    "npmPackageInstances": 25,
+    "npmUniqueNames": 24,
+    "generatedRuntimeGroups": 1,
+    "copiedSourceGroups": 1,
+    "componentGroups": 27
+  },
+  "components": [
+    {
+      "id": "node_modules/@inversifyjs/common@1.5.0",
+      "name": "@inversifyjs/common",
+      "version": "1.5.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@inversifyjs/common",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@inversifyjs/common/lib/esm/index.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@inversifyjs/common/LICENSE",
+          "sha256": "e7f118bca6d3c2ea16a30302f1e0062b6c7ba63bb1718a0602f969062b67ecbd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@inversifyjs/container@1.9.1",
+      "name": "@inversifyjs/container",
+      "version": "1.9.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@inversifyjs/container",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@inversifyjs/container/lib/esm/index.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@inversifyjs/container/LICENSE",
+          "sha256": "e7f118bca6d3c2ea16a30302f1e0062b6c7ba63bb1718a0602f969062b67ecbd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@inversifyjs/core@5.2.0",
+      "name": "@inversifyjs/core",
+      "version": "5.2.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@inversifyjs/core",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@inversifyjs/core/lib/esm/index.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@inversifyjs/core/LICENSE",
+          "sha256": "e7f118bca6d3c2ea16a30302f1e0062b6c7ba63bb1718a0602f969062b67ecbd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@inversifyjs/reflect-metadata-utils@1.1.0",
+      "name": "@inversifyjs/reflect-metadata-utils",
+      "version": "1.1.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@inversifyjs/reflect-metadata-utils",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@inversifyjs/reflect-metadata-utils/lib/esm/index.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@inversifyjs/reflect-metadata-utils/LICENSE",
+          "sha256": "e7f118bca6d3c2ea16a30302f1e0062b6c7ba63bb1718a0602f969062b67ecbd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/device-management-kit@1.11.0",
+      "name": "@ledgerhq/device-management-kit",
+      "version": "1.11.0",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/device-management-kit",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/package.json",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/DeviceManagementKit.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/DeviceManagementKitBuilder.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/Error.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/model/Apdu.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/ApduBuilder.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/ApduParser.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/AppBuilderError.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/ByteArrayBuilder.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/ByteArrayParser.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/di/commandModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/di/commandTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/model/CommandResult.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/os/GetAppAndVersionCommand.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/os/GetBatteryStatusCommand.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/os/GetOsVersionCommand.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/os/SecureElementFlagsParser.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/use-case/SendCommandUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/utils/CommandErrors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/utils/CommandUtils.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/utils/GlobalCommandError.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/di/deviceActionModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/di/deviceActionTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/model/DeviceActionState.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/model/UserInteractionRequired.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/use-case/ExecuteDeviceActionUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-model/data/StaticDeviceModelDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-model/model/BleDeviceInfos.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-model/model/DeviceModel.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/ApduResponse.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/DeviceSessionState.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/data/FramerConst.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/use-case/DisableDeviceSessionRefresher.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/utils/FramerUtils.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device/DeviceModel.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device/DeviceStatus.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device/SecureElementFlags.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/logger-subscriber/model/LogLevel.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/logger-subscriber/service/DefaultLogTagFormatter.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/model/DmkResult.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/network/DmkNetworkClient.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/network/DmkNetworkClientError.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/network/DmkNetworkClientHelpers.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/secure-channel/task/types.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/transport/model/ConnectedDevice.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/transport/model/DeviceConnectionStateMachine.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/transport/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/transport/model/TransportConnectedDevice.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/utils/HexaString.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/utils/apduLogs.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/di.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/di.stub.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/data/LocalConfigDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/data/LocalConfigDataSource.stub.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/data/RemoteConfigDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/data/RemoteConfigDataSource.stub.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/di/configModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/di/configTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/model/Config.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/service/DefaultConfigService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/use-case/GetDmkVersionUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-model/di/deviceModelModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-model/di/deviceModelTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/data/ApduResponseConst.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/data/DeviceSessionRefresherConst.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/di/deviceSessionModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/di/deviceSessionTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DevicePinger.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DeviceSession.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DeviceSessionEventDispatcher.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DeviceSessionRefresher.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DeviceSessionStateHandler.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/Frame.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/FrameHeader.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/DefaultApduReceiverService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/DefaultApduSenderService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/DefaultDeviceSessionService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/IntentQueueService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/RefresherService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/use-case/CloseSessionsUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/use-case/GetDeviceSessionStateUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/use-case/UnsafeBypassIntentQueueUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/di/discoveryModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/di/discoveryTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ConnectUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/DisconnectUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/GetConnectedDeviceUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ListConnectedDevicesUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ListenToAvailableDevicesUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ListenToConnectedDeviceUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ReconnectUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/StartDiscoveringUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/StopDiscoveringUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/logger-publisher/di/loggerModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/logger-publisher/di/loggerTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/logger-publisher/service/DefaultLoggerPublisherService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/logger-publisher/service/sanitiseData.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/data/HttpManagerApiDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/data/ManagerApiDto.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/di/managerApiModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/di/managerApiTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/model/Application.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/model/Const.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/service/DefaultManagerApiService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/use-case/SetFirmwareDistributionSaltUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/use-case/SetProviderUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/data/DefaultSecureChannelDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/di/secureChannelModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/di/secureChannelTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/model/Const.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/service/DefaultSecureChannelService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/use-case/SetWebSocketUrlUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/send/di/sendModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/send/di/sendTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/send/use-case/SendApduUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/transport/di/transportDiTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/transport/di/transportModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/transport/service/DefaultTransportService.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@ledgerhq/device-management-kit/LICENSE.MD",
+          "sha256": "3d5fd8df1ad22ad2ce6c9d1b96761647b30c6d0c06bf5b168972f0e247654730"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/device-transport-kit-web-hid@1.2.4",
+      "name": "@ledgerhq/device-transport-kit-web-hid",
+      "version": "1.2.4",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/device-transport-kit-web-hid",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/data/WebHidConfig.js",
+          "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/model/Errors.js",
+          "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/transport/WebHidApduSender.js",
+          "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/transport/WebHidTransport.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@ledgerhq/device-transport-kit-web-hid/LICENSE.MD",
+          "sha256": "3d5fd8df1ad22ad2ce6c9d1b96761647b30c6d0c06bf5b168972f0e247654730"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@noble/curves@1.9.7",
+      "name": "@noble/curves",
+      "version": "1.9.7",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@noble/curves",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js",
+        "assets/backup-import.worker-Dtrkqa4Y.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@noble/curves/esm/_shortw_utils.js",
+          "node_modules/@noble/curves/esm/abstract/curve.js",
+          "node_modules/@noble/curves/esm/abstract/modular.js",
+          "node_modules/@noble/curves/esm/abstract/weierstrass.js",
+          "node_modules/@noble/curves/esm/secp256k1.js",
+          "node_modules/@noble/curves/esm/utils.js"
+        ],
+        "worker": [
+          "node_modules/@noble/curves/esm/_shortw_utils.js",
+          "node_modules/@noble/curves/esm/abstract/curve.js",
+          "node_modules/@noble/curves/esm/abstract/modular.js",
+          "node_modules/@noble/curves/esm/abstract/weierstrass.js",
+          "node_modules/@noble/curves/esm/secp256k1.js",
+          "node_modules/@noble/curves/esm/utils.js"
+        ]
+      },
+      "notices": [
+        {
+          "path": "node_modules/@noble/curves/LICENSE",
+          "sha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@noble/hashes@1.8.0",
+      "name": "@noble/hashes",
+      "version": "1.8.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@noble/hashes",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js",
+        "assets/backup-import.worker-Dtrkqa4Y.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@noble/hashes/esm/_md.js",
+          "node_modules/@noble/hashes/esm/_u64.js",
+          "node_modules/@noble/hashes/esm/crypto.js",
+          "node_modules/@noble/hashes/esm/hmac.js",
+          "node_modules/@noble/hashes/esm/legacy.js",
+          "node_modules/@noble/hashes/esm/sha2.js",
+          "node_modules/@noble/hashes/esm/sha256.js",
+          "node_modules/@noble/hashes/esm/utils.js"
+        ],
+        "worker": [
+          "node_modules/@noble/hashes/esm/_md.js",
+          "node_modules/@noble/hashes/esm/_u64.js",
+          "node_modules/@noble/hashes/esm/crypto.js",
+          "node_modules/@noble/hashes/esm/hmac.js",
+          "node_modules/@noble/hashes/esm/legacy.js",
+          "node_modules/@noble/hashes/esm/sha2.js",
+          "node_modules/@noble/hashes/esm/sha256.js",
+          "node_modules/@noble/hashes/esm/utils.js"
+        ]
+      },
+      "notices": [
+        {
+          "path": "node_modules/@noble/hashes/LICENSE",
+          "sha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@scure/base@1.2.6",
+      "name": "@scure/base",
+      "version": "1.2.6",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@scure/base",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js",
+        "assets/backup-import.worker-Dtrkqa4Y.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@scure/base/lib/esm/index.js"
+        ],
+        "worker": [
+          "node_modules/@scure/base/lib/esm/index.js"
+        ]
+      },
+      "notices": [
+        {
+          "path": "node_modules/@scure/base/LICENSE",
+          "sha256": "3239e134eb6e6d64538ca76498c7fcb08a395249dd9d4af9927bf6d0169ee429"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@scure/bip32@1.7.0",
+      "name": "@scure/bip32",
+      "version": "1.7.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@scure/bip32",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js",
+        "assets/backup-import.worker-Dtrkqa4Y.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@scure/bip32/lib/esm/index.js"
+        ],
+        "worker": [
+          "node_modules/@scure/bip32/lib/esm/index.js"
+        ]
+      },
+      "notices": [
+        {
+          "path": "node_modules/@scure/bip32/LICENSE",
+          "sha256": "1565efd0ec4580bfaa96c7eeaaa9af3791baa1cc562c3bde62d0a055910b9ec7"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@sentry/hub@6.19.7",
+      "name": "@sentry/hub",
+      "version": "6.19.7",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/@sentry/hub",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@sentry/hub/esm/flags.js",
+          "node_modules/@sentry/hub/esm/hub.js",
+          "node_modules/@sentry/hub/esm/scope.js",
+          "node_modules/@sentry/hub/esm/session.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@sentry/hub/LICENSE",
+          "sha256": "dba8e6ce88f07f7a55f62bcbe01e436d6af3454e108825fa9d3a47e6e0c90197"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@sentry/minimal@6.19.7",
+      "name": "@sentry/minimal",
+      "version": "6.19.7",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/@sentry/minimal",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@sentry/minimal/esm/index.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@sentry/minimal/LICENSE",
+          "sha256": "dba8e6ce88f07f7a55f62bcbe01e436d6af3454e108825fa9d3a47e6e0c90197"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@sentry/utils@6.19.7",
+      "name": "@sentry/utils",
+      "version": "6.19.7",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/@sentry/utils",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@sentry/utils/esm/env.js",
+          "node_modules/@sentry/utils/esm/flags.js",
+          "node_modules/@sentry/utils/esm/global.js",
+          "node_modules/@sentry/utils/esm/is.js",
+          "node_modules/@sentry/utils/esm/logger.js",
+          "node_modules/@sentry/utils/esm/misc.js",
+          "node_modules/@sentry/utils/esm/node.js",
+          "node_modules/@sentry/utils/esm/object.js",
+          "node_modules/@sentry/utils/esm/syncpromise.js",
+          "node_modules/@sentry/utils/esm/time.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@sentry/utils/LICENSE",
+          "sha256": "dba8e6ce88f07f7a55f62bcbe01e436d6af3454e108825fa9d3a47e6e0c90197"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/base64-js@1.5.1",
+      "name": "base64-js",
+      "version": "1.5.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/base64-js",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/base64-js/index.js?commonjs-exports",
+          "node_modules/base64-js/index.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/base64-js/LICENSE",
+          "sha256": "5b37224c080cdcc97c871ada971c224e9926370fe74f11b539aa1cf9f3b1aca1"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/buffer@6.0.3",
+      "name": "buffer",
+      "version": "6.0.3",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/buffer",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/buffer/index.js?commonjs-es-import",
+          "\u0000node_modules/buffer/index.js?commonjs-exports",
+          "node_modules/buffer/index.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/buffer/LICENSE",
+          "sha256": "06bafa45fdad2579ba0e43b0c9b2c6290287c99c4203c300254a462b38a307f6"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/ieee754@1.2.1",
+      "name": "ieee754",
+      "version": "1.2.1",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/ieee754",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/ieee754/index.js?commonjs-exports",
+          "node_modules/ieee754/index.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/ieee754/LICENSE",
+          "sha256": "18d45466ba3253deae04667e267a91ea8de8548f18c1125264d1c9db28194cc1"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/isomorphic-ws@5.0.0",
+      "name": "isomorphic-ws",
+      "version": "5.0.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/isomorphic-ws",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/isomorphic-ws/browser.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/isomorphic-ws/LICENSE",
+          "sha256": "12a66fee27259312cf2101ac5a17f009da37dffdfcd051f821116a74ae9bf841"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/purify-ts@2.1.0",
+      "name": "purify-ts",
+      "version": "2.1.0",
+      "kind": "npm-reachable",
+      "license": "ISC",
+      "directory": "node_modules/purify-ts",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/purify-ts/esm/Either.js",
+          "node_modules/purify-ts/esm/EitherAsync.js",
+          "node_modules/purify-ts/esm/Maybe.js",
+          "node_modules/purify-ts/esm/MaybeAsync.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/purify-ts/LICENSE",
+          "sha256": "6a28424f4a02b7e13fa9809671c17d0b4912258f6fa0de29820b4a5ff40023b8"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/reflect-metadata@0.2.2",
+      "name": "reflect-metadata",
+      "version": "0.2.2",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/reflect-metadata",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-es-import",
+          "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-exports",
+          "node_modules/reflect-metadata/Reflect.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/reflect-metadata/CopyrightNotice.txt",
+          "sha256": "19246466cb51e46c12b22e43b4d2703ac981cb4295d061d6e20609bd5845510b"
+        },
+        {
+          "path": "node_modules/reflect-metadata/LICENSE",
+          "sha256": "c5217b0544ea9c91d010863582d6f6b35ec50e4146c34dee085ddcec5dd92def"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/rxjs@7.8.2",
+      "name": "rxjs",
+      "version": "7.8.2",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/rxjs",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/rxjs/dist/esm5/internal/BehaviorSubject.js",
+          "node_modules/rxjs/dist/esm5/internal/Observable.js",
+          "node_modules/rxjs/dist/esm5/internal/ReplaySubject.js",
+          "node_modules/rxjs/dist/esm5/internal/Scheduler.js",
+          "node_modules/rxjs/dist/esm5/internal/Subject.js",
+          "node_modules/rxjs/dist/esm5/internal/Subscriber.js",
+          "node_modules/rxjs/dist/esm5/internal/Subscription.js",
+          "node_modules/rxjs/dist/esm5/internal/config.js",
+          "node_modules/rxjs/dist/esm5/internal/firstValueFrom.js",
+          "node_modules/rxjs/dist/esm5/internal/lastValueFrom.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/concat.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/empty.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/from.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/innerFrom.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/merge.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/of.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/timer.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/OperatorSubscriber.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/concatAll.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/distinctUntilChanged.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/filter.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/finalize.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/map.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/mergeAll.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/mergeInternals.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/mergeMap.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/observeOn.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/scan.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/scanInternals.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/startWith.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/subscribeOn.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/switchMap.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/take.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/tap.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/timeout.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/withLatestFrom.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleArray.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleAsyncIterable.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleIterable.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleObservable.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/schedulePromise.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleReadableStreamLike.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduled.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/Action.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/AsyncAction.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/AsyncScheduler.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/async.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/dateTimestampProvider.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/intervalProvider.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/timeoutProvider.js",
+          "node_modules/rxjs/dist/esm5/internal/symbol/iterator.js",
+          "node_modules/rxjs/dist/esm5/internal/symbol/observable.js",
+          "node_modules/rxjs/dist/esm5/internal/util/EmptyError.js",
+          "node_modules/rxjs/dist/esm5/internal/util/ObjectUnsubscribedError.js",
+          "node_modules/rxjs/dist/esm5/internal/util/UnsubscriptionError.js",
+          "node_modules/rxjs/dist/esm5/internal/util/args.js",
+          "node_modules/rxjs/dist/esm5/internal/util/arrRemove.js",
+          "node_modules/rxjs/dist/esm5/internal/util/createErrorClass.js",
+          "node_modules/rxjs/dist/esm5/internal/util/errorContext.js",
+          "node_modules/rxjs/dist/esm5/internal/util/executeSchedule.js",
+          "node_modules/rxjs/dist/esm5/internal/util/identity.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isArrayLike.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isAsyncIterable.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isDate.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isFunction.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isInteropObservable.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isIterable.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isPromise.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isReadableStreamLike.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isScheduler.js",
+          "node_modules/rxjs/dist/esm5/internal/util/lift.js",
+          "node_modules/rxjs/dist/esm5/internal/util/noop.js",
+          "node_modules/rxjs/dist/esm5/internal/util/pipe.js",
+          "node_modules/rxjs/dist/esm5/internal/util/reportUnhandledError.js",
+          "node_modules/rxjs/dist/esm5/internal/util/throwUnobservableError.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/rxjs/LICENSE.txt",
+          "sha256": "81c407ac717813b0e3795402960e04003c7bba8ba59b621624707028531c9ade"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/rxjs/node_modules/tslib@2.8.1",
+      "name": "tslib",
+      "version": "2.8.1",
+      "kind": "npm-reachable",
+      "license": "0BSD",
+      "directory": "node_modules/rxjs/node_modules/tslib",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/rxjs/node_modules/tslib/tslib.es6.mjs"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/rxjs/node_modules/tslib/CopyrightNotice.txt",
+          "sha256": "da16ddb65f8ca390998fb99223d0112498b56b45784d00afd77ff8ce1ac4de8b"
+        },
+        {
+          "path": "node_modules/rxjs/node_modules/tslib/LICENSE.txt",
+          "sha256": "210b19e543130388c68654b7497e967119ce17145f66ab7d85688fbd70f08751"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/semver@7.7.2",
+      "name": "semver",
+      "version": "7.7.2",
+      "kind": "npm-reachable",
+      "license": "ISC",
+      "directory": "node_modules/semver",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/semver/index.js?commonjs-es-import",
+          "\u0000node_modules/semver/internal/re.js?commonjs-module",
+          "node_modules/semver/classes/comparator.js",
+          "node_modules/semver/classes/range.js",
+          "node_modules/semver/classes/semver.js",
+          "node_modules/semver/functions/clean.js",
+          "node_modules/semver/functions/cmp.js",
+          "node_modules/semver/functions/coerce.js",
+          "node_modules/semver/functions/compare-build.js",
+          "node_modules/semver/functions/compare-loose.js",
+          "node_modules/semver/functions/compare.js",
+          "node_modules/semver/functions/diff.js",
+          "node_modules/semver/functions/eq.js",
+          "node_modules/semver/functions/gt.js",
+          "node_modules/semver/functions/gte.js",
+          "node_modules/semver/functions/inc.js",
+          "node_modules/semver/functions/lt.js",
+          "node_modules/semver/functions/lte.js",
+          "node_modules/semver/functions/major.js",
+          "node_modules/semver/functions/minor.js",
+          "node_modules/semver/functions/neq.js",
+          "node_modules/semver/functions/parse.js",
+          "node_modules/semver/functions/patch.js",
+          "node_modules/semver/functions/prerelease.js",
+          "node_modules/semver/functions/rcompare.js",
+          "node_modules/semver/functions/rsort.js",
+          "node_modules/semver/functions/satisfies.js",
+          "node_modules/semver/functions/sort.js",
+          "node_modules/semver/functions/valid.js",
+          "node_modules/semver/index.js",
+          "node_modules/semver/internal/constants.js",
+          "node_modules/semver/internal/debug.js",
+          "node_modules/semver/internal/identifiers.js",
+          "node_modules/semver/internal/lrucache.js",
+          "node_modules/semver/internal/parse-options.js",
+          "node_modules/semver/internal/re.js",
+          "node_modules/semver/ranges/gtr.js",
+          "node_modules/semver/ranges/intersects.js",
+          "node_modules/semver/ranges/ltr.js",
+          "node_modules/semver/ranges/max-satisfying.js",
+          "node_modules/semver/ranges/min-satisfying.js",
+          "node_modules/semver/ranges/min-version.js",
+          "node_modules/semver/ranges/outside.js",
+          "node_modules/semver/ranges/simplify.js",
+          "node_modules/semver/ranges/subset.js",
+          "node_modules/semver/ranges/to-comparators.js",
+          "node_modules/semver/ranges/valid.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/semver/LICENSE",
+          "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/tslib@1.14.1",
+      "name": "tslib",
+      "version": "1.14.1",
+      "kind": "npm-reachable",
+      "license": "0BSD",
+      "directory": "node_modules/tslib",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/tslib/tslib.es6.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/tslib/CopyrightNotice.txt",
+          "sha256": "dd835e67a9a297da32f9467d7677a5d02c8e50e10f15da43b810147c79c04b9b"
+        },
+        {
+          "path": "node_modules/tslib/LICENSE.txt",
+          "sha256": "210b19e543130388c68654b7497e967119ce17145f66ab7d85688fbd70f08751"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/uuid@11.1.1",
+      "name": "uuid",
+      "version": "11.1.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/uuid",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/uuid/dist/esm-browser/native.js",
+          "node_modules/uuid/dist/esm-browser/rng.js",
+          "node_modules/uuid/dist/esm-browser/stringify.js",
+          "node_modules/uuid/dist/esm-browser/v4.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/uuid/LICENSE.md",
+          "sha256": "beaa6b04fb82e41dd2ad679e19e27953afb5999b1abbb455b6564e78ebfeb332"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/xstate@5.19.2",
+      "name": "xstate",
+      "version": "5.19.2",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/xstate",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/xstate/dev/dist/xstate-dev.esm.js",
+          "node_modules/xstate/dist/log-3d9d72a9.esm.js",
+          "node_modules/xstate/dist/raise-c17ec2bc.esm.js",
+          "node_modules/xstate/dist/xstate.esm.js"
+        ],
+        "worker": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/xstate/LICENSE",
+          "sha256": "542d926d7bbb099785e322d1d5574c539d51942e52ec8adce2be4629ba81fc7f"
+        }
+      ]
+    },
+    {
+      "id": "generated-runtime:vite@7.3.7",
+      "name": "Vite-generated runtime helpers",
+      "version": "7.3.7",
+      "kind": "bundler-generated-runtime",
+      "license": "MIT",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000commonjsHelpers.js",
+          "\u0000vite/modulepreload-polyfill.js"
+        ],
+        "worker": []
+      },
+      "scope": "Vite module-preload polyfill and bundled @rollup/plugin-commonjs interop helpers. The complete installed Vite license file is retained conservatively; its additional build-tool notices do not imply those packages execute in the wallet.",
+      "notices": [
+        {
+          "path": "node_modules/vite/LICENSE.md",
+          "sha256": "a77a1c089806b39ad339535bdf3677f636c91d96693e8ad7b11fe733f650ea64"
+        }
+      ]
+    },
+    {
+      "id": "source:LedgerHQ/app-bitcoin@44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+      "name": "Adapted Ledger Bitcoin host modules",
+      "version": "2.5.1",
+      "kind": "copied-source",
+      "license": "Apache-2.0",
+      "bundles": [
+        "assets/index-BPR0Pkw2.js"
+      ],
+      "repository": "https://github.com/LedgerHQ/app-bitcoin",
+      "revision": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+      "sourceModules": {
+        "main": [
+          "packages/bitcoin-prl-adapter/src/upstream/buffertools.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/clientCommands.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/merkle.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/merkleMap.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/policy.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/varint.ts"
+        ],
+        "worker": []
+      },
+      "modificationNotice": "Six host protocol modules were adapted from LedgerHQ/app-bitcoin 2.5.1, commit 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a. Pearl modifications add explicit browser Buffer imports, pinned noble hashing, strict TypeScript/ESM support, bigint-only uint64 handling, canonical varints, and bounded/copying Merkle-interpreter inputs. Original sources and the complete local patch are retained in packages/bitcoin-prl-adapter/provenance. Ledger approval or endorsement is not implied.",
+      "notices": [
+        {
+          "path": "packages/bitcoin-prl-adapter/provenance/LICENSE.app-bitcoin",
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+        }
+      ]
+    }
+  ],
+  "proposedNotices": {
+    "file": "THIRD-PARTY-NOTICES.proposed.txt",
+    "bytes": 186206,
+    "sha256": "ccea80c549383223e6cf762fa9fabb3648379b61763ab2222570e90e670a3808"
+  },
+  "limitations": [
+    "This is a proposed distribution artifact, not a legal opinion or completed deployment change.",
+    "Serve a reviewed version through the dedicated host's narrow asset policy and link it visibly; leaving it only in this report does not deliver it to website users.",
+    "Regenerate and verify against each changed browser dependency graph. Source-level redistribution may require additional source-specific notices beyond this browser artifact."
+  ]
+}

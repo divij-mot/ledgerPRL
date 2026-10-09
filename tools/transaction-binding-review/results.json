@@ -1,0 +1,35 @@
+{
+  "scope": "host-only public-fixture transaction binding",
+  "reviewed_head": "bef09f0550eda47956e5862a984a8d584a86fd30",
+  "branch": "ledger-bitcoin-prl",
+  "node": "v24.19.0",
+  "new_tests": {
+    "distinct": 24,
+    "runs": 3,
+    "passed_per_run": [
+      24,
+      24,
+      24
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  "existing_regressions": {
+    "passed": 148,
+    "failures": 0,
+    "skips": 0
+  },
+  "strict_typecheck": "passed",
+  "reviewed_source_changed_during_review": false,
+  "production_edits_by_this_review": false,
+  "new_exploitable_defects_reproduced": 0,
+  "not_run": [
+    "native",
+    "emulator",
+    "firmware",
+    "physical device",
+    "live indexer",
+    "live transaction",
+    "deployment"
+  ]
+}

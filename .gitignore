@@ -33,3 +33,4 @@ __pycache__/
 !tools/website-privacy-review/focused-tests.log
 !tools/website-privacy-review/ui-review.log
 !tools/host-checkpoint-review/check.log
+!tools/host-checkpoint-review/boundaries-check.log

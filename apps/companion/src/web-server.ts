@@ -134,6 +134,11 @@ async function loadBuild(
   }
   await load(join(root, "index.html"), "/", "text/html; charset=utf-8");
   assets.set("/index.html", assets.get("/")!);
+  await load(
+    join(root, "third-party-notices.txt"),
+    "/third-party-notices.txt",
+    "text/plain; charset=utf-8",
+  );
   const assetsDirectory = join(root, "assets");
   const info = await lstat(assetsDirectory);
   requireCondition(

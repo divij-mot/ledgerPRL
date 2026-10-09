@@ -28,7 +28,7 @@ npm run dev
 
 Open http://127.0.0.1:5173. The public-indexer option requires an explicit privacy choice before derived addresses are queried. Mainnet and Testnet2 use distinct, genesis-checked backends. Original testnet, regtest and simnet require an appropriate node. Public account import/offline inspection does not prove spendability or sign anything.
 
-The frontend and narrow proxy can run locally together or behind HTTPS using the production host described in [website hosting](docs/website-hosting.md). The public website does not expose the local-node bridge. See [companion instructions](docs/companion.md) for recovery metadata and limitations.
+The frontend and narrow proxy can run locally together or behind HTTPS using the production host described in [website hosting](docs/website-hosting.md). The public website does not expose the local-node bridge. Public TLS deployment and current live-indexer availability remain unqualified. See [companion instructions](docs/companion.md) for recovery metadata and limitations.
 
 Private keys remain on Ledger. The browser keeps receive/change recovery ranges and payment reservations, including already-signed bytes. Optional watch-cache saves also contain the account public key and chain code. These records contain no private signing keys but are financially sensitive; do not publish backups. The hosted proxy sees requested addresses/transaction IDs, not account derivation keys.
 
@@ -50,9 +50,10 @@ The current device port is documented in [Ledger Bitcoin PRL port](apps/ledger-b
 ## Documentation
 
 - [Security model and boundaries](SECURITY.md)
-- [Canonical protocol](docs/protocol-v1.md)
+- [Current C-port protocol](apps/ledger-bitcoin-prl/README.md)
+- [Historical Rust canonical protocol](docs/protocol-v1.md)
 - [Recorded test evidence](docs/test-evidence.md)
-- [Final native software qualification](tools/native-release-qualification/README.md)
+- [Historical Rust native qualification](tools/native-release-qualification/README.md)
 - [Exact-build reproduction and limits](tools/build-reproducibility/README.md)
 - [Implementation and release gates](docs/implementation-status.md)
 - [Recovery and safe migration](docs/recovery.md)

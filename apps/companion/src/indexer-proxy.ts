@@ -90,15 +90,20 @@ export function indexerProxy(origin: string, fetcher: typeof fetch = fetch) {
           "Invalid signed transaction",
         );
         const tx = parseTransaction(body.rawTx);
+        // Structural relay gate only: prevouts and browser approval are not
+        // available here, so this does not prove a valid signature or ownership.
+        // The browser verifies its signed payment; the upstream checks consensus.
         assert(
           tx.txid === body.expectedTxid &&
             tx.inputs.length >= 1 &&
             tx.inputs.length <= 16 &&
             tx.inputs.every(
               (input) =>
-                input.witness.length === 1 && input.witness[0]!.length === 64,
+                input.scriptSig.length === 0 &&
+                input.witness.length === 1 &&
+                input.witness[0]!.length === 64,
             ),
-          "Expected a signed key-path transaction",
+          "Expected key-path transaction structure",
         );
         await source.tip();
         // No retry. A timeout may follow successful submission and must remain ambiguous.

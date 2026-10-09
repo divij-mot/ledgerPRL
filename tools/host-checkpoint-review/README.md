@@ -1,5 +1,18 @@
 # Host integrity/privacy checkpoint
 
+## Later host boundary replay
+
+`boundaries-check.log` records the subsequent aggregate on 2026-10-09 at
+approximately 22:50 UTC: all typechecks, 420 tests (companion increased to 134),
+production build and tracked-file secret scan passed. This includes strict
+network/address validation before public indexer requests, empty-scriptSig relay
+validation and the bounded third-party-notices route. The emitted main asset is
+`index-BPR0Pkw2.js`; the backup worker is unchanged. The dependency graph and
+distributed notices were independently regenerated and checked. This later
+checkpoint does not extend any native, physical-device or live-network claim.
+
+## Earlier storage/privacy replay
+
 The aggregate `npm run check` completed successfully on 2026-10-09 at
 approximately 22:42 UTC. The included log records all workspace typechecks,
 415 passing tests, production builds and the tracked-file secret-pattern scan.

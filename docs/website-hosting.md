@@ -85,3 +85,27 @@ No seed words, PIN, private key, RPC password or API key belongs in the website,
 ## Automated verification scope
 
 `apps/companion/test/web-server.test.ts` uses actual loopback HTTP requests and injected synthetic upstream responses. It verifies serving/header policy, methods, exact origins/duplicate headers, traversal/source/map denial, immutable asset snapshots, symlink rejection, request bounds, no upload/private-node routes and no forwarding of client Cookie/Authorization. It does not issue certificates, exercise real Caddy/TLS, connect physical devices or send funds. Run the full repository checks again after changes; a unit suite does not establish a public deployment's configuration or browser/hardware compatibility.
+
+## Distribution notices
+
+The build includes `public/third-party-notices.txt`. The production server requires
+this bounded regular file at startup and exposes only its exact route as plain
+text. The footer links to it without adding third-party requests or scripts.
+It retains the installed dependency license/copyright bodies and adapted Ledger
+host-code attribution. It does not assign a license to newly authored project code.
+
+CI measures the actual main/worker module graph and checks that the distributed
+notices match it. After changing browser dependencies, run:
+
+```sh
+node --import tsx tools/dependency-supply-review/review.mjs
+node tools/dependency-supply-review/generate-notices.mjs --check apps/companion/public/third-party-notices.txt
+```
+
+A mismatch fails. Review the regenerated candidate and dependency changes before
+replacing the distributed file; preserve the full notices.
+
+The relay's Host, Origin and custom-header checks defend browser origins; they
+are not client authentication. Relay validation checks transaction structure and
+transaction ID, not Ledger approval or signatures without prevout data. The
+browser verifies signed payments, and the upstream node validates consensus.

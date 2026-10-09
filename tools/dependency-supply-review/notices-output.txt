@@ -1,0 +1,25 @@
+PASS: apps/companion/public/third-party-notices.txt exactly matches the current measured dependency notices.
+{
+  "counts": {
+    "npmPackageInstances": 25,
+    "npmUniqueNames": 24,
+    "generatedRuntimeGroups": 1,
+    "copiedSourceGroups": 1,
+    "componentGroups": 27
+  },
+  "bundles": [
+    {
+      "file": "assets/index-BPR0Pkw2.js",
+      "components": 27
+    },
+    {
+      "file": "assets/backup-import.worker-Dtrkqa4Y.js",
+      "components": 4
+    }
+  ],
+  "proposedNotices": {
+    "file": "THIRD-PARTY-NOTICES.proposed.txt",
+    "bytes": 186206,
+    "sha256": "ccea80c549383223e6cf762fa9fabb3648379b61763ab2222570e90e670a3808"
+  }
+}

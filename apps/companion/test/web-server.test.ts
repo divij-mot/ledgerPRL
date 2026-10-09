@@ -17,6 +17,10 @@ async function fixture(t: TestContext) {
   t.after(() => rm(directory, { recursive: true, force: true }));
   await mkdir(join(directory, "assets"));
   await writeFile(join(directory, "index.html"), html);
+  await writeFile(
+    join(directory, "third-party-notices.txt"),
+    "Public dependency notices\n",
+  );
   await writeFile(join(directory, js), "export const publicBuild = true;\n");
   await writeFile(join(directory, css), "body{color:#fff}\n");
   await writeFile(
@@ -150,7 +154,13 @@ test("production requires an exact HTTPS origin and a complete compiled build", 
 
 test("production HTTP serves external scripts/styles with real CSP and cache/security headers", async (t) => {
   const { request, server } = await start(t);
-  for (const path of ["/", "/index.html", js, css]) {
+  for (const path of [
+    "/",
+    "/index.html",
+    js,
+    css,
+    "/third-party-notices.txt",
+  ]) {
     const result = await request(path);
     assert.equal(result.status, 200);
     assert.equal(result.headers["content-security-policy"], WALLET_CSP);
@@ -190,6 +200,30 @@ test("production HTTP serves external scripts/styles with real CSP and cache/sec
   assert.equal(server.timeout, 30_000);
   assert.equal(server.maxConnections, 128);
   assert.equal(server.maxHeadersCount, 32);
+});
+
+test("only the bounded public notices file is served as plain text", async (t) => {
+  const { request, directory } = await start(t);
+  const response = await request("/third-party-notices.txt");
+  assert.equal(response.status, 200);
+  assert.equal(response.headers["content-type"], "text/plain; charset=utf-8");
+  assert.equal(response.body, "Public dependency notices\n");
+  await writeFile(join(directory, "unrelated.txt"), "not-public");
+  assert.equal((await request("/unrelated.txt")).status, 404);
+  await rm(join(directory, "third-party-notices.txt"));
+  await symlink(
+    join(directory, "unrelated.txt"),
+    join(directory, "third-party-notices.txt"),
+  );
+  await assert.rejects(
+    createWalletServer({ origin, distDirectory: directory }),
+    /invalid or oversized asset/,
+  );
+  await rm(join(directory, "third-party-notices.txt"));
+  await assert.rejects(
+    createWalletServer({ origin, distDirectory: directory }),
+    /ENOENT/,
+  );
 });
 
 test("HTTP cannot serve traversal, source, maps, fixtures, directories, arbitrary SPA paths or URL parameters", async (t) => {
