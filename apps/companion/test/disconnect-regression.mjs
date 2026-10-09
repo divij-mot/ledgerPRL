@@ -246,7 +246,8 @@ const { verifyBroadcastPayload } = await import(
 const source =
   fs.readFileSync(path.join(root, "apps/companion/src/main.ts"), "utf8") +
   `
-export {connect,sign,broadcast};
+export {connect,broadcast};
+export async function signForTest() { await run('Checking inputs', sign); }
 export async function auditPrepare(a,b){account=a;network=a.network;snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:b.inputs.map(i=>({...i,rawTransaction:'',coinbase:false,block:{height:1,hash:'bb'.repeat(32)}}))};validation=null;await store.mutate(accountId(a),j=>reservePayment(j,b,'audit-payment',1000));activePayment='audit-payment';await refreshJournal();}
 export async function auditJournal(){return store.journal(accountId(account));}
 export function auditStatus(){return {hasClient:client!==null,activePayment,sourceMode};}
@@ -332,7 +333,7 @@ globalThis.auditSignedCommitGate = new Promise((r) => (release = r));
 const committed = new Promise((r) => (reached = r));
 globalThis.auditSignedCommitReached = reached;
 globalThis.auditDelaySigned = true;
-const signing = app.sign();
+const signing = app.signForTest();
 await committed;
 assert.equal((await app.auditJournal()).payments[0].state, "signing");
 d.events.dispatchEvent(new Event("disconnect"));

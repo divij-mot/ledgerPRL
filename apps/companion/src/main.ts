@@ -115,7 +115,10 @@ async function refreshJournal() {
     );
   }
 }
-async function run(label: string, work: () => Promise<void>) {
+async function run(
+  label: string,
+  work: (signal: AbortSignal) => Promise<void>,
+) {
   if (busy) return;
   busy = true;
   currentAbort = new AbortController();
@@ -123,7 +126,7 @@ async function run(label: string, work: () => Promise<void>) {
   notification = "";
   render();
   try {
-    await work();
+    await work(currentAbort.signal);
   } catch (error) {
     notification = error instanceof Error ? error.message : "Operation failed";
     notificationType = "error";
@@ -615,21 +618,21 @@ function bind() {
   click(
     "verify-receive",
     () =>
-      void run("Approve the receive address on your Ledger", async () => {
+      void run("Approve the receive address on your Ledger", async (signal) => {
         assert(client && account, "Connect your Ledger");
         assert(
           receiveIndex <= Math.min(979, journal.issuedReceiveThrough + 1),
           "Receive index outside saved recovery range",
         );
         const expected = deriveAddress(account, 0, receiveIndex).address;
-        currentAbort = new AbortController();
-        render();
+        signal.throwIfAborted();
         const returned = await client.verifyAddress(
           account,
           0,
           receiveIndex,
-          currentAbort.signal,
+          signal,
         );
+        signal.throwIfAborted();
         assert(
           returned === expected,
           "Ledger address does not match the public account",
@@ -637,6 +640,7 @@ function bind() {
         await store.mutate(accountId(account), (j) =>
           recordVerifiedReceive(j, receiveIndex),
         );
+        signal.throwIfAborted();
         verifiedReceive = expected;
         notification =
           "Full receive address matched the Ledger-confirmed result.";
@@ -785,69 +789,85 @@ async function connect() {
   });
   await run(
     "Choose your Ledger, open Pearl, and approve the public account export",
-    async () => {
+    async (signal) => {
       await transport?.close();
       transport = null;
       client = null;
       verifiedReceive = null;
-      transport = await connecting;
-      client = new LedgerPearlClient(transport, network);
-      currentAbort = new AbortController();
-      render();
-      const capabilities = await client.capabilities(currentAbort.signal);
-      assert(
-        capabilities.protocol === 1 && capabilities.network === network,
-        "Wrong Pearl app/network",
-      );
-      const exported = await client.exportAccount(
-        accountIndex,
-        currentAbort.signal,
-      );
-      if (account && accountId(account) !== accountId(exported)) {
-        snapshot = null;
-        validation = null;
-        activePayment = null;
-        history = [];
-        lastUsed = [-1, -1];
-        sourceMode = "node";
-        syncComplete = false;
-        privacyConsent = false;
-        receiveIndex = 0;
-        selected.clear();
+      const connected = await connecting;
+      try {
+        signal.throwIfAborted();
+        transport = connected;
+        client = new LedgerPearlClient(connected, network);
+        render();
+        const capabilities = await client.capabilities(signal);
+        signal.throwIfAborted();
+        assert(
+          capabilities.protocol === 1 && capabilities.network === network,
+          "Wrong Pearl app/network",
+        );
+        const exported = await client.exportAccount(accountIndex, signal);
+        signal.throwIfAborted();
+        if (account && accountId(account) !== accountId(exported)) {
+          snapshot = null;
+          validation = null;
+          activePayment = null;
+          history = [];
+          lastUsed = [-1, -1];
+          sourceMode = "node";
+          syncComplete = false;
+          privacyConsent = false;
+          receiveIndex = 0;
+          selected.clear();
+        }
+        account = exported;
+        await refreshJournal();
+        signal.throwIfAborted();
+        notification = `Pearl ${capabilities.version} connected. Public account ${exported.account} approved on the device.`;
+      } catch (error) {
+        await connected.close();
+        if (transport === connected) {
+          transport = null;
+          client = null;
+          verifiedReceive = null;
+        }
+        throw error;
       }
-      account = exported;
-      await refreshJournal();
-      notification = `Pearl ${capabilities.version} connected. Public account ${exported.account} approved on the device.`;
     },
   );
 }
-async function sign() {
+async function sign(signal: AbortSignal) {
   assert(
     client && account && snapshot && activePayment,
     "Connect Ledger and prepare a payment",
   );
+  signal.throwIfAborted();
   let payment = (await store.journal(accountId(account))).payments.find(
     (p) => p.id === activePayment,
   );
+  signal.throwIfAborted();
   assert(
     payment?.state === "draft",
     "Only a fresh unsigned draft may be signed",
   );
   const bundle = paymentBundle(payment);
   await checkNode();
+  signal.throwIfAborted();
   requireFreshValidation(snapshot, validation, bundle);
-  await store.mutate(accountId(account), (j) =>
-    transitionPayment(j, activePayment!, "signing"),
-  );
+  await store.mutate(accountId(account), (j) => {
+    signal.throwIfAborted();
+    transitionPayment(j, activePayment!, "signing");
+  });
+  signal.throwIfAborted();
   await refreshJournal();
+  signal.throwIfAborted();
   channel.postMessage("journal");
-  currentAbort = new AbortController();
   busyText = "Check network, recipient, amount, fee and change on your Ledger";
   render();
   let result;
   try {
     result = await client.signBundle(bundle, account, {
-      signal: currentAbort.signal,
+      signal,
     });
   } catch (error) {
     if (
@@ -865,6 +885,8 @@ async function sign() {
     }
     throw error;
   }
+  // Once signatures have returned, cancellation must not discard exact signed
+  // bytes or release reservations. Complete verification and durable storage.
   // The SDK verified every Schnorr signature; re-run finalization before persistence too.
   const checked = finalizeTransaction(bundle, result.signatures);
   assert(
