@@ -261,25 +261,26 @@ export function validateRestoredJournal(
   recordRecoveryPaths(restored, knownPaths);
   return restored;
 }
+/** Compact recovery data stays bounded at 2,000 records; local error diagnostics are not recovery authority. */
 export function exportWalletBackup(
   account: AccountPublicKey,
   journal: WalletJournal,
 ): string {
-  const text = JSON.stringify(
-    {
-      schema: 2,
-      kind: "pearl-watch-backup",
-      account: accountToJson(account),
-      journal: {
-        ...journal,
-        payments: journal.payments.map(
-          ({ signingAttempt: _localOnly, ...payment }) => payment,
-        ),
-      },
+  const text = JSON.stringify({
+    schema: 2,
+    kind: "pearl-watch-backup",
+    account: accountToJson(account),
+    journal: {
+      ...journal,
+      payments: journal.payments.map(
+        ({
+          signingAttempt: _localOnly,
+          lastError: _diagnosticOnly,
+          ...payment
+        }) => payment,
+      ),
     },
-    null,
-    2,
-  );
+  });
   assert(
     new TextEncoder().encode(text).length <= MAX_BACKUP_BYTES,
     "Backup exceeds 16 MiB",

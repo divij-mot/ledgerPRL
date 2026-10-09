@@ -2,7 +2,9 @@
 
 Recorded 9 October 2026. Development emulators and public test keys only; this is functional integration evidence, not a security audit, physical-device certification, or permission to use valuable funds.
 
-## Actual passing runs
+## Historical source-bound passing runs
+
+These tables retain the exact earlier ELF checkpoints, not qualification of later source changes. See [final lexical-source requalification](test-evidence.md#final-lexical-key-lifetime-requalification) for the latest recorded matrix.
 
 The checked-in runner is `tests/e2e/native-node-roundtrip.ts`. Essential artifacts are retained under `tests/e2e/evidence/<model>/`: normalized result/provenance JSON, exact APDU transcript, canonical bundle, signed transaction, UI event transcript, and representative PNG screenshots. The normalized result removes machine-specific temporary paths; it retains a SHA256 of the original run record. The retention tool verifies the exact executed snapshot hash and excludes all ELF/node binaries from the repository.
 
@@ -16,7 +18,7 @@ The checked-in runner is `tests/e2e/native-node-roundtrip.ts`. Essential artifac
 
 Times are measured host wall times in this emulated environment, including APDU transport and UI automation. Touch final-action timings include the 2.5-second emulated touch hold. They are not secure-element signing benchmarks. No crash, allocation error or signature failure occurred in these runs. Stack/heap high-water was **not measured**.
 
-All 22 cases passed on each listed run against final hardened firmware, with a separately hashed immutable ELF snapshot for every run:
+All 22 cases passed on each listed run against the recorded hardened firmware, with a separately hashed immutable ELF snapshot for every run:
 
 - Native capabilities and correct simnet identity; emulated button/touch-approved account export matching the public BIP32 vector; full receive-address review matching public-only BIP86 derivation
 - Out-of-order APDUs and malformed BEGIN fail closed; wrong network, substituted input ownership, forged change script and wrong bundle hash reject before releasing a signature
@@ -30,7 +32,7 @@ The max-input tests intentionally spend 16 distinct mature outpoints paying the 
 
 ## Independently derived key-parity coverage
 
-`tests/e2e/evidence/nanosp-parity/` records a separate successful 22-case immutable Nano S Plus run with four inputs, a 463-byte bundle, and the same final ELF hash as the max-input run. Its public-only Go oracle (`tests/e2e/parity-oracle/main.go`) uses the pinned Pearl BIP32 and BIP86 implementation to identify:
+`tests/e2e/evidence/nanosp-parity/` records a separate successful 22-case immutable Nano S Plus run with four inputs, a 463-byte bundle, and the same recorded ELF hash as the max-input run. Its public-only Go oracle (`tests/e2e/parity-oracle/main.go`) uses the pinned Pearl BIP32 and BIP86 implementation to identify:
 
 | Receive index | Internal-key Y parity | Tweaked-output Y parity |
 | ------------: | --------------------- | ----------------------- |
@@ -41,7 +43,7 @@ The max-input tests intentionally spend 16 distinct mature outpoints paying the 
 
 The node mines genuine coinbases among all four derived addresses; the runner chooses four mature distinct-key outputs, obtains native signatures after emulated UI approval, independently verifies every signature on the host, and requires actual Pearl mempool acceptance and mined confirmation. The exact public points/addresses are in `tests/e2e/parity-vectors.json`. No software signer supplies these signatures. This parity run took 7.071 seconds for review/signing and 1.608 seconds after the final emulated approval action. Parity coverage is established on Nano S Plus; repeating the full parity transaction on every model is not claimed.
 
-A separate reviewer also independently reconstructed an earlier immutable parity fixture and executed the pinned Pearl Go oracle: four BIP341 digests, four BIP340 signatures, full script-engine checks, account/owned scripts, receive address, txid and wtxid passed. The final node run uses the latest transport-hardened ELF.
+A separate reviewer also independently reconstructed an earlier immutable parity fixture and executed the pinned Pearl Go oracle: four BIP341 digests, four BIP340 signatures, full script-engine checks, account/owned scripts, receive address, txid and wtxid passed. That node run uses the transport-hardened ELF identified in its retained manifest.
 
 ## Source and execution pins
 
@@ -78,9 +80,9 @@ Each run creates a fresh node data directory and starts `--simnet --nolisten --n
 
 An intermediate Nano S Plus parity run reached a successful first signature and cleared the remaining signatures on abort, then its next review encountered `SIGSEGV`. Investigation confirmed that another build had overwritten the same shared ELF inode while Speculos was mapping it. This does not qualify as a firmware regression result because code bytes changed during execution. The original failure record is retained under `tests/e2e/evidence/nanosp-parity-crash/` and classified as inconclusive.
 
-Artifact publication now uses atomic rename. More importantly, the runner copies the entire ELF into a fresh per-run snapshot, hashes that copied buffer and executes only that file. All five final maximum-input runs and the final four-key parity run above were rerun with this protection; the repeated approval/partial-export/abort/new-review sequence passed and the crash did not recur. Earlier unsnapshotted passes were replaced in the retained model results rather than presented as exact-binary qualification.
+Artifact publication now uses atomic rename. More importantly, the runner copies the entire ELF into a fresh per-run snapshot, hashes that copied buffer and executes only that file. All five retained maximum-input runs and the retained four-key parity run above were rerun with this protection; the repeated approval/partial-export/abort/new-review sequence passed and the crash did not recur. Earlier unsnapshotted passes were replaced in the retained model results rather than presented as exact-binary qualification.
 
-Two intermediate parity retries also stopped in discovery while the wallet interface gained mandatory confirmed/pending counts. The harness's RPC adapter was updated to provide actual node counts and transaction confirmations; the final matrix uses the current strict interface. Those incomplete retries are not counted as passing native-parity runs.
+Two intermediate parity retries also stopped in discovery while the wallet interface gained mandatory confirmed/pending counts. The harness's RPC adapter was updated to provide actual node counts and transaction confirmations; the retained matrix uses that strict interface. Those incomplete retries are not counted as passing native-parity runs.
 
 ## Not established
 
