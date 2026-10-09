@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-09",
+  "result": "PASS: manual original-slot control-flow review of five exact optimized pilot ELFs",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "scope": "Account and signing original private-key scalar32/metadata wipe on success and ordinary returned errors; no claim about OS exceptions, physical RAM, register copies or SDK-owned scratch",
+  "models": [
+    {
+      "model": "nanosplus",
+      "elf": "pearl-nanosplus-simnet.elf",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "accountKeyOffsetFromSampleMainSp": 10944,
+      "signingKeyOffsetFromSampleMainSp": 10720,
+      "sites": {
+        "accountSuccessDrop": "c0de1a20",
+        "accountErrorDrop": "c0de1996",
+        "signCall": "c0de3512",
+        "signSuccessDrop": "c0de3532",
+        "signErrorDrop": "c0de3632",
+        "verifyCall": "c0de3562",
+        "identifierCall": "c0de1a32",
+        "privateDrop": "c0de0254",
+        "zeroize32": "c0de64a8",
+        "zeroizeIterator": "c0de64cc"
+      }
+    },
+    {
+      "model": "nanox",
+      "elf": "pearl-nanox-simnet.elf",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "accountKeyOffsetFromSampleMainSp": 11224,
+      "signingKeyOffsetFromSampleMainSp": 11000,
+      "sites": {
+        "accountSuccessDrop": "c0de1f0e",
+        "accountErrorDrop": "c0de1d60",
+        "signCall": "c0de38ac",
+        "signSuccessDrop": "c0de38c6",
+        "signErrorDrop": "c0de3994",
+        "verifyCall": "c0de38ee",
+        "identifierCall": "c0de1f24",
+        "privateDrop": "c0de02c8",
+        "zeroize32": "c0de6870",
+        "zeroizeIterator": "c0de6894"
+      }
+    },
+    {
+      "model": "stax",
+      "elf": "pearl-stax-simnet.elf",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "accountKeyOffsetFromSampleMainSp": 10936,
+      "signingKeyOffsetFromSampleMainSp": 10712,
+      "sites": {
+        "accountSuccessDrop": "c0de1a32",
+        "accountErrorDrop": "c0de1954",
+        "signCall": "c0de3446",
+        "signSuccessDrop": "c0de3466",
+        "signErrorDrop": "c0de3556",
+        "verifyCall": "c0de3498",
+        "identifierCall": "c0de1a42",
+        "privateDrop": "c0de0254",
+        "zeroize32": "c0de492c",
+        "zeroizeIterator": "c0de4950"
+      }
+    },
+    {
+      "model": "flex",
+      "elf": "pearl-flex-simnet.elf",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "accountKeyOffsetFromSampleMainSp": 10944,
+      "signingKeyOffsetFromSampleMainSp": 10720,
+      "sites": {
+        "accountSuccessDrop": "c0de1a78",
+        "accountErrorDrop": "c0de19ee",
+        "signCall": "c0de356a",
+        "signSuccessDrop": "c0de358a",
+        "signErrorDrop": "c0de368a",
+        "verifyCall": "c0de35ba",
+        "identifierCall": "c0de1a8a",
+        "privateDrop": "c0de0254",
+        "zeroize32": "c0de4a28",
+        "zeroizeIterator": "c0de4a4c"
+      }
+    },
+    {
+      "model": "apex_p",
+      "elf": "pearl-apex_p-simnet.elf",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "accountKeyOffsetFromSampleMainSp": 10944,
+      "signingKeyOffsetFromSampleMainSp": 10720,
+      "sites": {
+        "accountSuccessDrop": "c0de1a78",
+        "accountErrorDrop": "c0de19ee",
+        "signCall": "c0de356a",
+        "signSuccessDrop": "c0de358a",
+        "signErrorDrop": "c0de368a",
+        "verifyCall": "c0de35ba",
+        "identifierCall": "c0de1a8a",
+        "privateDrop": "c0de0254",
+        "zeroize32": "c0de64f4",
+        "zeroizeIterator": "c0de6518"
+      }
+    }
+  ]
+}

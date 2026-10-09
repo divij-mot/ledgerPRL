@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+  "testRuns": [
+    {
+      "profile": "debug",
+      "passed": 8,
+      "log": "debug.log"
+    },
+    {
+      "profile": "release",
+      "passed": 8,
+      "log": "release.log"
+    }
+  ],
+  "coreDependency": "Live verified repository crates/pearl-core",
+  "instrumentation": "One observer call after the real PrivateKey Drop wipes scalar and metadata",
+  "limits": "Host mocked syscalls and synthetic keys, not SDK/hardware/physical UI proof",
+  "date": "2026-10-09",
+  "outputPathContainedSpaces": true,
+  "sourceChecksBeforeAndAfter": "PASS",
+  "sdkTrackedDeltaAndCleanliness": "PASS",
+  "originalSlotObserver": "Scalar address in mocked init must equal observed scalar address after Drop, as well as checking zero contents and metadata",
+  "rejectedHistoricalControl": {
+    "cryptoSha256": "7245b73f22769869bcd9440469a45adfce2b9878b9f5567bbad759742b38d1d9",
+    "profile": "debug",
+    "test": "success_preserves_aux_and_bip340_mode",
+    "exitCode": 101,
+    "reason": "Original initialized scalar address differs from the moved-copy Drop address"
+  }
+}

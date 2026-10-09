@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "cryptoPath": "apps/ledger/src/crypto.rs",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "sourceFiles": {
+    "Cargo.toml": "a14765fa6f22f50f29cd7bfd12308b36da7796cbb883af067e3e214b871bfa94",
+    "crates/pearl-core/Cargo.toml": "d4b267236c1cb479252cf8654b94219bc74e801156cfb015c4dd1d3f1ad5f2d4",
+    "apps/ledger/patches/strict-transport.patch": "49b0ebcd4632c59a5312ed49966b14c51104bb400c9e7917f28f2b560507f09b",
+    "crates/pearl-core/src/address.rs": "b86f02682901e5ca163f8a7f09a54ce018185a16ad59643caf0e33bffff45d1b",
+    "crates/pearl-core/src/amount.rs": "725716c8b18eb85597dbae481c6e5c3b74f09261387ef134651f19ad5fc6c815",
+    "crates/pearl-core/src/error.rs": "ba5a82fc377758b12a188e8db04ebb00832b07b63cec3e2e6a2977e8047656da",
+    "crates/pearl-core/src/lib.rs": "9bfd2b2e4fbdeef87e86e7bda17d443d0ec9fcbb905e6b023696d42a25f1fc57",
+    "crates/pearl-core/src/network.rs": "0e36b43efc30e8cb3109ff663dd9e1cf342a7e347ab269d884f15c38da93cb6d",
+    "crates/pearl-core/src/session.rs": "8d3daa41ebf7f46a655cddfc537629bc9527eea6cb6960d124c4e52bc3fdd6d7",
+    "crates/pearl-core/src/transaction.rs": "8b2ec2cf6608961182de5a103749aa0813eb541a698509c8da9f6cf4487250e1",
+    "scripts/ledger-prepare-sdk.sh": "6c346bb6a9d71bf4fef9f6a033925726e15cd0655dfe1b9f83d561f09e84a0e0"
+  },
+  "referenceSourceFiles": {
+    "apps/ledger/vendor/ledger-secure-sdk/lib_cxng/src/cx_rng.c": "53eeb35637a8b3321622c77548a2ea64edd95e4a32404369c4721a79101f3eb5",
+    "apps/ledger/vendor/ledger-secure-sdk/include/os_random.h": "6186d4577b3e47dd84f6b95a17932377a82ac8417b284621c55f9a5dedf5d3d6",
+    "apps/ledger/vendor/ledger-secure-sdk/include/os_seed.h": "4cd426d393612a9b7f5f500c6d10cb09f9a86c748c6c7f5ab4079af2ac63cfe8",
+    "apps/ledger/vendor/ledger-secure-sdk/src/syscalls.c": "102a4e294d5141d1915b2d55649c85c5db503c1f4b2d442e3ad20c4563028f86",
+    "apps/ledger/vendor/ledger-secure-sdk/src/svc_call.s": "828b97e358020481177c5874ac3117aefd6097a307d514c7ce3851a202053692",
+    "apps/ledger/vendor/ledger-secure-sdk/src/svc_cx_call.s": "e8e03d4038f127da0668a4557578e84ae07be7ed1ffa296414267c2e5741a395",
+    "apps/ledger/vendor/ledger-device-rust-sdk/ledger_secure_sdk_sys/src/c/src.c": "a5785277fa0930428d2d015c15d8c215e0d9f3dde250d92cbb497a2c62ecdbcf"
+  },
+  "sdkCommits": {
+    "apps/ledger/vendor/ledger-secure-sdk": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "apps/ledger/vendor/ledger-device-rust-sdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1"
+  },
+  "harnessSha256": "35f4dea8978306e124bce613723703d58307ac211c9e0e149c0cf671bb1bc8dd",
+  "lockSha256": "67c1538640410de19520c8bcd95e8d444ee6d3f3a1a5e712de757d302c9e8a72"
+}

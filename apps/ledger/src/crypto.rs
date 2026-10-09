@@ -1,9 +1,11 @@
 //! The sole application FFI boundary. All scalar and curve arithmetic is Ledger
 //! SDK code. This module never calls the SDK's high-level ECDSA signing methods.
 //!
-//! Secret containers zeroize on every normal/error return. No secret is retained
-//! while polling transport or showing UI. Fatal SDK/OS aborts tear down the app;
-//! checking OS RAM cleanup on each supported physical device is a release gate.
+//! Secret containers zeroize on normal and returned-error paths. No private key
+//! is retained while polling transport or showing UI. Panics and OS-raised
+//! exceptions may bypass Rust destructors; the SDK can restart on IO_RESET
+//! without explicitly wiping app RAM. Platform fault/cleanup behavior requires
+//! separate validation on each supported physical device.
 
 use ledger_device_sdk::{
     hash::{HashInit, sha2::Sha2_256},
@@ -160,9 +162,11 @@ pub fn output_key(path: &DerivationPath) -> Result<[u8; 32], Error> {
 
 pub fn account_public(path: &AccountPath) -> Result<AccountPublic, Error> {
     let mut chain_code = [0; 32];
-    let mut key = PrivateKey::new();
-    derive(&path.components(), &mut chain_code, &mut key)?;
-    let public = public_key(&mut key)?;
+    let public = {
+        let mut key = PrivateKey::new();
+        derive(&path.components(), &mut chain_code, &mut key)?;
+        public_key(&mut key)?
+    }; // Wipe the private key before the unrelated OS identifier syscall.
     // Use the OS identifier syscall; never request root derivation permission.
     let mut identifier = [0; 20];
     // SAFETY: 20 writable bytes, checked return, same usage as Ledger Bitcoin.
@@ -188,29 +192,34 @@ pub fn account_public(path: &AccountPath) -> Result<AccountPublic, Error> {
 pub fn sign_input(tx: &ReviewedTransaction, index: usize) -> Result<[u8; 64], Error> {
     let path = tx.input_path(index)?;
     let digest = tx.sighash(index)?;
-    let mut key = PrivateKey::new();
-    tweaked_key(&path, &mut key)?;
-    let public = public_key(&mut key)?;
     let mut signature = Zeroizing::new([0; 64]);
-    // SAFETY: 32 writable bytes. SDK RNG is infallible at the Rust boundary;
-    // fatal hardware RNG failure aborts inside the OS rather than returning data.
-    unsafe { sys::cx_rng_no_throw(signature.as_mut_ptr(), 32) };
+    // SAFETY: 32 writable bytes. Use the checked syscall behind the SDK's
+    // void RNG wrapper, which otherwise spins on a returned error. Acquire
+    // auxiliary entropy before deriving a private key, and fail closed on a
+    // returned error. OS faults that do not return remain a platform boundary.
+    check(unsafe { sys::cx_get_random_bytes(signature.as_mut_ptr().cast(), 32) })?;
     let mut length = signature.len();
-    // SAFETY: correctly initialized SDK key, 32-byte digest, 64-byte output.
-    // CX_RND_PROVIDED is essential: BIP340 consumes the fresh auxiliary random
-    // bytes at sig[0..32], then computes its tagged deterministic nonce itself.
-    // The SDK also normalizes the tweaked key's output parity as BIP340 requires.
-    check(unsafe {
-        sys::cx_ecschnorr_sign_no_throw(
-            &key.0,
-            sys::CX_ECSCHNORR_BIP0340 | sys::CX_RND_PROVIDED | sys::CX_LAST,
-            sys::CX_SHA256,
-            digest.as_ptr(),
-            digest.len(),
-            signature.as_mut_ptr(),
-            &mut length,
-        )
-    })?;
+    let public = {
+        let mut key = PrivateKey::new();
+        tweaked_key(&path, &mut key)?;
+        let public = public_key(&mut key)?;
+        // SAFETY: correctly initialized SDK key, 32-byte digest, 64-byte output.
+        // CX_RND_PROVIDED is essential: BIP340 consumes the fresh auxiliary random
+        // bytes at sig[0..32], then computes its tagged deterministic nonce itself.
+        // The SDK also normalizes the tweaked key's output parity as BIP340 requires.
+        check(unsafe {
+            sys::cx_ecschnorr_sign_no_throw(
+                &key.0,
+                sys::CX_ECSCHNORR_BIP0340 | sys::CX_RND_PROVIDED | sys::CX_LAST,
+                sys::CX_SHA256,
+                digest.as_ptr(),
+                digest.len(),
+                signature.as_mut_ptr(),
+                &mut length,
+            )
+        })?;
+        public
+    }; // Drop the private key in place before public-only verification.
     if length != 64 {
         return Err(Error::Crypto);
     }

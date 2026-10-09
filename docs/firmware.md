@@ -225,6 +225,12 @@ The [portable wall-clock qualification](../tools/native-wallclock/README.md) ran
 
 All 60 stale-state restart probes rejected old fetch/review/append requests. A new transaction required fresh emulated approval and independently verified signatures. Twelve preflight controls check exact source inventories and copied ELF/manifest identity before execution. Original qualification and full portable replay are separate evidence for the same matrix, not additional unique coverage. No accelerated or injected ticker was used. These are emulator results, not a guarantee of physical-device timing, RAM erasure, or every transport/scheduling race.
 
+## Checked entropy and private-key lifetimes
+
+The [native secret-lifecycle review](../tools/native-secret-review/REPORT.md) records checked auxiliary-randomness acquisition before private-key derivation and lexical key scopes that end before public-only identifier/verification calls. The bounded host controls check both wiped contents and the original key-storage address. An intermediate explicit by-value `drop(key)` candidate was rejected because its optimized code wiped a moved temporary; it was not accepted as qualified firmware.
+
+The retained source-bound assembly reviews verify original-slot scalar/metadata cleanup on ordinary success/error paths in all five simnet and five mainnet models. These are distinct from hardware proof: OS exceptions, IO_RESET restart, panics and nonreturning syscalls can bypass Rust cleanup. App and OS-owned RAM, register/spill behavior and physical fault handling remain release gates. Run the portable controls only with the documented exact SDK setup; a host mock or source hash is not a substitute for reviewing the emitted native code.
+
 ## Required release validation
 
 - Verify API27 firmware rollout/device compatibility, pin a builder image digest, then reproduce every target/network build
