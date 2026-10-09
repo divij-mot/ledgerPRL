@@ -204,16 +204,24 @@ const built = await build({
       name: "boundaries",
       setup(b) {
         b.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          {
+            filter:
+              /^\.\/(ledger\.js|storage\.js|styles\.css|backup-import\.js)$/,
+          },
           (a) => ({ path: a.path, namespace: "audit" }),
         );
         b.onLoad({ filter: /.*/, namespace: "audit" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
-            ? 'export async function connectLedger(){throw Error("No device permitted");}'
-            : a.path.includes("storage")
-              ? `export class WatchStorage {constructor(){this.rows=new Map();} async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],nextChangeIndex:0,issuedReceiveThrough:-1});}async mutate(k,fn){const j=await this.journal(k);const r=fn(j);this.rows.set(k,structuredClone(j));return r;}}`
-              : "",
+          resolveDir: root,
+          // Worker transport is modeled in this archival test; the unchanged
+          // validator still runs. Dedicated worker tests cover its real entry.
+          contents: a.path.includes("backup-import")
+            ? 'import { importWalletBackup } from "@pearl-ledger/wallet"; export async function importWalletBackupFile(file, signal) { signal.throwIfAborted(); return importWalletBackup(await file.text()); }'
+            : a.path.includes("ledger")
+              ? 'export async function connectLedger(){throw Error("No device permitted");}'
+              : a.path.includes("storage")
+                ? `export class WatchStorage {constructor(){this.rows=new Map();} async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],nextChangeIndex:0,issuedReceiveThrough:-1});}async mutate(k,fn){const j=await this.journal(k);const r=fn(j);this.rows.set(k,structuredClone(j));return r;}}`
+                : "",
         }));
       },
     },
@@ -238,7 +246,7 @@ const app = await import(
 );
 listeners.get("backup-file:change")({
   target: {
-    files: [{ size: Buffer.byteLength(backup), text: async () => backup }],
+    files: [new Blob([backup])],
   },
 });
 while (app.auditState().busy) await new Promise((r) => setImmediate(r));
@@ -377,21 +385,24 @@ console.log(
   "PASS: an over-budget reconciliation response leaves exact journal bytes unchanged.",
 );
 
-// Model an expired total-operation deadline, including the pre-network phase.
-const normalTimeout = AbortSignal.timeout;
+// Model an expired network-phase deadline after bounded local verification.
+const normalTimeout = globalThis.setTimeout;
 const requestCount = requests.length;
 try {
-  AbortSignal.timeout = (milliseconds) =>
-    milliseconds === 80000
-      ? AbortSignal.abort(new Error("Reconciliation test deadline exceeded"))
-      : normalTimeout(milliseconds);
+  globalThis.setTimeout = (callback, milliseconds, ...args) => {
+    if (milliseconds === 80000) {
+      callback(...args);
+      return normalTimeout(() => {}, 0);
+    }
+    return normalTimeout(callback, milliseconds, ...args);
+  };
   await app.auditReconcile();
   assert.equal(requests.length, requestCount);
   assert.equal(JSON.stringify(app.auditState().journal), guardedBefore);
   assert.match(app.auditState().notification, /deadline/);
 } finally {
-  AbortSignal.timeout = normalTimeout;
+  globalThis.setTimeout = normalTimeout;
 }
 console.log(
-  "PASS: an expired overall deadline sends no RPC request and preserves the prior journal.",
+  "PASS: an expired network deadline sends no RPC request and preserves the prior journal.",
 );

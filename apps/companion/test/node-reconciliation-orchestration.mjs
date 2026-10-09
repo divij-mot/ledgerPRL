@@ -56,7 +56,13 @@ const source =
   fs.readFileSync(path.join(root, "apps/companion/src/main.ts"), "utf8") +
   `
 export async function auditInstall(a,j){account=a;network=a.network;sourceMode='node';await store.mutate(accountId(a),next=>Object.assign(next,structuredClone(j)));await refreshJournal();}
-export async function auditReconcile(){await run('Batch review',reconcileNodePayments);}
+export async function auditReconcile(){await run('Batch review',async signal=>{
+ const add=signal.addEventListener.bind(signal), remove=signal.removeEventListener.bind(signal);
+ globalThis.auditForwardedListeners=0;
+ signal.addEventListener=(type,...args)=>{if(type==='abort')globalThis.auditForwardedListeners++;return add(type,...args);};
+ signal.removeEventListener=(type,...args)=>{if(type==='abort')globalThis.auditForwardedListeners--;return remove(type,...args);};
+ try {await reconcileNodePayments(signal);}finally{signal.addEventListener=add;signal.removeEventListener=remove;}
+});}
 export function auditCancel(){currentAbort?.abort();}
 export function auditState(){return {busy,notification,journal};}
 `;
@@ -132,6 +138,10 @@ const response = (request, tip = 1000) =>
   );
 for (const mode of [
   "success",
+  "slow-local-success",
+  "slow-two-batch-success",
+  "clock-budget-second",
+  "cancel-local",
   "cancel-second",
   "deadline-second",
   "tip-change-second",
@@ -140,18 +150,52 @@ for (const mode of [
   const requests = [],
     timers = [];
   const originalTimeout = AbortSignal.timeout;
-  if (mode === "deadline-second")
-    AbortSignal.timeout = (ms) => {
-      const c = new AbortController();
-      timers.push({ ms, c });
-      return c.signal;
-    };
+  const originalSetTimeout = globalThis.setTimeout;
+  const originalClearTimeout = globalThis.clearTimeout;
+  const networkTimers = [];
+  const originalNow = Object.getOwnPropertyDescriptor(performance, "now");
+  let clock = 0;
+  Object.defineProperty(performance, "now", {
+    configurable: true,
+    value: () => clock,
+  });
+  // Fake elapsed time, not weakened production validation. Yielding remains real.
+  globalThis.setTimeout = (callback, ms, ...args) => {
+    if (ms >= 80_000 && ms <= 1_600_000 && ms % 80_000 === 0) {
+      const handle = {};
+      networkTimers.push({
+        ms,
+        handle,
+        createdAt: clock,
+        cleared: false,
+        callback: () => callback(...args),
+      });
+      return handle;
+    }
+    return originalSetTimeout(() => {
+      if (ms === 0 && mode === "slow-local-success") clock += 100_000;
+      if (ms === 0 && mode === "cancel-local") app.auditCancel();
+      callback(...args);
+    }, ms);
+  };
+  globalThis.clearTimeout = (handle) => {
+    const timer = networkTimers.find((t) => t.handle === handle);
+    if (timer) timer.cleared = true;
+    else originalClearTimeout(handle);
+  };
+  AbortSignal.timeout = (ms) => {
+    const c = new AbortController();
+    timers.push({ ms, c });
+    return c.signal;
+  };
   let arrived;
   const second = new Promise((r) => (arrived = r));
   globalThis.fetch = async (route, options) => {
     assert.equal(route, "/api/reconcile");
     const request = JSON.parse(options.body);
     requests.push(request);
+    if (mode === "slow-two-batch-success") clock += 79_000;
+    if (mode === "clock-budget-second") clock += 80_000;
     if (
       requests.length === 2 &&
       (mode === "cancel-second" || mode === "deadline-second")
@@ -176,19 +220,37 @@ for (const mode of [
       await second;
       if (mode === "cancel-second") app.auditCancel();
       else {
-        assert.equal(timers.filter((t) => t.ms === 80000).length, 1);
+        assert.equal(networkTimers.filter((t) => t.ms === 160000).length, 1);
         assert.equal(timers.filter((t) => t.ms === 90000).length, 2);
-        timers
-          .find((t) => t.ms === 80000)
-          .c.abort(new Error("controlled overall80s deadline"));
+        networkTimers.find((t) => t.ms === 160000).callback();
       }
     }
     await running;
     assert.deepEqual(
       requests.map((r) => r.payments.length),
-      [100, 1],
+      mode === "cancel-local" ? [] : [100, 1],
     );
-    if (mode === "success") {
+    assert.equal(
+      networkTimers.filter((t) => t.ms === 160000).length,
+      mode === "cancel-local" ? 0 : 1,
+      "Exactly one count-bounded network deadline starts after local validation",
+    );
+    assert.equal(timers.filter((t) => t.ms === 90000).length, requests.length);
+    assert(
+      networkTimers.every((t) => t.cleared),
+      "Network scope must clear its timer on every terminal outcome",
+    );
+    assert.equal(
+      globalThis.auditForwardedListeners,
+      0,
+      "Forwarded user-abort listener must be removed on every terminal outcome",
+    );
+    if (mode === "slow-local-success")
+      assert(networkTimers[0].createdAt > 80_000);
+
+    if (
+      ["success", "slow-local-success", "slow-two-batch-success"].includes(mode)
+    ) {
       assert.equal(
         app.auditState().journal.payments.filter((p) => p.archived).length,
         101,
@@ -211,10 +273,14 @@ for (const mode of [
     console.log(
       "PASS control-flow:",
       mode,
-      "100+1 batches; all-or-none archive and202 locks retained.",
+      "Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.",
     );
   } finally {
     AbortSignal.timeout = originalTimeout;
+    globalThis.setTimeout = originalSetTimeout;
+    globalThis.clearTimeout = originalClearTimeout;
+    if (originalNow) Object.defineProperty(performance, "now", originalNow);
+    else delete performance.now;
   }
 }
 console.log(

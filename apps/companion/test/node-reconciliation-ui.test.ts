@@ -27,7 +27,7 @@ test("local-node archival UI preserves locks, handles reorgs and respects capaci
   );
 });
 
-test("multi-batch control flow honors one total deadline and cancellation (signature verification mocked)", () => {
+test("multi-batch control flow honors a count-bounded network deadline and local cancellation (signature verification mocked)", () => {
   const result = spawnSync(
     process.execPath,
     [
@@ -50,7 +50,7 @@ test("multi-batch control flow honors one total deadline and cancellation (signa
     result.stdout
       .split("\n")
       .filter((line) => line.startsWith("PASS control-flow:")).length,
-    4,
+    8,
     result.stdout,
   );
 });

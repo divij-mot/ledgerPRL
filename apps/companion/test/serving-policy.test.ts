@@ -20,6 +20,7 @@ function stylesheetHref(html: string): string {
   assert.ok(href, "the stylesheet must have a URL");
   assert.doesNotMatch(html, /<style\b/i, "styles must not require inline CSS");
   assert.match(html, /style-src 'self';/, "retain the strict style policy");
+  assert.match(html, /worker-src 'self';/, "workers remain same-origin only");
   assert.doesNotMatch(html, /'unsafe-inline'/);
   return href;
 }
@@ -93,6 +94,22 @@ test("development serves the linked stylesheet as CSS under the strict CSP", asy
   assert.doesNotMatch(source, /import\s*["'][^"']*\.css["']/);
   const entry = await fetch(`${origin}/src/main.ts`);
   assert.equal(entry.status, 200);
+  const validator = await fetch(`${origin}/src/backup-import.ts`);
+  assert.equal(validator.status, 200);
+  const validatorSource = await validator.text();
+  assert.match(
+    validatorSource,
+    /\/src\/backup-import\.worker\.ts\?worker_file&type=module/,
+  );
+  assert.doesNotMatch(
+    validatorSource.split("//# sourceMappingURL=")[0]!,
+    /blob:|data:/,
+  );
+  const worker = await fetch(
+    `${origin}/src/backup-import.worker.ts?worker_file&type=module`,
+  );
+  assert.equal(worker.status, 200);
+  assert.match(await worker.text(), /importWalletBackup/);
   assert.doesNotMatch(
     await entry.text(),
     /import\s*["'][^"']*\.css(?:\?[^"']*)?["']/,
@@ -114,4 +131,21 @@ test("production keeps the strict CSP and emits a linked CSS asset", async () =>
   const css = result.output.find((item) => `/${item.fileName}` === href);
   assert.ok(css && css.type === "asset");
   assert.match(String(css.source), /\.footer\{/);
+  const workers = result.output.filter((item) =>
+    /^assets\/backup-import\.worker-[^/]+\.js$/.test(item.fileName),
+  );
+  assert.equal(workers.length, 1, "emit one external validation worker");
+  const worker = workers[0]!;
+  assert.equal(worker.type, "asset");
+  const entry = result.output.find(
+    (item) => item.type === "chunk" && item.isEntry,
+  );
+  assert.ok(entry && entry.type === "chunk");
+  assert.ok(entry.code.includes(`/${worker.fileName}`));
+  assert.match(entry.code, /type:"module"/);
+  if (worker.type === "asset")
+    assert.match(
+      String(worker.source),
+      /Restored signed transaction fails independent signature\/byte verification/,
+    );
 });

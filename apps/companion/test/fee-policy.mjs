@@ -31,6 +31,7 @@ const snapshot = makeSnapshot(16);
 const source =
   fs.readFileSync(path.join(root, "apps/companion/src/main.ts"), "utf8") +
   `
+import { importWalletBackup } from "@pearl-ledger/wallet";
 export async function auditInputs(s) {
  account=s.account; network=s.account.network; snapshot=s; page='send'; activePayment=null;
  selected.clear(); for(const c of s.coins) selected.add(outpoint(c));

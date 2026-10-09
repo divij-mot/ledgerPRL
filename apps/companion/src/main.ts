@@ -46,10 +46,8 @@ import {
   transitionPayment,
   discardDraft,
   exportWalletBackup,
-  importWalletBackup,
   mergeRestoredJournal,
   reconcileConfirmed,
-  MAX_BACKUP_BYTES,
   rejectBeforeSigning,
   exportPublicRecovery,
   importPublicRecovery,
@@ -62,6 +60,7 @@ import {
 } from "@pearl-ledger/wallet";
 import { connectLedger, type DmkPearlTransport } from "./ledger.js";
 import { WatchStorage } from "./storage.js";
+import { importWalletBackupFile } from "./backup-import.js";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 const store = new WatchStorage();
@@ -503,17 +502,36 @@ function bind() {
     (event) =>
       void run(
         "Validating and merging complete public wallet backup",
-        async () => {
+        async (signal) => {
           const file = (event.target as HTMLInputElement).files?.[0];
           if (!file) return;
-          assert(file.size <= MAX_BACKUP_BYTES, "Backup exceeds 16 MiB");
-          const backup = importWalletBackup(await file.text());
-          await store.mutate(accountId(backup.account), (j) =>
-            mergeRestoredJournal(j, backup.journal),
-          );
+          const owner = account;
+          const backup = await importWalletBackupFile(file, signal);
+          const requireCurrent = () => {
+            signal.throwIfAborted();
+            assert(
+              account === owner,
+              "Account changed during backup validation",
+            );
+          };
+          requireCurrent();
+          await store.mutate(accountId(backup.account), (j) => {
+            // The storage read may have queued behind another tab's write.
+            requireCurrent();
+            mergeRestoredJournal(j, backup.journal);
+          });
+          channel.postMessage("journal");
+          const requireOpen = () =>
+            assert(
+              !signal.aborted && account === owner,
+              "Backup merged; opening the restored account was cancelled. Reservations remain saved.",
+            );
+          requireOpen();
           await transport?.close();
           transport = null;
           client = null;
+          verifiedReceive = null;
+          requireOpen();
           account = backup.account;
           network = account.network;
           accountIndex = account.account;
@@ -530,7 +548,6 @@ function bind() {
           selected.clear();
           await refreshJournal();
           page = "activity";
-          channel.postMessage("journal");
           notification =
             "Complete watch backup merged. Reservations and exact signed bytes restored; prior verification, consent and archival claims require fresh checks.";
         },
@@ -1066,15 +1083,18 @@ async function reconcileNodePayments(signal: AbortSignal) {
   assert(account, "Load a public account first");
   const owner = account,
     id = accountId(owner);
-  const operation = AbortSignal.any([signal, AbortSignal.timeout(80_000)]);
-  const deadline = performance.now() + 80_000;
+  // Local verification has a fixed record/signature bound and yields for Cancel.
+  // Slow cryptography must not consume the later bounded network allowance.
+  let operation = signal;
+  let deadline: number | undefined;
   const checkBudget = () => {
     operation.throwIfAborted();
     assert(
-      performance.now() < deadline,
+      deadline === undefined || performance.now() < deadline,
       "Reconciliation deadline exceeded; journal unchanged",
     );
   };
+  checkBudget();
   const saved = await store.journal(id),
     original = JSON.stringify(saved.payments);
   checkBudget();
@@ -1098,8 +1118,8 @@ async function reconcileNodePayments(signal: AbortSignal) {
     { block: ReturnType<typeof chainTip>; payments: PaymentRecord[] }
   >();
   for (const [index, payment] of signed.entries()) {
-    // Yield during large local verification passes so Cancel and the overall
-    // deadline remain observable before any node request.
+    // Yield during large local verification passes so Cancel remains
+    // observable before any node request.
     if (index % 10 === 0)
       await new Promise((resolve) => setTimeout(resolve, 0));
     checkBudget();
@@ -1152,149 +1172,179 @@ async function reconcileNodePayments(signal: AbortSignal) {
   let tip: ReturnType<typeof chainTip> | undefined,
     calls = 0,
     detached = 0;
-  for (let offset = 0; offset < Math.max(1, active.length); offset += 100) {
-    checkBudget();
-    const batch = active.slice(offset, offset + 100),
-      checkpoints =
-        offset === 0 ? [...receipts.values()].map((r) => r.block) : [];
-    const result = record(
-      await post(
-        "/api/reconcile",
-        { payments: batch.map((p) => p.payload), checkpoints },
-        operation,
-      ),
-      "reconciliation response",
-    );
-    checkBudget();
-    exactKeys(
-      result,
-      [
-        "network",
-        "genesisHash",
-        "tip",
-        "checkedAt",
-        "rpcCalls",
-        "transactions",
-        "checkpoints",
-      ],
-      "reconciliation response",
-    );
-    assert(
-      result.network === owner.network &&
-        result.genesisHash === NETWORKS[owner.network].genesisHash,
-      "Reconciliation network mismatch",
-    );
-    const currentTip = chainTip(result.tip);
-    assert(
-      !tip ||
-        (currentTip.hash === tip.hash && currentTip.height === tip.height),
-      "Node tip changed between reconciliation batches; retry",
-    );
-    tip = currentTip;
-    safeInteger(result.checkedAt, Number.MAX_SAFE_INTEGER);
-    calls += safeInteger(result.rpcCalls, 2108);
-    assert(calls <= 4160, "Total reconciliation RPC budget exhausted");
-    assert(
-      Array.isArray(result.transactions) &&
-        result.transactions.length === batch.length &&
-        Array.isArray(result.checkpoints) &&
-        result.checkpoints.length === checkpoints.length,
-      "Incomplete reconciliation coverage",
-    );
-    const expected = new Set(batch.map((p) => p.payload.expectedTxid));
-    for (const value of result.transactions) {
-      const tx = record(value, "known transaction"),
-        txid = hash(tx.txid);
-      assert(
-        expected.delete(txid),
-        "Unexpected or duplicate reconciliation transaction",
-      );
-      assert(
-        ["confirmed", "pending", "unknown", "detached"].includes(
-          String(tx.state),
+  // At most 20 batches, with the same 80-second allowance for each necessary
+  // batch. Per-request timeouts, RPC ceilings and one stable tip still apply.
+  const networkBudgetMs = 80_000 * Math.max(1, Math.ceil(active.length / 100));
+  const networkAbort = new AbortController();
+  let networkTimer: ReturnType<typeof setTimeout> | undefined;
+  const forwardCancel = () => {
+    if (networkTimer !== undefined) clearTimeout(networkTimer);
+    networkAbort.abort(signal.reason);
+  };
+  if (signal.aborted) forwardCancel();
+  else {
+    signal.addEventListener("abort", forwardCancel, { once: true });
+    networkTimer = setTimeout(
+      () =>
+        networkAbort.abort(
+          new Error("Reconciliation deadline exceeded; journal unchanged"),
         ),
-        "Invalid reconciliation state",
-      );
-      if (tx.state === "confirmed") {
-        exactKeys(
-          tx,
-          ["txid", "state", "block", "confirmations"],
-          "confirmed transaction",
-        );
-        const block = chainTip(tx.block),
-          confirmations = safeInteger(tx.confirmations);
-        assert(
-          confirmations > 0 && confirmations === tip.height - block.height + 1,
-          "Inconsistent reconciliation confirmation count",
-        );
-        knownHistory.push({
-          txid,
-          received: 0n,
-          spent: 0n,
-          block,
-          state: "confirmed",
-        });
-      } else {
-        exactKeys(tx, ["txid", "state"], "unconfirmed transaction");
-        if (tx.state === "detached") detached++;
-      }
-    }
-    const expectedCheckpoints = new Set(
-      checkpoints.map((c) => `${c.height}:${c.hash}`),
+      networkBudgetMs,
     );
-    for (const value of result.checkpoints) {
-      const c = record(value, "archival checkpoint"),
-        block = chainTip({ height: c.height, hash: c.hash }),
-        key = `${block.height}:${block.hash}`;
-      assert(
-        expectedCheckpoints.delete(key),
-        "Unexpected or duplicate archival checkpoint",
-      );
-      assert(
-        ["confirmed", "insufficient", "unknown", "detached"].includes(
-          String(c.state),
+  }
+  operation = networkAbort.signal;
+  deadline = performance.now() + networkBudgetMs;
+  try {
+    for (let offset = 0; offset < Math.max(1, active.length); offset += 100) {
+      checkBudget();
+      const batch = active.slice(offset, offset + 100),
+        checkpoints =
+          offset === 0 ? [...receipts.values()].map((r) => r.block) : [];
+      const result = record(
+        await post(
+          "/api/reconcile",
+          { payments: batch.map((p) => p.payload), checkpoints },
+          operation,
         ),
-        "Invalid archival checkpoint state",
+        "reconciliation response",
       );
-      if (c.state === "confirmed") {
-        exactKeys(
-          c,
-          ["height", "hash", "state", "confirmations"],
-          "confirmed checkpoint",
-        );
-        const confirmations = safeInteger(c.confirmations);
+      checkBudget();
+      exactKeys(
+        result,
+        [
+          "network",
+          "genesisHash",
+          "tip",
+          "checkedAt",
+          "rpcCalls",
+          "transactions",
+          "checkpoints",
+        ],
+        "reconciliation response",
+      );
+      assert(
+        result.network === owner.network &&
+          result.genesisHash === NETWORKS[owner.network].genesisHash,
+        "Reconciliation network mismatch",
+      );
+      const currentTip = chainTip(result.tip);
+      assert(
+        !tip ||
+          (currentTip.hash === tip.hash && currentTip.height === tip.height),
+        "Node tip changed between reconciliation batches; retry",
+      );
+      tip = currentTip;
+      safeInteger(result.checkedAt, Number.MAX_SAFE_INTEGER);
+      calls += safeInteger(result.rpcCalls, 2108);
+      assert(calls <= 4160, "Total reconciliation RPC budget exhausted");
+      assert(
+        Array.isArray(result.transactions) &&
+          result.transactions.length === batch.length &&
+          Array.isArray(result.checkpoints) &&
+          result.checkpoints.length === checkpoints.length,
+        "Incomplete reconciliation coverage",
+      );
+      const expected = new Set(batch.map((p) => p.payload.expectedTxid));
+      for (const value of result.transactions) {
+        const tx = record(value, "known transaction"),
+          txid = hash(tx.txid);
         assert(
-          confirmations >= 6 && confirmations === tip.height - block.height + 1,
-          "Invalid archival checkpoint depth",
+          expected.delete(txid),
+          "Unexpected or duplicate reconciliation transaction",
         );
-        for (const payment of receipts.get(key)!.payments)
+        assert(
+          ["confirmed", "pending", "unknown", "detached"].includes(
+            String(tx.state),
+          ),
+          "Invalid reconciliation state",
+        );
+        if (tx.state === "confirmed") {
+          exactKeys(
+            tx,
+            ["txid", "state", "block", "confirmations"],
+            "confirmed transaction",
+          );
+          const block = chainTip(tx.block),
+            confirmations = safeInteger(tx.confirmations);
+          assert(
+            confirmations > 0 &&
+              confirmations === tip.height - block.height + 1,
+            "Inconsistent reconciliation confirmation count",
+          );
           knownHistory.push({
-            txid: payment.txid!,
+            txid,
             received: 0n,
             spent: 0n,
             block,
             state: "confirmed",
           });
-      } else {
-        exactKeys(c, ["height", "hash", "state"], "unconfirmed checkpoint");
-        if (c.state === "detached")
-          detached += receipts.get(key)!.payments.length;
+        } else {
+          exactKeys(tx, ["txid", "state"], "unconfirmed transaction");
+          if (tx.state === "detached") detached++;
+        }
+      }
+      const expectedCheckpoints = new Set(
+        checkpoints.map((c) => `${c.height}:${c.hash}`),
+      );
+      for (const value of result.checkpoints) {
+        const c = record(value, "archival checkpoint"),
+          block = chainTip({ height: c.height, hash: c.hash }),
+          key = `${block.height}:${block.hash}`;
+        assert(
+          expectedCheckpoints.delete(key),
+          "Unexpected or duplicate archival checkpoint",
+        );
+        assert(
+          ["confirmed", "insufficient", "unknown", "detached"].includes(
+            String(c.state),
+          ),
+          "Invalid archival checkpoint state",
+        );
+        if (c.state === "confirmed") {
+          exactKeys(
+            c,
+            ["height", "hash", "state", "confirmations"],
+            "confirmed checkpoint",
+          );
+          const confirmations = safeInteger(c.confirmations);
+          assert(
+            confirmations >= 6 &&
+              confirmations === tip.height - block.height + 1,
+            "Invalid archival checkpoint depth",
+          );
+          for (const payment of receipts.get(key)!.payments)
+            knownHistory.push({
+              txid: payment.txid!,
+              received: 0n,
+              spent: 0n,
+              block,
+              state: "confirmed",
+            });
+        } else {
+          exactKeys(c, ["height", "hash", "state"], "unconfirmed checkpoint");
+          if (c.state === "detached")
+            detached += receipts.get(key)!.payments.length;
+        }
       }
     }
-  }
-  checkBudget();
-  assert(tip, "Missing reconciliation tip");
-  const checkedTip = tip;
-  const count = await store.mutate(id, (j) => {
     checkBudget();
-    assert(
-      JSON.stringify(j.payments) === original,
-      "Payment journal changed during reconciliation; retry",
-    );
-    return reconcileConfirmed(j, knownHistory, checkedTip);
-  });
-  channel.postMessage("journal");
-  notification = `${signed.length} known signed payments checked against the configured node at block ${tip.height}; ${count} confirmed records archived. ${signed.length - count} records remain active or unresolved, including ${detached} detached. All exact bytes and input locks retained. This trusts the node's chain view; a later reorg can change confirmation.`;
+    assert(tip, "Missing reconciliation tip");
+    const checkedTip = tip;
+    const count = await store.mutate(id, (j) => {
+      checkBudget();
+      assert(
+        JSON.stringify(j.payments) === original,
+        "Payment journal changed during reconciliation; retry",
+      );
+      return reconcileConfirmed(j, knownHistory, checkedTip);
+    });
+    channel.postMessage("journal");
+    notification = `${signed.length} known signed payments checked against the configured node at block ${tip.height}; ${count} confirmed records archived. ${signed.length - count} records remain active or unresolved, including ${detached} detached. All exact bytes and input locks retained. This trusts the node's chain view; a later reorg can change confirmation.`;
+  } finally {
+    if (networkTimer !== undefined) clearTimeout(networkTimer);
+    signal.removeEventListener("abort", forwardCancel);
+    networkAbort.abort(new Error("Reconciliation scope completed"));
+  }
 }
 async function broadcast(
   signal: AbortSignal | undefined = currentAbort?.signal,

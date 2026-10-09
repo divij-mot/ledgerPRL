@@ -115,3 +115,26 @@ they retain normalization and reject validation, request, transaction and abort
 failures. This does not claim that a real browser rejects unchanged-row writes at
 its quota. These handler checks do not establish real browser scheduling,
 cross-tab serialization, quota behavior, rollback or crash durability.
+
+## Backup validation worker boundaries
+
+`backup-import-worker.test.ts` runs the actual one-shot browser-worker entry and
+unchanged wallet validator in a Node worker_threads adapter. It verifies exact
+public fixture transaction bytes, signature/account/reservation tamper rejection,
+Blob and decoded UTF-8 size bounds, structured-clone types and worker self-exit.
+`backup-import.test.ts` models the Worker API to exercise immediate cancellation,
+late replies, listener cleanup, startup/runtime/message/clone errors and the
+absence of a main-thread validation fallback. `backup-import-ui.test.ts` runs the
+actual import event handler with worker, DOM, device and atomic-storage mocks;
+it checks repeat clicks, cancellation before commit, stale account completion,
+cross-tab state preservation, conflicting reservations and post-commit
+cancellation. A completed merge is never rolled back or represented as unsaved.
+
+The serving-policy tests check Vite's same-origin development worker route and
+production worker asset, preserving the strict CSP without blob workers or
+inline scripts. These are Node and build/HTTP checks, not an actual browser
+upload, browser-worker/CSP execution test, physical Ledger test or IndexedDB
+crash-durability claim. Full-backup validation still performs every existing
+ownership and signature check; moving it off the UI thread does not make large
+backups cryptographically cheaper. Cancellation terminates the worker and is
+checked again inside the atomic storage update before any merge.
