@@ -1,0 +1,61 @@
+{
+  "status": "offline-verified-not-installed",
+  "device": "stax",
+  "network": "mainnet",
+  "retailSideloadSupported": true,
+  "nanoXRestriction": "Retail Nano X cannot sideload; vendor-controlled review/testing only",
+  "elfSha256": "6ee46090a74c48ce999edc140aa3a1f5067ea9fe3281c4c76a562c0d52dbb7c9",
+  "applicationHash": "e329f596d8a4eff2b82095e1bbafd80c7cf70e653a8b799502d3ddeefc0bea83",
+  "metadata": {
+    "target": "stax",
+    "target_id": "0x33200004",
+    "target_name": "TARGET_STAX",
+    "app_name": "Pearl Dev",
+    "app_version": "0.1.0",
+    "api_level": "27",
+    "sdk_version": "v27.1.2",
+    "rust_sdk_version": "1.17.0",
+    "rust_sdk_name": "ledger_secure_sdk_sys",
+    "sdk_name": "ledger-secure-sdk",
+    "sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "sdk_graphics": "nbgl",
+    "app_flags": "0x200"
+  },
+  "effectiveParameters": {
+    "target_id": 857735172,
+    "api_level": 27,
+    "flags": 512,
+    "code_length": 64512,
+    "data_length": 8192,
+    "install_params_length": 110,
+    "boot_offset": 1,
+    "load_length": 72814
+  },
+  "curve": "secp256k1",
+  "derivationPrefix": "86'/808276'",
+  "installTlvSha256": "4a7b056788b99b02fe8f26a1a2691450b9662cf75f5a09f838623baae42b586a",
+  "iconTlvSha256": "46b9eca842b7c81353f13b7681e8b57652b6d80be8b27aa6f15730814ca03074",
+  "apduCount": 361,
+  "deleteExistingApp": false,
+  "sourceBuildManifestSha256": "527c30e3648068c9605faa71bb62dfae8ccf4cdd52426bd016dc32f89188e2ab",
+  "packagerSha256": "f6e5cedd5e2f2803a634140518beb652e939d771610a6e9a70bddd8b250110b0",
+  "tools": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "ledgerblue": "0.1.58",
+    "pyelftools": "0.33",
+    "objcopy": "GNU objcopy (2.44-3+23+b1) 2.44\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty.",
+    "ledgerblueSources": {
+      "ledgerblue.hexLoader": "1464011334295336988881f243a18da8c1a2f87c10bd42fac8fdb2f05b68220f",
+      "ledgerblue.hexParser": "c9466c21c98d2922c8ffe1896b8f75eaabf57dea647d7aa633633248b7fae163",
+      "ledgerblue.hashApp": "47083f16325021b39f0d686ecba6af421c1ed4b838af2ad5d7136b24334bf8e1"
+    }
+  },
+  "files": {
+    "pearl-stax-mainnet.apdu": "7be6f19174152ce9d0b836ca1ebcd9b37a62ea50634d3f75b887051ba498eeed",
+    "pearl-stax-mainnet.build.json": "527c30e3648068c9605faa71bb62dfae8ccf4cdd52426bd016dc32f89188e2ab",
+    "pearl-stax-mainnet.elf": "6ee46090a74c48ce999edc140aa3a1f5067ea9fe3281c4c76a562c0d52dbb7c9",
+    "pearl-stax-mainnet.hex": "8ef70e41a156a94c18397bb993edc18aeeb9d25b54d70fed573f177ca119341a",
+    "pearl-stax-mainnet.sha256": "518213120f5f443993b3cca54f5e4f70adebf22c825c43e9feb96a91ac244ee2"
+  },
+  "scope": "Offline APDU/HEX inspection only; no hardware transport, credentials, CA, OS flashing or vendor authorization"
+}

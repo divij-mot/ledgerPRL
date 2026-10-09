@@ -1,0 +1,9 @@
+# Official Ledger metadata discovery starts at the repository root.
+# Device support here means build/test targets, not retail sideload permission.
+[app]
+build_directory = "./apps/ledger"
+sdk = "Rust"
+devices = ["nanos+", "nanox", "stax", "flex", "apex_p"]
+
+# Existing functional tests are TypeScript/Speculos. No unimplemented Ragger
+# suite is advertised. Vendor acceptance of this test integration is pending.

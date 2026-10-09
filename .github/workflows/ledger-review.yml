@@ -1,0 +1,45 @@
+name: Offline Ledger packaging preflight
+
+# Manual only. This is neither the official enforcer nor a publication workflow.
+# No native build, hardware loader, vendor submission, credential or release job.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ledger-offline-preflight-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  offline-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: "3.12.14"
+      - name: Install pinned review tools in an isolated environment
+        run: |
+          python3 -m venv .ledger-review-venv
+          .ledger-review-venv/bin/python -m pip install --disable-pip-version-check -r apps/ledger/packaging-requirements.txt
+      - name: Validate the actual root manifest with Ledger's parser
+        run: |
+          .ledger-review-venv/bin/ledger-manifest --check . ledger_app.toml
+          .ledger-review-venv/bin/python scripts/ledger-package.py --check-configuration
+      - name: Exercise permission, image and APDU rejection checks
+        run: .ledger-review-venv/bin/python -m unittest discover -s apps/ledger/tests -p package_test.py -v
+      - name: Report unresolved official publication gates
+        run: |
+          .ledger-review-venv/bin/python - <<'PY'
+          import json, os
+          from pathlib import Path
+          gates = json.loads(Path('apps/ledger/publication/official-gates.json').read_text())
+          assert gates['active'] is False
+          text = 'Offline checks only. Official Ledger build/enforcer/functional gates have NOT run.\n\n'
+          text += '\n'.join('- ' + item for item in gates['blockers']) + '\n'
+          print(text)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as output:
+              output.write(text)
+          PY

@@ -1,0 +1,61 @@
+{
+  "status": "offline-verified-not-installed",
+  "device": "flex",
+  "network": "mainnet",
+  "retailSideloadSupported": true,
+  "nanoXRestriction": "Retail Nano X cannot sideload; vendor-controlled review/testing only",
+  "elfSha256": "35c89f2eecdebe6cc203bea1fe3ee87e6bb207de916ea2c2ae4ff5ffbdf65976",
+  "applicationHash": "528df1af5ad3a99d1c875cb2d64053ae6d780da40c150d0227c711f08d63c2bf",
+  "metadata": {
+    "target": "flex",
+    "target_id": "0x33300004",
+    "target_name": "TARGET_FLEX",
+    "app_name": "Pearl Dev",
+    "app_version": "0.1.0",
+    "api_level": "27",
+    "sdk_version": "v27.1.2",
+    "rust_sdk_version": "1.17.0",
+    "rust_sdk_name": "ledger_secure_sdk_sys",
+    "sdk_name": "ledger-secure-sdk",
+    "sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "sdk_graphics": "nbgl",
+    "app_flags": "0x200"
+  },
+  "effectiveParameters": {
+    "target_id": 858783748,
+    "api_level": 27,
+    "flags": 512,
+    "code_length": 65536,
+    "data_length": 9216,
+    "install_params_length": 141,
+    "boot_offset": 1,
+    "load_length": 74893
+  },
+  "curve": "secp256k1",
+  "derivationPrefix": "86'/808276'",
+  "installTlvSha256": "2062542384b042cf89bd56574097852e848e48e370c913c1be5efc72d9a5a36a",
+  "iconTlvSha256": "5383e1a15de3b3edce572bcf8d6f1e264cb967e61f6fc2e402271934328158db",
+  "apduCount": 366,
+  "deleteExistingApp": false,
+  "sourceBuildManifestSha256": "bb2e152221d07a1f0126359ed832042f11cfdae5ff8436d693b146b83cc90eec",
+  "packagerSha256": "f6e5cedd5e2f2803a634140518beb652e939d771610a6e9a70bddd8b250110b0",
+  "tools": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "ledgerblue": "0.1.58",
+    "pyelftools": "0.33",
+    "objcopy": "GNU objcopy (2.44-3+23+b1) 2.44\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty.",
+    "ledgerblueSources": {
+      "ledgerblue.hexLoader": "1464011334295336988881f243a18da8c1a2f87c10bd42fac8fdb2f05b68220f",
+      "ledgerblue.hexParser": "c9466c21c98d2922c8ffe1896b8f75eaabf57dea647d7aa633633248b7fae163",
+      "ledgerblue.hashApp": "47083f16325021b39f0d686ecba6af421c1ed4b838af2ad5d7136b24334bf8e1"
+    }
+  },
+  "files": {
+    "pearl-flex-mainnet.apdu": "81c12379e317c2a37fea97b8ad505f785aafb4d967015fbe59d7e73c4797e74a",
+    "pearl-flex-mainnet.build.json": "bb2e152221d07a1f0126359ed832042f11cfdae5ff8436d693b146b83cc90eec",
+    "pearl-flex-mainnet.elf": "35c89f2eecdebe6cc203bea1fe3ee87e6bb207de916ea2c2ae4ff5ffbdf65976",
+    "pearl-flex-mainnet.hex": "1218ee101f87464b2924fca66d731dabd20f4b2f0f851b25b22fbeb88444fa16",
+    "pearl-flex-mainnet.sha256": "1a2cb2ff595965be1e9848327c63a46510d52566c79778e1ea838dda728e272b"
+  },
+  "scope": "Offline APDU/HEX inspection only; no hardware transport, credentials, CA, OS flashing or vendor authorization"
+}

@@ -1,0 +1,61 @@
+{
+  "status": "offline-verified-not-installed",
+  "device": "nanox",
+  "network": "mainnet",
+  "retailSideloadSupported": false,
+  "nanoXRestriction": "Retail Nano X cannot sideload; vendor-controlled review/testing only",
+  "elfSha256": "eef809c66260c4e6f5916a1480f50bacd8e990189696eeab60d28c8dd3329e92",
+  "applicationHash": "8bf7fc3d3593710168aa94030344208443f8989b2be0c846266e4214e54f4b24",
+  "metadata": {
+    "target": "nanox",
+    "target_id": "0x33000004",
+    "target_name": "TARGET_NANOX",
+    "app_name": "Pearl Dev",
+    "app_version": "0.1.0",
+    "api_level": "27",
+    "sdk_version": "v27.1.2",
+    "rust_sdk_version": "1.17.0",
+    "rust_sdk_name": "ledger_secure_sdk_sys",
+    "sdk_name": "ledger-secure-sdk",
+    "sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "sdk_graphics": "nbgl",
+    "app_flags": "0x200"
+  },
+  "effectiveParameters": {
+    "target_id": 855638020,
+    "api_level": 27,
+    "flags": 512,
+    "code_length": 49408,
+    "data_length": 2816,
+    "install_params_length": 65,
+    "boot_offset": 1,
+    "load_length": 52289
+  },
+  "curve": "secp256k1",
+  "derivationPrefix": "86'/808276'",
+  "installTlvSha256": "f632adcce382ad930102310a81f0336e664906353543a24975fa41c02f17ba00",
+  "iconTlvSha256": "02d002e8d653eb1c3998f534a54b1e50055668b69b8bc41eb10136368b487547",
+  "apduCount": 260,
+  "deleteExistingApp": false,
+  "sourceBuildManifestSha256": "600a1062cc8c417fec587372c6f9c8ee40da28c9d1a452ecd43943cb3181b3c4",
+  "packagerSha256": "f6e5cedd5e2f2803a634140518beb652e939d771610a6e9a70bddd8b250110b0",
+  "tools": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "ledgerblue": "0.1.58",
+    "pyelftools": "0.33",
+    "objcopy": "GNU objcopy (2.44-3+23+b1) 2.44\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty.",
+    "ledgerblueSources": {
+      "ledgerblue.hexLoader": "1464011334295336988881f243a18da8c1a2f87c10bd42fac8fdb2f05b68220f",
+      "ledgerblue.hexParser": "c9466c21c98d2922c8ffe1896b8f75eaabf57dea647d7aa633633248b7fae163",
+      "ledgerblue.hashApp": "47083f16325021b39f0d686ecba6af421c1ed4b838af2ad5d7136b24334bf8e1"
+    }
+  },
+  "files": {
+    "pearl-nanox-mainnet.apdu": "7c19153dcf35eba0c896de515e5e43ae40b8c569341f49e76ceb7b01d208e167",
+    "pearl-nanox-mainnet.build.json": "600a1062cc8c417fec587372c6f9c8ee40da28c9d1a452ecd43943cb3181b3c4",
+    "pearl-nanox-mainnet.elf": "eef809c66260c4e6f5916a1480f50bacd8e990189696eeab60d28c8dd3329e92",
+    "pearl-nanox-mainnet.hex": "eab553775b1029a283243cd62457a4cd1dce4a6672e5935d4d6e41376ca4382f",
+    "pearl-nanox-mainnet.sha256": "23feac737645e467e22f178330e242a9b51cc2312d516e989400dba609591c50"
+  },
+  "scope": "Offline APDU/HEX inspection only; no hardware transport, credentials, CA, OS flashing or vendor authorization"
+}

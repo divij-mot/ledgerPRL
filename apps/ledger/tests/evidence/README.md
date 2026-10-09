@@ -10,6 +10,7 @@ These retained machine-readable results come from real ARM Ledger application ex
 - `<model>/memory.json`: separately instrumented ELF and patch hashes, SDK app-stack high-water and allocator occupancy sampled after every allocation across ordinary, warning-heavy and absolute permitted account/index/amount bounds. Release binaries reject the measurement APDU.
 - `<model>/latency.json`, when present: five successive maximum-16-input signing sessions. Wall time includes the final approval gesture, emulator, transport, signature fetching and host verification; it is not hardware CPU timing.
 - `stability/`: 100 successive mixed release sessions and 20 separate instrumented sessions per model, exact hashes, all case results, latency distributions and explicit host-RSS/native-heap distinctions. See its README for measured results and replay.
+- `packaging/`: thirteen offline-verified ELF/HEX/install-APDU package reports, effective permissions and canonical application hashes. No physical loading or vendor authorization is implied.
 - `artifact-race.json`: isolated dummy-file regression proving copy-time generation changes fail closed.
 - `build-locks.json`: independent held-lock checks for preparation/build/staging, followed by successful isolated build/stage.
 

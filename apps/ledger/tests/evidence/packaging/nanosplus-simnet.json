@@ -1,0 +1,61 @@
+{
+  "status": "offline-verified-not-installed",
+  "device": "nanosplus",
+  "network": "simnet",
+  "retailSideloadSupported": true,
+  "nanoXRestriction": "Retail Nano X cannot sideload; vendor-controlled review/testing only",
+  "elfSha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+  "applicationHash": "5ae04b9262b2bf7fc0589dfb5197d69089cf3da56a5dee74d1b795d10c93735e",
+  "metadata": {
+    "target": "nanos2",
+    "target_id": "0x33100004",
+    "target_name": "TARGET_NANOS2",
+    "app_name": "Pearl Sim Dev",
+    "app_version": "0.1.0",
+    "api_level": "27",
+    "sdk_version": "v27.1.2",
+    "rust_sdk_version": "1.17.0",
+    "rust_sdk_name": "ledger_secure_sdk_sys",
+    "sdk_name": "ledger-secure-sdk",
+    "sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "sdk_graphics": "nbgl",
+    "app_flags": "0"
+  },
+  "effectiveParameters": {
+    "target_id": 856686596,
+    "api_level": 27,
+    "flags": 0,
+    "code_length": 49152,
+    "data_length": 4096,
+    "install_params_length": 69,
+    "boot_offset": 1,
+    "load_length": 53317
+  },
+  "curve": "secp256k1",
+  "derivationPrefix": "86'/1'",
+  "installTlvSha256": "d6e4b6b797d107eb733da744beef1a64c5cde197f20599245eab792aa3526276",
+  "iconTlvSha256": "02d002e8d653eb1c3998f534a54b1e50055668b69b8bc41eb10136368b487547",
+  "apduCount": 264,
+  "deleteExistingApp": false,
+  "sourceBuildManifestSha256": "94182dd7747f25a9f86c81da01dcc43728c0907be1a3cf56e0f5b463d0274b6f",
+  "packagerSha256": "f6e5cedd5e2f2803a634140518beb652e939d771610a6e9a70bddd8b250110b0",
+  "tools": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "ledgerblue": "0.1.58",
+    "pyelftools": "0.33",
+    "objcopy": "GNU objcopy (2.44-3+23+b1) 2.44\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty.",
+    "ledgerblueSources": {
+      "ledgerblue.hexLoader": "1464011334295336988881f243a18da8c1a2f87c10bd42fac8fdb2f05b68220f",
+      "ledgerblue.hexParser": "c9466c21c98d2922c8ffe1896b8f75eaabf57dea647d7aa633633248b7fae163",
+      "ledgerblue.hashApp": "47083f16325021b39f0d686ecba6af421c1ed4b838af2ad5d7136b24334bf8e1"
+    }
+  },
+  "files": {
+    "pearl-nanosplus-simnet.apdu": "3329c79bd508a669f0c2b2e8d1f9f863980b608eec660eb78e56a2746228b008",
+    "pearl-nanosplus-simnet.build.json": "94182dd7747f25a9f86c81da01dcc43728c0907be1a3cf56e0f5b463d0274b6f",
+    "pearl-nanosplus-simnet.elf": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+    "pearl-nanosplus-simnet.hex": "110abd80aff9ebe3e9c9a87daad75ebd1e505a067a5e96ed82ef6da8ae8363de",
+    "pearl-nanosplus-simnet.sha256": "595685ff2f808061af3d66fe62dc57315321733966aa1704c9e5dc2db8d73854"
+  },
+  "scope": "Offline APDU/HEX inspection only; no hardware transport, credentials, CA, OS flashing or vendor authorization"
+}

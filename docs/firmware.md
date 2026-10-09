@@ -1,6 +1,6 @@
-# Native Ledger firmware
+# Native Ledger development app
 
-Development firmware. Do not use with valuable funds. This is a native Rust Ledger application, not a host signer or an ECDSA substitute. There is no seed entry, secret-key export, raw-digest signing command, software signing fallback, or broadcast implementation in the firmware.
+Development app build. Do not use with valuable funds. This is a native Rust Ledger application, not a host signer or an ECDSA substitute. There is no seed entry, secret-key export, raw-digest signing command, software signing fallback, or broadcast implementation in the app.
 
 ## Verified status (9 October 2026)
 
@@ -11,6 +11,67 @@ The active secure SDK is stable **v27.1.2 / API 27**, pinned to `6709cd2bdfebb22
 **Actual five-model emulator/node proof:** all five final release ELFs passed all 22 integration cases at the 16-input/1,507-byte limit in Speculos 0.27.1, using only the public BIP32 vector-one seed. Account metadata matched the independent fixture and full-address review passed. The companion independently verified native BIP340 signatures; isolated pinned Pearl simnet nodes rejected a bit-flipped signature, accepted and mined the genuine transaction, and the watch-only wallet discovered the result and handled invalidation/reconsideration. Partial signature export followed by abort and a fresh successful session passed too. Current exact-ELF summaries and two compact screenshots per model are retained as `apps/ledger/tests/evidence/<model>/node-roundtrip.json` and `node-*.png`. Replay uses `tests/e2e/native-node-roundtrip.ts`, with installed tool paths explicitly supplied as documented in `tests/e2e/README.md`. No private-key host signer is used.
 
 Physical-device installation, actual OS compatibility, physical disconnect behavior, hardware timing/side-channel resistance and a formal external security audit are not established by emulator or build success. Instrumented app-stack/allocator measurements and independent source/optimized-disassembly checks are recorded below; these do not replace physical validation. No physical device has been installed, upgraded, reset, or used to sign.
+
+## Installation is a separate gate
+
+This deliverable is an application for Ledger OS, **not an OS/BOLOS firmware image or flashing procedure**. Compiling an ELF and running it in Speculos do not establish installation compatibility. Speculos does not emulate installation/OS-update syscalls or the hardware watchdog. [Ledger development framework](https://developers.ledger.com/docs/device-app/references/framework).
+
+Ledger documents development sideloading for Nano S Plus, Stax, Flex and Nano Gen5 (`apex_p`), conditional on actual device OS/API and package compatibility. **An ordinary retail Nano X cannot sideload this unpublished app.** Its physical testing requires a Ledger-controlled distribution or special-development-device arrangement. A host option for development Nano X devices is not a retail workaround. Pearl has no vendor test-provider or production listing; this document does not authorize changing providers. [Official loading restrictions](https://developers.ledger.com/docs/device-app/beginner/vscode-extension), [official four-model sideload installer](https://github.com/LedgerHQ/app-boilerplate-rust/blob/0f857a78085678a26b332cf99128e22c0e5a6bde/tools/sideload/README.md), [vendor deployment process](https://developers.ledger.com/docs/device-app/submission-process/process).
+
+The API-27 versions above are SDK-to-OS mappings, not proof that a particular retail device has received or is eligible for an update. Record the actual OS/API separately for each owner-approved test device. Consumer rollout is staged. [current official SDK API mapping](https://github.com/LedgerHQ/ledger-secure-sdk#about-api_level-branches), [Ledger rollout guidance](https://support.ledger.com/de/article/4405549392401-zd).
+
+### Seed, trust and device safety
+
+- Ordinary app loading and an OS update are different operations. The documented app-loading route begins with an already-unlocked device and on-device confirmation; it does not require recovery-phrase entry or a seed reset. An untested installer is not guaranteed harmless, so use a dedicated, no-value test device after separate approval.
+- The extension's **quick setup** assigns a generic test seed/PIN. It is not an app-install prerequisite and must never be applied to a valuable existing wallet. [Official quick-setup warning](https://developers.ledger.com/docs/device-app/beginner/vscode-extension).
+- A custom developer CA changes device trust and can bypass per-install confirmation. Ledger says Genuine Check is unavailable until that CA and its loaded apps are removed. It is optional, is not a retail Nano X remedy, and is not used by this project. [Developer tools](https://developers.ledger.com/docs/device-app/references/tools), [CA privileges](https://developers.ledger.com/docs/device-app/explanation/ledger-os/features).
+- A separate OS upgrade carries a small reset risk and may require recovery from backup. Never promise a seed-preserving firmware update or hide one inside “install app.” [Ledger OS-update guidance](https://support.ledger.com/fr/article/8458939792669-zd).
+- Recovery entry, factory reset, quick setup, CA enrollment, security-warning bypasses, privileged USB configuration and provider/trust changes are not hidden prerequisites. None has been performed. Hardware use, changes to device/security state, private-source sharing and vendor submission require separate owner authorization.
+
+## Offline install packaging
+
+The existing frozen ELF is the input; packaging does **not** rebuild or modify it. `scripts/ledger-package.py` snapshots an ELF/build-manifest pair under the target lock, verifies source hashes and target/network identity, converts to Intel HEX, and uses pinned Ledger `HexLoader` with a file-only sink to emit unsigned install-manager APDUs. It does not import the hardware communication module, create keys, authenticate, load a device, enroll a CA or flash an OS.
+
+The official current Rust route is `cargo-ledger` → `ledgerblue`. The reviewed cargo-ledger revision `906d6963a9dfcbd19ad090b8501e26cd317ff988` invokes `loadApp --offline`, but also emits deletion of an existing same-name app; loadApp creates an unused manager key even offline. This wrapper deliberately uses the same pinned loader API without either behavior. No delete or signed-commit command is permitted. A future authorized replacement install must separately decide how an existing app is handled. [Pinned cargo-ledger implementation](https://github.com/LedgerHQ/cargo-ledger/blob/906d6963a9dfcbd19ad090b8501e26cd317ff988/src/utils.rs).
+
+Independent checks reconstruct every APDU-written byte and zero-filled image gap against the ELF, validate HEX checksums, command order, per-segment CRC, entry point, API, data/install lengths and final commit, and compare the computed application hash with Ledger's canonical `hashApp` calculation. The install TLV must contain exactly the expected app name/version/icon and **secp256k1-only** derivation prefix. Duplicate/unknown TLVs, extra curves, wildcard/root/SLIP21 paths, unexpected flags, deletion/trust commands or a different model/network fail closed. `package.json` records both ELF SHA256 and Ledger application hash; they measure different byte sequences and must not be confused.
+
+### Effective permissions
+
+| Model       | Target ID    | Effective app flags |
+| ----------- | ------------ | ------------------- |
+| Nano S Plus | `0x33100004` | `0x0`               |
+| Nano X      | `0x33000004` | `0x200`             |
+| Stax        | `0x33200004` | `0x200`             |
+| Flex        | `0x33300004` | `0x200`             |
+| Nano Gen5   | `0x33400004` | `0x200`             |
+
+Cargo's base `flags = "0"` is not the whole effective policy: the pinned official Rust SDK adds `APPLICATION_FLAG_BOLOS_SETTINGS` (`0x200`) on the four Bluetooth-capable targets. Its build-script comment identifies Bluetooth enabling as the reason; the secure SDK defines the flag as permission to change settings. This is a real privilege to disclose and review, not a claim of harmlessness. The current official Rust boilerplate also starts with `flags = "0"` under this SDK policy. Do not silently remove it or accept additional bits. Master-seed (`0x10`), preloaded (`0x20`), global-PIN (`0x40`) and library (`0x800`) flags are not permitted. [Pinned SDK flag addition](https://github.com/LedgerHQ/ledger-device-rust-sdk/blob/4123d2dc85a2085115e6a36826460a9fe742cfb1/ledger_device_sdk/build.rs#L92-L110), [secure SDK flag definitions](https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/include/appflags.h), [official boilerplate metadata](https://github.com/LedgerHQ/app-boilerplate-rust/blob/0f857a78085678a26b332cf99128e22c0e5a6bde/Cargo.toml).
+
+Network app names are `Pearl Dev`, `Pearl Test Dev`, `Pearl Test2 Dev`, `Pearl Reg Dev` and `Pearl Sim Dev`. Mainnet permits only `86'/808276'`; the four other networks permit only `86'/1'`. Nano X packages are vendor-review artifacts and do not establish a retail sideload route.
+
+```sh
+python3 -m venv /path/to/packaging-venv
+/path/to/packaging-venv/bin/python -m pip install -r apps/ledger/packaging-requirements.txt
+/path/to/packaging-venv/bin/ledger-manifest --check . ledger_app.toml
+/path/to/packaging-venv/bin/python scripts/ledger-package.py --check-configuration
+/path/to/packaging-venv/bin/python scripts/ledger-package.py \
+  --device nanosplus --network simnet --output /path/to/fresh-package-directory
+/path/to/packaging-venv/bin/python -m unittest discover \
+  -s apps/ledger/tests -p package_test.py -v
+```
+
+Use `--objcopy` or `LEDGER_OBJCOPY` for an explicit official ARM GNU objcopy path. Output directories must be new; cooperating publishers are locked and a complete verified generation is renamed into place. Packages include `.elf`, original `.build.json`, `.hex`, `.apdu`, application `.sha256` and `package.json`. The dependency snapshot pins ledgerblue 0.1.58, ledgered 0.17.0, pyelftools 0.33 and transitive versions; reports also hash the actual loader/parser/hash modules. It is a version snapshot, not a cross-platform wheel-hash lock. Physical installation and installed permissions remain unverified until a separately authorized device test.
+
+All thirteen existing model/network ELF variants passed the offline packaging checks on 2026-10-09. Compact reports, exact hashes and replay details are retained in `apps/ledger/tests/evidence/packaging/`. Two inspection/provenance defects found during independent review were fixed and regression-tested before regenerating the reports; valid package image/APDU bytes were unchanged.
+
+## Publication configuration status
+
+The official manifest is at repository root (`ledger_app.toml`) with `build_directory = "./apps/ledger"`, as expected by Ledger's metadata workflow. It lists build targets, not installation eligibility. The minimal manual-only `.github/workflows/ledger-review.yml` uses read-only repository permissions, validates the real root manifest with pinned Ledger tooling and runs offline rejection tests. It has no secrets, native build, hardware loading, submission, release or automatic push/PR trigger. Local preflight success is **not Ledger publication compliance**, and the GitHub workflow has not been dispatched as part of this packaging task.
+
+`apps/ledger/publication/official-gates.json` records disabled/documentary references to Ledger's guidelines, build and Ragger workflows at `77dc9ecd7b4bb8d25346ca503ad2f603e62911b4`. That upstream build runs `cargo update ledger_device_sdk`, uses a mutable `:latest` builder, lacks a preparation hook for this reviewed SDK patch, and requests action/pull-request write permissions; its Ragger workflow additionally requests contents-write access for snapshot pull requests. Nested tool/action references are not all immutable. The existing TypeScript native tests are not an implemented Ragger suite. These incompatibilities must be resolved with Ledger without weakening source pins or silently increasing privileges. The custom SDK patch, effective flags and test integration are explicit vendor-review items. [Pinned metadata discovery](https://github.com/LedgerHQ/ledger-app-workflows/blob/77dc9ecd7b4bb8d25346ca503ad2f603e62911b4/.github/workflows/_get_app_metadata.yml), [pinned native build workflow](https://github.com/LedgerHQ/ledger-app-workflows/blob/77dc9ecd7b4bb8d25346ca503ad2f603e62911b4/.github/workflows/reusable_build.yml).
+
+No project license has been chosen, no private source has been disclosed to Ledger/an auditor, no agreement has been accepted and no app submitted. The required owner/vendor/human-review gates remain in [the submission checklist](submission-checklist.md). The canonical protocol is linked from [docs/apdu.md](apdu.md); no second protocol copy or runtime change was introduced.
 
 ## Pinned sources and reproducible inputs
 

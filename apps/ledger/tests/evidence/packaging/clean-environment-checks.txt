@@ -1,0 +1,50 @@
+Independent clean-environment Python/pip check:
+Python 3.12.14
+No broken requirements found.
+
+Clean environment with native artifacts:
+Root Ledger manifest and all Cargo network policies verified; publication gates remain pending
+test_apdu_rejects_delete_ca_unknown_or_signed_commit (package_test.PackageTests.test_apdu_rejects_delete_ca_unknown_or_signed_commit) ... ok
+test_apdu_rejects_privilege_expansion (package_test.PackageTests.test_apdu_rejects_privilege_expansion) ... ok
+test_apdu_rejects_wrong_data_offset_crc_and_commit (package_test.PackageTests.test_apdu_rejects_wrong_data_offset_crc_and_commit) ... ok
+test_duplicate_ledger_sections_identical_and_conflicting (package_test.PackageTests.test_duplicate_ledger_sections_identical_and_conflicting) ... ok
+test_hex_image_and_gap (package_test.PackageTests.test_hex_image_and_gap) ... ok
+test_hex_rejects_checksum_overlap_trailing_and_missing_eof (package_test.PackageTests.test_hex_rejects_checksum_overlap_trailing_and_missing_eof) ... ok
+test_official_gates_are_explicitly_inactive (package_test.PackageTests.test_official_gates_are_explicitly_inactive) ... ok
+test_permissions_and_target_checks_on_frozen_elf_when_available (package_test.PackageTests.test_permissions_and_target_checks_on_frozen_elf_when_available) ... ok
+test_real_root_manifest_and_policies (package_test.PackageTests.test_real_root_manifest_and_policies) ... ok
+test_source_manifest_requires_complete_bound_digest_set (package_test.PackageTests.test_source_manifest_requires_complete_bound_digest_set) ... ok
+test_strict_tlv (package_test.PackageTests.test_strict_tlv) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.241s
+
+OK
+
+Source-only copy without native artifacts:
+Root Ledger manifest and all Cargo network policies verified; publication gates remain pending
+test_apdu_rejects_delete_ca_unknown_or_signed_commit (package_test.PackageTests.test_apdu_rejects_delete_ca_unknown_or_signed_commit) ... ok
+test_apdu_rejects_privilege_expansion (package_test.PackageTests.test_apdu_rejects_privilege_expansion) ... ok
+test_apdu_rejects_wrong_data_offset_crc_and_commit (package_test.PackageTests.test_apdu_rejects_wrong_data_offset_crc_and_commit) ... ok
+test_duplicate_ledger_sections_identical_and_conflicting (package_test.PackageTests.test_duplicate_ledger_sections_identical_and_conflicting) ... ok
+test_hex_image_and_gap (package_test.PackageTests.test_hex_image_and_gap) ... ok
+test_hex_rejects_checksum_overlap_trailing_and_missing_eof (package_test.PackageTests.test_hex_rejects_checksum_overlap_trailing_and_missing_eof) ... ok
+test_official_gates_are_explicitly_inactive (package_test.PackageTests.test_official_gates_are_explicitly_inactive) ... ok
+test_permissions_and_target_checks_on_frozen_elf_when_available (package_test.PackageTests.test_permissions_and_target_checks_on_frozen_elf_when_available) ... skipped 'Frozen native ELF is an optional local integration input'
+test_real_root_manifest_and_policies (package_test.PackageTests.test_real_root_manifest_and_policies) ... ok
+test_source_manifest_requires_complete_bound_digest_set (package_test.PackageTests.test_source_manifest_requires_complete_bound_digest_set) ... ok
+test_strict_tlv (package_test.PackageTests.test_strict_tlv) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.100s
+
+OK (skipped=1)
+Offline checks only. Official Ledger build/enforcer/functional gates have NOT run.
+
+- Official reusable build runs cargo update ledger_device_sdk rather than preserving the reviewed dependency lock
+- Official reusable build uses a mutable builder :latest and does not expose a digest-only builder input
+- Official reusable build has no preparation hook for the pinned local SDK checkouts and reviewed strict-transport patch
+- Existing native functional tests use TypeScript/Speculos; no Ragger suite or vendor acceptance of that integration is established
+- Official reusable workflows request write permissions and contain mutable nested action/dependency references
+- Owner has not selected a project license or authorized private-source disclosure, agreements, audit commissioning or vendor submission
+- Physical validation and a Ledger-controlled retail Nano X test/distribution arrangement remain pending

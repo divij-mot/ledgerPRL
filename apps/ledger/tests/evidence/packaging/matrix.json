@@ -1,0 +1,171 @@
+{
+  "status": "all-13-offline-packages-verified-not-installed",
+  "records": [
+    {
+      "device": "apex_p",
+      "network": "mainnet",
+      "report": "apex_p-mainnet.json",
+      "reportSha256": "4be97b3deb0168bec3e633c82b77ff6da780176134ae1a036781b31ef287e747",
+      "elfSha256": "18b2dbb03f384f122eb8c0d3ae5a22a8258f094e2af516bc0302ec960464b89c",
+      "applicationHash": "7bee502b6a6adf96228a279652cf03d42a0ea16f98fc315bb376f129eb35e7de",
+      "apduCount": 356
+    },
+    {
+      "device": "apex_p",
+      "network": "simnet",
+      "report": "apex_p-simnet.json",
+      "reportSha256": "67f2edd730958c2e394aa69e9bef6eae6c57f557cfc181363068dca09984f080",
+      "elfSha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "applicationHash": "a92dd41814f7aec6807ec193fe7ceee7fbaa5a929bcdb827daee775b869cc6ce",
+      "apduCount": 356
+    },
+    {
+      "device": "flex",
+      "network": "mainnet",
+      "report": "flex-mainnet.json",
+      "reportSha256": "d84da4a2e0b7f2bb51571f75ef687c657e5b50c9cf1873171f596154be9deba9",
+      "elfSha256": "35c89f2eecdebe6cc203bea1fe3ee87e6bb207de916ea2c2ae4ff5ffbdf65976",
+      "applicationHash": "528df1af5ad3a99d1c875cb2d64053ae6d780da40c150d0227c711f08d63c2bf",
+      "apduCount": 366
+    },
+    {
+      "device": "flex",
+      "network": "simnet",
+      "report": "flex-simnet.json",
+      "reportSha256": "205b4840d7824eb9b0f397474abe4bded154c0ca5db874abd3f5a4e708feccb5",
+      "elfSha256": "07405a1c64c6fadfa289ede2fa1d9c4593cb29f784d85a219ac8a672d7b4b8fd",
+      "applicationHash": "a62f7e1a2e4d62f2606e7ee5c3aef971b40b2af921cdbc52ee918c63b7e43295",
+      "apduCount": 366
+    },
+    {
+      "device": "nanosplus",
+      "network": "mainnet",
+      "report": "nanosplus-mainnet.json",
+      "reportSha256": "0adb4a547b33b254728da69a37458413e82289e6459d34fce85bf16ceb9fbb9a",
+      "elfSha256": "470b2edadffd7c73897ff09f6e8e3e15df675919acbf15801c5a2188f2a59ab3",
+      "applicationHash": "40a78ce2055a2a5c8622f1bc8310209eee354b43984965283b3c293e209739a2",
+      "apduCount": 264
+    },
+    {
+      "device": "nanosplus",
+      "network": "regtest",
+      "report": "nanosplus-regtest.json",
+      "reportSha256": "6125b4e33d971bb9285cefe501575d62985f4cf998e65137878764d29939c400",
+      "elfSha256": "d504c2816ed8af8d46f726c9154805cc748fc55167204860c6f6653fa005d575",
+      "applicationHash": "92bb6b7b970c527745978362c1416d4e21118106e7ee0d6a9743474190a71e38",
+      "apduCount": 264
+    },
+    {
+      "device": "nanosplus",
+      "network": "simnet",
+      "report": "nanosplus-simnet.json",
+      "reportSha256": "9bf63bb4dc08ddd5135146f959cac847494ebec92bbfe75f670809aca352a300",
+      "elfSha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+      "applicationHash": "5ae04b9262b2bf7fc0589dfb5197d69089cf3da56a5dee74d1b795d10c93735e",
+      "apduCount": 264
+    },
+    {
+      "device": "nanosplus",
+      "network": "testnet",
+      "report": "nanosplus-testnet.json",
+      "reportSha256": "5727c9cfe2271c3b6d0ababf11a5e43019e83f1df0f4ecf3cba0741e2117a1d1",
+      "elfSha256": "ef1ee94643dce7765f5a8e21fcc13caf67092befdbe0d1e30bd07b84a761560b",
+      "applicationHash": "ac35d4cba084bb2b451b690e2c8e9b68ab1135677adb99404c87700bb59db4f3",
+      "apduCount": 264
+    },
+    {
+      "device": "nanosplus",
+      "network": "testnet2",
+      "report": "nanosplus-testnet2.json",
+      "reportSha256": "dccbb6708424b07b84b73f14e12aa2217923bbb08ad986f0a9b9e94705964c52",
+      "elfSha256": "c1d312c454cb9b4bf63766aa454a2b6cbaa567f947caf5a4d01bd17ddb24df54",
+      "applicationHash": "f004dbcba3c8bae29474c586c9aed95ffe9d60ca29f7feb90f2abfa8e6b2ce5e",
+      "apduCount": 264
+    },
+    {
+      "device": "nanox",
+      "network": "mainnet",
+      "report": "nanox-mainnet.json",
+      "reportSha256": "27e79a0e4044a3d56be503b3045e3007beebfe12c72c5994b9a357a41a5f7409",
+      "elfSha256": "eef809c66260c4e6f5916a1480f50bacd8e990189696eeab60d28c8dd3329e92",
+      "applicationHash": "8bf7fc3d3593710168aa94030344208443f8989b2be0c846266e4214e54f4b24",
+      "apduCount": 260
+    },
+    {
+      "device": "nanox",
+      "network": "simnet",
+      "report": "nanox-simnet.json",
+      "reportSha256": "6674645e693cfa63f6da36e0970045a7a56d67586b39cff6186126c671d0b8a9",
+      "elfSha256": "4771a8b5349042bfac313e33e5b66229c2e76e327469e8af01c86dede68356a0",
+      "applicationHash": "14d2bc1d2a28d21e9214a2195050bc4f0197f688112f0f7bc7026c5b7c21cdf4",
+      "apduCount": 260
+    },
+    {
+      "device": "stax",
+      "network": "mainnet",
+      "report": "stax-mainnet.json",
+      "reportSha256": "7e32af61447cc43eace6728124456bfcf9ea27b5621bd5cdebe95c1f17360364",
+      "elfSha256": "6ee46090a74c48ce999edc140aa3a1f5067ea9fe3281c4c76a562c0d52dbb7c9",
+      "applicationHash": "e329f596d8a4eff2b82095e1bbafd80c7cf70e653a8b799502d3ddeefc0bea83",
+      "apduCount": 361
+    },
+    {
+      "device": "stax",
+      "network": "simnet",
+      "report": "stax-simnet.json",
+      "reportSha256": "e6f6edba424a6662173da05c738308fd48e28588c35e96b2dc6b234c865e7e3a",
+      "elfSha256": "7232fb09694fc9d2f27040ed19685277fb7065c6dfe9e6aa28647391e7fcc678",
+      "applicationHash": "750ff4b7ffc5064c5876d2e84f952fde2a7672f1da512fa48ff38102fd94e6b8",
+      "apduCount": 361
+    }
+  ],
+  "sourcePins": {
+    "cargoLedger": "906d6963a9dfcbd19ad090b8501e26cd317ff988",
+    "boilerplate": "0f857a78085678a26b332cf99128e22c0e5a6bde",
+    "workflows": "77dc9ecd7b4bb8d25346ca503ad2f603e62911b4"
+  },
+  "tools": {
+    "ledgerblue": "0.1.58",
+    "ledgered": "0.17.0",
+    "pyelftools": "0.33",
+    "objcopy": "GNU 2.44"
+  },
+  "tests": {
+    "unittestCount": 11,
+    "unitAndOptionalNativeTests": "passed",
+    "officialManifestCheck": "passed",
+    "rootBuildDirectory": "apps/ledger"
+  },
+  "limitations": [
+    "No device loaded or OS installed",
+    "Installed permissions and physical compatibility unverified",
+    "Retail Nano X cannot sideload",
+    "Official publication workflows not run; blockers remain explicit",
+    "Owner license, disclosure and submission approvals pending"
+  ],
+  "hardeningRegressions": [
+    "Duplicate identical/conflicting ledger.* ELF sections rejected",
+    "Complete source-key set mandatory; empty/missing/extra/invalid source digests rejected"
+  ],
+  "independentVerification": {
+    "packagePairs": 13,
+    "adversarialConcurrencyChecks": 27,
+    "cleanEnvironmentPinnedDistributions": 37,
+    "cleanWithArtifacts": {
+      "passed": 11,
+      "skipped": 0
+    },
+    "cleanSourceOnly": {
+      "passed": 10,
+      "skipped": 1
+    },
+    "verifier": "../../package-independent.py",
+    "verifierSha256": "1576e2760092dab80f719140e190bf75fea7b6545ca36bafbc483d1a4941f600",
+    "reports": {
+      "independent-review.md": "62d057bc5c727ae105d4d554893a40363f5436f2eb2238aa2c0a3c51e27e5657",
+      "independent-matrix.json": "480e2522d925ad35613e4049283ce3cebf83a41d836d3fad0089b6afdd04e860",
+      "independent-regressions.json": "5474cbfe16b5465264e1be2b0f60775d7cbb8030c0c195d4c0bb48d74fe71745",
+      "clean-environment-checks.txt": "34721f5ec3faf29e6637238fcfa1467b8e5991efe9060dcc9ed07bcc19075723"
+    }
+  }
+}

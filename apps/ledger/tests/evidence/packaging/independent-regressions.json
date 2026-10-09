@@ -1,0 +1,119 @@
+{
+  "workspace": "/workspace/shared/pearl-ledger-audit/offline-install-review-bv_kx8hz",
+  "packagerSha256": "f6e5cedd5e2f2803a634140518beb652e939d771610a6e9a70bddd8b250110b0",
+  "tests": [
+    {
+      "test": "modified create flags",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "modified create api_level",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "modified create boot_offset",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "modified create code_length",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "modified create data_length",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "modified create install_params_length",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "delete",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "reset CA",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "unknown",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "signed commit",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "trailing commit",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "missing commit",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "early commit",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "duplicate create",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "trailing raw byte",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "altered image byte",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "wrong nanox/mainnet",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "wrong nanosplus/simnet",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "extra curve",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "wildcard path",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "wrong prefix",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "duplicate identical ELF metadata",
+      "result": "PASS: rejected"
+    },
+    {
+      "test": "guarded repackage reproducibility",
+      "result": "PASS: every artifact byte-identical; blocked transport imports/private-key construction"
+    },
+    {
+      "test": "same-output publication race",
+      "result": "PASS: one complete winner, one refused overwrite",
+      "exitCodes": [
+        0,
+        1
+      ]
+    },
+    {
+      "test": "copy-time elf modification",
+      "result": "PASS: rejected; no output published"
+    },
+    {
+      "test": "copy-time source modification",
+      "result": "PASS: rejected; no output published"
+    },
+    {
+      "test": "empty provenance source map",
+      "result": "PASS: rejected",
+      "exitCode": 1
+    }
+  ]
+}

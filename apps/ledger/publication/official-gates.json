@@ -1,0 +1,32 @@
+{
+  "active": false,
+  "status": "vendor-integration-pending-not-compliant",
+  "upstream": {
+    "repository": "https://github.com/LedgerHQ/ledger-app-workflows",
+    "commit": "77dc9ecd7b4bb8d25346ca503ad2f603e62911b4",
+    "guidelines": ".github/workflows/reusable_guidelines_enforcer.yml",
+    "build": ".github/workflows/reusable_build.yml",
+    "functionalTests": ".github/workflows/reusable_ragger_tests.yml"
+  },
+  "manifest": "ledger_app.toml",
+  "buildDirectory": "apps/ledger",
+  "blockers": [
+    "Official reusable build runs cargo update ledger_device_sdk rather than preserving the reviewed dependency lock",
+    "Official reusable build uses a mutable builder :latest and does not expose a digest-only builder input",
+    "Official reusable build has no preparation hook for the pinned local SDK checkouts and reviewed strict-transport patch",
+    "Existing native functional tests use TypeScript/Speculos; no Ragger suite or vendor acceptance of that integration is established",
+    "Official reusable workflows request write permissions and contain mutable nested action/dependency references",
+    "Owner has not selected a project license or authorized private-source disclosure, agreements, audit commissioning or vendor submission",
+    "Physical validation and a Ledger-controlled retail Nano X test/distribution arrangement remain pending"
+  ],
+  "policy": "Documentary pinned references only. Do not enable without resolving the blockers and obtaining required owner/vendor authorization. Local preflight is not Ledger submission compliance.",
+  "requiredUpstreamPermissionsByWorkflow": {
+    "guidelines": ["contents:read", "actions:write", "pull-requests:write"],
+    "build": ["contents:read", "actions:write", "pull-requests:write"],
+    "functionalTests": [
+      "contents:write",
+      "actions:write",
+      "pull-requests:write"
+    ]
+  }
+}
