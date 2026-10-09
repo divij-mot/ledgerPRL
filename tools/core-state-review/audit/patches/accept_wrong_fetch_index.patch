@@ -1,0 +1,11 @@
+--- a/session.rs
++++ b/session.rs
+@@ -268,7 +268,7 @@
+                 if data.len() != 1 {
+                     return Err(Error::WrongLength);
+                 }
+-                if usize::from(data[0]) != self.next_signature {
++                if false && usize::from(data[0]) != self.next_signature {
+                     return Err(Error::InvalidData);
+                 }
+                 let response = Response::success(&self.signatures[self.next_signature]);

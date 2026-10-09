@@ -1,0 +1,29 @@
+--- a/session.rs
++++ b/session.rs
+@@ -104,9 +104,6 @@
+         self.state
+     }
+     pub fn reset(&mut self) {
+-        self.payload.zeroize();
+-        self.expected_hash.zeroize();
+-        self.signatures.zeroize();
+         self.expected_len = 0;
+         self.received = 0;
+         self.signature_count = 0;
+@@ -254,8 +251,6 @@
+                 let mut response = [0; 33];
+                 response[0] = count as u8;
+                 response[1..].copy_from_slice(&hash);
+-                self.payload.zeroize();
+-                self.expected_hash.zeroize();
+                 self.expected_len = 0;
+                 self.received = 0;
+                 self.signature_count = count;
+@@ -272,7 +267,6 @@
+                     return Err(Error::InvalidData);
+                 }
+                 let response = Response::success(&self.signatures[self.next_signature]);
+-                self.signatures[self.next_signature].zeroize();
+                 self.next_signature += 1;
+                 if self.next_signature == self.signature_count {
+                     self.reset();

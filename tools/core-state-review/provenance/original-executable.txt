@@ -1,0 +1,5 @@
+Original release executable SHA-256 (binary intentionally not retained):
+f65a4bcab3b72519feb3ca3f90885f38894747893d7a47e40ff460b8b0b30c13
+Original compiler: rustc 1.99.0 (b940084d7 2026-09-28)
+The original executable used the copied immutable core snapshot. Portable builds
+use the live checkout's core only after exact preflight, and are separate evidence.

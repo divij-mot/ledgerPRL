@@ -1,0 +1,83 @@
+{
+  "kind": "hardened-v2-campaign",
+  "harness_source_sha256": "c91d2246ce829a32e5507b052273f4465e34cf8ec77dc460d89306697e872e18",
+  "runs": [
+    {
+      "log": "seed-53544154455f5632-all.log",
+      "counts": {
+        "commands": 3256677,
+        "reviews": 78940,
+        "approvals": 78493,
+        "signing_callbacks": 861440,
+        "signatures_released": 809405,
+        "failures": 641018,
+        "resets": 35120,
+        "episodes": 135320
+      }
+    },
+    {
+      "log": "seed-0000000000000002-walks.log",
+      "counts": {
+        "commands": 20601173,
+        "reviews": 485903,
+        "approvals": 478884,
+        "signing_callbacks": 2298796,
+        "signatures_released": 771045,
+        "failures": 4922597,
+        "resets": 794615,
+        "episodes": 250000
+      }
+    },
+    {
+      "log": "seed-9e3779b97f4a7c15-walks.log",
+      "counts": {
+        "commands": 20569482,
+        "reviews": 484909,
+        "approvals": 477921,
+        "signing_callbacks": 2291586,
+        "signatures_released": 769614,
+        "failures": 4918086,
+        "resets": 794270,
+        "episodes": 250000
+      }
+    },
+    {
+      "log": "seed-deadbeef20261009-walks.log",
+      "counts": {
+        "commands": 20570793,
+        "reviews": 485105,
+        "approvals": 478120,
+        "signing_callbacks": 2295449,
+        "signatures_released": 768659,
+        "failures": 4915143,
+        "resets": 794567,
+        "episodes": 250000
+      }
+    },
+    {
+      "log": "seed-ffffffffffffffff-walks.log",
+      "counts": {
+        "commands": 20601046,
+        "reviews": 486424,
+        "approvals": 479191,
+        "signing_callbacks": 2299198,
+        "signatures_released": 769275,
+        "failures": 4923613,
+        "resets": 794862,
+        "episodes": 250000
+      }
+    }
+  ],
+  "aggregate": {
+    "commands": 85599171,
+    "reviews": 2021281,
+    "approvals": 1992609,
+    "signing_callbacks": 10046469,
+    "signatures_released": 3887998,
+    "failures": 20320457,
+    "resets": 3213434,
+    "episodes": 1135320
+  },
+  "production_counterexamples": 0,
+  "comparison_note": "Same traces are rerun with strengthened assertions. Original and hardened totals are separate; do not add them."
+}

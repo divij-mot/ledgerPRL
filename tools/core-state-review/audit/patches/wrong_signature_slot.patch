@@ -1,0 +1,11 @@
+--- a/session.rs
++++ b/session.rs
+@@ -271,7 +271,7 @@
+                 if usize::from(data[0]) != self.next_signature {
+                     return Err(Error::InvalidData);
+                 }
+-                let response = Response::success(&self.signatures[self.next_signature]);
++                let response = Response::success(&self.signatures[0]);
+                 self.signatures[self.next_signature].zeroize();
+                 self.next_signature += 1;
+                 if self.next_signature == self.signature_count {

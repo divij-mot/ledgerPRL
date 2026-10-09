@@ -1,0 +1,19 @@
+{
+  "kind": "portability-smoke",
+  "started_utc": "2026-10-09T18:30:48.022952+00:00",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "original_snapshot_commit": "87ca040566122a290c79a0a1fbd7590723b9da81",
+  "harness_source_sha256": "528ccb34685a352f7280c3a55ad0577566f9d2022cdeb7da7494b33d5967d84b",
+  "production_manifest_sha256": "85ef15f16592651e7b759a01f3fb0f9c1730ccd4adf269f92b325b8ead036a58",
+  "runs": [
+    [
+      "504f525441424c45",
+      "40",
+      "walks"
+    ]
+  ],
+  "note": "Live checkout dependency verified before build and after each run; historical source banner is unchanged. This evidence is separate from the original campaign.",
+  "portable_executable_sha256": "f566b8c3a3b5ecb280e8c5c7a77aa24ef298f379b26d038049b48ee67b3aa696",
+  "completed_utc": "2026-10-09T18:30:50.830882+00:00",
+  "status": "PASS"
+}

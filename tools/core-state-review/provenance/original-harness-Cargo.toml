@@ -1,0 +1,12 @@
+[package]
+name = "prl-core-state-review"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+pearl-core = { path = "snapshot/crates/pearl-core" }
+
+[profile.release]
+overflow-checks = true
+

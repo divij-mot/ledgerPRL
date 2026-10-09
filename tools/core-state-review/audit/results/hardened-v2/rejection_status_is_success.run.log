@@ -1,0 +1,10 @@
+seed=0x53544154455f5632 episodes_per_network=200 mode=all production=external-hash-verified-core harness=hardened-v2
+
+thread 'main' (663) panicked at src/main.rs:741:9:
+assertion `left == right` failed: response mismatch: boundaries seed=0x53544154455f5632 network=0 command=3 prior=Idle
+[e0, 01, 00, 00, 04, 00, 00, 00, 00] fault=None
+[e0, 01, 00, 00, 04, 00, 00, 00, 00] fault=Account(Crypto)
+[e0, 01, 00, 00, 04, 00, 00, 00, 00] fault=ConfirmAccount(UserRejected)
+  left: (36864, [])
+ right: (27013, [])
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

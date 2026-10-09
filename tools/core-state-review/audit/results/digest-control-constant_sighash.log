@@ -1,0 +1,43 @@
+
+running 4 tests
+test all_supported_shapes_match_independent_rust_bitcoin_bip341 ... FAILED
+test every_supported_consensus_field_is_committed ... FAILED
+test shared_typescript_fixture_matches_hash_addresses_signatures_and_txid ... FAILED
+test public_xpub_derivation_and_empty_tree_tweak_match_typescript_fixture ... ok
+
+failures:
+
+---- all_supported_shapes_match_independent_rust_bitcoin_bip341 stdout ----
+
+thread 'all_supported_shapes_match_independent_rust_bitcoin_bip341' (1200) panicked at crates/pearl-core/tests/sighash.rs:55:21:
+assertion `left == right` failed: count=1 change=false amount=1000 input=0
+  left: [85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85]
+ right: [74, 18, 113, 238, 250, 95, 191, 107, 41, 36, 57, 70, 151, 11, 29, 56, 129, 217, 21, 136, 172, 228, 159, 164, 204, 218, 199, 140, 192, 205, 131, 91]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- every_supported_consensus_field_is_committed stdout ----
+
+thread 'every_supported_consensus_field_is_committed' (1201) panicked at crates/pearl-core/tests/sighash.rs:90:9:
+assertion `left != right` failed: offset 19
+  left: [85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85]
+ right: [85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85]
+
+---- shared_typescript_fixture_matches_hash_addresses_signatures_and_txid stdout ----
+
+thread 'shared_typescript_fixture_matches_hash_addresses_signatures_and_txid' (1203) panicked at crates/pearl-core/tests/sighash.rs:114:9:
+assertion `left == right` failed
+  left: "5555555555555555555555555555555555555555555555555555555555555555"
+ right: "65a237337a646ae6cc208b8d7ddbc77c68979e53a467aa9bff6fe82bc4f53c3d"
+
+
+failures:
+    all_supported_shapes_match_independent_rust_bitcoin_bip341
+    every_supported_consensus_field_is_committed
+    shared_typescript_fixture_matches_hash_addresses_signatures_and_txid
+
+test result: FAILED. 1 passed; 3 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling pearl-core v0.1.0 (/workspace/shared/prl-harness-audit/digest-control/crates/pearl-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.33s
+     Running tests/sighash.rs (/workspace/shared/prl-harness-audit/digest-control-target/debug/deps/sighash-4a63940b21c8151c)
+error: test failed, to rerun pass `-p pearl-core --test sighash`

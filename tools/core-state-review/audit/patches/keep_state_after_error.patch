@@ -1,0 +1,11 @@
+--- a/session.rs
++++ b/session.rs
+@@ -129,7 +129,7 @@
+         match self.handle_inner(raw, device) {
+             Ok(response) => response,
+             Err(error) => {
+-                self.reset();
++                // MUTANT: state survives error
+                 Response::failure(error)
+             }
+         }

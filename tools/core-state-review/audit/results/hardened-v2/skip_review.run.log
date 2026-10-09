@@ -1,0 +1,5 @@
+seed=0x53544154455f5632 episodes_per_network=200 mode=all production=external-hash-verified-core harness=hardened-v2
+
+thread 'main' (231) panicked at src/main.rs:295:9:
+signature callback without this command's successful review
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

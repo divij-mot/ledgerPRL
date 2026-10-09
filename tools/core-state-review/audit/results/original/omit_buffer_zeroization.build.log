@@ -1,0 +1,12 @@
+   Compiling pearl-core v0.1.0 (/workspace/shared/prl-harness-audit/snapshot/crates/pearl-core)
+warning: unused import: `zeroize::Zeroize`
+ --> snapshot/crates/pearl-core/src/session.rs:6:5
+  |
+6 | use zeroize::Zeroize;
+  |     ^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `pearl-core` (lib) generated 1 warning (run `cargo fix --lib -p pearl-core` to apply 1 suggestion)
+   Compiling prl-core-state-review v0.0.0 (/workspace/shared/prl-harness-audit)
+    Finished `release` profile [optimized] target(s) in 1.69s

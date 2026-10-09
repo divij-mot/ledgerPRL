@@ -1,0 +1,15 @@
+seed=0x53544154455f5632 episodes_per_network=200 mode=all production=external-hash-verified-core harness=hardened-v2
+
+thread 'main' (855) panicked at src/main.rs:753:9:
+assertion `left == right` failed: callback mismatch: boundaries seed=0x53544154455f5632 network=0 command=8 prior=Idle
+[e0, 01, 00, 00, 04, 00, 00, 00, 00] fault=None
+[e0, 01, 00, 00, 04, 00, 00, 00, 00] fault=Account(Crypto)
+[e0, 01, 00, 00, 04, 00, 00, 00, 00] fault=ConfirmAccount(UserRejected)
+[e0, 01, 00, 00, 04, 00, 00, 00, 00] fault=BadAccountKey
+[e0, 02, 00, 00, 09, 00, 00, 00, 00, 00, 00, 00, 00, 00] fault=None
+[e0, 02, 00, 00, 09, 00, 00, 00, 00, 00, 00, 00, 00, 00] fault=DeriveAt(0, Crypto)
+[e0, 02, 00, 00, 09, 00, 00, 00, 00, 00, 00, 00, 00, 00] fault=ConfirmAddress(UserRejected)
+[e0, 02, 00, 00, 09, 00, 00, 00, 00, 00, 01, 00, 00, 00] fault=None
+  left: [Derive([2147483734, 2148291924, 2147483648, 0, 1]), ConfirmAddress(0, [2147483734, 2148291924, 2147483648, 0, 0], "prl1plh3y57enzn0mkeq2kjcwnrf3w29852av0hkrv9xutvuxla735y6slz2tgf")]
+ right: [Derive([2147483734, 2148291924, 2147483648, 0, 1]), ConfirmAddress(0, [2147483734, 2148291924, 2147483648, 0, 1], "prl1plh3y57enzn0mkeq2kjcwnrf3w29852av0hkrv9xutvuxla735y6slz2tgf")]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

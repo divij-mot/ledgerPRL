@@ -1,0 +1,11 @@
+--- a/transaction.rs
++++ b/transaction.rs
+@@ -257,7 +257,7 @@
+         self.transaction.recipient()
+     }
+     pub fn change(&self) -> Option<&Output> {
+-        self.transaction.change()
++        self.transaction.change().map(|_| self.transaction.recipient())
+     }
+     pub fn recipient_address(&self) -> &Address {
+         &self.recipient_address

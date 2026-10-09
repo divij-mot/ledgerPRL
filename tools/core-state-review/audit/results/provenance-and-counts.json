@@ -1,0 +1,92 @@
+{
+  "snapshot_commit": "87ca040566122a290c79a0a1fbd7590723b9da81",
+  "live_head": "80ceec9f8b318b2d6ae90e496abf078e60802518",
+  "source_checks": {
+    "crates/pearl-core/src/address.rs": {
+      "recorded_sha256": "b86f02682901e5ca163f8a7f09a54ce018185a16ad59643caf0e33bffff45d1b",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "crates/pearl-core/src/amount.rs": {
+      "recorded_sha256": "725716c8b18eb85597dbae481c6e5c3b74f09261387ef134651f19ad5fc6c815",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "crates/pearl-core/src/error.rs": {
+      "recorded_sha256": "ba5a82fc377758b12a188e8db04ebb00832b07b63cec3e2e6a2977e8047656da",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "crates/pearl-core/src/lib.rs": {
+      "recorded_sha256": "9bfd2b2e4fbdeef87e86e7bda17d443d0ec9fcbb905e6b023696d42a25f1fc57",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "crates/pearl-core/src/network.rs": {
+      "recorded_sha256": "0e36b43efc30e8cb3109ff663dd9e1cf342a7e347ab269d884f15c38da93cb6d",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "crates/pearl-core/src/session.rs": {
+      "recorded_sha256": "8d3daa41ebf7f46a655cddfc537629bc9527eea6cb6960d124c4e52bc3fdd6d7",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "crates/pearl-core/src/transaction.rs": {
+      "recorded_sha256": "8b2ec2cf6608961182de5a103749aa0813eb541a698509c8da9f6cf4487250e1",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "crates/pearl-core/Cargo.toml": {
+      "recorded_sha256": "d4b267236c1cb479252cf8654b94219bc74e801156cfb015c4dd1d3f1ad5f2d4",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "Cargo.toml": {
+      "recorded_sha256": "a14765fa6f22f50f29cd7bfd12308b36da7796cbb883af067e3e214b871bfa94",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    },
+    "Cargo.lock": {
+      "recorded_sha256": "c125a97950f47e0701371ce3ee230d3286d3a6ee6755f9ebbeec9f226e26ddd5",
+      "snapshot_match": true,
+      "live_match": true,
+      "snapshot_commit_match": true
+    }
+  },
+  "log_counts_match_summary": {
+    "seed-53544154455f5632-all.log": true,
+    "seed-0000000000000002-walks.log": true,
+    "seed-9e3779b97f4a7c15-walks.log": true,
+    "seed-deadbeef20261009-walks.log": true,
+    "seed-ffffffffffffffff-walks.log": true
+  },
+  "aggregate_from_logs": {
+    "commands": 85599171,
+    "reviews": 2021281,
+    "approvals": 1992609,
+    "signing_callbacks": 10046469,
+    "signatures_released": 3887998,
+    "failures": 20320457,
+    "resets": 3213434,
+    "episodes": 1135320
+  },
+  "aggregate_match": true,
+  "locked_dependency_checksums_match_production": true,
+  "directed_case_calculations": {
+    "callbacks_fault_cases": 6370,
+    "upload_split_boundaries": 19230,
+    "opcode_cases": 30720,
+    "individual_bit_mutations": 78000,
+    "u16_begin_cases": 327680
+  }
+}

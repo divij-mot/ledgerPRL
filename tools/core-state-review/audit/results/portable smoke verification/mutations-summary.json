@@ -1,0 +1,38 @@
+[
+  {
+    "name": "baseline",
+    "build_exit": 0,
+    "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exit": 0,
+    "outcome": "PASS",
+    "expected": "PASS",
+    "expectation_met": true
+  },
+  {
+    "name": "rejection_status_is_success",
+    "build_exit": 0,
+    "patch_sha256": "9693aaa14aa7151fa27cd44f993dbd0d555d1b9176604374e7efceebb0949587",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "expected": "DETECTED",
+    "expectation_met": true
+  },
+  {
+    "name": "review_recipient_is_change",
+    "build_exit": 0,
+    "patch_sha256": "1ac09664df901333211504fe41bc1c64d34ccdfecfb8e04adf6c3870ee22e2ae",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "expected": "DETECTED",
+    "expectation_met": true
+  },
+  {
+    "name": "review_change_is_recipient",
+    "build_exit": 0,
+    "patch_sha256": "ab715efb58f64779263cac93ef18fc2dfb86e2b0760bb2c00f9b0213a1eeff49",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "expected": "DETECTED",
+    "expectation_met": true
+  }
+]

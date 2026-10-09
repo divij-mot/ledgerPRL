@@ -1,0 +1,10 @@
+[
+  {
+    "name": "baseline",
+    "exit": 0
+  },
+  {
+    "name": "constant_sighash",
+    "exit": 101
+  }
+]

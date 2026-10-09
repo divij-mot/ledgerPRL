@@ -1,0 +1,68 @@
+
+running 4 tests
+test every_supported_consensus_field_is_committed ... ok
+test shared_typescript_fixture_matches_hash_addresses_signatures_and_txid ... ok
+test public_xpub_derivation_and_empty_tree_tweak_match_typescript_fixture ... ok
+test all_supported_shapes_match_independent_rust_bitcoin_bip341 ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+   Compiling libc v0.2.190
+   Compiling cfg-if v1.0.5
+   Compiling version_check v0.9.5
+   Compiling getrandom v0.3.4
+   Compiling bitcoin-io v0.1.101
+   Compiling shlex v2.0.1
+   Compiling typenum v1.20.1
+   Compiling find-msvc-tools v0.1.14
+   Compiling rustix v1.1.5
+   Compiling arrayvec v0.7.8
+   Compiling cc v1.6.0
+   Compiling zerocopy v0.8.62
+   Compiling getrandom v0.4.3
+   Compiling hex-conservative v0.2.3
+   Compiling generic-array v0.14.7
+   Compiling bitflags v2.13.2
+   Compiling autocfg v1.5.1
+   Compiling linux-raw-sys v0.12.1
+   Compiling bitcoin_hashes v0.14.101
+   Compiling zmij v1.0.23
+   Compiling once_cell v1.21.4
+   Compiling serde_core v1.0.229
+   Compiling fastrand v2.5.0
+   Compiling num-traits v0.2.19
+   Compiling hex_lit v0.1.1
+   Compiling quick-error v1.2.3
+   Compiling fnv v1.0.7
+   Compiling serde_json v1.0.151
+   Compiling bitcoin v0.32.102
+   Compiling cpufeatures v0.2.17
+   Compiling bech32 v0.11.0
+   Compiling bit-vec v0.8.0
+   Compiling base58ck v0.1.101
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling rand_core v0.9.5
+   Compiling digest v0.10.7
+   Compiling wait-timeout v0.2.1
+   Compiling bit-set v0.8.0
+   Compiling rand v0.9.5
+   Compiling sha2 v0.10.9
+   Compiling rand_xorshift v0.4.0
+   Compiling bitcoin-units v0.1.101
+   Compiling secp256k1-sys v0.10.1
+   Compiling itoa v1.0.18
+   Compiling zeroize v1.8.1
+   Compiling regex-syntax v0.8.11
+   Compiling unarray v0.1.4
+   Compiling memchr v2.8.3
+   Compiling pearl-core v0.1.0 (/workspace/shared/prl-harness-audit/digest-control/crates/pearl-core)
+   Compiling hex v0.4.3
+   Compiling tempfile v3.27.0
+   Compiling rusty-fork v0.3.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling secp256k1 v0.29.1
+   Compiling rand_chacha v0.9.0
+   Compiling proptest v1.11.0
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8.52s
+     Running tests/sighash.rs (/workspace/shared/prl-harness-audit/digest-control-target/debug/deps/sighash-4a63940b21c8151c)

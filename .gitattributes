@@ -2,3 +2,6 @@
 tools/fp8-compatibility/results/*-build-info.txt whitespace=-blank-at-eol
 # Keep hash-bound upstream test diagnostics byte-for-byte as recorded.
 tools/fp8-compatibility/results/*.log whitespace=-blank-at-eol,-space-before-tab
+# Hash-bound historical audit inputs retain their original whitespace.
+tools/core-state-review/audit/patches/constant_sighash.patch whitespace=-blank-at-eol,-blank-at-eof
+tools/core-state-review/provenance/original-harness-Cargo.toml whitespace=-blank-at-eof

@@ -1,0 +1,4 @@
+seed=0x9e3779b97f4a7c15 episodes_per_network=50000 mode=walks production=external-hash-verified-core harness=hardened-v2
+PASS walks: Counts { commands: 20569482, reviews: 484909, approvals: 477921, signing_callbacks: 2291586, signatures_released: 769614, failures: 4918086, resets: 794270, episodes: 250000 } elapsed=74.787135778s
+PASS TOTAL Counts { commands: 20569482, reviews: 484909, approvals: 477921, signing_callbacks: 2291586, signatures_released: 769614, failures: 4918086, resets: 794270, episodes: 250000 } elapsed=74.787158933s
+Bounded result: exact production Session state/response/callback agreement for these deterministic traces; public mocks do not establish real cryptography, device UI, hardware isolation, or transport integration.

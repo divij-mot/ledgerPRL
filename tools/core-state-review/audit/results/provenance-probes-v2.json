@@ -1,0 +1,66 @@
+{
+  "wrapper_sha256": "0be3a9fbe1f4497a7252814fe2082bbbdf2a46269715ef86937732676fd12242",
+  "harness_sha256": "c91d2246ce829a32e5507b052273f4465e34cf8ec77dc460d89306697e872e18",
+  "cases": [
+    {
+      "case": "untouched_package",
+      "exit": 0,
+      "expected_exit": 0,
+      "output": "PASS exact production and harness source preflight\n"
+    },
+    {
+      "case": "modified_core_source",
+      "exit": 2,
+      "expected_exit": 2,
+      "output": "REFUSED: source mismatch: crates/pearl-core/src/session.rs. Build/replay stopped without a mismatch override.\n"
+    },
+    {
+      "case": "added_core_module",
+      "exit": 2,
+      "expected_exit": 2,
+      "output": "REFUSED: source mismatch: pearl-core/src file inventory differs. Build/replay stopped without a mismatch override.\n"
+    },
+    {
+      "case": "added_core_build_script",
+      "exit": 2,
+      "expected_exit": 2,
+      "output": "REFUSED: source mismatch: unreviewed pearl-core/build.rs exists. Build/replay stopped without a mismatch override.\n"
+    },
+    {
+      "case": "modified_harness_source",
+      "exit": 2,
+      "expected_exit": 2,
+      "output": "REFUSED: source mismatch: src/main.rs. Build/replay stopped without a mismatch override.\n"
+    },
+    {
+      "case": "redirected_harness_dependency",
+      "exit": 2,
+      "expected_exit": 2,
+      "output": "REFUSED: source mismatch: Cargo.toml. Build/replay stopped without a mismatch override.\n"
+    },
+    {
+      "case": "modified_harness_lockfile",
+      "exit": 2,
+      "expected_exit": 2,
+      "output": "REFUSED: source mismatch: Cargo.lock. Build/replay stopped without a mismatch override.\n"
+    },
+    {
+      "case": "added_harness_build_script",
+      "exit": 2,
+      "expected_exit": 2,
+      "output": "REFUSED: source mismatch: unreviewed harness build input. Build/replay stopped without a mismatch override.\n"
+    },
+    {
+      "case": "core_source_symlink",
+      "exit": 2,
+      "expected_exit": 2,
+      "output": "REFUSED: source mismatch: symlink at crates/pearl-core/src/session.rs. Build/replay stopped without a mismatch override.\n"
+    },
+    {
+      "case": "restored_package",
+      "exit": 0,
+      "expected_exit": 0,
+      "output": "PASS exact production and harness source preflight\n"
+    }
+  ]
+}

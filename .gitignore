@@ -14,3 +14,4 @@ __pycache__/
 # Frozen public-fixture evidence; runtime replay output remains ignored.
 !tools/fp8-compatibility/results/*.log
 !tools/native-wallclock/preflight-controls.log
+!tools/core-state-review/**/*.log

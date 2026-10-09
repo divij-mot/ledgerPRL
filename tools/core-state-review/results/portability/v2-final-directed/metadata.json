@@ -1,0 +1,22 @@
+{
+  "kind": "hardened-v2-portable-directed",
+  "started_utc": "2026-10-09T18:44:20.625623+00:00",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "original_snapshot_commit": "87ca040566122a290c79a0a1fbd7590723b9da81",
+  "harness_source_sha256": "c91d2246ce829a32e5507b052273f4465e34cf8ec77dc460d89306697e872e18",
+  "runner_sha256": "52176ab7ebb84526dce2f393ad5f8521b778ed1b3ebc5733f51b90b4432f6ee9",
+  "production_manifest_sha256": "85ef15f16592651e7b759a01f3fb0f9c1730ccd4adf269f92b325b8ead036a58",
+  "runs": [
+    [
+      "53544154455f5632",
+      "200",
+      "all"
+    ]
+  ],
+  "note": "Live checkout dependency verified before build and after each run. Hardened v2 evidence is separate from the original campaign; repeated counts are not added to original totals.",
+  "resolved_core_manifest": "crates/pearl-core/Cargo.toml",
+  "resolved_core_matches_preflight": true,
+  "portable_executable_sha256": "334b1266ffee81feabed49c95a4e4447b9478aec3bbf1a0da03f650e7ddf9c12",
+  "completed_utc": "2026-10-09T18:44:34.065219+00:00",
+  "status": "PASS"
+}

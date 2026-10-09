@@ -1,0 +1,10 @@
+seed=0x53544154455f5632 episodes_per_network=200 mode=all production=external-hash-verified-core harness=hardened-v2
+PASS boundaries: Counts { commands: 1093546, reviews: 20759, approvals: 20759, signing_callbacks: 264899, signatures_released: 253889, failures: 334286, resets: 1240, episodes: 19230 } elapsed=3.904885155s
+PASS callbacks: Counts { commands: 272880, reviews: 9450, approvals: 9030, signing_callbacks: 99330, signatures_released: 79730, failures: 44590, resets: 0, episodes: 6370 } elapsed=5.295420697s
+PASS opcodes: Counts { commands: 285279, reviews: 10245, approvals: 10245, signing_callbacks: 20490, signatures_released: 5140, failures: 184155, resets: 30720, episodes: 30720 } elapsed=5.751526106s
+
+thread 'main' (423) panicked at src/main.rs:271:13:
+assertion `left == right` failed
+  left: [215, 105, 91, 84, 25, 27, 183, 8, 221, 116, 215, 134, 142, 66, 246, 17, 233, 17, 51, 7, 78, 122, 118, 91, 202, 129, 226, 123, 190, 200, 240, 197]
+ right: [214, 105, 91, 84, 25, 27, 183, 8, 221, 116, 215, 134, 142, 66, 246, 17, 233, 17, 51, 7, 78, 122, 118, 91, 202, 129, 226, 123, 190, 200, 240, 197]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

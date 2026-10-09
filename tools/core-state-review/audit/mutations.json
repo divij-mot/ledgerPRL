@@ -1,0 +1,121 @@
+[
+  {
+    "name": "skip_review",
+    "file": "session.rs",
+    "before": "                device.review_transaction(&validated)?;",
+    "after": "                // MUTANT: no approval callback",
+    "original_survives": false,
+    "hardened_survives": false
+  },
+  {
+    "name": "ignore_sign_failure",
+    "file": "session.rs",
+    "before": "self.signatures[i] = device.sign_input(&reviewed, i)?;",
+    "after": "self.signatures[i] = device.sign_input(&reviewed, i).unwrap_or([0; 64]);",
+    "original_survives": false,
+    "hardened_survives": false
+  },
+  {
+    "name": "keep_state_after_error",
+    "file": "session.rs",
+    "before": "            Err(error) => {\n                self.reset();",
+    "after": "            Err(error) => {\n                // MUTANT: state survives error",
+    "original_survives": false,
+    "hardened_survives": false
+  },
+  {
+    "name": "skip_input_ownership",
+    "file": "transaction.rs",
+    "before": "if input.script[2..] != expected {",
+    "after": "if false && input.script[2..] != expected {",
+    "original_survives": false,
+    "hardened_survives": false
+  },
+  {
+    "name": "skip_change_ownership",
+    "file": "transaction.rs",
+    "before": "if change.script[2..] != expected {",
+    "after": "if false && change.script[2..] != expected {",
+    "original_survives": false,
+    "hardened_survives": false
+  },
+  {
+    "name": "accept_wrong_fetch_index",
+    "file": "session.rs",
+    "before": "if usize::from(data[0]) != self.next_signature {",
+    "after": "if false && usize::from(data[0]) != self.next_signature {",
+    "original_survives": false,
+    "hardened_survives": false
+  },
+  {
+    "name": "wrong_signature_slot",
+    "file": "session.rs",
+    "before": "Response::success(&self.signatures[self.next_signature])",
+    "after": "Response::success(&self.signatures[0])",
+    "original_survives": false,
+    "hardened_survives": false
+  },
+  {
+    "name": "skip_commitment_check",
+    "file": "session.rs",
+    "before": "if hash != self.expected_hash {",
+    "after": "if false && hash != self.expected_hash {",
+    "original_survives": false,
+    "hardened_survives": false
+  },
+  {
+    "name": "constant_sighash",
+    "file": "transaction.rs",
+    "before": "        Ok(hash.finalize().into())",
+    "after": "        let _ = hash.finalize();\n        Ok([0x55; 32])",
+    "original_survives": true,
+    "hardened_survives": true
+  },
+  {
+    "name": "rejection_status_is_success",
+    "file": "error.rs",
+    "before": "Self::UserRejected => 0x6985,",
+    "after": "Self::UserRejected => 0x9000,",
+    "original_survives": true,
+    "hardened_survives": false
+  },
+  {
+    "name": "review_recipient_is_change",
+    "file": "transaction.rs",
+    "before": "        self.transaction.recipient()",
+    "after": "        self.transaction.change().unwrap_or_else(|| self.transaction.recipient())",
+    "original_survives": true,
+    "hardened_survives": false
+  },
+  {
+    "name": "review_change_is_recipient",
+    "file": "transaction.rs",
+    "before": "        self.transaction.change()",
+    "after": "        self.transaction.change().map(|_| self.transaction.recipient())",
+    "original_survives": true,
+    "hardened_survives": false
+  },
+  {
+    "name": "wrong_account_confirm_payload",
+    "file": "session.rs",
+    "before": "device.confirm_account(&path, &public)?;",
+    "after": "device.confirm_account(&path, &AccountPublic { master_fingerprint: [0; 4], compressed_public_key: [2; 33], chain_code: [0; 32] })?;",
+    "original_survives": true,
+    "hardened_survives": false
+  },
+  {
+    "name": "wrong_address_confirm_path",
+    "file": "session.rs",
+    "before": "device.confirm_address(&path, &address)?;",
+    "after": "device.confirm_address(&DerivationPath::new(self.network, 0, 0, 0)?, &address)?;",
+    "original_survives": true,
+    "hardened_survives": false
+  },
+  {
+    "name": "omit_buffer_zeroization",
+    "file": "session.rs",
+    "drop_containing": ".zeroize();",
+    "original_survives": true,
+    "hardened_survives": true
+  }
+]

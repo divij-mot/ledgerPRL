@@ -1,0 +1,10 @@
+crates/pearl-core/src/address.rs: OK
+crates/pearl-core/src/amount.rs: OK
+crates/pearl-core/src/error.rs: OK
+crates/pearl-core/src/lib.rs: OK
+crates/pearl-core/src/network.rs: OK
+crates/pearl-core/src/session.rs: OK
+crates/pearl-core/src/transaction.rs: OK
+crates/pearl-core/Cargo.toml: OK
+Cargo.toml: OK
+Cargo.lock: OK

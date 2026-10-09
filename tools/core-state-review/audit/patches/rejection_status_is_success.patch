@@ -1,0 +1,11 @@
+--- a/error.rs
++++ b/error.rs
+@@ -21,7 +21,7 @@
+     pub const fn status_word(self) -> u16 {
+         match self {
+             Self::WrongLength => 0x6700,
+-            Self::UserRejected => 0x6985,
++            Self::UserRejected => 0x9000,
+             Self::WrongState => 0x6986,
+             Self::WrongParameters => 0x6b00,
+             Self::UnsupportedInstruction => 0x6d00,

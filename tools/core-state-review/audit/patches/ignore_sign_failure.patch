@@ -1,0 +1,11 @@
+--- a/session.rs
++++ b/session.rs
+@@ -248,7 +248,7 @@
+                 let reviewed = ReviewedTransaction::approved(validated);
+                 let count = reviewed.transaction().inputs().len();
+                 for i in 0..count {
+-                    self.signatures[i] = device.sign_input(&reviewed, i)?;
++                    self.signatures[i] = device.sign_input(&reviewed, i).unwrap_or([0; 64]);
+                 }
+                 // No signature is returned until every input was successfully signed.
+                 let mut response = [0; 33];

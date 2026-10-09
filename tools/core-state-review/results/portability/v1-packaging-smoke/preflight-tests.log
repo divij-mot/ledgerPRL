@@ -1,0 +1,82 @@
+PASS baseline
+PASS changed-source
+PASS missing-source
+PASS extra-source
+PASS extra-build-script
+PASS changed-root-manifest
+PASS changed-core-manifest
+PASS changed-lockfile
+PASS source-symlink
+PASS changed-harness
+PASS manifest-inventory
+{
+  "kind": "portability-preflight-tests",
+  "cases": [
+    {
+      "case": "baseline",
+      "exit": 0,
+      "result": "PASS exact production and harness source preflight",
+      "passed": true
+    },
+    {
+      "case": "changed-source",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: crates/pearl-core/src/session.rs. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "missing-source",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: pearl-core/src file inventory differs. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "extra-source",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: pearl-core/src file inventory differs. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "extra-build-script",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: unreviewed pearl-core/build.rs exists. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "changed-root-manifest",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: Cargo.toml. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "changed-core-manifest",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: crates/pearl-core/Cargo.toml. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "changed-lockfile",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: Cargo.lock. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "source-symlink",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: symlink at crates/pearl-core/src/session.rs. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "changed-harness",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: src/main.rs. No mismatched source is authorized for replay.",
+      "passed": true
+    },
+    {
+      "case": "manifest-inventory",
+      "exit": 2,
+      "result": "REFUSED: source manifest has an unexpected file inventory. No mismatched source is authorized for replay.",
+      "passed": true
+    }
+  ]
+}

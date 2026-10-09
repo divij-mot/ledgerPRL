@@ -1,0 +1,131 @@
+PASS baseline
+PASS changed-source
+PASS missing-source
+PASS extra-source
+PASS extra-build-script
+PASS changed-root-manifest
+PASS changed-core-manifest
+PASS changed-lockfile
+PASS source-symlink
+PASS changed-harness
+PASS manifest-inventory
+PASS changed-portable-manifest
+PASS changed-portable-lockfile
+PASS extra-harness-source
+PASS extra-harness-build-script
+PASS root-cargo-config
+PASS tools-cargo-config
+PASS harness-cargo-config
+{
+  "kind": "portability-preflight-tests",
+  "cases": [
+    {
+      "case": "baseline",
+      "exit": 0,
+      "result": "PASS exact production and harness source preflight",
+      "passed": true
+    },
+    {
+      "case": "changed-source",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: crates/pearl-core/src/session.rs. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "missing-source",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: pearl-core/src file inventory differs. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "extra-source",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: pearl-core/src file inventory differs. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "extra-build-script",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: unreviewed pearl-core/build.rs exists. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "changed-root-manifest",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: Cargo.toml. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "changed-core-manifest",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: crates/pearl-core/Cargo.toml. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "changed-lockfile",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: Cargo.lock. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "source-symlink",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: symlink at crates/pearl-core/src/session.rs. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "changed-harness",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: src/main.rs. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "manifest-inventory",
+      "exit": 2,
+      "result": "REFUSED: source manifest has an unexpected file inventory. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "changed-portable-manifest",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: Cargo.toml. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "changed-portable-lockfile",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: Cargo.lock. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "extra-harness-source",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: unreviewed harness build input. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "extra-harness-build-script",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: unreviewed harness build input. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "root-cargo-config",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: unreviewed checkout-local Cargo configuration. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "tools-cargo-config",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: unreviewed checkout-local Cargo configuration. Build/replay stopped without a mismatch override.",
+      "passed": true
+    },
+    {
+      "case": "harness-cargo-config",
+      "exit": 2,
+      "result": "REFUSED: source mismatch: unreviewed checkout-local Cargo configuration. Build/replay stopped without a mismatch override.",
+      "passed": true
+    }
+  ]
+}

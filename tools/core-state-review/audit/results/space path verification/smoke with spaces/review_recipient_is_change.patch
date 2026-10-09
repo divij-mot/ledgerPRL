@@ -1,0 +1,11 @@
+--- a/transaction.rs
++++ b/transaction.rs
+@@ -254,7 +254,7 @@
+         self.transaction.account()
+     }
+     pub fn recipient(&self) -> &Output {
+-        self.transaction.recipient()
++        self.transaction.change().unwrap_or_else(|| self.transaction.recipient())
+     }
+     pub fn change(&self) -> Option<&Output> {
+         self.transaction.change()

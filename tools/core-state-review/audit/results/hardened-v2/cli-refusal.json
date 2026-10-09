@@ -1,0 +1,30 @@
+[
+  {
+    "args": [
+      "1",
+      "1",
+      "misspelled_suite"
+    ],
+    "exit": 2,
+    "output": "REFUSED: unknown suite, zero episodes, or extra arguments\n"
+  },
+  {
+    "args": [
+      "1",
+      "0",
+      "walks"
+    ],
+    "exit": 2,
+    "output": "REFUSED: unknown suite, zero episodes, or extra arguments\n"
+  },
+  {
+    "args": [
+      "1",
+      "1",
+      "walks",
+      "extra"
+    ],
+    "exit": 2,
+    "output": "REFUSED: unknown suite, zero episodes, or extra arguments\n"
+  }
+]

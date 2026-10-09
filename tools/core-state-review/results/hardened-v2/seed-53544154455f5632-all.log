@@ -1,0 +1,8 @@
+seed=0x53544154455f5632 episodes_per_network=200 mode=all production=external-hash-verified-core harness=hardened-v2
+PASS boundaries: Counts { commands: 1093546, reviews: 20759, approvals: 20759, signing_callbacks: 264899, signatures_released: 253889, failures: 334286, resets: 1240, episodes: 19230 } elapsed=4.013264099s
+PASS callbacks: Counts { commands: 272880, reviews: 9450, approvals: 9030, signing_callbacks: 99330, signatures_released: 79730, failures: 44590, resets: 0, episodes: 6370 } elapsed=5.620072387s
+PASS opcodes: Counts { commands: 285279, reviews: 10245, approvals: 10245, signing_callbacks: 20490, signatures_released: 5140, failures: 184155, resets: 30720, episodes: 30720 } elapsed=6.236727857s
+PASS mutations: Counts { commands: 1521467, reviews: 36568, approvals: 36568, signing_callbacks: 467640, signatures_released: 467640, failures: 58014, resets: 0, episodes: 78000 } elapsed=14.384709979s
+PASS walks: Counts { commands: 83505, reviews: 1918, approvals: 1891, signing_callbacks: 9081, signatures_released: 3006, failures: 19973, resets: 3160, episodes: 1000 } elapsed=14.709286766s
+PASS TOTAL Counts { commands: 3256677, reviews: 78940, approvals: 78493, signing_callbacks: 861440, signatures_released: 809405, failures: 641018, resets: 35120, episodes: 135320 } elapsed=14.709313356s
+Bounded result: exact production Session state/response/callback agreement for these deterministic traces; public mocks do not establish real cryptography, device UI, hardware isolation, or transport integration.

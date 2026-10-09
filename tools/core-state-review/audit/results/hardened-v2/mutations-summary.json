@@ -1,0 +1,146 @@
+[
+  {
+    "name": "baseline",
+    "expected_survive": null,
+    "build_exit": 0,
+    "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exit": 0,
+    "outcome": "PASS",
+    "seconds": 16.73
+  },
+  {
+    "name": "skip_review",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "2209f23b42a2153cd5c3f30eb9f652e5319c15fb208d5714f1634b9c51ffe49a",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.374
+  },
+  {
+    "name": "ignore_sign_failure",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "50d611fa1dba59573ee1bc4b3cb62dfa464219be01940498399725efee618d5b",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 5.168
+  },
+  {
+    "name": "keep_state_after_error",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "7ca280e9c999fb9a43c87b5ab973a8ff0814b9a60c71cdd201def9c008dd3c57",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.445
+  },
+  {
+    "name": "skip_input_ownership",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "ca180f93f306c7bf69c658a1b202bc4b773dc8f0447a5bf623040fa7ea371d88",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.493
+  },
+  {
+    "name": "skip_change_ownership",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "8e281d519f575c3d02c42a44abf54e07dde578db721148448a4ac4b4e0e88f86",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 7.305
+  },
+  {
+    "name": "accept_wrong_fetch_index",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "72963c6588bcd99cc53e0774c8e25c590c00936375d76d6247a1741b9cab71f5",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.573
+  },
+  {
+    "name": "wrong_signature_slot",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "2e6500c11a9238bc2be4124ec13d788797b26adf0828a01e8fb90d0d2997e2e5",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.806
+  },
+  {
+    "name": "skip_commitment_check",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "5fe5d7b4e3a0261ae08e060d739677e9691738f88dafa1d365e329cb809a95f5",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 16.262
+  },
+  {
+    "name": "constant_sighash",
+    "expected_survive": true,
+    "build_exit": 0,
+    "patch_sha256": "0786f40f4180aeab34ca8e24c2c4084eaca9eef05c55fa1347280d91a4e8214d",
+    "exit": 0,
+    "outcome": "SURVIVED",
+    "seconds": 15.193
+  },
+  {
+    "name": "rejection_status_is_success",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "9693aaa14aa7151fa27cd44f993dbd0d555d1b9176604374e7efceebb0949587",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.512
+  },
+  {
+    "name": "review_recipient_is_change",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "1ac09664df901333211504fe41bc1c64d34ccdfecfb8e04adf6c3870ee22e2ae",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.59
+  },
+  {
+    "name": "review_change_is_recipient",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "ab715efb58f64779263cac93ef18fc2dfb86e2b0760bb2c00f9b0213a1eeff49",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.602
+  },
+  {
+    "name": "wrong_account_confirm_payload",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "63d1c67da0653fea7220456a51a07fa884fc81dd826294d4e549d65a23bce9df",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.58
+  },
+  {
+    "name": "wrong_address_confirm_path",
+    "expected_survive": false,
+    "build_exit": 0,
+    "patch_sha256": "4b260a7a7dc0203d7bbab0961dd6bac815c50aa30bf4118f6bfdd29432658444",
+    "exit": 101,
+    "outcome": "DETECTED",
+    "seconds": 1.712
+  },
+  {
+    "name": "omit_buffer_zeroization",
+    "expected_survive": true,
+    "build_exit": 0,
+    "patch_sha256": "0fdb3a93173c27c80043162ceeb80f9ed530766348d65aa1a9ac16ad8f10fe4e",
+    "exit": 0,
+    "outcome": "SURVIVED",
+    "seconds": 14.705
+  }
+]

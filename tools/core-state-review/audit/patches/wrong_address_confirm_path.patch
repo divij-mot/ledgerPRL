@@ -1,0 +1,11 @@
+--- a/session.rs
++++ b/session.rs
+@@ -194,7 +194,7 @@
+                 )?;
+                 let key = device.derive_output_key(&path)?;
+                 let address = Address::from_output_key(self.network, &key)?;
+-                device.confirm_address(&path, &address)?;
++                device.confirm_address(&DerivationPath::new(self.network, 0, 0, 0)?, &address)?;
+                 Ok(Response::success(address.as_str().as_bytes()))
+             }
+             0x10 => {

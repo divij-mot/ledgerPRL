@@ -1,0 +1,7 @@
+seed=0x53544154455f5632 episodes_per_network=200 mode=all production=external-hash-verified-core harness=hardened-v2
+
+thread 'main' (711) panicked at src/main.rs:31:5:
+assertion `left == right` failed
+  left: 16578231
+ right: 22364316
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

@@ -1,0 +1,11 @@
+--- a/session.rs
++++ b/session.rs
+@@ -172,7 +172,7 @@
+                 if !matches!(public.compressed_public_key[0], 2 | 3) {
+                     return Err(Error::Crypto);
+                 }
+-                device.confirm_account(&path, &public)?;
++                device.confirm_account(&path, &AccountPublic { master_fingerprint: [0; 4], compressed_public_key: [2; 33], chain_code: [0; 32] })?;
+                 let mut response = [0; 74];
+                 response[..4].copy_from_slice(&public.master_fingerprint);
+                 response[4..37].copy_from_slice(&public.compressed_public_key);

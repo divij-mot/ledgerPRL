@@ -1,0 +1,4 @@
+seed=0x0000000000000002 episodes_per_network=50000 mode=walks production=external-immutable-snapshot
+PASS walks: Counts { commands: 20601173, reviews: 485903, approvals: 478884, signing_callbacks: 2298796, signatures_released: 771045, failures: 4922597, resets: 794615, episodes: 250000 } elapsed=72.626206036s
+PASS TOTAL Counts { commands: 20601173, reviews: 485903, approvals: 478884, signing_callbacks: 2298796, signatures_released: 771045, failures: 4922597, resets: 794615, episodes: 250000 } elapsed=72.626233207s
+Bounded result: exact production Session state/response/callback agreement for these deterministic traces; public mocks do not establish real cryptography, device UI, hardware isolation, or transport integration.
