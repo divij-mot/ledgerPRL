@@ -1,6 +1,6 @@
 # FP8 and transaction compatibility
 
-Reference pins from source review on 2026-10-09:
+Reference pins from source review on 2026-10-09, rechecked against the official repository at 20:33 UTC (all unchanged; PR311 still open and unmerged):
 
 - Pearl released v1.4.11: 2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4
 - Pearl implementation oracle: 2f8b770cac8f8b74be05c1fc51c2baeb76ce0701

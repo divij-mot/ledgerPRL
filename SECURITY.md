@@ -27,4 +27,4 @@ Until a public security contact is designated, report potential vulnerabilities 
 
 ## Release gates
 
-See docs/implementation-status.md, docs/test-evidence.md and docs/firmware.md. Remaining gates include stable-OS matched builds for every supported model, emulator happy/adversarial workflows, physical screens and signing, measured stack/heap/latency, dependency review, independent human audit, vendor review, reproducible packaging and a selected project license.
+See docs/implementation-status.md, docs/test-evidence.md and docs/firmware.md. Source-bound builds, emulator happy/adversarial workflows, instrumented app-memory measurements and canonical-path package reproduction have passed at the recorded checkpoints. Remaining gates include actual supported-device/retail-OS compatibility, physical screens/signing/restore and resource measurements, complete loaded-browser/IndexedDB flows, independent human and dependency review, Ledger vendor review, a production builder/distribution process and a selected project license. Software results and registry advisory scans do not establish these gates.

@@ -1,6 +1,6 @@
 # Pearl Ledger development CLI
 
-Run from the repository root after `npm ci`:
+Run from the repository root after `npm ci --ignore-scripts`:
 
 ```sh
 npm run cli -- help
@@ -20,4 +20,4 @@ The emulator must already run the matching Pearl network build. Account export, 
 
 Output files are created exclusively with permissions `0600`; existing files are never overwritten. Signed output contains raw transaction hex, txid/wtxid, exact witnesses and vsize. These are sensitive transaction details even though no seed exists in the host.
 
-The CLI intentionally has no broadcast operation. Review the exported transaction and independently confirm node/network before invoking your node's explicit `sendrawtransaction` action. Native mainnet use, physical-device approval UX and complete emulator integration remain release gates.
+The CLI intentionally has no broadcast operation. Review the exported transaction and independently confirm node/network before invoking your node's explicit `sendrawtransaction` action. The source-bound emulator/node integration matrix is recorded in [test evidence](../../docs/test-evidence.md). Valuable-funds use, physical-device approval/restore and vendor qualification remain release gates.
