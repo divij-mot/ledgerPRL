@@ -1,0 +1,2307 @@
+[
+  {
+    "artifact": "apex_p-mainnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1734",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de173c",
+        "c0de1752",
+        "c0de175e"
+      ],
+      "dropCalls": [
+        "c0de19ce",
+        "c0de1a58"
+      ],
+      "calls": [
+        {
+          "address": "c0de1746",
+          "target": "c0de0c58 <_RNvNtCskIK8MABUnkz_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de174e",
+          "target": "c0de70b6 <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de19ce",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCskIK8MABUnkz_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a2a",
+          "target": "c0de70fe <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a48",
+          "target": "c0def9e2 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a58",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCskIK8MABUnkz_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34e8",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34f2",
+        "c0de3508",
+        "c0de3550",
+        "c0de365e"
+      ],
+      "dropCalls": [
+        "c0de356a",
+        "c0de366a"
+      ],
+      "calls": [
+        {
+          "address": "c0de3500",
+          "target": "c0de0c58 <_RNvNtCskIK8MABUnkz_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3504",
+          "target": "c0de71a4 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de3512",
+          "target": "c0de70aa <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de3520",
+          "target": "c0def9e2 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de354a",
+          "target": "c0de75d8 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3560",
+          "target": "c0def9ee <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de356a",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCskIK8MABUnkz_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de366a",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCskIK8MABUnkz_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de354a"
+  },
+  {
+    "artifact": "apex_p-regtest",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1754",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de175c",
+        "c0de1772",
+        "c0de177e"
+      ],
+      "dropCalls": [
+        "c0de19ee",
+        "c0de1a78"
+      ],
+      "calls": [
+        {
+          "address": "c0de1766",
+          "target": "c0de0bb0 <_RNvNtCs1TlDqtaNIuU_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de176e",
+          "target": "c0de70c4 <OUTLINED_FUNCTION_25>"
+        },
+        {
+          "address": "c0de19ee",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs1TlDqtaNIuU_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a4a",
+          "target": "c0de7106 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a68",
+          "target": "c0def9ea <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a78",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs1TlDqtaNIuU_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de3508",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de3512",
+        "c0de3528",
+        "c0de3570",
+        "c0de367e"
+      ],
+      "dropCalls": [
+        "c0de358a",
+        "c0de368a"
+      ],
+      "calls": [
+        {
+          "address": "c0de3520",
+          "target": "c0de0bb0 <_RNvNtCs1TlDqtaNIuU_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3524",
+          "target": "c0de71ac <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de70b2 <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de3540",
+          "target": "c0def9ea <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de356a",
+          "target": "c0de75e0 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3580",
+          "target": "c0def9f6 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de358a",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs1TlDqtaNIuU_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de368a",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs1TlDqtaNIuU_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de356a"
+  },
+  {
+    "artifact": "apex_p-simnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1754",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de175c",
+        "c0de1772",
+        "c0de177e"
+      ],
+      "dropCalls": [
+        "c0de19ee",
+        "c0de1a78"
+      ],
+      "calls": [
+        {
+          "address": "c0de1766",
+          "target": "c0de0bb0 <_RNvNtCs369opVfLGbd_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de176e",
+          "target": "c0de70c4 <OUTLINED_FUNCTION_25>"
+        },
+        {
+          "address": "c0de19ee",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs369opVfLGbd_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a4a",
+          "target": "c0de7106 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a68",
+          "target": "c0def9ea <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a78",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs369opVfLGbd_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de3508",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de3512",
+        "c0de3528",
+        "c0de3570",
+        "c0de367e"
+      ],
+      "dropCalls": [
+        "c0de358a",
+        "c0de368a"
+      ],
+      "calls": [
+        {
+          "address": "c0de3520",
+          "target": "c0de0bb0 <_RNvNtCs369opVfLGbd_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3524",
+          "target": "c0de71ac <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de70b2 <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de3540",
+          "target": "c0def9ea <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de356a",
+          "target": "c0de75e0 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3580",
+          "target": "c0def9f6 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de358a",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs369opVfLGbd_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de368a",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs369opVfLGbd_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de356a"
+  },
+  {
+    "artifact": "apex_p-testnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1754",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de175c",
+        "c0de1772",
+        "c0de177e"
+      ],
+      "dropCalls": [
+        "c0de19ee",
+        "c0de1a78"
+      ],
+      "calls": [
+        {
+          "address": "c0de1766",
+          "target": "c0de0bb0 <_RNvNtCs6smQ8uV0pC_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de176e",
+          "target": "c0de70c4 <OUTLINED_FUNCTION_25>"
+        },
+        {
+          "address": "c0de19ee",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs6smQ8uV0pC_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a4a",
+          "target": "c0de7106 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a68",
+          "target": "c0def9ea <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a78",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs6smQ8uV0pC_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de3508",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de3512",
+        "c0de3528",
+        "c0de3570",
+        "c0de367e"
+      ],
+      "dropCalls": [
+        "c0de358a",
+        "c0de368a"
+      ],
+      "calls": [
+        {
+          "address": "c0de3520",
+          "target": "c0de0bb0 <_RNvNtCs6smQ8uV0pC_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3524",
+          "target": "c0de71ac <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de70b2 <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de3540",
+          "target": "c0def9ea <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de356a",
+          "target": "c0de75e0 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3580",
+          "target": "c0def9f6 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de358a",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs6smQ8uV0pC_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de368a",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs6smQ8uV0pC_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de356a"
+  },
+  {
+    "artifact": "apex_p-testnet2",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de173c",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de1744",
+        "c0de175a",
+        "c0de1766"
+      ],
+      "dropCalls": [
+        "c0de19d6",
+        "c0de1a60"
+      ],
+      "calls": [
+        {
+          "address": "c0de174e",
+          "target": "c0de0b98 <_RNvNtCsdIl3k2TSxuU_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1756",
+          "target": "c0de70c4 <OUTLINED_FUNCTION_25>"
+        },
+        {
+          "address": "c0de19d6",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCsdIl3k2TSxuU_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a32",
+          "target": "c0de7106 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a50",
+          "target": "c0def9ea <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a60",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCsdIl3k2TSxuU_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34f0",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34fa",
+        "c0de3510",
+        "c0de3558",
+        "c0de3666"
+      ],
+      "dropCalls": [
+        "c0de3572",
+        "c0de3672"
+      ],
+      "calls": [
+        {
+          "address": "c0de3508",
+          "target": "c0de0b98 <_RNvNtCsdIl3k2TSxuU_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de350c",
+          "target": "c0de71ac <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de351a",
+          "target": "c0de70b2 <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de3528",
+          "target": "c0def9ea <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3552",
+          "target": "c0de75e0 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3568",
+          "target": "c0def9f6 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3572",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCsdIl3k2TSxuU_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3672",
+          "target": "c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCsdIl3k2TSxuU_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3552"
+  },
+  {
+    "artifact": "flex-mainnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1734",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de173c",
+        "c0de1752",
+        "c0de175e"
+      ],
+      "dropCalls": [
+        "c0de19ce",
+        "c0de1a58"
+      ],
+      "calls": [
+        {
+          "address": "c0de1746",
+          "target": "c0de0c58 <_RNvNtCs5YZksXtshZO_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de174e",
+          "target": "c0de70ce <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de19ce",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCs5YZksXtshZO_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a2a",
+          "target": "c0de7116 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a48",
+          "target": "c0defb3e <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a58",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCs5YZksXtshZO_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34e8",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34f2",
+        "c0de3508",
+        "c0de3550",
+        "c0de365e"
+      ],
+      "dropCalls": [
+        "c0de356a",
+        "c0de366a"
+      ],
+      "calls": [
+        {
+          "address": "c0de3500",
+          "target": "c0de0c58 <_RNvNtCs5YZksXtshZO_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3504",
+          "target": "c0de71bc <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de3512",
+          "target": "c0de70c2 <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de3520",
+          "target": "c0defb3e <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de354a",
+          "target": "c0de75f0 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3560",
+          "target": "c0defb4a <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de356a",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCs5YZksXtshZO_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de366a",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCs5YZksXtshZO_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de354a"
+  },
+  {
+    "artifact": "flex-regtest",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1754",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de175c",
+        "c0de1772",
+        "c0de177e"
+      ],
+      "dropCalls": [
+        "c0de19ee",
+        "c0de1a78"
+      ],
+      "calls": [
+        {
+          "address": "c0de1766",
+          "target": "c0de0c70 <_RNvNtCsGGoXkU8vv5_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de176e",
+          "target": "c0de70d6 <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de19ee",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsGGoXkU8vv5_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a4a",
+          "target": "c0de711e <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a68",
+          "target": "c0defb46 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a78",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsGGoXkU8vv5_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de3508",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de3512",
+        "c0de3528",
+        "c0de3570",
+        "c0de367e"
+      ],
+      "dropCalls": [
+        "c0de358a",
+        "c0de368a"
+      ],
+      "calls": [
+        {
+          "address": "c0de3520",
+          "target": "c0de0c70 <_RNvNtCsGGoXkU8vv5_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3524",
+          "target": "c0de71c4 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de70c4 <OUTLINED_FUNCTION_21>"
+        },
+        {
+          "address": "c0de3540",
+          "target": "c0defb46 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de356a",
+          "target": "c0de75f8 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3580",
+          "target": "c0defb52 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de358a",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsGGoXkU8vv5_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de368a",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsGGoXkU8vv5_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de356a"
+  },
+  {
+    "artifact": "flex-simnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1754",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de175c",
+        "c0de1772",
+        "c0de177e"
+      ],
+      "dropCalls": [
+        "c0de19ee",
+        "c0de1a78"
+      ],
+      "calls": [
+        {
+          "address": "c0de1766",
+          "target": "c0de0c70 <_RNvNtCsgKvHugvzaNQ_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de176e",
+          "target": "c0de70d6 <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de19ee",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsgKvHugvzaNQ_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a4a",
+          "target": "c0de711e <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a68",
+          "target": "c0defb46 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a78",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsgKvHugvzaNQ_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de3508",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de3512",
+        "c0de3528",
+        "c0de3570",
+        "c0de367e"
+      ],
+      "dropCalls": [
+        "c0de358a",
+        "c0de368a"
+      ],
+      "calls": [
+        {
+          "address": "c0de3520",
+          "target": "c0de0c70 <_RNvNtCsgKvHugvzaNQ_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3524",
+          "target": "c0de71c4 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de70c4 <OUTLINED_FUNCTION_21>"
+        },
+        {
+          "address": "c0de3540",
+          "target": "c0defb46 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de356a",
+          "target": "c0de75f8 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3580",
+          "target": "c0defb52 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de358a",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsgKvHugvzaNQ_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de368a",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsgKvHugvzaNQ_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de356a"
+  },
+  {
+    "artifact": "flex-testnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1754",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de175c",
+        "c0de1772",
+        "c0de177e"
+      ],
+      "dropCalls": [
+        "c0de19ee",
+        "c0de1a78"
+      ],
+      "calls": [
+        {
+          "address": "c0de1766",
+          "target": "c0de0c70 <_RNvNtCs9m2YwxFcpLw_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de176e",
+          "target": "c0de70d6 <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de19ee",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCs9m2YwxFcpLw_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a4a",
+          "target": "c0de711e <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a68",
+          "target": "c0defb46 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a78",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCs9m2YwxFcpLw_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de3508",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de3512",
+        "c0de3528",
+        "c0de3570",
+        "c0de367e"
+      ],
+      "dropCalls": [
+        "c0de358a",
+        "c0de368a"
+      ],
+      "calls": [
+        {
+          "address": "c0de3520",
+          "target": "c0de0c70 <_RNvNtCs9m2YwxFcpLw_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3524",
+          "target": "c0de71c4 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de70c4 <OUTLINED_FUNCTION_21>"
+        },
+        {
+          "address": "c0de3540",
+          "target": "c0defb46 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de356a",
+          "target": "c0de75f8 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3580",
+          "target": "c0defb52 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de358a",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCs9m2YwxFcpLw_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de368a",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCs9m2YwxFcpLw_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de356a"
+  },
+  {
+    "artifact": "flex-testnet2",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de173c",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de1744",
+        "c0de175a",
+        "c0de1766"
+      ],
+      "dropCalls": [
+        "c0de19d6",
+        "c0de1a60"
+      ],
+      "calls": [
+        {
+          "address": "c0de174e",
+          "target": "c0de0c58 <_RNvNtCsaEDossSwUaf_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1756",
+          "target": "c0de70d6 <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de19d6",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsaEDossSwUaf_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a32",
+          "target": "c0de711e <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a50",
+          "target": "c0defb46 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a60",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsaEDossSwUaf_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34f0",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34fa",
+        "c0de3510",
+        "c0de3558",
+        "c0de3666"
+      ],
+      "dropCalls": [
+        "c0de3572",
+        "c0de3672"
+      ],
+      "calls": [
+        {
+          "address": "c0de3508",
+          "target": "c0de0c58 <_RNvNtCsaEDossSwUaf_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de350c",
+          "target": "c0de71c4 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de351a",
+          "target": "c0de70ca <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de3528",
+          "target": "c0defb46 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3552",
+          "target": "c0de75f8 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3568",
+          "target": "c0defb52 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3572",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsaEDossSwUaf_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3672",
+          "target": "c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsaEDossSwUaf_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3552"
+  },
+  {
+    "artifact": "nanosplus-mainnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de170c",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de1714",
+        "c0de172a",
+        "c0de1736"
+      ],
+      "dropCalls": [
+        "c0de19a6",
+        "c0de1a30"
+      ],
+      "calls": [
+        {
+          "address": "c0de171e",
+          "target": "c0de0b70 <_RNvNtCsg5rqWeTekgV_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1726",
+          "target": "c0de7070 <OUTLINED_FUNCTION_25>"
+        },
+        {
+          "address": "c0de19a6",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCsg5rqWeTekgV_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a02",
+          "target": "c0de70b2 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a20",
+          "target": "c0debb8a <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a30",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCsg5rqWeTekgV_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34c0",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34ca",
+        "c0de34e0",
+        "c0de3528",
+        "c0de3636"
+      ],
+      "dropCalls": [
+        "c0de3542",
+        "c0de3642"
+      ],
+      "calls": [
+        {
+          "address": "c0de34d8",
+          "target": "c0de0b70 <_RNvNtCsg5rqWeTekgV_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de34dc",
+          "target": "c0de7158 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de34ea",
+          "target": "c0de705e <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de34f8",
+          "target": "c0debb8a <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3522",
+          "target": "c0de75a4 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3538",
+          "target": "c0debb96 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3542",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCsg5rqWeTekgV_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3642",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCsg5rqWeTekgV_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3522"
+  },
+  {
+    "artifact": "nanosplus-regtest",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de1714",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de171c",
+        "c0de1732",
+        "c0de173e"
+      ],
+      "dropCalls": [
+        "c0de19ae",
+        "c0de1a38"
+      ],
+      "calls": [
+        {
+          "address": "c0de1726",
+          "target": "c0de0b70 <_RNvNtCs5xLDnQo7z4i_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de172e",
+          "target": "c0de7078 <OUTLINED_FUNCTION_25>"
+        },
+        {
+          "address": "c0de19ae",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCs5xLDnQo7z4i_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a0a",
+          "target": "c0de70ba <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a28",
+          "target": "c0debb92 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a38",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCs5xLDnQo7z4i_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34c8",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34d2",
+        "c0de34e8",
+        "c0de3530",
+        "c0de363e"
+      ],
+      "dropCalls": [
+        "c0de354a",
+        "c0de364a"
+      ],
+      "calls": [
+        {
+          "address": "c0de34e0",
+          "target": "c0de0b70 <_RNvNtCs5xLDnQo7z4i_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de34e4",
+          "target": "c0de7160 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de34f2",
+          "target": "c0de7066 <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de3500",
+          "target": "c0debb92 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de352a",
+          "target": "c0de75ac <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3540",
+          "target": "c0debb9e <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de354a",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCs5xLDnQo7z4i_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de364a",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCs5xLDnQo7z4i_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de352a"
+  },
+  {
+    "artifact": "nanosplus-simnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de16fc",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de1704",
+        "c0de171a",
+        "c0de1726"
+      ],
+      "dropCalls": [
+        "c0de1996",
+        "c0de1a20"
+      ],
+      "calls": [
+        {
+          "address": "c0de170e",
+          "target": "c0de0c18 <_RNvNtCskVXdcy3eKtj_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1716",
+          "target": "c0de7072 <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de1996",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskVXdcy3eKtj_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de19f2",
+          "target": "c0de70ba <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a10",
+          "target": "c0debb92 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a20",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskVXdcy3eKtj_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34b0",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34ba",
+        "c0de34d0",
+        "c0de3518",
+        "c0de3626"
+      ],
+      "dropCalls": [
+        "c0de3532",
+        "c0de3632"
+      ],
+      "calls": [
+        {
+          "address": "c0de34c8",
+          "target": "c0de0c18 <_RNvNtCskVXdcy3eKtj_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de34cc",
+          "target": "c0de7160 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de34da",
+          "target": "c0de7066 <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de34e8",
+          "target": "c0debb92 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3512",
+          "target": "c0de75ac <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3528",
+          "target": "c0debb9e <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskVXdcy3eKtj_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3632",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskVXdcy3eKtj_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3512"
+  },
+  {
+    "artifact": "nanosplus-testnet",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de16fc",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de1704",
+        "c0de171a",
+        "c0de1726"
+      ],
+      "dropCalls": [
+        "c0de1996",
+        "c0de1a20"
+      ],
+      "calls": [
+        {
+          "address": "c0de170e",
+          "target": "c0de0c18 <_RNvNtCskreYmlOj71I_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1716",
+          "target": "c0de7072 <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de1996",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskreYmlOj71I_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de19f2",
+          "target": "c0de70ba <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a10",
+          "target": "c0debb92 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a20",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskreYmlOj71I_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34b0",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34ba",
+        "c0de34d0",
+        "c0de3518",
+        "c0de3626"
+      ],
+      "dropCalls": [
+        "c0de3532",
+        "c0de3632"
+      ],
+      "calls": [
+        {
+          "address": "c0de34c8",
+          "target": "c0de0c18 <_RNvNtCskreYmlOj71I_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de34cc",
+          "target": "c0de7160 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de34da",
+          "target": "c0de7066 <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de34e8",
+          "target": "c0debb92 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3512",
+          "target": "c0de75ac <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3528",
+          "target": "c0debb9e <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskreYmlOj71I_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3632",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskreYmlOj71I_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3512"
+  },
+  {
+    "artifact": "nanosplus-testnet2",
+    "account": {
+      "keySPoffset": 10944,
+      "entryCall": "c0de16fc",
+      "visitedInstructions": 35,
+      "branchAddresses": [
+        "c0de1704",
+        "c0de171a",
+        "c0de1726"
+      ],
+      "dropCalls": [
+        "c0de1996",
+        "c0de1a20"
+      ],
+      "calls": [
+        {
+          "address": "c0de170e",
+          "target": "c0de0c18 <_RNvNtCskql8Wkde6g4_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1716",
+          "target": "c0de708a <OUTLINED_FUNCTION_24>"
+        },
+        {
+          "address": "c0de1996",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskql8Wkde6g4_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de19f2",
+          "target": "c0de70d2 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a10",
+          "target": "c0debbaa <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a20",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskql8Wkde6g4_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10720,
+      "entryCall": "c0de34b0",
+      "visitedInstructions": 51,
+      "branchAddresses": [
+        "c0de34ba",
+        "c0de34d0",
+        "c0de3518",
+        "c0de3626"
+      ],
+      "dropCalls": [
+        "c0de3532",
+        "c0de3632"
+      ],
+      "calls": [
+        {
+          "address": "c0de34c8",
+          "target": "c0de0c18 <_RNvNtCskql8Wkde6g4_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de34cc",
+          "target": "c0de7178 <OUTLINED_FUNCTION_51>"
+        },
+        {
+          "address": "c0de34da",
+          "target": "c0de707e <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de34e8",
+          "target": "c0debbaa <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3512",
+          "target": "c0de75c4 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3528",
+          "target": "c0debbb6 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3532",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskql8Wkde6g4_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3632",
+          "target": "c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskql8Wkde6g4_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3512"
+  },
+  {
+    "artifact": "nanox-mainnet",
+    "account": {
+      "keySPoffset": 11224,
+      "entryCall": "c0de1a24",
+      "visitedInstructions": 38,
+      "branchAddresses": [
+        "c0de1a2c",
+        "c0de1a2e",
+        "c0de1a42",
+        "c0de1a44",
+        "c0de1a4c"
+      ],
+      "dropCalls": [
+        "c0de1d74",
+        "c0de1f22"
+      ],
+      "calls": [
+        {
+          "address": "c0de1d74",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCs6GHsmTvjCak_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a3a",
+          "target": "c0de0d64 <_RNvNtCs6GHsmTvjCak_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1f0a",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f1a",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f22",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCs6GHsmTvjCak_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 11000,
+      "entryCall": "c0de3868",
+      "visitedInstructions": 60,
+      "branchAddresses": [
+        "c0de3872",
+        "c0de3874",
+        "c0de3888",
+        "c0de388a",
+        "c0de38c6",
+        "c0de399e"
+      ],
+      "dropCalls": [
+        "c0de38da",
+        "c0de39a8"
+      ],
+      "calls": [
+        {
+          "address": "c0de39a8",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCs6GHsmTvjCak_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3880",
+          "target": "c0de0d64 <_RNvNtCs6GHsmTvjCak_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3896",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de38a2",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de38c0",
+          "target": "c0de7800 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de38d2",
+          "target": "c0debf86 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de38da",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCs6GHsmTvjCak_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de38c0"
+  },
+  {
+    "artifact": "nanox-regtest",
+    "account": {
+      "keySPoffset": 11224,
+      "entryCall": "c0de1a10",
+      "visitedInstructions": 38,
+      "branchAddresses": [
+        "c0de1a18",
+        "c0de1a1a",
+        "c0de1a2e",
+        "c0de1a30",
+        "c0de1a38"
+      ],
+      "dropCalls": [
+        "c0de1d60",
+        "c0de1f0e"
+      ],
+      "calls": [
+        {
+          "address": "c0de1d60",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCseGhiILwpBvc_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a26",
+          "target": "c0de0d4c <_RNvNtCseGhiILwpBvc_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1ef6",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f06",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f0e",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCseGhiILwpBvc_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 11000,
+      "entryCall": "c0de3854",
+      "visitedInstructions": 60,
+      "branchAddresses": [
+        "c0de385e",
+        "c0de3860",
+        "c0de3874",
+        "c0de3876",
+        "c0de38b2",
+        "c0de398a"
+      ],
+      "dropCalls": [
+        "c0de38c6",
+        "c0de3994"
+      ],
+      "calls": [
+        {
+          "address": "c0de3994",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCseGhiILwpBvc_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de386c",
+          "target": "c0de0d4c <_RNvNtCseGhiILwpBvc_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3882",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de388e",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de38ac",
+          "target": "c0de7800 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de38be",
+          "target": "c0debf86 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de38c6",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCseGhiILwpBvc_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de38ac"
+  },
+  {
+    "artifact": "nanox-simnet",
+    "account": {
+      "keySPoffset": 11224,
+      "entryCall": "c0de1a10",
+      "visitedInstructions": 38,
+      "branchAddresses": [
+        "c0de1a18",
+        "c0de1a1a",
+        "c0de1a2e",
+        "c0de1a30",
+        "c0de1a38"
+      ],
+      "dropCalls": [
+        "c0de1d60",
+        "c0de1f0e"
+      ],
+      "calls": [
+        {
+          "address": "c0de1d60",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsks7nMV9NENT_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a26",
+          "target": "c0de0d4c <_RNvNtCsks7nMV9NENT_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1ef6",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f06",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f0e",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsks7nMV9NENT_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 11000,
+      "entryCall": "c0de3854",
+      "visitedInstructions": 60,
+      "branchAddresses": [
+        "c0de385e",
+        "c0de3860",
+        "c0de3874",
+        "c0de3876",
+        "c0de38b2",
+        "c0de398a"
+      ],
+      "dropCalls": [
+        "c0de38c6",
+        "c0de3994"
+      ],
+      "calls": [
+        {
+          "address": "c0de3994",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsks7nMV9NENT_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de386c",
+          "target": "c0de0d4c <_RNvNtCsks7nMV9NENT_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3882",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de388e",
+          "target": "c0debf7c <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de38ac",
+          "target": "c0de7800 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de38be",
+          "target": "c0debf86 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de38c6",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsks7nMV9NENT_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de38ac"
+  },
+  {
+    "artifact": "nanox-testnet",
+    "account": {
+      "keySPoffset": 11224,
+      "entryCall": "c0de1a28",
+      "visitedInstructions": 38,
+      "branchAddresses": [
+        "c0de1a30",
+        "c0de1a32",
+        "c0de1a46",
+        "c0de1a48",
+        "c0de1a50"
+      ],
+      "dropCalls": [
+        "c0de1d78",
+        "c0de1f26"
+      ],
+      "calls": [
+        {
+          "address": "c0de1d78",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCs67rwNUiroWx_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a3e",
+          "target": "c0de0d64 <_RNvNtCs67rwNUiroWx_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1f0e",
+          "target": "c0debf80 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f1e",
+          "target": "c0debf80 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f26",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCs67rwNUiroWx_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 11000,
+      "entryCall": "c0de386c",
+      "visitedInstructions": 60,
+      "branchAddresses": [
+        "c0de3876",
+        "c0de3878",
+        "c0de388c",
+        "c0de388e",
+        "c0de38ca",
+        "c0de39a2"
+      ],
+      "dropCalls": [
+        "c0de38de",
+        "c0de39ac"
+      ],
+      "calls": [
+        {
+          "address": "c0de39ac",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCs67rwNUiroWx_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3884",
+          "target": "c0de0d64 <_RNvNtCs67rwNUiroWx_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de389a",
+          "target": "c0debf80 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de38a6",
+          "target": "c0debf80 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de38c4",
+          "target": "c0de7804 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de38d6",
+          "target": "c0debf8a <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de38de",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCs67rwNUiroWx_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de38c4"
+  },
+  {
+    "artifact": "nanox-testnet2",
+    "account": {
+      "keySPoffset": 11224,
+      "entryCall": "c0de1a2c",
+      "visitedInstructions": 38,
+      "branchAddresses": [
+        "c0de1a34",
+        "c0de1a36",
+        "c0de1a4a",
+        "c0de1a4c",
+        "c0de1a54"
+      ],
+      "dropCalls": [
+        "c0de1d78",
+        "c0de1f26"
+      ],
+      "calls": [
+        {
+          "address": "c0de1d78",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsj8UjoCG0hW6_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a42",
+          "target": "c0de0d64 <_RNvNtCsj8UjoCG0hW6_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1f0e",
+          "target": "c0debf80 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f1e",
+          "target": "c0debf80 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1f26",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsj8UjoCG0hW6_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 11000,
+      "entryCall": "c0de386c",
+      "visitedInstructions": 60,
+      "branchAddresses": [
+        "c0de3876",
+        "c0de3878",
+        "c0de388c",
+        "c0de388e",
+        "c0de38ca",
+        "c0de39a2"
+      ],
+      "dropCalls": [
+        "c0de38de",
+        "c0de39ac"
+      ],
+      "calls": [
+        {
+          "address": "c0de39ac",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsj8UjoCG0hW6_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3884",
+          "target": "c0de0d64 <_RNvNtCsj8UjoCG0hW6_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de389a",
+          "target": "c0debf80 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de38a6",
+          "target": "c0debf80 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de38c4",
+          "target": "c0de7804 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de38d6",
+          "target": "c0debf8a <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de38de",
+          "target": "c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsj8UjoCG0hW6_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de38c4"
+  },
+  {
+    "artifact": "stax-mainnet",
+    "account": {
+      "keySPoffset": 10936,
+      "entryCall": "c0de16e4",
+      "visitedInstructions": 30,
+      "branchAddresses": [
+        "c0de16ec",
+        "c0de1704",
+        "c0de1710"
+      ],
+      "dropCalls": [
+        "c0de1964",
+        "c0de1a42"
+      ],
+      "calls": [
+        {
+          "address": "c0de16f8",
+          "target": "c0de0ba0 <_RNvNtCs7jU8YrMMpEN_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1700",
+          "target": "c0de6e6c <OUTLINED_FUNCTION_23>"
+        },
+        {
+          "address": "c0de1964",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCs7jU8YrMMpEN_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a24",
+          "target": "c0de6ec4 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a38",
+          "target": "c0def96e <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a42",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCs7jU8YrMMpEN_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10712,
+      "entryCall": "c0de33f4",
+      "visitedInstructions": 52,
+      "branchAddresses": [
+        "c0de33fe",
+        "c0de3414",
+        "c0de345c",
+        "c0de355a"
+      ],
+      "dropCalls": [
+        "c0de3476",
+        "c0de3566"
+      ],
+      "calls": [
+        {
+          "address": "c0de340c",
+          "target": "c0de0ba0 <_RNvNtCs7jU8YrMMpEN_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3410",
+          "target": "c0de6f76 <OUTLINED_FUNCTION_53>"
+        },
+        {
+          "address": "c0de341e",
+          "target": "c0de6e2a <OUTLINED_FUNCTION_15>"
+        },
+        {
+          "address": "c0de342c",
+          "target": "c0def96e <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3456",
+          "target": "c0de73ac <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de346c",
+          "target": "c0def97a <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3476",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCs7jU8YrMMpEN_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3566",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCs7jU8YrMMpEN_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3456"
+  },
+  {
+    "artifact": "stax-regtest",
+    "account": {
+      "keySPoffset": 10936,
+      "entryCall": "c0de16d4",
+      "visitedInstructions": 30,
+      "branchAddresses": [
+        "c0de16dc",
+        "c0de16f4",
+        "c0de1700"
+      ],
+      "dropCalls": [
+        "c0de1954",
+        "c0de1a32"
+      ],
+      "calls": [
+        {
+          "address": "c0de16e8",
+          "target": "c0de0b88 <_RNvNtCsa9pciHTBxy6_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de16f0",
+          "target": "c0de6e74 <OUTLINED_FUNCTION_23>"
+        },
+        {
+          "address": "c0de1954",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsa9pciHTBxy6_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a14",
+          "target": "c0de6ecc <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a28",
+          "target": "c0def976 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a32",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsa9pciHTBxy6_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10712,
+      "entryCall": "c0de33e4",
+      "visitedInstructions": 52,
+      "branchAddresses": [
+        "c0de33ee",
+        "c0de3404",
+        "c0de344c",
+        "c0de354a"
+      ],
+      "dropCalls": [
+        "c0de3466",
+        "c0de3556"
+      ],
+      "calls": [
+        {
+          "address": "c0de33fc",
+          "target": "c0de0b88 <_RNvNtCsa9pciHTBxy6_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3400",
+          "target": "c0de6f7e <OUTLINED_FUNCTION_53>"
+        },
+        {
+          "address": "c0de340e",
+          "target": "c0de6e32 <OUTLINED_FUNCTION_15>"
+        },
+        {
+          "address": "c0de341c",
+          "target": "c0def976 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3446",
+          "target": "c0de73b4 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de345c",
+          "target": "c0def982 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3466",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsa9pciHTBxy6_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3556",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsa9pciHTBxy6_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3446"
+  },
+  {
+    "artifact": "stax-simnet",
+    "account": {
+      "keySPoffset": 10936,
+      "entryCall": "c0de16d4",
+      "visitedInstructions": 30,
+      "branchAddresses": [
+        "c0de16dc",
+        "c0de16f4",
+        "c0de1700"
+      ],
+      "dropCalls": [
+        "c0de1954",
+        "c0de1a32"
+      ],
+      "calls": [
+        {
+          "address": "c0de16e8",
+          "target": "c0de0c48 <_RNvNtCsbtBwyjVvsTk_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de16f0",
+          "target": "c0de6e6e <OUTLINED_FUNCTION_22>"
+        },
+        {
+          "address": "c0de1954",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsbtBwyjVvsTk_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a14",
+          "target": "c0de6ecc <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a28",
+          "target": "c0def976 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a32",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsbtBwyjVvsTk_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10712,
+      "entryCall": "c0de33e4",
+      "visitedInstructions": 52,
+      "branchAddresses": [
+        "c0de33ee",
+        "c0de3404",
+        "c0de344c",
+        "c0de354a"
+      ],
+      "dropCalls": [
+        "c0de3466",
+        "c0de3556"
+      ],
+      "calls": [
+        {
+          "address": "c0de33fc",
+          "target": "c0de0c48 <_RNvNtCsbtBwyjVvsTk_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3400",
+          "target": "c0de6f7e <OUTLINED_FUNCTION_53>"
+        },
+        {
+          "address": "c0de340e",
+          "target": "c0de6e32 <OUTLINED_FUNCTION_15>"
+        },
+        {
+          "address": "c0de341c",
+          "target": "c0def976 <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de3446",
+          "target": "c0de73b4 <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de345c",
+          "target": "c0def982 <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de3466",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsbtBwyjVvsTk_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de3556",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsbtBwyjVvsTk_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de3446"
+  },
+  {
+    "artifact": "stax-testnet",
+    "account": {
+      "keySPoffset": 10936,
+      "entryCall": "c0de16ec",
+      "visitedInstructions": 30,
+      "branchAddresses": [
+        "c0de16f4",
+        "c0de170c",
+        "c0de1718"
+      ],
+      "dropCalls": [
+        "c0de196c",
+        "c0de1a4a"
+      ],
+      "calls": [
+        {
+          "address": "c0de1700",
+          "target": "c0de0c60 <_RNvNtCsdqwvTkR1xBI_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1708",
+          "target": "c0de6e50 <OUTLINED_FUNCTION_21>"
+        },
+        {
+          "address": "c0de196c",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsdqwvTkR1xBI_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a2c",
+          "target": "c0de6eb4 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a40",
+          "target": "c0def95e <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a4a",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsdqwvTkR1xBI_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10712,
+      "entryCall": "c0de33fc",
+      "visitedInstructions": 52,
+      "branchAddresses": [
+        "c0de3406",
+        "c0de341c",
+        "c0de3464",
+        "c0de3562"
+      ],
+      "dropCalls": [
+        "c0de347e",
+        "c0de356e"
+      ],
+      "calls": [
+        {
+          "address": "c0de3414",
+          "target": "c0de0c60 <_RNvNtCsdqwvTkR1xBI_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3418",
+          "target": "c0de6f66 <OUTLINED_FUNCTION_53>"
+        },
+        {
+          "address": "c0de3426",
+          "target": "c0de6e1a <OUTLINED_FUNCTION_15>"
+        },
+        {
+          "address": "c0de3434",
+          "target": "c0def95e <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de345e",
+          "target": "c0de739c <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3474",
+          "target": "c0def96a <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de347e",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsdqwvTkR1xBI_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de356e",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsdqwvTkR1xBI_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de345e"
+  },
+  {
+    "artifact": "stax-testnet2",
+    "account": {
+      "keySPoffset": 10936,
+      "entryCall": "c0de16ec",
+      "visitedInstructions": 30,
+      "branchAddresses": [
+        "c0de16f4",
+        "c0de170c",
+        "c0de1718"
+      ],
+      "dropCalls": [
+        "c0de196c",
+        "c0de1a4a"
+      ],
+      "calls": [
+        {
+          "address": "c0de1700",
+          "target": "c0de0c60 <_RNvNtCsb2Jvvu2bUbZ_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de1708",
+          "target": "c0de6e50 <OUTLINED_FUNCTION_21>"
+        },
+        {
+          "address": "c0de196c",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsb2Jvvu2bUbZ_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de1a2c",
+          "target": "c0de6eb4 <OUTLINED_FUNCTION_33>"
+        },
+        {
+          "address": "c0de1a40",
+          "target": "c0def95e <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de1a4a",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsb2Jvvu2bUbZ_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signing": {
+      "keySPoffset": 10712,
+      "entryCall": "c0de33fc",
+      "visitedInstructions": 52,
+      "branchAddresses": [
+        "c0de3406",
+        "c0de341c",
+        "c0de3464",
+        "c0de3562"
+      ],
+      "dropCalls": [
+        "c0de347e",
+        "c0de356e"
+      ],
+      "calls": [
+        {
+          "address": "c0de3414",
+          "target": "c0de0c60 <_RNvNtCsb2Jvvu2bUbZ_12pearl_ledger6crypto10public_key>"
+        },
+        {
+          "address": "c0de3418",
+          "target": "c0de6f66 <OUTLINED_FUNCTION_53>"
+        },
+        {
+          "address": "c0de3426",
+          "target": "c0de6e1a <OUTLINED_FUNCTION_15>"
+        },
+        {
+          "address": "c0de3434",
+          "target": "c0def95e <__aeabi_memcpy>"
+        },
+        {
+          "address": "c0de345e",
+          "target": "c0de739c <cx_ecschnorr_sign_no_throw>"
+        },
+        {
+          "address": "c0de3474",
+          "target": "c0def96a <__aeabi_memcpy4>"
+        },
+        {
+          "address": "c0de347e",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsb2Jvvu2bUbZ_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        },
+        {
+          "address": "c0de356e",
+          "target": "c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsb2Jvvu2bUbZ_12pearl_ledger6crypto10PrivateKeyEBK_>"
+        }
+      ]
+    },
+    "signCall": "c0de345e"
+  }
+]

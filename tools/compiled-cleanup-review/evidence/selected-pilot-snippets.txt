@@ -1,0 +1,285 @@
+Selected from this independent crosscheck's already-generated simnet disassemblies.
+No new disassembly was run for portable packaging. Complete model/site table and limits are in REPORT.md.
+
+### nanosplus
+c0de16c4:	f50d 562b 	add.w	r6, sp, #10944	@ 0x2ac0
+c0de16c8:	2128      	movs	r1, #40	@ 0x28
+c0de16ca:	f005 fcbe 	bl	c0de704a <OUTLINED_FUNCTION_18>
+c0de16ce:	4a5e      	ldr	r2, [pc, #376]	@ (c0de1848 <sample_main+0x850>)
+c0de16d0:	4633      	mov	r3, r6
+c0de16d2:	9948      	ldr	r1, [sp, #288]	@ 0x120
+c0de16d4:	984b      	ldr	r0, [sp, #300]	@ 0x12c
+c0de16d6:	2900      	cmp	r1, #0
+c0de16d8:	4611      	mov	r1, r2
+c0de16da:	bf04      	itt	eq
+c0de16dc:	f245 5154 	movweq	r1, #21844	@ 0x5554
+c0de16e0:	f2c8 010c 	movteq	r1, #32780	@ 0x800c
+c0de16e4:	f040 4000 	orr.w	r0, r0, #2147483648	@ 0x80000000
+c0de16e8:	3255      	adds	r2, #85	@ 0x55
+c0de16ea:	f8c8 2d50 	str.w	r2, [r8, #3408]	@ 0xd50
+c0de16ee:	f8c8 1d54 	str.w	r1, [r8, #3412]	@ 0xd54
+c0de16f2:	2103      	movs	r1, #3
+c0de16f4:	f8c8 0d58 	str.w	r0, [r8, #3416]	@ 0xd58
+c0de16f8:	4658      	mov	r0, fp
+c0de16fa:	4622      	mov	r2, r4
+c0de16fc:	f7ff fb9a 	bl	c0de0e34 <_RNvNtCskVXdcy3eKtj_12pearl_ledger6crypto6derive>
+c0de1700:	b2c0      	uxtb	r0, r0
+c0de1702:	280e      	cmp	r0, #14
+c0de1704:	f040 8144 	bne.w	c0de1990 <sample_main+0x998>
+c0de1708:	f50d 512b 	add.w	r1, sp, #10944	@ 0x2ac0
+c0de170c:	4658      	mov	r0, fp
+c0de170e:	f7ff fa83 	bl	c0de0c18 <_RNvNtCskVXdcy3eKtj_12pearl_ledger6crypto10public_key>
+c0de1712:	f50d 5000 	add.w	r0, sp, #8192	@ 0x2000
+c0de1716:	f005 fcac 	bl	c0de7072 <OUTLINED_FUNCTION_24>
+c0de171a:	f040 8167 	bne.w	c0de19ec <sample_main+0x9f4>
+c0de171e:	f50d 5000 	add.w	r0, sp, #8192	@ 0x2000
+c0de1722:	f890 4131 	ldrb.w	r4, [r0, #305]	@ 0x131
+c0de1726:	e134      	b.n	c0de1992 <sample_main+0x99a>
+c0de1a1c:	f50d 502b 	add.w	r0, sp, #10944	@ 0x2ac0
+c0de1a20:	f7fe fc18 	bl	c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskVXdcy3eKtj_12pearl_ledger6crypto10PrivateKeyEBK_>
+c0de1a24:	f1a7 0680 	sub.w	r6, r7, #128	@ 0x80
+c0de1a28:	2114      	movs	r1, #20
+c0de1a2a:	f005 fb0e 	bl	c0de704a <OUTLINED_FUNCTION_18>
+c0de1a2e:	4630      	mov	r0, r6
+c0de1a30:	2114      	movs	r1, #20
+c0de1a32:	f005 ff23 	bl	c0de787c <os_perso_get_master_key_identifier>
+c0de1a36:	2800      	cmp	r0, #0
+c0de1a38:	d173      	bne.n	c0de1b22 <sample_main+0xb2a>
+c0de3476:	a804      	add	r0, sp, #16
+c0de3478:	f500 5429 	add.w	r4, r0, #10816	@ 0x2a40
+c0de347c:	2140      	movs	r1, #64	@ 0x40
+c0de347e:	f003 fdef 	bl	c0de7060 <OUTLINED_FUNCTION_21>
+c0de3482:	4620      	mov	r0, r4
+c0de3484:	2120      	movs	r1, #32
+c0de3486:	f004 f9c1 	bl	c0de780c <cx_get_random_bytes>
+c0de348a:	2800      	cmp	r0, #0
+c0de348c:	f040 80d4 	bne.w	c0de3638 <sample_main+0x2640>
+c0de3490:	a80f      	add	r0, sp, #60	@ 0x3c
+c0de3492:	2140      	movs	r1, #64	@ 0x40
+c0de3494:	f500 5022 	add.w	r0, r0, #10368	@ 0x2880
+c0de3498:	f8c0 10b4 	str.w	r1, [r0, #180]	@ 0xb4
+c0de349c:	a808      	add	r0, sp, #32
+c0de349e:	f500 5427 	add.w	r4, r0, #10688	@ 0x29c0
+c0de34a2:	2128      	movs	r1, #40	@ 0x28
+c0de34a4:	f003 fddc 	bl	c0de7060 <OUTLINED_FUNCTION_21>
+c0de34a8:	a808      	add	r0, sp, #32
+c0de34aa:	4621      	mov	r1, r4
+c0de34ac:	f500 5021 	add.w	r0, r0, #10304	@ 0x2840
+c0de34b0:	f7fd fbda 	bl	c0de0c68 <_RNvNtCskVXdcy3eKtj_12pearl_ledger6crypto11tweaked_key>
+c0de34b4:	b2c0      	uxtb	r0, r0
+c0de34b6:	9042      	str	r0, [sp, #264]	@ 0x108
+c0de34b8:	280e      	cmp	r0, #14
+c0de34ba:	f040 80b7 	bne.w	c0de362c <sample_main+0x2634>
+c0de3506:	a808      	add	r0, sp, #32
+c0de3508:	ab0c      	add	r3, sp, #48	@ 0x30
+c0de350a:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de350e:	f503 5321 	add.w	r3, r3, #10304	@ 0x2840
+c0de3512:	f004 f84b 	bl	c0de75ac <cx_ecschnorr_sign_no_throw>
+c0de3516:	2800      	cmp	r0, #0
+c0de3518:	f040 8086 	bne.w	c0de3628 <sample_main+0x2630>
+c0de351c:	a90d      	add	r1, sp, #52	@ 0x34
+c0de351e:	f50d 502b 	add.w	r0, sp, #10944	@ 0x2ac0
+c0de3522:	f501 5122 	add.w	r1, r1, #10368	@ 0x2880
+c0de3526:	224c      	movs	r2, #76	@ 0x4c
+c0de3528:	f008 fb39 	bl	c0debb9e <__aeabi_memcpy4>
+c0de352c:	a808      	add	r0, sp, #32
+c0de352e:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de3532:	f7fc fe8f 	bl	c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskVXdcy3eKtj_12pearl_ledger6crypto10PrivateKeyEBK_>
+c0de3536:	a80f      	add	r0, sp, #60	@ 0x3c
+c0de3538:	f500 5022 	add.w	r0, r0, #10368	@ 0x2880
+c0de353c:	f8d0 00b4 	ldr.w	r0, [r0, #180]	@ 0xb4
+c0de3540:	2840      	cmp	r0, #64	@ 0x40
+c0de3542:	d179      	bne.n	c0de3638 <sample_main+0x2640>
+c0de3622:	f817 0c7f 	ldrb.w	r0, [r7, #-127]
+c0de3626:	e000      	b.n	c0de362a <sample_main+0x2632>
+c0de3628:	200d      	movs	r0, #13
+c0de362a:	9042      	str	r0, [sp, #264]	@ 0x108
+c0de362c:	a808      	add	r0, sp, #32
+c0de362e:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de3632:	f7fc fe0f 	bl	c0de0254 <_RINvNtCs77Jtq17PsCU_4core3ptr13drop_in_placeNtNtCskVXdcy3eKtj_12pearl_ledger6crypto10PrivateKeyEBK_>
+c0de3636:	e001      	b.n	c0de363c <sample_main+0x2644>
+c0de3638:	200d      	movs	r0, #13
+c0de363a:	9042      	str	r0, [sp, #264]	@ 0x108
+c0de363c:	a804      	add	r0, sp, #16
+c0de363e:	f500 5029 	add.w	r0, r0, #10816	@ 0x2a40
+c0de3642:	f002 ff3a 	bl	c0de64ba <_RNvXs2_CsgnFOl4UCvib_7zeroizeAhj40_NtB5_7Zeroize7zeroizeCs2ztrPTGy3KX_10pearl_core>
+c0de3646:	f7ff b896 	b.w	c0de2776 <sample_main+0x177e>
+
+### nanox
+c0de1cec:	00002bd8 	.word	0x00002bd8
+c0de2054:	00002bd8 	.word	0x00002bd8
+c0de3842:	4c7d      	ldr	r4, [pc, #500]	@ (c0de3a38 <sample_main+0x293c>)
+c0de3844:	446c      	add	r4, sp
+c0de3846:	2128      	movs	r1, #40	@ 0x28
+c0de3848:	4620      	mov	r0, r4
+c0de384a:	f008 fb8d 	bl	c0debf68 <__aeabi_memclr4>
+c0de384e:	487b      	ldr	r0, [pc, #492]	@ (c0de3a3c <sample_main+0x2940>)
+c0de3850:	4468      	add	r0, sp
+c0de3852:	4621      	mov	r1, r4
+c0de3854:	f7fd faa2 	bl	c0de0d9c <_RNvNtCsks7nMV9NENT_12pearl_ledger6crypto11tweaked_key>
+c0de3858:	b2c0      	uxtb	r0, r0
+c0de385a:	908d      	str	r0, [sp, #564]	@ 0x234
+c0de385c:	280e      	cmp	r0, #14
+c0de385e:	d000      	beq.n	c0de3862 <sample_main+0x2766>
+c0de3860:	e096      	b.n	c0de3990 <sample_main+0x2894>
+c0de38a0:	4865      	ldr	r0, [pc, #404]	@ (c0de3a38 <sample_main+0x293c>)
+c0de38a2:	4468      	add	r0, sp
+c0de38a4:	2203      	movs	r2, #3
+c0de38a6:	4b67      	ldr	r3, [pc, #412]	@ (c0de3a44 <sample_main+0x2948>)
+c0de38a8:	446b      	add	r3, sp
+c0de38aa:	495b      	ldr	r1, [pc, #364]	@ (c0de3a18 <sample_main+0x291c>)
+c0de38ac:	f003 ffa8 	bl	c0de7800 <cx_ecschnorr_sign_no_throw>
+c0de38b0:	2800      	cmp	r0, #0
+c0de38b2:	d16b      	bne.n	c0de398c <sample_main+0x2890>
+c0de38b4:	4859      	ldr	r0, [pc, #356]	@ (c0de3a1c <sample_main+0x2920>)
+c0de38b6:	4468      	add	r0, sp
+c0de38b8:	495a      	ldr	r1, [pc, #360]	@ (c0de3a24 <sample_main+0x2928>)
+c0de38ba:	4469      	add	r1, sp
+c0de38bc:	224c      	movs	r2, #76	@ 0x4c
+c0de38be:	f008 fb62 	bl	c0debf86 <__aeabi_memcpy4>
+c0de38c2:	485d      	ldr	r0, [pc, #372]	@ (c0de3a38 <sample_main+0x293c>)
+c0de38c4:	4468      	add	r0, sp
+c0de38c6:	f7fc fcff 	bl	c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsks7nMV9NENT_12pearl_ledger6crypto10PrivateKeyEBK_>
+c0de38ca:	200d      	movs	r0, #13
+c0de38cc:	908d      	str	r0, [sp, #564]	@ 0x234
+c0de38ce:	9880      	ldr	r0, [sp, #512]	@ 0x200
+c0de38d0:	6800      	ldr	r0, [r0, #0]
+c0de38d2:	2840      	cmp	r0, #64	@ 0x40
+c0de38d4:	d160      	bne.n	c0de3998 <sample_main+0x289c>
+c0de3984:	482b      	ldr	r0, [pc, #172]	@ (c0de3a34 <sample_main+0x2938>)
+c0de3986:	4468      	add	r0, sp
+c0de3988:	7840      	ldrb	r0, [r0, #1]
+c0de398a:	e000      	b.n	c0de398e <sample_main+0x2892>
+c0de398c:	200d      	movs	r0, #13
+c0de398e:	908d      	str	r0, [sp, #564]	@ 0x234
+c0de3990:	4829      	ldr	r0, [pc, #164]	@ (c0de3a38 <sample_main+0x293c>)
+c0de3992:	4468      	add	r0, sp
+c0de3994:	f7fc fc98 	bl	c0de02c8 <_RINvNtCs46aIOn39SU8_4core3ptr13drop_in_placeNtNtCsks7nMV9NENT_12pearl_ledger6crypto10PrivateKeyEBK_>
+c0de3998:	4824      	ldr	r0, [pc, #144]	@ (c0de3a2c <sample_main+0x2930>)
+c0de399a:	4468      	add	r0, sp
+c0de399c:	f002 ff71 	bl	c0de6882 <_RNvXs2_Csew5e7ktAoNj_7zeroizeAhj40_NtB5_7Zeroize7zeroizeCs4qqpmTE3yor_10pearl_core>
+c0de3a38:	00002af8 	.word	0x00002af8
+
+### stax
+c0de33ba:	f004 f975 	bl	c0de76a8 <cx_get_random_bytes>
+c0de33be:	2800      	cmp	r0, #0
+c0de33c0:	f040 80cc 	bne.w	c0de355c <sample_main+0x2560>
+c0de33c4:	a80d      	add	r0, sp, #52	@ 0x34
+c0de33c6:	2140      	movs	r1, #64	@ 0x40
+c0de33c8:	f500 5022 	add.w	r0, r0, #10368	@ 0x2880
+c0de33cc:	f8c0 10b4 	str.w	r1, [r0, #180]	@ 0xb4
+c0de33d0:	a806      	add	r0, sp, #24
+c0de33d2:	f500 5427 	add.w	r4, r0, #10688	@ 0x29c0
+c0de33d6:	2128      	movs	r1, #40	@ 0x28
+c0de33d8:	f003 fd72 	bl	c0de6ec0 <OUTLINED_FUNCTION_31>
+c0de33dc:	a806      	add	r0, sp, #24
+c0de33de:	4621      	mov	r1, r4
+c0de33e0:	f500 5021 	add.w	r0, r0, #10304	@ 0x2840
+c0de33e4:	f7fd fc58 	bl	c0de0c98 <_RNvNtCsbtBwyjVvsTk_12pearl_ledger6crypto11tweaked_key>
+c0de33e8:	b2c0      	uxtb	r0, r0
+c0de33ea:	9040      	str	r0, [sp, #256]	@ 0x100
+c0de33ec:	280e      	cmp	r0, #14
+c0de33ee:	f040 80af 	bne.w	c0de3550 <sample_main+0x2554>
+c0de343a:	a806      	add	r0, sp, #24
+c0de343c:	ab0a      	add	r3, sp, #40	@ 0x28
+c0de343e:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de3442:	f503 5321 	add.w	r3, r3, #10304	@ 0x2840
+c0de3446:	f003 ffb5 	bl	c0de73b4 <cx_ecschnorr_sign_no_throw>
+c0de344a:	2800      	cmp	r0, #0
+c0de344c:	d17e      	bne.n	c0de354c <sample_main+0x2550>
+c0de344e:	a80e      	add	r0, sp, #56	@ 0x38
+c0de3450:	a90b      	add	r1, sp, #44	@ 0x2c
+c0de3452:	f500 502a 	add.w	r0, r0, #10880	@ 0x2a80
+c0de3456:	f501 5122 	add.w	r1, r1, #10368	@ 0x2880
+c0de345a:	224c      	movs	r2, #76	@ 0x4c
+c0de345c:	f00c fa91 	bl	c0def982 <__aeabi_memcpy4>
+c0de3460:	a806      	add	r0, sp, #24
+c0de3462:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de3466:	f7fc fef5 	bl	c0de0254 <_RINvNtCs5DroFJSorLX_4core3ptr13drop_in_placeNtNtCsbtBwyjVvsTk_12pearl_ledger6crypto10PrivateKeyEBK_>
+c0de346a:	a80d      	add	r0, sp, #52	@ 0x34
+c0de346c:	f500 5022 	add.w	r0, r0, #10368	@ 0x2880
+c0de3470:	f8d0 00b4 	ldr.w	r0, [r0, #180]	@ 0xb4
+c0de3474:	2840      	cmp	r0, #64	@ 0x40
+c0de3476:	d171      	bne.n	c0de355c <sample_main+0x2560>
+
+### flex
+c0de34de:	f004 fa05 	bl	c0de78ec <cx_get_random_bytes>
+c0de34e2:	2800      	cmp	r0, #0
+c0de34e4:	f040 80d4 	bne.w	c0de3690 <sample_main+0x2640>
+c0de34e8:	a80f      	add	r0, sp, #60	@ 0x3c
+c0de34ea:	2140      	movs	r1, #64	@ 0x40
+c0de34ec:	f500 5022 	add.w	r0, r0, #10368	@ 0x2880
+c0de34f0:	f8c0 10b4 	str.w	r1, [r0, #180]	@ 0xb4
+c0de34f4:	a808      	add	r0, sp, #32
+c0de34f6:	f500 5427 	add.w	r4, r0, #10688	@ 0x29c0
+c0de34fa:	2128      	movs	r1, #40	@ 0x28
+c0de34fc:	f003 fde5 	bl	c0de70ca <OUTLINED_FUNCTION_22>
+c0de3500:	a808      	add	r0, sp, #32
+c0de3502:	4621      	mov	r1, r4
+c0de3504:	f500 5021 	add.w	r0, r0, #10304	@ 0x2840
+c0de3508:	f7fd fbda 	bl	c0de0cc0 <_RNvNtCsgKvHugvzaNQ_12pearl_ledger6crypto11tweaked_key>
+c0de350c:	b2c0      	uxtb	r0, r0
+c0de350e:	9042      	str	r0, [sp, #264]	@ 0x108
+c0de3510:	280e      	cmp	r0, #14
+c0de3512:	f040 80b7 	bne.w	c0de3684 <sample_main+0x2634>
+c0de355e:	a808      	add	r0, sp, #32
+c0de3560:	ab0c      	add	r3, sp, #48	@ 0x30
+c0de3562:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de3566:	f503 5321 	add.w	r3, r3, #10304	@ 0x2840
+c0de356a:	f004 f845 	bl	c0de75f8 <cx_ecschnorr_sign_no_throw>
+c0de356e:	2800      	cmp	r0, #0
+c0de3570:	f040 8086 	bne.w	c0de3680 <sample_main+0x2630>
+c0de3574:	a90d      	add	r1, sp, #52	@ 0x34
+c0de3576:	f50d 502b 	add.w	r0, sp, #10944	@ 0x2ac0
+c0de357a:	f501 5122 	add.w	r1, r1, #10368	@ 0x2880
+c0de357e:	224c      	movs	r2, #76	@ 0x4c
+c0de3580:	f00c fae7 	bl	c0defb52 <__aeabi_memcpy4>
+c0de3584:	a808      	add	r0, sp, #32
+c0de3586:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de358a:	f7fc fe63 	bl	c0de0254 <_RINvNtCshdjlaM1dxLQ_4core3ptr13drop_in_placeNtNtCsgKvHugvzaNQ_12pearl_ledger6crypto10PrivateKeyEBK_>
+c0de358e:	a80f      	add	r0, sp, #60	@ 0x3c
+c0de3590:	f500 5022 	add.w	r0, r0, #10368	@ 0x2880
+c0de3594:	f8d0 00b4 	ldr.w	r0, [r0, #180]	@ 0xb4
+c0de3598:	2840      	cmp	r0, #64	@ 0x40
+c0de359a:	d179      	bne.n	c0de3690 <sample_main+0x2640>
+
+### apex_p
+c0de34de:	f004 f9c1 	bl	c0de7864 <cx_get_random_bytes>
+c0de34e2:	2800      	cmp	r0, #0
+c0de34e4:	f040 80d4 	bne.w	c0de3690 <sample_main+0x2640>
+c0de34e8:	a80f      	add	r0, sp, #60	@ 0x3c
+c0de34ea:	2140      	movs	r1, #64	@ 0x40
+c0de34ec:	f500 5022 	add.w	r0, r0, #10368	@ 0x2880
+c0de34f0:	f8c0 10b4 	str.w	r1, [r0, #180]	@ 0xb4
+c0de34f4:	a808      	add	r0, sp, #32
+c0de34f6:	f500 5427 	add.w	r4, r0, #10688	@ 0x29c0
+c0de34fa:	2128      	movs	r1, #40	@ 0x28
+c0de34fc:	f003 fddc 	bl	c0de70b8 <OUTLINED_FUNCTION_23>
+c0de3500:	a808      	add	r0, sp, #32
+c0de3502:	4621      	mov	r1, r4
+c0de3504:	f500 5021 	add.w	r0, r0, #10304	@ 0x2840
+c0de3508:	f7fd fb7a 	bl	c0de0c00 <_RNvNtCs369opVfLGbd_12pearl_ledger6crypto11tweaked_key>
+c0de350c:	b2c0      	uxtb	r0, r0
+c0de350e:	9042      	str	r0, [sp, #264]	@ 0x108
+c0de3510:	280e      	cmp	r0, #14
+c0de3512:	f040 80b7 	bne.w	c0de3684 <sample_main+0x2634>
+c0de355e:	a808      	add	r0, sp, #32
+c0de3560:	ab0c      	add	r3, sp, #48	@ 0x30
+c0de3562:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de3566:	f503 5321 	add.w	r3, r3, #10304	@ 0x2840
+c0de356a:	f004 f839 	bl	c0de75e0 <cx_ecschnorr_sign_no_throw>
+c0de356e:	2800      	cmp	r0, #0
+c0de3570:	f040 8086 	bne.w	c0de3680 <sample_main+0x2630>
+c0de3574:	a90d      	add	r1, sp, #52	@ 0x34
+c0de3576:	f50d 502b 	add.w	r0, sp, #10944	@ 0x2ac0
+c0de357a:	f501 5122 	add.w	r1, r1, #10368	@ 0x2880
+c0de357e:	224c      	movs	r2, #76	@ 0x4c
+c0de3580:	f00c fa39 	bl	c0def9f6 <__aeabi_memcpy4>
+c0de3584:	a808      	add	r0, sp, #32
+c0de3586:	f500 5027 	add.w	r0, r0, #10688	@ 0x29c0
+c0de358a:	f7fc fe63 	bl	c0de0254 <_RINvNtCshTAuGF9Ap7R_4core3ptr13drop_in_placeNtNtCs369opVfLGbd_12pearl_ledger6crypto10PrivateKeyEBK_>
+c0de358e:	a80f      	add	r0, sp, #60	@ 0x3c
+c0de3590:	f500 5022 	add.w	r0, r0, #10368	@ 0x2880
+c0de3594:	f8d0 00b4 	ldr.w	r0, [r0, #180]	@ 0xb4
+c0de3598:	2840      	cmp	r0, #64	@ 0x40
+c0de359a:	d179      	bne.n	c0de3690 <sample_main+0x2640>

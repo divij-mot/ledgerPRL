@@ -1,0 +1,333 @@
+{
+  "baselineShapes": {
+    "apex_p": {
+      "privateDrop": [
+        "push {r4, r6, r7, lr}",
+        "add r7, sp, #8",
+        "mov r4, r0",
+        "adds r0, #8",
+        "bl zeroize32",
+        "movs r0, #0",
+        "str r0, [r4, #4]",
+        "strb r0, [r4, #0]",
+        "pop {r4, r6, r7, pc}"
+      ],
+      "zeroize32": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #32",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "zeroize64": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #64",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "iterator": [
+        "push {r7, lr}",
+        "mov r7, sp",
+        "movs r1, #0",
+        "ldrd r2, r3, [r0]",
+        "cmp r2, r3",
+        "it eq",
+        "popeq {r7, pc}",
+        "strb.w r1, [r2], #1",
+        "str r2, [r0, #0]",
+        "b.n local+6"
+      ]
+    },
+    "flex": {
+      "privateDrop": [
+        "push {r4, r6, r7, lr}",
+        "add r7, sp, #8",
+        "mov r4, r0",
+        "adds r0, #8",
+        "bl zeroize32",
+        "movs r0, #0",
+        "str r0, [r4, #4]",
+        "strb r0, [r4, #0]",
+        "pop {r4, r6, r7, pc}"
+      ],
+      "zeroize32": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #32",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "zeroize64": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #64",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "iterator": [
+        "push {r7, lr}",
+        "mov r7, sp",
+        "movs r1, #0",
+        "ldrd r2, r3, [r0]",
+        "cmp r2, r3",
+        "it eq",
+        "popeq {r7, pc}",
+        "strb.w r1, [r2], #1",
+        "str r2, [r0, #0]",
+        "b.n local+6"
+      ]
+    },
+    "nanosplus": {
+      "privateDrop": [
+        "push {r4, r6, r7, lr}",
+        "add r7, sp, #8",
+        "mov r4, r0",
+        "adds r0, #8",
+        "bl zeroize32",
+        "movs r0, #0",
+        "str r0, [r4, #4]",
+        "strb r0, [r4, #0]",
+        "pop {r4, r6, r7, pc}"
+      ],
+      "zeroize32": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #32",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "zeroize64": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #64",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "iterator": [
+        "push {r7, lr}",
+        "mov r7, sp",
+        "movs r1, #0",
+        "ldrd r2, r3, [r0]",
+        "cmp r2, r3",
+        "it eq",
+        "popeq {r7, pc}",
+        "strb.w r1, [r2], #1",
+        "str r2, [r0, #0]",
+        "b.n local+6"
+      ]
+    },
+    "nanox": {
+      "privateDrop": [
+        "push {r4, r6, r7, lr}",
+        "add r7, sp, #8",
+        "mov r4, r0",
+        "adds r0, #8",
+        "bl zeroize32",
+        "movs r0, #0",
+        "str r0, [r4, #4]",
+        "strb r0, [r4, #0]",
+        "pop {r4, r6, r7, pc}"
+      ],
+      "zeroize32": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #32",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "zeroize64": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #64",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "iterator": [
+        "push {r7, lr}",
+        "add r7, sp, #0",
+        "ldmia r0!, {r1, r2}",
+        "subs r0, #8",
+        "cmp r1, r2",
+        "beq.n local+16",
+        "movs r2, #0",
+        "strb r2, [r1, #0]",
+        "adds r1, r1, #1",
+        "str r1, [r0, #0]",
+        "b.n local+4",
+        "pop {r7, pc}"
+      ]
+    },
+    "stax": {
+      "privateDrop": [
+        "push {r4, r6, r7, lr}",
+        "add r7, sp, #8",
+        "mov r4, r0",
+        "adds r0, #8",
+        "bl zeroize32",
+        "movs r0, #0",
+        "str r0, [r4, #4]",
+        "strb r0, [r4, #0]",
+        "pop {r4, r6, r7, pc}"
+      ],
+      "zeroize32": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #32",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "zeroize64": [
+        "push {r5, r6, r7, lr}",
+        "add r7, sp, #8",
+        "str r0, [sp, #0]",
+        "adds r0, #64",
+        "str r0, [sp, #4]",
+        "mov r0, sp",
+        "bl zeroizeIterator",
+        "pop {r2, r3, r7, pc}"
+      ],
+      "iterator": [
+        "push {r7, lr}",
+        "mov r7, sp",
+        "movs r1, #0",
+        "ldrd r2, r3, [r0]",
+        "cmp r2, r3",
+        "it eq",
+        "popeq {r7, pc}",
+        "strb.w r1, [r2], #1",
+        "str r2, [r0, #0]",
+        "b.n local+6"
+      ]
+    }
+  },
+  "results": [
+    {
+      "artifact": "apex_p-mainnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "apex_p-regtest",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "apex_p-simnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "apex_p-testnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "apex_p-testnet2",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "flex-mainnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "flex-regtest",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "flex-simnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "flex-testnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "flex-testnet2",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanosplus-mainnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanosplus-regtest",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanosplus-simnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanosplus-testnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanosplus-testnet2",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanox-mainnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanox-regtest",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanox-simnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanox-testnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "nanox-testnet2",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "stax-mainnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "stax-regtest",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "stax-simnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "stax-testnet",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    },
+    {
+      "artifact": "stax-testnet2",
+      "zeroizerSemanticShapeMatchesManuallyReviewedSimnet": true
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "priorAttemptsPreservedSeparately": [
+    {
+      "attemptId": "prl-wallclock-final-20261009-1850",
+      "cryptoSha256": "7245b73f22769869bcd9440469a45adfce2b9878b9f5567bbad759742b38d1d9",
+      "status": "cancelled-incomplete",
+      "completedCases": 0,
+      "passingCases": 0,
+      "reason": "Root canceled for compiled original-slot wipe finding",
+      "evidenceSha256": "29d4f989a5132dce48adbc33a368cf53c9211003207ca385d3ac2afdf2926fd5"
+    },
+    {
+      "attemptId": "prl-wallclock-lexical-20261009-1859",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "status": "failed-wall-time-bound-incomplete",
+      "receivingCasesPassed": 5,
+      "reviewCriterion": "All five exited after 1200 ticks and returned 6986, but elapsed 145.235\u2013145.656s exceeded unchanged 145s harness bound",
+      "reviewTimings": [
+        {
+          "model": "apex_p",
+          "elapsedSeconds": 145.620717475,
+          "tickCount": 1200,
+          "gapsOverOneSecond": [
+            {
+              "seconds": 6.504899944,
+              "startMonotonicNs": 23184408989194,
+              "endMonotonicNs": 23190913889138
+            },
+            {
+              "seconds": 2.166295976,
+              "startMonotonicNs": 23192192803488,
+              "endMonotonicNs": 23194359099464
+            },
+            {
+              "seconds": 2.400533034,
+              "startMonotonicNs": 23197561587827,
+              "endMonotonicNs": 23199962120861
+            },
+            {
+              "seconds": 13.078264969,
+              "startMonotonicNs": 23200478974209,
+              "endMonotonicNs": 23213557239178
+            }
+          ]
+        },
+        {
+          "model": "flex",
+          "elapsedSeconds": 145.65581484,
+          "tickCount": 1200,
+          "gapsOverOneSecond": [
+            {
+              "seconds": 6.581299526,
+              "startMonotonicNs": 23184332234964,
+              "endMonotonicNs": 23190913534490
+            },
+            {
+              "seconds": 2.178397075,
+              "startMonotonicNs": 23192181155560,
+              "endMonotonicNs": 23194359552635
+            },
+            {
+              "seconds": 2.428811413,
+              "startMonotonicNs": 23197529566542,
+              "endMonotonicNs": 23199958377955
+            },
+            {
+              "seconds": 12.959059436,
+              "startMonotonicNs": 23200604244888,
+              "endMonotonicNs": 23213563304324
+            }
+          ]
+        },
+        {
+          "model": "nanosp",
+          "elapsedSeconds": 145.234576953,
+          "tickCount": 1200,
+          "gapsOverOneSecond": [
+            {
+              "seconds": 6.586243288,
+              "startMonotonicNs": 23184326939784,
+              "endMonotonicNs": 23190913183072
+            },
+            {
+              "seconds": 2.152668252,
+              "startMonotonicNs": 23192203103455,
+              "endMonotonicNs": 23194355771707
+            },
+            {
+              "seconds": 2.388234078,
+              "startMonotonicNs": 23197570560519,
+              "endMonotonicNs": 23199958794597
+            },
+            {
+              "seconds": 13.080473789,
+              "startMonotonicNs": 23200482411526,
+              "endMonotonicNs": 23213562885315
+            }
+          ]
+        },
+        {
+          "model": "nanox",
+          "elapsedSeconds": 145.25094436,
+          "tickCount": 1200,
+          "gapsOverOneSecond": [
+            {
+              "seconds": 6.565712656,
+              "startMonotonicNs": 23184348774196,
+              "endMonotonicNs": 23190914486852
+            },
+            {
+              "seconds": 2.132976078,
+              "startMonotonicNs": 23192225119292,
+              "endMonotonicNs": 23194358095370
+            },
+            {
+              "seconds": 2.154100026,
+              "startMonotonicNs": 23197808526756,
+              "endMonotonicNs": 23199962626782
+            },
+            {
+              "seconds": 12.972941422,
+              "startMonotonicNs": 23200589364031,
+              "endMonotonicNs": 23213562305453
+            }
+          ]
+        },
+        {
+          "model": "stax",
+          "elapsedSeconds": 145.372637367,
+          "tickCount": 1200,
+          "gapsOverOneSecond": [
+            {
+              "seconds": 6.576945162,
+              "startMonotonicNs": 23184336758974,
+              "endMonotonicNs": 23190913704136
+            },
+            {
+              "seconds": 2.141949971,
+              "startMonotonicNs": 23192215486373,
+              "endMonotonicNs": 23194357436344
+            },
+            {
+              "seconds": 2.149776656,
+              "startMonotonicNs": 23197803667988,
+              "endMonotonicNs": 23199953444644
+            },
+            {
+              "seconds": 13.004775914,
+              "startMonotonicNs": 23200561245836,
+              "endMonotonicNs": 23213566021750
+            }
+          ]
+        }
+      ],
+      "attribution": "Shared host/scheduling stalls were suggested by synchronized gaps, but exact external cause was not established",
+      "partialExportCasesRun": 0,
+      "idleCasesRun": 0,
+      "evidenceSha256": "4bfbb744f85180596932b320e74043d1f95ba400f0a681503515fd75bc083f08"
+    },
+    {
+      "attemptId": "prl-wallclock-lexical-quiet-20261009-1908",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "status": "environment-interrupted-incomplete",
+      "receivingCasesPassed": 5,
+      "reviewCasesCompleted": 0,
+      "lastReviewLogsStoppedUtc": "2026-10-09T19:10:53Z",
+      "oldExecSessionUnavailable": true,
+      "partialExportCasesRun": 0,
+      "idleCasesRun": 0,
+      "evidenceSha256": "561065c07b1287673751727f71d28bb3515321ea418c465f633566c59c5ca25a"
+    }
+  ],
+  "qualificationAccounting": "Only the current complete quiet2 run establishes full final-source normal-clock qualification. Older attempts are not relabeled as passing or extra unique coverage.",
+  "executionVisibilityCorrection": "Independent exec socket/process probes do not reliably observe an owning job network/process namespace. Final cleanup relies on owning harness terminate/wait and execution exit 0, plus in-context expiry connection-refusal checks."
+}

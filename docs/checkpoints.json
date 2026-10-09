@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "verifiedAt": "2026-10-09T19:08:00Z",
+  "verifiedAt": "2026-10-09T19:36:00Z",
   "repository": "https://github.com/divij-mot/ledgerPRL",
   "note": "Local test reports can identify a local commit. The corresponding published commit has different metadata but the exact same Git tree. Use publishedCommit when checking out from GitHub; native source and ELF hashes remain separate verification inputs.",
   "checkpoints": [
@@ -78,6 +78,11 @@
       "localCommit": "37a5d4442f64dc954e80502951fb86d2b36bd59b",
       "publishedCommit": "0815691d1afcef3e202784f2efdd6b23807f6b90",
       "tree": "3b67e9662756dcd67bef600d675f29879ed9c141"
+    },
+    {
+      "localCommit": "e36dc35abcd47277a491d5bc4155a576e0ff2855",
+      "publishedCommit": "26ed2282f3ddc897027be3e4230627a1a997ad3d",
+      "tree": "7361be6c1284cd3d38a63ffcb0b5f397e63cb955"
     }
   ]
 }

@@ -1,0 +1,293 @@
+{
+  "models": {
+    "nanosp": {
+      "frozenElf": "pearl-nanosplus-simnet.elf",
+      "sourceElf": "pearl-nanosplus-simnet.elf",
+      "sha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "manifestSha256": "9005d2f658492a36705fdd8097508e6b4ed0930d84fe7c5635e697d5117278ac",
+      "exactSourceMapVerified": true,
+      "copiedElfVerified": true,
+      "copiedManifestBytesVerified": true
+    },
+    "nanox": {
+      "frozenElf": "pearl-nanox-simnet.elf",
+      "sourceElf": "pearl-nanox-simnet.elf",
+      "sha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "manifestSha256": "4c54647748df0f6ec1e3b4e0cd7378baf1f0689c5504925c2955df792420dbb4",
+      "exactSourceMapVerified": true,
+      "copiedElfVerified": true,
+      "copiedManifestBytesVerified": true
+    },
+    "stax": {
+      "frozenElf": "pearl-stax-simnet.elf",
+      "sourceElf": "pearl-stax-simnet.elf",
+      "sha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "manifestSha256": "d84c06fcfdd430398778d690b24bce440bb715d1858bf65b8cbb0dd42590b9c9",
+      "exactSourceMapVerified": true,
+      "copiedElfVerified": true,
+      "copiedManifestBytesVerified": true
+    },
+    "flex": {
+      "frozenElf": "pearl-flex-simnet.elf",
+      "sourceElf": "pearl-flex-simnet.elf",
+      "sha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "manifestSha256": "e36eada5014d038b7ca16154719f76229a32da5e4c68b24046dd61274898b272",
+      "exactSourceMapVerified": true,
+      "copiedElfVerified": true,
+      "copiedManifestBytesVerified": true
+    },
+    "apex_p": {
+      "frozenElf": "pearl-apex_p-simnet.elf",
+      "sourceElf": "pearl-apex_p-simnet.elf",
+      "sha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "manifestSha256": "bc87bbb0a9dce1fa5f1e7897bc7dd39a9893b5e99b031fbc3d933ed470d6fcd9",
+      "exactSourceMapVerified": true,
+      "copiedElfVerified": true,
+      "copiedManifestBytesVerified": true
+    }
+  },
+  "sourceFiles": {
+    "Cargo.toml": "a14765fa6f22f50f29cd7bfd12308b36da7796cbb883af067e3e214b871bfa94",
+    "apps/ledger/.cargo/config.toml": "bfd5f2ecfa9d797ec035d94c07cbcc6697ea1b70f4f309fb786d13e254442b7a",
+    "apps/ledger/Cargo.lock": "bcb360d93cd5625183c65ca4b2c79adaac4380fcb8a89e58a87684614b2c2e49",
+    "apps/ledger/Cargo.toml": "fdae1682cc36c7be82fa515b513c4cfc41b599fe342a7ea49f1b5e2da3370cd1",
+    "apps/ledger/icons/pearl-14.png": "007e9a664c25675a76b2f702d749fd7ce355567fa014e579c70e60afccdf09a9",
+    "apps/ledger/icons/pearl-32.png": "829faa732b45782b042e04a6e4850eba3b8c15aa9de159e716a7f16b5b7bae0d",
+    "apps/ledger/icons/pearl-40.png": "3df91f396a3bcc8635aed16fee296d8d8baf9e878e266193bb935e8ec80dc6d8",
+    "apps/ledger/patches/strict-transport.patch": "49b0ebcd4632c59a5312ed49966b14c51104bb400c9e7917f28f2b560507f09b",
+    "apps/ledger/rust-toolchain.toml": "be996b49786f9b0d7ebcdf5a508587f884d5b93f8eb899b864c76468d2334974",
+    "apps/ledger/src/crypto.rs": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+    "apps/ledger/src/main.rs": "57079dd2255e69cf81432f9b774711c2d2bf97ce1ea3bc0eaf1b931145af882f",
+    "apps/ledger/src/ui.rs": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+    "apps/ledger/src/warnings.rs": "6f9ca1b8ea830f45f0c5757e790d5bc7e5cadc2727666ce55bb58fdbd4e54f0e",
+    "crates/pearl-core/Cargo.toml": "d4b267236c1cb479252cf8654b94219bc74e801156cfb015c4dd1d3f1ad5f2d4",
+    "crates/pearl-core/src/address.rs": "b86f02682901e5ca163f8a7f09a54ce018185a16ad59643caf0e33bffff45d1b",
+    "crates/pearl-core/src/amount.rs": "725716c8b18eb85597dbae481c6e5c3b74f09261387ef134651f19ad5fc6c815",
+    "crates/pearl-core/src/error.rs": "ba5a82fc377758b12a188e8db04ebb00832b07b63cec3e2e6a2977e8047656da",
+    "crates/pearl-core/src/lib.rs": "9bfd2b2e4fbdeef87e86e7bda17d443d0ec9fcbb905e6b023696d42a25f1fc57",
+    "crates/pearl-core/src/network.rs": "0e36b43efc30e8cb3109ff663dd9e1cf342a7e347ab269d884f15c38da93cb6d",
+    "crates/pearl-core/src/session.rs": "8d3daa41ebf7f46a655cddfc537629bc9527eea6cb6960d124c4e52bc3fdd6d7",
+    "crates/pearl-core/src/transaction.rs": "8b2ec2cf6608961182de5a103749aa0813eb541a698509c8da9f6cf4487250e1",
+    "scripts/ledger-build-manifest.py": "f8bfa464f53fe6b40bc05e5d782dfac51bfa1b0ac77c654bf2d3e4196633bbe2",
+    "scripts/ledger-build.sh": "6db1f73b3a19c1c95b68c1ef6b16f901edc1fbbebd35d7894ff36930753a04a3",
+    "scripts/ledger-prepare-sdk.sh": "6c346bb6a9d71bf4fef9f6a033925726e15cd0655dfe1b9f83d561f09e84a0e0",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d"
+  },
+  "tools": {
+    "python3.12": {
+      "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7",
+      "bytes": 30894944
+    },
+    "qemu-arm": {
+      "sha256": "94f4d938a299230026c759b348a5c8f8eaf05969ee5d7a6819598de8c6d342bb",
+      "bytes": 14674352
+    },
+    "speculos/resources_importer.py": {
+      "sha256": "040f8156c66d3637e617a2f19f08b0fc4831febdf662292f553856b56ef6baf1",
+      "bytes": 618
+    },
+    "speculos/observer.py": {
+      "sha256": "e35323e3757cc55bbd26438fc4fa69e23ab7367d5d89a2ff763e3781bbfd2826",
+      "bytes": 864
+    },
+    "speculos/main.py": {
+      "sha256": "b727fa762406f1b2a093784fb6244486714c485e7c0de52ce3f3651c5b1ec5c6",
+      "bytes": 28626
+    },
+    "speculos/client.py": {
+      "sha256": "8dd5dc03f727e96e4185860cdb188bc0f59ebc8937fefe9b8f95d6ebaa51dacf",
+      "bytes": 10479
+    },
+    "speculos/__version__.py": {
+      "sha256": "850e6c8f7bb87798352098e2ba13f5c26f23d4d7b36d6eb95ced53375f107a58",
+      "bytes": 530
+    },
+    "speculos/__main__.py": {
+      "sha256": "dd0db40f7b0e12d62020b5effe49d1bd1f70b6aec64622df0fa1b0c86328d5d5",
+      "bytes": 78
+    },
+    "speculos/__init__.py": {
+      "sha256": "12c74d61ed9d58675322400b48e3f72a6e5dd38894a2761b879e3d74b3c5187c",
+      "bytes": 201
+    },
+    "speculos/sharedlib/stax-api-level-shared-27.elf": {
+      "sha256": "ac909bd3fa08e946237b56343275797b2e4cac646a750feba1ca0881cdcee253",
+      "bytes": 625204
+    },
+    "speculos/sharedlib/nanox-api-level-shared-27.elf": {
+      "sha256": "0ff0ba8e4f3011422d9c021c6ff9ee0c83b95537c955c48cfc69da28db54759a",
+      "bytes": 632900
+    },
+    "speculos/sharedlib/nanosp-api-level-shared-27.elf": {
+      "sha256": "b1d45758613c6aea3aede65e63625801088951e852146baefddf7a34c0fd12dc",
+      "bytes": 490112
+    },
+    "speculos/sharedlib/flex-api-level-shared-27.elf": {
+      "sha256": "89f20399603d3783fe81f67f7f107551fb3479296b41787a75e031202d53cf12",
+      "bytes": 630684
+    },
+    "speculos/sharedlib/apex_p-api-level-shared-27.elf": {
+      "sha256": "c0e20bbb71461052c44d1f9a83dcac4d63819fda81f7cb724ceed1a1a83e029d",
+      "bytes": 595660
+    },
+    "speculos/resources/launcher": {
+      "sha256": "818c9bb93a9f2c5e70fb9c7ab1ade2e09ccc375be7e222243246c2b55db97c99",
+      "bytes": 2135572
+    },
+    "speculos/mcu/vnc.py": {
+      "sha256": "07e7ccceef8e48949ff473d1774bb3e47ab833e6408b6891575f3dccafc7ff55",
+      "bytes": 3939
+    },
+    "speculos/mcu/struct.py": {
+      "sha256": "c01e8c5901c5c73fa102752395a145fe071aed2ea5e03f2f13414d6ceefb6550",
+      "bytes": 962
+    },
+    "speculos/mcu/seproxyhal.py": {
+      "sha256": "5b1f4d67d51cb9b71e12ea567593c420a0fcd6f5a0183ea031efd48e7a1b45a2",
+      "bytes": 22466
+    },
+    "speculos/mcu/screen_text.py": {
+      "sha256": "36e38655ab87c9ac725b03cf0b005a821b36210a3c22bc6c7b6735e07db98185",
+      "bytes": 5507
+    },
+    "speculos/mcu/screen.py": {
+      "sha256": "203f6b8643c379276eabecaa0efceef3332506e8784077c6af88a4ae0315a9d6",
+      "bytes": 12934
+    },
+    "speculos/mcu/rle_custom.py": {
+      "sha256": "1bf9b332fbd5bb8c53449d33b8e0e229f42b81ca10496780b5b6dc4914dbb032",
+      "bytes": 42031
+    },
+    "speculos/mcu/readerror.py": {
+      "sha256": "32246a47c9da40821049f4bc54ab822755d44a69d038d28e2155bab1ad26b5e3",
+      "bytes": 298
+    },
+    "speculos/mcu/ocr.py": {
+      "sha256": "8451b5e6d5396ef77cf8d58d002f17ad88f68aca3592c93fdbab9aef87a7631e",
+      "bytes": 9399
+    },
+    "speculos/mcu/nbgl_serialize.py": {
+      "sha256": "cdd4f85354275399409f48b8727efdd4afe35bf2e32649487c7f284f675c1690",
+      "bytes": 19916
+    },
+    "speculos/mcu/nbgl.py": {
+      "sha256": "a4c2f14b5244caef426a5e98d4210e85f340ebdf839df72cc3e86b61c5be200e",
+      "bytes": 14366
+    },
+    "speculos/mcu/headless.py": {
+      "sha256": "d1844145594a339051eba23d2ff22e13bd0df389c68ea475af99f02f519d01d2",
+      "bytes": 2479
+    },
+    "speculos/mcu/finger_tcp.py": {
+      "sha256": "7ac794a9af2b4cbde4a7763b778a152d5d1ed160f574806c07254ef6b3b0c06f",
+      "bytes": 2031
+    },
+    "speculos/mcu/display.py": {
+      "sha256": "bcabe73db0ec008b5989cdee0bde807177b41e80edd08cc845acae20a0cf207d",
+      "bytes": 11898
+    },
+    "speculos/mcu/button_tcp.py": {
+      "sha256": "ffeaf083f45b9727f3e828ade4c86a4833c6d784a20d62f421b3161221f85eba",
+      "bytes": 2049
+    },
+    "speculos/mcu/bagl_glyph.py": {
+      "sha256": "36b77d19c041789b253437055b3302238760724e3cccdb81b0a92b9977b4114a",
+      "bytes": 4319
+    },
+    "speculos/mcu/bagl_font.py": {
+      "sha256": "8616a461f908a70d25f8ece9fd17522f71fcf162be92ede18ebd99a03b311025",
+      "bytes": 491056
+    },
+    "speculos/mcu/bagl.py": {
+      "sha256": "28c0eb6f3f483c0301fb1a76efce845389d0d94f0538ee215e8d6233702236d3",
+      "bytes": 25907
+    },
+    "speculos/mcu/automation_server.py": {
+      "sha256": "b68d94062fed0959ffa8c6b0d7e52656b59555d105829789c30960b8261c4fcf",
+      "bytes": 2033
+    },
+    "speculos/mcu/automation.py": {
+      "sha256": "55f1cbe601feb5d67b07671ae39cbf632a3e07f226b97dcd4964a958e654b2d8",
+      "bytes": 1943
+    },
+    "speculos/mcu/apdu.py": {
+      "sha256": "1e713e78d8cee6dd96480f6557c3a40932b3e14e9dc3b665f52ab42d635f2ea9",
+      "bytes": 3394
+    },
+    "speculos/mcu/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "speculos/api/web_interface.py": {
+      "sha256": "08bd5ba85bea0c8f99f8d0e80b1bcbd96783d04a579ff41e9c240b92247d7bda",
+      "bytes": 142
+    },
+    "speculos/api/ticker.py": {
+      "sha256": "25e36bda2f96853432bf6d42e2fce37ff1fabec74ca7f38dc18d3a7cdeaed5b7",
+      "bytes": 593
+    },
+    "speculos/api/swagger.py": {
+      "sha256": "1b015364bc9815d3052d0c05ff6ea4a4d759b031cc6b7116267408ee043d97ff",
+      "bytes": 145
+    },
+    "speculos/api/screenshot.py": {
+      "sha256": "a16e9a2d0978fa33becbdfb84e407086bfdd1f1c6fd3349d4886c94e0b171441",
+      "bytes": 345
+    },
+    "speculos/api/restful.py": {
+      "sha256": "e0a3d21619f7a31e19e1cc36bc7692e3e34d32ca11b53d3cf5237672bb27c291",
+      "bytes": 1060
+    },
+    "speculos/api/finger.py": {
+      "sha256": "74bc851180c3cfd0b1efbed6edcc7f41ccd8ca338c4f017f732cf54f4bdab22a",
+      "bytes": 945
+    },
+    "speculos/api/events.py": {
+      "sha256": "36ca97c378cf199f688a58ff7663ca5b7a182ab086adf8c97ec73a33e48a8fe4",
+      "bytes": 3469
+    },
+    "speculos/api/button.py": {
+      "sha256": "36a937fcca75341921155afc89fa87d15129f92e210cdc79de41e71e77a003a9",
+      "bytes": 1336
+    },
+    "speculos/api/automation.py": {
+      "sha256": "5b6bdf66898f81125a0a3b8a3ebd07971f8a3fe46a0c50d76a8504eb3a6971a2",
+      "bytes": 773
+    },
+    "speculos/api/api.py": {
+      "sha256": "756a78a614d0095e0dd3e30970caa899d3aa3479e09b0a44dcb1fe762a4a54a2",
+      "bytes": 3903
+    },
+    "speculos/api/apdu.py": {
+      "sha256": "4837c67006d59a04e399eef59c24564cdfbebb5bcf6689d7833175ecc5f001a3",
+      "bytes": 2744
+    },
+    "speculos/api/__init__.py": {
+      "sha256": "93d85fc898425a3e262d2cf315bee05de138b577335d172c2ec4ba9c2724957d",
+      "bytes": 93
+    },
+    "speculos/mcu/transport/usb.py": {
+      "sha256": "04a8c61b626b9875bb0cb34dd67b9a88bb2deb03e6720b9ee64f536ad2a3e652",
+      "bytes": 9545
+    },
+    "speculos/mcu/transport/nfc.py": {
+      "sha256": "ed149c06b24e64c9748b8c56f56b2e2148c8d57a8e58b4af61f7e2d09f8f7996",
+      "bytes": 2307
+    },
+    "speculos/mcu/transport/interface.py": {
+      "sha256": "96fbdfbe1fb3314221cb8fff78b8ed754693e8d3c6f506fc9d11b0739a4f5663",
+      "bytes": 849
+    },
+    "speculos/mcu/transport/__init__.py": {
+      "sha256": "8a2d26a37af7e7e2228223c99103d49372ae36b4cfdbe554f5eb258b9b7dcb7e",
+      "bytes": 460
+    },
+    "node_modules/@noble/curves/secp256k1.js": {
+      "sha256": "db1bc543816e481a1d20dd70bdd69d2677415b4917c2f1b66bfb55eea1144c42"
+    }
+  },
+  "speculosVersion": "0.27.1",
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "commit": "e36dc35abcd47277a491d5bc4155a576e0ff2855",
+  "qualificationKind": "Definitive completed lexical-source normal-clock requalification; same existing coverage matrix"
+}

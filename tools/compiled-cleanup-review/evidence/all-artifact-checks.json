@@ -1,0 +1,277 @@
+[
+  {
+    "name": "apex_p-mainnet",
+    "elfSha256": "7cce99aaacc43c281c5cf99eec90587c32e636869ae59cedfc0da2b5c19dc852",
+    "functionByteHashes": {
+      "10PrivateKey": "face35cf59a3a481f67671fd5e0a3a20567b075cd22009d779480d4663e37975",
+      "10public_key": "751f9cb4fd414c9a7e758d7ddcf8b56aec0d6bf4bcd616281f9af71c8fbc56c5",
+      "11tweaked_key": "a292cf20e47a11ec7c8af547f46d03adb8f0347c6210a57cfab3fd715b2fee0b",
+      "6derive": "0df6c17c0b5f7cc3bd99a176b613f358daf24c53b2b4a1a0c8a96c083fa40b4a",
+      "sample_main": "8ffd8b934c80ac96f9abe6433b78f781a8b70d43906413d58b6eb84ae9a576c3"
+    }
+  },
+  {
+    "name": "apex_p-regtest",
+    "elfSha256": "46dcfd7e3981323f782ea99ea8e2ac56d3211d26fdee115fe89d3ff72d8cabd5",
+    "functionByteHashes": {
+      "10PrivateKey": "da4a8d85b597fa6ac7cb723f4a13179d4b6c288441e3eb93aa2ade249023dde2",
+      "10public_key": "49c3a2f745700a109532f0687f941f3a9aa9e78c7124372d8e29967f77890c49",
+      "11tweaked_key": "4998f8d3afa5f0342bea45739123e1eaa1adddb5303e9e1e89d4a63425fcc7af",
+      "6derive": "5931ba7408326e93e35db17a25ebbee5e5333a1dbc6825458c6eb7139eab9a90",
+      "sample_main": "b865ac7eeb7b951ba0297c21b111f1862f16bd447893b408c2df87053eb705f3"
+    }
+  },
+  {
+    "name": "apex_p-simnet",
+    "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+    "functionByteHashes": {
+      "10PrivateKey": "da4a8d85b597fa6ac7cb723f4a13179d4b6c288441e3eb93aa2ade249023dde2",
+      "10public_key": "49c3a2f745700a109532f0687f941f3a9aa9e78c7124372d8e29967f77890c49",
+      "11tweaked_key": "4998f8d3afa5f0342bea45739123e1eaa1adddb5303e9e1e89d4a63425fcc7af",
+      "6derive": "5931ba7408326e93e35db17a25ebbee5e5333a1dbc6825458c6eb7139eab9a90",
+      "sample_main": "b4caf0c5e3967b0bff2382ff9a956c9a689d895853c72953dfa7075efb44ab77"
+    }
+  },
+  {
+    "name": "apex_p-testnet",
+    "elfSha256": "01cf7816a6d8090e18de75b0212f48a81e731d94ac80cef924fc91535ff94fd1",
+    "functionByteHashes": {
+      "10PrivateKey": "da4a8d85b597fa6ac7cb723f4a13179d4b6c288441e3eb93aa2ade249023dde2",
+      "10public_key": "49c3a2f745700a109532f0687f941f3a9aa9e78c7124372d8e29967f77890c49",
+      "11tweaked_key": "4998f8d3afa5f0342bea45739123e1eaa1adddb5303e9e1e89d4a63425fcc7af",
+      "6derive": "5931ba7408326e93e35db17a25ebbee5e5333a1dbc6825458c6eb7139eab9a90",
+      "sample_main": "8b88bbaa13c039c01c6a38371a5d8f2b5db01ef323284d41777d915c83549f52"
+    }
+  },
+  {
+    "name": "apex_p-testnet2",
+    "elfSha256": "a4ee60fd8620b3426fe4e56f3bd416791375761836d06a4ecb6ba18a2a1127a0",
+    "functionByteHashes": {
+      "10PrivateKey": "da4a8d85b597fa6ac7cb723f4a13179d4b6c288441e3eb93aa2ade249023dde2",
+      "10public_key": "66950330e8f90c6b2e41dd8ad8041997477992f837035087fd1d4cd8d2842d25",
+      "11tweaked_key": "d9db1a1592d466fad5ed0c17563733a29c34bfd4618b01408dddd232dcb8a328",
+      "6derive": "cec49c6ca9328a55711f51ae3fa248c6935b1c99f05322609f574b065b304be6",
+      "sample_main": "801c5c7a2fee33fb7188ebbe8a0efd7b6bb28eb0726330d2a1d41efc0a15467b"
+    }
+  },
+  {
+    "name": "flex-mainnet",
+    "elfSha256": "7844ce075283c48f663477e7a2deb789a445879b78dfe3929fb918beec5d6103",
+    "functionByteHashes": {
+      "10PrivateKey": "e0ce9f5c6f234eeb223476a47d4d34d29eafb16e5c83232df48b2c12abdcd8ec",
+      "10public_key": "de30378b4b2a775d12802ad13c5710ad2b8af70c9a6bddd72330dd6bec3df255",
+      "11tweaked_key": "47ae940472efaac2f5b6b60016e2f38607aec1fcbcef8903fa05b179771d9e9e",
+      "6derive": "f21286954e7c9b93161d003f191c4fbc558f66058c9e82f29956eea96b2cf46e",
+      "sample_main": "0266453377d3c2b3d2a81143827e46da2d483367ceac8b3e285cbfed55df569b"
+    }
+  },
+  {
+    "name": "flex-regtest",
+    "elfSha256": "e3a89d593fd4bf18ba3f2bec550b58f58c07b93abb3592cd4c270c744ba0e05f",
+    "functionByteHashes": {
+      "10PrivateKey": "4ae59bae80449ddab2e428f5851fd0dd0f59a4616a99a4b80b409a614fe5a2f1",
+      "10public_key": "a17fdc5d89ee2461c12d6d7f01b60b45bf6898e47f9853837897b12bc6e40779",
+      "11tweaked_key": "a997e050cde23cec21fe4a438ff334bbefa874c75a097bf7a3ed1a550c086294",
+      "6derive": "4e606cccecbfb54efb0511b6534062b0a27b94ec07f1ed7dc7bce4a6b24cdbc9",
+      "sample_main": "59be1b7eb002b3fb7eca84f955e9ec6e598544a00ff3b484a169a8dfa768a545"
+    }
+  },
+  {
+    "name": "flex-simnet",
+    "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+    "functionByteHashes": {
+      "10PrivateKey": "4ae59bae80449ddab2e428f5851fd0dd0f59a4616a99a4b80b409a614fe5a2f1",
+      "10public_key": "a17fdc5d89ee2461c12d6d7f01b60b45bf6898e47f9853837897b12bc6e40779",
+      "11tweaked_key": "a997e050cde23cec21fe4a438ff334bbefa874c75a097bf7a3ed1a550c086294",
+      "6derive": "4e606cccecbfb54efb0511b6534062b0a27b94ec07f1ed7dc7bce4a6b24cdbc9",
+      "sample_main": "994e13f50f0e7fdc9e2427c4f06ea22a11e91e0e0c9300030e1095e71eb70283"
+    }
+  },
+  {
+    "name": "flex-testnet",
+    "elfSha256": "1a0fb7f2f314b5825e48e80bb038e99e5ae3d4007ff1f3cd050c4587e051c37b",
+    "functionByteHashes": {
+      "10PrivateKey": "4ae59bae80449ddab2e428f5851fd0dd0f59a4616a99a4b80b409a614fe5a2f1",
+      "10public_key": "a17fdc5d89ee2461c12d6d7f01b60b45bf6898e47f9853837897b12bc6e40779",
+      "11tweaked_key": "a997e050cde23cec21fe4a438ff334bbefa874c75a097bf7a3ed1a550c086294",
+      "6derive": "4e606cccecbfb54efb0511b6534062b0a27b94ec07f1ed7dc7bce4a6b24cdbc9",
+      "sample_main": "c6379a8e79d42d2f9ffefc1bda5b0ca360384a06af39cd581f70e89004267dc6"
+    }
+  },
+  {
+    "name": "flex-testnet2",
+    "elfSha256": "f2e9fd2ed73c03bcac90562736fcd7f90206fcfeb06a221b59a5325ad1141b23",
+    "functionByteHashes": {
+      "10PrivateKey": "4ae59bae80449ddab2e428f5851fd0dd0f59a4616a99a4b80b409a614fe5a2f1",
+      "10public_key": "64bf6bd8fda9bbf8408e14613046f5d5d9f7a232be0cc9403412524fdadd81e9",
+      "11tweaked_key": "7602184f9e1d92508b7a3e9a53d956b86cec975b7b3f33ad6537b68270020ec6",
+      "6derive": "3236c3e1d1b4354d1c70a765faa28beb76a2f780b2af176318334985a6a3e7a1",
+      "sample_main": "350689ce1b55e0c28aa8b0c014f2eea3d5ca6b11467293afe5c92e5babccff52"
+    }
+  },
+  {
+    "name": "nanosplus-mainnet",
+    "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+    "functionByteHashes": {
+      "10PrivateKey": "d847eb82807e7a2d84a1ba01595a37cfd8b225ba2d076c3096f0dfefaa264d9c",
+      "10public_key": "65cc121b918c5f296d6e9c6c177c816cf7cc7d707c7fd3806d8cbe3c563eb9bc",
+      "11tweaked_key": "b426c40cfc3c49dfca78391639a3d8de9b75bbaec4561882a62cd53f31f97c6f",
+      "6derive": "8adeda0c48d931ab3fd7cd1347373369254fe75c1a26fbc7c07007e817089642",
+      "sample_main": "37e718540472e9185bd4f68c968ca45fb4c8834b23a86db3b7774b31c9135b96"
+    }
+  },
+  {
+    "name": "nanosplus-regtest",
+    "elfSha256": "8a15b763668c2cbe9ace2813b62ae1746d5872db2ab761c91388dfff92720ac8",
+    "functionByteHashes": {
+      "10PrivateKey": "f404650b9c288318176a1746f3c4b149df41ff5697784c7c6cc471abb4751fd1",
+      "10public_key": "379d8cb992fcaa93df1bc64b88adb2275df3929f3d3e2f7cb5e7af5912801ee4",
+      "11tweaked_key": "b9777bc15f593e0389266841bd88545b7938d8e519eaec7cde9bb5ed1fccf120",
+      "6derive": "332eadb416de424a47b52d8688db1c7ca92f37e27f7962d64785bd3484aa9623",
+      "sample_main": "ae23bcd3339e1e12844a51508710ffeabda54b8a1182f86f5454b359a791b67d"
+    }
+  },
+  {
+    "name": "nanosplus-simnet",
+    "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+    "functionByteHashes": {
+      "10PrivateKey": "f404650b9c288318176a1746f3c4b149df41ff5697784c7c6cc471abb4751fd1",
+      "10public_key": "2082ca149b83492c71d04f262abfae24caa8146b8c64f1b7978ac797c2dcd6e3",
+      "11tweaked_key": "08247ad7f8b351c0195bcb914d8c002bf50d1d81b9792ceac7812494ada17508",
+      "6derive": "7f5872551945bf832bb5abfe53ee0061e4d74d7ad1408f145ce13ac50f9b1c00",
+      "sample_main": "c4f00af23c5219a86b4523d376a7914475deb12b2d250f2433da17cedd95ee83"
+    }
+  },
+  {
+    "name": "nanosplus-testnet",
+    "elfSha256": "22a09f32080cd54cf1f1bf1a151a5d2ccdf6c8e68406b1c67583ffad36be9f46",
+    "functionByteHashes": {
+      "10PrivateKey": "f404650b9c288318176a1746f3c4b149df41ff5697784c7c6cc471abb4751fd1",
+      "10public_key": "2082ca149b83492c71d04f262abfae24caa8146b8c64f1b7978ac797c2dcd6e3",
+      "11tweaked_key": "08247ad7f8b351c0195bcb914d8c002bf50d1d81b9792ceac7812494ada17508",
+      "6derive": "7f5872551945bf832bb5abfe53ee0061e4d74d7ad1408f145ce13ac50f9b1c00",
+      "sample_main": "ed4cc2b5e9eadd68a5936252f97543f1c895c484c89a7886be8ce947dac78098"
+    }
+  },
+  {
+    "name": "nanosplus-testnet2",
+    "elfSha256": "f055cc9d208f327f56939a86084d95644489785380da4ba0dab5ed201bc359b5",
+    "functionByteHashes": {
+      "10PrivateKey": "366123f3edd101564ce557cdf31a5e4500c7a45e10b9808c0a7e144165c2db92",
+      "10public_key": "92fd19b254bdf48aa03f3dca51dc39e97f515aac50cd6839f73bdc411e27ec6b",
+      "11tweaked_key": "ba388b52b292d9f62be5ad1a845923813419d438a754d1bc7b9d6b1bc6dbfa9f",
+      "6derive": "9038b7fbc28ab0f52af1963b8aedc042c402f2aa086192cf6e3565a3452dc425",
+      "sample_main": "d6b939e3890e046c17588d927387ff7a930bc81d22ad15b2c35f718718e8a85e"
+    }
+  },
+  {
+    "name": "nanox-mainnet",
+    "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+    "functionByteHashes": {
+      "10PrivateKey": "4ae11fbd3726d8a110b2f315930ece15fbcfef146b70b6e252b4a85bd3f54e91",
+      "10public_key": "0ca1ef644cb8c13545b9b416e74d8bf1f6b36c3384c1d5f4aff27674d45b0339",
+      "11tweaked_key": "71dba93c8c7f8f81cc40bbbe3a2c8f221dc79314f64034c0e0d928e44b3c4b35",
+      "6derive": "1d9bf97b7e6fe83679b115a1fe8a5abd7dbecd9fcbd417211f86e6143f097512",
+      "sample_main": "aaec088e4898d049c9d816d7d1dfe377babe61eb1fc5bfd1278822aa9b0b50dc"
+    }
+  },
+  {
+    "name": "nanox-regtest",
+    "elfSha256": "b1b02db7d428a8d680fe4ab955a6d9945ff5ea1c86d36d0e599028638d837fff",
+    "functionByteHashes": {
+      "10PrivateKey": "4ae11fbd3726d8a110b2f315930ece15fbcfef146b70b6e252b4a85bd3f54e91",
+      "10public_key": "b7e79f5ec2adb68f908f8d13e6cb460dbb85771860f8bffd2300244316d780a5",
+      "11tweaked_key": "18f46d00224cb34c3b1f2b529ddf8b6b4a826ae391dd219137fba03ec655feca",
+      "6derive": "f9cf7160ae00bfa84a0995614b9916f3bd41eb7c0aadfc1ba03fb142898d2798",
+      "sample_main": "a971756da645cd7034981bbd5ee32d8f8e5665199bc3c2e7cd34db846e2772ca"
+    }
+  },
+  {
+    "name": "nanox-simnet",
+    "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+    "functionByteHashes": {
+      "10PrivateKey": "4ae11fbd3726d8a110b2f315930ece15fbcfef146b70b6e252b4a85bd3f54e91",
+      "10public_key": "b7e79f5ec2adb68f908f8d13e6cb460dbb85771860f8bffd2300244316d780a5",
+      "11tweaked_key": "18f46d00224cb34c3b1f2b529ddf8b6b4a826ae391dd219137fba03ec655feca",
+      "6derive": "f9cf7160ae00bfa84a0995614b9916f3bd41eb7c0aadfc1ba03fb142898d2798",
+      "sample_main": "061dd05e5708c148f5b8414563d62ba0b6bbbb540c86799b4be20fd9c8c05631"
+    }
+  },
+  {
+    "name": "nanox-testnet",
+    "elfSha256": "56689befc195e24805c02d2b917f4cba259a0493a24d445f904a07db0cd2d293",
+    "functionByteHashes": {
+      "10PrivateKey": "7d0d9347c1dcbb60b6e7ba9c68a894cc4b0ca76f0939c777fb73f6ac437ae37f",
+      "10public_key": "90059cac990c5ea6fb9384fc9a5e188da04d3db590be8c792d8103de77f610a3",
+      "11tweaked_key": "811ea5aea1aa204f61198e707fcd0dcf83a8156bede8e288e554bafefdbb01e9",
+      "6derive": "4b38077caa864bee931230c754cce3066fba943799b9c62e14212f71d57677f7",
+      "sample_main": "1e001bede596b6b4a7d40066f891ac535f1d0295f7027b5619843e031dff69dc"
+    }
+  },
+  {
+    "name": "nanox-testnet2",
+    "elfSha256": "d2ef1a3b76090a82bdfa53196587aa2ba058585cc47493014922c8984af0c62d",
+    "functionByteHashes": {
+      "10PrivateKey": "7d0d9347c1dcbb60b6e7ba9c68a894cc4b0ca76f0939c777fb73f6ac437ae37f",
+      "10public_key": "90059cac990c5ea6fb9384fc9a5e188da04d3db590be8c792d8103de77f610a3",
+      "11tweaked_key": "811ea5aea1aa204f61198e707fcd0dcf83a8156bede8e288e554bafefdbb01e9",
+      "6derive": "4b38077caa864bee931230c754cce3066fba943799b9c62e14212f71d57677f7",
+      "sample_main": "0a1561e57c733a33c6b5721debba8b8aafbb3335e11391f25910fce3deb81dd6"
+    }
+  },
+  {
+    "name": "stax-mainnet",
+    "elfSha256": "bf137b68355f1efc8d54d9f4e6ea56179f956b9cc7b41dcfc0e18e91571b61b6",
+    "functionByteHashes": {
+      "10PrivateKey": "1f28cf88be2f148b0fdfb46f95c90daf282d7fa8978c227a07a97f43e1848572",
+      "10public_key": "0dc221c0c481408a2102c43802eccfd1c5bc63abd98fd4fbdf2dba247b367b6b",
+      "11tweaked_key": "dc35f33c0bcb71740bb13c47ca995146443f7d6895bd76dc627a79fbb95eedcd",
+      "6derive": "9ff828ba480ccef7d5d0cd6f97f69448674c158a4c43d71ba4ede9012b35bdfd",
+      "sample_main": "a96043f963ea8002ce1f04173a240f462b487552db80823a4d4a75c300b17716"
+    }
+  },
+  {
+    "name": "stax-regtest",
+    "elfSha256": "5d527751071c9644bc436222ee50bdf663e939fcfe58ca68f8cd7c3dced02549",
+    "functionByteHashes": {
+      "10PrivateKey": "cbbce3cf122a4d2d8927b7a038215cb1631e84e2c05f1d566d3518970c404470",
+      "10public_key": "9bf61411c6f5b4f9913f65106519ceb27b37c80e5b41086eef00bdc46d4bc5b0",
+      "11tweaked_key": "0ceca555a81fb1eaf53bcaebcda2c7106ee5d2a47bd7514c31df7ad7cb3f11cf",
+      "6derive": "30c378a8de3e34799dd3f19c325c0c10f2b57a14e740cb05db4937e543f98c1e",
+      "sample_main": "1807b2733f1c8e35a1adc412176cf3be1eed610112fdff50b28a4b25fbd4c073"
+    }
+  },
+  {
+    "name": "stax-simnet",
+    "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+    "functionByteHashes": {
+      "10PrivateKey": "cbbce3cf122a4d2d8927b7a038215cb1631e84e2c05f1d566d3518970c404470",
+      "10public_key": "46f705a1b33076681581382de679b2ed54c5d541f17c0d31c836756f7c8543bf",
+      "11tweaked_key": "1c9b7355c4b139ea824845f75fe99c4a5d2f9eecca4833dbcb4f53002c326738",
+      "6derive": "0138b9ef7aa2d5e00364d4e713fa36a2662fb783e65758971fa9c5b7bc22119c",
+      "sample_main": "235d1d125ecef91f76794a702ea61da55e5a5631fc8fe54ef3ff8407fb2960c4"
+    }
+  },
+  {
+    "name": "stax-testnet",
+    "elfSha256": "d0f6e393bd75bc2b2cc789e3050a49c0b429a3ae51d30afeb9ca60f2e3d12d6f",
+    "functionByteHashes": {
+      "10PrivateKey": "142fd8569db2b812e7c02994498b018f98053d16647e8d7255844124b60b017e",
+      "10public_key": "a79cd581412527163359c7bb78a045e19044679fdbcb661f81a286d6a18d478f",
+      "11tweaked_key": "9df654287f577fee8bb00dd8e6a6dece208f0dd7701b877067710f07217eaf86",
+      "6derive": "cc7b91cd079dba14c6098905c5c5ea35b63126b35c16eae16f4a785265b65e55",
+      "sample_main": "e107c3671fc709f06303134536abc3573bee41dcdf41ec7f7eb3c27a6d5f2981"
+    }
+  },
+  {
+    "name": "stax-testnet2",
+    "elfSha256": "bb3e186902880aba78c7b1b1e5d7d32d783d9abb8896ec3c5cc413e5ee389d1f",
+    "functionByteHashes": {
+      "10PrivateKey": "142fd8569db2b812e7c02994498b018f98053d16647e8d7255844124b60b017e",
+      "10public_key": "a79cd581412527163359c7bb78a045e19044679fdbcb661f81a286d6a18d478f",
+      "11tweaked_key": "9df654287f577fee8bb00dd8e6a6dece208f0dd7701b877067710f07217eaf86",
+      "6derive": "cc7b91cd079dba14c6098905c5c5ea35b63126b35c16eae16f4a785265b65e55",
+      "sample_main": "8d78eb379dee2a47ec65fd1dc88930c7e5ae5e44a360a146828b32134a6bd237"
+    }
+  }
+]

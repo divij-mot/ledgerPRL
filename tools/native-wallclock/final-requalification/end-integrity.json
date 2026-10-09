@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "asOfUtc": "2026-10-09T19:30:44.458382+00:00",
+  "nativeSourceInputsUnchangedAtEnd": 25,
+  "runtimeToolFilesUnchangedAtEnd": 53,
+  "allFiveSourceAndFrozenElfsMatchApprovedPilots": true,
+  "owningExecSessionExitCode": 0,
+  "cleanupEvidence": "All cases completed their Emulator.stop cleanup before result success; owning execution session completed with exit 0. Expiry transport/connection assertions ran inside the owning emulator network context.",
+  "crossExecListenerChecksNotUsedAsCleanupProof": true,
+  "nativeCryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "harnessSha256": "320a5a038ff623167e6cefc284101481508b7882d794726ef210570e8c26c7d9",
+  "validatorSha256": "127a670c2010825910f70b0d1944dd6fd7203407c7e2285c85311ba7a7b59d4b",
+  "independentRawEvidenceValidationPassed": true
+}

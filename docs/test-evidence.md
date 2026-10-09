@@ -27,6 +27,16 @@ npm run check
 - [Trusted-display review](../apps/ledger/tests/evidence/trusted-display/README.md), [mixed-session stability](../apps/ledger/tests/evidence/stability/README.md), and [offline package verification](../apps/ledger/tests/evidence/packaging/README.md) retain their exact scope and artifact hashes. App memory was measured in separately instrumented emulators; release timing is host-observed emulator time, not physical-device performance. See [firmware measurements](firmware.md#instrumented-memory-measurements).
 - [Built companion desktop rendering](../apps/companion/test/evidence/rendering/README.md): empty-state presentation/navigation was checked in an actual cloud browser. [Companion qualification limits](companion.md#verification-and-remaining-qualification) identify what this bounded review did and did not exercise.
 
+## Final lexical-key-lifetime requalification
+
+The final `crypto.rs` source hash is `50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1`. Its current retained checks are:
+
+- [Independent optimized-code cleanup review and replay](../tools/compiled-cleanup-review/README.md): all 25 exact model/network ELFs passed bounded original-slot control-flow/address and zero-store checks. Explicit stores cover the 32-byte scalar, 32-bit length and 8-bit curve field; three ABI padding bytes, register/spill copies, SDK scratch, OS exceptions and physical erasure are outside this claim.
+- [Definitive normal-ticker timeout run](../tools/native-wallclock/final-requalification/README.md): all five modeled devices passed receiving, review and partial-export expiry at exactly 1,200 ordinary ticks, 60 stale-state rejections, fresh approval/signature recovery, and five 125-second idle controls. A separate validator replay passed. Earlier failed, interrupted and canceled attempts remain explicitly recorded and do not count as passes.
+- [Final trusted-display requalification](../apps/ledger/tests/evidence/trusted-display/final-requalification/README.md): 125 accepted flows, 400 exact displayed fields and 20 warning details across five models. Six Stax capture-recovery repeats add no unique coverage.
+
+These results do not retroactively rebind older runtime/resource reports to this source. The remaining final-source transaction and repeated-session matrix is still being completed.
+
 Reports apply to their recorded source/tool/artifact hashes, not automatically to later edits. [Checkpoint mappings](checkpoints.json) relate retained local source commits to published commits with the same Git tree.
 
 ## Not established

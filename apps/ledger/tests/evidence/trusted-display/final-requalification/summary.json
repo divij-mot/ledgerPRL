@@ -1,0 +1,1271 @@
+{
+  "status": "passed",
+  "dateUtc": "2026-10-09",
+  "classification": "Same bounded matrix requalified on final final lexical-scope and lexical-key-scope native sources; not additional unique display coverage.",
+  "repoHeadAtSnapshot": "45d0ccb6ebc2d9de3f1e9a83f0b2f8975d234cf5",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "nativeAndSdkSourceChangesFromOriginal": [
+    {
+      "file": "apps/ledger/src/crypto.rs",
+      "oldSha256": "e29384e20151aca794771c2026aa93ac710ad796ac6c44f0f1ca4ae3a378f563",
+      "newSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1"
+    }
+  ],
+  "publicFixtureSeed": "000102030405060708090a0b0c0d0e0f",
+  "speculosVersion": "0.27.1",
+  "injector": null,
+  "scope": "Official Speculos emulation only; no physical hardware/screen, installation, OS compatibility, audit, or RNG-failure-path qualification.",
+  "originalReview": "apps/ledger/tests/evidence/trusted-display/summary.json",
+  "sameProbeVerification": [
+    {
+      "file": "apps/ledger/tests/trusted-display-baseline.ts",
+      "originalProbeSha256": "0c3db8ce4b8f1d50f6441891bb74c5d74168f1fbdb01b44c6e92130ae17b6883",
+      "newRunProbeSha256": "0c3db8ce4b8f1d50f6441891bb74c5d74168f1fbdb01b44c6e92130ae17b6883",
+      "unchanged": true
+    },
+    {
+      "file": "apps/ledger/tests/trusted-display-boundaries.ts",
+      "originalProbeSha256": "d0d20d8d1cce8dfe35c2975e7489a5a3e12302a416390e1d7d449e7dce948f1d",
+      "newRunProbeSha256": "d0d20d8d1cce8dfe35c2975e7489a5a3e12302a416390e1d7d449e7dce948f1d",
+      "unchanged": true
+    },
+    {
+      "file": "apps/ledger/tests/trusted-display-interactions.ts",
+      "originalProbeSha256": "57b0462bdc3c4fed9ae882ff0255928947723583317aa3f22efc292b9d7b1140",
+      "newRunProbeSha256": "57b0462bdc3c4fed9ae882ff0255928947723583317aa3f22efc292b9d7b1140",
+      "unchanged": true
+    },
+    {
+      "file": "apps/ledger/tests/verify-trusted-display.py",
+      "originalProbeSha256": "bde8fcfa85c0fd6f2a7e9262108a0dbe7548f593a94b6922b46a287c3c75316e",
+      "newRunProbeSha256": "bde8fcfa85c0fd6f2a7e9262108a0dbe7548f593a94b6922b46a287c3c75316e",
+      "unchanged": true
+    }
+  ],
+  "sameHelpersVerification": [
+    {
+      "file": "packages/sdk/src/amount.ts",
+      "originalSha256": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+      "finalSha256": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+      "unchanged": true
+    },
+    {
+      "file": "packages/sdk/src/bundle.ts",
+      "originalSha256": "8f7cc2c5b1fdc2660e8314aa8ded9e1caf96300777a3de2fb63cea3252a2afc1",
+      "finalSha256": "8f7cc2c5b1fdc2660e8314aa8ded9e1caf96300777a3de2fb63cea3252a2afc1",
+      "unchanged": true
+    },
+    {
+      "file": "packages/sdk/src/bytes.ts",
+      "originalSha256": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+      "finalSha256": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+      "unchanged": true
+    },
+    {
+      "file": "packages/sdk/src/device.ts",
+      "originalSha256": "955f9b097cb34cda7235157775d9a52e48a53debd6d04a372c2393f3527a92c8",
+      "finalSha256": "955f9b097cb34cda7235157775d9a52e48a53debd6d04a372c2393f3527a92c8",
+      "unchanged": true
+    },
+    {
+      "file": "packages/sdk/src/http.ts",
+      "originalSha256": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+      "finalSha256": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+      "unchanged": true
+    },
+    {
+      "file": "packages/sdk/src/index.ts",
+      "originalSha256": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+      "finalSha256": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+      "unchanged": true
+    },
+    {
+      "file": "packages/sdk/src/keys.ts",
+      "originalSha256": "5a26b0198f94e1435b731b3b00991832123f984968fbb6dbd662e9bf0fd1d1ef",
+      "finalSha256": "5a26b0198f94e1435b731b3b00991832123f984968fbb6dbd662e9bf0fd1d1ef",
+      "unchanged": true
+    },
+    {
+      "file": "packages/sdk/src/network.ts",
+      "originalSha256": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+      "finalSha256": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+      "unchanged": true
+    },
+    {
+      "file": "packages/sdk/src/transaction.ts",
+      "originalSha256": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+      "finalSha256": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+      "unchanged": true
+    },
+    {
+      "file": "apps/ledger/tests/speculos-driver.ts",
+      "originalSha256": "ab3d5d8a1638b9ee2841a2467f21f0cef33eab0d1ec0e6df4a5d67cfbf0f8fdf",
+      "finalSha256": "ab3d5d8a1638b9ee2841a2467f21f0cef33eab0d1ec0e6df4a5d67cfbf0f8fdf",
+      "unchanged": true
+    },
+    {
+      "file": "fixtures/protocol-v1.json",
+      "originalSha256": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+      "finalSha256": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+      "unchanged": true
+    }
+  ],
+  "rejectedExplicitDropCandidateDisplayRun": false,
+  "baseline": [
+    {
+      "directory": "baseline-apex_p-mainnet-r1",
+      "model": "apex_p",
+      "sha256": "7cce99aaacc43c281c5cf99eec90587c32e636869ae59cedfc0da2b5c19dc852",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "0b8f00844bd3515df32e1267b0599c250ad2f79375d142c8865576773aed0c81",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-apex_p-simnet-r1",
+      "model": "apex_p",
+      "sha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "df1b9a0303c5d5bfe298c65c01375312e7cc6cc14c855a6c6360cf42a1c797cc",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-flex-mainnet-r1",
+      "model": "flex",
+      "sha256": "7844ce075283c48f663477e7a2deb789a445879b78dfe3929fb918beec5d6103",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "ec9939fe84e5095b9684be96d17e784ea6bee5faa8a2e3b20c01e2f4825856ae",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-flex-simnet-r1",
+      "model": "flex",
+      "sha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "50d87d44c03e3f1dec3db57e6e8d7659b1bbe036e93bbce392ea853f33de47e3",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-nanosp-mainnet-r1",
+      "model": "nanosp",
+      "sha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "54b2816b365e9d255e1ca92f1b9456b95a242a70a818b95541aac6d1810f6c69",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-nanosp-simnet-r1",
+      "model": "nanosp",
+      "sha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "8855c137e3b649190367a41ae8880febd279bb7731d0ad327a1729f00124f178",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-nanox-mainnet-r1",
+      "model": "nanox",
+      "sha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "cc7165064ab02f8ec300079f553e3f6b8be34f56b5b59490477ed0f3b57bdc80",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-nanox-simnet-r1",
+      "model": "nanox",
+      "sha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "8855c137e3b649190367a41ae8880febd279bb7731d0ad327a1729f00124f178",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-stax-mainnet-r1",
+      "model": "stax",
+      "sha256": "bf137b68355f1efc8d54d9f4e6ea56179f956b9cc7b41dcfc0e18e91571b61b6",
+      "network": "mainnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "67b0b3659500dbbee5eec5b4a0c2ab45d99c6d7c109c0f187f4754f579c0033f",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    },
+    {
+      "directory": "baseline-stax-simnet-r1",
+      "model": "stax",
+      "sha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "network": "simnet",
+      "exactFieldChecks": 31,
+      "status": "passed",
+      "missingOrTruncatedValues": false,
+      "sourceScreensSha256": "6d95ef7d58edae2a52996c7dc2f3f85dcb91d0925b333a6c29b784faa1a85a80",
+      "expectedPublicFieldsUnchangedFromOriginal": true
+    }
+  ],
+  "interactions": [
+    {
+      "status": "passed",
+      "model": "nanosp",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-nanosplus-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/interactions-nanosp-r1/tested-firmware.elf",
+        "sha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": false,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "a02bb43ad9200f55ed38f752424cca36c073143e9567909bca29ec8c13224658"
+    },
+    {
+      "status": "passed",
+      "model": "nanox",
+      "firmware": {
+        "model": "nanox",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-nanox-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/interactions-nanox-r1/tested-firmware.elf",
+        "sha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": false,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "cd14cae510ba991c167d7a9cc5fbae49651701d7dc8c56c647a1d4840b9c7818"
+    },
+    {
+      "status": "passed",
+      "model": "stax",
+      "firmware": {
+        "model": "stax",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-stax-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/interactions-stax-r1/tested-firmware.elf",
+        "sha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": true,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "ce3110f3451777ba6e2e416ce2b9e610d3e68ce18125f328b8bab559e1a9e0af"
+    },
+    {
+      "status": "passed",
+      "model": "flex",
+      "firmware": {
+        "model": "flex",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-flex-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/interactions-flex-r1/tested-firmware.elf",
+        "sha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": true,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "08dea5c06058c1e876dac05f5bb2398da543e2d905d18e91b44d5ee673b8ddfb"
+    },
+    {
+      "status": "passed",
+      "model": "apex_p",
+      "firmware": {
+        "model": "apex_p",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-apex_p-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/interactions-apex_p-r1/tested-firmware.elf",
+        "sha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "reject-account",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "cancel-address",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-account-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-address-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-high-fee-warning",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "reject-transaction",
+          "status": "6985",
+          "signatureAfter": "6986"
+        },
+        {
+          "case": "back-short-press-final",
+          "intermediateApproval": false,
+          "backKeepsPending": true,
+          "shortPressRejected": true,
+          "finalApproval": "9000",
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "14f6db9a1336b6521df4337c05c11cbebf7f9e512aed36e5b0809a01cf94621b"
+    }
+  ],
+  "boundaries": [
+    {
+      "status": "passed",
+      "model": "nanosp",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-nanosplus-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/extreme-paths-nanosp-r1/tested-firmware.elf",
+        "sha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "ae1c5840463f1eabe22a36b29f189853d42b9633cb82f1a96345f05d02e16cc6"
+    },
+    {
+      "status": "passed",
+      "model": "nanox",
+      "firmware": {
+        "model": "nanox",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-nanox-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/extreme-paths-nanox-r1/tested-firmware.elf",
+        "sha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "ab5bf43d464e2a66d3569f6f6170a89af4feaa831cd59ea5afce9e5e6a4703e9"
+    },
+    {
+      "status": "passed",
+      "model": "stax",
+      "firmware": {
+        "model": "stax",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-stax-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/stax-boundary-retry/extreme-paths-stax-r1/tested-firmware.elf",
+        "sha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "4486521895071dd2bb9a5ce26d5fa73b9c2fb2aa5ed3d13194ed84afe9e7261a"
+    },
+    {
+      "status": "passed",
+      "model": "flex",
+      "firmware": {
+        "model": "flex",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-flex-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/extreme-paths-flex-r1/tested-firmware.elf",
+        "sha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "b1e0a99a10bc34bb3b179e1b28f16eb529f25144b78063a7c94ecc8425d763cf"
+    },
+    {
+      "status": "passed",
+      "model": "apex_p",
+      "firmware": {
+        "model": "apex_p",
+        "sourceElf": "/workspace/shared/prl-trusted-display-final-requalification/immutable/pearl-apex_p-simnet.elf",
+        "testedSnapshot": "/workspace/shared/prl-trusted-display-final-requalification/extreme-paths-apex_p-r1/tested-firmware.elf",
+        "sha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      },
+      "checks": [
+        {
+          "case": "all-warnings-max",
+          "explicitWarningApprovals": 4,
+          "account": 2147483647,
+          "inputIndex": 2147483647,
+          "changeIndex": 2147483647,
+          "fee": "20999999999.99999998 PRL",
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "zero-fee",
+          "inputGrains": "1",
+          "recipientGrains": "1",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "max-amount-zero-fee",
+          "inputGrains": "2100000000000000000",
+          "recipientGrains": "2100000000000000000",
+          "feeGrains": "0",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-below",
+          "inputGrains": "100001",
+          "recipientGrains": "90001",
+          "feeGrains": "10000",
+          "warning": false,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "high-fee-ceiling",
+          "inputGrains": "100001",
+          "recipientGrains": "90000",
+          "feeGrains": "10001",
+          "warning": true,
+          "nativeSignatureVerified": true
+        },
+        {
+          "case": "small-total-exception",
+          "inputGrains": "100000",
+          "recipientGrains": "1",
+          "feeGrains": "99999",
+          "warning": false,
+          "nativeSignatureVerified": true
+        }
+      ],
+      "sourceScreensSha256": "54ced99f868e09db1024b98eec6c10774c201b42ec753eb7becefbd23f2b75b9"
+    }
+  ],
+  "boundaryFieldVerification": [
+    {
+      "model": "nanosp",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835"
+    },
+    {
+      "model": "nanox",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568"
+    },
+    {
+      "model": "stax",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449"
+    },
+    {
+      "model": "flex",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1"
+    },
+    {
+      "model": "apex_p",
+      "status": "passed",
+      "exactFieldChecks": 18,
+      "exactWarningDetailChecks": 4,
+      "explicitWarningApprovals": 4,
+      "sha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959"
+    }
+  ],
+  "totals": {
+    "baselineModelNetworkPairs": 10,
+    "baselineFlows": 60,
+    "interactionFlows": 35,
+    "boundaryFlows": 30,
+    "totalFlowsRequalified": 125,
+    "additionalRepeatedFlowsForCaptureRecovery": 6,
+    "totalExecutedFlows": 131,
+    "exactFieldComparisons": 400,
+    "exactWarningDetailComparisons": 20,
+    "additionalUniqueCoverage": 0
+  },
+  "captureRetry": {
+    "originalAttempt": "stax high-fee-ceiling Fee page absent from capture; first aggregate display verification correctly failed",
+    "action": "Repeated the unchanged six-flow Stax boundary probe serially on the same immutable ELF in a fresh directory",
+    "originalEvidencePreserved": true,
+    "acceptedEvidenceSelection": [
+      {
+        "flow": "baseline-nanosp-simnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-nanosp-simnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "baseline-nanosp-mainnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-nanosp-mainnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "interactions-nanosp-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/interactions-nanosp-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "extreme-paths-nanosp-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/extreme-paths-nanosp-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "baseline-nanox-simnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-nanox-simnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "baseline-nanox-mainnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-nanox-mainnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "interactions-nanox-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/interactions-nanox-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "extreme-paths-nanox-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/extreme-paths-nanox-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "baseline-stax-simnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-stax-simnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "baseline-stax-mainnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-stax-mainnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "interactions-stax-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/interactions-stax-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "extreme-paths-stax-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/stax-boundary-retry/extreme-paths-stax-r1",
+        "attempt": "serial retry"
+      },
+      {
+        "flow": "baseline-flex-simnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-flex-simnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "baseline-flex-mainnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-flex-mainnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "interactions-flex-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/interactions-flex-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "extreme-paths-flex-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/extreme-paths-flex-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "baseline-apex_p-simnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-apex_p-simnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "baseline-apex_p-mainnet-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/baseline-apex_p-mainnet-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "interactions-apex_p-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/interactions-apex_p-r1",
+        "attempt": "original"
+      },
+      {
+        "flow": "extreme-paths-apex_p-r1",
+        "source": "/workspace/shared/prl-trusted-display-final-requalification/extreme-paths-apex_p-r1",
+        "attempt": "original"
+      }
+    ]
+  },
+  "postRunIntegrity": {
+    "nativeAndSdkSourceFilesUnchanged": 409,
+    "probeAndFixtureFilesUnchanged": 15,
+    "immutableElfsReverified": 10
+  },
+  "selectedScreenshots": [
+    {
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "045-max-amount.png",
+      "sha256": "393bf6c0dd1cec6b019036e8a08869df67529cd2666661e1ead6c81d97ababa1",
+      "screenText": "Recipient (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e",
+      "originalCaptureSha256": "393bf6c0dd1cec6b019036e8a08869df67529cd2666661e1ead6c81d97ababa1",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../nanosp-recipient-page-1.png"
+    },
+    {
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "046-max-amount.png",
+      "sha256": "087328d4834b612286ffd1613269d914c25e8296c44273672f5df9fb0b8170ce",
+      "screenText": "Recipient (2/2) | 8sfm7dk5",
+      "originalCaptureSha256": "087328d4834b612286ffd1613269d914c25e8296c44273672f5df9fb0b8170ce",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../nanosp-recipient-page-2.png"
+    },
+    {
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "047-max-amount.png",
+      "sha256": "5dc17ef5a7ffcd729d27816c5cd24ea16634ee351e9d56aea7f111009fc33a7e",
+      "screenText": "Amount | 20999999999.9999999 | 8 PRL",
+      "originalCaptureSha256": "5dc17ef5a7ffcd729d27816c5cd24ea16634ee351e9d56aea7f111009fc33a7e",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../nanosp-maximum-amount.png"
+    },
+    {
+      "model": "nanox",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanox-mainnet-r1",
+      "sourceFile": "044-max-amount.png",
+      "sha256": "393bf6c0dd1cec6b019036e8a08869df67529cd2666661e1ead6c81d97ababa1",
+      "screenText": "Recipient (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e",
+      "originalCaptureSha256": "393bf6c0dd1cec6b019036e8a08869df67529cd2666661e1ead6c81d97ababa1",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../nanox-recipient-page-1.png"
+    },
+    {
+      "model": "nanox",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanox-mainnet-r1",
+      "sourceFile": "045-max-amount.png",
+      "sha256": "087328d4834b612286ffd1613269d914c25e8296c44273672f5df9fb0b8170ce",
+      "screenText": "Recipient (2/2) | 8sfm7dk5",
+      "originalCaptureSha256": "087328d4834b612286ffd1613269d914c25e8296c44273672f5df9fb0b8170ce",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../nanox-recipient-page-2.png"
+    },
+    {
+      "model": "nanox",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanox-mainnet-r1",
+      "sourceFile": "046-max-amount.png",
+      "sha256": "5dc17ef5a7ffcd729d27816c5cd24ea16634ee351e9d56aea7f111009fc33a7e",
+      "screenText": "Amount | 20999999999.9999999 | 8 PRL",
+      "originalCaptureSha256": "5dc17ef5a7ffcd729d27816c5cd24ea16634ee351e9d56aea7f111009fc33a7e",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../nanox-maximum-amount.png"
+    },
+    {
+      "model": "stax",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-stax-mainnet-r1",
+      "sourceFile": "020-max-amount.png",
+      "sha256": "2d29cded28ba9b4700b7dcb9e7cafd2357c3d71ce124e054e51f88690be9dfb0",
+      "screenText": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8sfm7dk5 | Amount | 20999999999.999999 | 98 PRL | Reject | 2 of 4",
+      "originalCaptureSha256": "2d29cded28ba9b4700b7dcb9e7cafd2357c3d71ce124e054e51f88690be9dfb0",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../stax-recipient-and-amount.png"
+    },
+    {
+      "model": "stax",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-stax-mainnet-r1",
+      "sourceFile": "021-max-amount.png",
+      "sha256": "ac7d7b072a90d9a0ed985839c0f9313a47bbfdd8bd3b00791fe854d024e3b7a4",
+      "screenText": "Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Change address | prl1p7ear3npj7rlxjdpm | r8kxjxendgw9kzqj2c0 | fdppggs4z8kumxs0sw | 26w9t | Change path | m/86'/808276'/0'/1/0 | Reject | 3 of 4",
+      "originalCaptureSha256": "ac7d7b072a90d9a0ed985839c0f9313a47bbfdd8bd3b00791fe854d024e3b7a4",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../stax-fee-and-change.png"
+    },
+    {
+      "model": "flex",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-flex-mainnet-r1",
+      "sourceFile": "024-max-amount.png",
+      "sha256": "013f4deaf89584fb15d80b59e698a30d991c205e0d82dbc34f862e16b208ec42",
+      "screenText": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5qf | 3j9q2uk9cmyc8n0u29d | 3eyhf8q069j924e8sfm | 7dk5 | Reject | 2 of 5",
+      "originalCaptureSha256": "013f4deaf89584fb15d80b59e698a30d991c205e0d82dbc34f862e16b208ec42",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../flex-recipient.png"
+    },
+    {
+      "model": "flex",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-flex-mainnet-r1",
+      "sourceFile": "025-max-amount.png",
+      "sha256": "aa4d02e50601d6c10e57a18835a42b151a8c04eae7d53abef7a1f40577be8126",
+      "screenText": "Amount | 20999999999.999999 | 98 PRL | Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Reject | 3 of 5",
+      "originalCaptureSha256": "aa4d02e50601d6c10e57a18835a42b151a8c04eae7d53abef7a1f40577be8126",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../flex-maximum-amount.png"
+    },
+    {
+      "model": "apex_p",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-apex_p-mainnet-r1",
+      "sourceFile": "025-max-amount.png",
+      "sha256": "1171d7082bf4a3319d35b899a1b632cc54cbbbc6da2e6959c06c97cc34d9f947",
+      "screenText": "Network | Pearl mainnet | From account | m/86'/808276'/0' | Recipient | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e | 8sfm7dk5 | Reject | 2 of 5",
+      "originalCaptureSha256": "1171d7082bf4a3319d35b899a1b632cc54cbbbc6da2e6959c06c97cc34d9f947",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../apex_p-recipient.png"
+    },
+    {
+      "model": "apex_p",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-apex_p-mainnet-r1",
+      "sourceFile": "026-max-amount.png",
+      "sha256": "babcaeb81a93544066a3153a918d11f91c275027d68d720ad327cfebf6933a10",
+      "screenText": "Amount | 20999999999.999999 | 98 PRL | Fee | 0.00000001 PRL | Change | 0.00000001 PRL | Reject | 3 of 5",
+      "originalCaptureSha256": "babcaeb81a93544066a3153a918d11f91c275027d68d720ad327cfebf6933a10",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../apex_p-maximum-amount.png"
+    },
+    {
+      "model": "apex_p",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-apex_p-mainnet-r1",
+      "sourceFile": "027-max-amount.png",
+      "sha256": "dce9d39ad1c39daa7ad585f80d49ee943d6c1c914a963093675bf3718f0aa53c",
+      "screenText": "Change address | prl1p7ear3npj7rlxjdpm | r8kxjxendgw9kzqj2c0 | fdppggs4z8kumxs0sw | 26w9t | Change path | m/86'/808276'/0'/1/0 | Reject | 4 of 5",
+      "originalCaptureSha256": "dce9d39ad1c39daa7ad585f80d49ee943d6c1c914a963093675bf3718f0aa53c",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../apex_p-change.png"
+    },
+    {
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "056-max-fee.png",
+      "sha256": "f2aa045bb434d79b7e23d4059da1aa3f75fc44eb144546b348ef03eba15964ee",
+      "screenText": "High tr...ee (1/2) | Fee  | 20999999999.9999999 | 9 PRL is at least 10% ",
+      "originalCaptureSha256": "f2aa045bb434d79b7e23d4059da1aa3f75fc44eb144546b348ef03eba15964ee",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../nanosp-maximum-fee-warning-1.png"
+    },
+    {
+      "model": "nanosp",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-nanosp-mainnet-r1",
+      "sourceFile": "057-max-fee.png",
+      "sha256": "c58581f80bf1ef2176de7ab3c30039ff8c48f9be54eb2ccf687d962ca493add8",
+      "screenText": "High tr...ee (2/2) | of inputs",
+      "originalCaptureSha256": "c58581f80bf1ef2176de7ab3c30039ff8c48f9be54eb2ccf687d962ca493add8",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../nanosp-maximum-fee-warning-2.png"
+    },
+    {
+      "model": "apex_p",
+      "network": "mainnet",
+      "sourceDirectory": "baseline-apex_p-mainnet-r1",
+      "sourceFile": "030-max-fee.png",
+      "sha256": "36eab75db1f381e73a2f7d2040694b8212557021ea11c1596be7e3acc7df99c4",
+      "screenText": "High transaction fee | Fee 20999999999.99999999  | PRL is at least 10% of inputs | Reject | Review anyway",
+      "originalCaptureSha256": "36eab75db1f381e73a2f7d2040694b8212557021ea11c1596be7e3acc7df99c4",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../apex_p-maximum-fee-warning-1.png"
+    },
+    {
+      "model": "apex_p",
+      "network": "simnet",
+      "sourceDirectory": "baseline-apex_p-simnet-r1",
+      "sourceFile": "003-account-0.png",
+      "sha256": "39c1067f4f8c1069fe1d4862a50943233f131c02528ac2b315f6617779fed961",
+      "screenText": "Approve export | Reject | 4 of 4 | Hold to sign",
+      "originalCaptureSha256": "39c1067f4f8c1069fe1d4862a50943233f131c02528ac2b315f6617779fed961",
+      "pixelIdenticalToOriginal": true,
+      "retainedScreenshot": "../apex_p-export-generic-hold.png"
+    }
+  ],
+  "artifactManifestBindings": [
+    {
+      "device": "nanosplus",
+      "network": "simnet",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "nanosplus",
+      "network": "mainnet",
+      "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "nanox",
+      "network": "simnet",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "nanox",
+      "network": "mainnet",
+      "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "stax",
+      "network": "simnet",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "stax",
+      "network": "mainnet",
+      "elfSha256": "bf137b68355f1efc8d54d9f4e6ea56179f956b9cc7b41dcfc0e18e91571b61b6",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "flex",
+      "network": "simnet",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "flex",
+      "network": "mainnet",
+      "elfSha256": "7844ce075283c48f663477e7a2deb789a445879b78dfe3929fb918beec5d6103",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "apex_p",
+      "network": "simnet",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    },
+    {
+      "device": "apex_p",
+      "network": "mainnet",
+      "elfSha256": "7cce99aaacc43c281c5cf99eec90587c32e636869ae59cedfc0da2b5c19dc852",
+      "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+      "uiSha256": "427b379c7ded08666aed5e4f8f9430175a374bcbc06a5516c747780eb2dcf2c4",
+      "allBuildSourcesMatchedAtSnapshot": true
+    }
+  ],
+  "screenshotRetention": "Seventeen fresh representative captures match the original retained PNGs exactly; they are referenced, not duplicated. One supplementary PNG shows the corrected Stax fee-page capture after the serial retry.",
+  "retryScreenshot": {
+    "file": "stax-high-fee-ceiling-retry.png",
+    "model": "stax",
+    "network": "simnet",
+    "sourceFile": "/workspace/shared/prl-trusted-display-final-requalification/stax-boundary-retry/extreme-paths-stax-r1/030-high-fee-ceiling.png",
+    "sha256": "ebb8dfd8d068a8ef374524ddc1f6c37684223c826d06f592fce048eeb056841b",
+    "screenText": "Fee | 0.00010001 PRL | Change | None | Change address | None | Change path | None | Reject | 3 of 4"
+  }
+}

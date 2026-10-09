@@ -1,0 +1,37 @@
+{
+  "kind": "Definitive lexical-lifetime native-source requalification after approved compiled original-slot wipe review; same coverage matrix",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "harnessSha256": "320a5a038ff623167e6cefc284101481508b7882d794726ef210570e8c26c7d9",
+  "models": {
+    "nanosp": {
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "buildManifestSha256": "9005d2f658492a36705fdd8097508e6b4ed0930d84fe7c5635e697d5117278ac",
+      "matchesVerifiedImmutablePilot": true,
+      "exactSourceSnapshotMatch": true
+    },
+    "nanox": {
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "buildManifestSha256": "4c54647748df0f6ec1e3b4e0cd7378baf1f0689c5504925c2955df792420dbb4",
+      "matchesVerifiedImmutablePilot": true,
+      "exactSourceSnapshotMatch": true
+    },
+    "stax": {
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "buildManifestSha256": "d84c06fcfdd430398778d690b24bce440bb715d1858bf65b8cbb0dd42590b9c9",
+      "matchesVerifiedImmutablePilot": true,
+      "exactSourceSnapshotMatch": true
+    },
+    "flex": {
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "buildManifestSha256": "e36eada5014d038b7ca16154719f76229a32da5e4c68b24046dd61274898b272",
+      "matchesVerifiedImmutablePilot": true,
+      "exactSourceSnapshotMatch": true
+    },
+    "apex_p": {
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "buildManifestSha256": "bc87bbb0a9dce1fa5f1e7897bc7dd39a9893b5e99b031fbc3d933ed470d6fcd9",
+      "matchesVerifiedImmutablePilot": true,
+      "exactSourceSnapshotMatch": true
+    }
+  }
+}

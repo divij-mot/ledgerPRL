@@ -1,0 +1,12 @@
+{
+  "startUtc": "2026-10-09T19:21:48.817644+00:00",
+  "rootAndLeadQuietWindowConfirmed": true,
+  "basePort": 5901,
+  "sourceAndHarnessUnchanged": true,
+  "boundsUnchanged": true,
+  "restartLimit": "If another environment lifecycle interruption occurs, stop and report; no automatic further restart.",
+  "earlierAttempts": [
+    "prl-wallclock-lexical-20261009-1859: failed wall-time bound with synchronized gaps",
+    "prl-wallclock-lexical-quiet-20261009-1908: environment-interrupted during review"
+  ]
+}

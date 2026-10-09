@@ -1,0 +1,281 @@
+{
+  "sourceRelativePath": "apps/ledger/src/crypto.rs",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "artifacts": [
+    {
+      "name": "apex_p-mainnet",
+      "elfFile": "pearl-apex_p-mainnet.elf",
+      "elfSha256": "7cce99aaacc43c281c5cf99eec90587c32e636869ae59cedfc0da2b5c19dc852",
+      "manifestFile": "pearl-apex_p-mainnet.build.json",
+      "manifestSha256": "914f98de3a7ada6f37b12a6d83ad222cc904b0e6d65e29c50ec6acb9ea3e6adc",
+      "device": "apex_p",
+      "network": "mainnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "apex_p-regtest",
+      "elfFile": "pearl-apex_p-regtest.elf",
+      "elfSha256": "46dcfd7e3981323f782ea99ea8e2ac56d3211d26fdee115fe89d3ff72d8cabd5",
+      "manifestFile": "pearl-apex_p-regtest.build.json",
+      "manifestSha256": "73908874a4d48b11f2fbf524560cf523b0b9b348b3425310496cc71f09643577",
+      "device": "apex_p",
+      "network": "regtest",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "apex_p-simnet",
+      "elfFile": "pearl-apex_p-simnet.elf",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "manifestFile": "pearl-apex_p-simnet.build.json",
+      "manifestSha256": "bc87bbb0a9dce1fa5f1e7897bc7dd39a9893b5e99b031fbc3d933ed470d6fcd9",
+      "device": "apex_p",
+      "network": "simnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "apex_p-testnet",
+      "elfFile": "pearl-apex_p-testnet.elf",
+      "elfSha256": "01cf7816a6d8090e18de75b0212f48a81e731d94ac80cef924fc91535ff94fd1",
+      "manifestFile": "pearl-apex_p-testnet.build.json",
+      "manifestSha256": "1b320bb7a8ee55fa3446fb85aa524232914888233a14a21f0c2a747bb88b5cfe",
+      "device": "apex_p",
+      "network": "testnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "apex_p-testnet2",
+      "elfFile": "pearl-apex_p-testnet2.elf",
+      "elfSha256": "a4ee60fd8620b3426fe4e56f3bd416791375761836d06a4ecb6ba18a2a1127a0",
+      "manifestFile": "pearl-apex_p-testnet2.build.json",
+      "manifestSha256": "72d7a468e7f19fd499f82f043e9c2f0993a91775c25bfebb516fa913e72afc93",
+      "device": "apex_p",
+      "network": "testnet2",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "flex-mainnet",
+      "elfFile": "pearl-flex-mainnet.elf",
+      "elfSha256": "7844ce075283c48f663477e7a2deb789a445879b78dfe3929fb918beec5d6103",
+      "manifestFile": "pearl-flex-mainnet.build.json",
+      "manifestSha256": "6e20db91206a8ace0493ed449f19ba4a09c1937760b14f47cfdbcbe43c5b286c",
+      "device": "flex",
+      "network": "mainnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "flex-regtest",
+      "elfFile": "pearl-flex-regtest.elf",
+      "elfSha256": "e3a89d593fd4bf18ba3f2bec550b58f58c07b93abb3592cd4c270c744ba0e05f",
+      "manifestFile": "pearl-flex-regtest.build.json",
+      "manifestSha256": "27c20e43e90105c1c3ff47e9cd31e576d74619f61cbe3f31ba6297948e59ddd4",
+      "device": "flex",
+      "network": "regtest",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "flex-simnet",
+      "elfFile": "pearl-flex-simnet.elf",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "manifestFile": "pearl-flex-simnet.build.json",
+      "manifestSha256": "e36eada5014d038b7ca16154719f76229a32da5e4c68b24046dd61274898b272",
+      "device": "flex",
+      "network": "simnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "flex-testnet",
+      "elfFile": "pearl-flex-testnet.elf",
+      "elfSha256": "1a0fb7f2f314b5825e48e80bb038e99e5ae3d4007ff1f3cd050c4587e051c37b",
+      "manifestFile": "pearl-flex-testnet.build.json",
+      "manifestSha256": "9eab6da12d61baf18a9b4c8a5494a6d4b489517445ff6c625d0210c778f36ee5",
+      "device": "flex",
+      "network": "testnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "flex-testnet2",
+      "elfFile": "pearl-flex-testnet2.elf",
+      "elfSha256": "f2e9fd2ed73c03bcac90562736fcd7f90206fcfeb06a221b59a5325ad1141b23",
+      "manifestFile": "pearl-flex-testnet2.build.json",
+      "manifestSha256": "732c7ce60b0fe4550d0761b3b52477f9ed9db3f284f70ec35acc221daa5b49f6",
+      "device": "flex",
+      "network": "testnet2",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanosplus-mainnet",
+      "elfFile": "pearl-nanosplus-mainnet.elf",
+      "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+      "manifestFile": "pearl-nanosplus-mainnet.build.json",
+      "manifestSha256": "134b75bb25ba4d8044c636f6a49ac1158b2f7bca3a627c9c3b024435afed8c36",
+      "device": "nanosplus",
+      "network": "mainnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanosplus-regtest",
+      "elfFile": "pearl-nanosplus-regtest.elf",
+      "elfSha256": "8a15b763668c2cbe9ace2813b62ae1746d5872db2ab761c91388dfff92720ac8",
+      "manifestFile": "pearl-nanosplus-regtest.build.json",
+      "manifestSha256": "f48c895e2662955f70433debd0838fec524983fb05ad355ca39c86ad0b015dd6",
+      "device": "nanosplus",
+      "network": "regtest",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanosplus-simnet",
+      "elfFile": "pearl-nanosplus-simnet.elf",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "manifestFile": "pearl-nanosplus-simnet.build.json",
+      "manifestSha256": "9005d2f658492a36705fdd8097508e6b4ed0930d84fe7c5635e697d5117278ac",
+      "device": "nanosplus",
+      "network": "simnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanosplus-testnet",
+      "elfFile": "pearl-nanosplus-testnet.elf",
+      "elfSha256": "22a09f32080cd54cf1f1bf1a151a5d2ccdf6c8e68406b1c67583ffad36be9f46",
+      "manifestFile": "pearl-nanosplus-testnet.build.json",
+      "manifestSha256": "f07113e64f5cc8132f06e03df7bffc32d489f851dbbd4932b12678e451ac9a8b",
+      "device": "nanosplus",
+      "network": "testnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanosplus-testnet2",
+      "elfFile": "pearl-nanosplus-testnet2.elf",
+      "elfSha256": "f055cc9d208f327f56939a86084d95644489785380da4ba0dab5ed201bc359b5",
+      "manifestFile": "pearl-nanosplus-testnet2.build.json",
+      "manifestSha256": "cade9289ce49571ce3f979bd084945b55f7b9f38789a07120e425371ee61fee1",
+      "device": "nanosplus",
+      "network": "testnet2",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanox-mainnet",
+      "elfFile": "pearl-nanox-mainnet.elf",
+      "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+      "manifestFile": "pearl-nanox-mainnet.build.json",
+      "manifestSha256": "ae2e414a3a64c66e867b3f1514d9df0e7c19ca9ca7618fbeb51fcef5366176c8",
+      "device": "nanox",
+      "network": "mainnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanox-regtest",
+      "elfFile": "pearl-nanox-regtest.elf",
+      "elfSha256": "b1b02db7d428a8d680fe4ab955a6d9945ff5ea1c86d36d0e599028638d837fff",
+      "manifestFile": "pearl-nanox-regtest.build.json",
+      "manifestSha256": "82091090e138fa882a4e34e9ffc66bf3c01ff912d70461f7cacd6b736d146fa6",
+      "device": "nanox",
+      "network": "regtest",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanox-simnet",
+      "elfFile": "pearl-nanox-simnet.elf",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "manifestFile": "pearl-nanox-simnet.build.json",
+      "manifestSha256": "4c54647748df0f6ec1e3b4e0cd7378baf1f0689c5504925c2955df792420dbb4",
+      "device": "nanox",
+      "network": "simnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanox-testnet",
+      "elfFile": "pearl-nanox-testnet.elf",
+      "elfSha256": "56689befc195e24805c02d2b917f4cba259a0493a24d445f904a07db0cd2d293",
+      "manifestFile": "pearl-nanox-testnet.build.json",
+      "manifestSha256": "bfaee5e865f8ed70292d2be7ad99d97a615af97703f5b45a397908c7e23c4ca9",
+      "device": "nanox",
+      "network": "testnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "nanox-testnet2",
+      "elfFile": "pearl-nanox-testnet2.elf",
+      "elfSha256": "d2ef1a3b76090a82bdfa53196587aa2ba058585cc47493014922c8984af0c62d",
+      "manifestFile": "pearl-nanox-testnet2.build.json",
+      "manifestSha256": "66ffd3f63458570932748afd79f3a0a9ce80c7b311ad20558fd1eeef280e3edd",
+      "device": "nanox",
+      "network": "testnet2",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "stax-mainnet",
+      "elfFile": "pearl-stax-mainnet.elf",
+      "elfSha256": "bf137b68355f1efc8d54d9f4e6ea56179f956b9cc7b41dcfc0e18e91571b61b6",
+      "manifestFile": "pearl-stax-mainnet.build.json",
+      "manifestSha256": "51954cd7091024feb0a433badec22f696b10d40a5d01f407207809d32da46f4b",
+      "device": "stax",
+      "network": "mainnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "stax-regtest",
+      "elfFile": "pearl-stax-regtest.elf",
+      "elfSha256": "5d527751071c9644bc436222ee50bdf663e939fcfe58ca68f8cd7c3dced02549",
+      "manifestFile": "pearl-stax-regtest.build.json",
+      "manifestSha256": "67330a74c77f49e0011cade0783be664eb4897cc1f6b9058ce0c4e55e6c5cfe1",
+      "device": "stax",
+      "network": "regtest",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "stax-simnet",
+      "elfFile": "pearl-stax-simnet.elf",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "manifestFile": "pearl-stax-simnet.build.json",
+      "manifestSha256": "d84c06fcfdd430398778d690b24bce440bb715d1858bf65b8cbb0dd42590b9c9",
+      "device": "stax",
+      "network": "simnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "stax-testnet",
+      "elfFile": "pearl-stax-testnet.elf",
+      "elfSha256": "d0f6e393bd75bc2b2cc789e3050a49c0b429a3ae51d30afeb9ca60f2e3d12d6f",
+      "manifestFile": "pearl-stax-testnet.build.json",
+      "manifestSha256": "e1f317f517d86b38c79a93e11f5f315c63fcfd79c9bd833fd56d9cb8c089ced1",
+      "device": "stax",
+      "network": "testnet",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    },
+    {
+      "name": "stax-testnet2",
+      "elfFile": "pearl-stax-testnet2.elf",
+      "elfSha256": "bb3e186902880aba78c7b1b1e5d7d32d783d9abb8896ec3c5cc413e5ee389d1f",
+      "manifestFile": "pearl-stax-testnet2.build.json",
+      "manifestSha256": "a2aabb5c2347c4df3dc32ee4c16d1409a9338e2603144fde23d7129fd7209423",
+      "device": "stax",
+      "network": "testnet2",
+      "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+    }
+  ]
+}
