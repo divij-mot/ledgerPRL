@@ -19,7 +19,7 @@ export default defineConfig({
     strictPort: true,
     allowedHosts: ["127.0.0.1", "localhost"],
     proxy: {
-      "^/api/(check|broadcast)$": {
+      "^/api/(check|reconcile|broadcast)$": {
         target: "http://127.0.0.1:8787",
         changeOrigin: false,
       },

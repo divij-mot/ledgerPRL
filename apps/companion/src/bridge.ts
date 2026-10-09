@@ -27,6 +27,8 @@ import {
   safeInteger,
   record,
   outpoint,
+  exactKeys,
+  chainTip,
 } from "@pearl-ledger/wallet";
 
 export interface BridgeConfig {
@@ -305,6 +307,159 @@ export function verifyBroadcastPayload(network: NetworkName, value: unknown) {
   );
   return finalized;
 }
+/** Bounded known-payment checks against the authenticated node, not a consensus proof. */
+export const MAX_RECONCILE_BATCH = 100;
+export const MAX_RECONCILE_CHECKPOINTS = 2000;
+export const MAX_RECONCILE_RPC_CALLS = 2108;
+type KnownState = "confirmed" | "pending" | "unknown" | "detached";
+interface KnownTransaction {
+  txid: string;
+  state: KnownState;
+  block?: ChainTip;
+  confirmations?: number;
+}
+interface KnownCheckpoint extends ChainTip {
+  state: "confirmed" | "insufficient" | "unknown" | "detached";
+  confirmations?: number;
+}
+export async function checkKnownPayments(
+  rpc: NodeRpc,
+  network: NetworkName,
+  value: unknown,
+  now?: number,
+) {
+  const body = record(value, "reconciliation request");
+  exactKeys(body, ["payments", "checkpoints"], "reconciliation request");
+  assert(
+    Array.isArray(body.payments) && body.payments.length <= MAX_RECONCILE_BATCH,
+    "Reconciliation supports at most 100 signed payments per batch",
+  );
+  assert(
+    Array.isArray(body.checkpoints) &&
+      body.checkpoints.length <= MAX_RECONCILE_CHECKPOINTS &&
+      body.payments.length + body.checkpoints.length <= 2000,
+    "Reconciliation checkpoint limit exceeded",
+  );
+  // Validate every submitted signature and byte before making any node request.
+  const payments = body.payments.map((payment) =>
+    verifyBroadcastPayload(network, payment),
+  );
+  assert(
+    new Set(payments.map((p) => p.txid)).size === payments.length,
+    "Duplicate reconciliation transaction",
+  );
+  const checkpoints = body.checkpoints.map(chainTip);
+  assert(
+    new Set(checkpoints.map((c) => `${c.height}:${c.hash}`)).size ===
+      checkpoints.length,
+    "Duplicate archival checkpoint",
+  );
+  let rpcCalls = 0;
+  const bounded: NodeRpc = (method, params) => {
+    assert(
+      ++rpcCalls <= MAX_RECONCILE_RPC_CALLS,
+      "Reconciliation RPC budget exhausted",
+    );
+    return rpc(method, params);
+  };
+  const tip = await readTip(bounded, network);
+  const hashes = new Map<number, string | null>();
+  async function activeHash(height: number): Promise<string | null> {
+    if (!hashes.has(height)) {
+      try {
+        hashes.set(height, hash(await bounded("getblockhash", [height])));
+      } catch {
+        hashes.set(height, null);
+      }
+    }
+    return hashes.get(height)!;
+  }
+  const transactions: KnownTransaction[] = [];
+  for (const payment of payments) {
+    let checked: KnownTransaction = { txid: payment.txid, state: "unknown" };
+    try {
+      const tx = record(
+        await bounded("getrawtransaction", [payment.txid, 1]),
+        "known transaction",
+      );
+      assert(
+        tx.txid === payment.txid && tx.hex === payment.rawTx,
+        "Known signed transaction bytes changed",
+      );
+      // Pearl omits both fields for mempool transactions (omitempty).
+      const confirmations =
+        tx.confirmations === undefined && tx.blockhash === undefined
+          ? 0
+          : safeInteger(tx.confirmations);
+      if (confirmations === 0) {
+        assert(
+          tx.blockhash === undefined,
+          "Pending transaction has block metadata",
+        );
+        checked = { txid: payment.txid, state: "pending" };
+      } else {
+        assert(
+          confirmations <= tip.height + 1,
+          "Invalid known transaction confirmation count",
+        );
+        const block = {
+          height: tip.height - confirmations + 1,
+          hash: hash(tx.blockhash),
+        };
+        const active = await activeHash(block.height);
+        checked =
+          active === null
+            ? checked
+            : active !== block.hash
+              ? { txid: payment.txid, state: "detached" }
+              : {
+                  txid: payment.txid,
+                  state: "confirmed",
+                  block,
+                  confirmations,
+                };
+      }
+    } catch {
+      /* Missing, malformed or unavailable transactions remain active and reserved. */
+    }
+    transactions.push(checked);
+  }
+  const checkedCheckpoints: KnownCheckpoint[] = [];
+  for (const checkpoint of checkpoints) {
+    let state: KnownCheckpoint["state"] = "detached";
+    const confirmations = tip.height - checkpoint.height + 1;
+    if (confirmations >= 1) {
+      const active = await activeHash(checkpoint.height);
+      state =
+        active === null
+          ? "unknown"
+          : active !== checkpoint.hash
+            ? "detached"
+            : confirmations >= 6
+              ? "confirmed"
+              : "insufficient";
+    }
+    checkedCheckpoints.push({
+      ...checkpoint,
+      state,
+      ...(state === "confirmed" ? { confirmations } : {}),
+    });
+  }
+  const end = await readTip(bounded, network);
+  assert(
+    end.hash === tip.hash && end.height === tip.height,
+    "Node tip changed during reconciliation; retry",
+  );
+  return {
+    network,
+    genesisHash: NETWORKS[network].genesisHash,
+    tip,
+    checkedAt: now ?? Date.now(),
+    rpcCalls,
+    transactions,
+    checkpoints: checkedCheckpoints,
+  };
+}
 export async function broadcastVerified(
   rpc: NodeRpc,
   network: NetworkName,
@@ -375,7 +530,11 @@ export function createBridge(
       respond(response, 403, { error: "Local companion origin required" });
       return;
     }
-    if (request.url !== "/api/check" && request.url !== "/api/broadcast") {
+    if (
+      !["/api/check", "/api/reconcile", "/api/broadcast"].includes(
+        request.url ?? "",
+      )
+    ) {
       respond(response, 404, { error: "Unsupported route" });
       return;
     }
@@ -399,6 +558,12 @@ export function createBridge(
           response,
           200,
           await checkSnapshot(scoped, config.network, snapshot),
+        );
+      } else if (request.url === "/api/reconcile") {
+        respond(
+          response,
+          200,
+          await checkKnownPayments(scoped, config.network, body),
         );
       } else {
         assert(

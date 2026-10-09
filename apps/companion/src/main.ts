@@ -14,6 +14,7 @@ import {
   NETWORKS,
   assert,
   finalizeTransaction,
+  validateBundle,
   parseTransaction,
   scriptToAddress,
   parseGrains,
@@ -26,6 +27,7 @@ import {
   type PaymentRecord,
   type HistoryEntry,
   record,
+  exactKeys,
   safeInteger,
   hash,
   chainTip,
@@ -144,14 +146,18 @@ async function run(
 function getPayment(): PaymentRecord | undefined {
   return journal.payments.find((p) => p.id === activePayment);
 }
-async function post(route: string, body: unknown): Promise<unknown> {
+async function post(
+  route: string,
+  body: unknown,
+  signal: AbortSignal | undefined = currentAbort?.signal,
+): Promise<unknown> {
   const response = await fetch(route, {
     method: "POST",
     headers: { "content-type": "application/json", "x-pearl-companion": "1" },
     body: JSON.stringify(body),
     signal: AbortSignal.any([
       AbortSignal.timeout(route.endsWith("/discover") ? 300_000 : 90_000),
-      ...(currentAbort ? [currentAbort.signal] : []),
+      ...(signal ? [signal] : []),
     ]),
   });
   let value: unknown;
@@ -359,7 +365,7 @@ function review(payment: PaymentRecord) {
   return `<div class="grid"><section class="card review"><div class="section-head"><h2>Review the exact payment</h2><span class="tag">${e(payment.state)}</span></div>${highFee ? '<div class="notice error"><b>Unusually high fee.</b> The fee exceeds 100,000 grains and is at least 10% of the selected input value. Review the fee carefully on the Ledger.</div>' : ""}<dl class="data-list"><div><dt>Network</dt><dd>${bundle.network}</dd></div><div><dt>Recipient</dt><dd class="mono">${scriptToAddress(recipient.scriptPubKey, bundle.network)}</dd></div><div><dt>Amount</dt><dd>${money(recipient.amount)}</dd></div><div><dt>Exact fee</dt><dd>${money(fee)}</dd></div><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span><br>Branch 1 / index ${change.index}` : ""}</dd></div><div><dt>Inputs</dt><dd>${bundle.inputs.length} reserved outputs</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl>${payment.state === "draft" ? `<button id="sign" ${disabled(busy || client?.sessionState !== "ready")}>Review & sign on Ledger</button> <button id="discard" class="ghost" ${disabled(busy)}>Discard unsigned draft</button>` : payment.state === "signed" || payment.state === "broadcast-unknown" ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Signatures independently verified. Nothing has been broadcast by this app." : "Broadcast outcome may be unknown. This exact transaction may already be accepted. Keep inputs reserved; never construct a replacement payment just because of a timeout."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve broadcasting these exact signed bytes to ${sourceMode === "public" ? "the public Pearl Blockbook service" : "the configured local node"} on ${bundle.network}.</label><button id="broadcast" disabled>${payment.state === "broadcast-unknown" ? "Explicitly rebroadcast exact bytes" : "Broadcast signed transaction"}</button>` : payment.state === "accepted" ? '<div class="notice success">The node returned the expected transaction ID. Acceptance is not confirmation. Refresh the node scan to track inclusion or a reorg.</div>' : '<div class="notice error">Signing was started. The result may be unknown after an interruption. Inputs remain reserved. Inspect the device and reconcile the transaction before reusing funds.</div>'}</section><section class="card"><h2>Check your Ledger screen</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Network and full recipient</b><span class="muted">Compare the entire address, not only its first or last characters.</span></div></div><div class="step"><span class="number">2</span><div><b>Amount, fee and change</b><span class="muted">The device recomputes the signing digest from this complete transaction.</span></div></div><div class="step"><span class="number">3</span><div><b>Physical approval</b><span class="muted">Reject if any detail differs. No blind-sign or software-signing fallback exists.</span></div></div></div><button id="back-payments" class="ghost" ${disabled(busy)}>Back to activity</button></section></div>`;
 }
 function activity() {
-  return `<section class="card"><div class="section-head"><h2>Reserved payments</h2><span class="tag">${journal.payments.length} records</span></div><p class="hint">Reservations are shared atomically across this browser's tabs and persist after restart. They do not coordinate separate browser profiles or computers. Signed or interrupted payments never auto-expire. Browser eviction or profile loss can remove this state: export a complete backup before switching profiles.</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy || !account)}>Back up full watch wallet</button><button id="reconcile" class="secondary" ${disabled(busy || !syncComplete)}>Archive confirmed records</button></div><p class="hint">Archival requires six confirmations in a completed source view. Archived exact bytes and outpoint locks are retained through reorgs; they no longer count against the 100-active-payment limit. Conflicted/unknown records remain reserved.</p>${
+  return `<section class="card"><div class="section-head"><h2>Reserved payments</h2><span class="tag">${journal.payments.length} records</span></div><p class="hint">Reservations are shared atomically across this browser's tabs and persist after restart. They do not coordinate separate browser profiles or computers. Signed or interrupted payments never auto-expire. Browser eviction or profile loss can remove this state: export a complete backup before switching profiles.</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy || !account)}>Back up full watch wallet</button><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Archive confirmed records</button></div><p class="hint">Archival requires six confirmations in a completed source view. Archived exact bytes and outpoint locks are retained through reorgs; they no longer count against the 100-active-payment limit. Conflicted/unknown records remain reserved.</p>${
     journal.payments.length
       ? journal.payments
           .slice()
@@ -447,15 +453,17 @@ function bind() {
           "Public account loaded. Approve public address disclosure to discover balances, or connect the matching Ledger.";
       }),
   );
-  click("backup-export", () =>
-    void run("Exporting the latest watch-wallet backup", async () => {
-      if (!account) return;
-      const owner = account;
-      download(
-        "pearl-watch-wallet-backup.json",
-        exportWalletBackup(owner, await store.journal(accountId(owner))),
-      );
-    }),
+  click(
+    "backup-export",
+    () =>
+      void run("Exporting the latest watch-wallet backup", async () => {
+        if (!account) return;
+        const owner = account;
+        download(
+          "pearl-watch-wallet-backup.json",
+          exportWalletBackup(owner, await store.journal(accountId(owner))),
+        );
+      }),
   );
   document.getElementById("backup-file")?.addEventListener(
     "change",
@@ -500,7 +508,11 @@ function bind() {
     () =>
       void run(
         "Archiving confirmed payments without releasing locks",
-        async () => {
+        async (signal) => {
+          if (sourceMode === "node") {
+            await reconcileNodePayments(signal);
+            return;
+          }
           assert(
             account && snapshot && syncComplete,
             "Complete source resync required",
@@ -595,15 +607,17 @@ function bind() {
           "Public watch data saved in this browser profile. No signing keys are stored.";
       }),
   );
-  click("export-public", () =>
-    void run("Exporting the latest public recovery record", async () => {
-      if (!account) return;
-      const owner = account;
-      download(
-        "pearl-public-recovery.json",
-        exportPublicRecovery(owner, await store.journal(accountId(owner))),
-      );
-    }),
+  click(
+    "export-public",
+    () =>
+      void run("Exporting the latest public recovery record", async () => {
+        if (!account) return;
+        const owner = account;
+        download(
+          "pearl-public-recovery.json",
+          exportPublicRecovery(owner, await store.journal(accountId(owner))),
+        );
+      }),
   );
   document
     .getElementById("receive-index")
@@ -902,6 +916,241 @@ async function sign(signal: AbortSignal) {
   channel.postMessage("journal");
   notification =
     "Signatures independently verified and exact signed bytes saved. Broadcast requires a separate approval.";
+}
+/** Recheck known local-node payments without claiming a complete account scan. */
+async function reconcileNodePayments(signal: AbortSignal) {
+  assert(account, "Load a public account first");
+  const owner = account,
+    id = accountId(owner);
+  const operation = AbortSignal.any([signal, AbortSignal.timeout(80_000)]);
+  const deadline = performance.now() + 80_000;
+  const checkBudget = () => {
+    operation.throwIfAborted();
+    assert(
+      performance.now() < deadline,
+      "Reconciliation deadline exceeded; journal unchanged",
+    );
+  };
+  const saved = await store.journal(id),
+    original = JSON.stringify(saved.payments);
+  checkBudget();
+  assert(
+    saved.payments.length <= 2000,
+    "Reconciliation journal limit exceeded",
+  );
+  const signed = saved.payments.filter(
+    (p) => p.rawTx !== undefined || p.txid !== undefined,
+  );
+  assert(
+    new Set(signed.map((p) => p.txid)).size === signed.length,
+    "Duplicate known signed transaction in journal",
+  );
+  const active: {
+    payment: PaymentRecord;
+    payload: { bundleHex: string; rawTx: string; expectedTxid: string };
+  }[] = [];
+  const receipts = new Map<
+    string,
+    { block: ReturnType<typeof chainTip>; payments: PaymentRecord[] }
+  >();
+  for (const [index, payment] of signed.entries()) {
+    // Yield during large local verification passes so Cancel and the overall
+    // deadline remain observable before any node request.
+    if (index % 10 === 0)
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    checkBudget();
+    assert(
+      payment.rawTx &&
+        payment.txid &&
+        ["signed", "broadcast-unknown", "accepted"].includes(payment.state),
+      "Corrupt signed payment; do not clear its reservation",
+    );
+    const bundle = paymentBundle(payment);
+    validateBundle(bundle, owner);
+    const raw = parseTransaction(payment.rawTx);
+    const checked = finalizeTransaction(
+      bundle,
+      raw.inputs.map((i) => i.witness[0]!),
+    );
+    assert(
+      checked.rawTx === payment.rawTx && checked.txid === payment.txid,
+      "Saved signed payment bytes failed verification",
+    );
+    let receipt: ReturnType<typeof chainTip> | undefined;
+    if (payment.archived) {
+      try {
+        assert(
+          payment.archived.status === "confirmed",
+          "Invalid archival status",
+        );
+        safeInteger(payment.archived.checkedAt, Number.MAX_SAFE_INTEGER);
+        receipt = chainTip(payment.archived.block);
+      } catch {
+        /* A malformed legacy receipt must requalify by exact raw lookup. */
+      }
+    }
+    if (receipt) {
+      const key = `${receipt.height}:${receipt.hash}`;
+      const group = receipts.get(key) ?? { block: receipt, payments: [] };
+      group.payments.push(payment);
+      receipts.set(key, group);
+    } else
+      active.push({
+        payment,
+        payload: {
+          bundleHex: payment.bundleHex,
+          rawTx: payment.rawTx,
+          expectedTxid: payment.txid,
+        },
+      });
+  }
+  const knownHistory: HistoryEntry[] = [];
+  let tip: ReturnType<typeof chainTip> | undefined,
+    calls = 0,
+    detached = 0;
+  for (let offset = 0; offset < Math.max(1, active.length); offset += 100) {
+    checkBudget();
+    const batch = active.slice(offset, offset + 100),
+      checkpoints =
+        offset === 0 ? [...receipts.values()].map((r) => r.block) : [];
+    const result = record(
+      await post(
+        "/api/reconcile",
+        { payments: batch.map((p) => p.payload), checkpoints },
+        operation,
+      ),
+      "reconciliation response",
+    );
+    checkBudget();
+    exactKeys(
+      result,
+      [
+        "network",
+        "genesisHash",
+        "tip",
+        "checkedAt",
+        "rpcCalls",
+        "transactions",
+        "checkpoints",
+      ],
+      "reconciliation response",
+    );
+    assert(
+      result.network === owner.network &&
+        result.genesisHash === NETWORKS[owner.network].genesisHash,
+      "Reconciliation network mismatch",
+    );
+    const currentTip = chainTip(result.tip);
+    assert(
+      !tip ||
+        (currentTip.hash === tip.hash && currentTip.height === tip.height),
+      "Node tip changed between reconciliation batches; retry",
+    );
+    tip = currentTip;
+    safeInteger(result.checkedAt, Number.MAX_SAFE_INTEGER);
+    calls += safeInteger(result.rpcCalls, 2108);
+    assert(calls <= 4160, "Total reconciliation RPC budget exhausted");
+    assert(
+      Array.isArray(result.transactions) &&
+        result.transactions.length === batch.length &&
+        Array.isArray(result.checkpoints) &&
+        result.checkpoints.length === checkpoints.length,
+      "Incomplete reconciliation coverage",
+    );
+    const expected = new Set(batch.map((p) => p.payload.expectedTxid));
+    for (const value of result.transactions) {
+      const tx = record(value, "known transaction"),
+        txid = hash(tx.txid);
+      assert(
+        expected.delete(txid),
+        "Unexpected or duplicate reconciliation transaction",
+      );
+      assert(
+        ["confirmed", "pending", "unknown", "detached"].includes(
+          String(tx.state),
+        ),
+        "Invalid reconciliation state",
+      );
+      if (tx.state === "confirmed") {
+        exactKeys(
+          tx,
+          ["txid", "state", "block", "confirmations"],
+          "confirmed transaction",
+        );
+        const block = chainTip(tx.block),
+          confirmations = safeInteger(tx.confirmations);
+        assert(
+          confirmations > 0 && confirmations === tip.height - block.height + 1,
+          "Inconsistent reconciliation confirmation count",
+        );
+        knownHistory.push({
+          txid,
+          received: 0n,
+          spent: 0n,
+          block,
+          state: "confirmed",
+        });
+      } else {
+        exactKeys(tx, ["txid", "state"], "unconfirmed transaction");
+        if (tx.state === "detached") detached++;
+      }
+    }
+    const expectedCheckpoints = new Set(
+      checkpoints.map((c) => `${c.height}:${c.hash}`),
+    );
+    for (const value of result.checkpoints) {
+      const c = record(value, "archival checkpoint"),
+        block = chainTip({ height: c.height, hash: c.hash }),
+        key = `${block.height}:${block.hash}`;
+      assert(
+        expectedCheckpoints.delete(key),
+        "Unexpected or duplicate archival checkpoint",
+      );
+      assert(
+        ["confirmed", "insufficient", "unknown", "detached"].includes(
+          String(c.state),
+        ),
+        "Invalid archival checkpoint state",
+      );
+      if (c.state === "confirmed") {
+        exactKeys(
+          c,
+          ["height", "hash", "state", "confirmations"],
+          "confirmed checkpoint",
+        );
+        const confirmations = safeInteger(c.confirmations);
+        assert(
+          confirmations >= 6 && confirmations === tip.height - block.height + 1,
+          "Invalid archival checkpoint depth",
+        );
+        for (const payment of receipts.get(key)!.payments)
+          knownHistory.push({
+            txid: payment.txid!,
+            received: 0n,
+            spent: 0n,
+            block,
+            state: "confirmed",
+          });
+      } else {
+        exactKeys(c, ["height", "hash", "state"], "unconfirmed checkpoint");
+        if (c.state === "detached")
+          detached += receipts.get(key)!.payments.length;
+      }
+    }
+  }
+  checkBudget();
+  assert(tip, "Missing reconciliation tip");
+  const checkedTip = tip;
+  const count = await store.mutate(id, (j) => {
+    checkBudget();
+    assert(
+      JSON.stringify(j.payments) === original,
+      "Payment journal changed during reconciliation; retry",
+    );
+    return reconcileConfirmed(j, knownHistory, checkedTip);
+  });
+  channel.postMessage("journal");
+  notification = `${signed.length} known signed payments checked against the configured node at block ${tip.height}; ${count} confirmed records archived. ${signed.length - count} records remain active or unresolved, including ${detached} detached. All exact bytes and input locks retained. This trusts the node's chain view; a later reorg can change confirmation.`;
 }
 async function broadcast() {
   assert(account && activePayment, "No signed payment");
