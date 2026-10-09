@@ -1,0 +1,20 @@
+{
+  "begin": "e0100000222101bebc61a4588bd775c6dfd4e11590afc866f5b8f78dc5e167c98b97595a937c9d",
+  "intruder": "b001000000",
+  "responses": [
+    "9000",
+    "6986"
+  ],
+  "nativeExit": 1,
+  "processExit": 1,
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "apps/ledger/target/artifacts/pearl-nanosplus-simnet.elf",
+    "testedSnapshot": "/workspace/shared/pearl-ledger-packaging/dmk-receiving-info/tested-firmware.elf",
+    "sha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "scope": "Active Receiving rejects BOLOS polling and exits; no hardware"
+}

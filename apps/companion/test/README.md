@@ -58,3 +58,33 @@ cover both input orders, stable confirmed and pending controls, and changes in
 history IDs, pending spends or UTXOs during a check. Passing these checks only
 establishes rejection of observed inconsistent responses. It does not prove an
 indexer's honesty, consensus validity or an atomic snapshot of a live mempool.
+
+## DMK refresher timing and native response captures
+
+`dmk-refresher.test.ts` runs the actual bundled `connectLedger` adapter, installed
+DMK `DeviceSession`, intent queue, initial pinger, periodic refresher and device
+connection state machine. Test-only discovery/builder plumbing connects them to
+an in-process APDU endpoint with frozen public signatures. Production's explicit
+`isRefresherDisabled: true` option is asserted. Five DMK model IDs (Nano S Plus,
+Nano X, Stax, Flex and Apex) complete the verified payment across real timer gaps
+without periodic B0 traffic. Two enabled-refresher negative controls inject B0
+between signing commands, including after a 2.2-second busy REVIEW, and expose the
+modeled strict fault. They show that the DMK queue serializes individual commands,
+not the complete multi-command payment. Allow about 20 seconds for this test.
+
+The verbatim `fixtures/dmk-idle-info.json` and `dmk-receiving-info.json` are separate
+historical evidence from **one actual Nano S Plus simnet native ELF** under
+Speculos 0.27.1, using the public BIP32 vector-one seed. Both identify the same ELF
+SHA-256 `016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661`:
+idle B0 app-info returned the encoded `Pearl Sim Dev` / `0.1.0` response; after
+BEGIN returned `9000`, the B0 intruder returned `6986` and the native app exited.
+The installed DMK parser is exercised on the captured idle response. The test
+also checks the fault response and shared provenance. Historical absolute snapshot
+paths are metadata only; the portable test never reads them or executes firmware.
+
+These are five **model-ID timing simulations**, plus one **recorded native-model
+control**. They do not establish physical USB/HID behavior or native firmware
+behavior on the other four models. No native ELF, emulator, browser, hardware,
+private user seed or network listener is used by this host regression. The public
+capture seed and signature fixtures must never be funded. Test-only facades are
+not imported by production and do not provide a signer or transport fallback.
