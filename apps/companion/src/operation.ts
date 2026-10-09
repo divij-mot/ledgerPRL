@@ -1,4 +1,28 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
+import { addAbortSignal } from "node:stream";
+import { assert } from "@pearl-ledger/sdk";
+
+/** Bound both incoming bytes and time spent waiting for the unfinished body. */
+export async function readJsonBody(
+  request: IncomingMessage,
+  signal: AbortSignal,
+): Promise<unknown> {
+  assert(
+    request.headers["content-type"] === "application/json",
+    "JSON required",
+  );
+  const chunks: Buffer[] = [];
+  let total = 0;
+  for await (const value of addAbortSignal(signal, request)) {
+    const chunk = Buffer.from(value);
+    total += chunk.length;
+    assert(total <= 4 * 1024 * 1024, "Request too large");
+    chunks.push(chunk);
+  }
+  signal.throwIfAborted();
+  return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+}
+
 /** Total deadline plus client disconnect cancellation; no abandoned request can monopolize the bridge. */
 export function requestOperation(
   request: IncomingMessage,
@@ -23,6 +47,9 @@ export function requestOperation(
       clearTimeout(timer);
       request.off("aborted", abort);
       response.off("close", closed);
+      // Promise.all can reject while sibling fetches are still pending. End
+      // their shared scope before the caller releases its request slot.
+      controller.abort(new Error("Request operation completed"));
     },
   };
 }

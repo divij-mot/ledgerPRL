@@ -1,4 +1,4 @@
-import { requestOperation } from "./operation.js";
+import { requestOperation, readJsonBody } from "./operation.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import {
   accountFromJson,
@@ -404,21 +404,6 @@ function send(response: ServerResponse, status: number, body: unknown) {
   });
   response.end(text);
 }
-async function bodyOf(request: IncomingMessage) {
-  assert(
-    request.headers["content-type"] === "application/json",
-    "JSON required",
-  );
-  const chunks: Buffer[] = [];
-  let total = 0;
-  for await (const c of request) {
-    const chunk = Buffer.from(c);
-    total += chunk.length;
-    assert(total <= 4 * 1024 * 1024, "Request too large");
-    chunks.push(chunk);
-  }
-  return record(JSON.parse(Buffer.concat(chunks).toString("utf8")), "request");
-}
 export function lightMiddleware(origin = "http://127.0.0.1:5173") {
   const expected = new URL(origin);
   assert(
@@ -467,7 +452,10 @@ export function lightMiddleware(origin = "http://127.0.0.1:5173") {
       request.url.endsWith("/discover") ? 295_000 : 85_000,
     );
     try {
-      const body = await bodyOf(request);
+      const body = record(
+        await readJsonBody(request, operation.signal),
+        "request",
+      );
       assert(
         body.consent === true,
         "Explicit public address disclosure consent is required",

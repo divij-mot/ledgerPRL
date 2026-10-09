@@ -1,6 +1,10 @@
 import { defineConfig } from "vite";
 import { lightMiddleware } from "./src/blockbook.js";
 const origin = "http://127.0.0.1:5173";
+const headers = {
+  "Content-Security-Policy": "frame-ancestors 'none'",
+  "X-Frame-Options": "DENY",
+};
 export default defineConfig({
   plugins: [
     {
@@ -14,6 +18,7 @@ export default defineConfig({
     },
   ],
   server: {
+    headers,
     host: "127.0.0.1",
     port: 5173,
     strictPort: true,
@@ -25,6 +30,6 @@ export default defineConfig({
       },
     },
   },
-  preview: { host: "127.0.0.1", port: 5173, strictPort: true },
+  preview: { host: "127.0.0.1", port: 5173, strictPort: true, headers },
   build: { target: "es2022", sourcemap: false },
 });

@@ -1,4 +1,4 @@
-import { requestOperation, abortable } from "./operation.js";
+import { requestOperation, abortable, readJsonBody } from "./operation.js";
 /** Narrow local node boundary. Never expose arbitrary RPC method/URL or wallet signing APIs. */
 import {
   createServer,
@@ -483,21 +483,6 @@ export async function broadcastVerified(
   );
   return { txid: finalized.txid };
 }
-async function readBody(request: IncomingMessage): Promise<unknown> {
-  assert(
-    request.headers["content-type"] === "application/json",
-    "JSON required",
-  );
-  const buffers: Buffer[] = [];
-  let length = 0;
-  for await (const chunk of request) {
-    const b = Buffer.from(chunk);
-    length += b.length;
-    assert(length <= 4 * 1024 * 1024, "Request too large");
-    buffers.push(b);
-  }
-  return JSON.parse(Buffer.concat(buffers).toString("utf8"));
-}
 function respond(
   response: ServerResponse,
   status: number,
@@ -551,7 +536,7 @@ export function createBridge(
       return abortable(rpc(method, params, operation.signal), operation.signal);
     };
     try {
-      const body = await readBody(request);
+      const body = await readJsonBody(request, operation.signal);
       if (request.url === "/api/check") {
         const snapshot = parseWatchSnapshot(JSON.stringify(body));
         respond(

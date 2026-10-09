@@ -89,6 +89,7 @@ let busy = false,
 let receiveIndex = 0,
   verifiedReceive: string | null = null;
 let currentAbort: AbortController | null = null;
+let journalRefreshGeneration = 0;
 const selected = new Set<string>();
 const form = { recipient: "", amount: "", fee: "0.00001000", changeIndex: "0" };
 const e = (value: unknown) =>
@@ -107,8 +108,12 @@ function notify(message: string, error = false) {
   render();
 }
 async function refreshJournal() {
-  if (account) {
-    journal = await store.journal(accountId(account));
+  const owner = account;
+  const generation = ++journalRefreshGeneration;
+  if (owner) {
+    const loaded = await store.journal(accountId(owner));
+    if (account !== owner || generation !== journalRefreshGeneration) return;
+    journal = loaded;
     form.changeIndex = String(
       Math.max(
         journal.nextChangeIndex,

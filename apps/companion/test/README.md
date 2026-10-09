@@ -88,3 +88,20 @@ behavior on the other four models. No native ELF, emulator, browser, hardware,
 private user seed or network listener is used by this host regression. The public
 capture seed and signature fixtures must never be funded. Test-only facades are
 not imported by production and do not provide a signer or transport fallback.
+
+## Request scopes and stale account views
+
+`middleware-lifecycle.test.ts` exercises actual node/light middleware over local
+HTTP sockets. Public-indexer responses and node RPC are isolated fixtures. Only
+the explicit operation-deadline timers are shortened to 500 ms in the child
+process; timers and fetch are restored afterward. It checks unfinished-body
+termination, subsequent successful requests, malformed JSON, failed-discovery
+sibling cancellation and completed-discovery cleanup. `operation.test.ts` adds
+stream byte limits, cancellation, completion and listener-cleanup controls.
+
+`stale-journal.test.ts` runs actual UI code with deferred storage and DOM mocks.
+Late reads cannot repopulate a closed account, cross an account/session switch,
+or replace a newer journal/change-index view. `serving-policy.test.ts` resolves
+the pinned Vite configuration and checks anti-framing headers in development and
+preview, including the inherited node-bridge proxy. These checks do not establish
+browser clickjacking resistance or real IndexedDB crash durability.
