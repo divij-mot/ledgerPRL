@@ -4,6 +4,7 @@
  * No browser upload, hardware, private key, live network, or broadcast is used.
  */
 import fs from "node:fs";
+import { createPsbtEndpoint, P } from "./psbt-endpoint.mjs";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -103,52 +104,7 @@ function gate() {
   return { pending, release };
 }
 function device() {
-  const commands = [];
-  let digest,
-    closes = 0;
-  const transport = {
-    async close() {
-      closes++;
-    },
-    async exchange(apdu, signal) {
-      assert(
-        !signal?.aborted,
-        "Canceled signal must not reach an APDU endpoint",
-      );
-      commands.push(apdu[1]);
-      const data = apdu.slice(5);
-      let response = new Uint8Array();
-      switch (apdu[1]) {
-        case sdk.INS.CAPABILITIES:
-          response = Uint8Array.of(1, 0, 1, 0, 3, 16, 0xe3, 5);
-          break;
-        case sdk.INS.EXPORT_ACCOUNT:
-          response = sdk.concat(
-            account.masterFingerprint,
-            account.publicKey,
-            account.chainCode,
-            Uint8Array.of(3),
-            sdk.u32(0),
-          );
-          break;
-        case sdk.INS.BEGIN:
-          digest = data.slice(2);
-          break;
-        case sdk.INS.APPEND:
-          break;
-        case sdk.INS.REVIEW:
-          response = sdk.concat(Uint8Array.of(bundle.inputs.length), digest);
-          break;
-        case sdk.INS.SIGNATURE:
-          response = sdk.fromHex(fixture.signatures[data[0]]);
-          break;
-        default:
-          throw new Error("Unexpected test command");
-      }
-      return sdk.concat(response, Uint8Array.of(0x90, 0));
-    },
-  };
-  return { transport, commands, closes: () => closes };
+  return createPsbtEndpoint();
 }
 let backendCalls = 0;
 async function backend(route) {
@@ -266,7 +222,7 @@ for (const [phase, state, expected] of [
     boundary = pauseAt("before-commit", "signed");
   const operation = app.startSign();
   await boundary.reached;
-  assert.equal(d.commands.filter((ins) => ins === sdk.INS.SIGNATURE).length, 2);
+  assert.equal(d.yields(), 2);
   const commandCount = d.commands.length;
   app.cancel();
   boundary.release();

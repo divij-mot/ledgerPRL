@@ -29,7 +29,8 @@
     "@noble/hashes": "1.8.0",
     "@scure/base": "1.2.6",
     "@scure/bip32": "1.7.0",
-    "uuid": "11.1.1"
+    "uuid": "11.1.1",
+    "@metamask/snaps-sdk": "12.0.1"
   },
   "devDependencies": {
     "@types/node": "24.10.0",
@@ -45,6 +46,9 @@
       "uuid": "$uuid"
     },
     "@ledgerhq/device-transport-kit-web-hid": {
+      "uuid": "$uuid"
+    },
+    "@metamask/utils": {
       "uuid": "$uuid"
     }
   }

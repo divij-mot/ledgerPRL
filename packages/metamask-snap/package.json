@@ -1,0 +1,24 @@
+{
+  "name": "@pearl-ledger/metamask-snap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/provider.ts",
+    "./core": "./src/core.ts"
+  },
+  "scripts": {
+    "test": "node --import tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "@metamask/snaps-sdk": "12.0.1",
+    "@pearl-ledger/sdk": "0.1.0",
+    "@pearl-ledger/wallet": "0.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}

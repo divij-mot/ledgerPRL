@@ -2,6 +2,7 @@
 // DOM, atomic storage scheduler, APDU endpoint and source responses are mocks.
 // No browser, physical device, seed import, broadcast or live endpoint is used.
 import fs from "node:fs";
+import { createPsbtEndpoint, P } from "./psbt-endpoint.mjs";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -31,7 +32,7 @@ const account = sdk.accountFromJson(f.publicAccount),
 const source =
   fs.readFileSync(path.join(root, "apps/companion/src/main.ts"), "utf8") +
   `
-export async function auditInit(a,b,endpoint) {account=a;network=a.network;sourceMode='node';snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:b.inputs.map(i=>({...i,rawTransaction:'',coinbase:false,block:{height:1,hash:'bb'.repeat(32)}}))};client=new LedgerPearlClient(endpoint,network);activePayment='uncertain-recovery-fixture';await refreshJournal();page='send';render();}
+export async function auditInit(a,b,endpoint) {account=a;network=a.network;sourceMode='node';snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:b.inputs.map(i=>({...i,rawTransaction:'',coinbase:false,block:{height:1,hash:'bb'.repeat(32)}}))};client=new LedgerBitcoinPrlClient(endpoint,network);activePayment='uncertain-recovery-fixture';await refreshJournal();page='send';render();}
 export async function auditStart(recover=true){await run(recover?'Recover':'Sign',signal=>sign(signal,recover));}
 export function auditCancel(){currentAbort?.abort();}
 export function auditState(){return{busy,notification,journal};}
@@ -88,60 +89,22 @@ function endpoint({
   afterExport,
 } = {}) {
   const review = gate(),
-    entered = gate(),
-    sent = [];
-  let digest,
-    uploaded = [];
-  return {
-    sent,
-    review,
-    entered,
-    async close() {},
-    async exchange(apdu) {
-      const ins = apdu[1],
-        data = apdu.slice(5);
-      sent.push(ins);
-      let response = new Uint8Array(),
-        status = 0x9000;
-      switch (ins) {
-        case sdk.INS.CAPABILITIES:
-          response = Uint8Array.of(1, 0, 1, 0, 3, 16, 0xe3, 5);
-          break;
-        case sdk.INS.EXPORT_ACCOUNT:
-          response = sdk.concat(
-            account.masterFingerprint,
-            account.publicKey,
-            wrongAccount ? new Uint8Array(32).fill(3) : account.chainCode,
-            Uint8Array.of(3),
-            sdk.u32(0),
-          );
-          afterExport?.();
-          break;
-        case sdk.INS.BEGIN:
-          digest = data.slice(2);
-          uploaded = [];
-          break;
-        case sdk.INS.APPEND:
-          uploaded.push(data.slice(2));
-          break;
-        case sdk.INS.REVIEW:
-          assert.equal(sdk.hex(sdk.concat(...uploaded)), f.bundleHex);
-          entered.open();
-          if (pauseReview) await review.promise;
-          if (rejectReview) status = 0x6985;
-          else response = sdk.concat(Uint8Array.of(2), digest);
-          break;
-        case sdk.INS.SIGNATURE:
-          response = sdk.fromHex((alternate ? alt : f).signatures[data[0]]);
-          break;
-        case sdk.INS.ABORT:
-          break;
-        default:
-          throw Error("Unexpected APDU " + ins);
+    entered = gate();
+  const endpoint = createPsbtEndpoint({
+    account: wrongAccount
+      ? { ...account, chainCode: new Uint8Array(32).fill(3) }
+      : account,
+    signatures: (alternate ? alt : f).signatures,
+    onStage: async (stage) => {
+      if (stage === "export") afterExport?.();
+      if (stage === "review") {
+        entered.open();
+        if (pauseReview) await review.promise;
+        if (rejectReview) return Uint8Array.of(0x69, 0x85);
       }
-      return sdk.concat(response, Uint8Array.of(status >>> 8, status & 255));
     },
-  };
+  });
+  return { ...endpoint.transport, sent: endpoint.commands, review, entered };
 }
 function seed(state = "signing") {
   const j = wallet.emptyJournal();
@@ -219,8 +182,8 @@ function unchanged(j, { signed = false } = {}) {
   assert.equal(j.payments[0].state, "signed");
   assert.equal(j.payments[0].rawTx, alt.rawTx);
   assert.equal(j.payments[0].txid, f.txid);
-  assert.equal(d.sent.filter((x) => x === sdk.INS.EXPORT_ACCOUNT).length, 1);
-  assert.equal(d.sent.filter((x) => x === sdk.INS.REVIEW).length, 1);
+  assert.equal(d.sent.filter((x) => x === P.GET_EXTENDED_PUBKEY).length, 1);
+  assert.equal(d.sent.filter((x) => x === P.SIGN_PSBT).length, 1);
   console.log(
     "PASS approved: same record, bundle, txid, change and locks; new account approval and full review; alternate valid witnesses saved",
   );
@@ -281,7 +244,7 @@ for (const status of ["spent-or-unknown", "reorged", "timeout"]) {
     app = await tab(status, d);
   await app.auditStart();
   unchanged(saved());
-  assert(!d.sent.includes(sdk.INS.BEGIN));
+  assert(!d.sent.includes(P.SIGN_PSBT));
   console.log(
     "PASS unavailable: " +
       status +
@@ -294,7 +257,7 @@ for (const status of ["spent-or-unknown", "reorged", "timeout"]) {
     app = await tab("wrong-account", d);
   await app.auditStart();
   unchanged(saved());
-  assert(!d.sent.includes(sdk.INS.BEGIN));
+  assert(!d.sent.includes(P.SIGN_PSBT));
   console.log(
     "PASS identity: a newly exported different account cannot recover the saved payment",
   );
@@ -341,7 +304,7 @@ for (const status of ["spent-or-unknown", "reorged", "timeout"]) {
   unchanged(saved(), { signed: true });
   assert.equal(saved().payments[0].state, "signed");
   console.log(
-    "PASS interleaving: old REVIEW rejection cannot undo a durably started recovery",
+    "PASS interleaving: old SIGN_PSBT rejection cannot undo a durably started recovery",
   );
 }
 {
@@ -370,19 +333,19 @@ for (const status of ["spent-or-unknown", "reorged", "timeout"]) {
   await captured.promise;
   originalDevice.review.open();
   await oldRun;
-  assert.equal(saved().payments[0].state, "draft");
+  assert.equal(saved().payments[0].state, "signing");
   release.open();
   await newRun;
   delete globalThis.afterRead;
-  assert.equal(saved().payments[0].state, "draft");
+  assert.equal(saved().payments[0].state, "signed");
+  assert.equal(saved().payments[0].rawTx, f.rawTx);
   assert.equal(wallet.reservedOutpoints(saved()).size, 2);
   assert.equal(
-    recoveryDevice.sent.length,
-    0,
-    "stale recovery must stop before account or signing APDUs",
+    recoveryDevice.sent.filter((ins) => ins === P.SIGN_PSBT).length,
+    1,
   );
   console.log(
-    "PASS opposite ordering: an initial rejection that commits first prevents stale recovery before APDUs",
+    "PASS opposite ordering: generic initial rejection retains locks until fresh explicit identical-payment recovery verifies every signature",
   );
 }
 {
@@ -471,10 +434,10 @@ for (const mode of ["success", "spent", "error", "still-stale", "clock-back"]) {
       unchanged(saved(), { signed: true });
       assert.equal(saved().payments[0].state, "signed");
       assert.equal(saved().payments[0].rawTx, f.rawTx);
-      assert(d.sent.includes(sdk.INS.REVIEW));
+      assert(d.sent.includes(P.SIGN_PSBT));
     } else {
       unchanged(saved());
-      assert(!d.sent.includes(sdk.INS.BEGIN));
+      assert(!d.sent.includes(P.SIGN_PSBT));
     }
     console.log(
       "PASS bounded freshness: " +
@@ -516,7 +479,7 @@ for (const mode of ["success", "spent", "error", "still-stale", "clock-back"]) {
       app = await tab("second-check-race", d);
     await app.auditStart();
     assert.equal(checks, 2);
-    assert(!d.sent.includes(sdk.INS.BEGIN));
+    assert(!d.sent.includes(P.SIGN_PSBT));
     unchanged(saved(), { signed: true });
     assert.equal(saved().payments[0].rawTx, f.rawTx);
     console.log(
@@ -565,7 +528,7 @@ for (const mode of ["success", "spent", "error", "still-stale", "clock-back"]) {
     release.open();
     await run;
     assert.equal(checks, 2);
-    assert(!d.sent.includes(sdk.INS.BEGIN));
+    assert(!d.sent.includes(P.SIGN_PSBT));
     unchanged(saved());
     console.log(
       "PASS refresh cancellation: original run cancels both request signals, and even a late response cannot start signing",

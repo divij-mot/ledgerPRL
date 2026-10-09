@@ -1,0 +1,32 @@
+# Public indexer mode versus Pearl's official light client
+
+Source review: Pearl revision [`2f8b770cac8f8b74be05c1fc51c2baeb76ce0701`](https://github.com/pearl-research-labs/pearl/tree/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701), 2026-10-09. This compares ordinary receiving/sending and chain-data trust. It does not expand signing custody beyond the PRL adapter's BIP86 inputs/change and P2TR/P2MR external recipients.
+
+## What already exists upstream
+
+Pearl's [`spv/`](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/spv/README.md) is a Go BIP157/BIP158 compact-filter light client. It maintains header/filter-header chains, downloads filters and matching blocks, supports continuing rescans and UTXO spend reports, and handles connected/disconnected blocks. It is not an HTTP address indexer or an immediately usable browser library.
+
+Normal P2P header validation calls contextual difficulty/timestamp checks, certificate activation rules and certificate sanity/verification in [`checkHeaderSanity`](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/spv/blockmanager.go#L2823-L2865). The node's [`checkProofOfWork`](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/node/blockchain/validate.go#L309-L339) invokes `zkpow.VerifyCertificate`. Downloaded blocks additionally receive sanity and witness-commitment checks in [`GetBlock`](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/spv/query.go#L805-L899).
+
+Important qualifications:
+
+- The actual certificate verifier requires the `zkpow` build and native FFI. The [`!zkpow` stub](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/node/zkpow/zkpow_stub.go#L20-L38) returns an error, not successful proof verification. A Go/WASM build without that verifier must not be labeled verified SPV.
+- The separate, explicit [bare-header import utility](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/spv/chainimport/block_headers_validator.go#L3-L8) treats its imported range as trusted and skips certificate checks because the format lacks certificates. This is not the normal P2P validation path and was not found in the ordinary Oyster startup configuration.
+- Rescan receive/spend notifications are confirmed-only, according to the SPV README. [`NeutrinoClient.TestMempoolAccept`](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/wallet/chain/neutrino.go#L259-L267) is explicitly unimplemented. SPV reuse needs a separate pending-spend/acceptance design; it must not silently remove current mempool checks.
+- Oyster's recovery waits for backend synchronization before scanning, persists a birthday block, and rolls back disconnected history ([startup/recovery flow](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/wallet/wallet/wallet.go#L400-L490)). Its [branch recovery window](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/wallet/wallet/recovery.go#L312-L343) extends after found addresses. Private-key wallet creation/unlocking is outside this seedless Ledger wallet's scope.
+
+## Current standalone wallet
+
+The website derives public addresses and validates wallet data in the browser. A narrowly allowlisted same-origin proxy sends only public address/transaction requests to fixed Blockbook endpoints. This keeps the account public key and chain code out of the host's API payloads. Both the wallet host and indexer can correlate requests; this is not equivalent to local compact-filter privacy. The host still supplies the executable JavaScript and remains a trust boundary: keeping keys out of normal API payloads does not protect against a compromised host changing that JavaScript.
+
+Current discovery checks genesis, explicit network, stable tip, complete bounded address history, exact raw transactions, output ownership and observed confirmed/pending spends. These are useful consistency checks **within the selected indexer's reported chain view**. They are not header/certificate verification, transaction-inclusion proofs or a proof of unspentness. A dishonest provider can omit a self-consistent history or report a fabricated chain view.
+
+Bounds remain explicit: both branches, gap 20, address index at most 999, recoverable issued index at most 979 with the trailing gap, 2,000 history transactions and 256 UTXOs. Exceeding a bound fails as incomplete rather than showing a final zero balance. The signer supports larger derivation indices; this does not expand website discovery automatically. Public recovery high-water marks and signed-payment reservations must survive reloads, migration and cancellation independently of chain-source selection.
+
+## Practical reuse and remaining gates
+
+1. Keep the existing exact-integer wallet, discovery/recovery records, coin selection, reservation journal and Ledger signing boundary. They are already independent of a seed-bearing Oyster wallet.
+2. If adding a local SPV-backed service, reuse the official `ChainService`, compact-filter rescan, block/reorg handling and UTXO scanner behind a narrow public-data interface. Reuse its proof verifier and network rules rather than replacing them with indexer assertions. Network/sync state, cancellation, bounded scanning and pending spends need explicit integration tests.
+3. Browser-native SPV requires a separately qualified certificate-verification/WASM route, browser-compatible peer transport, persistent header/filter storage, peer-selection/eclipse and checkpoint policies, reorg/rescan recovery, resource limits and privacy testing. Upstream uses outbound TCP and a local database ([transport/configuration](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/spv/neutrino.go#L573-L577), [Oyster startup](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/wallet/btcwallet.go#L162-L194)); it is not a drop-in static-site dependency.
+
+For this phase, accurate “public indexer, trust its chain view” labeling is preferable to claiming full light-client verification. A source-provider upgrade can improve chain verification without changing hardware custody, but is a separate security qualification effort.

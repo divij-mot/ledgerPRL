@@ -1,0 +1,26 @@
+{
+  "repository": "https://github.com/LedgerHQ/app-bitcoin",
+  "commit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+  "source_version": "2.5.1",
+  "basis": "official annotated device deployment tags",
+  "verified_at": "2026-10-09",
+  "device_tags": [
+    "nanos+_1.6.1_2.5.1_sdk_v26.6.2",
+    "nanox_2.7.1_2.5.1_sdk_v26.6.2",
+    "stax_1.10.1_2.5.1_sdk_v26.6.2",
+    "flex_1.6.1_2.5.1_sdk_v26.6.2",
+    "apex_p_1.1.1_2.5.1_sdk_v26.6.2"
+  ],
+  "upstream_sdk": {
+    "tag": "v26.6.2",
+    "commit": "22d1131a03fcd89c5d2e660de886c8b0417b0789"
+  },
+  "port_sdk": {
+    "tag": "v27.1.2",
+    "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "api": 27
+  },
+  "inspected_but_not_used_develop": "bc76e7b66b9525f878b3901a82d35151614705e0",
+  "master_same_tree": "da3c8c9d1cab91a7614efe6cadf197c5cc7c3b50",
+  "notice": "Experimental Pearl fork. Upstream review/distribution does not cover the changes or API27 retarget. No Ledger approval or physical validation."
+}

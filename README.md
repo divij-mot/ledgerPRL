@@ -1,15 +1,16 @@
 # Pearl Ledger
 
-A native Rust Ledger signer and minimal watch-only companion for Pearl (PRL).
+A Ledger-backed wallet website for Pearl (PRL), with a narrowly adapted Ledger Bitcoin device app and exact-integer PRL host adapter.
 
 **Development software. Do not use with valuable funds.** Software and emulator tests do not establish Ledger approval, physical-device validation, human audit, or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
 
 ## What is implemented
 
-- Bounded no_std transaction parser and APDU state machine with strict network/path/amount policy
-- Native Ledger SDK BIP32/BIP340 integration, independently derived ownership/change and trusted transaction review
-- Exact bigint TypeScript SDK, signature verification, transaction finalization and CLI
-- Local watch-only GUI, fixed-endpoint public indexing and optional authenticated local-node bridge
+- Pinned Ledger Bitcoin 2.5.1 C baseline with explicit PRL networks, BIP86 ownership/change checks, PSBT validation and trusted device review
+- Exact bigint PRL host adapter, independently verified signatures, transaction finalization and CLI
+- Direct Ledger DMK/WebHID website; no MetaMask, seed entry or software signing required
+- Browser-side public-account discovery and validation; same-origin fixed-endpoint public indexer proxy
+- Durable local payment recovery, optional watch cache and optional local-only authenticated node bridge
 - Public deterministic cross-language vectors, actual Pearl script-engine oracle, adversarial tests and ongoing security review
 
 Only ordinary no-script BIP86 P2TR owned inputs/change, one recipient, at most one change, at most 16 inputs and SIGHASH_DEFAULT are supported. The input cap still needs physical-device measurement. No arbitrary hash/message signing, seed entry, hot-wallet fallback, XMSS, script-path signing, RBF or automated consolidation.
@@ -27,7 +28,9 @@ npm run dev
 
 Open http://127.0.0.1:5173. The public-indexer option requires an explicit privacy choice before derived addresses are queried. Mainnet and Testnet2 use distinct, genesis-checked backends. Original testnet, regtest and simnet require an appropriate node. Public account import/offline inspection does not prove spendability or sign anything.
 
-The frontend and narrow light-service proxy run locally together. No public web deployment is needed. See [companion instructions](docs/companion.md) for node-backed mode, recovery metadata and limitations.
+The frontend and narrow proxy can run locally together or behind HTTPS using the production host described in [website hosting](docs/website-hosting.md). The public website does not expose the local-node bridge. See [companion instructions](docs/companion.md) for recovery metadata and limitations.
+
+Private keys remain on Ledger. The browser keeps receive/change recovery ranges and payment reservations, including already-signed bytes. Optional watch-cache saves also contain the account public key and chain code. These records contain no private signing keys but are financially sensitive; do not publish backups. The hosted proxy sees requested addresses/transaction IDs, not account derivation keys.
 
 ## Verify source and fixtures
 
@@ -42,7 +45,7 @@ cargo +1.99.0 clippy --locked --workspace --all-targets -- -D warnings
 
 The oracle requires Go 1.26.6 and pins the upstream Pearl implementation. Runtime code has no software signer; deterministic test signing stays in test-only fixture generation. Never fund published test addresses.
 
-Native builds are separate from host tests. See [firmware build and verification](docs/firmware.md). No command in the default host test/build flow installs an app on a physical Ledger, updates firmware or broadcasts money.
+The current device port is documented in [Ledger Bitcoin PRL port](apps/ledger-bitcoin-prl/README.md), with [redesign boundaries](docs/ledger-bitcoin-redesign.md). The earlier Rust app, its protocol and historical evidence remain in the repository as a reference; those results do not qualify the new C app. Native builds are separate from host tests. See [historical firmware build and verification](docs/firmware.md). No command in the default host test/build flow installs an app on a physical Ledger, updates firmware or broadcasts money.
 
 ## Documentation
 

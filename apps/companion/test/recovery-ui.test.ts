@@ -23,9 +23,10 @@ import {
   type WatchSnapshot,
 } from "@pearl-ledger/wallet";
 import {
-  publicAccount,
+  publicAccount as fixtureAccount,
   blockHash,
 } from "../../../packages/wallet/test/fixtures.js";
+const publicAccount = { ...fixtureAccount, network: "mainnet" as const };
 
 // Exercise actual main.ts import/export handlers with local public transaction
 // bytes. DOM, IndexedDB, downloads, and the unused device connector are isolated
@@ -58,7 +59,7 @@ function snapshot(coins: ReturnType<typeof coin>[]) {
   return {
     schema: 1,
     account: accountToJson(publicAccount),
-    genesisHash: NETWORKS.regtest.genesisHash,
+    genesisHash: NETWORKS.mainnet.genesisHash,
     tip: { height: 200, hash: blockHash(200) },
     coverage: {
       externalScannedThrough: 0x7fffffff,
@@ -213,10 +214,10 @@ export async function otherTab(receive, change) {
   );
   const result = await discoverAccount(
     {
-      network: "regtest",
+      network: "mainnet",
       tip: async () => ({
         tip: snapshot(known).tip,
-        genesisHash: NETWORKS.regtest.genesisHash,
+        genesisHash: NETWORKS.mainnet.genesisHash,
       }),
       blockHash: async (height) => blockHash(height),
       address: async (address) => {
@@ -253,13 +254,79 @@ export async function otherTab(receive, change) {
   await app.importSnapshot(JSON.stringify(snapshot(known)));
   app.consent();
   await app.otherTab(200, 211);
-  let requested: { minimumIndex: [number, number] } | undefined;
-  globalThis.fetch = async (_url, init) => {
-    requested = JSON.parse(String(init!.body));
-    throw new Error("capture-only");
+  const requestedAddresses = new Set<string>();
+  const emptyIndexer = async (
+    url: string | URL | Request,
+    init?: RequestInit,
+  ) => {
+    assert.equal(url, "/api/indexer/read");
+    const request = JSON.parse(String(init!.body)) as {
+      network: string;
+      consent: boolean;
+      path: string;
+    };
+    assert.deepEqual(Object.keys(request).sort(), [
+      "consent",
+      "network",
+      "path",
+    ]);
+    assert.equal(request.network, "mainnet");
+    assert.equal(request.consent, true);
+    assert.equal(init!.credentials, "omit");
+    assert.equal(init!.redirect, "error");
+    assert.equal(init!.cache, "no-store");
+    let result: unknown;
+    if (request.path === "/api/v2/")
+      result = {
+        blockbook: {
+          inSync: true,
+          initialSync: false,
+          inSyncMempool: true,
+          bestHeight: 200,
+          decimals: 8,
+        },
+        backend: {
+          chain: "mainnet",
+          blocks: 200,
+          bestBlockHash: blockHash(200),
+        },
+      };
+    else if (request.path.startsWith("/api/v2/block-index/"))
+      result = {
+        blockHash: request.path.endsWith("/0")
+          ? NETWORKS.mainnet.genesisHash
+          : blockHash(200),
+      };
+    else {
+      const match =
+        /^\/api\/v2\/address\/([a-zA-Z0-9]+)\?details=txids&pageSize=1000&page=1$/.exec(
+          request.path,
+        );
+      assert(match, `Unexpected privacy-proxy path: ${request.path}`);
+      requestedAddresses.add(match[1]!);
+      result = {
+        address: match[1],
+        txs: 0,
+        unconfirmedTxs: 0,
+        page: 1,
+        totalPages: 1,
+        itemsOnPage: 1000,
+        txids: [],
+      };
+    }
+    return new Response(JSON.stringify(result));
   };
-  await assert.rejects(app.syncPublic(), /capture-only/);
-  assert.deepEqual(requested!.minimumIndex, [200, 210]);
+  globalThis.fetch = emptyIndexer;
+  await app.syncPublic();
+  // Recovery bounds are consulted locally. Only individual derived addresses,
+  // never account/xpub/snapshot/minimumIndex, cross the mocked HTTP boundary.
+  assert(requestedAddresses.has(deriveAddress(publicAccount, 0, 200).address));
+  assert(requestedAddresses.has(deriveAddress(publicAccount, 1, 210).address));
+  assert.equal(app.state().snapshot.coverage.externalScannedThrough, 220);
+  assert.equal(app.state().snapshot.coverage.changeScannedThrough, 230);
+  assert.equal(app.state().syncComplete, true);
+  await app.importSnapshot(JSON.stringify(snapshot(known)));
+  app.consent();
   let release!: () => void, entered!: () => void;
   const gate = new Promise<void>((resolve) => {
     release = resolve;
@@ -267,27 +334,14 @@ export async function otherTab(receive, change) {
   const started = new Promise<void>((resolve) => {
     entered = resolve;
   });
-  globalThis.fetch = async (_url, init) => {
-    const request = JSON.parse(String(init!.body)) as {
-      minimumIndex: [number, number];
-    };
-    entered();
-    await gate;
-    return new Response(
-      JSON.stringify({
-        complete: true,
-        history: [],
-        lastUsed: [-1, -1],
-        snapshot: {
-          ...snapshot([]),
-          coverage: {
-            externalScannedThrough: request.minimumIndex[0] + 20,
-            changeScannedThrough: request.minimumIndex[1] + 20,
-            gapLimit: 20,
-          },
-        },
-      }),
-    );
+  let paused = false;
+  globalThis.fetch = async (url, init) => {
+    if (!paused) {
+      paused = true;
+      entered();
+      await gate;
+    }
+    return emptyIndexer(url, init);
   };
   const pending = app.syncPublic();
   await started;

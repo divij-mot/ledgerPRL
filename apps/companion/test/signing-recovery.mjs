@@ -1,6 +1,7 @@
 /** Actual UI, wallet and SDK; public frozen signatures only. DOM, atomic storage,
  * source responses and APDU endpoint are mocks. No signing keys, hardware or network. */
 import fs from "node:fs";
+import { createPsbtEndpoint, P, interrupted } from "./psbt-endpoint.mjs";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -59,7 +60,7 @@ const snapshot = {
 const contents =
   fs.readFileSync(path.join(root, "apps/companion/src/main.ts"), "utf8") +
   `
-export async function mountRecovery(a,s,d) {account=a;network=a.network;snapshot=s;client=new LedgerPearlClient(d,'regtest');activePayment='recovery-fixture';page='send';await refreshJournal();render();}
+export async function mountRecovery(a,s,d) {account=a;network=a.network;snapshot=s;client=new LedgerBitcoinPrlClient(d,'regtest');activePayment='recovery-fixture';page='send';await refreshJournal();render();}
 export async function startRecovery(recovery=true) {await run('Explicit identical-payment recovery',signal=>sign(signal,recovery));return notification;}
 export function cancelRecovery(){currentAbort?.abort();}
 export function recoveryState(){return {notification,journal};}
@@ -170,55 +171,7 @@ function unchangedPayment(before) {
   assert.equal(wallet.reservedOutpoints(current).size, 2);
 }
 function device(options = {}) {
-  const commands = [];
-  let digest;
-  const transport = {
-    async exchange(apdu, signal) {
-      assert(!signal?.aborted);
-      const ins = apdu[1],
-        data = apdu.slice(5);
-      commands.push(ins);
-      const custom = await options.onCommand?.(ins, data);
-      if (custom) return custom;
-      let result = new Uint8Array();
-      switch (ins) {
-        case sdk.INS.CAPABILITIES:
-          result = Uint8Array.of(1, 0, 1, 0, 3, 16, 0xe3, 5);
-          break;
-        case sdk.INS.EXPORT_ACCOUNT: {
-          const a = options.account ?? account;
-          result = sdk.concat(
-            a.masterFingerprint,
-            a.publicKey,
-            a.chainCode,
-            Uint8Array.of(3),
-            sdk.u32(a.account),
-          );
-          break;
-        }
-        case sdk.INS.BEGIN:
-          digest = data.slice(2);
-          break;
-        case sdk.INS.APPEND:
-          break;
-        case sdk.INS.REVIEW:
-          result = sdk.concat(Uint8Array.of(2), digest);
-          break;
-        case sdk.INS.SIGNATURE:
-          result = (options.signatures ?? f.signatures).map((x) =>
-            typeof x === "string" ? sdk.fromHex(x) : x,
-          )[data[0]];
-          break;
-        case sdk.INS.ABORT:
-          break;
-        default:
-          throw Error("Unexpected APDU");
-      }
-      return sdk.concat(result, Uint8Array.of(0x90, 0));
-    },
-    async close() {},
-  };
-  return { transport, commands };
+  return createPsbtEndpoint(options);
 }
 async function mount(d) {
   const app = await import(
@@ -242,8 +195,7 @@ async function mount(d) {
   assert.equal(saved().payments[0].rawTx, f.rawTx);
   assert.equal(saved().payments[0].signingAttempt, undefined);
   assert(
-    d.commands.indexOf(sdk.INS.EXPORT_ACCOUNT) <
-      d.commands.indexOf(sdk.INS.BEGIN),
+    d.commands.indexOf(P.GET_EXTENDED_PUBKEY) < d.commands.indexOf(P.SIGN_PSBT),
   );
   assert.equal(calls, 1);
   unchangedPayment(before);
@@ -267,17 +219,24 @@ for (const failure of [
         ? { ...account, chainCode: new Uint8Array(32).fill(3) }
         : account,
     onCommand: async (ins) => {
-      if (failure === "review-rejection" && ins === sdk.INS.REVIEW)
+      if (failure === "review-rejection" && ins === P.SIGN_PSBT)
         return Uint8Array.of(0x69, 0x85);
-      if (failure === "timeout" && ins === sdk.INS.REVIEW)
+      if (failure === "timeout" && ins === P.SIGN_PSBT)
         throw Error("Transport timeout");
-      if (failure === "invalid-signature" && ins === sdk.INS.SIGNATURE)
-        return sdk.concat(new Uint8Array(64), Uint8Array.of(0x90, 0));
-      if (
-        (failure === "cancel-export" && ins === sdk.INS.EXPORT_ACCOUNT) ||
-        (failure === "cancel-signature" && ins === sdk.INS.SIGNATURE)
-      )
+      if (failure === "cancel-export" && ins === P.GET_EXTENDED_PUBKEY)
         app.cancelRecovery();
+    },
+    onStage: async (stage, index) => {
+      if (stage !== "signature") return;
+      if (failure === "cancel-signature") app.cancelRecovery();
+      if (failure === "invalid-signature")
+        return interrupted(
+          sdk.concat(
+            Uint8Array.of(0x10, index, 32),
+            bundle.inputs[index].scriptPubKey.slice(2),
+            new Uint8Array(64),
+          ),
+        );
     },
   });
   app = await mount(d);
@@ -286,7 +245,7 @@ for (const failure of [
   assert.equal(saved().payments[0].rawTx, undefined);
   assert(saved().payments[0].signingAttempt.recovery);
   if (failure === "wrong-key" || failure === "cancel-export")
-    assert(!d.commands.includes(sdk.INS.BEGIN));
+    assert(!d.commands.includes(P.SIGN_PSBT));
   assert.throws(() => wallet.discardDraft(saved(), id));
   unchangedPayment(before);
   console.log(
@@ -326,8 +285,8 @@ for (const state of ["spent-or-unknown", "reorged"]) {
   // Save the other tab's bytes once, while this SDK is still retrieving signatures.
   let once = false;
   const other = device({
-    onCommand: async (ins) => {
-      if (ins === sdk.INS.SIGNATURE && !once) {
+    onStage: async (stage) => {
+      if (stage === "signature" && !once) {
         once = true;
         wallet.transitionPayment(saved(), id, "signed", {
           rawTx: alternate.rawTx,
@@ -354,7 +313,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
     exportEntered = gate();
   const first = device({
     onCommand: async (ins) => {
-      if (ins === sdk.INS.REVIEW) {
+      if (ins === P.SIGN_PSBT) {
         entered.release();
         await review.promise;
         return Uint8Array.of(0x69, 0x85);
@@ -366,7 +325,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
   await entered.promise;
   const second = device({
     onCommand: async (ins) => {
-      if (ins === sdk.INS.EXPORT_ACCOUNT) {
+      if (ins === P.GET_EXTENDED_PUBKEY) {
         exportEntered.release();
         await exportGate.promise;
         return Uint8Array.of(0x69, 0x85);
@@ -385,7 +344,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
   assert.throws(() => wallet.discardDraft(saved(), id));
   unchangedPayment(before);
   console.log(
-    "PASS: initial REVIEW rejection cannot reset an atomically claimed recovery attempt",
+    "PASS: initial SIGN_PSBT rejection cannot reset an atomically claimed recovery attempt",
   );
 }
 {
@@ -394,7 +353,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
     entered = gate();
   const first = device({
       onCommand: async (ins) => {
-        if (ins === sdk.INS.REVIEW) {
+        if (ins === P.SIGN_PSBT) {
           entered.release();
           await review.promise;
           return Uint8Array.of(0x69, 0x85);
@@ -416,14 +375,15 @@ for (const state of ["spent-or-unknown", "reorged"]) {
   await checked.promise;
   review.release();
   await running;
-  assert.equal(saved().payments[0].state, "draft");
+  assert.equal(saved().payments[0].state, "signing");
   checkGate.release();
   await recovering;
-  assert.equal(second.commands.length, 0);
-  assert.equal(saved().payments[0].state, "draft");
+  assert.equal(second.commands.filter((ins) => ins === P.SIGN_PSBT).length, 1);
+  assert.equal(saved().payments[0].state, "signed");
+  assert.equal(saved().payments[0].rawTx, f.rawTx);
   unchangedPayment(before);
   console.log(
-    "PASS: initial rejection winning the atomic race blocks recovery before any APDU",
+    "PASS: initial generic rejection retains ambiguity until explicit matching recovery saves exact verified bytes",
   );
 }
 {
@@ -432,7 +392,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
     entered = gate(),
     d = device({
       onCommand: async (ins) => {
-        if (ins === sdk.INS.REVIEW) {
+        if (ins === P.SIGN_PSBT) {
           entered.release();
           await review.promise;
           return Uint8Array.of(0x69, 0x85);
@@ -461,7 +421,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
     entered = gate(),
     first = device({
       onCommand: async (ins) => {
-        if (ins === sdk.INS.REVIEW) {
+        if (ins === P.SIGN_PSBT) {
           entered.release();
           await review.promise;
         }
@@ -488,7 +448,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
   let app;
   const d = device({
     onCommand: async (ins) => {
-      if (ins === sdk.INS.EXPORT_ACCOUNT)
+      if (ins === P.GET_EXTENDED_PUBKEY)
         Date.now = () => originalNow() + 60_001;
     },
   });
@@ -499,7 +459,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
     Date.now = originalNow;
   }
   assert.equal(saved().payments[0].state, "signed");
-  assert(d.commands.includes(sdk.INS.BEGIN));
+  assert(d.commands.includes(P.SIGN_PSBT));
   assert.equal(calls, 2);
   unchangedPayment(before);
   console.log(
@@ -527,7 +487,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
     originalNow = Date.now;
   const d = device({
       onCommand: async (ins) => {
-        if (ins === sdk.INS.EXPORT_ACCOUNT) {
+        if (ins === P.GET_EXTENDED_PUBKEY) {
           Date.now = () => originalNow() + 60_001;
           sourceState = "spent-or-unknown";
         }
@@ -541,7 +501,7 @@ for (const state of ["spent-or-unknown", "reorged"]) {
   }
   assert.equal(saved().payments[0].state, "signing");
   assert.equal(calls, 2);
-  assert(!d.commands.includes(sdk.INS.BEGIN));
+  assert(!d.commands.includes(P.SIGN_PSBT));
   unchangedPayment(before);
   console.log(
     "PASS: the bounded second check must still prove every original input unspent",

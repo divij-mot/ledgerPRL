@@ -110,7 +110,7 @@ test("public fixture addresses reproduce and validate", () => {
     );
   }
 });
-test("reject wrong HRP, checksum, v2, mixed case and non-curve program", () => {
+test("reject wrong HRP, checksum, v3, mixed case and non-curve program", () => {
   const address = fixture.addresses.input;
   assert.throws(() => sdk.addressToScript(address, "mainnet"));
   assert.throws(() =>
@@ -125,7 +125,7 @@ test("reject wrong HRP, checksum, v2, mixed case and non-curve program", () => {
   const program = sdk.deriveAddress(account, 0, 0).outputKey;
   assert.throws(() =>
     sdk.addressToScript(
-      bech32m.encode("rprl", [2, ...bech32m.toWords(program)]),
+      bech32m.encode("rprl", [3, ...bech32m.toWords(program)]),
       "regtest",
     ),
   );

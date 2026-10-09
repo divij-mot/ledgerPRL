@@ -1,0 +1,50 @@
+{
+  "description": "Native PRL app in Speculos with PUBLIC vector-one seed. Never fund. No broadcast.",
+  "publicAccount": {
+    "network": "regtest",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "bundle": {
+    "network": "regtest",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "vout": 1,
+        "amount": "100000000",
+        "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "1000",
+        "scriptPubKey": "51205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      }
+    ]
+  },
+  "sighashes": [
+    "b53dc3b86393cd65f7c7a63669f4fe74eaccada07fed713833eaf93172ce7694"
+  ],
+  "signatures": [
+    "f87e136527ca018fafd8d0c3cd7272c0aaafbaecc21be16f9023d97397f6691aeaebbf22c311f4fda6b77b1e5ee8308414e9156f8661f6d57a70c00f246a2506"
+  ],
+  "addresses": {
+    "input": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+    "recipient": "rprl1ptkfg5hcsgxwuu5qf3j9q2uk9cmyc8n0u29d3eyhf8q069j924e8scdxtvf"
+  },
+  "rawTx": "0100000000010111111111111111111111111111111111111111111111111111111111111111110100000000ffffffff01e8030000000000002251205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f0140f87e136527ca018fafd8d0c3cd7272c0aaafbaecc21be16f9023d97397f6691aeaebbf22c311f4fda6b77b1e5ee8308414e9156f8661f6d57a70c00f246a250600000000",
+  "txid": "3a3fdd28e6f7a87142df61f905bb9c4ecdac47e5a505641ea0f8929bafeae393",
+  "wtxid": "18742974b65bc86a9b5bce0db052e3326e51e0df3b0aaa4566596c6806ad888e",
+  "vsize": 111
+}

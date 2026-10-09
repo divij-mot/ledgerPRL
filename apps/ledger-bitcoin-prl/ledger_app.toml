@@ -1,0 +1,7 @@
+[app]
+build_directory = "./"
+sdk = "C"
+devices = ["nanox", "nanos+", "stax", "flex", "apex_p"]
+
+# PRL qualification uses tools/bitcoin-prl-port and prl-tests/. Retained upstream
+# unit-tests/ is reference material, not a claim of PRL test compatibility.

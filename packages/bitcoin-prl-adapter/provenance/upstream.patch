@@ -1,0 +1,320 @@
+--- a/bitcoin_client_js/src/lib/buffertools.ts
++++ b/packages/bitcoin-prl-adapter/src/upstream/buffertools.ts
+@@ -1,34 +1,20 @@
+-import { createVarint, parseVarint, sanitizeBigintToNumber } from './varint';
++// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.
++// Apache-2.0; local changes recorded in provenance/upstream.patch.
++import { Buffer } from 'buffer';
++import { createVarint, parseVarint, sanitizeBigintToNumber } from './varint.js';
+ 
+-export function unsafeTo64bitLE(n: number): Buffer {
+-  // we want to represent the input as a 8-bytes array
+-  if (n > Number.MAX_SAFE_INTEGER) {
+-    throw new Error("Can't convert numbers > MAX_SAFE_INT");
++/** PRL adaptation: exact integers only; no amount can pass through Number. */
++export function uint64LE(n: bigint): Buffer {
++  if (typeof n !== 'bigint' || n < 0n || n > 0xffffffffffffffffn) {
++    throw new RangeError('Invalid uint64 bigint');
+   }
+-  const byteArray = Buffer.alloc(8, 0);
+-  for (let index = 0; index < byteArray.length; index++) {
+-    const byte = n & 0xff;
+-    byteArray[index] = byte;
+-    n = (n - byte) / 256;
+-  }
+-  return byteArray;
++  const result = Buffer.alloc(8);
++  result.writeBigUInt64LE(n);
++  return result;
+ }
+-
+-export function unsafeFrom64bitLE(byteArray: Buffer): number {
+-  let value = 0;
+-  if (byteArray.length != 8) {
+-    throw new Error('Expected Bufffer of lenght 8');
+-  }
+-  if (byteArray[7] != 0) {
+-    throw new Error("Can't encode numbers > MAX_SAFE_INT");
+-  }
+-  if (byteArray[6] > 0x1f) {
+-    throw new Error("Can't encode numbers > MAX_SAFE_INT");
+-  }
+-  for (let i = byteArray.length - 1; i >= 0; i--) {
+-    value = value * 256 + byteArray[i];
+-  }
+-  return value;
++export function from64bitLE(bytes: Buffer): bigint {
++  if (bytes.length !== 8) throw new Error('Expected uint64 bytes');
++  return bytes.readBigUInt64LE();
+ }
+ 
+ export class BufferWriter {
+@@ -52,8 +38,8 @@
+     this.write(4, (b) => b.writeUInt32LE(i, 0));
+   }
+ 
+-  writeUInt64(i: number): void {
+-    const bytes = unsafeTo64bitLE(i);
++  writeUInt64(i: bigint): void {
++    const bytes = uint64LE(i);
+     this.writeSlice(bytes);
+   }
+ 
+@@ -100,9 +86,9 @@
+     return result;
+   }
+ 
+-  readUInt64(): number {
++  readUInt64(): bigint {
+     const buf = this.readSlice(8);
+-    return unsafeFrom64bitLE(buf);
++    return from64bitLE(buf);
+   }
+ 
+   readVarInt(): bigint {
+@@ -112,7 +98,7 @@
+   }
+ 
+   readSlice(n: number): Buffer {
+-    if (this.buffer.length < this.offset + n) {
++    if (!Number.isSafeInteger(n) || n < 0 || this.buffer.length < this.offset + n) {
+       throw new Error('Cannot read slice out of bounds');
+     }
+     const result = this.buffer.slice(this.offset, this.offset + n);
+--- a/bitcoin_client_js/src/lib/clientCommands.ts
++++ b/packages/bitcoin-prl-adapter/src/upstream/clientCommands.ts
+@@ -1,10 +1,14 @@
+-import { crypto } from 'bitcoinjs-lib';
+-
+-import { BufferReader } from './buffertools';
+-import { hashLeaf, Merkle } from './merkle';
+-import { MerkleMap } from './merkleMap';
+-import { WalletPolicy } from './policy';
+-import { createVarint, sanitizeBigintToNumber } from './varint';
++// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.
++// Apache-2.0; local changes recorded in provenance/upstream.patch.
++import { Buffer } from 'buffer';
++import { sha256 } from '@pearl-ledger/sdk';
++const crypto = { sha256 };
++
++import { BufferReader } from './buffertools.js';
++import { hashLeaf, Merkle } from './merkle.js';
++import { MerkleMap } from './merkleMap.js';
++import { WalletPolicy } from './policy.js';
++import { createVarint, sanitizeBigintToNumber } from './varint.js';
+ 
+ enum ClientCommandCode {
+   YIELD = 0x10,
+@@ -68,10 +72,11 @@
+     // read the hash
+     const hash = Buffer.alloc(32);
+     for (let i = 0; i < 32; i++) {
+-      hash[i] = req[1 + i];
++      hash[i] = req[1 + i]!;
+     }
+     const req_hash_hex = hash.toString('hex');
+ 
++    if (this.queue.length !== 0) throw new Error('Pending continuation queue');
+     const known_preimage = this.known_preimages.get(req_hash_hex);
+     if (known_preimage != undefined) {
+       const preimage_len_varint = createVarint(known_preimage.length);
+@@ -84,7 +89,7 @@
+ 
+       if (payload_size < known_preimage.length) {
+         for (let i = payload_size; i < known_preimage.length; i++) {
+-          this.queue.push(Buffer.from([known_preimage[i]]));
++          this.queue.push(Buffer.from([known_preimage[i]!]));
+         }
+       }
+ 
+@@ -133,6 +138,7 @@
+       );
+     }
+ 
++    if (reqBuf.available() !== 0) throw new Error('Trailing Merkle proof request bytes');
+     const mt = this.known_trees.get(hash_hex);
+     if (!mt) {
+       throw Error(`Requested Merkle leaf proof for unknown tree: ${hash_hex}`);
+@@ -241,7 +247,7 @@
+     }
+ 
+     // all elements should have the same length
+-    const element_len = this.queue[0].length;
++    const element_len = this.queue[0]!.length;
+     if (this.queue.some((el) => el.length != element_len)) {
+       throw new Error(
+         'The queue contains elements with different byte length, which is not expected'
+@@ -310,7 +316,7 @@
+   addKnownPreimage(preimage: Buffer): void {
+     this.preimages.set(
+       Buffer.from(crypto.sha256(preimage)).toString('hex'),
+-      preimage
++      Buffer.from(preimage)
+     );
+   }
+ 
+@@ -341,7 +347,10 @@
+       throw new Error('Unexpected empty command');
+     }
+ 
+-    const cmdCode = request[0];
++    const cmdCode = request[0]!;
++    if (this.queue.length !== 0 && cmdCode !== ClientCommandCode.GET_MORE_ELEMENTS) {
++      throw new Error('Pending continuation queue');
++    }
+     const cmd = this.commands.get(cmdCode);
+     if (!cmd) {
+       throw new Error(`Unexpected command code ${cmdCode}`);
+--- a/bitcoin_client_js/src/lib/merkle.ts
++++ b/packages/bitcoin-prl-adapter/src/upstream/merkle.ts
+@@ -1,4 +1,8 @@
+-import { crypto } from 'bitcoinjs-lib';
++// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.
++// Apache-2.0; local changes recorded in provenance/upstream.patch.
++import { Buffer } from 'buffer';
++import { sha256 } from '@pearl-ledger/sdk';
++const crypto = { sha256 };
+ 
+ function sha256AsBuffer(buf: Buffer): Buffer {
+   return Buffer.from(crypto.sha256(buf));
+@@ -18,7 +22,8 @@
+     leaves: Buffer[],
+     hasher: (buf: Buffer) => Buffer = sha256AsBuffer
+   ) {
+-    this.leaves = leaves;
++    if (leaves.length > 4096 || leaves.some((leaf) => leaf.length !== 32)) throw new Error("Invalid Merkle leaves");
++    this.leaves = leaves.map((leaf) => Buffer.from(leaf));
+     this.h = hasher;
+     const nodes = this.calculateRoot(leaves);
+     this.rootNode = nodes.root;
+@@ -34,11 +39,11 @@
+     return this.leaves;
+   }
+   getLeafHash(index: number): Buffer {
+-    return this.leafNodes[index].hash;
++    return this.leafNodes[index]!.hash;
+   }
+   getProof(index: number): Buffer[] {
+-    if (index >= this.leaves.length) throw Error('Index out of bounds');
+-    return proveNode(this.leafNodes[index]);
++    if (!Number.isSafeInteger(index) || index < 0 || index >= this.leaves.length) throw Error('Index out of bounds');
++    return proveNode(this.leafNodes[index]!);
+   }
+ 
+   calculateRoot(leaves: Buffer[]): {
+@@ -53,7 +58,7 @@
+       };
+     }
+     if (n == 1) {
+-      const newNode = new Node(undefined, undefined, leaves[0]);
++      const newNode = new Node(undefined, undefined, leaves[0]!);
+       return { root: newNode, leaves: [newNode] };
+     }
+     const leftCount = highestPowerOf2LessThan(n);
+@@ -89,8 +94,8 @@
+ }
+ 
+ class Node {
+-  leftChild?: Node;
+-  rightChild?: Node;
++  leftChild: Node | undefined;
++  rightChild: Node | undefined;
+   parent?: Node;
+   hash: Buffer;
+   constructor(left: Node | undefined, right: Node | undefined, hash: Buffer) {
+--- a/bitcoin_client_js/src/lib/merkleMap.ts
++++ b/packages/bitcoin-prl-adapter/src/upstream/merkleMap.ts
+@@ -1,5 +1,8 @@
+-import { hashLeaf, Merkle } from './merkle';
+-import { createVarint } from './varint';
++// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.
++// Apache-2.0; local changes recorded in provenance/upstream.patch.
++import { Buffer } from 'buffer';
++import { hashLeaf, Merkle } from './merkle.js';
++import { createVarint } from './varint.js';
+ 
+ /**
+  * This implements "Merkelized Maps", documented at
+@@ -27,7 +30,7 @@
+ 
+     // Sanity check: verify that keys are actually sorted and with no duplicates
+     for (let i = 0; i < keys.length - 1; i++) {
+-      if (keys[i].toString('hex') >= keys[i + 1].toString('hex')) {
++      if (keys[i]!.toString('hex') >= keys[i + 1]!.toString('hex')) {
+         throw new Error('keys must be in strictly increasing order');
+       }
+     }
+--- a/bitcoin_client_js/src/lib/policy.ts
++++ b/packages/bitcoin-prl-adapter/src/upstream/policy.ts
+@@ -1,7 +1,11 @@
+-import { crypto } from 'bitcoinjs-lib';
++// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.
++// Apache-2.0; local changes recorded in provenance/upstream.patch.
++import { Buffer } from 'buffer';
++import { sha256 } from '@pearl-ledger/sdk';
++const crypto = { sha256 };
+ 
+-import { BufferWriter } from './buffertools';
+-import { hashLeaf, Merkle } from './merkle';
++import { BufferWriter } from './buffertools.js';
++import { hashLeaf, Merkle } from './merkle.js';
+ 
+ const WALLET_POLICY_V2 = 2;
+ 
+--- a/bitcoin_client_js/src/lib/varint.ts
++++ b/packages/bitcoin-prl-adapter/src/upstream/varint.ts
+@@ -1,3 +1,6 @@
++// Derived from LedgerHQ/app-bitcoin 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a.
++// Apache-2.0; local changes recorded in provenance/upstream.patch.
++import { Buffer } from 'buffer';
+ function bigintToSmallEndian(
+   value: bigint,
+   length: number,
+@@ -23,7 +26,7 @@
+     if (buffer[i + offset] == undefined) {
+       throw Error('Buffer too small');
+     }
+-    result += BigInt(buffer[i + offset]) << BigInt(i * 8);
++    result += BigInt(buffer[i + offset]!) << BigInt(i * 8);
+   }
+   return result;
+ }
+@@ -37,6 +40,7 @@
+  * @returns `n` as a `number`
+  */
+  export function sanitizeBigintToNumber(n: number | bigint): number {
++  if (typeof n === 'number' && !Number.isSafeInteger(n)) throw RangeError('Invalid integer');
+   if (n < 0) throw RangeError('Negative bigint is not a valid varint');
+   if (n > Number.MAX_SAFE_INTEGER) throw RangeError('Too large for a Number');
+ 
+@@ -78,22 +82,26 @@
+   data: Buffer,
+   offset: number
+ ): readonly [bigint, number] {
+-  if (offset < 0) {
++  if (!Number.isSafeInteger(offset) || offset < 0) {
+     throw RangeError("Negative offset is invalid");
+   }
+   if (data[offset] == undefined) {
+     throw Error('Buffer too small');
+   }
+ 
+-  if (data[offset] < 0xfd) {
+-    return [BigInt(data[offset]), 1];
++  if (data[offset]! < 0xfd) {
++    return [BigInt(data[offset]!), 1];
+   } else {
+     let size: number;
+     if (data[offset] === 0xfd) size = 2;
+     else if (data[offset] === 0xfe) size = 4;
+     else size = 8;
+ 
+-    return [smallEndianToBigint(data, offset + 1, size), size + 1];
++    const value = smallEndianToBigint(data, offset + 1, size);
++    if ((size === 2 && value < 0xfdn) || (size === 4 && value <= 0xffffn) || (size === 8 && value <= 0xffffffffn)) {
++      throw new Error('Noncanonical CompactSize');
++    }
++    return [value, size + 1];
+   }
+ }
+ 

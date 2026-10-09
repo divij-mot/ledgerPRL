@@ -1,0 +1,174 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger-bitcoin-prl/build/nanos2/bin/app.elf",
+    "testedSnapshot": "/workspace/shared/prl-bitcoin-independent-lCSE9F/tested-firmware.elf",
+    "sha256": "8e45823f822fbc675dcd2e2c0868667905e4e26e64a711dc62fec0392febf737",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "results": [
+    {
+      "name": "missing-network",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "wrong-network-id",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "wrong-genesis",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "network-binding-trailing",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "unknown-global-key",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "global-count-mismatch",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "psbt-version-zero",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "transaction-version-two",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "nonzero-locktime",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "modifiable-outputs",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "input-amount-max-plus-one",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "input-zero",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "aggregate-input-max-plus-one",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "aggregate-output-max-plus-one",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "output-zero",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "negative-fee",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "sighash-all",
+      "status": "6a82",
+      "passed": true
+    },
+    {
+      "name": "sighash-anyonecanpay-single",
+      "status": "6a82",
+      "passed": true
+    },
+    {
+      "name": "nonfinal-sequence",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "duplicate-outpoint",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "input-p2mr",
+      "status": "6a82",
+      "passed": true
+    },
+    {
+      "name": "recipient-witness-three",
+      "status": "6a82",
+      "passed": true
+    },
+    {
+      "name": "change-p2mr",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "two-external-recipients",
+      "status": "6a82",
+      "passed": true
+    },
+    {
+      "name": "forged-change-script",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "foreign-internal-key",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "taproot-script-tree",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "musig-input",
+      "status": "6a80",
+      "passed": true
+    },
+    {
+      "name": "nonzero-wallet-hmac",
+      "status": "6a82",
+      "passed": true
+    },
+    {
+      "name": "overflow-high-fee",
+      "passed": true,
+      "txid": "7f2412ab9cec6097ba1794cb69ac8f59fcaa0e612ca26e14ea62e8a5b47cd4fd"
+    },
+    {
+      "name": "max-minus-one",
+      "passed": true,
+      "txid": "ab6c0029e2d0608bb1c48493c38cabe6537014793d1f7b9288a404f74a38149c"
+    },
+    {
+      "name": "p2mr-ff-root",
+      "passed": true,
+      "txid": "c97ae1fe7b624e3486c02b5112eb5f811f53894c1b42284968d832f320950756"
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 import {
-  LedgerPearlClient,
-  DeviceError,
-  INS,
+  LedgerBitcoinPrlClient,
+  VerifiedSigningResultError,
+} from "@pearl-ledger/bitcoin-prl-adapter";
+import {
   type AccountPublicKey,
   type NetworkName,
   type SigningBundle,
+  type FinalizedTransaction,
   accountFromJson,
   accountToJson,
   deriveAddress,
@@ -20,6 +22,7 @@ import {
 } from "@pearl-ledger/sdk";
 import { readBoundedText, readBoundedJson } from "@pearl-ledger/sdk";
 import {
+  discoverAccount,
   type WatchSnapshot,
   type ChainValidation,
   type WalletJournal,
@@ -48,7 +51,6 @@ import {
   exportWalletBackup,
   mergeRestoredJournal,
   reconcileConfirmed,
-  rejectBeforeSigning,
   exportPublicRecovery,
   importPublicRecovery,
   recordVerifiedReceive,
@@ -59,10 +61,14 @@ import {
   requireFreshValidation,
 } from "@pearl-ledger/wallet";
 import { connectLedger, type DmkPearlTransport } from "./ledger.js";
+import { browserPublicSource } from "./public-source.js";
+import { checkLightSnapshot } from "./blockbook-source.js";
 import { WatchStorage } from "./storage.js";
+import { signedRecoveryBackup } from "./signed-recovery.js";
 import { importWalletBackupFile } from "./backup-import.js";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
+const hostedMode = window.location?.protocol === "https:";
 const store = new WatchStorage();
 const channel = new BroadcastChannel("pearl-ledger-watch-v1");
 let sourceMode: "node" | "public" = "node",
@@ -71,12 +77,12 @@ let sourceMode: "node" | "public" = "node",
 let history: HistoryEntry[] = [],
   lastUsed: [number, number] = [-1, -1];
 let page: "overview" | "receive" | "send" | "activity" = "overview";
-let network: NetworkName = "regtest",
+let network: NetworkName = hostedMode ? "testnet2" : "regtest",
   accountIndex = 0,
   account: AccountPublicKey | null = null;
 let snapshot: WatchSnapshot | null = null,
   validation: ChainValidation | null = null;
-let client: LedgerPearlClient | null = null,
+let client: LedgerBitcoinPrlClient | null = null,
   transport: DmkPearlTransport | null = null;
 let journal: WalletJournal = emptyJournal(),
   activePayment: string | null = null;
@@ -87,6 +93,15 @@ let busy = false,
 let receiveIndex = 0,
   verifiedReceive: string | null = null;
 let currentAbort: AbortController | null = null;
+let emergencySignedRecovery: {
+  text: string;
+  txid: string;
+  ownerId: string;
+  paymentId: string;
+  bundleHex: string;
+  createdAt: number;
+  outpoints: string;
+} | null = null;
 let journalRefreshGeneration = 0;
 const selected = new Set<string>();
 const form = { recipient: "", amount: "", fee: "0.00001000", changeIndex: "0" };
@@ -138,6 +153,11 @@ async function run(
   } catch (error) {
     notification = error instanceof Error ? error.message : "Operation failed";
     notificationType = "error";
+    if (client?.sessionState === "failed") {
+      verifiedReceive = null;
+      notification +=
+        " Exit and reopen the Pearl app on your Ledger before reconnecting. Closing this page does not cancel a review still shown on the device.";
+    }
   } finally {
     busy = false;
     busyText = "";
@@ -146,7 +166,38 @@ async function run(
       notification = String(error);
       notificationType = "error";
     });
+    await verifyRestoredEmergencyBackup();
     render();
+  }
+}
+async function verifyRestoredEmergencyBackup() {
+  const recovery = emergencySignedRecovery;
+  if (!recovery) return;
+  try {
+    const durable = await store.journal(recovery.ownerId);
+    const saved = durable.payments.find((p) => p.id === recovery.paymentId);
+    if (
+      !saved?.rawTx ||
+      saved.txid !== recovery.txid ||
+      saved.bundleHex !== recovery.bundleHex ||
+      saved.createdAt !== recovery.createdAt ||
+      JSON.stringify(saved.outpoints) !== recovery.outpoints ||
+      !["signed", "broadcast-unknown", "accepted"].includes(saved.state)
+    )
+      return;
+    const bundle = paymentBundle(saved);
+    const checked = finalizeTransaction(
+      bundle,
+      parseTransaction(saved.rawTx).inputs.map((i) => i.witness[0]!),
+    );
+    if (
+      checked.rawTx === saved.rawTx &&
+      checked.txid === recovery.txid &&
+      emergencySignedRecovery === recovery
+    )
+      emergencySignedRecovery = null;
+  } catch {
+    /* Keep the only available signed recovery copy until durable verification succeeds. */
   }
 }
 function getPayment(): PaymentRecord | undefined {
@@ -159,6 +210,9 @@ async function post(
 ): Promise<unknown> {
   const response = await fetch(route, {
     method: "POST",
+    credentials: "omit",
+    redirect: "error",
+    cache: "no-store",
     headers: { "content-type": "application/json", "x-pearl-companion": "1" },
     body: JSON.stringify(body),
     signal: AbortSignal.any([
@@ -183,21 +237,25 @@ async function post(
   return value;
 }
 async function checkNode(signal?: AbortSignal) {
+  signal = AbortSignal.any([
+    AbortSignal.timeout(90_000),
+    ...(signal ? [signal] : []),
+  ]);
   assert(snapshot, "Import or discover public watch data first");
+  assert(
+    !hostedMode || sourceMode === "public",
+    "Sync this account with the public source first. Private-node access is available only in the local app.",
+  );
   const result = applyValidation(
     snapshot,
-    await post(
-      sourceMode === "public" ? "/api/light/check" : "/api/check",
-      sourceMode === "public"
-        ? {
-            network,
-            consent: privacyConsent,
-            snapshot: JSON.parse(snapshotToJson(snapshot)),
-          }
-        : JSON.parse(snapshotToJson(snapshot)),
-      signal,
-    ),
+    sourceMode === "public"
+      ? await checkLightSnapshot(
+          browserPublicSource(network, privacyConsent, signal),
+          snapshot,
+        )
+      : await post("/api/check", JSON.parse(snapshotToJson(snapshot)), signal),
   );
+  signal.throwIfAborted();
   snapshot = result.snapshot;
   validation = result.validation;
   for (const key of selected)
@@ -210,12 +268,12 @@ async function checkNode(signal?: AbortSignal) {
 function render() {
   const active = getPayment(),
     b = snapshot ? balances(snapshot, reservedOutpoints(journal)) : null;
-  app.innerHTML = `<div class="layout"><aside class="sidebar"><div><div class="brand"><span class="pearl" aria-hidden="true"></span>pearl</div><div class="subtitle">Ledger companion</div></div><nav class="nav" aria-label="Main navigation">${(["overview", "receive", "send", "activity"] as const).map((p, i) => `<button data-nav="${p}" class="${page === p ? "active" : ""}" ${disabled(busy)}><span aria-hidden="true">${["◫", "↙", "↗", "≋"][i]}</span>${p[0]!.toUpperCase() + p.slice(1)}</button>`).join("")}</nav><div class="sidebar-bottom"><span class="status-dot"></span>Watch-only by design<br>Your keys stay on your Ledger.<br><br>Protocol v1 · Development build<br>No recovery phrase needed.</div></aside><main class="main"><header class="topbar"><div><p class="eyebrow">Your Pearl, under your control</p><h1>${{ overview: "Account overview", receive: "Receive Pearl", send: "Send with confidence", activity: "Payment activity" }[page]}</h1></div><div class="actions"><span class="tag ${network === "mainnet" ? "warn" : ""}">${e(network)}</span><button id="connect" ${disabled(busy)}>${client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger"}</button></div></header><div class="notice">Development prototype. Not audited, Ledger-approved or verified on physical hardware. Use disposable test funds only. Classical Taproot custody; no post-quantum claim.</div>${notification ? `<div role="status" class="notice ${notificationType}">${e(notification)} <button id="dismiss" class="ghost" aria-label="Dismiss notification">Dismiss</button></div>` : ""}${busy ? `<div role="status" class="notice busy">${e(busyText)}${currentAbort ? '<button id="cancel-device" class="ghost">Cancel operation</button>' : ""}</div>` : ""}${page === "overview" ? overview(b) : page === "receive" ? receive() : page === "send" ? send(active) : activity()}<footer class="footer"><span>Public data only. Never enter recovery words or private keys.</span><span>Empty-tree BIP86 · PRL protocol v1</span></footer></main></div>`;
+  app.innerHTML = `<div class="layout"><aside class="sidebar"><div><div class="brand"><span class="pearl" aria-hidden="true"></span>pearl</div><div class="subtitle">Ledger companion</div></div><nav class="nav" aria-label="Main navigation">${(["overview", "receive", "send", "activity"] as const).map((p, i) => `<button data-nav="${p}" class="${page === p ? "active" : ""}" ${disabled(busy)}><span aria-hidden="true">${["◫", "↙", "↗", "≋"][i]}</span>${p[0]!.toUpperCase() + p.slice(1)}</button>`).join("")}</nav><div class="sidebar-bottom"><span class="status-dot"></span>Watch-only by design<br>Your keys stay on your Ledger.<br><br>PSBT signer · Development build<br>No recovery phrase needed.</div></aside><main class="main"><header class="topbar"><div><p class="eyebrow">Your Pearl, under your control</p><h1>${{ overview: "Account overview", receive: "Receive Pearl", send: "Send with confidence", activity: "Payment activity" }[page]}</h1></div><div class="actions"><span class="tag ${network === "mainnet" ? "warn" : ""}">${e(network)}</span><button id="connect" ${disabled(busy)}>${client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger"}</button></div></header><div class="notice">Development prototype. Not audited, Ledger-approved or verified on physical hardware. Use disposable test funds only. Classical Taproot custody; no post-quantum claim.</div>${emergencySignedRecovery ? `<section class="notice error" role="alert"><strong>Signed payment needs a recovery backup</strong><p>Local storage failed after signing. Do not close or refresh this page. Download the signed-payment backup before continuing. Keep it private: anyone with these signed bytes can broadcast this exact payment. Inputs remain reserved; do not create a replacement payment.</p><p class="mono">${e(emergencySignedRecovery.txid)}</p><button id="download-signed-recovery">Download signed-payment backup</button></section>` : ""}${notification ? `<div role="status" class="notice ${notificationType}">${e(notification)} <button id="dismiss" class="ghost" aria-label="Dismiss notification">Dismiss</button></div>` : ""}${busy ? `<div role="status" class="notice busy">${e(busyText)}${currentAbort ? '<button id="cancel-device" class="ghost">Cancel operation</button>' : ""}</div>` : ""}${page === "overview" ? overview(b) : page === "receive" ? receive() : page === "send" ? send(active) : activity()}<footer class="footer"><span>Public data only. Never enter recovery words or private keys.</span><span>BIP86 accounts · PRL PSBT protocol</span></footer></main></div>`;
   bind();
 }
 function lightCard() {
   if (!account || !["mainnet", "testnet2"].includes(network)) return "";
-  return `<section class="card"><p class="eyebrow">No local full node required</p><h2>Public light sync</h2><p class="hint">Discover balances and transaction history through Pearl’s ${network === "mainnet" ? "blockbook.pearlresearch.ai" : "blockbook.testnet.pearlresearch.ai"} service over HTTPS. The operator can link queried addresses and your IP. Public account keys stay in this local app.</p><label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy)}>I allow this session to query my receive/change addresses and transaction IDs with this public service and trust its chain view.</label><button id="sync-public" ${disabled(busy || !privacyConsent)}>${syncComplete ? "Resync account & history" : "Discover watch account"}</button><p class="hint">Both branches · gap 20 · bounded recovery scan. No recovery words. Current limit: index 999 per branch, 2,000 history transactions and 256 UTXOs. Limit exhaustion is reported as incomplete.</p></section>`;
+  return `<section class="card"><p class="eyebrow">No local full node required</p><h2>Public light sync</h2><p class="hint">Discover balances and transaction history through Pearl’s ${network === "mainnet" ? "blockbook.pearlresearch.ai" : "blockbook.testnet.pearlresearch.ai"} service over HTTPS. The operator can link queried addresses and your IP. Public account keys stay in your browser. The wallet host and indexer can link these requests.</p><label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy)}>I allow this session to query my receive/change addresses and transaction IDs with this public service and trust its chain view.</label><button id="sync-public" ${disabled(busy || !privacyConsent)}>${syncComplete ? "Resync account & history" : "Discover watch account"}</button><p class="hint">Both branches · gap 20 · bounded recovery scan. No recovery words. Current limit: index 999 per branch, 2,000 history transactions and 256 UTXOs. Limit exhaustion is reported as incomplete.</p></section>`;
 }
 function paymentStatus(payment: PaymentRecord): string {
   if (payment.archived)
@@ -246,6 +304,10 @@ function historyCard(): string {
     .join("")}</section>`;
 }
 async function syncPublic() {
+  const signal = AbortSignal.any([
+    AbortSignal.timeout(300_000),
+    ...(currentAbort ? [currentAbort.signal] : []),
+  ]);
   assert(
     account && privacyConsent,
     "Select a public account and approve address disclosure first",
@@ -257,15 +319,21 @@ async function syncPublic() {
       Math.max(lastUsed[0], journal.issuedReceiveThrough),
       Math.max(lastUsed[1], journal.nextChangeIndex - 1),
     ];
-  const result = record(
-    await post("/api/light/discover", {
-      network,
-      consent: true,
-      account: accountToJson(account),
-      minimumIndex,
-    }),
-    "discovery response",
+  const discovered = await discoverAccount(
+    browserPublicSource(network, privacyConsent, signal),
+    account,
+    { minimumIndex },
   );
+  signal.throwIfAborted();
+  const result = {
+    ...discovered,
+    snapshot: JSON.parse(snapshotToJson(discovered.snapshot)),
+    history: discovered.history.map((h) => ({
+      ...h,
+      received: h.received.toString(),
+      spent: h.spent.toString(),
+    })),
+  };
   assert(
     result.complete === true,
     "Public scan incomplete; no final balance available",
@@ -298,7 +366,22 @@ async function syncPublic() {
     "Invalid discovery checkpoint",
   );
   const nextLastUsed = result.lastUsed as [number, number];
+  assert(
+    nextLastUsed.every(
+      (v, branch) =>
+        Number.isInteger(v) &&
+        v >= -1 &&
+        v <= 979 &&
+        v <=
+          (branch === 0
+            ? next.coverage.externalScannedThrough
+            : next.coverage.changeScannedThrough) -
+            20,
+    ),
+    "Invalid discovery recovery range",
+  );
   await store.mutate(owner, (j) => {
+    signal.throwIfAborted();
     // The same atomic transaction that saves the result checks for recovery
     // ranges learned by another tab while this bounded scan was in flight.
     assert(
@@ -320,6 +403,7 @@ async function syncPublic() {
           delete payment.archived;
       }
   });
+  signal.throwIfAborted();
   lastUsed = nextLastUsed;
   snapshot = next;
   history = nextHistory;
@@ -337,7 +421,7 @@ function overview(b: ReturnType<typeof balances> | null) {
     .map((n) => `<option ${network === n ? "selected" : ""}>${n}</option>`)
     .join(
       "",
-    )}</select></div><div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div></div>${account ? `<dl class="data-list"><div><dt>Derivation</dt><dd class="mono">${e(deriveAddress(account, 0, 0).path.replace("/0/0", ""))}</dd></div><div><dt>Fingerprint</dt><dd class="mono">${hex(account.masterFingerprint)}</dd></div><div><dt>Public key</dt><dd class="mono">${hex(account.publicKey)}</dd></div></dl><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy)}>Back up full watch wallet</button><button id="export-public" class="secondary" ${disabled(busy)}>Export public recovery record</button><button id="save-cache" class="secondary" ${disabled(busy || !snapshot)}>Save watch data locally</button><button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button></div><p class="hint">Saving exposes public addresses and balances to anyone using this browser profile. Payment reservations are always kept locally to prevent accidental reuse.</p>` : `<div class="empty"><div class="symbol" aria-hidden="true">◇</div><h3>Start with your Ledger</h3><p>Open the matching Pearl app, then connect and approve the public account export. Your device stays in charge of every signature.</p><button id="connect-inline" ${disabled(busy)}>Connect Ledger</button></div>`}</section>${snapshot ? `<section class="card"><div class="section-head"><h2>${syncComplete ? "Synced watch account" : "Watch data"}</h2><span class="tag ${validation ? "ok" : "warn"}">${validation ? (sourceMode === "public" ? "HTTPS indexer checked" : "Node checked") : "Chain metadata unverified"}</span></div><dl class="data-list"><div><dt>Snapshot block</dt><dd>${snapshot.tip.height}<br><span class="mono">${snapshot.tip.hash}</span></dd></div><div><dt>Address coverage</dt><dd>Receive 0–${snapshot.coverage.externalScannedThrough}; change 0–${snapshot.coverage.changeScannedThrough}; gap ${snapshot.coverage.gapLimit}</dd></div><div><dt>Outputs</dt><dd>${snapshot.coins.length} · ${money(b!.total)} observed total</dd></div></dl><p class="hint">${syncComplete ? "Scanned both branches through a gap of 20 unused addresses. This trusts the selected indexer and is not SPV." : "Imported data is not a complete scan or proof of chain inclusion."} Coinbase outputs need 100 confirmations. Reorgs invalidate detached outputs; reserved inputs remain locked.</p><button id="check-node" class="secondary" ${disabled(busy)}>Refresh input status</button></section>` : ""}</div><div>${lightCard()}<section class="card"><p class="eyebrow">Three deliberate steps</p><h2>Your device is the signer</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Verify your receive address</b><span class="muted">Compare the full address on your Ledger before using it for payouts.</span></div></div><div class="step"><span class="number">2</span><div><b>Review every detail</b><span class="muted">Choose inputs, recipient, amount, exact fee and derived change.</span></div></div><div class="step"><span class="number">3</span><div><b>Sign, then broadcast</b><span class="muted">Signatures are verified independently. Broadcast is a separate explicit action.</span></div></div></div></section><section class="card"><h2>Import public watch data</h2><p class="hint">Use the documented JSON snapshot format. Raw transactions are parsed locally to check exact grain amounts, transaction IDs and ownership. Never import a seed or private key.</p><div class="field"><label for="backup-file">Complete watch-wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account / range recovery JSON</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Public snapshot JSON</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved data</button><button id="load-demo" class="ghost" ${disabled(busy)}>Explore public example</button></div></section><section class="card"><h2>Browser support</h2><p class="hint">Ledger connection uses current DMK + WebHID. Desktop Chrome / Edge on localhost or HTTPS are the intended test targets. Mobile, Safari and Firefox are not qualified.</p><p class="hint">${window.isSecureContext && "hid" in navigator ? "WebHID is available in this browser." : "WebHID is unavailable here. Public watch data remains viewable."}</p></section></div></div>`;
+    )}</select></div><div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div></div>${account ? `<dl class="data-list"><div><dt>Derivation</dt><dd class="mono">${e(deriveAddress(account, 0, 0).path.replace("/0/0", ""))}</dd></div><div><dt>Fingerprint</dt><dd class="mono">${hex(account.masterFingerprint)}</dd></div><div><dt>Public key</dt><dd class="mono">${hex(account.publicKey)}</dd></div></dl><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy)}>Back up full watch wallet</button><button id="export-public" class="secondary" ${disabled(busy)}>Export public recovery record</button><button id="save-cache" class="secondary" ${disabled(busy || !snapshot)}>Save watch data locally</button><button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button></div><p class="hint">Saving exposes addresses and balances to anyone using this browser profile. Recovery exports can link all account addresses; full backups also contain signed payments that anyone holding the file can broadcast. Keep exports private. Payment reservations stay local to prevent accidental reuse.</p>` : `<div class="empty"><div class="symbol" aria-hidden="true">◇</div><h3>Start with your Ledger</h3><p>Open the matching Pearl app, then connect and approve the public account export. Your device stays in charge of every signature.</p><button id="connect-inline" ${disabled(busy)}>Connect Ledger</button></div>`}</section>${snapshot ? `<section class="card"><div class="section-head"><h2>${syncComplete ? "Synced watch account" : "Watch data"}</h2><span class="tag ${validation ? "ok" : "warn"}">${validation ? (sourceMode === "public" ? "HTTPS indexer checked" : "Node checked") : "Chain metadata unverified"}</span></div><dl class="data-list"><div><dt>Snapshot block</dt><dd>${snapshot.tip.height}<br><span class="mono">${snapshot.tip.hash}</span></dd></div><div><dt>Address coverage</dt><dd>Receive 0–${snapshot.coverage.externalScannedThrough}; change 0–${snapshot.coverage.changeScannedThrough}; gap ${snapshot.coverage.gapLimit}</dd></div><div><dt>Outputs</dt><dd>${snapshot.coins.length} · ${money(b!.total)} observed total</dd></div></dl><p class="hint">${syncComplete ? "Scanned both branches through a gap of 20 unused addresses. This trusts the selected indexer and is not SPV." : "Imported data is not a complete scan or proof of chain inclusion."} Coinbase outputs need 100 confirmations. Reorgs invalidate detached outputs; reserved inputs remain locked.</p><button id="check-node" class="secondary" ${disabled(busy)}>Refresh input status</button></section>` : ""}</div><div>${lightCard()}<section class="card"><p class="eyebrow">Three deliberate steps</p><h2>Your device is the signer</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Verify your receive address</b><span class="muted">Compare the full address on your Ledger before using it for payouts.</span></div></div><div class="step"><span class="number">2</span><div><b>Review every detail</b><span class="muted">Choose inputs, recipient, amount, exact fee and derived change.</span></div></div><div class="step"><span class="number">3</span><div><b>Sign, then broadcast</b><span class="muted">Signatures are verified independently. Broadcast is a separate explicit action.</span></div></div></div></section><section class="card"><h2>Import public watch data</h2><p class="hint">Use the documented JSON snapshot format. Raw transactions are parsed locally to check exact grain amounts, transaction IDs and ownership. Never import a seed or private key.</p><div class="field"><label for="backup-file">Complete watch-wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account / range recovery JSON</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Public snapshot JSON</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved data</button>${hostedMode ? "" : `<button id="load-demo" class="ghost" ${disabled(busy)}>Explore public example</button>`}</div></section><section class="card"><h2>Browser support</h2><p class="hint">Ledger connection uses current DMK + WebHID. Desktop Chrome / Edge on localhost or HTTPS are the intended test targets. Mobile, Safari and Firefox are not qualified.</p><p class="hint">${window.isSecureContext && "hid" in navigator ? "WebHID is available in this browser." : "WebHID is unavailable here. Public watch data remains viewable."}</p></section></div></div>`;
 }
 function receive() {
   if (!account)
@@ -579,6 +663,13 @@ function bind() {
     notification = "";
     render();
   });
+  click("download-signed-recovery", () => {
+    if (emergencySignedRecovery)
+      download(
+        "pearl-signed-payment-backup.json",
+        emergencySignedRecovery.text,
+      );
+  });
   click("connect", () => void connect());
   click("connect-inline", () => void connect());
   click(
@@ -684,25 +775,36 @@ function bind() {
     () =>
       void run("Approve the receive address on your Ledger", async (signal) => {
         assert(client && account, "Connect your Ledger");
+        verifiedReceive = null;
         assert(
           receiveIndex <= Math.min(979, journal.issuedReceiveThrough + 1),
           "Receive index outside saved recovery range",
         );
-        const expected = deriveAddress(account, 0, receiveIndex).address;
+        const owner = account,
+          device = client,
+          index = receiveIndex;
+        const expected = deriveAddress(owner, 0, index).address;
         signal.throwIfAborted();
-        const returned = await client.verifyAddress(
-          account,
-          0,
-          receiveIndex,
-          signal,
+        // Save the public recovery range before an address can be shown on the
+        // device. Rejection/cancellation must not roll this range back.
+        await store.mutate(accountId(owner), (j) => {
+          signal.throwIfAborted();
+          recordVerifiedReceive(j, index);
+        });
+        signal.throwIfAborted();
+        assert(
+          account === owner && client === device && receiveIndex === index,
+          "Receive account changed; reconnect and verify again",
         );
+        const returned = await device.verifyAddress(owner, 0, index, signal);
         signal.throwIfAborted();
         assert(
           returned === expected,
           "Ledger address does not match the public account",
         );
-        await store.mutate(accountId(account), (j) =>
-          recordVerifiedReceive(j, receiveIndex),
+        assert(
+          account === owner && client === device && receiveIndex === index,
+          "Receive account changed; reconnect and verify again",
         );
         signal.throwIfAborted();
         verifiedReceive = expected;
@@ -811,10 +913,28 @@ function bind() {
       const button = document.getElementById("broadcast") as HTMLButtonElement;
       button.disabled = busy || !(event.target as HTMLInputElement).checked;
     });
-  click(
-    "broadcast",
-    () => void run("Broadcasting the exact signed transaction", broadcast),
-  );
+  click("broadcast", () => {
+    if (busy) return;
+    const approved = (
+      document.getElementById("broadcast-approval") as HTMLInputElement | null
+    )?.checked;
+    const payment = getPayment();
+    if (!approved || !account || !payment?.rawTx || !payment.txid) {
+      notify("Approve this exact signed payment before broadcasting", true);
+      return;
+    }
+    const approval: BroadcastApproval = Object.freeze({
+      ownerId: accountId(account),
+      paymentId: payment.id,
+      network,
+      source: sourceMode,
+      rawTx: payment.rawTx,
+      txid: payment.txid,
+    });
+    void run("Broadcasting the exact signed transaction", (signal) =>
+      broadcast(signal, approval),
+    );
+  });
   click("back-payments", () => {
     activePayment = null;
     page = "activity";
@@ -856,10 +976,10 @@ async function connect() {
     client = null;
     currentAbort?.abort();
     notification =
-      "Ledger disconnected. Reconnect before continuing; existing payment reservations remain locked.";
+      "Ledger disconnected. Exit and reopen the Pearl app on the device before reconnecting; payment reservations remain locked.";
     notificationType = "error";
     render();
-  });
+  }, "bitcoin-prl");
   await run(
     "Choose your Ledger, open Pearl, and approve the public account export",
     async (signal) => {
@@ -871,12 +991,13 @@ async function connect() {
       try {
         signal.throwIfAborted();
         transport = connected;
-        client = new LedgerPearlClient(connected, network);
+        client = new LedgerBitcoinPrlClient(connected, network);
         render();
         const capabilities = await client.capabilities(signal);
         signal.throwIfAborted();
         assert(
-          capabilities.protocol === 1 && capabilities.network === network,
+          capabilities.protocol === "ledger-bitcoin-prl-v1" &&
+            capabilities.network === network,
           "Wrong Pearl app/network",
         );
         const exported = await client.exportAccount(accountIndex, signal);
@@ -896,7 +1017,7 @@ async function connect() {
         account = exported;
         await refreshJournal();
         signal.throwIfAborted();
-        notification = `Pearl ${capabilities.version} connected. Public account ${exported.account} approved on the device.`;
+        notification = `Pearl PSBT signer connected. Public account ${exported.account} approved on the device.`;
       } catch (error) {
         await connected.close();
         if (transport === connected) {
@@ -911,6 +1032,10 @@ async function connect() {
 }
 async function sign(signal: AbortSignal, recovery = false) {
   assert(
+    !emergencySignedRecovery,
+    "Save and restore the signed-payment recovery backup before further signing",
+  );
+  assert(
     client && account && snapshot && activePayment,
     "Connect Ledger and load the reserved payment's watch data",
   );
@@ -920,7 +1045,7 @@ async function sign(signal: AbortSignal, recovery = false) {
     device = client;
   assert(
     device.sessionState === "ready",
-    "Reconnect your Ledger before signing",
+    "Exit and reopen the Pearl app on your Ledger, then reconnect before signing",
   );
   assert(
     network === owner.network && accountId(snapshot.account) === ownerId,
@@ -1002,81 +1127,126 @@ async function sign(signal: AbortSignal, recovery = false) {
   signal.throwIfAborted();
   busyText = "Check network, recipient, amount, fee and change on your Ledger";
   render();
-  let result;
-  try {
-    result = await device.signBundle(bundle, owner, { signal });
-  } catch (error) {
-    if (
-      !recovery &&
-      error instanceof DeviceError &&
-      error.status === 0x6985 &&
-      error.instruction === INS.REVIEW
-    ) {
-      const reset = await store.mutate(ownerId, (j) => {
+  let persistedRawTx: string | null = null;
+  const persistVerifiedSigned = async (result: FinalizedTransaction) => {
+    const recoveryText = signedRecoveryBackup(
+      owner,
+      bundle,
+      result,
+      paymentId,
+      payment.createdAt,
+    );
+    try {
+      // Once signatures return, cancellation cannot discard independently verified
+      // bytes. Concurrent completions may have a different valid witness, but must
+      // describe exactly the same canonical payment and transaction ID.
+      const checked = finalizeTransaction(bundle, result.signatures);
+      assert(
+        checked.rawTx === result.rawTx && checked.txid === result.txid,
+        "Final transaction mismatch",
+      );
+      const retained = await store.mutate(ownerId, (j) => {
         const current = j.payments.find((p) => p.id === paymentId);
-        if (JSON.stringify(current) !== signingRecord) return false;
-        rejectBeforeSigning(j, paymentId, attemptId);
-        return true;
+        assert(
+          current &&
+            current.bundleHex === payment.bundleHex &&
+            current.createdAt === payment.createdAt &&
+            JSON.stringify(current.outpoints) ===
+              JSON.stringify(payment.outpoints),
+          "Reserved payment changed before signed storage; existing record retained",
+        );
+        if (current.rawTx !== undefined || current.txid !== undefined) {
+          assert(
+            ["signed", "broadcast-unknown", "accepted"].includes(
+              current.state,
+            ) &&
+              current.rawTx &&
+              current.txid,
+            "Inconsistent saved signed payment; existing record retained",
+          );
+          const saved = finalizeTransaction(
+            bundle,
+            parseTransaction(current.rawTx).inputs.map((i) => i.witness[0]!),
+          );
+          assert(
+            saved.rawTx === current.rawTx &&
+              saved.txid === current.txid &&
+              saved.txid === checked.txid,
+            "Concurrent signed payment failed verification; existing record retained",
+          );
+          return true;
+        }
+        assert(
+          current.state === "signing" && !current.archived,
+          "Signing reservation changed; existing record retained",
+        );
+        transitionPayment(j, paymentId, "signed", {
+          rawTx: checked.rawTx,
+          txid: checked.txid,
+        });
+        return false;
       });
       channel.postMessage("journal");
-      throw new Error(
-        reset
-          ? "Payment rejected on the Ledger before signing. The unsigned draft remains reserved; discard it or reconnect to review again."
-          : "Ledger rejected this attempt, but the payment changed during review. Its current state and reservations were preserved; inspect activity before continuing.",
-      );
+      notification = retained
+        ? "Another tab's independently verified signed bytes were preserved. Broadcast still requires separate explicit approval."
+        : "Signatures independently verified and exact signed bytes saved. Broadcast requires a separate approval.";
+      persistedRawTx = result.rawTx;
+    } catch (error) {
+      emergencySignedRecovery = {
+        text: recoveryText,
+        txid: result.txid,
+        ownerId,
+        paymentId,
+        bundleHex: payment.bundleHex,
+        createdAt: payment.createdAt,
+        outpoints: JSON.stringify(payment.outpoints),
+      };
+      render();
+      throw error;
+    }
+  };
+  // Persist at the last independently verified signature yield, before the
+  // final device ACK. A missing ACK must not discard a spendable transaction.
+  let result;
+  try {
+    result = await device.signBundle(bundle, owner, {
+      signal,
+      onVerifiedSigned: persistVerifiedSigned,
+    });
+  } catch (error) {
+    // A durability timeout can happen while IndexedDB never settles, before
+    // the callback's own catch can run. Keep the verified bytes immediately.
+    if (error instanceof VerifiedSigningResultError) {
+      const signed = error.signedTransaction;
+      emergencySignedRecovery = {
+        text: signedRecoveryBackup(
+          owner,
+          bundle,
+          signed,
+          paymentId,
+          payment.createdAt,
+        ),
+        txid: signed.txid,
+        ownerId,
+        paymentId,
+        bundleHex: payment.bundleHex,
+        createdAt: payment.createdAt,
+        outpoints: JSON.stringify(payment.outpoints),
+      };
+      render();
     }
     throw error;
   }
-  // Once signatures return, cancellation cannot discard independently verified
-  // bytes. Concurrent completions may have a different valid witness, but must
-  // describe exactly the same canonical payment and transaction ID.
-  const checked = finalizeTransaction(bundle, result.signatures);
+  if (persistedRawTx === null) await persistVerifiedSigned(result);
   assert(
-    checked.rawTx === result.rawTx && checked.txid === result.txid,
-    "Final transaction mismatch",
+    persistedRawTx === result.rawTx,
+    "Returned signed bytes differ from durable result",
   );
-  const retained = await store.mutate(ownerId, (j) => {
-    const current = j.payments.find((p) => p.id === paymentId);
-    assert(
-      current &&
-        current.bundleHex === payment.bundleHex &&
-        current.createdAt === payment.createdAt &&
-        JSON.stringify(current.outpoints) === JSON.stringify(payment.outpoints),
-      "Reserved payment changed before signed storage; existing record retained",
-    );
-    if (current.rawTx !== undefined || current.txid !== undefined) {
-      assert(
-        ["signed", "broadcast-unknown", "accepted"].includes(current.state) &&
-          current.rawTx &&
-          current.txid,
-        "Inconsistent saved signed payment; existing record retained",
-      );
-      const saved = finalizeTransaction(
-        bundle,
-        parseTransaction(current.rawTx).inputs.map((i) => i.witness[0]!),
-      );
-      assert(
-        saved.rawTx === current.rawTx &&
-          saved.txid === current.txid &&
-          saved.txid === checked.txid,
-        "Concurrent signed payment failed verification; existing record retained",
-      );
-      return true;
-    }
-    assert(
-      current.state === "signing" && !current.archived,
-      "Signing reservation changed; existing record retained",
-    );
-    transitionPayment(j, paymentId, "signed", {
-      rawTx: checked.rawTx,
-      txid: checked.txid,
-    });
-    return false;
-  });
-  channel.postMessage("journal");
-  notification = retained
-    ? "Another tab's independently verified signed bytes were preserved. Broadcast still requires separate explicit approval."
-    : "Signatures independently verified and exact signed bytes saved. Broadcast requires a separate approval.";
+  if (result.completionWarning) {
+    notification =
+      "Signed bytes were verified and saved, but the final device acknowledgement was not confirmed. Reconnect before another operation. Broadcast still requires separate approval.";
+    notificationType = "error";
+  }
 }
 /** Recheck known local-node payments without claiming a complete account scan. */
 async function reconcileNodePayments(signal: AbortSignal) {
@@ -1346,16 +1516,35 @@ async function reconcileNodePayments(signal: AbortSignal) {
     networkAbort.abort(new Error("Reconciliation scope completed"));
   }
 }
+type BroadcastApproval = Readonly<{
+  ownerId: string;
+  paymentId: string;
+  network: NetworkName;
+  source: "node" | "public";
+  rawTx: string;
+  txid: string;
+}>;
 async function broadcast(
   signal: AbortSignal | undefined = currentAbort?.signal,
+  approval?: BroadcastApproval,
 ) {
-  assert(account && activePayment, "No signed payment");
+  assert(
+    account && activePayment && approval,
+    "Explicit signed-payment approval required",
+  );
   const owner = account,
     ownerId = accountId(owner),
     paymentId = activePayment;
   assert(
     network === owner.network,
     "Selected broadcast network differs from account",
+  );
+  assert(
+    approval.ownerId === ownerId &&
+      approval.paymentId === paymentId &&
+      approval.network === network &&
+      approval.source === sourceMode,
+    "Broadcast context changed; review and approve again",
   );
   signal?.throwIfAborted();
   const payment = (await store.journal(ownerId)).payments.find(
@@ -1368,6 +1557,14 @@ async function broadcast(
       payment.rawTx &&
       payment.txid,
     "No verified signed transaction",
+  );
+  assert(
+    payment.rawTx === approval.rawTx && payment.txid === approval.txid,
+    "Signed payment changed; review and approve again",
+  );
+  assert(
+    approval.source !== "public" || privacyConsent,
+    "Public address disclosure approval required",
   );
   assert(
     !payment.archived,
@@ -1386,6 +1583,13 @@ async function broadcast(
   );
   await store.mutate(ownerId, (j) => {
     signal?.throwIfAborted();
+    assert(
+      account === owner &&
+        activePayment === paymentId &&
+        network === approval.network &&
+        sourceMode === approval.source,
+      "Broadcast context changed; review and approve again",
+    );
     const current = j.payments.find((p) => p.id === paymentId);
     assert(
       current && !current.archived,
@@ -1405,9 +1609,14 @@ async function broadcast(
     expectedTxid: payment.txid,
   };
   const result = await post(
-    sourceMode === "public" ? "/api/light/broadcast" : "/api/broadcast",
-    sourceMode === "public"
-      ? { network: owner.network, consent: privacyConsent, payment: payload }
+    approval.source === "public" ? "/api/indexer/broadcast" : "/api/broadcast",
+    approval.source === "public"
+      ? {
+          network: owner.network,
+          consent: privacyConsent,
+          rawTx: payment.rawTx,
+          expectedTxid: payment.txid,
+        }
       : payload,
     signal,
   );
@@ -1456,7 +1665,11 @@ channel.onmessage = () => {
       ),
     );
 };
-window.addEventListener("beforeunload", () => {
+window.addEventListener("beforeunload", (event) => {
+  if (emergencySignedRecovery) {
+    event.preventDefault();
+    event.returnValue = "";
+  }
   currentAbort?.abort();
   void transport?.close();
 });

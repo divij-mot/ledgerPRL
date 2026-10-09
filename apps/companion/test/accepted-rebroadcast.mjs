@@ -29,9 +29,12 @@ const contents =
   `
 export async function auditSeed(a,j) {account=a;network=a.network;sourceMode='node';await store.mutate(accountId(a),saved=>Object.assign(saved,structuredClone(j)));activePayment=j.payments[0].id;page='send';await refreshJournal();render();}
 export async function auditReconcile(){await reconcileNodePayments(new AbortController().signal);await refreshJournal();render();}
-export async function auditBroadcast(){await broadcast();await refreshJournal();render();}
+// Test-only explicit approval, captured before the actual async broadcast flow.
+// The real checkbox/dispatch guard is exercised separately in direct-wallet-ui.mjs.
+function auditApproval(){const p=getPayment();return Object.freeze({ownerId:accountId(account),paymentId:p.id,network,source:sourceMode,rawTx:p.rawTx,txid:p.txid});}
+export async function auditBroadcast(){await broadcast(undefined,auditApproval());await refreshJournal();render();}
 export async function auditSaved(){return store.journal(accountId(account));}
-export async function auditRunBroadcast(){await run('Explicit retry',broadcast);return notification;}
+export async function auditRunBroadcast(){const approval=auditApproval();await run('Explicit retry',signal=>broadcast(signal,approval));return notification;}
 export function auditCancel(){currentAbort?.abort();}
 `;
 const output = await build({

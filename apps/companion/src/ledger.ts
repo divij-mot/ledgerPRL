@@ -12,30 +12,42 @@ import { webHidTransportFactory } from "@ledgerhq/device-transport-kit-web-hid";
 import { firstValueFrom, take, timeout } from "rxjs";
 import { assert, concat, type ApduTransport } from "@pearl-ledger/sdk";
 
+export type PearlDeviceProtocol = "prl1" | "bitcoin-prl";
+
 /** Real DMK custom-command adapter. No LedgerJS, fake device, software key or signing fallback. */
 export class PearlCommand implements Command<Uint8Array> {
-  readonly name = "Pearl protocol v1";
+  readonly name: string;
   private readonly bytes: Uint8Array;
-  constructor(bytes: Uint8Array) {
+  constructor(bytes: Uint8Array, protocol: PearlDeviceProtocol = "prl1") {
+    this.name =
+      protocol === "bitcoin-prl"
+        ? "Pearl Bitcoin-based PSBT protocol"
+        : "Pearl protocol v1";
     assert(
       bytes.length >= 5 && bytes.length === 5 + bytes[4]!,
       "Invalid short APDU",
     );
-    assert(
+    const legacy =
+      protocol === "prl1" &&
       bytes[0] === 0xe0 &&
-        bytes[2] === 0 &&
-        bytes[3] === 0 &&
-        [0, 1, 2, 0x10, 0x11, 0x12, 0x13, 0x14].includes(bytes[1]!),
-      "Unsupported Pearl command",
-    );
+      bytes[2] === 0 &&
+      bytes[3] === 0 &&
+      [0, 1, 2, 0x10, 0x11, 0x12, 0x13, 0x14].includes(bytes[1]!);
+    const bitcoinPrl =
+      protocol === "bitcoin-prl" &&
+      bytes[2] === 0 &&
+      bytes[3] === 1 &&
+      ((bytes[0] === 0xe1 && [0, 3, 4, 5, 6].includes(bytes[1]!)) ||
+        (bytes[0] === 0xf8 && bytes[1] === 1));
+    assert(legacy || bitcoinPrl, "Unsupported Pearl command or protocol");
     this.bytes = bytes.slice();
   }
   getApdu() {
     return new ApduBuilder({
       cla: this.bytes[0]!,
       ins: this.bytes[1]!,
-      p1: 0,
-      p2: 0,
+      p1: this.bytes[2]!,
+      p2: this.bytes[3]!,
     })
       .addBufferToData(this.bytes.slice(5))
       .build();
@@ -65,6 +77,8 @@ export class DmkPearlTransport implements ApduTransport {
       ? (navigator as Navigator & { hid?: EventTarget }).hid
       : undefined,
     private readonly onDisconnect?: () => void,
+    private readonly protocol: PearlDeviceProtocol = "prl1",
+    private readonly destroyTransport?: () => void,
   ) {
     this.disconnectEvents?.addEventListener("disconnect", this.disconnected);
   }
@@ -83,7 +97,7 @@ export class DmkPearlTransport implements ApduTransport {
     try {
       const command = this.dmk.sendCommand({
         sessionId: this.sessionId,
-        command: new PearlCommand(apdu),
+        command: new PearlCommand(apdu, this.protocol),
         abortTimeout: 120_000,
       });
       const cancellation = new Promise<never>((_, reject) => {
@@ -96,9 +110,15 @@ export class DmkPearlTransport implements ApduTransport {
           );
         };
         signal?.addEventListener("abort", abort, { once: true });
+        // A library callback may close the transport synchronously inside sendCommand.
+        if (signal?.aborted) abort();
       });
       const result = await Promise.race([command, cancellation]);
-      assert(!this.closed, "Device disconnected");
+      // In the PSBT protocol this response can contain the final signature
+      // yield. If the response won the race, let the client verify/persist it
+      // even when the transport closed in the same turn. The terminal latch
+      // still rejects every subsequent APDU; no automatic retry is allowed.
+      if (this.protocol === "prl1") assert(!this.closed, "Device disconnected");
       if (!isSuccessCommandResult(result))
         throw new Error(
           "Ledger transport failed. Unlock the device, open the matching Pearl app and reconnect.",
@@ -139,17 +159,41 @@ export class DmkPearlTransport implements ApduTransport {
     } catch {
       /* best-effort terminal cleanup */
     }
+    try {
+      this.destroyTransport?.();
+    } catch {
+      /* The terminal latch stays closed even if library cleanup fails. */
+    }
   }
 }
 export async function connectLedger(
   onDisconnect?: () => void,
+  protocol: PearlDeviceProtocol = "prl1",
 ): Promise<DmkPearlTransport> {
   assert(
     window.isSecureContext && "hid" in navigator,
     "WebHID is unavailable. Use desktop Chrome or Edge on localhost or HTTPS.",
   );
+  let hidTransport: ReturnType<typeof webHidTransportFactory> | undefined;
+  let destroyed = false;
+  const destroyTransport = () => {
+    if (destroyed) return;
+    destroyed = true;
+    // DMK close does not own WebHID factory listener teardown. The pinned
+    // WebHID implementation exposes destroy(); keep this feature-detected
+    // because the common DMK Transport interface does not declare it.
+    if (
+      hidTransport &&
+      "destroy" in hidTransport &&
+      typeof hidTransport.destroy === "function"
+    )
+      hidTransport.destroy();
+  };
   const dmk = new DeviceManagementKitBuilder()
-    .addTransport(webHidTransportFactory)
+    .addTransport((...args) => {
+      hidTransport = webHidTransportFactory(...args);
+      return hidTransport;
+    })
     .build();
   try {
     // Invocation starts inside the explicit Connect click, preserving browser device-picker activation.
@@ -166,9 +210,15 @@ export async function connectLedger(
       sessionId,
       (navigator as Navigator & { hid: EventTarget }).hid,
       onDisconnect,
+      protocol,
+      destroyTransport,
     );
   } catch (error) {
-    dmk.close();
+    try {
+      dmk.close();
+    } finally {
+      destroyTransport();
+    }
     throw error;
   }
 }

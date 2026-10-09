@@ -9,13 +9,15 @@
     "preview": "node --import tsx ../../node_modules/vite/bin/vite.js preview --host 127.0.0.1",
     "bridge": "node --import tsx src/bridge-main.ts",
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test test/*.test.ts"
+    "test": "node --import tsx --test test/*.test.ts",
+    "web": "node --import tsx src/web-server.ts"
   },
   "dependencies": {
     "@pearl-ledger/sdk": "0.1.0",
     "@pearl-ledger/wallet": "0.1.0",
     "@ledgerhq/device-management-kit": "1.11.0",
     "@ledgerhq/device-transport-kit-web-hid": "1.2.4",
-    "rxjs": "7.8.2"
+    "rxjs": "7.8.2",
+    "@pearl-ledger/bitcoin-prl-adapter": "0.1.0"
   }
 }

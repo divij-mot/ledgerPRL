@@ -1,0 +1,50 @@
+{
+  "description": "Native PRL app in Speculos with PUBLIC vector-one seed. Never fund. No broadcast.",
+  "publicAccount": {
+    "network": "regtest",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "bundle": {
+    "network": "regtest",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "vout": 1,
+        "amount": "2100000000000000000",
+        "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "2099999999999999000",
+        "scriptPubKey": "51205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      }
+    ]
+  },
+  "sighashes": [
+    "e432b11b1d85cfab19375cfcef9a09e1e40b6ec01dd4d112112b2f7f5bb50471"
+  ],
+  "signatures": [
+    "29b7e989ec0ca815cd7c5231a034b600ca21d39432e4e76ceb28973864d6986d7d711ff86b12503494b4e86255fdc63eb9e9245ec78568922edec66bab840883"
+  ],
+  "addresses": {
+    "input": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+    "recipient": "rprl1ptkfg5hcsgxwuu5qf3j9q2uk9cmyc8n0u29d3eyhf8q069j924e8scdxtvf"
+  },
+  "rawTx": "0100000000010111111111111111111111111111111111111111111111111111111111111111110100000000ffffffff0118fc51acdfb2241d2251205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f014029b7e989ec0ca815cd7c5231a034b600ca21d39432e4e76ceb28973864d6986d7d711ff86b12503494b4e86255fdc63eb9e9245ec78568922edec66bab84088300000000",
+  "txid": "4db1dd1fa15ff07fbe274c9a7bce7fa8cf1bfbe03b0b5f3ad356b2782201f3f1",
+  "wtxid": "80d24cbb814bb9a6a94242546a5ea487fc22880919a73e87f56494df33a14f5f",
+  "vsize": 111
+}

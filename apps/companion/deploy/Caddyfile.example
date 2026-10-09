@@ -1,0 +1,45 @@
+# Template only: replace wallet.example.com with your dedicated wallet hostname.
+# See docs/website-hosting.md. No DNS, certificate or service changes are made by this repository.
+{
+    # Keep Caddy's management API local. Never publish port 2019.
+    admin 127.0.0.1:2019
+    servers {
+        strict_sni_host on
+        max_header_size 8KiB
+        timeouts {
+            read_header 5s
+            read_body 10s
+            write 35s
+            idle 30s
+        }
+    }
+    # Request errors can include metadata, so discard HTTP access/error logging.
+    # Retain other operational logs (for example certificate-renewal failures).
+    log default {
+        exclude http.log.access http.log.error
+    }
+}
+
+wallet.example.com {
+    # Caddy obtains/renews a publicly trusted certificate and redirects HTTP to HTTPS.
+    # There is intentionally no access-log directive, CDN, analytics or body logger.
+    request_body {
+        max_size 128KiB
+    }
+    header -Server
+    reverse_proxy 127.0.0.1:8788 {
+        # Preserve the original Host; the Node service validates it exactly.
+        header_up X-Forwarded-Proto https
+        header_up -X-Forwarded-For
+        header_up -X-Forwarded-Host
+        header_up -Forwarded
+        header_up -Cookie
+        header_up -Authorization
+        transport http {
+            dial_timeout 3s
+            response_header_timeout 30s
+            read_timeout 35s
+            write_timeout 10s
+        }
+    }
+}

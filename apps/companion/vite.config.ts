@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import { lightMiddleware } from "./src/blockbook.js";
+import { indexerProxy } from "./src/indexer-proxy.js";
 const origin = "http://127.0.0.1:5173";
 const headers = {
   "Content-Security-Policy": "frame-ancestors 'none'",
@@ -10,9 +11,11 @@ export default defineConfig({
     {
       name: "pearl-public-watch-only",
       configureServer(server) {
+        server.middlewares.use(indexerProxy(origin));
         server.middlewares.use(lightMiddleware(origin));
       },
       configurePreviewServer(server) {
+        server.middlewares.use(indexerProxy(origin));
         server.middlewares.use(lightMiddleware(origin));
       },
     },

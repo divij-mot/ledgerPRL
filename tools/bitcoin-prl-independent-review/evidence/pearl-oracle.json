@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "feeGrains": "1900000000000000000",
+      "name": "overflow-high-fee",
+      "negativeScriptChecks": 3,
+      "recipientClass": "witness_v1_taproot",
+      "txid": "7f2412ab9cec6097ba1794cb69ac8f59fcaa0e612ca26e14ea62e8a5b47cd4fd",
+      "validInputScripts": 1
+    },
+    {
+      "feeGrains": "1",
+      "name": "max-minus-one",
+      "negativeScriptChecks": 3,
+      "recipientClass": "witness_v1_taproot",
+      "txid": "ab6c0029e2d0608bb1c48493c38cabe6537014793d1f7b9288a404f74a38149c",
+      "validInputScripts": 1
+    },
+    {
+      "feeGrains": "1000",
+      "name": "p2mr-ff-root",
+      "negativeScriptChecks": 6,
+      "recipientClass": "witness_v2_merkleroot",
+      "txid": "c97ae1fe7b624e3486c02b5112eb5f811f53894c1b42284968d832f320950756",
+      "validInputScripts": 2
+    }
+  ],
+  "scope": "Synthetic UTXO script/sanity/input validation; no live chain, mempool fee policy, or P2MR spending claim",
+  "upstream": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701"
+}

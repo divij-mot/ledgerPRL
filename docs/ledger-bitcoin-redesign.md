@@ -8,12 +8,13 @@ A usable native PRL hardware wallet is the goal. Reusing Ledger's Bitcoin applic
 
 The previous Rust device app and its evidence remain available as a reference. Its test results do not qualify this different device application or the new host protocol.
 
-## Planned components
+## Components
 
 - A pinned, release-tagged Ledger Bitcoin application baseline, preserving its PSBT/Merkle parsing, device review and signing machinery where compatible.
 - Explicit PRL network, address, derivation and monetary policy. Amounts remain exact integer grains; aggregate totals and fee arithmetic must remain safe through the PRL maximum of 2.1e18 grains.
 - A narrowly adapted upstream Ledger Bitcoin host protocol with auditable provenance and exact-integer PSBT support.
-- An optional seedless MetaMask Snap and explicit PRL website-provider interface. A separate local companion handles hardware transport. No software private-key derivation or recovery-phrase entry is introduced.
+- A direct Ledger-backed wallet website for receive, send and history. The browser uses Ledger DMK/WebHID directly; MetaMask is not required. Account derivation stays in the browser, and a fixed same-origin public-data proxy relays only addresses, transaction IDs or exact signed bytes. No software private-key derivation or recovery-phrase entry is introduced.
+- A preserved optional MetaMask experiment, clearly unintegrated and outside the primary wallet flow.
 
 ## Integration boundaries
 

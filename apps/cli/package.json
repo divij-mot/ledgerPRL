@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "start": "node --import tsx src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.ts"
   },
   "dependencies": {
-    "@pearl-ledger/sdk": "0.1.0"
+    "@pearl-ledger/sdk": "0.1.0",
+    "@pearl-ledger/bitcoin-prl-adapter": "0.1.0"
   }
 }

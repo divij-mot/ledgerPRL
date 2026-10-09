@@ -26,6 +26,8 @@ for raw in filter(None, files):
         content = content.replace("http://user:password@localhost:5000", "PUBLIC_NEGATIVE_URL_FIXTURE")
     if str(path.relative_to(ROOT)) == "apps/companion/test/bridge.test.ts":
         content = content.replace("https://name:secret@example.com", "PUBLIC_NEGATIVE_URL_FIXTURE")
+    if str(path.relative_to(ROOT)) == "apps/companion/test/web-server.test.ts":
+        content = content.replace("https://u:p@wallet.example.com", "PUBLIC_NEGATIVE_URL_FIXTURE")
     for label, pattern in PATTERNS.items():
         if pattern.search(content):
             findings.append(f"{path.relative_to(ROOT)}: possible {label}")

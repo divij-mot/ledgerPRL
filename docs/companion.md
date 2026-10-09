@@ -1,6 +1,6 @@
 # Pearl Ledger companion
 
-A local, seedless, watch-only companion for the development Pearl Ledger protocol. It is **not audited, Ledger-approved, or qualified on physical hardware**. Do not use valuable funds. The signer is classical BIP86 Taproot; this is not post-quantum custody.
+A seedless, watch-only wallet website for the development Pearl Ledger Bitcoin-based PSBT protocol. It can run locally or through the [dedicated HTTPS host](website-hosting.md). It is **not audited, Ledger-approved, or qualified on physical hardware**. Do not use valuable funds. The signer is classical BIP86 Taproot; this is not post-quantum custody.
 
 ## Run
 
@@ -18,7 +18,7 @@ The package scripts load `tsx` before Vite so the server-side middleware can res
 
 1. Select **mainnet** or **testnet2**, connect a Ledger running the matching development Pearl app, and physically approve the public account export. Alternatively, import a public account/recovery JSON file to view an account without a connected device.
 2. Read the public-address privacy notice and explicitly enable it. Choose **Discover watch account**.
-3. The local server derives addresses from the public account, queries their history and UTXOs, fetches raw previous transactions, and verifies transaction IDs, exact grain amounts and derived script ownership. It binds network name, genesis, tip hash and the eight-decimal unit before displaying a completed source view.
+3. The browser derives addresses from the public account, queries their history and UTXOs through the fixed same-origin proxy, fetches raw previous transactions, and verifies transaction IDs, exact grain amounts and derived script ownership. It binds network name, genesis, tip hash and the eight-decimal unit before displaying a completed source view.
 4. A fresh full-address rescan is explicit through **Resync account & history**. This rebuilds UTXOs and history, rather than trusting a previous checkpoint through a reorganization. It reports confirmed, pending and detached history. It is not a background monitor and does not automatically follow new blocks while the page is idle.
 
 Fixed upstreams:
@@ -28,7 +28,7 @@ Fixed upstreams:
 
 The current services omit browser CORS headers. Only the local same-origin server contacts them. There is no general URL/RPC proxy. Read paths are explicitly allowlisted. The mutating Blockbook `GET /sendtx/{hex}` route is never available through the read adapter. A separate POST route is the only public broadcast path.
 
-**Trust and privacy:** HTTPS authenticates the service endpoint; it does not prove chain truth. The operator can censor or omit transactions, misreport state, and link addresses/IP/timing. No SPV proof verification, FP8 certificate verification or independent chain consensus runs in the companion. The Ledger cannot establish the host's chain view. The public account key/chain code is sent to the user's local server, while only derived addresses and transaction IDs are queried upstream. The browser-session privacy permission is cleared when the account is closed/restored or a different account is imported.
+**Trust and privacy:** HTTPS authenticates the service endpoint; it does not prove chain truth. The operator can censor or omit transactions, misreport state, and link addresses/IP/timing. No SPV proof verification, FP8 certificate verification or independent chain consensus runs in the companion. The Ledger cannot establish the host's chain view. The public account key/chain code stays in the browser in public mode. Only derived addresses and transaction IDs are queried through the proxy. On a hosted origin, the wallet host can link those queries to the client IP and the indexer normally sees the proxy IP. Neither is a private or trustless service. The browser-session privacy permission is cleared when the account is closed/restored or a different account is imported.
 
 The adapter requires a consistent in-sync indexer/backend status and matching genesis, fetches canonical block hashes, and rejects a changing tip during a completed scan. It independently parses raw transactions and excludes inputs spent by any parsed history transaction, including pending transactions, even if a UTXO endpoint incorrectly still lists them. Source consistency is not an assurance of a complete or honest mempool.
 
@@ -69,7 +69,7 @@ WebHID is feature-detected. Intended test targets are desktop Chrome/Edge on loc
 - A distinct checkbox and **Broadcast signed transaction** button disclose the current network/provider and submit only those exact verified bytes. The server verifies the bundle, witnesses, signatures and transaction ID again. Public broadcast uses the documented POST `/api/v2/sendtx/`; local-node broadcast is off by default.
 - Before sending, the journal moves to `broadcast-unknown`. A timeout or error keeps the reservation and exact bytes. An explicit rebroadcast uses the same bytes; the app never silently constructs a replacement payment. A matching returned transaction ID means node/indexer acceptance, not confirmation. Previously accepted but currently unarchived records expose **Explicitly rebroadcast exact bytes** with a fresh approval checkbox. This repeats the stored bytes and transaction ID; it never selects new inputs or signs again. A currently archived receipt must first be reconciled. Timeout, rejection or an already-known error preserves uncertainty and all reservations; importing an older accepted backup cannot clear that uncertainty.
 
-A proven `0x6985` rejection of **REVIEW** can return an initial signing attempt to its unsigned draft only while that attempt still owns the unchanged record. The caller may then discard it or reconnect and review again. A recovery attempt's rejection cannot clear earlier signing uncertainty. Rejection during signature fetch, transport loss, timeout and any other uncertain result retain the signing reservation. The explicit identical-payment recovery above is implemented; automatic retrieval of earlier missing signed bytes and release of ambiguous or conflicted input locks are not. There is intentionally no “clear all locks” button. Do not clear browser storage to reuse uncertain inputs.
+With the current PSBT protocol, any failure after signing starts conservatively retains the signing reservation. A generic `0x6985` is not proof that no signature was yielded. A recovery attempt's rejection cannot clear earlier signing uncertainty. Rejection during signature fetch, transport loss, timeout and any other uncertain result retain the signing reservation. The explicit identical-payment recovery above is implemented; automatic retrieval of earlier missing signed bytes and release of ambiguous or conflicted input locks are not. There is intentionally no “clear all locks” button. Do not clear browser storage to reuse uncertain inputs.
 
 ## Optional authenticated local-node bridge
 
@@ -148,3 +148,11 @@ Physical WebHID connection, screen comparison, approval/rejection, USB disconnec
 - [Blockbook OpenAPI](https://github.com/trezor/blockbook/blob/master/openapi.yaml)
 - [Deployed Blockbook address-pagination implementation](https://github.com/trezor/blockbook/blob/81f52f2/api/worker.go#L1520-L1790)
 - [Pinned Pearl node RPC implementation](https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/node/rpcserver.go)
+
+## Device cancellation and backup privacy
+
+A browser cancellation closes and poisons its transport session; it does not guarantee cancellation of a still-powered Ledger review. Reject the review and exit/reopen the Pearl app before reconnecting. The native app separately bounds review time and rejects invalid nested commands.
+
+Receive/change high-water marks and payment journals are persisted before corresponding device actions. Account public-key/chain-code caching is optional. Recovery exports reveal account linkage; full/emergency backups may contain already signed payments that their holder can broadcast. Keep them private. Do not clear unresolved reservations to make an error disappear.
+
+The hosted broadcast relay checks exact transaction ID and bounded signed-transaction shape. Independent cryptographic validation happens in the browser against the canonical bundle, on Ledger during signing, and at the accepting node; the raw-byte relay alone lacks previous-output data for that validation.
