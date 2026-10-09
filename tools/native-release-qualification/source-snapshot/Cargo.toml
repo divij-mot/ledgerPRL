@@ -1,0 +1,15 @@
+[workspace]
+exclude = ["apps/ledger", "apps/ledger/vendor/ledger-device-rust-sdk"]
+members = ["crates/pearl-core"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.81"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+overflow-checks = true

@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "command": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "packages/wallet/test/backup-capacity.test.ts",
+    "packages/wallet/test/recovery.test.ts"
+  ],
+  "exitCode": 0,
+  "passedTests": 20,
+  "sourcesUnchanged": true,
+  "sourceSha256": {
+    "packages/wallet/src/recovery.ts": "9ab76005ef1d4793a8e8a501e265cdeba5c5a73fc3e8ca37180544c96f4b5cc4",
+    "packages/wallet/src/journal.ts": "4e4fb50ec5058d25895bfde0a5459514792aa560d1d1a9d46444caeb5a000b4f",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "packages/wallet/test/backup-capacity.test.ts": "bd6d9e04e76fbd55e85ee2da80136f99c63f9789c6c4aaf43e2f2747e77f2aa7",
+    "packages/wallet/test/recovery.test.ts": "e5aa2d00764f1d093efbc7a623513aabacc272033d754dfb80233809f4582eea"
+  },
+  "stdoutSha256": "9f4cf46966bed9f0ac71936fd00bff96b79f76e3a7cdeae26e21a334b6f4ddcf",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "scope": "Focused host tests for compact full-backup serialization and existing recovery invariants; no browser or native test"
+}

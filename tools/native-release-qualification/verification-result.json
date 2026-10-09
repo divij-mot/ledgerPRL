@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "scope": "Source-bound consistency check of retained software evidence; not hardware attestation or a repeat of emulator UI/node execution",
+  "combinations": 25,
+  "runtimeSuites": 30,
+  "mixedSessions": 100,
+  "nodeTransactionSignatures": 100,
+  "actualElfsChecked": 25
+}

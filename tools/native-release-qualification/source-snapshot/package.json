@@ -1,0 +1,51 @@
+{
+  "name": "pearl-ledger",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/cli",
+    "apps/companion"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "dev": "npm run dev --workspace @pearl-ledger/companion",
+    "cli": "node --import tsx apps/cli/src/index.ts",
+    "check": "npm run typecheck && npm test && npm run build && python3 scripts/secret_scan.py",
+    "start": "npm run dev",
+    "preview": "npm run preview --workspace @pearl-ledger/companion",
+    "test:oracle": "cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json"
+  },
+  "dependencies": {
+    "@ledgerhq/device-management-kit": "1.11.0",
+    "@ledgerhq/device-transport-kit-web-hid": "1.2.4",
+    "@noble/curves": "1.9.7",
+    "@noble/hashes": "1.8.0",
+    "@scure/base": "1.2.6",
+    "@scure/bip32": "1.7.0",
+    "uuid": "11.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.0",
+    "playwright-core": "1.64.0",
+    "prettier": "3.6.2",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  },
+  "overrides": {
+    "uuid": "$uuid",
+    "@ledgerhq/device-management-kit": {
+      "uuid": "$uuid"
+    },
+    "@ledgerhq/device-transport-kit-web-hid": {
+      "uuid": "$uuid"
+    }
+  }
+}

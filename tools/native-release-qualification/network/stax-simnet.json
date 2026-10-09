@@ -1,0 +1,53 @@
+{
+  "sdkSourceHashes": {
+    "amount.ts": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+    "bundle.ts": "8f7cc2c5b1fdc2660e8314aa8ded9e1caf96300777a3de2fb63cea3252a2afc1",
+    "bytes.ts": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+    "device.ts": "955f9b097cb34cda7235157775d9a52e48a53debd6d04a372c2393f3527a92c8",
+    "http.ts": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+    "index.ts": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+    "keys.ts": "5a26b0198f94e1435b731b3b00991832123f984968fbb6dbd662e9bf0fd1d1ef",
+    "network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca"
+  },
+  "status": "passed",
+  "scope": "Emulated read-only capability/account/address verification; no signatures, broadcast or physical install",
+  "firmware": {
+    "model": "stax",
+    "sourceElf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-stax-simnet.elf",
+    "testedSnapshot": "/workspace/shared/pearl-lexical-requalification-20261009-1852/network-runtime/stax-simnet/tested-firmware.elf",
+    "sha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "sourceSha256": {
+    "harness": "03725e292352b841607fecbb2c3172404cb4b639aee0e7566843c8d5c4948a95",
+    "driver": "ab3d5d8a1638b9ee2841a2467f21f0cef33eab0d1ec0e6df4a5d67cfbf0f8fdf",
+    "lockfile": "e07e6d210196b3e2ad94274b41618d9b993d69fc2e86e9ddc94106eb712cd047"
+  },
+  "capabilities": {
+    "protocol": 1,
+    "version": "0.1.0",
+    "network": "simnet",
+    "maxInputs": 16,
+    "maxBundleSize": 1507
+  },
+  "account": {
+    "network": "simnet",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "addresses": {
+    "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+    "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+  },
+  "checks": [
+    "exact-network-capabilities",
+    "four-wrong-host-network-selections-rejected",
+    "independent-public-vector-account-coin-path",
+    "full-receive-and-change-address-review"
+  ]
+}

@@ -1,0 +1,9 @@
+FIXTURE apex_p-node-16.json
+go: downloading github.com/pearl-research-labs/pearl v1.4.12-0.20261004154648-2f8b770cac8f
+main.go:13:2: module lookup disabled by GOPROXY=off
+main.go:14:2: module lookup disabled by GOPROXY=off
+main.go:15:2: module lookup disabled by GOPROXY=off
+main.go:16:2: module lookup disabled by GOPROXY=off
+main.go:17:2: module lookup disabled by GOPROXY=off
+main.go:18:2: module lookup disabled by GOPROXY=off
+main.go:19:2: module lookup disabled by GOPROXY=off

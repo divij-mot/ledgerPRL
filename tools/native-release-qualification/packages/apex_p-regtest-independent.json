@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/apex_p-regtest/pearl-apex_p-regtest.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/apex_p-regtest/pearl-apex_p-regtest.apdu",
+  "elfSha256": "46dcfd7e3981323f782ea99ea8e2ac56d3211d26fdee115fe89d3ff72d8cabd5",
+  "apduSha256": "5b9b5379ac80d52646bdfcd8e30f6c17d9bd8f2e901da68f93218022a480f72c",
+  "appHash": "c8036073a3c0c9b003b5fe0293fb02a283b4d0d2db793e79d9db545d4e1af848",
+  "target": "apex_p",
+  "targetId": "0x33400004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "regtest",
+  "appName": "Pearl Reg Dev",
+  "imageBytes": 72818,
+  "writtenBytes": 72362,
+  "implicitZeroGapBytes": 456,
+  "installParamsBytes": 114,
+  "commands": 356,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

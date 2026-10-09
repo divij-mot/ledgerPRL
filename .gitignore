@@ -15,3 +15,7 @@ __pycache__/
 !tools/fp8-compatibility/results/*.log
 !tools/native-wallclock/preflight-controls.log
 !tools/core-state-review/**/*.log
+
+# Source-bound native qualification logs; generated replay output is not tracked.
+!tools/native-release-qualification/*.log
+!tools/native-release-qualification/packages/unit-tests.log

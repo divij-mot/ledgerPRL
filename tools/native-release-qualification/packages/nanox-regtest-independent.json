@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanox-regtest/pearl-nanox-regtest.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanox-regtest/pearl-nanox-regtest.apdu",
+  "elfSha256": "b1b02db7d428a8d680fe4ab955a6d9945ff5ea1c86d36d0e599028638d837fff",
+  "apduSha256": "7bb4a07654787f727d48ca9830a875b60f1102d12e1f33d590c8cb977b6dbcc5",
+  "appHash": "d58d2f71615a4ec31597dbe62b23da7ecb3d9376648607463aaa113e9da0f81c",
+  "target": "nanox",
+  "targetId": "0x33000004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "regtest",
+  "appName": "Pearl Reg Dev",
+  "imageBytes": 52293,
+  "writtenBytes": 52221,
+  "implicitZeroGapBytes": 72,
+  "installParamsBytes": 69,
+  "commands": 260,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

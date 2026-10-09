@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "stax",
+    "sourceElf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-stax-simnet.elf",
+    "testedSnapshot": "/workspace/shared/pearl-lexical-requalification-20261009-1852/runtime/stax-canonical/tested-firmware.elf",
+    "sha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "checks": [
+    "exact-public-account-fixture",
+    "invalid-xonly-zero",
+    "invalid-xonly-ff",
+    "SDK-BN-cleanup-recovery",
+    "verified-full-address",
+    "two-native-BIP340-signatures"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/stax-mainnet/pearl-stax-mainnet.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/stax-mainnet/pearl-stax-mainnet.apdu",
+  "elfSha256": "bf137b68355f1efc8d54d9f4e6ea56179f956b9cc7b41dcfc0e18e91571b61b6",
+  "apduSha256": "2c1a858df15c58245be9b71ab52f697893cd01df085b4a19125acc54ed7ee7bc",
+  "appHash": "6565596d15f8ff6aae0c20ec63872eaebbb794ce2d3f0fb3873520b1c9406683",
+  "target": "stax",
+  "targetId": "0x33200004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "mainnet",
+  "appName": "Pearl Dev",
+  "imageBytes": 73326,
+  "writtenBytes": 73182,
+  "implicitZeroGapBytes": 144,
+  "installParamsBytes": 110,
+  "commands": 364,
+  "crcSegments": 3,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

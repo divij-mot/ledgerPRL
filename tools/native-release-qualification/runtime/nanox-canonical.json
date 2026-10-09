@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "nanox",
+    "sourceElf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-nanox-simnet.elf",
+    "testedSnapshot": "/workspace/shared/pearl-lexical-requalification-20261009-1852/runtime/nanox-canonical/tested-firmware.elf",
+    "sha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "checks": [
+    "exact-public-account-fixture",
+    "invalid-xonly-zero",
+    "invalid-xonly-ff",
+    "SDK-BN-cleanup-recovery",
+    "verified-full-address",
+    "two-native-BIP340-signatures"
+  ]
+}

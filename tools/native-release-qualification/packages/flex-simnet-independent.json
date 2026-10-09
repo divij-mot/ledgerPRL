@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/flex-simnet/pearl-flex-simnet.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/flex-simnet/pearl-flex-simnet.apdu",
+  "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+  "apduSha256": "12f6a97927f03a666a94348b6aca5c42a8a357fe5a19f5bf6b0e64e1afab1358",
+  "appHash": "27d55ee396a6746f0ba061864e6ca81ed5d82a7e25cbf6b279016c1e37720eae",
+  "target": "flex",
+  "targetId": "0x33300004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "simnet",
+  "appName": "Pearl Sim Dev",
+  "imageBytes": 74897,
+  "writtenBytes": 74441,
+  "implicitZeroGapBytes": 456,
+  "installParamsBytes": 145,
+  "commands": 366,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

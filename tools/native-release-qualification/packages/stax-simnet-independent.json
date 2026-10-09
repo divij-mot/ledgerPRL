@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/stax-simnet/pearl-stax-simnet.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/stax-simnet/pearl-stax-simnet.apdu",
+  "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+  "apduSha256": "3987a769279081f8d776a98e09e9e6aed994b1a60bcbe1dc82bd8977119c0d44",
+  "appHash": "0961066f7a19f97fe3d7e451463f19d862798a630e9c9cfbf7d63a450e9d65e4",
+  "target": "stax",
+  "targetId": "0x33200004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "simnet",
+  "appName": "Pearl Sim Dev",
+  "imageBytes": 73330,
+  "writtenBytes": 73186,
+  "implicitZeroGapBytes": 144,
+  "installParamsBytes": 114,
+  "commands": 364,
+  "crcSegments": 3,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

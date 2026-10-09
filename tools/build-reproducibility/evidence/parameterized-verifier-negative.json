@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "passed": false,
+  "count": 4,
+  "packageVerificationRun": true,
+  "referenceArtifacts": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts",
+  "candidateArtifacts": "/workspace/shared/prl-build-repro/artifacts",
+  "variants": [
+    {
+      "device": "nanosplus",
+      "network": "mainnet",
+      "reference": {
+        "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+        "elfBytes": 205452,
+        "loadImageSha256": "cda801c269d419c967c7feb2a70077f9f53fea84167322dab336b128af05001b",
+        "loadImageBytes": 53313,
+        "applicationHash": "8787dc47f3e9731c7704713c747cc5f6f737f706ddedb9353844b965dd65d1c7"
+      },
+      "candidate": {
+        "elfSha256": "1a82fa07436d15b432feba53020e1aae9745083399180e55d343878b00f56aa5",
+        "elfBytes": 205412,
+        "loadImageSha256": "8ddfe6c030052a253e956ccf6a05976a0eb813857bca86ba9d4e5ad9a528f457",
+        "loadImageBytes": 53313,
+        "applicationHash": "8734ffcf6b73a45155751c9aae4e3bc8c9a1c7c2de17e0c1c61b11e26c82598d"
+      },
+      "independentCandidatePackage": {
+        "elf": "/workspace/shared/prl-build-repro/artifacts/pearl-nanosplus-mainnet.elf",
+        "apdu": "/workspace/shared/prl-build-repro/packages/nanosplus-mainnet/pearl-nanosplus-mainnet.apdu",
+        "elfSha256": "1a82fa07436d15b432feba53020e1aae9745083399180e55d343878b00f56aa5",
+        "apduSha256": "85c7b319304f047c84dc0eb2e3a49bc69383f19f90b29a40690a0a6a4a606be8",
+        "appHash": "8734ffcf6b73a45155751c9aae4e3bc8c9a1c7c2de17e0c1c61b11e26c82598d",
+        "target": "nanos2",
+        "targetId": "0x33100004",
+        "apiLevel": 27,
+        "flags": "0x0",
+        "network": "mainnet",
+        "appName": "Pearl Dev",
+        "imageBytes": 53313,
+        "writtenBytes": 53185,
+        "implicitZeroGapBytes": 128,
+        "installParamsBytes": 65,
+        "commands": 264,
+        "crcSegments": 2,
+        "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+      },
+      "checks": {
+        "elfBytesEqual": false,
+        "loadImageBytesEqual": false,
+        "sparseLoadBytesEqual": false,
+        "applicationHashEqual": false,
+        "buildManifestBytesEqual": false,
+        "independentApplicationHashEqual": false,
+        "package.elfBytesEqual": false,
+        "package.hexBytesEqual": false,
+        "package.apduBytesEqual": false,
+        "package.sha256BytesEqual": false,
+        "package.build.jsonBytesEqual": false,
+        "package.jsonBytesEqual": false
+      },
+      "passed": false
+    },
+    {
+      "device": "nanosplus",
+      "network": "simnet",
+      "reference": {
+        "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+        "elfBytes": 205460,
+        "loadImageSha256": "00fb80fa01371b6c73ddcd2f7af7f4fd7db84e416bec3d0faa09fc9413902cea",
+        "loadImageBytes": 53317,
+        "applicationHash": "42af735c8b8a227609e8d16d26b350096adf2cdf47992d13236826aaba3a7682"
+      },
+      "candidate": {
+        "elfSha256": "1ed5e4323022915709ba9cb86cf708915dc8ce605caef65440668c0c401a0f03",
+        "elfBytes": 205416,
+        "loadImageSha256": "e8745cb31bcd34ce1c3ceb4ea2069fdc558e4a4064c56ef14738fbabe34b3a34",
+        "loadImageBytes": 53317,
+        "applicationHash": "05f8a294a81c31a9f60f7fcf0c739f225079bec4643d0679d5f3229c07aed78a"
+      },
+      "independentCandidatePackage": {
+        "elf": "/workspace/shared/prl-build-repro/artifacts/pearl-nanosplus-simnet.elf",
+        "apdu": "/workspace/shared/prl-build-repro/packages/nanosplus-simnet/pearl-nanosplus-simnet.apdu",
+        "elfSha256": "1ed5e4323022915709ba9cb86cf708915dc8ce605caef65440668c0c401a0f03",
+        "apduSha256": "8bc0c3a3f0ab9c5a0f8583987470ce1fd59aba5bc0dcec110588f530c95906f2",
+        "appHash": "05f8a294a81c31a9f60f7fcf0c739f225079bec4643d0679d5f3229c07aed78a",
+        "target": "nanos2",
+        "targetId": "0x33100004",
+        "apiLevel": 27,
+        "flags": "0x0",
+        "network": "simnet",
+        "appName": "Pearl Sim Dev",
+        "imageBytes": 53317,
+        "writtenBytes": 53189,
+        "implicitZeroGapBytes": 128,
+        "installParamsBytes": 69,
+        "commands": 264,
+        "crcSegments": 2,
+        "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+      },
+      "checks": {
+        "elfBytesEqual": false,
+        "loadImageBytesEqual": false,
+        "sparseLoadBytesEqual": false,
+        "applicationHashEqual": false,
+        "buildManifestBytesEqual": false,
+        "independentApplicationHashEqual": false,
+        "package.elfBytesEqual": false,
+        "package.hexBytesEqual": false,
+        "package.apduBytesEqual": false,
+        "package.sha256BytesEqual": false,
+        "package.build.jsonBytesEqual": false,
+        "package.jsonBytesEqual": false
+      },
+      "passed": false
+    },
+    {
+      "device": "nanox",
+      "network": "mainnet",
+      "reference": {
+        "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+        "elfBytes": 200592,
+        "loadImageSha256": "ea020860c256250f4f7c2e044f735a824f6f088abb8b688c2888a92f9b378183",
+        "loadImageBytes": 52289,
+        "applicationHash": "3eecc148c5a23d2fbec48507fe5121c286aebf97f444e1bc9e220c5af6f46031"
+      },
+      "candidate": {
+        "elfSha256": "6380a5efc39cae64db99ffa4fa7100efde1c04f6e18ff588bedb331dfe707846",
+        "elfBytes": 200620,
+        "loadImageSha256": "664d0dfb920d28244d7a6be899f59ec42c380df614250a81e8be9273516bf24d",
+        "loadImageBytes": 52289,
+        "applicationHash": "be9483ef8cd25ee46948bd9782078b10b64599ccc1d77008165c4e145efd2ca3"
+      },
+      "independentCandidatePackage": {
+        "elf": "/workspace/shared/prl-build-repro/artifacts/pearl-nanox-mainnet.elf",
+        "apdu": "/workspace/shared/prl-build-repro/packages/nanox-mainnet/pearl-nanox-mainnet.apdu",
+        "elfSha256": "6380a5efc39cae64db99ffa4fa7100efde1c04f6e18ff588bedb331dfe707846",
+        "apduSha256": "2f27e9e8ea00eb421a68e3385c95fbb5da31d488c0c2f1c519baefd61c1622bf",
+        "appHash": "be9483ef8cd25ee46948bd9782078b10b64599ccc1d77008165c4e145efd2ca3",
+        "target": "nanox",
+        "targetId": "0x33000004",
+        "apiLevel": 27,
+        "flags": "0x200",
+        "network": "mainnet",
+        "appName": "Pearl Dev",
+        "imageBytes": 52289,
+        "writtenBytes": 52217,
+        "implicitZeroGapBytes": 72,
+        "installParamsBytes": 65,
+        "commands": 260,
+        "crcSegments": 2,
+        "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+      },
+      "checks": {
+        "elfBytesEqual": false,
+        "loadImageBytesEqual": false,
+        "sparseLoadBytesEqual": false,
+        "applicationHashEqual": false,
+        "buildManifestBytesEqual": false,
+        "independentApplicationHashEqual": false,
+        "package.elfBytesEqual": false,
+        "package.hexBytesEqual": false,
+        "package.apduBytesEqual": false,
+        "package.sha256BytesEqual": false,
+        "package.build.jsonBytesEqual": false,
+        "package.jsonBytesEqual": false
+      },
+      "passed": false
+    },
+    {
+      "device": "nanox",
+      "network": "simnet",
+      "reference": {
+        "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+        "elfBytes": 200636,
+        "loadImageSha256": "f3fc967d18de4075e82204eb745ca6d9bb031ca86ee93c6c9e4297ebf972c4ef",
+        "loadImageBytes": 52293,
+        "applicationHash": "6f232ed0a474bc75da21016ed6d47031ef3382ffd6ba62e1e6c006e90fa3756c"
+      },
+      "candidate": {
+        "elfSha256": "016f54f0eacfd7981372351fd8416d281ba2a8cbf449d68f455147ddd8a63d5d",
+        "elfBytes": 200652,
+        "loadImageSha256": "d177b37130a7e7e5118dc19ee314f9bd1cdc28b12207a837feadb5499f9cc913",
+        "loadImageBytes": 52293,
+        "applicationHash": "5e09d1bb3447126c8ce61fcecb6d228bb1942ad18645b1a2154a9ea55902f47e"
+      },
+      "independentCandidatePackage": {
+        "elf": "/workspace/shared/prl-build-repro/artifacts/pearl-nanox-simnet.elf",
+        "apdu": "/workspace/shared/prl-build-repro/packages/nanox-simnet/pearl-nanox-simnet.apdu",
+        "elfSha256": "016f54f0eacfd7981372351fd8416d281ba2a8cbf449d68f455147ddd8a63d5d",
+        "apduSha256": "efb1674acfa0e102f87dd140c4519ac63bcc63f1796229193da44dfdb4ffb18b",
+        "appHash": "5e09d1bb3447126c8ce61fcecb6d228bb1942ad18645b1a2154a9ea55902f47e",
+        "target": "nanox",
+        "targetId": "0x33000004",
+        "apiLevel": 27,
+        "flags": "0x200",
+        "network": "simnet",
+        "appName": "Pearl Sim Dev",
+        "imageBytes": 52293,
+        "writtenBytes": 52221,
+        "implicitZeroGapBytes": 72,
+        "installParamsBytes": 69,
+        "commands": 260,
+        "crcSegments": 2,
+        "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+      },
+      "checks": {
+        "elfBytesEqual": false,
+        "loadImageBytesEqual": false,
+        "sparseLoadBytesEqual": false,
+        "applicationHashEqual": false,
+        "buildManifestBytesEqual": false,
+        "independentApplicationHashEqual": false,
+        "package.elfBytesEqual": false,
+        "package.hexBytesEqual": false,
+        "package.apduBytesEqual": false,
+        "package.sha256BytesEqual": false,
+        "package.build.jsonBytesEqual": false,
+        "package.jsonBytesEqual": false
+      },
+      "passed": false
+    }
+  ]
+}

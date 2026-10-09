@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanox-simnet/pearl-nanox-simnet.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanox-simnet/pearl-nanox-simnet.apdu",
+  "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+  "apduSha256": "43480a909140d9f8ff11fc85f347002068e1dd9e71b92b87275bbe8508cf7808",
+  "appHash": "6f232ed0a474bc75da21016ed6d47031ef3382ffd6ba62e1e6c006e90fa3756c",
+  "target": "nanox",
+  "targetId": "0x33000004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "simnet",
+  "appName": "Pearl Sim Dev",
+  "imageBytes": 52293,
+  "writtenBytes": 52221,
+  "implicitZeroGapBytes": 72,
+  "installParamsBytes": 69,
+  "commands": 260,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

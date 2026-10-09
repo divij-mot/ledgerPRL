@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "apex_p",
+    "sourceElf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-apex_p-simnet.elf",
+    "testedSnapshot": "/workspace/shared/pearl-lexical-requalification-20261009-1852/runtime/apex_p-canonical/tested-firmware.elf",
+    "sha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "checks": [
+    "exact-public-account-fixture",
+    "invalid-xonly-zero",
+    "invalid-xonly-ff",
+    "SDK-BN-cleanup-recovery",
+    "verified-full-address",
+    "two-native-BIP340-signatures"
+  ]
+}

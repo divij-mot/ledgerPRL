@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanosplus-simnet/pearl-nanosplus-simnet.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanosplus-simnet/pearl-nanosplus-simnet.apdu",
+  "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+  "apduSha256": "4b29be8e3ca832b35f132e328b10412f59bb30534494ad22543c791b0d1d7ffd",
+  "appHash": "42af735c8b8a227609e8d16d26b350096adf2cdf47992d13236826aaba3a7682",
+  "target": "nanos2",
+  "targetId": "0x33100004",
+  "apiLevel": 27,
+  "flags": "0x0",
+  "network": "simnet",
+  "appName": "Pearl Sim Dev",
+  "imageBytes": 53317,
+  "writtenBytes": 53189,
+  "implicitZeroGapBytes": 128,
+  "installParamsBytes": 69,
+  "commands": 264,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

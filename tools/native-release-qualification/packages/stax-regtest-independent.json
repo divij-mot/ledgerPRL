@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/stax-regtest/pearl-stax-regtest.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/stax-regtest/pearl-stax-regtest.apdu",
+  "elfSha256": "5d527751071c9644bc436222ee50bdf663e939fcfe58ca68f8cd7c3dced02549",
+  "apduSha256": "ab53fd172f668ec196c8d8d17c52a9b4f061180b7cd352fc712e988733678e12",
+  "appHash": "ba55cd154a60d61349eb51dd823f366e73384352a69f6c5a621931ffce3b60ac",
+  "target": "stax",
+  "targetId": "0x33200004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "regtest",
+  "appName": "Pearl Reg Dev",
+  "imageBytes": 73330,
+  "writtenBytes": 73186,
+  "implicitZeroGapBytes": 144,
+  "installParamsBytes": 114,
+  "commands": 364,
+  "crcSegments": 3,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

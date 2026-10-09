@@ -1,0 +1,199 @@
+{
+  "startedAt": "2026-10-09T19:43:30.083Z",
+  "network": "simnet",
+  "inputCount": 4,
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "firmware": {
+    "path": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-apex_p-simnet.elf",
+    "snapshot": "native-snapshot.elf",
+    "sha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+    "model": "apex_p"
+  },
+  "pearlNode": {
+    "path": "/tmp/pearl-pearld-test",
+    "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+  },
+  "output": "/workspace/shared/pearl-lexical-requalification-20261009-1852/runtime/apex_p-node-parity",
+  "cases": [
+    {
+      "name": "native firmware advertises simnet and protocol bounds",
+      "status": "passed"
+    },
+    {
+      "name": "device public account export requires UI approval",
+      "status": "passed"
+    },
+    {
+      "name": "device receive address matches public-only BIP86 derivation",
+      "status": "passed"
+    },
+    {
+      "name": "native out-of-order signature and malformed transfer fail closed",
+      "status": "passed"
+    },
+    {
+      "name": "isolated Pearl simnet genesis and no peers",
+      "status": "passed"
+    },
+    {
+      "name": "mine 200 native Pearl simnet blocks to device-derived address",
+      "status": "passed"
+    },
+    {
+      "name": "public-account discovery scans both branches and exact UTXOs",
+      "status": "passed"
+    },
+    {
+      "name": "production bridge validates exact mined prevouts before signing",
+      "status": "passed"
+    },
+    {
+      "name": "native wrong network bundle rejected before signing",
+      "status": "passed"
+    },
+    {
+      "name": "native input ownership and change ownership independently reject substitutions",
+      "status": "passed"
+    },
+    {
+      "name": "native bundle hash mismatch clears session before review",
+      "status": "passed"
+    },
+    {
+      "name": "native user rejection releases no signature and clears session",
+      "status": "passed"
+    },
+    {
+      "name": "native explicit abort before review clears transferred bundle",
+      "status": "passed"
+    },
+    {
+      "name": "native abort after approval and partial signature export wipes remainder",
+      "status": "passed"
+    },
+    {
+      "name": "native 4-input BIP340 signing and independent host verification",
+      "status": "passed"
+    },
+    {
+      "name": "native consumed signatures cannot be replayed",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl rejects a bit-flipped native witness",
+      "status": "passed"
+    },
+    {
+      "name": "native signed transaction broadcasts only to isolated simnet",
+      "status": "passed"
+    },
+    {
+      "name": "production bridge excludes confirmed inputs spent in Pearl mempool",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl mines and confirms exact recipient/change and spent inputs",
+      "status": "passed"
+    },
+    {
+      "name": "wallet refresh removes spent inputs and discovers recipient/change",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl invalidation detaches confirmation and reconsideration restores it",
+      "status": "passed"
+    }
+  ],
+  "capabilities": {
+    "protocol": 1,
+    "version": "0.1.0",
+    "network": "simnet",
+    "maxInputs": 16,
+    "maxBundleSize": 1507
+  },
+  "accountTiming": {
+    "totalWallMs": 4303,
+    "afterApprovalWallMs": 2608
+  },
+  "account": {
+    "network": "simnet",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "parityCoverage": [
+    {
+      "address": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+      "branch": 0,
+      "compressedInternalKey": "0383f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de154",
+      "compressedOutputKey": "0215fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+      "index": 0,
+      "internalParity": 1,
+      "outputParity": 0,
+      "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0"
+    },
+    {
+      "address": "rprl1p2nxuyp0u25rds6nkpezmapwn6k4lle8wsj7rpq3km297cdz8rw7q52c8k0",
+      "branch": 0,
+      "compressedInternalKey": "02af7dbbf9b9f39f147487fbd85453b683112ee5cb1d52230c5af280448a8815d3",
+      "compressedOutputKey": "0254cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+      "index": 3,
+      "internalParity": 0,
+      "outputParity": 0,
+      "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc"
+    },
+    {
+      "address": "rprl1pkhp60ypj33vcs27xtsqpylsr8w2qw7ggvy9cckzs04my8fdnvgkqjfr7jf",
+      "branch": 0,
+      "compressedInternalKey": "031a192d2a88f6df9b748e298310cda31231065b379338fa6844481c9e8d9c0738",
+      "compressedOutputKey": "03b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+      "index": 4,
+      "internalParity": 1,
+      "outputParity": 1,
+      "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c"
+    },
+    {
+      "address": "rprl1pyst6awqhkr252kza7tg7emu8lrpa56ayq8jaenvqsp4560ckvgrq4e45yt",
+      "branch": 0,
+      "compressedInternalKey": "02d3d8b7aedbfae27bc84bfead5712aae8467a9697db53fdb60f53439c91405460",
+      "compressedOutputKey": "032417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+      "index": 9,
+      "internalParity": 0,
+      "outputParity": 1,
+      "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206"
+    }
+  ],
+  "addressTiming": {
+    "totalWallMs": 1567,
+    "afterApprovalWallMs": 264
+  },
+  "minedFirstBlock": "66b0da3ecc4e52e7ce4e134d462a796f295b443a29b425e5e251d97d39d9d0be",
+  "partial-exportTiming": {
+    "totalWallMs": 6664,
+    "afterApprovalWallMs": 3911
+  },
+  "signTiming": {
+    "totalWallMs": 7671,
+    "afterApprovalWallMs": 4425
+  },
+  "transaction": {
+    "bundleBytes": 463,
+    "txid": "52f229e8e4707a380cbfcfe17390956c19b3fcfa5420cf7f7334b3125d619d76",
+    "wtxid": "1e0da8328983bdda28b86776121f8de87d8dd3fca77a52942d81f7b265428b63",
+    "vsize": 327,
+    "inputs": 4,
+    "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+    "amountGrains": "123456789",
+    "feeGrains": "1000",
+    "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+    "signatures": [
+      "15558ee0e0be26f5e6e2052c6036dd11fb547b504a895e169ad199dd02daadfdb535a2cd6f6959ee1a83464c222a09b05ed0ad232a20b6c000fe2c7a832e859d",
+      "b1a5b38ec7c5c735a06e280c13a08a4e97ad1d5442b464eb387a58095a291c0ad4d3b0dcd23418fb16bf15251f9dc06ef7265920cb189be865ffd84605215006",
+      "19263861113a1619d245b187687df95ec967d0a26ee1fdaa58c7d586c962320ed2879400518a73243ac5e93356b5273aa3e16b3e9bb41cd30db322b6de5f59fd",
+      "0bbe14b7aaae052a037ef232c1251b96a6b57fcfd299cbe857d07d741b9a215dc795261012e1adec7ad29d12d167d63981d2d2861797342f8dadc5cb3b4fde70"
+    ]
+  },
+  "status": "passed",
+  "finishedAt": "2026-10-09T19:44:04.158Z"
+}

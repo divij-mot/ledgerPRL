@@ -1,0 +1,902 @@
+{
+  "status": "FAIL: fresh checkout at a different path is not byte-reproducible",
+  "referenceDirectory": "/workspace/shared/pearl-lexical-requalification-20261009-1852",
+  "privateRunDirectory": "/workspace/shared/prl-build-repro",
+  "head": "e36dc35abcd47277a491d5bc4155a576e0ff2855",
+  "variants": [
+    {
+      "device": "nanosplus",
+      "network": "mainnet",
+      "reference": {
+        "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+        "elfBytes": 205452,
+        "loadImageSha256": "cda801c269d419c967c7feb2a70077f9f53fea84167322dab336b128af05001b",
+        "loadImageBytes": 53313,
+        "appHash": "8787dc47f3e9731c7704713c747cc5f6f737f706ddedb9353844b965dd65d1c7",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0ded041"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": [
+          "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/address.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/session.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/transaction.rs"
+        ]
+      },
+      "freshDifferentPath": {
+        "elfSha256": "1a82fa07436d15b432feba53020e1aae9745083399180e55d343878b00f56aa5",
+        "elfBytes": 205412,
+        "loadImageSha256": "8ddfe6c030052a253e956ccf6a05976a0eb813857bca86ba9d4e5ad9a528f457",
+        "loadImageBytes": 53313,
+        "appHash": "8734ffcf6b73a45155751c9aae4e3bc8c9a1c7c2de17e0c1c61b11e26c82598d",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0ded041"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": [
+          "/workspace/shared/prl-build-repro/source/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+          "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/address.rs",
+          "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/session.rs",
+          "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/transaction.rs"
+        ]
+      },
+      "comparison": {
+        "elfEqual": false,
+        "loadImageEqual": false,
+        "sparseLoadAddressesEqual": true,
+        "sparseLoadBytesEqual": false,
+        "applicationHashEqual": false,
+        "metadataEqual": true,
+        "loadParametersEqual": true,
+        "loadChangedBytePositions": 5795,
+        "sectionDifferences": [
+          {
+            "name": ".rel.rodata",
+            "allocated": false,
+            "referenceBytes": 384,
+            "rebuiltBytes": 384,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "4ecb346d1daf0e59ea88d787da219e0270f62f7422d5202c43df88048effe8a0",
+            "rebuiltSha256": "3a5fd805ac3000b2162c5b93087ab3ac2c9d33c2fd6047af239974eb993c44a1",
+            "changedBytePositions": 49
+          },
+          {
+            "name": ".rel.text",
+            "allocated": false,
+            "referenceBytes": 15760,
+            "rebuiltBytes": 15760,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "912a4380d7e75087fdf2296a11285e0ed290fe59b9e4f7b23f86b4eefc74a7e3",
+            "rebuiltSha256": "dc7d7ac9e393c5dfefad57835875a5ebb4d4177323f135546201484c99a1894b",
+            "changedBytePositions": 175
+          },
+          {
+            "name": ".rel_flash",
+            "allocated": true,
+            "referenceBytes": 384,
+            "rebuiltBytes": 384,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "4ecb346d1daf0e59ea88d787da219e0270f62f7422d5202c43df88048effe8a0",
+            "rebuiltSha256": "3a5fd805ac3000b2162c5b93087ab3ac2c9d33c2fd6047af239974eb993c44a1",
+            "changedBytePositions": 49
+          },
+          {
+            "name": ".rodata",
+            "allocated": true,
+            "referenceBytes": 3584,
+            "rebuiltBytes": 3584,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "07ed0078f393bd5c9241f2c5511f3bacf6c30be9486971e17e5ae513756bee83",
+            "rebuiltSha256": "07ea6091c0c91a9763fd3c1e9f9f49081577610b26ff82f075af3413f73e6729",
+            "changedBytePositions": 2818
+          },
+          {
+            "name": ".strtab",
+            "allocated": false,
+            "referenceBytes": 33461,
+            "rebuiltBytes": 33421,
+            "payloadEqual": false,
+            "headerEqual": false,
+            "referenceSha256": "1d0599730cabe2b4d51365b1554e73142ffffe630405f0e0ecaadce65f387368",
+            "rebuiltSha256": "90f83b2baf76ef23e64197acd0f54a4919b8135714a634cbc790f0c63b4bf1ea",
+            "changedBytePositions": 32100
+          },
+          {
+            "name": ".symtab",
+            "allocated": false,
+            "referenceBytes": 22816,
+            "rebuiltBytes": 22816,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "2b5e511cfe7eb6b258e5deb8c5896cd93ac1d2f342b1c4f7566106d0025f3095",
+            "rebuiltSha256": "1ef2600963cf5f03ba369bf4be1a4c88bd33b08982951a470518a54558a7cfa9",
+            "changedBytePositions": 1874
+          },
+          {
+            "name": ".text",
+            "allocated": true,
+            "referenceBytes": 48640,
+            "rebuiltBytes": 48640,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "12b87c473567428602e98c98015ac5151b7834e1bce8258fcf72bd000e5d8d27",
+            "rebuiltSha256": "ed2daf3a96197890f5cebf340737d94a019fd7b6e975d04948d3a1d71c73bc81",
+            "changedBytePositions": 2928
+          }
+        ]
+      },
+      "buildManifestDifferences": [
+        "elfSha256"
+      ],
+      "offlinePackage": {
+        "referenceIndependent": {
+          "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-nanosplus-mainnet.elf",
+          "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanosplus-mainnet/pearl-nanosplus-mainnet.apdu",
+          "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+          "apduSha256": "521bf9032e69464e206a423a165288166c89acdfa0115249dd8b46a115874b1a",
+          "appHash": "8787dc47f3e9731c7704713c747cc5f6f737f706ddedb9353844b965dd65d1c7",
+          "target": "nanos2",
+          "targetId": "0x33100004",
+          "apiLevel": 27,
+          "flags": "0x0",
+          "network": "mainnet",
+          "appName": "Pearl Dev",
+          "imageBytes": 53313,
+          "writtenBytes": 53185,
+          "implicitZeroGapBytes": 128,
+          "installParamsBytes": 65,
+          "commands": 264,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "freshIndependent": {
+          "elf": "/workspace/shared/prl-build-repro/artifacts/pearl-nanosplus-mainnet.elf",
+          "apdu": "/workspace/shared/prl-build-repro/packages/nanosplus-mainnet/pearl-nanosplus-mainnet.apdu",
+          "elfSha256": "1a82fa07436d15b432feba53020e1aae9745083399180e55d343878b00f56aa5",
+          "apduSha256": "85c7b319304f047c84dc0eb2e3a49bc69383f19f90b29a40690a0a6a4a606be8",
+          "appHash": "8734ffcf6b73a45155751c9aae4e3bc8c9a1c7c2de17e0c1c61b11e26c82598d",
+          "target": "nanos2",
+          "targetId": "0x33100004",
+          "apiLevel": 27,
+          "flags": "0x0",
+          "network": "mainnet",
+          "appName": "Pearl Dev",
+          "imageBytes": 53313,
+          "writtenBytes": 53185,
+          "implicitZeroGapBytes": 128,
+          "installParamsBytes": 65,
+          "commands": 264,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "officialAndIndependentApplicationHashesAgree": true,
+        "hexBytesEqual": false,
+        "apduBytesEqual": false
+      },
+      "freshReferenceLogicalPath": {
+        "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+        "elfBytes": 205452,
+        "loadImageSha256": "cda801c269d419c967c7feb2a70077f9f53fea84167322dab336b128af05001b",
+        "loadImageBytes": 53313,
+        "appHash": "8787dc47f3e9731c7704713c747cc5f6f737f706ddedb9353844b965dd65d1c7",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0ded041"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": [
+          "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/address.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/session.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/transaction.rs"
+        ]
+      },
+      "controlComparison": {
+        "elfEqual": true,
+        "loadImageEqual": true,
+        "sparseLoadAddressesEqual": true,
+        "sparseLoadBytesEqual": true,
+        "applicationHashEqual": true,
+        "metadataEqual": true,
+        "loadParametersEqual": true,
+        "loadChangedBytePositions": 0,
+        "sectionDifferences": []
+      },
+      "controlOfflinePackage": {
+        "independent": {
+          "elf": "/workspace/shared/prl-build-repro/control-artifacts/pearl-nanosplus-mainnet.elf",
+          "apdu": "/workspace/shared/prl-build-repro/control-packages/nanosplus-mainnet/pearl-nanosplus-mainnet.apdu",
+          "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+          "apduSha256": "521bf9032e69464e206a423a165288166c89acdfa0115249dd8b46a115874b1a",
+          "appHash": "8787dc47f3e9731c7704713c747cc5f6f737f706ddedb9353844b965dd65d1c7",
+          "target": "nanos2",
+          "targetId": "0x33100004",
+          "apiLevel": 27,
+          "flags": "0x0",
+          "network": "mainnet",
+          "appName": "Pearl Dev",
+          "imageBytes": 53313,
+          "writtenBytes": 53185,
+          "implicitZeroGapBytes": 128,
+          "installParamsBytes": 65,
+          "commands": 264,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "officialAndIndependentApplicationHashesAgree": true,
+        "hexBytesEqual": true,
+        "apduBytesEqual": true
+      }
+    },
+    {
+      "device": "nanosplus",
+      "network": "simnet",
+      "reference": {
+        "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+        "elfBytes": 205460,
+        "loadImageSha256": "00fb80fa01371b6c73ddcd2f7af7f4fd7db84e416bec3d0faa09fc9413902cea",
+        "loadImageBytes": 53317,
+        "appHash": "42af735c8b8a227609e8d16d26b350096adf2cdf47992d13236826aaba3a7682",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0ded045"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": [
+          "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/address.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/session.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/transaction.rs"
+        ]
+      },
+      "freshDifferentPath": {
+        "elfSha256": "1ed5e4323022915709ba9cb86cf708915dc8ce605caef65440668c0c401a0f03",
+        "elfBytes": 205416,
+        "loadImageSha256": "e8745cb31bcd34ce1c3ceb4ea2069fdc558e4a4064c56ef14738fbabe34b3a34",
+        "loadImageBytes": 53317,
+        "appHash": "05f8a294a81c31a9f60f7fcf0c739f225079bec4643d0679d5f3229c07aed78a",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0ded045"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": [
+          "/workspace/shared/prl-build-repro/source/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+          "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/address.rs",
+          "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/session.rs",
+          "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/transaction.rs"
+        ]
+      },
+      "comparison": {
+        "elfEqual": false,
+        "loadImageEqual": false,
+        "sparseLoadAddressesEqual": true,
+        "sparseLoadBytesEqual": false,
+        "applicationHashEqual": false,
+        "metadataEqual": true,
+        "loadParametersEqual": true,
+        "loadChangedBytePositions": 20599,
+        "sectionDifferences": [
+          {
+            "name": ".rel.rodata",
+            "allocated": false,
+            "referenceBytes": 384,
+            "rebuiltBytes": 384,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "b0742ad556f60583c3180f3ce6c866bf3cfe98c4789592fbea2530952cb142c4",
+            "rebuiltSha256": "3f9ae3949aab08c6570019548d965cb46deb94316da4cf732169c66e12a437b2",
+            "changedBytePositions": 53
+          },
+          {
+            "name": ".rel.text",
+            "allocated": false,
+            "referenceBytes": 15760,
+            "rebuiltBytes": 15760,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "153998d2436fab0dca47469f8055f3ed6f9922b0ba69619783a7123fdb1b62ef",
+            "rebuiltSha256": "0902b343a87d7ddc62326719e05e79400a56de0f9c478d4085b5b566185b1ae2",
+            "changedBytePositions": 2011
+          },
+          {
+            "name": ".rel_flash",
+            "allocated": true,
+            "referenceBytes": 384,
+            "rebuiltBytes": 384,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "b0742ad556f60583c3180f3ce6c866bf3cfe98c4789592fbea2530952cb142c4",
+            "rebuiltSha256": "3f9ae3949aab08c6570019548d965cb46deb94316da4cf732169c66e12a437b2",
+            "changedBytePositions": 53
+          },
+          {
+            "name": ".rodata",
+            "allocated": true,
+            "referenceBytes": 3584,
+            "rebuiltBytes": 3584,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "b3f3332677e606db4dc811a9f9ae80913eda2832c6942decd7565dc711a40b48",
+            "rebuiltSha256": "93482cbd261d22278fefc447d077bd712cd989b96db5d863527a9b2beb37adeb",
+            "changedBytePositions": 2819
+          },
+          {
+            "name": ".strtab",
+            "allocated": false,
+            "referenceBytes": 33466,
+            "rebuiltBytes": 33421,
+            "payloadEqual": false,
+            "headerEqual": false,
+            "referenceSha256": "b2548a248c1851738e35b880048b9ab68420ad8088e045b933bb6389818d6b6b",
+            "rebuiltSha256": "4a272c07ba5d3cfe1a70c5ed06ae05ccb9bf3bd016198e85972aeec9412f7202",
+            "changedBytePositions": 31671
+          },
+          {
+            "name": ".symtab",
+            "allocated": false,
+            "referenceBytes": 22816,
+            "rebuiltBytes": 22816,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "e9cb9df61b32371f1704e4b7a21a75e307e572560edc9fe3f245daf5da1ec55a",
+            "rebuiltSha256": "8f661fa3e033ef4a689382e7a479f9ae0bc1d8da74ff18c7bef8192ea176c254",
+            "changedBytePositions": 3224
+          },
+          {
+            "name": ".text",
+            "allocated": true,
+            "referenceBytes": 48640,
+            "rebuiltBytes": 48640,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "0742342de6b377a6ad2b6698f1aa682636fc8bacae1eaa0a2c55a687a90594c7",
+            "rebuiltSha256": "0408763e8f1fa1f968b8926ee5edbc974445f51e976af666fa0b807c6e6f1e14",
+            "changedBytePositions": 17727
+          }
+        ]
+      },
+      "buildManifestDifferences": [
+        "elfSha256"
+      ],
+      "offlinePackage": {
+        "referenceIndependent": {
+          "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-nanosplus-simnet.elf",
+          "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanosplus-simnet/pearl-nanosplus-simnet.apdu",
+          "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+          "apduSha256": "4b29be8e3ca832b35f132e328b10412f59bb30534494ad22543c791b0d1d7ffd",
+          "appHash": "42af735c8b8a227609e8d16d26b350096adf2cdf47992d13236826aaba3a7682",
+          "target": "nanos2",
+          "targetId": "0x33100004",
+          "apiLevel": 27,
+          "flags": "0x0",
+          "network": "simnet",
+          "appName": "Pearl Sim Dev",
+          "imageBytes": 53317,
+          "writtenBytes": 53189,
+          "implicitZeroGapBytes": 128,
+          "installParamsBytes": 69,
+          "commands": 264,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "freshIndependent": {
+          "elf": "/workspace/shared/prl-build-repro/artifacts/pearl-nanosplus-simnet.elf",
+          "apdu": "/workspace/shared/prl-build-repro/packages/nanosplus-simnet/pearl-nanosplus-simnet.apdu",
+          "elfSha256": "1ed5e4323022915709ba9cb86cf708915dc8ce605caef65440668c0c401a0f03",
+          "apduSha256": "8bc0c3a3f0ab9c5a0f8583987470ce1fd59aba5bc0dcec110588f530c95906f2",
+          "appHash": "05f8a294a81c31a9f60f7fcf0c739f225079bec4643d0679d5f3229c07aed78a",
+          "target": "nanos2",
+          "targetId": "0x33100004",
+          "apiLevel": 27,
+          "flags": "0x0",
+          "network": "simnet",
+          "appName": "Pearl Sim Dev",
+          "imageBytes": 53317,
+          "writtenBytes": 53189,
+          "implicitZeroGapBytes": 128,
+          "installParamsBytes": 69,
+          "commands": 264,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "officialAndIndependentApplicationHashesAgree": true,
+        "hexBytesEqual": false,
+        "apduBytesEqual": false
+      },
+      "freshReferenceLogicalPath": {
+        "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+        "elfBytes": 205460,
+        "loadImageSha256": "00fb80fa01371b6c73ddcd2f7af7f4fd7db84e416bec3d0faa09fc9413902cea",
+        "loadImageBytes": 53317,
+        "appHash": "42af735c8b8a227609e8d16d26b350096adf2cdf47992d13236826aaba3a7682",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0ded045"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": [
+          "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/address.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/session.rs",
+          "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/transaction.rs"
+        ]
+      },
+      "controlComparison": {
+        "elfEqual": true,
+        "loadImageEqual": true,
+        "sparseLoadAddressesEqual": true,
+        "sparseLoadBytesEqual": true,
+        "applicationHashEqual": true,
+        "metadataEqual": true,
+        "loadParametersEqual": true,
+        "loadChangedBytePositions": 0,
+        "sectionDifferences": []
+      },
+      "controlOfflinePackage": {
+        "independent": {
+          "elf": "/workspace/shared/prl-build-repro/control-artifacts/pearl-nanosplus-simnet.elf",
+          "apdu": "/workspace/shared/prl-build-repro/control-packages/nanosplus-simnet/pearl-nanosplus-simnet.apdu",
+          "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+          "apduSha256": "4b29be8e3ca832b35f132e328b10412f59bb30534494ad22543c791b0d1d7ffd",
+          "appHash": "42af735c8b8a227609e8d16d26b350096adf2cdf47992d13236826aaba3a7682",
+          "target": "nanos2",
+          "targetId": "0x33100004",
+          "apiLevel": 27,
+          "flags": "0x0",
+          "network": "simnet",
+          "appName": "Pearl Sim Dev",
+          "imageBytes": 53317,
+          "writtenBytes": 53189,
+          "implicitZeroGapBytes": 128,
+          "installParamsBytes": 69,
+          "commands": 264,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "officialAndIndependentApplicationHashesAgree": true,
+        "hexBytesEqual": true,
+        "apduBytesEqual": true
+      }
+    },
+    {
+      "device": "nanox",
+      "network": "mainnet",
+      "reference": {
+        "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+        "elfBytes": 200592,
+        "loadImageSha256": "ea020860c256250f4f7c2e044f735a824f6f088abb8b688c2888a92f9b378183",
+        "loadImageBytes": 52289,
+        "appHash": "3eecc148c5a23d2fbec48507fe5121c286aebf97f444e1bc9e220c5af6f46031",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0decc41"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": []
+      },
+      "freshDifferentPath": {
+        "elfSha256": "6380a5efc39cae64db99ffa4fa7100efde1c04f6e18ff588bedb331dfe707846",
+        "elfBytes": 200620,
+        "loadImageSha256": "664d0dfb920d28244d7a6be899f59ec42c380df614250a81e8be9273516bf24d",
+        "loadImageBytes": 52289,
+        "appHash": "be9483ef8cd25ee46948bd9782078b10b64599ccc1d77008165c4e145efd2ca3",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0decc41"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": []
+      },
+      "comparison": {
+        "elfEqual": false,
+        "loadImageEqual": false,
+        "sparseLoadAddressesEqual": true,
+        "sparseLoadBytesEqual": false,
+        "applicationHashEqual": false,
+        "metadataEqual": true,
+        "loadParametersEqual": true,
+        "loadChangedBytePositions": 46032,
+        "sectionDifferences": [
+          {
+            "name": ".rel.rodata",
+            "allocated": false,
+            "referenceBytes": 184,
+            "rebuiltBytes": 184,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "c560d22b811c2c32b8d7ceee3da4aa3dcf59dbe34b68b1d30c213f8ce83c566b",
+            "rebuiltSha256": "ec745da156e1b5264ce29988317fe77414c94e58be4998137d1d0248181814fd",
+            "changedBytePositions": 4
+          },
+          {
+            "name": ".rel.text",
+            "allocated": false,
+            "referenceBytes": 14648,
+            "rebuiltBytes": 14648,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "eaf97d08e2ce4c55ea9228febb70ce06d4a4c9ff58faa954a319ed0aadaca653",
+            "rebuiltSha256": "620108337228dac0762e8fd457216284bd8976c7c88a074b520973a2d09f2900",
+            "changedBytePositions": 3176
+          },
+          {
+            "name": ".rel_flash",
+            "allocated": true,
+            "referenceBytes": 184,
+            "rebuiltBytes": 184,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "c560d22b811c2c32b8d7ceee3da4aa3dcf59dbe34b68b1d30c213f8ce83c566b",
+            "rebuiltSha256": "ec745da156e1b5264ce29988317fe77414c94e58be4998137d1d0248181814fd",
+            "changedBytePositions": 4
+          },
+          {
+            "name": ".rodata",
+            "allocated": true,
+            "referenceBytes": 2560,
+            "rebuiltBytes": 2560,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "de06759bf717a67be334922e1c3f445a14ae42d7b93be39b02afe80d9544586d",
+            "rebuiltSha256": "dc0633f18a9b7244f89d2afbe5be9114ff2cfda0bebc94e713bd872525fecabf",
+            "changedBytePositions": 5
+          },
+          {
+            "name": ".strtab",
+            "allocated": false,
+            "referenceBytes": 31850,
+            "rebuiltBytes": 31876,
+            "payloadEqual": false,
+            "headerEqual": false,
+            "referenceSha256": "c32b6558e6aacf326594c484cde537fe8c88fda2de7327304a16c63351218174",
+            "rebuiltSha256": "e4f41cdeddfd1815316fd67cb0c22b1ad94c380573cb5c3136885f9062f4162b",
+            "changedBytePositions": 23872
+          },
+          {
+            "name": ".symtab",
+            "allocated": false,
+            "referenceBytes": 20880,
+            "rebuiltBytes": 20880,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "9907c5bd65fcdd584108acb624ab9801fab8379e55ebdcdf04885d943795e87b",
+            "rebuiltSha256": "1eb5bbc891fa9da387ef42da39385624c6ea994897b21313847de6c88c0b4115",
+            "changedBytePositions": 3429
+          },
+          {
+            "name": ".text",
+            "allocated": true,
+            "referenceBytes": 49152,
+            "rebuiltBytes": 49152,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "c3755511946d09bdbe0f5a6c1cc0eddf5a272da22065f1982c875ce345b21fe7",
+            "rebuiltSha256": "38624110179ec26a8c900068c7745a1ec6256ffc8573d3d566aa5c6159bcfac4",
+            "changedBytePositions": 46023
+          }
+        ]
+      },
+      "buildManifestDifferences": [
+        "elfSha256"
+      ],
+      "offlinePackage": {
+        "referenceIndependent": {
+          "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-nanox-mainnet.elf",
+          "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanox-mainnet/pearl-nanox-mainnet.apdu",
+          "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+          "apduSha256": "156ba0ad964382ab199fd533a850a75dc140d8f8298ed637d2e18c0876e99112",
+          "appHash": "3eecc148c5a23d2fbec48507fe5121c286aebf97f444e1bc9e220c5af6f46031",
+          "target": "nanox",
+          "targetId": "0x33000004",
+          "apiLevel": 27,
+          "flags": "0x200",
+          "network": "mainnet",
+          "appName": "Pearl Dev",
+          "imageBytes": 52289,
+          "writtenBytes": 52217,
+          "implicitZeroGapBytes": 72,
+          "installParamsBytes": 65,
+          "commands": 260,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "freshIndependent": {
+          "elf": "/workspace/shared/prl-build-repro/artifacts/pearl-nanox-mainnet.elf",
+          "apdu": "/workspace/shared/prl-build-repro/packages/nanox-mainnet/pearl-nanox-mainnet.apdu",
+          "elfSha256": "6380a5efc39cae64db99ffa4fa7100efde1c04f6e18ff588bedb331dfe707846",
+          "apduSha256": "2f27e9e8ea00eb421a68e3385c95fbb5da31d488c0c2f1c519baefd61c1622bf",
+          "appHash": "be9483ef8cd25ee46948bd9782078b10b64599ccc1d77008165c4e145efd2ca3",
+          "target": "nanox",
+          "targetId": "0x33000004",
+          "apiLevel": 27,
+          "flags": "0x200",
+          "network": "mainnet",
+          "appName": "Pearl Dev",
+          "imageBytes": 52289,
+          "writtenBytes": 52217,
+          "implicitZeroGapBytes": 72,
+          "installParamsBytes": 65,
+          "commands": 260,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "officialAndIndependentApplicationHashesAgree": true,
+        "hexBytesEqual": false,
+        "apduBytesEqual": false
+      },
+      "freshReferenceLogicalPath": {
+        "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+        "elfBytes": 200592,
+        "loadImageSha256": "ea020860c256250f4f7c2e044f735a824f6f088abb8b688c2888a92f9b378183",
+        "loadImageBytes": 52289,
+        "appHash": "3eecc148c5a23d2fbec48507fe5121c286aebf97f444e1bc9e220c5af6f46031",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0decc41"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": []
+      },
+      "controlComparison": {
+        "elfEqual": true,
+        "loadImageEqual": true,
+        "sparseLoadAddressesEqual": true,
+        "sparseLoadBytesEqual": true,
+        "applicationHashEqual": true,
+        "metadataEqual": true,
+        "loadParametersEqual": true,
+        "loadChangedBytePositions": 0,
+        "sectionDifferences": []
+      },
+      "controlOfflinePackage": {
+        "independent": {
+          "elf": "/workspace/shared/prl-build-repro/control-artifacts/pearl-nanox-mainnet.elf",
+          "apdu": "/workspace/shared/prl-build-repro/control-packages/nanox-mainnet/pearl-nanox-mainnet.apdu",
+          "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+          "apduSha256": "156ba0ad964382ab199fd533a850a75dc140d8f8298ed637d2e18c0876e99112",
+          "appHash": "3eecc148c5a23d2fbec48507fe5121c286aebf97f444e1bc9e220c5af6f46031",
+          "target": "nanox",
+          "targetId": "0x33000004",
+          "apiLevel": 27,
+          "flags": "0x200",
+          "network": "mainnet",
+          "appName": "Pearl Dev",
+          "imageBytes": 52289,
+          "writtenBytes": 52217,
+          "implicitZeroGapBytes": 72,
+          "installParamsBytes": 65,
+          "commands": 260,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "officialAndIndependentApplicationHashesAgree": true,
+        "hexBytesEqual": true,
+        "apduBytesEqual": true
+      }
+    },
+    {
+      "device": "nanox",
+      "network": "simnet",
+      "reference": {
+        "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+        "elfBytes": 200636,
+        "loadImageSha256": "f3fc967d18de4075e82204eb745ca6d9bb031ca86ee93c6c9e4297ebf972c4ef",
+        "loadImageBytes": 52293,
+        "appHash": "6f232ed0a474bc75da21016ed6d47031ef3382ffd6ba62e1e6c006e90fa3756c",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0decc45"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": []
+      },
+      "freshDifferentPath": {
+        "elfSha256": "016f54f0eacfd7981372351fd8416d281ba2a8cbf449d68f455147ddd8a63d5d",
+        "elfBytes": 200652,
+        "loadImageSha256": "d177b37130a7e7e5118dc19ee314f9bd1cdc28b12207a837feadb5499f9cc913",
+        "loadImageBytes": 52293,
+        "appHash": "5e09d1bb3447126c8ce61fcecb6d228bb1942ad18645b1a2154a9ea55902f47e",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0decc45"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": []
+      },
+      "comparison": {
+        "elfEqual": false,
+        "loadImageEqual": false,
+        "sparseLoadAddressesEqual": true,
+        "sparseLoadBytesEqual": false,
+        "applicationHashEqual": false,
+        "metadataEqual": true,
+        "loadParametersEqual": true,
+        "loadChangedBytePositions": 46259,
+        "sectionDifferences": [
+          {
+            "name": ".rel.rodata",
+            "allocated": false,
+            "referenceBytes": 184,
+            "rebuiltBytes": 184,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "39e673144446c1c0865f7c53d9411b88c2093e37d9140defd6b909cc5006c4e6",
+            "rebuiltSha256": "84db795ad8ae6727b1bd65b6564a2756144f0df91be9d032f1daf55ace7658b6",
+            "changedBytePositions": 4
+          },
+          {
+            "name": ".rel.text",
+            "allocated": false,
+            "referenceBytes": 14648,
+            "rebuiltBytes": 14648,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "0593d434f20d9a8b52977c703ca60555349971c8484f9f1f6840453fd20c1db2",
+            "rebuiltSha256": "d30cf3bf9c987676b4c4af82a97e0a1cf1cf02a482ba439c9022229657f3ee4c",
+            "changedBytePositions": 3163
+          },
+          {
+            "name": ".rel_flash",
+            "allocated": true,
+            "referenceBytes": 184,
+            "rebuiltBytes": 184,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "39e673144446c1c0865f7c53d9411b88c2093e37d9140defd6b909cc5006c4e6",
+            "rebuiltSha256": "84db795ad8ae6727b1bd65b6564a2756144f0df91be9d032f1daf55ace7658b6",
+            "changedBytePositions": 4
+          },
+          {
+            "name": ".rodata",
+            "allocated": true,
+            "referenceBytes": 2560,
+            "rebuiltBytes": 2560,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "df7fa211211ab43b76f8cde57b1d1b2175bb2cb850c159540a1280d683323c65",
+            "rebuiltSha256": "85afd15a3596df3172c5acc52700b67bd01952c9b26009dcd87e8777284ae3f3",
+            "changedBytePositions": 5
+          },
+          {
+            "name": ".strtab",
+            "allocated": false,
+            "referenceBytes": 31855,
+            "rebuiltBytes": 31871,
+            "payloadEqual": false,
+            "headerEqual": false,
+            "referenceSha256": "a869d1fff04c885b331bd3f725a86a62e127da08620714359f591c8a7e58d8f9",
+            "rebuiltSha256": "c27c1116261e3ee5b6e9d5701e117b04da4e9e04ec37d3ef5f331666668c69d0",
+            "changedBytePositions": 23596
+          },
+          {
+            "name": ".symtab",
+            "allocated": false,
+            "referenceBytes": 20912,
+            "rebuiltBytes": 20912,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "0a9b8a470342fdbfdd759744bc2d9ad23fce076f1f683c3d9dc1cfdd70e17b5d",
+            "rebuiltSha256": "3a98f6816c50b8dfea37bcb61301d23aba83bc4b4cfb979832c003431fd83552",
+            "changedBytePositions": 3450
+          },
+          {
+            "name": ".text",
+            "allocated": true,
+            "referenceBytes": 49152,
+            "rebuiltBytes": 49152,
+            "payloadEqual": false,
+            "headerEqual": true,
+            "referenceSha256": "f2807cd1e6eb3a959525889c513cab23a7f2fd424987100dc6c679fa3881b7ab",
+            "rebuiltSha256": "b8fe40d7784dc639ad6947ed5e9ea93c06c5dd6e422da4e9b78a141567b5bdef",
+            "changedBytePositions": 46250
+          }
+        ]
+      },
+      "buildManifestDifferences": [
+        "elfSha256"
+      ],
+      "offlinePackage": {
+        "referenceIndependent": {
+          "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-nanox-simnet.elf",
+          "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanox-simnet/pearl-nanox-simnet.apdu",
+          "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+          "apduSha256": "43480a909140d9f8ff11fc85f347002068e1dd9e71b92b87275bbe8508cf7808",
+          "appHash": "6f232ed0a474bc75da21016ed6d47031ef3382ffd6ba62e1e6c006e90fa3756c",
+          "target": "nanox",
+          "targetId": "0x33000004",
+          "apiLevel": 27,
+          "flags": "0x200",
+          "network": "simnet",
+          "appName": "Pearl Sim Dev",
+          "imageBytes": 52293,
+          "writtenBytes": 52221,
+          "implicitZeroGapBytes": 72,
+          "installParamsBytes": 69,
+          "commands": 260,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "freshIndependent": {
+          "elf": "/workspace/shared/prl-build-repro/artifacts/pearl-nanox-simnet.elf",
+          "apdu": "/workspace/shared/prl-build-repro/packages/nanox-simnet/pearl-nanox-simnet.apdu",
+          "elfSha256": "016f54f0eacfd7981372351fd8416d281ba2a8cbf449d68f455147ddd8a63d5d",
+          "apduSha256": "efb1674acfa0e102f87dd140c4519ac63bcc63f1796229193da44dfdb4ffb18b",
+          "appHash": "5e09d1bb3447126c8ce61fcecb6d228bb1942ad18645b1a2154a9ea55902f47e",
+          "target": "nanox",
+          "targetId": "0x33000004",
+          "apiLevel": 27,
+          "flags": "0x200",
+          "network": "simnet",
+          "appName": "Pearl Sim Dev",
+          "imageBytes": 52293,
+          "writtenBytes": 52221,
+          "implicitZeroGapBytes": 72,
+          "installParamsBytes": 69,
+          "commands": 260,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "officialAndIndependentApplicationHashesAgree": true,
+        "hexBytesEqual": false,
+        "apduBytesEqual": false
+      },
+      "freshReferenceLogicalPath": {
+        "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+        "elfBytes": 200636,
+        "loadImageSha256": "f3fc967d18de4075e82204eb745ca6d9bb031ca86ee93c6c9e4297ebf972c4ef",
+        "loadImageBytes": 52293,
+        "appHash": "6f232ed0a474bc75da21016ed6d47031ef3382ffd6ba62e1e6c006e90fa3756c",
+        "loadRange": [
+          "0xc0de0000",
+          "0xc0decc45"
+        ],
+        "debugSections": [],
+        "embeddedWorkspacePaths": []
+      },
+      "controlComparison": {
+        "elfEqual": true,
+        "loadImageEqual": true,
+        "sparseLoadAddressesEqual": true,
+        "sparseLoadBytesEqual": true,
+        "applicationHashEqual": true,
+        "metadataEqual": true,
+        "loadParametersEqual": true,
+        "loadChangedBytePositions": 0,
+        "sectionDifferences": []
+      },
+      "controlOfflinePackage": {
+        "independent": {
+          "elf": "/workspace/shared/prl-build-repro/control-artifacts/pearl-nanox-simnet.elf",
+          "apdu": "/workspace/shared/prl-build-repro/control-packages/nanox-simnet/pearl-nanox-simnet.apdu",
+          "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+          "apduSha256": "43480a909140d9f8ff11fc85f347002068e1dd9e71b92b87275bbe8508cf7808",
+          "appHash": "6f232ed0a474bc75da21016ed6d47031ef3382ffd6ba62e1e6c006e90fa3756c",
+          "target": "nanox",
+          "targetId": "0x33000004",
+          "apiLevel": 27,
+          "flags": "0x200",
+          "network": "simnet",
+          "appName": "Pearl Sim Dev",
+          "imageBytes": 52293,
+          "writtenBytes": 52221,
+          "implicitZeroGapBytes": 72,
+          "installParamsBytes": 69,
+          "commands": 260,
+          "crcSegments": 2,
+          "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+        },
+        "officialAndIndependentApplicationHashesAgree": true,
+        "hexBytesEqual": true,
+        "apduBytesEqual": true
+      }
+    }
+  ]
+}

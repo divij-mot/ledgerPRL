@@ -1,0 +1,61 @@
+{
+  "status": "offline-verified-not-installed",
+  "device": "nanosplus",
+  "network": "testnet",
+  "retailSideloadSupported": true,
+  "nanoXRestriction": "Retail Nano X cannot sideload; vendor-controlled review/testing only",
+  "elfSha256": "22a09f32080cd54cf1f1bf1a151a5d2ccdf6c8e68406b1c67583ffad36be9f46",
+  "applicationHash": "ba90b4ff7a42edb539307fc1141de2bc0873a334c15e869502a2e2b5b851398c",
+  "metadata": {
+    "target": "nanos2",
+    "target_id": "0x33100004",
+    "target_name": "TARGET_NANOS2",
+    "app_name": "Pearl Test Dev",
+    "app_version": "0.1.0",
+    "api_level": "27",
+    "sdk_version": "v27.1.2",
+    "rust_sdk_version": "1.17.0",
+    "rust_sdk_name": "ledger_secure_sdk_sys",
+    "sdk_name": "ledger-secure-sdk",
+    "sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "sdk_graphics": "nbgl",
+    "app_flags": "0"
+  },
+  "effectiveParameters": {
+    "target_id": 856686596,
+    "api_level": 27,
+    "flags": 0,
+    "code_length": 49152,
+    "data_length": 4096,
+    "install_params_length": 70,
+    "boot_offset": 1,
+    "load_length": 53318
+  },
+  "curve": "secp256k1",
+  "derivationPrefix": "86'/1'",
+  "installTlvSha256": "2fe2afbbb093454b340c4859bfbb7e172989c4bdb39ea6f39e50e61817d71de1",
+  "iconTlvSha256": "02d002e8d653eb1c3998f534a54b1e50055668b69b8bc41eb10136368b487547",
+  "apduCount": 264,
+  "deleteExistingApp": false,
+  "sourceBuildManifestSha256": "f07113e64f5cc8132f06e03df7bffc32d489f851dbbd4932b12678e451ac9a8b",
+  "packagerSha256": "f6e5cedd5e2f2803a634140518beb652e939d771610a6e9a70bddd8b250110b0",
+  "tools": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "ledgerblue": "0.1.58",
+    "pyelftools": "0.33",
+    "objcopy": "GNU objcopy (2.44-3+23+b1) 2.44\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty.",
+    "ledgerblueSources": {
+      "ledgerblue.hexLoader": "1464011334295336988881f243a18da8c1a2f87c10bd42fac8fdb2f05b68220f",
+      "ledgerblue.hexParser": "c9466c21c98d2922c8ffe1896b8f75eaabf57dea647d7aa633633248b7fae163",
+      "ledgerblue.hashApp": "47083f16325021b39f0d686ecba6af421c1ed4b838af2ad5d7136b24334bf8e1"
+    }
+  },
+  "files": {
+    "pearl-nanosplus-testnet.apdu": "a6192dd7c20a4e9d04980fbf40b9c4d624d381fea4857cb02703969cb525eb41",
+    "pearl-nanosplus-testnet.build.json": "f07113e64f5cc8132f06e03df7bffc32d489f851dbbd4932b12678e451ac9a8b",
+    "pearl-nanosplus-testnet.elf": "22a09f32080cd54cf1f1bf1a151a5d2ccdf6c8e68406b1c67583ffad36be9f46",
+    "pearl-nanosplus-testnet.hex": "d26ea01a6bb39c1f92f5c3c4fea1c62090d3deed8582557d2f598c1e85fae408",
+    "pearl-nanosplus-testnet.sha256": "431f0344b11dd9eaafe3c20532f47aad35b5b84b246e66c017a4c30b7581a1f5"
+  },
+  "scope": "Offline APDU/HEX inspection only; no hardware transport, credentials, CA, OS flashing or vendor authorization"
+}

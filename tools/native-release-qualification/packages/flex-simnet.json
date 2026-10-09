@@ -1,0 +1,61 @@
+{
+  "status": "offline-verified-not-installed",
+  "device": "flex",
+  "network": "simnet",
+  "retailSideloadSupported": true,
+  "nanoXRestriction": "Retail Nano X cannot sideload; vendor-controlled review/testing only",
+  "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+  "applicationHash": "27d55ee396a6746f0ba061864e6ca81ed5d82a7e25cbf6b279016c1e37720eae",
+  "metadata": {
+    "target": "flex",
+    "target_id": "0x33300004",
+    "target_name": "TARGET_FLEX",
+    "app_name": "Pearl Sim Dev",
+    "app_version": "0.1.0",
+    "api_level": "27",
+    "sdk_version": "v27.1.2",
+    "rust_sdk_version": "1.17.0",
+    "rust_sdk_name": "ledger_secure_sdk_sys",
+    "sdk_name": "ledger-secure-sdk",
+    "sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "sdk_graphics": "nbgl",
+    "app_flags": "0x200"
+  },
+  "effectiveParameters": {
+    "target_id": 858783748,
+    "api_level": 27,
+    "flags": 512,
+    "code_length": 65536,
+    "data_length": 9216,
+    "install_params_length": 145,
+    "boot_offset": 1,
+    "load_length": 74897
+  },
+  "curve": "secp256k1",
+  "derivationPrefix": "86'/1'",
+  "installTlvSha256": "cd30b9310cfce424fba902fc1d093bb2c3e9db873fd71b2ceb441ce4945bbb4d",
+  "iconTlvSha256": "5383e1a15de3b3edce572bcf8d6f1e264cb967e61f6fc2e402271934328158db",
+  "apduCount": 366,
+  "deleteExistingApp": false,
+  "sourceBuildManifestSha256": "e36eada5014d038b7ca16154719f76229a32da5e4c68b24046dd61274898b272",
+  "packagerSha256": "f6e5cedd5e2f2803a634140518beb652e939d771610a6e9a70bddd8b250110b0",
+  "tools": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "ledgerblue": "0.1.58",
+    "pyelftools": "0.33",
+    "objcopy": "GNU objcopy (2.44-3+23+b1) 2.44\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty.",
+    "ledgerblueSources": {
+      "ledgerblue.hexLoader": "1464011334295336988881f243a18da8c1a2f87c10bd42fac8fdb2f05b68220f",
+      "ledgerblue.hexParser": "c9466c21c98d2922c8ffe1896b8f75eaabf57dea647d7aa633633248b7fae163",
+      "ledgerblue.hashApp": "47083f16325021b39f0d686ecba6af421c1ed4b838af2ad5d7136b24334bf8e1"
+    }
+  },
+  "files": {
+    "pearl-flex-simnet.apdu": "12f6a97927f03a666a94348b6aca5c42a8a357fe5a19f5bf6b0e64e1afab1358",
+    "pearl-flex-simnet.build.json": "e36eada5014d038b7ca16154719f76229a32da5e4c68b24046dd61274898b272",
+    "pearl-flex-simnet.elf": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+    "pearl-flex-simnet.hex": "13840430dfdf2ea6c7584d113eb5a46aea2e0adb4977d252e2b1371343d2f879",
+    "pearl-flex-simnet.sha256": "931ae15516b61c9bc1958f7b41bc137a8f78ae706a631f0605d32c24a713d606"
+  },
+  "scope": "Offline APDU/HEX inspection only; no hardware transport, credentials, CA, OS flashing or vendor authorization"
+}

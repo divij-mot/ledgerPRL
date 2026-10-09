@@ -1,0 +1,73 @@
+{
+  "protectedFileCount": 2820,
+  "nativeSourceManifestUnchanged": true,
+  "vendorAndFrozenArtifactContentsUnchanged": true,
+  "parentDocumentationChangedDuringConcurrentWork": [
+    "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/tests/evidence/README.md",
+    "/workspace/scratch/5d237258d612/ledgerPRL/docs/checkpoints.json",
+    "/workspace/scratch/5d237258d612/ledgerPRL/docs/e2e-evidence.md",
+    "/workspace/scratch/5d237258d612/ledgerPRL/docs/firmware.md",
+    "/workspace/scratch/5d237258d612/ledgerPRL/docs/test-evidence.md"
+  ],
+  "protectedFilesMissing": [],
+  "nativeBuildsFilesystemSandboxed": true,
+  "originalParentSourceAndVendorsAndArtifactsReadOnlyDuringDifferentPathBuilds": true,
+  "differentPathMounts": {
+    "/workspace/scratch/5d237258d612/ledgerPRL": {
+      "mountpoint": "/workspace/scratch/5d237258d612",
+      "options": "ro,nosuid,nodev,relatime",
+      "root": "/workspace/scratch/5d237258d612",
+      "filesystem": "overlay"
+    },
+    "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/vendor": {
+      "mountpoint": "/workspace/scratch/5d237258d612",
+      "options": "ro,nosuid,nodev,relatime",
+      "root": "/workspace/scratch/5d237258d612",
+      "filesystem": "overlay"
+    },
+    "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts": {
+      "mountpoint": "/workspace/shared",
+      "options": "ro,nosuid,nodev,relatime",
+      "root": "/workspace/shared",
+      "filesystem": "overlay"
+    },
+    "/workspace/shared/prl-build-repro/source/apps/ledger/target": {
+      "mountpoint": "/workspace/shared/prl-build-repro",
+      "options": "rw,nosuid,nodev,relatime",
+      "root": "/workspace/shared/prl-build-repro",
+      "filesystem": "overlay"
+    },
+    "/tmp/pearl-cargo": {
+      "mountpoint": "/tmp/pearl-cargo",
+      "options": "rw,nosuid,nodev,relatime",
+      "root": "/workspace/shared/prl-build-repro/cargo-home",
+      "filesystem": "overlay"
+    }
+  },
+  "controlHostSourceSharesNoInodesWithParent": true,
+  "controlMountProof": {
+    "logicalPath": "/workspace/scratch/5d237258d612/ledgerPRL",
+    "physicalPrivateSource": "/workspace/shared/prl-build-repro/control-source",
+    "logicalInode": [
+      27,
+      1347218
+    ],
+    "privateInode": [
+      27,
+      1347218
+    ],
+    "samePrivateInode": true,
+    "hostParentInodeAfter": [
+      27,
+      668524
+    ],
+    "hostParentAndPrivateInodesDiffer": true
+  },
+  "cargoNetOffline": true,
+  "gitProtocolAllow": "never",
+  "rustupAutoInstall": false,
+  "networkNamespaceAvailable": false,
+  "ptraceAvailable": false,
+  "diagnosticLimit": "Kernel did not permit the extra network namespace or ptrace tracing. Cargo offline and Git protocol denial were used. Filesystem isolation succeeded.",
+  "productionSourceScriptsEditedByThisWork": false
+}

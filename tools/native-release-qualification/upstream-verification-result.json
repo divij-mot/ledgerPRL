@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "transactions": 10,
+  "signaturesAndScriptEngineExecutions": 100,
+  "pearlModule": "v1.4.12-0.20261004154648-2f8b770cac8f",
+  "moduleCacheVerified": true,
+  "goVersion": "1.26.6",
+  "offline": true,
+  "failedInitialAttempt": "Wrong empty module cache; no oracle case executed. Retained separately."
+}

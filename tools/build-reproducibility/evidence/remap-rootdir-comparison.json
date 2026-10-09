@@ -1,0 +1,150 @@
+{
+  "a": {
+    "elfSha256": "43a6f88070c23c7fd102384b2480e2f5f454295d93c5474f7d9435d9c5ccf2e6",
+    "elfBytes": 205440,
+    "loadImageSha256": "8d88b8cb454442fa6a221897c96b12437eaf41e3bb63ab8d0e969dc66b1410f1",
+    "loadImageBytes": 53313,
+    "appHash": "eb287d4ebeb1b9a6646a3a181069ba271a2fe676408ae148e8f5c400f5af8835",
+    "loadRange": [
+      "0xc0de0000",
+      "0xc0ded041"
+    ],
+    "debugSections": [],
+    "embeddedWorkspacePaths": []
+  },
+  "b": {
+    "elfSha256": "5df43a3d62b251b5b50cd969f020ea9ac077c03e71cdf869682716f12ae9e7e6",
+    "elfBytes": 205452,
+    "loadImageSha256": "6727494f0cdd9d7b4cf2cc4b717ed0dbda9f9942bf347c4854b5ddb4c20b490d",
+    "loadImageBytes": 53313,
+    "appHash": "8d89b0d4510e115d7c650a8a98884bf8cc0692fe43aff9ab11c66782fd125627",
+    "loadRange": [
+      "0xc0de0000",
+      "0xc0ded041"
+    ],
+    "debugSections": [],
+    "embeddedWorkspacePaths": []
+  },
+  "comparison": {
+    "elfEqual": false,
+    "loadImageEqual": false,
+    "sparseLoadAddressesEqual": true,
+    "sparseLoadBytesEqual": false,
+    "applicationHashEqual": false,
+    "metadataEqual": true,
+    "loadParametersEqual": true,
+    "loadChangedBytePositions": 33521,
+    "sectionDifferences": [
+      {
+        "name": ".ARM.attributes",
+        "allocated": false,
+        "referenceBytes": 54,
+        "rebuiltBytes": 54,
+        "payloadEqual": true,
+        "headerEqual": false,
+        "referenceSha256": "c1f47a646b7eff07fc1f130277d30da958465c97e5d5307f17cfb313f4d583c8",
+        "rebuiltSha256": "c1f47a646b7eff07fc1f130277d30da958465c97e5d5307f17cfb313f4d583c8",
+        "changedBytePositions": 0
+      },
+      {
+        "name": ".comment",
+        "allocated": false,
+        "referenceBytes": 267,
+        "rebuiltBytes": 267,
+        "payloadEqual": true,
+        "headerEqual": false,
+        "referenceSha256": "d81a4ee6dd26bffd578a22f4ad057ac3818e1072ef9cb86a4a7450f40c36535c",
+        "rebuiltSha256": "d81a4ee6dd26bffd578a22f4ad057ac3818e1072ef9cb86a4a7450f40c36535c",
+        "changedBytePositions": 0
+      },
+      {
+        "name": ".rel.rodata",
+        "allocated": false,
+        "referenceBytes": 384,
+        "rebuiltBytes": 384,
+        "payloadEqual": false,
+        "headerEqual": false,
+        "referenceSha256": "60050e7ac5a14a083382f800894245a6ed755c533e29dbd6f666420d4a19be4f",
+        "rebuiltSha256": "60febee1ccd8da8abd55ea040a737c96892d4c6e198960f16a5e04d73634a0e2",
+        "changedBytePositions": 4
+      },
+      {
+        "name": ".rel.text",
+        "allocated": false,
+        "referenceBytes": 15768,
+        "rebuiltBytes": 15760,
+        "payloadEqual": false,
+        "headerEqual": false,
+        "referenceSha256": "5eccfe2ea7addc5d6191d80a67302e64b0f90e4d279e6b34238cc27d2bcaecac",
+        "rebuiltSha256": "589a297cccb1babfdb0bd3cb7841c4c197e2aa027c4acc40479a8f6c5ca90c65",
+        "changedBytePositions": 3883
+      },
+      {
+        "name": ".rel_flash",
+        "allocated": true,
+        "referenceBytes": 384,
+        "rebuiltBytes": 384,
+        "payloadEqual": false,
+        "headerEqual": true,
+        "referenceSha256": "60050e7ac5a14a083382f800894245a6ed755c533e29dbd6f666420d4a19be4f",
+        "rebuiltSha256": "60febee1ccd8da8abd55ea040a737c96892d4c6e198960f16a5e04d73634a0e2",
+        "changedBytePositions": 4
+      },
+      {
+        "name": ".rodata",
+        "allocated": true,
+        "referenceBytes": 3584,
+        "rebuiltBytes": 3584,
+        "payloadEqual": false,
+        "headerEqual": true,
+        "referenceSha256": "a25c2d990c867c74f727260a36dce2a65eff1bf93169e75bc87024ff114e453f",
+        "rebuiltSha256": "adbc473463c83c0c9fac881e7b92a158f92910683575fc48d43ede71138b68a5",
+        "changedBytePositions": 4
+      },
+      {
+        "name": ".shstrtab",
+        "allocated": false,
+        "referenceBytes": 358,
+        "rebuiltBytes": 358,
+        "payloadEqual": true,
+        "headerEqual": false,
+        "referenceSha256": "e8ffd4826ada131a1706f816671e64408d6790a37fafbde012330ac17b4c336f",
+        "rebuiltSha256": "e8ffd4826ada131a1706f816671e64408d6790a37fafbde012330ac17b4c336f",
+        "changedBytePositions": 0
+      },
+      {
+        "name": ".strtab",
+        "allocated": false,
+        "referenceBytes": 33440,
+        "rebuiltBytes": 33461,
+        "payloadEqual": false,
+        "headerEqual": false,
+        "referenceSha256": "917764ef85a1b6f8ca605cf56253c5da77a980c552e14401b9c169f92f281bc7",
+        "rebuiltSha256": "a4da60210bcf4a82d77cc1fe88e29f0e9ab363b7714efb801fcc00d0f358f3e4",
+        "changedBytePositions": 32032
+      },
+      {
+        "name": ".symtab",
+        "allocated": false,
+        "referenceBytes": 22816,
+        "rebuiltBytes": 22816,
+        "payloadEqual": false,
+        "headerEqual": false,
+        "referenceSha256": "d83f1e3b901af15522108ae4326eaf05d156693ad7cb4d47754c455b5ad1d310",
+        "rebuiltSha256": "da9c739feb6ac2cb952a3daa75c9af8c4494c5a199d8c446616c3bbe3d3c06fb",
+        "changedBytePositions": 3354
+      },
+      {
+        "name": ".text",
+        "allocated": true,
+        "referenceBytes": 48640,
+        "rebuiltBytes": 48640,
+        "payloadEqual": false,
+        "headerEqual": true,
+        "referenceSha256": "b83806ea7e00f1d9fec96b6540b0009fad20e98efb734ddcb6c226606f448885",
+        "rebuiltSha256": "9bf2c4778c51b0242627e2090e9c009b26c7b880186e82a36e1889b0d4aa6830",
+        "changedBytePositions": 33513
+      }
+    ]
+  }
+}

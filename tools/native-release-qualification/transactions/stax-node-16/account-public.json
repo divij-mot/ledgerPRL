@@ -1,0 +1,7 @@
+{
+  "network": "simnet",
+  "account": 0,
+  "masterFingerprint": "3442193e",
+  "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+  "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+}

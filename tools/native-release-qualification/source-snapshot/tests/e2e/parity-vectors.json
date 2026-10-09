@@ -1,0 +1,42 @@
+[
+  {
+    "address": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+    "branch": 0,
+    "compressedInternalKey": "0383f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de154",
+    "compressedOutputKey": "0215fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+    "index": 0,
+    "internalParity": 1,
+    "outputParity": 0,
+    "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0"
+  },
+  {
+    "address": "rprl1p2nxuyp0u25rds6nkpezmapwn6k4lle8wsj7rpq3km297cdz8rw7q52c8k0",
+    "branch": 0,
+    "compressedInternalKey": "02af7dbbf9b9f39f147487fbd85453b683112ee5cb1d52230c5af280448a8815d3",
+    "compressedOutputKey": "0254cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+    "index": 3,
+    "internalParity": 0,
+    "outputParity": 0,
+    "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc"
+  },
+  {
+    "address": "rprl1pkhp60ypj33vcs27xtsqpylsr8w2qw7ggvy9cckzs04my8fdnvgkqjfr7jf",
+    "branch": 0,
+    "compressedInternalKey": "031a192d2a88f6df9b748e298310cda31231065b379338fa6844481c9e8d9c0738",
+    "compressedOutputKey": "03b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+    "index": 4,
+    "internalParity": 1,
+    "outputParity": 1,
+    "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c"
+  },
+  {
+    "address": "rprl1pyst6awqhkr252kza7tg7emu8lrpa56ayq8jaenvqsp4560ckvgrq4e45yt",
+    "branch": 0,
+    "compressedInternalKey": "02d3d8b7aedbfae27bc84bfead5712aae8467a9697db53fdb60f53439c91405460",
+    "compressedOutputKey": "032417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+    "index": 9,
+    "internalParity": 0,
+    "outputParity": 1,
+    "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206"
+  }
+]

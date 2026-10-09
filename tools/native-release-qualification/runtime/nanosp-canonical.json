@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/artifacts/pearl-nanosplus-simnet.elf",
+    "testedSnapshot": "/workspace/shared/pearl-lexical-requalification-20261009-1852/runtime/nanosp-canonical/tested-firmware.elf",
+    "sha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "checks": [
+    "exact-public-account-fixture",
+    "invalid-xonly-zero",
+    "invalid-xonly-ff",
+    "SDK-BN-cleanup-recovery",
+    "verified-full-address",
+    "two-native-BIP340-signatures"
+  ]
+}

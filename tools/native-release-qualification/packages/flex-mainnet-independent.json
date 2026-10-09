@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/flex-mainnet/pearl-flex-mainnet.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/flex-mainnet/pearl-flex-mainnet.apdu",
+  "elfSha256": "7844ce075283c48f663477e7a2deb789a445879b78dfe3929fb918beec5d6103",
+  "apduSha256": "cc743edbcf02304ff48cf3d4c1bbf134e7d033d51a63aae386514b9220ddbfa0",
+  "appHash": "cda25a624993a0c585a2d66e6ecbcb8940f150173fab9d70f09e4e13e8af50e0",
+  "target": "flex",
+  "targetId": "0x33300004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "mainnet",
+  "appName": "Pearl Dev",
+  "imageBytes": 74893,
+  "writtenBytes": 74437,
+  "implicitZeroGapBytes": 456,
+  "installParamsBytes": 141,
+  "commands": 366,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

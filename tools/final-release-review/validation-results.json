@@ -1,0 +1,488 @@
+{
+  "status": "PASS",
+  "scope": "Recorded provenance/count/status verification and fresh pinned independent APDU decode; not a runtime/hardware replay",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "inputReportSha256": {
+    "qualification": "c8117faa4b84a3ab8c748ea60984e245125b094895d874592d808e617861d9ee",
+    "reproduction": "a2a7743ddca73a0a559049e2810c2078d84967656f5c0c6d340c5791b6ce670b",
+    "identities": "c4046e8226e9e55edd586543c7f0fab9c2f4def4d63e12ddea4a18e2f68d322f"
+  },
+  "nativeSourceFilesVerified": 24,
+  "runtimeSourceFilesVerifiedPerSuite": 39,
+  "buildNetworkPackageVariants": 25,
+  "networkReadOnlyChecks": 100,
+  "independentPackageDecodes": 50,
+  "runtimeSuites": 30,
+  "runtimeSnapshotsVerified": 102,
+  "faultCases": 77,
+  "nodeCases": 220,
+  "nodeFinalTransactionSignatures": 100,
+  "stabilitySessions": 100,
+  "stabilitySignatures": 230,
+  "packagerUnitTests": 11,
+  "variants": [
+    {
+      "device": "apex_p",
+      "network": "mainnet",
+      "elfSha256": "7cce99aaacc43c281c5cf99eec90587c32e636869ae59cedfc0da2b5c19dc852",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "apex_p",
+      "network": "regtest",
+      "elfSha256": "46dcfd7e3981323f782ea99ea8e2ac56d3211d26fdee115fe89d3ff72d8cabd5",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "apex_p",
+      "network": "simnet",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "apex_p",
+      "network": "testnet",
+      "elfSha256": "01cf7816a6d8090e18de75b0212f48a81e731d94ac80cef924fc91535ff94fd1",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "apex_p",
+      "network": "testnet2",
+      "elfSha256": "a4ee60fd8620b3426fe4e56f3bd416791375761836d06a4ecb6ba18a2a1127a0",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "flex",
+      "network": "mainnet",
+      "elfSha256": "7844ce075283c48f663477e7a2deb789a445879b78dfe3929fb918beec5d6103",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "flex",
+      "network": "regtest",
+      "elfSha256": "e3a89d593fd4bf18ba3f2bec550b58f58c07b93abb3592cd4c270c744ba0e05f",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "flex",
+      "network": "simnet",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "flex",
+      "network": "testnet",
+      "elfSha256": "1a0fb7f2f314b5825e48e80bb038e99e5ae3d4007ff1f3cd050c4587e051c37b",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "flex",
+      "network": "testnet2",
+      "elfSha256": "f2e9fd2ed73c03bcac90562736fcd7f90206fcfeb06a221b59a5325ad1141b23",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanosplus",
+      "network": "mainnet",
+      "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanosplus",
+      "network": "regtest",
+      "elfSha256": "8a15b763668c2cbe9ace2813b62ae1746d5872db2ab761c91388dfff92720ac8",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanosplus",
+      "network": "simnet",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanosplus",
+      "network": "testnet",
+      "elfSha256": "22a09f32080cd54cf1f1bf1a151a5d2ccdf6c8e68406b1c67583ffad36be9f46",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanosplus",
+      "network": "testnet2",
+      "elfSha256": "f055cc9d208f327f56939a86084d95644489785380da4ba0dab5ed201bc359b5",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanox",
+      "network": "mainnet",
+      "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanox",
+      "network": "regtest",
+      "elfSha256": "b1b02db7d428a8d680fe4ab955a6d9945ff5ea1c86d36d0e599028638d837fff",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanox",
+      "network": "simnet",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanox",
+      "network": "testnet",
+      "elfSha256": "56689befc195e24805c02d2b917f4cba259a0493a24d445f904a07db0cd2d293",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "nanox",
+      "network": "testnet2",
+      "elfSha256": "d2ef1a3b76090a82bdfa53196587aa2ba058585cc47493014922c8984af0c62d",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "stax",
+      "network": "mainnet",
+      "elfSha256": "bf137b68355f1efc8d54d9f4e6ea56179f956b9cc7b41dcfc0e18e91571b61b6",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "stax",
+      "network": "regtest",
+      "elfSha256": "5d527751071c9644bc436222ee50bdf663e939fcfe58ca68f8cd7c3dced02549",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "stax",
+      "network": "simnet",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "stax",
+      "network": "testnet",
+      "elfSha256": "d0f6e393bd75bc2b2cc789e3050a49c0b429a3ae51d30afeb9ca60f2e3d12d6f",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    },
+    {
+      "device": "stax",
+      "network": "testnet2",
+      "elfSha256": "bb3e186902880aba78c7b1b1e5d7d32d783d9abb8896ec3c5cc413e5ee389d1f",
+      "networkChecks": 4,
+      "packageFilesVerified": 5,
+      "canonicalBytesEqual": true,
+      "independentApduDecodes": 2
+    }
+  ],
+  "runtime": [
+    {
+      "model": "apex_p",
+      "suite": "canonical",
+      "evidenceSha256": "d952c04262e94cc6c9c60b7df4391c40d32244f152704d6cefdbfee0741cb200",
+      "snapshotsVerified": 1,
+      "checks": 6
+    },
+    {
+      "model": "apex_p",
+      "suite": "faults",
+      "evidenceSha256": "4214904cb69dfe9b22ae2fc5462ae4bb32dded631e04403e272656a0355ef229",
+      "snapshotsVerified": 15,
+      "faultCases": 15
+    },
+    {
+      "model": "apex_p",
+      "suite": "node-16",
+      "evidenceSha256": "711e0b9526b1a4558b8bde18c86ba59eaed06d7f371809ff0f0b07ba4e4e78d9",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 16
+    },
+    {
+      "model": "apex_p",
+      "suite": "node-parity",
+      "evidenceSha256": "f923cbbd976a3f55e3674529404cfea9354b3b2154fb2156655901188bffa4dd",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 4
+    },
+    {
+      "model": "apex_p",
+      "suite": "stability",
+      "evidenceSha256": "2619ddf556ab1d802133713cecb12bdfe2cffd8e78582f9731a7ee8f3d0ad555",
+      "snapshotsVerified": 1,
+      "sessions": 20,
+      "completeSignatures": 44,
+      "partialSignatures": 2
+    },
+    {
+      "model": "apex_p",
+      "suite": "warnings",
+      "evidenceSha256": "7cfcaa7a051e2a5731270a3fb27669808c04c5ca4205b452211a8982c5831527",
+      "snapshotsVerified": 1,
+      "checks": 5
+    },
+    {
+      "model": "flex",
+      "suite": "canonical",
+      "evidenceSha256": "3704a7a7d15d6bf2ac58b96b6ba9fd03e615453597153150e6b16767cf6ba40b",
+      "snapshotsVerified": 1,
+      "checks": 6
+    },
+    {
+      "model": "flex",
+      "suite": "faults",
+      "evidenceSha256": "5b41e693fd5b8e45af3856b166f44df6b77e126e0a0008ee76c2b1681203f0cc",
+      "snapshotsVerified": 15,
+      "faultCases": 15
+    },
+    {
+      "model": "flex",
+      "suite": "node-16",
+      "evidenceSha256": "ae81a1ec7f97e44915f330ef55d433cb62ecfa59a82daf8ffeeb954eb6a5c8d3",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 16
+    },
+    {
+      "model": "flex",
+      "suite": "node-parity",
+      "evidenceSha256": "3465d478c39056cb27bcddec77e550e9970be56cd1fa7b1f7e635c576f5cbace",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 4
+    },
+    {
+      "model": "flex",
+      "suite": "stability",
+      "evidenceSha256": "3add5224962fcb1fb40c65f94a98d2c05c33265c5408b7ccbbe158789410d9bd",
+      "snapshotsVerified": 1,
+      "sessions": 20,
+      "completeSignatures": 44,
+      "partialSignatures": 2
+    },
+    {
+      "model": "flex",
+      "suite": "warnings",
+      "evidenceSha256": "396c3001a6d61db397b29b4a1535f661d4e629fd14d303190b87d74011432900",
+      "snapshotsVerified": 1,
+      "checks": 5
+    },
+    {
+      "model": "nanosp",
+      "suite": "canonical",
+      "evidenceSha256": "4733d2d43a9dc78729a2bcaf8b04579e1ce1c3b16da7b85551c428c13a506a2f",
+      "snapshotsVerified": 1,
+      "checks": 6
+    },
+    {
+      "model": "nanosp",
+      "suite": "faults",
+      "evidenceSha256": "81e81dacf2776c5e989d1e7b982eae348bb79cd5aa6ffb06ced81e3c380c1b37",
+      "snapshotsVerified": 16,
+      "faultCases": 16
+    },
+    {
+      "model": "nanosp",
+      "suite": "node-16",
+      "evidenceSha256": "45569b2c6fa8e50436ffaf6c18b10c7657f8dd5435ade225357a3332ff085f70",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 16
+    },
+    {
+      "model": "nanosp",
+      "suite": "node-parity",
+      "evidenceSha256": "2491e609b42fccdd7b437f5ca658ba75ec3eb21ed1088884fda5ab610608dd54",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 4
+    },
+    {
+      "model": "nanosp",
+      "suite": "stability",
+      "evidenceSha256": "0c7c7ac023f67b59a83ddfd00a9b7504cbde5b47b03f7979d40c5f5009f5178f",
+      "snapshotsVerified": 1,
+      "sessions": 20,
+      "completeSignatures": 44,
+      "partialSignatures": 2
+    },
+    {
+      "model": "nanosp",
+      "suite": "warnings",
+      "evidenceSha256": "984d036a6e0ffdc383cddaab6265ab880d0dfe1e6e6769b6ca6d1941b1a66f7c",
+      "snapshotsVerified": 1,
+      "checks": 5
+    },
+    {
+      "model": "nanox",
+      "suite": "canonical",
+      "evidenceSha256": "d96f8bb1b7196a6aa1474f19e305399dd83077747ab7ebde894fd45ac912fe15",
+      "snapshotsVerified": 1,
+      "checks": 6
+    },
+    {
+      "model": "nanox",
+      "suite": "faults",
+      "evidenceSha256": "d1c228d6996a22c92ada40b5063fadbd802b5fa854bb6b223ed3b2e23ef7acee",
+      "snapshotsVerified": 16,
+      "faultCases": 16
+    },
+    {
+      "model": "nanox",
+      "suite": "node-16",
+      "evidenceSha256": "d73f6875ec01f186fe1cc861bf804eb7b55514fd6835400c0a3be9f6ee2b65ee",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 16
+    },
+    {
+      "model": "nanox",
+      "suite": "node-parity",
+      "evidenceSha256": "085b5c7e408d5ca6722a28b71053d08866abba09d6fbdff6a2ec7ae92b1a6caf",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 4
+    },
+    {
+      "model": "nanox",
+      "suite": "stability",
+      "evidenceSha256": "f3abd705fecff28f478594058de7502ee20398fd243bec586b5c3c7d1fac22f4",
+      "snapshotsVerified": 1,
+      "sessions": 20,
+      "completeSignatures": 44,
+      "partialSignatures": 2
+    },
+    {
+      "model": "nanox",
+      "suite": "warnings",
+      "evidenceSha256": "22f2a006aa16a496e51e725c4caaf202606ddb4a9015b4b2c59d15771aeea73f",
+      "snapshotsVerified": 1,
+      "checks": 5
+    },
+    {
+      "model": "stax",
+      "suite": "canonical",
+      "evidenceSha256": "0c5fab62967cd05b35df644b3ba0b22a56978bfb3631f1fa2d2245a3b5737a7d",
+      "snapshotsVerified": 1,
+      "checks": 6
+    },
+    {
+      "model": "stax",
+      "suite": "faults",
+      "evidenceSha256": "f426aa3a4ceca3dd6eb657e6b7893f27b21d3afcab2e1a8b5e9c68c8a1d44ec6",
+      "snapshotsVerified": 15,
+      "faultCases": 15
+    },
+    {
+      "model": "stax",
+      "suite": "node-16",
+      "evidenceSha256": "6f25fe1d3a4b57c4a643ae316f4cf01cc66bf7664c57c5412910fa6b7864a659",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 16
+    },
+    {
+      "model": "stax",
+      "suite": "node-parity",
+      "evidenceSha256": "386d4a84d9c8d4d76e82606f9b16e4409411dabe1cc209bb650dda869ac82d40",
+      "snapshotsVerified": 1,
+      "nodeCases": 22,
+      "finalTransactionSignatures": 4
+    },
+    {
+      "model": "stax",
+      "suite": "stability",
+      "evidenceSha256": "15d36a9b92b74fb375362db8550b4d7c1406ada9acbf8bac38ebf0f1b48453ec",
+      "snapshotsVerified": 1,
+      "sessions": 20,
+      "completeSignatures": 44,
+      "partialSignatures": 2
+    },
+    {
+      "model": "stax",
+      "suite": "warnings",
+      "evidenceSha256": "b0a18f5ce7e07c3917849491a3c6ece70f3dde570716dd6c24ed10c03eada364",
+      "snapshotsVerified": 1,
+      "checks": 5
+    }
+  ],
+  "limits": [
+    "Native runtime not replayed",
+    "Package decoder reused at a pinned reviewed hash",
+    "Canonical logical-path rebuild only; arbitrary-prefix reproducibility is not established",
+    "No physical device, loaded-account browser, real IndexedDB, human audit, or vendor approval"
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "status": "passed",
+  "scope": "Parameterized aggregator reproduced every report field except the new generation timestamp against the exact retained historical source snapshot."
+}

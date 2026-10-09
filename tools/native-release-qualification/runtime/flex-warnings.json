@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "flex",
+    "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/target/artifacts/pearl-flex-simnet.elf",
+    "testedSnapshot": "/workspace/shared/pearl-lexical-requalification-20261009-1852/runtime/flex-warnings/tested-firmware.elf",
+    "sha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "checks": [
+    "account-101",
+    "address-index-50001",
+    "high-fee-20-percent",
+    "input-index-50001",
+    "change-index-50001"
+  ]
+}

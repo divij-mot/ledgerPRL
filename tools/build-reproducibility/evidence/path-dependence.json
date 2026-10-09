@@ -1,0 +1,98 @@
+[
+  {
+    "device": "nanosplus",
+    "network": "mainnet",
+    "referenceEmbeddedPaths": [
+      "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+      "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/address.rs",
+      "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/session.rs",
+      "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/transaction.rs"
+    ],
+    "differentCheckoutEmbeddedPaths": [
+      "/workspace/shared/prl-build-repro/source/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+      "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/address.rs",
+      "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/session.rs",
+      "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/transaction.rs"
+    ],
+    "loadChangedBytePositions": 5795,
+    "changedSections": [
+      ".rel.rodata",
+      ".rel.text",
+      ".rel_flash",
+      ".rodata",
+      ".strtab",
+      ".symtab",
+      ".text"
+    ],
+    "debugSections": [],
+    "canonicalPathFullElfMatch": true,
+    "rustSymbolExample": {
+      "reference": "_RNvMNtCs2ztrPTGy3KX_10pearl_core7addressNtB2_7Address15from_output_key",
+      "freshDifferentPath": "_RNvMNtCszwA9TmBdsQ_10pearl_core7addressNtB2_7Address15from_output_key"
+    }
+  },
+  {
+    "device": "nanosplus",
+    "network": "simnet",
+    "referenceEmbeddedPaths": [
+      "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+      "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/address.rs",
+      "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/session.rs",
+      "/workspace/scratch/5d237258d612/ledgerPRL/crates/pearl-core/src/transaction.rs"
+    ],
+    "differentCheckoutEmbeddedPaths": [
+      "/workspace/shared/prl-build-repro/source/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk/src/io_new.rs",
+      "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/address.rs",
+      "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/session.rs",
+      "/workspace/shared/prl-build-repro/source/crates/pearl-core/src/transaction.rs"
+    ],
+    "loadChangedBytePositions": 20599,
+    "changedSections": [
+      ".rel.rodata",
+      ".rel.text",
+      ".rel_flash",
+      ".rodata",
+      ".strtab",
+      ".symtab",
+      ".text"
+    ],
+    "debugSections": [],
+    "canonicalPathFullElfMatch": true
+  },
+  {
+    "device": "nanox",
+    "network": "mainnet",
+    "referenceEmbeddedPaths": [],
+    "differentCheckoutEmbeddedPaths": [],
+    "loadChangedBytePositions": 46032,
+    "changedSections": [
+      ".rel.rodata",
+      ".rel.text",
+      ".rel_flash",
+      ".rodata",
+      ".strtab",
+      ".symtab",
+      ".text"
+    ],
+    "debugSections": [],
+    "canonicalPathFullElfMatch": true
+  },
+  {
+    "device": "nanox",
+    "network": "simnet",
+    "referenceEmbeddedPaths": [],
+    "differentCheckoutEmbeddedPaths": [],
+    "loadChangedBytePositions": 46259,
+    "changedSections": [
+      ".rel.rodata",
+      ".rel.text",
+      ".rel_flash",
+      ".rodata",
+      ".strtab",
+      ".symtab",
+      ".text"
+    ],
+    "debugSections": [],
+    "canonicalPathFullElfMatch": true
+  }
+]

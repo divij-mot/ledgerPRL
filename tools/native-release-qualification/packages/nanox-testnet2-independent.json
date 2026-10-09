@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanox-testnet2/pearl-nanox-testnet2.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanox-testnet2/pearl-nanox-testnet2.apdu",
+  "elfSha256": "d2ef1a3b76090a82bdfa53196587aa2ba058585cc47493014922c8984af0c62d",
+  "apduSha256": "4048c42fb2f2ce74229a8d2017dc80a0649c4927163754bd68943e408fa55dfe",
+  "appHash": "ec4dca93cc22b5c819e2dcc178a6bf63da2fc3e07eb514d3403ade409297ff96",
+  "target": "nanox",
+  "targetId": "0x33000004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "testnet2",
+  "appName": "Pearl Test2 Dev",
+  "imageBytes": 52295,
+  "writtenBytes": 52223,
+  "implicitZeroGapBytes": 72,
+  "installParamsBytes": 71,
+  "commands": 260,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

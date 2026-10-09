@@ -1,0 +1,57 @@
+{
+  "cargo": {
+    "commandPath": "/tmp/pearl-cargo/bin/cargo",
+    "resolvedPath": "/tmp/pearl-cargo/bin/rustup",
+    "sha256": "dda7234360b7f578ca8b0ddcb80145646fa61a67c1720a5abc7051b35c9fcb71"
+  },
+  "rustc": {
+    "commandPath": "/tmp/pearl-cargo/bin/rustc",
+    "resolvedPath": "/tmp/pearl-cargo/bin/rustup",
+    "sha256": "dda7234360b7f578ca8b0ddcb80145646fa61a67c1720a5abc7051b35c9fcb71"
+  },
+  "clang": {
+    "commandPath": "/tmp/pearl-toolchain/root/usr/lib/llvm-19/bin/clang",
+    "resolvedPath": "/workspace/shared/pearl-toolchain/root/usr/lib/llvm-19/bin/clang",
+    "sha256": "0a3c55936ac43954fbe4914e6e73b577ca9e35e75d89ef13d3e28c187f41ca1a"
+  },
+  "arm-none-eabi-gcc": {
+    "commandPath": "/tmp/pearl-ledger-tools/arm-none-eabi-gcc",
+    "resolvedPath": "/tmp/pearl-ledger-tools/arm-none-eabi-gcc",
+    "sha256": "0d8a7f32d0b6a85bb60bfe6ce1d5316dcc92978f4f0593423cdc068e1de6e8e1"
+  },
+  "arm-none-eabi-objcopy": {
+    "commandPath": "/tmp/pearl-toolchain/root/usr/bin/arm-none-eabi-objcopy",
+    "resolvedPath": "/workspace/shared/pearl-toolchain/root/usr/bin/arm-none-eabi-objcopy",
+    "sha256": "b0f417cb958a1205aa5061b7bedcc05f16335dd718802d5265e8b7b0b5d78c88"
+  },
+  "python3": {
+    "commandPath": "/tmp/pearl-speculos-venv/bin/python3",
+    "resolvedPath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+  },
+  "bwrap": {
+    "commandPath": "/usr/bin/bwrap",
+    "resolvedPath": "/usr/bin/bwrap",
+    "sha256": "573236e5328ac2ebb08f59ae3a9805b4f8d12bdef14be8af4450d5463294985f"
+  },
+  "nightly/bin/cargo": {
+    "resolvedPath": "/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/bin/cargo",
+    "sha256": "6ac317bb599856547fe7ba1ab51767d05c264ad35af31829badc76fa4348828b"
+  },
+  "nightly/bin/rustc": {
+    "resolvedPath": "/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/bin/rustc",
+    "sha256": "773c320deb6cc929c48a0c324200d2de057a084d71903287b2c3c260e6cacdf9"
+  },
+  "nightly/lib/rustlib/x86_64-unknown-linux-gnu/bin/rust-lld": {
+    "resolvedPath": "/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/bin/rust-lld",
+    "sha256": "0fdb5f7ec7bf8799d4cb34571cb7477eb259d27317eb6b02a1132c95dfe11be3"
+  },
+  "armGccDriver": {
+    "resolvedPath": "/workspace/shared/pearl-toolchain/root/usr/bin/arm-none-eabi-gcc",
+    "sha256": "9b369e040fa0889790fc1aaf673ed3099436f360cd022265f8e7c97d61ed00ec"
+  },
+  "packagingPython": {
+    "resolvedPath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+  }
+}

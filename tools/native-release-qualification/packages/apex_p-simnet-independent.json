@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/apex_p-simnet/pearl-apex_p-simnet.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/apex_p-simnet/pearl-apex_p-simnet.apdu",
+  "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+  "apduSha256": "64b20154a667d7c53a322507102651c76eec994db57577c036ca20cf0ef3ab06",
+  "appHash": "9c8afe3a895dc1e7dd9295f30c2871359fe408f4bf379ef3dd36faf4b2193cfd",
+  "target": "apex_p",
+  "targetId": "0x33400004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "simnet",
+  "appName": "Pearl Sim Dev",
+  "imageBytes": 72818,
+  "writtenBytes": 72362,
+  "implicitZeroGapBytes": 456,
+  "installParamsBytes": 114,
+  "commands": 356,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

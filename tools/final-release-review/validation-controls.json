@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "controls": [
+    {
+      "name": "full replay with source/output paths containing spaces",
+      "passed": true,
+      "exitCode": 0,
+      "failureMessage": null
+    },
+    {
+      "name": "changed crypto rejected",
+      "passed": true,
+      "exitCode": 1,
+      "failureMessage": "FAIL: Wrong crypto source"
+    },
+    {
+      "name": "duplicate model/network entry rejected",
+      "passed": true,
+      "exitCode": 1,
+      "failureMessage": "FAIL: Missing/duplicate/unexpected matrix entries"
+    },
+    {
+      "name": "failed underlying case rejected despite rebound summary hash",
+      "passed": true,
+      "exitCode": 1,
+      "failureMessage": "FAIL: nanosp-canonical: underlying status/artifact mismatch"
+    },
+    {
+      "name": "matching but incomplete test inventories rejected",
+      "passed": true,
+      "exitCode": 1,
+      "failureMessage": "FAIL: nanosp-canonical: test source inventory/hash mismatch"
+    },
+    {
+      "name": "changed canonical APDU bytes rejected",
+      "passed": true,
+      "exitCode": 1,
+      "failureMessage": "FAIL: apex_p-mainnet: canonical rebuild bytes differ"
+    }
+  ]
+}

@@ -49,6 +49,8 @@ Native builds are separate from host tests. See [firmware build and verification
 - [Security model and boundaries](SECURITY.md)
 - [Canonical protocol](docs/protocol-v1.md)
 - [Recorded test evidence](docs/test-evidence.md)
+- [Final native software qualification](tools/native-release-qualification/README.md)
+- [Exact-build reproduction and limits](tools/build-reproducibility/README.md)
 - [Implementation and release gates](docs/implementation-status.md)
 - [Recovery and safe migration](docs/recovery.md)
 - [FP8 compatibility](docs/fp8-compatibility.md)

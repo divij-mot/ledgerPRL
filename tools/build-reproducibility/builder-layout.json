@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "sourceRoot": "/workspace/scratch/5d237258d612/ledgerPRL",
+  "cargoHome": "/tmp/pearl-cargo",
+  "rustupHome": "/tmp/pearl-rustup",
+  "pathPrefix": [
+    "/tmp/pearl-ledger-tools",
+    "/tmp/pearl-cargo/bin",
+    "/tmp/pearl-toolchain/root/usr/lib/llvm-19/bin",
+    "/tmp/pearl-toolchain/root/usr/bin",
+    "/tmp/pearl-speculos-venv/bin"
+  ],
+  "systemPath": "/usr/local/bin:/usr/bin:/bin",
+  "libraryPath": "/tmp/pearl-toolchain/root/usr/lib/x86_64-linux-gnu",
+  "packagingPythonDefault": "/workspace/shared/pearl-ledger-packaging/venv/bin/python",
+  "rustSdkRevision": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+  "secureSdkRevision": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "nightly": "nightly-2025-12-05",
+  "scope": "Recorded builder layout for existing qualified bytes; not an installable or independently provisioned container image."
+}

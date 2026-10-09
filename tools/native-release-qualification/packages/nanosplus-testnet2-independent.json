@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanosplus-testnet2/pearl-nanosplus-testnet2.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/nanosplus-testnet2/pearl-nanosplus-testnet2.apdu",
+  "elfSha256": "f055cc9d208f327f56939a86084d95644489785380da4ba0dab5ed201bc359b5",
+  "apduSha256": "806028b9721fbb4751e11977bc1e5c192f2589111e5f08d14923b4a7246069be",
+  "appHash": "54a359c1bef4971d1e7b5a7de697c44448cd3d83d6da523d188baedfd8aa1026",
+  "target": "nanos2",
+  "targetId": "0x33100004",
+  "apiLevel": 27,
+  "flags": "0x0",
+  "network": "testnet2",
+  "appName": "Pearl Test2 Dev",
+  "imageBytes": 53319,
+  "writtenBytes": 53191,
+  "implicitZeroGapBytes": 128,
+  "installParamsBytes": 71,
+  "commands": 264,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

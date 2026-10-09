@@ -1,0 +1,88 @@
+{
+  "scope": "Offline independent recheck using frozen SDK and retained emulated-device signatures; does not repeat node acceptance or hardware review",
+  "status": "passed",
+  "transactions": 10,
+  "signatures": 100,
+  "rows": [
+    {
+      "model": "nanosp",
+      "suite": "node-16",
+      "signatures": 16,
+      "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+      "wtxid": "de9aba1899f1c7e588975f7f5cc3f026449ef5526c9ea5bd751ef9e870d401bd",
+      "status": "passed"
+    },
+    {
+      "model": "nanosp",
+      "suite": "node-parity",
+      "signatures": 4,
+      "txid": "bd96fe6186300d1192f951edce007d98864035ac2f7d47e03da8775c03691263",
+      "wtxid": "eb6c828bfbc0b54f0a6857cfc7958689652040b848ad4c2851c05a90ccc712a0",
+      "status": "passed"
+    },
+    {
+      "model": "nanox",
+      "suite": "node-16",
+      "signatures": 16,
+      "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+      "wtxid": "2e920e529b968ec1c7873acf7ce20466c62622d0f688f04a43e72ca6053f45ff",
+      "status": "passed"
+    },
+    {
+      "model": "nanox",
+      "suite": "node-parity",
+      "signatures": 4,
+      "txid": "cd6cd3fe7c6b55dbe8c47bf58fb6f3fa6f31bed7123a2bab3634f2cbff3b7483",
+      "wtxid": "6ecc2f3e9f261856cbc9649882fbdf14cc3523d206ca28231f37508d2c061bb3",
+      "status": "passed"
+    },
+    {
+      "model": "stax",
+      "suite": "node-16",
+      "signatures": 16,
+      "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+      "wtxid": "b69f6f7c76f357214f13e5c70eda73f11b48e25bfabee1d2db7ea41a2a8ee8ec",
+      "status": "passed"
+    },
+    {
+      "model": "stax",
+      "suite": "node-parity",
+      "signatures": 4,
+      "txid": "153474b0b96c377b1c989cd5611ad28e67c7cc907c167b68652151e94145fd7d",
+      "wtxid": "802b4b2fa55c2b9fe9670148265304a51baea477ea4eee87e72093ef4303210f",
+      "status": "passed"
+    },
+    {
+      "model": "flex",
+      "suite": "node-16",
+      "signatures": 16,
+      "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+      "wtxid": "85b5100a5b3a745a18a30b0f4409702e2f6bfb119a2e0784fd088853290075aa",
+      "status": "passed"
+    },
+    {
+      "model": "flex",
+      "suite": "node-parity",
+      "signatures": 4,
+      "txid": "13613c0ce65b317dadba2116da8ca486445bee14eab70acc8db5de7d2de4564a",
+      "wtxid": "8b41d13473f094690945a468f8edede9b5a95c2be9a0056ce1141e0153be3881",
+      "status": "passed"
+    },
+    {
+      "model": "apex_p",
+      "suite": "node-16",
+      "signatures": 16,
+      "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+      "wtxid": "0b824cfed9d2a621a721e2feb68cb1735137e8a7fda17fa2bae8823b820a62ac",
+      "status": "passed"
+    },
+    {
+      "model": "apex_p",
+      "suite": "node-parity",
+      "signatures": 4,
+      "txid": "52f229e8e4707a380cbfcfe17390956c19b3fcfa5420cf7f7334b3125d619d76",
+      "wtxid": "1e0da8328983bdda28b86776121f8de87d8dd3fca77a52942d81f7b265428b63",
+      "status": "passed"
+    }
+  ]
+}

@@ -1,0 +1,1485 @@
+{
+  "scope": "Final lexical-scope release software qualification. Emulators and isolated valueless Pearl simnet only.",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "nativeSourceMapSha256": "1af08894d22908d7f9145021aeadbf2d39e05c9a1ae52849048d3ca27c623dcf",
+  "nativeSourcesUnchanged": true,
+  "buildNetworkPackageMatrix": [
+    {
+      "device": "nanosplus",
+      "network": "mainnet",
+      "elfSha256": "734ad170d4621eb98b20809f548cacbe32e5409d158d3e2eea47a6736fbeb136",
+      "buildManifestSha256": "134b75bb25ba4d8044c636f6a49ac1158b2f7bca3a627c9c3b024435afed8c36",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "dc3fa4b3da4ec330b9d30e5d7ed49595165f26331e60f4b89dd3e4d2d346e227",
+      "addresses": {
+        "0": "prl1pdmqd2wzd3e2unrkvq880t24acsrf8zffzqjqr356pmd93cve9eqs4u7tjx",
+        "1": "prl1p7ear3npj7rlxjdpmr8kxjxendgw9kzqj2c0fdppggs4z8kumxs0sw26w9t"
+      },
+      "packageEvidenceSha256": "78f05d50cbca23f5dabfe6af2a0910cc15e47668cb626fe39db68588381148e9",
+      "independentPackageEvidenceSha256": "7e0b969c4f1a74d2ee582e332f4ce0df06e0fc1433302d2ce95519b6a97dcc60",
+      "applicationHash": "8787dc47f3e9731c7704713c747cc5f6f737f706ddedb9353844b965dd65d1c7",
+      "apduSha256": "521bf9032e69464e206a423a165288166c89acdfa0115249dd8b46a115874b1a",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanosplus",
+      "network": "testnet",
+      "elfSha256": "22a09f32080cd54cf1f1bf1a151a5d2ccdf6c8e68406b1c67583ffad36be9f46",
+      "buildManifestSha256": "f07113e64f5cc8132f06e03df7bffc32d489f851dbbd4932b12678e451ac9a8b",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "f4ea78c379b7c9177cb93aa4239c01d108608d37415b4d51251df8d182e786d3",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "ebee29ce1311b153d8f699faefbce4c068d748edf648eb41ad6cc8c015be0720",
+      "independentPackageEvidenceSha256": "f52f308a1358d035005e67cd6b6740d08fc9582c174a52d634669a3b1721c94a",
+      "applicationHash": "ba90b4ff7a42edb539307fc1141de2bc0873a334c15e869502a2e2b5b851398c",
+      "apduSha256": "a6192dd7c20a4e9d04980fbf40b9c4d624d381fea4857cb02703969cb525eb41",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanosplus",
+      "network": "testnet2",
+      "elfSha256": "f055cc9d208f327f56939a86084d95644489785380da4ba0dab5ed201bc359b5",
+      "buildManifestSha256": "cade9289ce49571ce3f979bd084945b55f7b9f38789a07120e425371ee61fee1",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "d6174df4b7e4c28498df2fa0d5332643b3f0d7f295ac7f63496cea4c25cf29df",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "e1a952dfecc895fd1e9266e245840ed18a74816ad14c688feb9686ac68e4bc99",
+      "independentPackageEvidenceSha256": "3818f48f8e90b5997e1bc52a95ce736af96858c75196a5a1280af87625a03ca9",
+      "applicationHash": "54a359c1bef4971d1e7b5a7de697c44448cd3d83d6da523d188baedfd8aa1026",
+      "apduSha256": "806028b9721fbb4751e11977bc1e5c192f2589111e5f08d14923b4a7246069be",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanosplus",
+      "network": "regtest",
+      "elfSha256": "8a15b763668c2cbe9ace2813b62ae1746d5872db2ab761c91388dfff92720ac8",
+      "buildManifestSha256": "f48c895e2662955f70433debd0838fec524983fb05ad355ca39c86ad0b015dd6",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "65b75171c28037235722875b33cf5decbd62ed02af89264f5d0f2aedeb9fb42b",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "7350a526ad545f681828dfd096ce4db30188b3854c8ca99204dee2474ee53e95",
+      "independentPackageEvidenceSha256": "a7cb99d87e84bf645e1d31ea1cf94c8a2d2c0d55f47ceb1db36123f27af14e31",
+      "applicationHash": "8207ada003815f74aba9b8f550d8074edf904a43c4db9adf221eac2d360da2df",
+      "apduSha256": "4ab585b2f532a3d6b7164ec9c340bdfd8f2778d1609401d102e561db909e2e64",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanosplus",
+      "network": "simnet",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "buildManifestSha256": "9005d2f658492a36705fdd8097508e6b4ed0930d84fe7c5635e697d5117278ac",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "12ede9636fd40d0add9c5fcb4d373670cff79d80136cdbdb2e1462c864550cc4",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "207ee1e90deed8e82645682fcfbba12ab21873162960072924a00257e0caba0b",
+      "independentPackageEvidenceSha256": "b7f1af354f93a10c69114db66e68093cb51c8ce2acb318b75bc720bb9fcb629e",
+      "applicationHash": "42af735c8b8a227609e8d16d26b350096adf2cdf47992d13236826aaba3a7682",
+      "apduSha256": "4b29be8e3ca832b35f132e328b10412f59bb30534494ad22543c791b0d1d7ffd",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanox",
+      "network": "mainnet",
+      "elfSha256": "6221a610022e3684edf575f8a70c06eda86059ed995bc7a09038b178acfa811f",
+      "buildManifestSha256": "ae2e414a3a64c66e867b3f1514d9df0e7c19ca9ca7618fbeb51fcef5366176c8",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "d105f845021ffe97396778d44e1e3af8cdbd7fa50cfca76f3c23a8dd84632bb8",
+      "addresses": {
+        "0": "prl1pdmqd2wzd3e2unrkvq880t24acsrf8zffzqjqr356pmd93cve9eqs4u7tjx",
+        "1": "prl1p7ear3npj7rlxjdpmr8kxjxendgw9kzqj2c0fdppggs4z8kumxs0sw26w9t"
+      },
+      "packageEvidenceSha256": "bdb5934131c3410ae7ca9641703a0918691dd4c828e006889f57dda44c174786",
+      "independentPackageEvidenceSha256": "3083d96b184a3750004fb7e5f53e30e42a66e3133f554765f4bada6fb1365ddc",
+      "applicationHash": "3eecc148c5a23d2fbec48507fe5121c286aebf97f444e1bc9e220c5af6f46031",
+      "apduSha256": "156ba0ad964382ab199fd533a850a75dc140d8f8298ed637d2e18c0876e99112",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanox",
+      "network": "testnet",
+      "elfSha256": "56689befc195e24805c02d2b917f4cba259a0493a24d445f904a07db0cd2d293",
+      "buildManifestSha256": "bfaee5e865f8ed70292d2be7ad99d97a615af97703f5b45a397908c7e23c4ca9",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "77ccb5477ceafcbad75a09392b21d4003fbc29c142d284dd0337572f99824298",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "c4ee1d35f2c70962d278f9bf629d040fd04ff2c2460d5a5ca12e2f26b76606d5",
+      "independentPackageEvidenceSha256": "94bb98ff58fafdf19764074b708ee71888c19d72463457ed1c496e69816bf60c",
+      "applicationHash": "0f450c28cab9ce6de5d4c95d5e618727dbb5b8181363bacb2270240a23682b50",
+      "apduSha256": "8fab703ca1e6a221859bcabde2d4c7dc9c510c9d0bb1900826175a3825693a50",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanox",
+      "network": "testnet2",
+      "elfSha256": "d2ef1a3b76090a82bdfa53196587aa2ba058585cc47493014922c8984af0c62d",
+      "buildManifestSha256": "66ffd3f63458570932748afd79f3a0a9ce80c7b311ad20558fd1eeef280e3edd",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "9fc8516427e47f78f24d6ad9f11df9f8b71404993a176284f3d585c7bd787a2b",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "383139d7328225fefab478eb73d7230d51c3c4a0fd0c725c2eca2011f7bf8157",
+      "independentPackageEvidenceSha256": "6a63dd91b82289abafc947534652a555d390dad132aa0d952d5ca2d8a6a85525",
+      "applicationHash": "ec4dca93cc22b5c819e2dcc178a6bf63da2fc3e07eb514d3403ade409297ff96",
+      "apduSha256": "4048c42fb2f2ce74229a8d2017dc80a0649c4927163754bd68943e408fa55dfe",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanox",
+      "network": "regtest",
+      "elfSha256": "b1b02db7d428a8d680fe4ab955a6d9945ff5ea1c86d36d0e599028638d837fff",
+      "buildManifestSha256": "82091090e138fa882a4e34e9ffc66bf3c01ff912d70461f7cacd6b736d146fa6",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "b55875456b40b97bed6858780432003a2644b67bdb5d2300b6e6b6ee28c70a20",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "c8a89fbbc07569f379d0f35531e4cdd034677936410550a294bf2178c7f61ec4",
+      "independentPackageEvidenceSha256": "bdaad740b82f579ceeafccc706efc9468c0d1967b0e58f922661e037a13ec8c8",
+      "applicationHash": "d58d2f71615a4ec31597dbe62b23da7ecb3d9376648607463aaa113e9da0f81c",
+      "apduSha256": "7bb4a07654787f727d48ca9830a875b60f1102d12e1f33d590c8cb977b6dbcc5",
+      "apiLevel": 27
+    },
+    {
+      "device": "nanox",
+      "network": "simnet",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "buildManifestSha256": "4c54647748df0f6ec1e3b4e0cd7378baf1f0689c5504925c2955df792420dbb4",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "82aa6250ffe9c07e9c8937d8ad28c557a12e0037d6148d4ec64496c34c91452c",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "f423c913ad69d8cd93fa267644b7a0bc274c4d31327cb7cbaf5619981f442432",
+      "independentPackageEvidenceSha256": "9bdc5a864d36f824862118c3c20dd1f00e518678c61d6b85a0413fe2e818f445",
+      "applicationHash": "6f232ed0a474bc75da21016ed6d47031ef3382ffd6ba62e1e6c006e90fa3756c",
+      "apduSha256": "43480a909140d9f8ff11fc85f347002068e1dd9e71b92b87275bbe8508cf7808",
+      "apiLevel": 27
+    },
+    {
+      "device": "stax",
+      "network": "mainnet",
+      "elfSha256": "bf137b68355f1efc8d54d9f4e6ea56179f956b9cc7b41dcfc0e18e91571b61b6",
+      "buildManifestSha256": "51954cd7091024feb0a433badec22f696b10d40a5d01f407207809d32da46f4b",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "89f75cf220ede86757b47d9a64e29896ea3081657639f94dc16ab6d527a70058",
+      "addresses": {
+        "0": "prl1pdmqd2wzd3e2unrkvq880t24acsrf8zffzqjqr356pmd93cve9eqs4u7tjx",
+        "1": "prl1p7ear3npj7rlxjdpmr8kxjxendgw9kzqj2c0fdppggs4z8kumxs0sw26w9t"
+      },
+      "packageEvidenceSha256": "a1a56cb01652107220f2c45bbad4c699f2e37df26fb84e395467e987a7ae5a0b",
+      "independentPackageEvidenceSha256": "c5be2f02c9c8a225d10d87ab4300af7d40cd37d3184f4524dd2c4fbf0535e4f0",
+      "applicationHash": "6565596d15f8ff6aae0c20ec63872eaebbb794ce2d3f0fb3873520b1c9406683",
+      "apduSha256": "2c1a858df15c58245be9b71ab52f697893cd01df085b4a19125acc54ed7ee7bc",
+      "apiLevel": 27
+    },
+    {
+      "device": "stax",
+      "network": "testnet",
+      "elfSha256": "d0f6e393bd75bc2b2cc789e3050a49c0b429a3ae51d30afeb9ca60f2e3d12d6f",
+      "buildManifestSha256": "e1f317f517d86b38c79a93e11f5f315c63fcfd79c9bd833fd56d9cb8c089ced1",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "c001fecca6f38b37353297422a417d7f76d1c7f34be1535b5be87de2c1796a01",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "d5e5bc33022ec95797c665fc58d0daf1f6736a669c6fabb47ee8c502f2c9cc8b",
+      "independentPackageEvidenceSha256": "43e53140ffd39a4add0124e882749ca802e10dd10cfbef16dcad20938779b37b",
+      "applicationHash": "993d30efa4d09e9364345988d14d838df9a7f2ed7c832da4b3a8820a92a527e0",
+      "apduSha256": "9016b3b5d551971b0f217e5c7018b1e396b94d024c163457e250330ed42f720a",
+      "apiLevel": 27
+    },
+    {
+      "device": "stax",
+      "network": "testnet2",
+      "elfSha256": "bb3e186902880aba78c7b1b1e5d7d32d783d9abb8896ec3c5cc413e5ee389d1f",
+      "buildManifestSha256": "a2aabb5c2347c4df3dc32ee4c16d1409a9338e2603144fde23d7129fd7209423",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "33ef10aa99df875c799dfccb84baa77f0686f7ca375509b36b41bacbdd903760",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "87bfe9349d3b36b5bb719fb2d0c129297b678eb817d0c2c81dfab7bed2b6d056",
+      "independentPackageEvidenceSha256": "a643a9e3c23da1621fe82e4cad68c91304555985ba18490a79ee159b1a0c711f",
+      "applicationHash": "cc66ee4db5a726ae611345d64f4a86ec53d1002e945427ca9eb26ff69a2920f3",
+      "apduSha256": "0fd8e5cb971f00d7a2c0bb31bf8809444ff17fc5a682d63a0d3d0fa2f081f046",
+      "apiLevel": 27
+    },
+    {
+      "device": "stax",
+      "network": "regtest",
+      "elfSha256": "5d527751071c9644bc436222ee50bdf663e939fcfe58ca68f8cd7c3dced02549",
+      "buildManifestSha256": "67330a74c77f49e0011cade0783be664eb4897cc1f6b9058ce0c4e55e6c5cfe1",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "6fdf7def82d279528c47fddfb153f32e2a01976f1564c82935967c29a39f0d07",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "d83fa778487933fe929e87f29efc15e7e98438e0cc54dc75acc3e0d0a31fd6a7",
+      "independentPackageEvidenceSha256": "19bf2b9b42ad25f95abdc0c337ec95e66b0d4a76d84964c473c13c827f63ecca",
+      "applicationHash": "ba55cd154a60d61349eb51dd823f366e73384352a69f6c5a621931ffce3b60ac",
+      "apduSha256": "ab53fd172f668ec196c8d8d17c52a9b4f061180b7cd352fc712e988733678e12",
+      "apiLevel": 27
+    },
+    {
+      "device": "stax",
+      "network": "simnet",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "buildManifestSha256": "d84c06fcfdd430398778d690b24bce440bb715d1858bf65b8cbb0dd42590b9c9",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "61548fc2aa0d910facd5e07a95f44c8be4c35788f2cc0a936cbaabb67475c24d",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "06b80c6ac0242d7c6ace9bbc2c161438405c80151f973b5858f8099528369038",
+      "independentPackageEvidenceSha256": "277d497c3977124499c9f8f16ec3b1a59c6e4e5514633e3555abac31b09efa5e",
+      "applicationHash": "0961066f7a19f97fe3d7e451463f19d862798a630e9c9cfbf7d63a450e9d65e4",
+      "apduSha256": "3987a769279081f8d776a98e09e9e6aed994b1a60bcbe1dc82bd8977119c0d44",
+      "apiLevel": 27
+    },
+    {
+      "device": "flex",
+      "network": "mainnet",
+      "elfSha256": "7844ce075283c48f663477e7a2deb789a445879b78dfe3929fb918beec5d6103",
+      "buildManifestSha256": "6e20db91206a8ace0493ed449f19ba4a09c1937760b14f47cfdbcbe43c5b286c",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "d871261760de43150ebedaca671ae05dd39659c6d8a2676caff3e73482eb33bc",
+      "addresses": {
+        "0": "prl1pdmqd2wzd3e2unrkvq880t24acsrf8zffzqjqr356pmd93cve9eqs4u7tjx",
+        "1": "prl1p7ear3npj7rlxjdpmr8kxjxendgw9kzqj2c0fdppggs4z8kumxs0sw26w9t"
+      },
+      "packageEvidenceSha256": "230e78fb4135a6c3c2ecbb834cfad042456dbd47f07b88ae7b38b0a1b554f116",
+      "independentPackageEvidenceSha256": "d3c6a7536e87c401416b4dcc9433536fb4e90379ba79e0d245c8bf501290602e",
+      "applicationHash": "cda25a624993a0c585a2d66e6ecbcb8940f150173fab9d70f09e4e13e8af50e0",
+      "apduSha256": "cc743edbcf02304ff48cf3d4c1bbf134e7d033d51a63aae386514b9220ddbfa0",
+      "apiLevel": 27
+    },
+    {
+      "device": "flex",
+      "network": "testnet",
+      "elfSha256": "1a0fb7f2f314b5825e48e80bb038e99e5ae3d4007ff1f3cd050c4587e051c37b",
+      "buildManifestSha256": "9eab6da12d61baf18a9b4c8a5494a6d4b489517445ff6c625d0210c778f36ee5",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "b907e4d47c4ff86860ff2c232d1aeada3b1fcdaf013f1a71eb65f27f68f0265c",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "890366cc637d38c6f8a583bd2a389abdfe6992794744a2054f1e4dc56999edbf",
+      "independentPackageEvidenceSha256": "aad0660dec3aab5c91dee25e974450d26d7e9e1fa863eb2946b63ffddb74f2ab",
+      "applicationHash": "1cb371d4ca1eb81fbf31f4504b5d5aa3acde107bb29fcd05a18530403ec1e917",
+      "apduSha256": "d1c9d619d6e0ad74c50d84fc0b3d8d45742e75106c92820bddada0aa5d2ca94b",
+      "apiLevel": 27
+    },
+    {
+      "device": "flex",
+      "network": "testnet2",
+      "elfSha256": "f2e9fd2ed73c03bcac90562736fcd7f90206fcfeb06a221b59a5325ad1141b23",
+      "buildManifestSha256": "732c7ce60b0fe4550d0761b3b52477f9ed9db3f284f70ec35acc221daa5b49f6",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "608a88db5e622445cba2b922ec29dc67bbd431d8914f3ce6529ee80dad1dcfa8",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "13167c0903172200f78d5e83d8ac59a6b1f0cbb0fdc3f8e3e6390595b0420c27",
+      "independentPackageEvidenceSha256": "43f83fff93f51566b22f0abffdc859b18b713acd22a5564d56d5cf25320125c9",
+      "applicationHash": "dfd7fab1ab8b8100ff090ada3fbedbba638720b5218743dfbc151648b46c6ab5",
+      "apduSha256": "f99246fc4f5a6a610762e01b7313d9856f46425c6a99f12004e9e2ea7cf97bfb",
+      "apiLevel": 27
+    },
+    {
+      "device": "flex",
+      "network": "regtest",
+      "elfSha256": "e3a89d593fd4bf18ba3f2bec550b58f58c07b93abb3592cd4c270c744ba0e05f",
+      "buildManifestSha256": "27c20e43e90105c1c3ff47e9cd31e576d74619f61cbe3f31ba6297948e59ddd4",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "73623d5ce9d8f3546b4ea6e245c3c3cdb7531be3828798b0cf4096c822907d49",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "c7ab1629c8bb5d0b60a575af899a4d9b975c405943d25b9256df2a01d66dbe1c",
+      "independentPackageEvidenceSha256": "09386c1f050cf2b9cd8c56941b641c1b6351d8396a6f12fc3b44f0e15647116d",
+      "applicationHash": "09fcdffb9ec5ca08984687a0ad0d518940a990202d0d0767495c96519703cc47",
+      "apduSha256": "49aadd2e8ff62c57912813328d833a8a0fa9d9cbdcf7ae2b0ccd5eee76207bf3",
+      "apiLevel": 27
+    },
+    {
+      "device": "flex",
+      "network": "simnet",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "buildManifestSha256": "e36eada5014d038b7ca16154719f76229a32da5e4c68b24046dd61274898b272",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "ad23d0ad55dc0c6e7c05f8d046daec1369cfc8606adf45b2aa830a473a0b985f",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "4cadd870dba6b6744941fb2e0e39c1a324b65ddbd1dd038912ef8000114fa40c",
+      "independentPackageEvidenceSha256": "df42d060d24857b91b661f3198c48b0f62480d84da3d05bc875dcdcfafa0bd15",
+      "applicationHash": "27d55ee396a6746f0ba061864e6ca81ed5d82a7e25cbf6b279016c1e37720eae",
+      "apduSha256": "12f6a97927f03a666a94348b6aca5c42a8a357fe5a19f5bf6b0e64e1afab1358",
+      "apiLevel": 27
+    },
+    {
+      "device": "apex_p",
+      "network": "mainnet",
+      "elfSha256": "7cce99aaacc43c281c5cf99eec90587c32e636869ae59cedfc0da2b5c19dc852",
+      "buildManifestSha256": "914f98de3a7ada6f37b12a6d83ad222cc904b0e6d65e29c50ec6acb9ea3e6adc",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "e89d6926a809958ccf02eca07d1bca2bfdf0826be7dc7ee29beb6c42d276357c",
+      "addresses": {
+        "0": "prl1pdmqd2wzd3e2unrkvq880t24acsrf8zffzqjqr356pmd93cve9eqs4u7tjx",
+        "1": "prl1p7ear3npj7rlxjdpmr8kxjxendgw9kzqj2c0fdppggs4z8kumxs0sw26w9t"
+      },
+      "packageEvidenceSha256": "8501ee221ff1d392cbbc70b966bcfeba7427e28a75be3eb5b25dddeede51c21d",
+      "independentPackageEvidenceSha256": "8cbfaa4db3f225912b9955d2c281cacf20bbc52d427ff8245f59cb2c24f205ef",
+      "applicationHash": "0cd3e315d554da7460e7f7ba33acd763e30830a348b6176f752804ab18a6b0d7",
+      "apduSha256": "03a065414b8cad8f91509bdb629894b34f04de377849ab212d0a423ac02532d8",
+      "apiLevel": 27
+    },
+    {
+      "device": "apex_p",
+      "network": "testnet",
+      "elfSha256": "01cf7816a6d8090e18de75b0212f48a81e731d94ac80cef924fc91535ff94fd1",
+      "buildManifestSha256": "1b320bb7a8ee55fa3446fb85aa524232914888233a14a21f0c2a747bb88b5cfe",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "570e4b7fbed6e4d254778d7432f80b4990ab287b962b3c0a231ad1355f194f5d",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "8aef99d688c62e89112a3cd151302f2df8def9d41a6d0e49ccdabbafa5a48eda",
+      "independentPackageEvidenceSha256": "602201fff8dd6e4cc861542c2f0e16c613164f49952e1b21474d1c3fe420232a",
+      "applicationHash": "5e2481f71d00386241867ee54c4c266c044bb6d0829a5c47ed87f4aadfa9c180",
+      "apduSha256": "48d649bb2d9af5ae018a7b03a8acda300d57574cb9332e20906e5aabc8d9d23c",
+      "apiLevel": 27
+    },
+    {
+      "device": "apex_p",
+      "network": "testnet2",
+      "elfSha256": "a4ee60fd8620b3426fe4e56f3bd416791375761836d06a4ecb6ba18a2a1127a0",
+      "buildManifestSha256": "72d7a468e7f19fd499f82f043e9c2f0993a91775c25bfebb516fa913e72afc93",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "f28364f814a1a7d05b63aeb39b9a1c844019ec47a9bf697df8eb8ccbb47e3f6f",
+      "addresses": {
+        "0": "tprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqg5e3rn",
+        "1": "tprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7spae8ln"
+      },
+      "packageEvidenceSha256": "d79bd87261d4b8c53e7eefe10327e6270c558fcd53a673578cf696cd33a98db5",
+      "independentPackageEvidenceSha256": "48b554bea1fe318e7f71a512c621b630573e124514667c5bbd5893bfaa8f2806",
+      "applicationHash": "a864cf24aeef4224490d44e77cee29768adc27bd4b4609cacfdcbb798eb2201a",
+      "apduSha256": "b70ddd4d22a4f35c924a87dbcf053744a5b33727d42b90968f0da0d0579198cf",
+      "apiLevel": 27
+    },
+    {
+      "device": "apex_p",
+      "network": "regtest",
+      "elfSha256": "46dcfd7e3981323f782ea99ea8e2ac56d3211d26fdee115fe89d3ff72d8cabd5",
+      "buildManifestSha256": "73908874a4d48b11f2fbf524560cf523b0b9b348b3425310496cc71f09643577",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "98a910ab0d4de5d6eb15b0dcf41cfa60b20c668d80d00eb906af65fdbfd2ebc9",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "7e8141b8e6f767cf92b597bc493d5c220d919b6c76fe02b9e44abfed2b63c433",
+      "independentPackageEvidenceSha256": "8477ede627b84b4169dfb47db35e5467b591ed519fc9e93a44c4832a20da803b",
+      "applicationHash": "c8036073a3c0c9b003b5fe0293fb02a283b4d0d2db793e79d9db545d4e1af848",
+      "apduSha256": "5b9b5379ac80d52646bdfcd8e30f6c17d9bd8f2e901da68f93218022a480f72c",
+      "apiLevel": 27
+    },
+    {
+      "device": "apex_p",
+      "network": "simnet",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "buildManifestSha256": "bc87bbb0a9dce1fa5f1e7897bc7dd39a9893b5e99b031fbc3d933ed470d6fcd9",
+      "status": "passed",
+      "networkSmokeEvidenceSha256": "c3627642451b48bb8c2fc4d65c52216e7f1fa6553290baa8eaf939a74da41e5d",
+      "addresses": {
+        "0": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+        "1": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m"
+      },
+      "packageEvidenceSha256": "7a3bce24ef100a2ad2bd3163e7b4670bea1813c28579a30395db8d9f0bbfca3a",
+      "independentPackageEvidenceSha256": "2c9014a7473e331dda277b5c1c41be66a70952d1bc1d470af91eeed23ba64558",
+      "applicationHash": "9c8afe3a895dc1e7dd9295f30c2871359fe408f4bf379ef3dd36faf4b2193cfd",
+      "apduSha256": "64b20154a667d7c53a322507102651c76eec994db57577c036ca20cf0ef3ab06",
+      "apiLevel": 27
+    }
+  ],
+  "runtimeMatrix": [
+    {
+      "model": "nanosp",
+      "suite": "canonical",
+      "status": "passed",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "startedAt": "2026-10-09T18:58:57.905661+00:00",
+      "completedAt": "2026-10-09T18:59:11.237563+00:00",
+      "evidenceSha256": "4733d2d43a9dc78729a2bcaf8b04579e1ce1c3b16da7b85551c428c13a506a2f",
+      "snapshotCount": 1,
+      "checks": [
+        "exact-public-account-fixture",
+        "invalid-xonly-zero",
+        "invalid-xonly-ff",
+        "SDK-BN-cleanup-recovery",
+        "verified-full-address",
+        "two-native-BIP340-signatures"
+      ]
+    },
+    {
+      "model": "nanosp",
+      "suite": "warnings",
+      "status": "passed",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "startedAt": "2026-10-09T18:59:11.325258+00:00",
+      "completedAt": "2026-10-09T18:59:35.637177+00:00",
+      "evidenceSha256": "984d036a6e0ffdc383cddaab6265ab880d0dfe1e6e6769b6ca6d1941b1a66f7c",
+      "snapshotCount": 1,
+      "checks": [
+        "account-101",
+        "address-index-50001",
+        "high-fee-20-percent",
+        "input-index-50001",
+        "change-index-50001"
+      ]
+    },
+    {
+      "model": "nanosp",
+      "suite": "faults",
+      "status": "passed",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "startedAt": "2026-10-09T18:59:35.742161+00:00",
+      "completedAt": "2026-10-09T19:01:07.461481+00:00",
+      "evidenceSha256": "81e81dacf2776c5e989d1e7b982eae348bb79cd5aa6ffb06ced81e3c380c1b37",
+      "snapshotCount": 16,
+      "cases": [
+        "strict-short-apdu",
+        "idle-bolos-allowlist",
+        "benign-partial-button-release",
+        "interleaved-account-wipes-transfer",
+        "nested-apdu-at-approval",
+        "bolos-version-at-approval",
+        "bolos-quit-at-approval",
+        "malformed-apdu-at-approval",
+        "extended-apdu-at-approval",
+        "usb-power-loss-at-approval",
+        "empty-button-event",
+        "short-finger-event",
+        "empty-itc-event",
+        "short-pairing-event",
+        "oversized-pairing-event",
+        "timeout-during-review"
+      ]
+    },
+    {
+      "model": "nanosp",
+      "suite": "node-16",
+      "status": "passed",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "startedAt": "2026-10-09T19:01:07.564533+00:00",
+      "completedAt": "2026-10-09T19:02:26.973246+00:00",
+      "evidenceSha256": "45569b2c6fa8e50436ffaf6c18b10c7657f8dd5435ade225357a3332ff085f70",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 1507,
+        "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+        "wtxid": "de9aba1899f1c7e588975f7f5cc3f026449ef5526c9ea5bd751ef9e870d401bd",
+        "vsize": 1017,
+        "inputs": 16,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "10000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "a1c593631270a924f4ffb002b9e92619d170642907f18f139cea99083ef7820a0295b336f01990b1cec026ba277a364a2f59c348aaac22a318c32f4869dd3ad0",
+          "deb811fca3bd047701a9ed5cdc34c01b15363025a31dc8024c5e754a2c3f9f365eae454dc3a29e87a114bab02a0dd3075f3800b5ab7e78144fdcbe2b57822ba9",
+          "db9d0e7a62ac6c60d98ba50f214cd47aba6ad3dc35efc9258b4115fe1dfee8333dcc9363d188fecad08ffdb33e0a1c6fa5a0f5b0034dafb917f7cdebff092005",
+          "84d7e02e69e68daf73a99d151303e771bfcec126ad31130d111c39378ee6be7f04455bad16debe1d3d53913291a510cbd6b447d2a4ef95932959600e563e928c",
+          "1aff08fffc28974547713df93e882937a27303b0de6cbe7eb0ea3936a5972eeee6c6b58d2d4e736f30d25f15f458852a28071856d89dd3df98a4ea2300d43032",
+          "92133091f984e6e508ab93b0747de39b8b004861cc387765a8f3af426a17c70853cc234cf477577bd75ec792de091693e40224c089eafec08aefeb4c9466501f",
+          "437992879ccfb440365d617eaad1affee8a635bd2ec2ab48889df8d4f66497a97d682ff0755323adade7553f708ada14fe220da93fec88afaffb0ceef24fd2d0",
+          "3597c60b9c5e91bc5f821dada8b29488a5ef3af95ddda1dc7175ec1efa04b46dcf660ddde1e5baebb0345aca4bee5aac04e44e81b4256475e1fb0977c3c71500",
+          "79a0da59291920476093c38ec1501d2a26a6190a8018ba2d9dac6385735cd056db0fd59d169096b2241107ace42c9e6846fadf618e09a6c1bb9e15df9283bb77",
+          "25363790cd30adff92851b3aa73805d10e4cc655ae4c1ad5c9b735a4983f2080b96e256ec2b20535dab18d6b3f6ff5f1e6b2abdf09423582fd72026370c39170",
+          "390ff5af954aefcf26f40346a421d53437a97da47d363ee55d7fb6a18d38e5181c6c7e5c33ad4f2885bd2836fce9416a0b1bf463c47c644de5b601a96dc2ebed",
+          "797303efb774489ec009c05f098aa68ec537843fd884276b933c400133d79fc2892bdbc98b3447b3cf6c4dabd48aba1158c28831dedaa5f2c692cfee3da0e67d",
+          "e3167f660d643348bf7838d99dd0a2672e855540092b90fb8015f2d651537558a8bc6e98315f993c4153cfe5f62260d848cb07c0c9a94796a2527fa5fc83646f",
+          "027c01e348c5398899469f8694a1aa2975523be36e68b8d62a9e7dbe179bcf9fed89b98ab75629ac10ec32a69a0b51037b2857d05d128473eafbbdd805ec9253",
+          "82dab9894c91803397a5972bbd0a989044aadf8f3ced9adf8c87d12f320502900cb8b0f64bb688b4c3eedd9e8cbd39dbad3bf30b43340bfb216f4db79e4da9ee",
+          "a8aef6d6ddeecafe7f49e573a3c6cc8b81d2bd570f8554a5387bf3746485aa3d1522747038d97de7f031dba76148188bf038b8f8df074fafbfdc1dfeafd15473"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      }
+    },
+    {
+      "model": "nanosp",
+      "suite": "node-parity",
+      "status": "passed",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "startedAt": "2026-10-09T19:02:27.059763+00:00",
+      "completedAt": "2026-10-09T19:03:04.009509+00:00",
+      "evidenceSha256": "2491e609b42fccdd7b437f5ca658ba75ec3eb21ed1088884fda5ab610608dd54",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 463,
+        "txid": "bd96fe6186300d1192f951edce007d98864035ac2f7d47e03da8775c03691263",
+        "wtxid": "eb6c828bfbc0b54f0a6857cfc7958689652040b848ad4c2851c05a90ccc712a0",
+        "vsize": 327,
+        "inputs": 4,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "1000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "afdf08a54b3a2f66c723ba920e1331c4b7ee593043c69e2b8f2fd86ef0e3a75ee33a1beb95427f0460ba6e7c2f8ed5c261b56fdaba4185e22af108ab5cfcdf38",
+          "8595590a12b1d1d835c9d9dc814ab0dee9e2820574f865c138730a8cd0edf94ddc8afd496f64aa26bba41bcf94863ae97be1f522a7eefaa4000b2504163ed09d",
+          "04e1d8fcc3a1c9e3326357326bde36a8c1d91ee8b06e51f8874c4ce6cd52a641eba9414a9da03c70be52bc81ab796af41b7abba6d82791d17cf889d668d0c87b",
+          "12225fbbcfc02f3c252509f699a04cb23d66b053300c8b06352a2ea85d4ed16f2ce065d8bd49c94d26006dff259875d4426f74361a4308b24393572cc7ac75f4"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      },
+      "parityCoverage": [
+        {
+          "address": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+          "branch": 0,
+          "compressedInternalKey": "0383f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de154",
+          "compressedOutputKey": "0215fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+          "index": 0,
+          "internalParity": 1,
+          "outputParity": 0,
+          "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0"
+        },
+        {
+          "address": "rprl1p2nxuyp0u25rds6nkpezmapwn6k4lle8wsj7rpq3km297cdz8rw7q52c8k0",
+          "branch": 0,
+          "compressedInternalKey": "02af7dbbf9b9f39f147487fbd85453b683112ee5cb1d52230c5af280448a8815d3",
+          "compressedOutputKey": "0254cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+          "index": 3,
+          "internalParity": 0,
+          "outputParity": 0,
+          "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc"
+        },
+        {
+          "address": "rprl1pkhp60ypj33vcs27xtsqpylsr8w2qw7ggvy9cckzs04my8fdnvgkqjfr7jf",
+          "branch": 0,
+          "compressedInternalKey": "031a192d2a88f6df9b748e298310cda31231065b379338fa6844481c9e8d9c0738",
+          "compressedOutputKey": "03b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+          "index": 4,
+          "internalParity": 1,
+          "outputParity": 1,
+          "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c"
+        },
+        {
+          "address": "rprl1pyst6awqhkr252kza7tg7emu8lrpa56ayq8jaenvqsp4560ckvgrq4e45yt",
+          "branch": 0,
+          "compressedInternalKey": "02d3d8b7aedbfae27bc84bfead5712aae8467a9697db53fdb60f53439c91405460",
+          "compressedOutputKey": "032417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+          "index": 9,
+          "internalParity": 0,
+          "outputParity": 1,
+          "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206"
+        }
+      ]
+    },
+    {
+      "model": "nanosp",
+      "suite": "stability",
+      "status": "passed",
+      "elfSha256": "b4a0e2d8165d37a1a0a5bc31b5ae8ebd646ed5eb850d56b6d2edfd9961044835",
+      "startedAt": "2026-10-09T19:03:04.092589+00:00",
+      "completedAt": "2026-10-09T19:04:34.157239+00:00",
+      "evidenceSha256": "0c7c7ac023f67b59a83ddfd00a9b7504cbde5b47b03f7979d40c5f5009f5178f",
+      "snapshotCount": 1,
+      "completedSessions": 20,
+      "apduCount": 183,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      }
+    },
+    {
+      "model": "nanox",
+      "suite": "canonical",
+      "status": "passed",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "startedAt": "2026-10-09T19:04:34.239333+00:00",
+      "completedAt": "2026-10-09T19:04:47.223337+00:00",
+      "evidenceSha256": "d96f8bb1b7196a6aa1474f19e305399dd83077747ab7ebde894fd45ac912fe15",
+      "snapshotCount": 1,
+      "checks": [
+        "exact-public-account-fixture",
+        "invalid-xonly-zero",
+        "invalid-xonly-ff",
+        "SDK-BN-cleanup-recovery",
+        "verified-full-address",
+        "two-native-BIP340-signatures"
+      ]
+    },
+    {
+      "model": "nanox",
+      "suite": "warnings",
+      "status": "passed",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "startedAt": "2026-10-09T19:04:47.306678+00:00",
+      "completedAt": "2026-10-09T19:05:11.717772+00:00",
+      "evidenceSha256": "22f2a006aa16a496e51e725c4caaf202606ddb4a9015b4b2c59d15771aeea73f",
+      "snapshotCount": 1,
+      "checks": [
+        "account-101",
+        "address-index-50001",
+        "high-fee-20-percent",
+        "input-index-50001",
+        "change-index-50001"
+      ]
+    },
+    {
+      "model": "nanox",
+      "suite": "faults",
+      "status": "passed",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "startedAt": "2026-10-09T19:05:11.805911+00:00",
+      "completedAt": "2026-10-09T19:06:42.094411+00:00",
+      "evidenceSha256": "d1c228d6996a22c92ada40b5063fadbd802b5fa854bb6b223ed3b2e23ef7acee",
+      "snapshotCount": 16,
+      "cases": [
+        "strict-short-apdu",
+        "idle-bolos-allowlist",
+        "benign-partial-button-release",
+        "interleaved-account-wipes-transfer",
+        "nested-apdu-at-approval",
+        "bolos-version-at-approval",
+        "bolos-quit-at-approval",
+        "malformed-apdu-at-approval",
+        "extended-apdu-at-approval",
+        "usb-power-loss-at-approval",
+        "empty-button-event",
+        "short-finger-event",
+        "empty-itc-event",
+        "short-pairing-event",
+        "oversized-pairing-event",
+        "timeout-during-review"
+      ]
+    },
+    {
+      "model": "nanox",
+      "suite": "node-16",
+      "status": "passed",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "startedAt": "2026-10-09T19:06:42.178342+00:00",
+      "completedAt": "2026-10-09T19:07:32.332085+00:00",
+      "evidenceSha256": "d73f6875ec01f186fe1cc861bf804eb7b55514fd6835400c0a3be9f6ee2b65ee",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 1507,
+        "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+        "wtxid": "2e920e529b968ec1c7873acf7ce20466c62622d0f688f04a43e72ca6053f45ff",
+        "vsize": 1017,
+        "inputs": 16,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "10000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "792dea901cdb0f2d7ba552bc9af352ff46bc4ff5b5f8d4ee5229e9ec4b401471cc102f69bd85d8796dc62213113e22dd7a13889fb3ecbaf3a5d5dc8460b5ac11",
+          "504ea1724bd827369370dbc0f966b6119dc745e766157cd6fb4775a96833f49056c8a0941b938733f5d2ac255dfccf4c88b4b3d721859c999bfbd81c452d1e2d",
+          "24882923ea7558eded5476f57543a7012ee99a131c326c811fb9ba94395e06f34e0c6b847b257f7a2abf40104507a1f52aaa69a69e806d9139f2f8b3044bea3a",
+          "ac0d379c2337df958bdcfab94f63f07ca8c395855023b7c7b6b80deea70b17c84c54306e8ab3fa45686410a769783984895cc561be9904edb0aeae49e2f50106",
+          "a6be799a593dd6467be523f21a0dc0a9494ec329612091e4ac4fed33ba05348d33b8feab88d06bbeb0bd3edbd6d765683a67f01f707f563d6e0d9a15835ef8a2",
+          "68563f7ff046b4cfd06d7f06f021bbbe8c021fc25b1effddb1f83cb49a6a2809267d81ba19388f46f57251e0ed3fd9fda0c9426b99ec7113e09da8431bd87988",
+          "2eb87ee2bf3a2ac72352452d4a40ce542154cda0700d50b5c68c5156bb95658f7e79d04c34d428a3332f4fdeb23a4c3a39de58d04dd23924d96d1ba70cd0ac91",
+          "76658e681488bcb234bd3a85db4587e3f0b0198aff4248a5670df6203f65aff8be2d1cabf9d7b09447d817e16878698d689498c9f38242de27ef5e98372bb696",
+          "6ebe785f40d236ed481db522ee018264aba70e35e1c3bf8d752c1b267abc5f4e68e5690f676b189710fe0bcdcbf68a3133e46eb67846ca36f3f53ac2c20a6ed6",
+          "56d616e63901a11f63ea850f2e7a86bb03eb1664164da7a8ad7df50c13f811f3007e36b9669a84fdba4abf94990476996153e5a5af980a98eeed8beafd375964",
+          "1e57d095f6c0a597e5dafb6d3e867673014a6b7b76a2de12b94f0a112dabf0ccd9e661e76687bd1e93b9aee81489af81df4068d88f458b3bed0ae3934f55013a",
+          "9beb104ffaa420d2f995728db16939c96855408541daa475dc5c7d9926dcfd8b1e7b6c25994c74a1c585833a03a3e2c920ad301eb6c46b8a9741aae4f94e802b",
+          "e620e71f57dfa98b9be302e52de1df02e6fed34c48af2a751dbb54cdf676ea8cb8203ff29d89815a181b4b44253b7b5d367c67198f64af6363420520d4273177",
+          "87c552186d92dbb8d94fd45cfe6139fd8651d0c3944894a53fff36204aa6992e1847c6add8ec8adea75fcfd2a069a9a00e9eaa74534a94aac3588ace8050a5cd",
+          "00971c00927d0db416368b15df0ca4ef4f0f7c83cb3de864bf20eb5368d9e0dce5c4142cd914bdb29ea3d7f3dc9877921c598310a98acdcdb9eb843c77aa3a1a",
+          "0181259f815e0bb94585bd6557d2301bb8153a2675b5c0adb2dc0afdfa2d61fb9f9a27ef56dafe2fd2908331118d1e659628fa10eade0d4759a10a0b662534e1"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      }
+    },
+    {
+      "model": "nanox",
+      "suite": "node-parity",
+      "status": "passed",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "startedAt": "2026-10-09T19:30:52.858696+00:00",
+      "completedAt": "2026-10-09T19:31:28.917897+00:00",
+      "evidenceSha256": "085b5c7e408d5ca6722a28b71053d08866abba09d6fbdff6a2ec7ae92b1a6caf",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 463,
+        "txid": "cd6cd3fe7c6b55dbe8c47bf58fb6f3fa6f31bed7123a2bab3634f2cbff3b7483",
+        "wtxid": "6ecc2f3e9f261856cbc9649882fbdf14cc3523d206ca28231f37508d2c061bb3",
+        "vsize": 327,
+        "inputs": 4,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "1000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "ba010048f39e103ee3377420f3fbf0716440bf6804b986d42b5c2f0835933d60f7e48bea6971a464bacbd25a329559d66b3b7a08064f4ac61dd28877b4cf2217",
+          "8d35e0c6275b9cdad9d65000146926b307dc0ed2537574cb679482c40637566371e9ad38d675384efdaae3fbc989445031ab92a6522431b01ac1032601d9625b",
+          "20b9eb637a281b1343ce1bff031b9968e64906c21f96d4c7091f00d9044824010b84f357afe07ff5cabbd46269b9f3ae937f485ef00b11648ac257047befd655",
+          "ab43c9849656a21e7d5002db85bfd6255e1b8b36fd64bd87a54a8e3335368e2c786ff4a6ab09434e274a1fc1b8686bb6a00839e90a345b93f684260148fe5e0c"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      },
+      "parityCoverage": [
+        {
+          "address": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+          "branch": 0,
+          "compressedInternalKey": "0383f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de154",
+          "compressedOutputKey": "0215fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+          "index": 0,
+          "internalParity": 1,
+          "outputParity": 0,
+          "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0"
+        },
+        {
+          "address": "rprl1p2nxuyp0u25rds6nkpezmapwn6k4lle8wsj7rpq3km297cdz8rw7q52c8k0",
+          "branch": 0,
+          "compressedInternalKey": "02af7dbbf9b9f39f147487fbd85453b683112ee5cb1d52230c5af280448a8815d3",
+          "compressedOutputKey": "0254cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+          "index": 3,
+          "internalParity": 0,
+          "outputParity": 0,
+          "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc"
+        },
+        {
+          "address": "rprl1pkhp60ypj33vcs27xtsqpylsr8w2qw7ggvy9cckzs04my8fdnvgkqjfr7jf",
+          "branch": 0,
+          "compressedInternalKey": "031a192d2a88f6df9b748e298310cda31231065b379338fa6844481c9e8d9c0738",
+          "compressedOutputKey": "03b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+          "index": 4,
+          "internalParity": 1,
+          "outputParity": 1,
+          "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c"
+        },
+        {
+          "address": "rprl1pyst6awqhkr252kza7tg7emu8lrpa56ayq8jaenvqsp4560ckvgrq4e45yt",
+          "branch": 0,
+          "compressedInternalKey": "02d3d8b7aedbfae27bc84bfead5712aae8467a9697db53fdb60f53439c91405460",
+          "compressedOutputKey": "032417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+          "index": 9,
+          "internalParity": 0,
+          "outputParity": 1,
+          "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206"
+        }
+      ]
+    },
+    {
+      "model": "nanox",
+      "suite": "stability",
+      "status": "passed",
+      "elfSha256": "71920b16eaa629fd23b032756ae7dd0faecafab61da19ce40c4b5680433af568",
+      "startedAt": "2026-10-09T19:31:28.999545+00:00",
+      "completedAt": "2026-10-09T19:32:58.605822+00:00",
+      "evidenceSha256": "f3abd705fecff28f478594058de7502ee20398fd243bec586b5c3c7d1fac22f4",
+      "snapshotCount": 1,
+      "completedSessions": 20,
+      "apduCount": 183,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      }
+    },
+    {
+      "model": "stax",
+      "suite": "canonical",
+      "status": "passed",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "startedAt": "2026-10-09T19:32:58.689931+00:00",
+      "completedAt": "2026-10-09T19:33:10.724922+00:00",
+      "evidenceSha256": "0c5fab62967cd05b35df644b3ba0b22a56978bfb3631f1fa2d2245a3b5737a7d",
+      "snapshotCount": 1,
+      "checks": [
+        "exact-public-account-fixture",
+        "invalid-xonly-zero",
+        "invalid-xonly-ff",
+        "SDK-BN-cleanup-recovery",
+        "verified-full-address",
+        "two-native-BIP340-signatures"
+      ]
+    },
+    {
+      "model": "stax",
+      "suite": "warnings",
+      "status": "passed",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "startedAt": "2026-10-09T19:33:10.819479+00:00",
+      "completedAt": "2026-10-09T19:33:28.676272+00:00",
+      "evidenceSha256": "b0a18f5ce7e07c3917849491a3c6ece70f3dde570716dd6c24ed10c03eada364",
+      "snapshotCount": 1,
+      "checks": [
+        "account-101",
+        "address-index-50001",
+        "high-fee-20-percent",
+        "input-index-50001",
+        "change-index-50001"
+      ]
+    },
+    {
+      "model": "stax",
+      "suite": "faults",
+      "status": "passed",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "startedAt": "2026-10-09T19:33:28.766459+00:00",
+      "completedAt": "2026-10-09T19:34:14.845149+00:00",
+      "evidenceSha256": "f426aa3a4ceca3dd6eb657e6b7893f27b21d3afcab2e1a8b5e9c68c8a1d44ec6",
+      "snapshotCount": 15,
+      "cases": [
+        "strict-short-apdu",
+        "idle-bolos-allowlist",
+        "interleaved-account-wipes-transfer",
+        "nested-apdu-at-approval",
+        "bolos-version-at-approval",
+        "bolos-quit-at-approval",
+        "malformed-apdu-at-approval",
+        "extended-apdu-at-approval",
+        "usb-power-loss-at-approval",
+        "empty-button-event",
+        "short-finger-event",
+        "empty-itc-event",
+        "short-pairing-event",
+        "oversized-pairing-event",
+        "timeout-during-review"
+      ]
+    },
+    {
+      "model": "stax",
+      "suite": "node-16",
+      "status": "passed",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "startedAt": "2026-10-09T19:34:14.942947+00:00",
+      "completedAt": "2026-10-09T19:35:02.025721+00:00",
+      "evidenceSha256": "6f25fe1d3a4b57c4a643ae316f4cf01cc66bf7664c57c5412910fa6b7864a659",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 1507,
+        "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+        "wtxid": "b69f6f7c76f357214f13e5c70eda73f11b48e25bfabee1d2db7ea41a2a8ee8ec",
+        "vsize": 1017,
+        "inputs": 16,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "10000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "a4614ac104c5aeec20fa3dbe3b05f458e00b95db6717a33dd0c7d8353f9452397702e91543896999532ce277af4e1e30f873b5efe2ad1555557656e16e796881",
+          "1f2e7d643899fd0a56cb383c122d1a75045633465a7375edce20a3bb565a95e4ad0ca9a35db1fa58b61c9dd2349f4d14975f78af7ff9f742803ac29761ed53ab",
+          "1e3e21be8f6046aa5ef6871ae68418f0b951d9a217e5528a187afe9bf2dadb82a14422e0c3f347e28840f6afca991679bd13a0ecf513f05a27e94c998f892061",
+          "552b03850cc7b55934b279906ac5caaf72bf8db5aa08882f56f8cd391624a1e96c5683343070e65118f222718141c746022e06d7e245587641fbab71a1aa3199",
+          "aff38dd10bb06f3879dc868ad7fc90d46ac12c70ea4fa7c7b84daa567b85d6a3c5b317e8ba23d3da7aa6ce1107c4e346cf1ca2aede6b8209d150473ff43742ca",
+          "d2813f0e50f961ff4672e10a0d43a1fb5046fa22d64f4db2b4eb76418db84269b7b7f308b012668879dd6e22a319cc514cff0a6226ccf06161450c4a037ee4f8",
+          "88fc51ce9ba3079493081e157f82c8e54459d142f08697b6dc4508b5b3772e51138fa8d796950325a840c00402ee2e5c8facde280f35574738e40d67b4f9a5cb",
+          "9144ab62ff70a1ab431caf6ae7df9493ff8ccb1a5e50660276ddd60a4253a54b8e5b0ec8835e5850573199a21dee4fef6f3425cad611b860bbd647ae9767de8e",
+          "23027407660060cbd4e00167ff5b1bdf57011c7ffc6ecd9eb90d38a2c012e6aa672f89a141cffa28d6592a55b7b3dd343de8d8a0beee9ad951353f7fe4917529",
+          "9489bcfbe7564b93919992e68d11f363c3475d1b881edc4652b171dd8788e74cc2faf127bb718c7e515e654ed25d11251270a5648f21afcdfb9317e9eb54ebea",
+          "a4a2f5017257a717628cd5debc57640b3c65eafc0e2a04ea023b249ad0bbe7420a842904cf5654e93c9d90ddf78fb620530f5cefefe7f757e2e0593e767597bb",
+          "17245d901fd658cc2ee0d4ad4bd1af58a00cf83ae3974690f4f16cfd99eb9c2d6eb5bef7db6ef300861a0d5df659874eac04eab8a0b0a00c7f5e9405b3e78192",
+          "0cf3808572b6a75269604051fd40f465d7a3043a70f88dfb89bf07067fe5647a4883c9d32515f9481a0d78c815b6be9bc35d52606e9f5aa6d19930eda8076e68",
+          "147929270eea86fc4d26e10aa3e63c63ab26da8860122d7804da2d1967e1574b9e413f1bb77096a9df7bd3aa8bee77aa436436e2203d314e0aa920f7e574d592",
+          "1652df93c02fdaf22184ab12f0c58050e625684dbe766ffad048b639533cd1074498813ae437c309c09d65e751eb8698d23a19b3a5ec107c6cdeb59ee154e176",
+          "80c98aed32729ee1476d457b2b35dca0a85948ff23f9595a8d52ecb96dce74f0c69a10a408f64f04ab5cfcbadb5d7ced793279fa3d2e3c5e8f6894933650d191"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      }
+    },
+    {
+      "model": "stax",
+      "suite": "node-parity",
+      "status": "passed",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "startedAt": "2026-10-09T19:35:02.123201+00:00",
+      "completedAt": "2026-10-09T19:35:34.009735+00:00",
+      "evidenceSha256": "386d4a84d9c8d4d76e82606f9b16e4409411dabe1cc209bb650dda869ac82d40",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 463,
+        "txid": "153474b0b96c377b1c989cd5611ad28e67c7cc907c167b68652151e94145fd7d",
+        "wtxid": "802b4b2fa55c2b9fe9670148265304a51baea477ea4eee87e72093ef4303210f",
+        "vsize": 327,
+        "inputs": 4,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "1000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "3ca6a4bfa9a3fe355b6ea423496a848a66d79ef50a7b4168118ed72166e373e405a8c941b047a780c524abd10e1075221de48f589c9c75b5bb025d9d88742bb1",
+          "9db7c8ee894c7a5013ab38686f959019a80f292562fb34bfd49a4bba5cb52b22833ce01146bb0acf56acf81709cbbe19839d81c5e6496cccb35b9c8be8e581f2",
+          "40c87043a240e80f8b82e8958791bfc93031daac1d0f64c04ff7e9d6f726101dab7f1953c604187755d07e1f654592b41fdc2f0ec6ca123bcfdb752210170a1b",
+          "be0ea66c5be07fa9ae8374aa7510d540c4efe863c54188b9de694557fc549e0f3f5fc93280da4d456e4dae4f2b093ce787818469d3ad129c03cce92389892cab"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      },
+      "parityCoverage": [
+        {
+          "address": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+          "branch": 0,
+          "compressedInternalKey": "0383f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de154",
+          "compressedOutputKey": "0215fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+          "index": 0,
+          "internalParity": 1,
+          "outputParity": 0,
+          "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0"
+        },
+        {
+          "address": "rprl1p2nxuyp0u25rds6nkpezmapwn6k4lle8wsj7rpq3km297cdz8rw7q52c8k0",
+          "branch": 0,
+          "compressedInternalKey": "02af7dbbf9b9f39f147487fbd85453b683112ee5cb1d52230c5af280448a8815d3",
+          "compressedOutputKey": "0254cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+          "index": 3,
+          "internalParity": 0,
+          "outputParity": 0,
+          "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc"
+        },
+        {
+          "address": "rprl1pkhp60ypj33vcs27xtsqpylsr8w2qw7ggvy9cckzs04my8fdnvgkqjfr7jf",
+          "branch": 0,
+          "compressedInternalKey": "031a192d2a88f6df9b748e298310cda31231065b379338fa6844481c9e8d9c0738",
+          "compressedOutputKey": "03b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+          "index": 4,
+          "internalParity": 1,
+          "outputParity": 1,
+          "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c"
+        },
+        {
+          "address": "rprl1pyst6awqhkr252kza7tg7emu8lrpa56ayq8jaenvqsp4560ckvgrq4e45yt",
+          "branch": 0,
+          "compressedInternalKey": "02d3d8b7aedbfae27bc84bfead5712aae8467a9697db53fdb60f53439c91405460",
+          "compressedOutputKey": "032417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+          "index": 9,
+          "internalParity": 0,
+          "outputParity": 1,
+          "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206"
+        }
+      ]
+    },
+    {
+      "model": "stax",
+      "suite": "stability",
+      "status": "passed",
+      "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+      "startedAt": "2026-10-09T19:35:34.088551+00:00",
+      "completedAt": "2026-10-09T19:36:51.023676+00:00",
+      "evidenceSha256": "15d36a9b92b74fb375362db8550b4d7c1406ada9acbf8bac38ebf0f1b48453ec",
+      "snapshotCount": 1,
+      "completedSessions": 20,
+      "apduCount": 183,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      }
+    },
+    {
+      "model": "flex",
+      "suite": "canonical",
+      "status": "passed",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "startedAt": "2026-10-09T19:36:51.100621+00:00",
+      "completedAt": "2026-10-09T19:37:04.321871+00:00",
+      "evidenceSha256": "3704a7a7d15d6bf2ac58b96b6ba9fd03e615453597153150e6b16767cf6ba40b",
+      "snapshotCount": 1,
+      "checks": [
+        "exact-public-account-fixture",
+        "invalid-xonly-zero",
+        "invalid-xonly-ff",
+        "SDK-BN-cleanup-recovery",
+        "verified-full-address",
+        "two-native-BIP340-signatures"
+      ]
+    },
+    {
+      "model": "flex",
+      "suite": "warnings",
+      "status": "passed",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "startedAt": "2026-10-09T19:37:04.395401+00:00",
+      "completedAt": "2026-10-09T19:37:23.145708+00:00",
+      "evidenceSha256": "396c3001a6d61db397b29b4a1535f661d4e629fd14d303190b87d74011432900",
+      "snapshotCount": 1,
+      "checks": [
+        "account-101",
+        "address-index-50001",
+        "high-fee-20-percent",
+        "input-index-50001",
+        "change-index-50001"
+      ]
+    },
+    {
+      "model": "flex",
+      "suite": "faults",
+      "status": "passed",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "startedAt": "2026-10-09T19:37:23.218699+00:00",
+      "completedAt": "2026-10-09T19:38:13.196934+00:00",
+      "evidenceSha256": "5b41e693fd5b8e45af3856b166f44df6b77e126e0a0008ee76c2b1681203f0cc",
+      "snapshotCount": 15,
+      "cases": [
+        "strict-short-apdu",
+        "idle-bolos-allowlist",
+        "interleaved-account-wipes-transfer",
+        "nested-apdu-at-approval",
+        "bolos-version-at-approval",
+        "bolos-quit-at-approval",
+        "malformed-apdu-at-approval",
+        "extended-apdu-at-approval",
+        "usb-power-loss-at-approval",
+        "empty-button-event",
+        "short-finger-event",
+        "empty-itc-event",
+        "short-pairing-event",
+        "oversized-pairing-event",
+        "timeout-during-review"
+      ]
+    },
+    {
+      "model": "flex",
+      "suite": "node-16",
+      "status": "passed",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "startedAt": "2026-10-09T19:38:13.276786+00:00",
+      "completedAt": "2026-10-09T19:39:01.917640+00:00",
+      "evidenceSha256": "ae81a1ec7f97e44915f330ef55d433cb62ecfa59a82daf8ffeeb954eb6a5c8d3",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 1507,
+        "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+        "wtxid": "85b5100a5b3a745a18a30b0f4409702e2f6bfb119a2e0784fd088853290075aa",
+        "vsize": 1017,
+        "inputs": 16,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "10000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "6306730975e7782dc2b271e6068a2254e8da7dfba332c7aad23272d811a722f695efb08ceb01735a033d11f558acfd7a5c4fbba4546c22f2a67e76eba491c668",
+          "5b8fc4fe5a74c0b07c0c75c326ebf34bdcb246b6935c31e4b007fecb2ce97fd895aa6da8e5aa4466b4086b24965ff7cd3c362ccf25aa0c636796d2ad26518784",
+          "0eb2dd236118f048ef59cf7130dcad8e856d5151687994c0f8ab50682945039a3b56717d4e88dad1b49c628b8c66d35b535fe82049086056b1401b1a5ce62638",
+          "d6f6a65034499fa46d7c78d3533cb37bbec4f8dbf95d4bc8d6b2e50a0f11364653772d35264eac2c796c23ec4d016cd621c93a47c34ed84372ccec624fadfabd",
+          "f27dd1404efde4fcc4c3cd398c6feefeff8998cd845bd39fa63341d7e41a9c85c81695c052cc71e6ed60ca2a503c118d807c049cddd60b0ede750b8ca871836c",
+          "9f03f32bf681bf1ef87b13b187e81e7e30751545632e5e20a79b7968e4b66d639a5d48562e57ad628cd957abd1c19da807f262884a8ad95474cafe32ba8eea42",
+          "3b3effbb027c2112363e7c75af66791f3b71a1bcd89810aa36d4751f3e936a1fa25f6f5171a968071739dbbcc03dd87b23043a3f473603c0b567875e5c906c56",
+          "19dc9af03b26c9c1b2bdea298c95c74ce9c756fe56ea27b54d4141172aa49b8455cab3aa6af79b721c80329d351196bd8ba03cdd68479cea337642f22285fc7f",
+          "e5e2f9d7f9fb2b2e94ad205c9b11975261b1c74d580f8f26aa5593f0f9538eed0307305f270dca41f5255b2de3614f37dd3e3f2d88876bee232917363e664e29",
+          "167b1144428c0e9abfbe8f2922978936e39a5b9d7df1f154f322a544ac56a9a7fc7d3b88d0fd74e18dd8bf075c3a27d0a2fd65e9b832543d972cfd2b6830919d",
+          "96193241db6a4e4e20915e1044b624016974957a1400f40702fffedb4c9a0bcc463e54a2e247cf046e9b51061c980fb8742c9cb14f60bf5f2d8f67ae91986e0a",
+          "02601afa41eec8781597017b060f03c4bb39fb88e11e3c600a3f4619d8e0bce2a3330c7c9f7120a2003072fb570ed2febaf7acdcd6a8183956f44ce45966931b",
+          "cd3820bf64152cbc67eb43f2d7342a7e8233a44ace4c4f0119a9c8058bc5878b8f948f9b99e812661a4d515900e93d3dad521638112a74ece004ada4007fa0cd",
+          "c67d899be2778f8bf05e2f3f2583d946aed6388aa7b1dd93b8f6fdd7c3642bc935ab0b7779b49e94e90e27d7b27279f8ff09affab1ee0277228eb139b8f28597",
+          "0cbd94e0d7f2fe51261c7c0b0afd9d4b0b2ba8015eed74ec839f0867ffeb2e98504eb6c24f65993d0bb42adeddb65c7bcb753c69d8f9a620ded80f9168804855",
+          "f46c7ec70eeaf5b3783e8d3104ddd0eb5e359cd1d340ee3e078a1a2b52ad185601b48ac869966a2d043fbd7bbdaadaa4b6c9ed3c29333ade6ceea4a6af2896ef"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      }
+    },
+    {
+      "model": "flex",
+      "suite": "node-parity",
+      "status": "passed",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "startedAt": "2026-10-09T19:39:01.999684+00:00",
+      "completedAt": "2026-10-09T19:39:38.768861+00:00",
+      "evidenceSha256": "3465d478c39056cb27bcddec77e550e9970be56cd1fa7b1f7e635c576f5cbace",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 463,
+        "txid": "13613c0ce65b317dadba2116da8ca486445bee14eab70acc8db5de7d2de4564a",
+        "wtxid": "8b41d13473f094690945a468f8edede9b5a95c2be9a0056ce1141e0153be3881",
+        "vsize": 327,
+        "inputs": 4,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "1000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "b31ee96b7d71d1495da31e59cec547c6c27eb04330436a5ca9384dbe86cd291e889e94215eb839bcae52b5b4e385507aba2cf0f80f3d53ce0d6a63efaa2e25a6",
+          "31bdd7e87f2c9bbc2d072961fd0266e8e022bcea3b78681ad36de32893a907954a5cc06b921e564977107bd8c065be23c83788d9dfb6f1b967f7aee93b3c30a9",
+          "a682ed7198aaf76903dd46c3cff94e6fbf94b93c1d6034da83d5dd10c737e2e83e8a35d5b0c5e727430e06e35f8c77ca7f362690210099261977d6d2faedd25d",
+          "40d5d1b65cc92c8a15fd01658ffd6b83e1c144bddc249cc055207c01026ab8a2269028e933ca876f265293f75000fa992a5bc383342dd82e3cc90c493193644a"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      },
+      "parityCoverage": [
+        {
+          "address": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+          "branch": 0,
+          "compressedInternalKey": "0383f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de154",
+          "compressedOutputKey": "0215fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+          "index": 0,
+          "internalParity": 1,
+          "outputParity": 0,
+          "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0"
+        },
+        {
+          "address": "rprl1p2nxuyp0u25rds6nkpezmapwn6k4lle8wsj7rpq3km297cdz8rw7q52c8k0",
+          "branch": 0,
+          "compressedInternalKey": "02af7dbbf9b9f39f147487fbd85453b683112ee5cb1d52230c5af280448a8815d3",
+          "compressedOutputKey": "0254cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+          "index": 3,
+          "internalParity": 0,
+          "outputParity": 0,
+          "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc"
+        },
+        {
+          "address": "rprl1pkhp60ypj33vcs27xtsqpylsr8w2qw7ggvy9cckzs04my8fdnvgkqjfr7jf",
+          "branch": 0,
+          "compressedInternalKey": "031a192d2a88f6df9b748e298310cda31231065b379338fa6844481c9e8d9c0738",
+          "compressedOutputKey": "03b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+          "index": 4,
+          "internalParity": 1,
+          "outputParity": 1,
+          "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c"
+        },
+        {
+          "address": "rprl1pyst6awqhkr252kza7tg7emu8lrpa56ayq8jaenvqsp4560ckvgrq4e45yt",
+          "branch": 0,
+          "compressedInternalKey": "02d3d8b7aedbfae27bc84bfead5712aae8467a9697db53fdb60f53439c91405460",
+          "compressedOutputKey": "032417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+          "index": 9,
+          "internalParity": 0,
+          "outputParity": 1,
+          "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206"
+        }
+      ]
+    },
+    {
+      "model": "flex",
+      "suite": "stability",
+      "status": "passed",
+      "elfSha256": "d13e2224a766bcff9ccb5f0bc3d09ca59f686a9444092eb80ea594c0ba86e7f1",
+      "startedAt": "2026-10-09T19:39:38.866198+00:00",
+      "completedAt": "2026-10-09T19:41:00.462481+00:00",
+      "evidenceSha256": "3add5224962fcb1fb40c65f94a98d2c05c33265c5408b7ccbbe158789410d9bd",
+      "snapshotCount": 1,
+      "completedSessions": 20,
+      "apduCount": 183,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      }
+    },
+    {
+      "model": "apex_p",
+      "suite": "canonical",
+      "status": "passed",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "startedAt": "2026-10-09T19:41:00.547353+00:00",
+      "completedAt": "2026-10-09T19:41:15.033493+00:00",
+      "evidenceSha256": "d952c04262e94cc6c9c60b7df4391c40d32244f152704d6cefdbfee0741cb200",
+      "snapshotCount": 1,
+      "checks": [
+        "exact-public-account-fixture",
+        "invalid-xonly-zero",
+        "invalid-xonly-ff",
+        "SDK-BN-cleanup-recovery",
+        "verified-full-address",
+        "two-native-BIP340-signatures"
+      ]
+    },
+    {
+      "model": "apex_p",
+      "suite": "warnings",
+      "status": "passed",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "startedAt": "2026-10-09T19:41:15.146815+00:00",
+      "completedAt": "2026-10-09T19:41:35.462531+00:00",
+      "evidenceSha256": "7cfcaa7a051e2a5731270a3fb27669808c04c5ca4205b452211a8982c5831527",
+      "snapshotCount": 1,
+      "checks": [
+        "account-101",
+        "address-index-50001",
+        "high-fee-20-percent",
+        "input-index-50001",
+        "change-index-50001"
+      ]
+    },
+    {
+      "model": "apex_p",
+      "suite": "faults",
+      "status": "passed",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "startedAt": "2026-10-09T19:41:35.543600+00:00",
+      "completedAt": "2026-10-09T19:42:32.796082+00:00",
+      "evidenceSha256": "4214904cb69dfe9b22ae2fc5462ae4bb32dded631e04403e272656a0355ef229",
+      "snapshotCount": 15,
+      "cases": [
+        "strict-short-apdu",
+        "idle-bolos-allowlist",
+        "interleaved-account-wipes-transfer",
+        "nested-apdu-at-approval",
+        "bolos-version-at-approval",
+        "bolos-quit-at-approval",
+        "malformed-apdu-at-approval",
+        "extended-apdu-at-approval",
+        "usb-power-loss-at-approval",
+        "empty-button-event",
+        "short-finger-event",
+        "empty-itc-event",
+        "short-pairing-event",
+        "oversized-pairing-event",
+        "timeout-during-review"
+      ]
+    },
+    {
+      "model": "apex_p",
+      "suite": "node-16",
+      "status": "passed",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "startedAt": "2026-10-09T19:42:32.882419+00:00",
+      "completedAt": "2026-10-09T19:43:29.749666+00:00",
+      "evidenceSha256": "711e0b9526b1a4558b8bde18c86ba59eaed06d7f371809ff0f0b07ba4e4e78d9",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 1507,
+        "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+        "wtxid": "0b824cfed9d2a621a721e2feb68cb1735137e8a7fda17fa2bae8823b820a62ac",
+        "vsize": 1017,
+        "inputs": 16,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "10000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "b4493d80f712a0a53db466316dad9696bae46658fa2d22853dea8fed35a664bcd31581e5d17f06429d5244b17796c054d4f1d76e8b6212d84ada4328b027db4c",
+          "ebf9b336a2ab49fc0f6252393124b2b62c0966f9269e59f0d0172a8c561bd5ca9df3d061f2cce95ec70eb5e5f4cd2c047fd2bbc7488d796ac1283dc16e997633",
+          "25cdf32636a81e1cbbdec6a1d5178f8d7cd6cdd80aafeac989b5f2076b537214a9ca678727b07ee98917c8081e2851cde30284873a7e74b462db8199b763ee8f",
+          "9949d7e0149d12925f020eec38873efdc2fc05c7e76a879e2092b7214df06fe2bdbd1a7c561640097cfa42475a993a3d7e3a52365439944da614148898446118",
+          "f7cf3185aa1d1d0aa84fedae7fe42997ae9b67e05905987fec5d46b6c09779cd2d3355e91dce193b18926f342ab3a1a715dc51d071db0dcf39b54d65d5eaf499",
+          "263a529be79ea6442a732f8b9156d1d44f1abbd4e962a9496a9ad1afb3688cbbf71b52d2f844032c8d54ab852d92cb1e670c180c723993418a917786acb7e721",
+          "97299cd20bcd2222b5efd7ac8751b5915317f5a8c5e7955e8643345677058cb8df91de1861cf47c3692d21725893907e8ba2c57103ac6e6a6c4541eb76c9352b",
+          "87476d0a462a1ad3f986b00b25072fe5fd756c2519e8f6965b12ff671c035582a7e487a39e1afe2edc8cc87f35d5bfdbba32dd445418c4a70b3c43c2c662b976",
+          "6db048df090edf381f24e8fb50e2f563c6e94ec7762aeb0b5a1c65b27739500f0915d38bbe7db919736c96acd6623e354946a4f40f7c6a0c16c29c286f6c560c",
+          "dec82cabbf796470cd31fcdab94d9accad59a7d73bcf035bf1567c5d24c5848f74952c0c42a6e0455159fe846eb6fd2bd85cf554957607f0ff7fb2510e43eec3",
+          "c417521a2277d87d7d6b66a8b969efcfa919e859fee26b0f17c0a4bfaab646e2ae3b18b3490ea70ba2e5c85f92dec3fc18730b49b2cb9d27a6fc1f3fa19faefc",
+          "fc3cae0bf7661f4e9dc9c4d77129e6dbe3536475e871e84878a536978d234a8c087f7fe2c264e83ec8539f91e06ba945d9104b34eb76d6768219832d95f6e037",
+          "8457b312c485e0533a64ecad2dbb72c4eaa261daf38d685b23371634ff1d621f7a5e9738a206bd4a32d97cb7afa820166b4e8ccb30e500d563007b87f53b0528",
+          "333097ab5ace9c5a1c70a7d69e80ae6b5657fe6046b3fdb8159520123cd35312c64545fcd4044773284cd12bb556c657d11b170ba7aca4c6505a42f65e8c1bd6",
+          "f8ca44683d7a1fcc051d56cfd86fbf53e6eb1554db83bcad32861000bb477d69df4efd0ce16766ae4e6b01351a7ec4b4d1e75a9f8994a8072b0c7e90a58dc920",
+          "cab272a23867c4fd1a8a53712cea07fbeceeb93d6bb94c75d2cb739a74ec72edebe07738e5478eaa90124d4ff2726fa516a8190a3160cdff1538c9ef20889f86"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      }
+    },
+    {
+      "model": "apex_p",
+      "suite": "node-parity",
+      "status": "passed",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "startedAt": "2026-10-09T19:43:29.842057+00:00",
+      "completedAt": "2026-10-09T19:44:07.169711+00:00",
+      "evidenceSha256": "f923cbbd976a3f55e3674529404cfea9354b3b2154fb2156655901188bffa4dd",
+      "snapshotCount": 1,
+      "caseCount": 22,
+      "transaction": {
+        "bundleBytes": 463,
+        "txid": "52f229e8e4707a380cbfcfe17390956c19b3fcfa5420cf7f7334b3125d619d76",
+        "wtxid": "1e0da8328983bdda28b86776121f8de87d8dd3fca77a52942d81f7b265428b63",
+        "vsize": 327,
+        "inputs": 4,
+        "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+        "amountGrains": "123456789",
+        "feeGrains": "1000",
+        "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+        "signatures": [
+          "15558ee0e0be26f5e6e2052c6036dd11fb547b504a895e169ad199dd02daadfdb535a2cd6f6959ee1a83464c222a09b05ed0ad232a20b6c000fe2c7a832e859d",
+          "b1a5b38ec7c5c735a06e280c13a08a4e97ad1d5442b464eb387a58095a291c0ad4d3b0dcd23418fb16bf15251f9dc06ef7265920cb189be865ffd84605215006",
+          "19263861113a1619d245b187687df95ec967d0a26ee1fdaa58c7d586c962320ed2879400518a73243ac5e93356b5273aa3e16b3e9bb41cd30db322b6de5f59fd",
+          "0bbe14b7aaae052a037ef232c1251b96a6b57fcfd299cbe857d07d741b9a215dc795261012e1adec7ad29d12d167d63981d2d2861797342f8dadc5cb3b4fde70"
+        ]
+      },
+      "pearlNode": {
+        "path": "/tmp/pearl-pearld-test",
+        "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+      },
+      "parityCoverage": [
+        {
+          "address": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+          "branch": 0,
+          "compressedInternalKey": "0383f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de154",
+          "compressedOutputKey": "0215fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+          "index": 0,
+          "internalParity": 1,
+          "outputParity": 0,
+          "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0"
+        },
+        {
+          "address": "rprl1p2nxuyp0u25rds6nkpezmapwn6k4lle8wsj7rpq3km297cdz8rw7q52c8k0",
+          "branch": 0,
+          "compressedInternalKey": "02af7dbbf9b9f39f147487fbd85453b683112ee5cb1d52230c5af280448a8815d3",
+          "compressedOutputKey": "0254cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+          "index": 3,
+          "internalParity": 0,
+          "outputParity": 0,
+          "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc"
+        },
+        {
+          "address": "rprl1pkhp60ypj33vcs27xtsqpylsr8w2qw7ggvy9cckzs04my8fdnvgkqjfr7jf",
+          "branch": 0,
+          "compressedInternalKey": "031a192d2a88f6df9b748e298310cda31231065b379338fa6844481c9e8d9c0738",
+          "compressedOutputKey": "03b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+          "index": 4,
+          "internalParity": 1,
+          "outputParity": 1,
+          "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c"
+        },
+        {
+          "address": "rprl1pyst6awqhkr252kza7tg7emu8lrpa56ayq8jaenvqsp4560ckvgrq4e45yt",
+          "branch": 0,
+          "compressedInternalKey": "02d3d8b7aedbfae27bc84bfead5712aae8467a9697db53fdb60f53439c91405460",
+          "compressedOutputKey": "032417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+          "index": 9,
+          "internalParity": 0,
+          "outputParity": 1,
+          "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206"
+        }
+      ]
+    },
+    {
+      "model": "apex_p",
+      "suite": "stability",
+      "status": "passed",
+      "elfSha256": "98d624ac34120b70c2df7f5b3696fddef219f7d3aeee19e50e3f60590aae8959",
+      "startedAt": "2026-10-09T19:44:07.259287+00:00",
+      "completedAt": "2026-10-09T19:45:43.117708+00:00",
+      "evidenceSha256": "2619ddf556ab1d802133713cecb12bdfe2cffd8e78582f9731a7ee8f3d0ad555",
+      "snapshotCount": 1,
+      "completedSessions": 20,
+      "apduCount": 183,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      }
+    }
+  ],
+  "notClaimed": [
+    "Physical-device validation",
+    "Human security audit",
+    "Vendor approval or store availability",
+    "Hardware RNG quality/fault resistance",
+    "Production readiness"
+  ],
+  "status": "passed-software-qualification-only",
+  "completedAt": "2026-10-09T19:46:33.657149+00:00",
+  "packagerUnitTests": {
+    "passed": 11,
+    "logSha256": "c45cb9dbe4357e46872fbff87a82c0ea8e4c65ca99ebbfefdae3d23a8c71aacc"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "head": "e36dc35abcd47277a491d5bc4155a576e0ff2855",
+  "source": "/workspace/shared/prl-build-repro/source",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "privateSourceFileCount": 3737,
+  "protectedFileCount": 2820,
+  "parentSharedInodes": [],
+  "sourceSymlinks": [],
+  "gitObjectAlternates": false,
+  "nativeTargetInitiallyAbsent": true,
+  "allFourFrozenSourceManifestsMatch": true,
+  "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+  "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579"
+}

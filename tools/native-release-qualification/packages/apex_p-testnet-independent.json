@@ -1,0 +1,20 @@
+{
+  "elf": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/apex_p-testnet/pearl-apex_p-testnet.elf",
+  "apdu": "/workspace/shared/pearl-lexical-requalification-20261009-1852/packages/apex_p-testnet/pearl-apex_p-testnet.apdu",
+  "elfSha256": "01cf7816a6d8090e18de75b0212f48a81e731d94ac80cef924fc91535ff94fd1",
+  "apduSha256": "48d649bb2d9af5ae018a7b03a8acda300d57574cb9332e20906e5aabc8d9d23c",
+  "appHash": "5e2481f71d00386241867ee54c4c266c044bb6d0829a5c47ed87f4aadfa9c180",
+  "target": "apex_p",
+  "targetId": "0x33400004",
+  "apiLevel": 27,
+  "flags": "0x200",
+  "network": "testnet",
+  "appName": "Pearl Test Dev",
+  "imageBytes": 72819,
+  "writtenBytes": 72363,
+  "implicitZeroGapBytes": 456,
+  "installParamsBytes": 115,
+  "commands": 356,
+  "crcSegments": 2,
+  "status": "PASS: exact ELF image and strict command grammar independently reconstructed"
+}

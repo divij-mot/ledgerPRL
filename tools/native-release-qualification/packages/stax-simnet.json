@@ -1,0 +1,61 @@
+{
+  "status": "offline-verified-not-installed",
+  "device": "stax",
+  "network": "simnet",
+  "retailSideloadSupported": true,
+  "nanoXRestriction": "Retail Nano X cannot sideload; vendor-controlled review/testing only",
+  "elfSha256": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+  "applicationHash": "0961066f7a19f97fe3d7e451463f19d862798a630e9c9cfbf7d63a450e9d65e4",
+  "metadata": {
+    "target": "stax",
+    "target_id": "0x33200004",
+    "target_name": "TARGET_STAX",
+    "app_name": "Pearl Sim Dev",
+    "app_version": "0.1.0",
+    "api_level": "27",
+    "sdk_version": "v27.1.2",
+    "rust_sdk_version": "1.17.0",
+    "rust_sdk_name": "ledger_secure_sdk_sys",
+    "sdk_name": "ledger-secure-sdk",
+    "sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "sdk_graphics": "nbgl",
+    "app_flags": "0x200"
+  },
+  "effectiveParameters": {
+    "target_id": 857735172,
+    "api_level": 27,
+    "flags": 512,
+    "code_length": 65024,
+    "data_length": 8192,
+    "install_params_length": 114,
+    "boot_offset": 1,
+    "load_length": 73330
+  },
+  "curve": "secp256k1",
+  "derivationPrefix": "86'/1'",
+  "installTlvSha256": "7f1495e6f19ed79b70837a256bb4033fcaa1eda68adab3b394dc55ef26ac117e",
+  "iconTlvSha256": "46b9eca842b7c81353f13b7681e8b57652b6d80be8b27aa6f15730814ca03074",
+  "apduCount": 364,
+  "deleteExistingApp": false,
+  "sourceBuildManifestSha256": "d84c06fcfdd430398778d690b24bce440bb715d1858bf65b8cbb0dd42590b9c9",
+  "packagerSha256": "f6e5cedd5e2f2803a634140518beb652e939d771610a6e9a70bddd8b250110b0",
+  "tools": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "ledgerblue": "0.1.58",
+    "pyelftools": "0.33",
+    "objcopy": "GNU objcopy (2.44-3+23+b1) 2.44\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty.",
+    "ledgerblueSources": {
+      "ledgerblue.hexLoader": "1464011334295336988881f243a18da8c1a2f87c10bd42fac8fdb2f05b68220f",
+      "ledgerblue.hexParser": "c9466c21c98d2922c8ffe1896b8f75eaabf57dea647d7aa633633248b7fae163",
+      "ledgerblue.hashApp": "47083f16325021b39f0d686ecba6af421c1ed4b838af2ad5d7136b24334bf8e1"
+    }
+  },
+  "files": {
+    "pearl-stax-simnet.apdu": "3987a769279081f8d776a98e09e9e6aed994b1a60bcbe1dc82bd8977119c0d44",
+    "pearl-stax-simnet.build.json": "d84c06fcfdd430398778d690b24bce440bb715d1858bf65b8cbb0dd42590b9c9",
+    "pearl-stax-simnet.elf": "5f6fbc9d7330992958afb8f875c48f8df9ecab1446d8ec4366f2016d0a2a7449",
+    "pearl-stax-simnet.hex": "303d2765a8274f4fe9d570fe889b5c97cfd5b8f4f9ccde07ad6cdac61b370daf",
+    "pearl-stax-simnet.sha256": "74fde8c227eca5a98d1c7b5558a63c17ab9b1e3ca9327918a2c661cfff350a78"
+  },
+  "scope": "Offline APDU/HEX inspection only; no hardware transport, credentials, CA, OS flashing or vendor authorization"
+}

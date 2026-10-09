@@ -1,0 +1,87 @@
+{
+  "publicAccount": {
+    "network": "simnet",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "bundle": {
+    "network": "simnet",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "421db8f9183adfc4fa1ddf7479fdc6700ced8b1fd40bf6e65b8196416a8af77f",
+        "vout": 0,
+        "amount": "322963140676",
+        "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "txid": "2ed6e5c71c1167feaefe6a6ab8a23750ad1b2db026c0d66d7c49e138af361a89",
+        "vout": 0,
+        "amount": "322961153915",
+        "scriptPubKey": "512054cdc205fc5506d86a760e45be85d3d5abffe4ee84bc308236da8bec34471bbc",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 3
+      },
+      {
+        "txid": "d544eda0c44e9e64b4bf3fc959e4e2256c3f0a94e35c71ee7f72ce27efd7b811",
+        "vout": 0,
+        "amount": "322962147293",
+        "scriptPubKey": "5120b5c3a790328c59882bc65c00127e033b94077908610b8c58507d7643a5b3622c",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 4
+      },
+      {
+        "txid": "3ae41e3b097352ed0a277e44524a3b3e7a28f2ae46e528de45a6e10f57ac21e2",
+        "vout": 0,
+        "amount": "322964134063",
+        "scriptPubKey": "51202417aeb817b0d545585df2d1ecef87f8c3da6ba401e5dccd80806b4d3f166206",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 9
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "123456789",
+        "scriptPubKey": "51204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "amount": "1291727118158",
+        "scriptPubKey": "5120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d",
+        "role": "change",
+        "branch": 1,
+        "index": 0
+      }
+    ]
+  },
+  "sighashes": [
+    "724c1bb996c70812bffaa5a4d4c946c21ba28171384a574358478d3c78118335",
+    "b613871d8b4a924146c52fc9cac3cf4a93615d05578da82860c7c5a007c2f136",
+    "4a042dfa6b928d1c465e598f6567911d2edc0b64f9aa284867925c705d93b3d1",
+    "3fb286c8e7f77f07d00562d6d1f0240e6234f90203490d955e48ca565e144191"
+  ],
+  "signatures": [
+    "15558ee0e0be26f5e6e2052c6036dd11fb547b504a895e169ad199dd02daadfdb535a2cd6f6959ee1a83464c222a09b05ed0ad232a20b6c000fe2c7a832e859d",
+    "b1a5b38ec7c5c735a06e280c13a08a4e97ad1d5442b464eb387a58095a291c0ad4d3b0dcd23418fb16bf15251f9dc06ef7265920cb189be865ffd84605215006",
+    "19263861113a1619d245b187687df95ec967d0a26ee1fdaa58c7d586c962320ed2879400518a73243ac5e93356b5273aa3e16b3e9bb41cd30db322b6de5f59fd",
+    "0bbe14b7aaae052a037ef232c1251b96a6b57fcfd299cbe857d07d741b9a215dc795261012e1adec7ad29d12d167d63981d2d2861797342f8dadc5cb3b4fde70"
+  ],
+  "rawTx": "010000000001047ff78a6a4196815be6f60bd41f8bed0c70c6fd7974df1dfac4df3a18f9b81d420000000000ffffffff891a36af38e1497c6dd6c026b02d1bad5037a2b86a6afeaefe67111cc7e5d62e0000000000ffffffff11b8d7ef27ce727fee715ce3940a3f6c25e2e459c93fbfb4649e4ec4a0ed44d50000000000ffffffffe221ac570fe1a645de28e546aef2287a3e3b4a52447e270aed5273093b1ee43a0000000000ffffffff0215cd5b07000000002251204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb0454e9fefc02c010000225120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d014015558ee0e0be26f5e6e2052c6036dd11fb547b504a895e169ad199dd02daadfdb535a2cd6f6959ee1a83464c222a09b05ed0ad232a20b6c000fe2c7a832e859d0140b1a5b38ec7c5c735a06e280c13a08a4e97ad1d5442b464eb387a58095a291c0ad4d3b0dcd23418fb16bf15251f9dc06ef7265920cb189be865ffd84605215006014019263861113a1619d245b187687df95ec967d0a26ee1fdaa58c7d586c962320ed2879400518a73243ac5e93356b5273aa3e16b3e9bb41cd30db322b6de5f59fd01400bbe14b7aaae052a037ef232c1251b96a6b57fcfd299cbe857d07d741b9a215dc795261012e1adec7ad29d12d167d63981d2d2861797342f8dadc5cb3b4fde7000000000",
+  "txid": "52f229e8e4707a380cbfcfe17390956c19b3fcfa5420cf7f7334b3125d619d76",
+  "wtxid": "1e0da8328983bdda28b86776121f8de87d8dd3fca77a52942d81f7b265428b63",
+  "addresses": {
+    "input": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm"
+  }
+}

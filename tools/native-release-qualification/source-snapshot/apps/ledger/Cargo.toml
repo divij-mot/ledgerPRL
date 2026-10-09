@@ -1,0 +1,61 @@
+[package]
+name = "pearl-ledger"
+version = "0.1.0"
+edition = "2024"
+authors = ["Pearl Ledger contributors"]
+publish = false
+
+# Kept out of the host workspace: compiling the SDK requires Ledger targets.
+[workspace]
+exclude = ["vendor/ledger-device-rust-sdk"]
+
+[workspace.package]
+license = "Apache-2.0"
+repository = "https://github.com/LedgerHQ/ledger-device-rust-sdk"
+
+[dependencies]
+pearl-core = { path = "../../crates/pearl-core" }
+ledger_device_sdk = { path = "vendor/ledger-device-rust-sdk/ledger_device_sdk", default-features = false, features = ["heap", "io_new", "nano_nbgl", "sys"] }
+zeroize = { version = "=1.8.1", default-features = false }
+
+[features]
+default = []
+testnet = ["ledger_device_sdk/variant_0"]
+testnet2 = ["ledger_device_sdk/variant_1"]
+regtest = ["ledger_device_sdk/variant_2"]
+simnet = ["ledger_device_sdk/variant_3"]
+
+[package.metadata.ledger]
+curve = ["secp256k1"]
+flags = "0"
+path = ["86'/808276'"]
+name = "Pearl Dev"
+nanosplus = { icon = "icons/pearl-14.png" }
+nanox = { icon = "icons/pearl-14.png" }
+stax = { icon = "icons/pearl-32.png" }
+flex = { icon = "icons/pearl-40.png" }
+apex_p = { icon = "icons/pearl-32.png" }
+
+[package.metadata.ledger.variants.0]
+name = "Pearl Test Dev"
+path = ["86'/1'"]
+[package.metadata.ledger.variants.1]
+name = "Pearl Test2 Dev"
+path = ["86'/1'"]
+[package.metadata.ledger.variants.2]
+name = "Pearl Reg Dev"
+path = ["86'/1'"]
+[package.metadata.ledger.variants.3]
+name = "Pearl Sim Dev"
+path = ["86'/1'"]
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+overflow-checks = true
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("nanosplus", "nanox", "stax", "flex", "apex_p"))'] }

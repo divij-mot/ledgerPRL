@@ -1,0 +1,13 @@
+{
+  "fullEvidenceArchive": {
+    "filename": "prl-native-build-reproducibility-20261009.tar.gz",
+    "originalLocation": "/workspace/shared/prl-native-build-reproducibility-20261009.tar.gz",
+    "bytes": 10168584,
+    "sha256": "bae1c4ebc7da55d0659b88a68036c7e5d174dab1c9185934c1441a54db63626a",
+    "includedHere": false
+  },
+  "sourceCommit": "e36dc35abcd47277a491d5bc4155a576e0ff2855",
+  "independentVerifierOriginalPath": "apps/ledger/tests/package-independent.py",
+  "independentVerifierOriginalSha256": "1576e2760092dab80f719140e190bf75fea7b6545ca36bafbc483d1a4941f600",
+  "note": "Full archive contains original replay helpers, source tarball, payloads and full logs; this compact directory is source/text only."
+}
