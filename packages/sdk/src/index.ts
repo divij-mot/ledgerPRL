@@ -5,3 +5,5 @@ export * from "./keys.js";
 export * from "./bundle.js";
 export * from "./transaction.js";
 export * from "./device.js";
+
+export * from "./http.js";

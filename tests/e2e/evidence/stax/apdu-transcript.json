@@ -1,0 +1,217 @@
+[
+  {
+    "instruction": 0,
+    "request": "e000000000",
+    "response": "010001000410e3059000"
+  },
+  {
+    "instruction": 0,
+    "request": "e000000000",
+    "response": "010001000410e3059000"
+  },
+  {
+    "instruction": 1,
+    "request": "e00100000400000000",
+    "response": "3442193e03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf104000000009000"
+  },
+  {
+    "instruction": 0,
+    "request": "e000000000",
+    "response": "010001000410e3059000"
+  },
+  {
+    "instruction": 2,
+    "request": "e002000009000000000000000000",
+    "response": "7270726c31707a68373572747837346c383576327871667235756c6e376d687934307679717a6d36386d6c34796e6763717939763038357471716a643966786d9000"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000100",
+    "response": "6986"
+  },
+  {
+    "instruction": 17,
+    "request": "e011000003000001",
+    "response": "6986"
+  },
+  {
+    "instruction": 16,
+    "request": "e01000000100",
+    "response": "6700"
+  },
+  {
+    "instruction": 20,
+    "request": "e014000000",
+    "response": "9000"
+  },
+  {
+    "instruction": 16,
+    "request": "e0100000222101bd43eea5871ba4dcf776beb93eefa6467c15bf762ae094b299cdbda8d948c28b",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e0110000ff000050524c3103000000000100000000000000020206cb9a55d510de9e142ad571fda0248807db95461113ab62f4d255c120970f7d00000000af9829324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff00000000007ff78a6a4196815be6f60bd41f8bed0c70c6fd7974df1dfac4df3a18f9b81d420000000044701a324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000015cd5b070000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045000000000000f637e85c960000005120caba",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e011000026fd00c13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d010100000000",
+    "response": "9000"
+  },
+  {
+    "instruction": 18,
+    "request": "e012000000",
+    "response": "6a80"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000100",
+    "response": "6986"
+  },
+  {
+    "instruction": 16,
+    "request": "e01000002221018d62f66784589f0d7bd2b3eeeb2d9dd4dd47a74e2ad1613daccadea1ba56f0c6",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e0110000ff000050524c3104000000000100000000000000020206cb9a55d510de9e142ad571fda0248807db95461113ab62f4d255c120970f7d00000000af9829324b00000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045ffffffff00000000007ff78a6a4196815be6f60bd41f8bed0c70c6fd7974df1dfac4df3a18f9b81d420000000044701a324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000015cd5b070000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045000000000000f637e85c960000005120caba",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e011000026fd00c13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d010100000000",
+    "response": "9000"
+  },
+  {
+    "instruction": 18,
+    "request": "e012000000",
+    "response": "6a80"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000100",
+    "response": "6986"
+  },
+  {
+    "instruction": 16,
+    "request": "e01000002221016ee8b97fc94de6f8be4a56155abe96d529bd08189f2b8e9a0273aad9d6353d73",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e0110000ff000050524c3104000000000100000000000000020206cb9a55d510de9e142ad571fda0248807db95461113ab62f4d255c120970f7d00000000af9829324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff00000000007ff78a6a4196815be6f60bd41f8bed0c70c6fd7974df1dfac4df3a18f9b81d420000000044701a324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000015cd5b070000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045000000000000f637e85c9600000051209450",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e011000026fd00706c1949cffff61606fb1a7d6735c80b2793e5f4312a45c692cbd98c8624010100000000",
+    "response": "9000"
+  },
+  {
+    "instruction": 18,
+    "request": "e012000000",
+    "response": "6a80"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000100",
+    "response": "6986"
+  },
+  {
+    "instruction": 16,
+    "request": "e0100000222101736bdab1a4f7ee56ffb4ba7bc413ef24d191ba9d5876a26561855b9c78259159",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e0110000ff000050524c3104000000000100000000000000020206cb9a55d510de9e142ad571fda0248807db95461113ab62f4d255c120970f7d00000000af9829324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff00000000007ff78a6a4196815be6f60bd41f8bed0c70c6fd7974df1dfac4df3a18f9b81d420000000044701a324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000015cd5b070000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045000000000000f637e85c960000005120caba",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e011000026fd00c13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d010100000000",
+    "response": "9000"
+  },
+  {
+    "instruction": 18,
+    "request": "e012000000",
+    "response": "6a80"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000100",
+    "response": "6986"
+  },
+  {
+    "instruction": 0,
+    "request": "e000000000",
+    "response": "010001000410e3059000"
+  },
+  {
+    "instruction": 16,
+    "request": "e0100000222101726bdab1a4f7ee56ffb4ba7bc413ef24d191ba9d5876a26561855b9c78259159",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e0110000ff000050524c3104000000000100000000000000020206cb9a55d510de9e142ad571fda0248807db95461113ab62f4d255c120970f7d00000000af9829324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff00000000007ff78a6a4196815be6f60bd41f8bed0c70c6fd7974df1dfac4df3a18f9b81d420000000044701a324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000015cd5b070000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045000000000000f637e85c960000005120caba",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e011000026fd00c13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d010100000000",
+    "response": "9000"
+  },
+  {
+    "instruction": 18,
+    "request": "e012000000",
+    "response": "6985"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000100",
+    "response": "6986"
+  },
+  {
+    "instruction": 0,
+    "request": "e000000000",
+    "response": "010001000410e3059000"
+  },
+  {
+    "instruction": 16,
+    "request": "e0100000222101726bdab1a4f7ee56ffb4ba7bc413ef24d191ba9d5876a26561855b9c78259159",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e0110000ff000050524c3104000000000100000000000000020206cb9a55d510de9e142ad571fda0248807db95461113ab62f4d255c120970f7d00000000af9829324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff00000000007ff78a6a4196815be6f60bd41f8bed0c70c6fd7974df1dfac4df3a18f9b81d420000000044701a324b000000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000015cd5b070000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045000000000000f637e85c960000005120caba",
+    "response": "9000"
+  },
+  {
+    "instruction": 17,
+    "request": "e011000026fd00c13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d010100000000",
+    "response": "9000"
+  },
+  {
+    "instruction": 18,
+    "request": "e012000000",
+    "response": "02726bdab1a4f7ee56ffb4ba7bc413ef24d191ba9d5876a26561855b9c782591599000"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000100",
+    "response": "4d949744ad4836daf73bad391eaaa3b08642d505a0f55e7bac7d7b2b1a6da09696cb179fe1e3ce9f056435a745ec9b2aa02acddffe0bb892e33ee00dc8ed72999000"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000101",
+    "response": "e8ad3156e1f9a155f7fa83b2410049981f9ead1ab8b3183baf941d007168009a900c6cb11edd5a89e357d54b536bc3f6028e8f949a0274b59ffcb24b570087d49000"
+  },
+  {
+    "instruction": 19,
+    "request": "e01300000100",
+    "response": "6986"
+  }
+]

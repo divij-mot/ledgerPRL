@@ -385,3 +385,23 @@ test("missing fields, oversized numeric strings and invalid JSON collections fai
   assert.throws(() => sdk.parseGrains("1".repeat(100_000)));
   assert.throws(() => sdk.parsePrl("1".repeat(100_000)));
 });
+
+test("maximum 16-input 2-output bundle is exactly 1507 bytes", () => {
+  const b = fresh();
+  b.inputs = Array.from({ length: 16 }, (_, i) => ({
+    ...b.inputs[0]!,
+    vout: i,
+  }));
+  const bytes = sdk.encodeBundle(b);
+  assert.equal(bytes.length, sdk.MAX_BUNDLE_SIZE);
+  assert.deepEqual(
+    sdk.bundleToJson(sdk.decodeBundle(bytes)),
+    sdk.bundleToJson(b),
+  );
+});
+
+test("internal key helper rejects malformed compressed prefixes", () => {
+  const key = sdk.derivePublicKey(account, 0, 0);
+  key[0] = 4;
+  assert.throws(() => sdk.taprootOutputKey(key), /prefix/);
+});

@@ -1,3 +1,4 @@
+import { readBoundedJson } from "./http.js";
 import {
   assert,
   concat,
@@ -60,6 +61,7 @@ export class DeviceError extends Error {
   constructor(
     message: string,
     readonly status?: number,
+    readonly instruction?: number,
   ) {
     super(message);
     this.name = "DeviceError";
@@ -69,6 +71,10 @@ export function command(
   ins: number,
   data: Uint8Array = new Uint8Array(),
 ): Uint8Array {
+  assert(
+    Number.isInteger(ins) && ins >= 0 && ins <= 255,
+    "Invalid instruction",
+  );
   assert(data.length <= 255, "APDU data exceeds short command limit");
   return concat(Uint8Array.of(0xe0, ins, 0, 0, data.length), data);
 }
@@ -79,11 +85,18 @@ function aborted(signal?: AbortSignal): void {
 /** Fail-closed one-operation-at-a-time adapter. A failed client must reset explicitly. */
 export class LedgerPearlClient {
   private state: "ready" | "busy" | "failed" | "closed" = "ready";
+  private readonly timeoutMs: number;
   constructor(
     readonly transport: ApduTransport,
     readonly network: NetworkName,
+    options: { timeoutMs?: number } = {},
   ) {
     networkConfig(network);
+    this.timeoutMs = options.timeoutMs ?? 120_000;
+    assert(
+      Number.isSafeInteger(this.timeoutMs) && this.timeoutMs > 0,
+      "Invalid device timeout",
+    );
   }
   get sessionState() {
     return this.state;
@@ -94,10 +107,39 @@ export class LedgerPearlClient {
     signal?: AbortSignal,
   ): Promise<Uint8Array> {
     aborted(signal);
-    const response = await this.transport.exchange(command(ins, data), signal);
+    // The adapter should honor cancellation, but a late/ignored signal must not
+    // permit the protocol state machine to resume and fetch a signature.
+    const controller = new AbortController();
+    const onAbort = () => controller.abort();
+    signal?.addEventListener("abort", onAbort, { once: true });
+    const timer = setTimeout(() => controller.abort(), this.timeoutMs);
+    let rejectAbort: (() => void) | undefined;
+    const cancelled = new Promise<never>((_, reject) => {
+      rejectAbort = () =>
+        reject(
+          new DeviceError(
+            "Device operation cancelled or timed out; session is terminal",
+          ),
+        );
+      controller.signal.addEventListener("abort", rejectAbort, { once: true });
+    });
+    let response: Uint8Array;
+    try {
+      response = await Promise.race([
+        this.transport.exchange(command(ins, data), controller.signal),
+        cancelled,
+      ]);
+    } finally {
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", onAbort);
+      if (rejectAbort)
+        controller.signal.removeEventListener("abort", rejectAbort);
+    }
     aborted(signal);
     assert(
-      response instanceof Uint8Array && response.length >= 2,
+      response instanceof Uint8Array &&
+        response.length >= 2 &&
+        response.length <= 4096,
       "Malformed APDU response",
     );
     const status =
@@ -106,8 +148,26 @@ export class LedgerPearlClient {
       throw new DeviceError(
         `Device rejected command (0x${status.toString(16)})`,
         status,
+        ins,
       );
-    return response.slice(0, -2);
+    return Uint8Array.from(response.subarray(0, -2));
+  }
+  private async closeTransport(): Promise<void> {
+    if (!this.transport.close) return;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    try {
+      await Promise.race([
+        this.transport.close(),
+        new Promise<never>((_, reject) => {
+          timer = setTimeout(
+            () => reject(new DeviceError("Transport cleanup timed out")),
+            Math.min(this.timeoutMs, 5_000),
+          );
+        }),
+      ]);
+    } finally {
+      if (timer !== undefined) clearTimeout(timer);
+    }
   }
   private async run<T>(fn: () => Promise<T>): Promise<T> {
     assert(
@@ -122,7 +182,7 @@ export class LedgerPearlClient {
     } catch (error) {
       this.state = "failed"; // A transport timeout/cancel may leave the peer mid-review. Close, never send a concurrent abort.
       try {
-        await this.transport.close?.();
+        await this.closeTransport();
       } catch {}
       throw error;
     }
@@ -184,11 +244,12 @@ export class LedgerPearlClient {
     checkedBranch(branch);
     checkedIndex(index);
     const expected = deriveAddress(account, branch, index).address;
+    const accountIndex = account.account;
     return this.run(async () => {
       await this.readCapabilities(signal);
       const bytes = await this.exchange(
         INS.VERIFY_ADDRESS,
-        concat(u32(account.account), Uint8Array.of(branch), u32(index)),
+        concat(u32(accountIndex), Uint8Array.of(branch), u32(index)),
         signal,
       );
       assert(
@@ -289,6 +350,7 @@ export class LedgerPearlClient {
       this.state !== "busy" && this.state !== "closed",
       "Cannot reset active/closed client",
     );
+    this.state = "busy";
     try {
       const response = await this.exchange(INS.ABORT);
       assert(response.length === 0, "Unexpected ABORT payload");
@@ -300,13 +362,21 @@ export class LedgerPearlClient {
   }
   async close(): Promise<void> {
     assert(this.state !== "busy", "Cancel the active operation first");
-    if (this.state === "ready") {
-      try {
-        await this.exchange(INS.ABORT);
-      } catch {}
-    }
+    if (this.state === "closed") return;
+    const shouldAbort = this.state === "ready";
+    // Claim terminal ownership synchronously, before either async transport call.
     this.state = "closed";
-    await this.transport.close?.();
+    try {
+      if (shouldAbort) {
+        try {
+          await this.exchange(INS.ABORT);
+        } catch {
+          /* Terminal either way. */
+        }
+      }
+    } finally {
+      await this.closeTransport();
+    }
   }
 }
 const networkConfig = network;
@@ -346,7 +416,7 @@ export class SpeculosTransport implements ApduTransport {
       redirect: "error",
     });
     assert(response.ok, `Speculos HTTP ${response.status}`);
-    const json: unknown = await response.json();
+    const json: unknown = await readBoundedJson(response, 8192);
     assert(
       json !== null &&
         typeof json === "object" &&

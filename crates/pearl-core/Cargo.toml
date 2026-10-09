@@ -3,7 +3,7 @@ name = "pearl-core"
 version = "0.1.0"
 description = "Bounded no_std Pearl hardware-wallet transaction policy and APDU core"
 edition.workspace = true
-license.workspace = true
+publish = false
 rust-version.workspace = true
 
 [dependencies]

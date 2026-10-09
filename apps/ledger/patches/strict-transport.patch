@@ -1,0 +1,302 @@
+diff --git a/ledger_device_sdk/src/io_new.rs b/ledger_device_sdk/src/io_new.rs
+index ac67196..c5d7bae 100644
+--- a/ledger_device_sdk/src/io_new.rs
++++ b/ledger_device_sdk/src/io_new.rs
+@@ -133,6 +133,10 @@ pub enum Event<'a, const N: usize = DEFAULT_BUF_SIZE> {
+     #[cfg(any(target_os = "stax", target_os = "flex", target_os = "apex_p"))]
+     Touch,
+     Ticker,
++    /// A benign partial button/display/redisplay event (Pearl hardening).
++    UiInternal,
++    /// A session fault that requires application-state erasure (Pearl).
++    SessionFault,
+     /// An event the SDK handled entirely, such as a USB or BLE event, or an
+     /// APDU it answered itself. There is nothing to do, but the application
+     /// gets a chance to run, for instance to process data that callbacks of an
+@@ -163,6 +167,10 @@ pub struct Comm<const N: usize = DEFAULT_BUF_SIZE> {
+     /// application replies to it. This is what makes a second incoming APDU a
+     /// *double* APDU rather than the normal way of receiving work.
+     apdu_in_progress: bool,
++    // Pearl: strict sessions fail closed even inside blocking NBGL review.
++    strict_session: bool,
++    strict_faulted: bool,
++    strict_ticks_left: u16,
+ }
+ 
+ impl<const N: usize> Comm<N> {
+@@ -197,6 +205,9 @@ impl<const N: usize> Comm<N> {
+             pending_offset: 0,
+             pending_length: 0,
+             apdu_in_progress: false,
++            strict_session: false,
++            strict_faulted: false,
++            strict_ticks_left: 0,
+         }
+     }
+ 
+@@ -278,7 +289,10 @@ impl<const N: usize> Comm<N> {
+                 length: self.pending_length,
+             };
+         }
+-        self.recv(true).unwrap().decode_event()
++        match self.recv(true) {
++            Ok(received) => received.decode_event(),
++            Err(_) => RawEvent::SessionFault,
++        }
+     }
+ 
+     /// Receive the next event, answering on the spot the APDUs that are not for
+@@ -305,7 +319,40 @@ impl<const N: usize> Comm<N> {
+         let in_flight_apdu_type = self.apdu_type;
+         let in_progress = self.apdu_in_progress;
+ 
+-        let sw: Reply = match self.recv_event() {
++        let event = self.recv_event();
++        if matches!(event, RawEvent::SessionFault) {
++            self.strict_faulted = true;
++            return RawEvent::SessionFault;
++        }
++        if self.strict_session {
++            match &event {
++                RawEvent::Ticker => {
++                    self.strict_ticks_left = self.strict_ticks_left.saturating_sub(1);
++                    if self.strict_ticks_left == 0 {
++                        self.strict_faulted = true;
++                        return RawEvent::SessionFault;
++                    }
++                }
++                // Includes link/OS reset events, locked-device APDUs and events
++                // this version cannot classify. Conservative failure is intentional.
++                RawEvent::Ignored => {
++                    self.strict_faulted = true;
++                    return RawEvent::SessionFault;
++                },
++                RawEvent::Apdu { header, .. } if in_progress || header.cla == 0xB0 => {
++                    self.reject_apdu(self.apdu_type, Reply(0x6986));
++                    self.strict_faulted = true;
++                    return RawEvent::SessionFault;
++                }
++                RawEvent::ApduError { .. } => {
++                    self.reject_apdu(self.apdu_type, Reply(0x6700));
++                    self.strict_faulted = true;
++                    return RawEvent::SessionFault;
++                }
++                _ => {}
++            }
++        }
++        let sw: Reply = match event {
+             RawEvent::Apdu { header, .. }
+                 if header.cla == 0xB0
+                     && (!in_progress
+@@ -333,7 +380,7 @@ impl<const N: usize> Comm<N> {
+             {
+                 StatusWords::CmdNotAccepted.into()
+             }
+-            RawEvent::ApduError { error, .. } => StatusWords::from(error).into(),
++            RawEvent::ApduError { .. } => Reply(0x6700), // Pearl wrong-length status
+             event => return event,
+         };
+         self.reject_apdu(self.apdu_type, sw);
+@@ -380,6 +427,8 @@ impl<const N: usize> Comm<N> {
+             #[cfg(any(target_os = "stax", target_os = "flex", target_os = "apex_p"))]
+             RawEvent::Touch => Event::Touch,
+             RawEvent::Ticker => Event::Ticker,
++            RawEvent::UiInternal => Event::UiInternal,
++            RawEvent::SessionFault => Event::SessionFault,
+             RawEvent::ApduError { .. } | RawEvent::Ignored => Event::Internal,
+         }
+     }
+@@ -412,6 +461,17 @@ impl<const N: usize> Comm<N> {
+     /// let mut comm = Comm::new();
+     /// comm.set_expected_cla(0xE0);
+     /// ```
++    /// Pearl-only hardening: an active public-data session cannot survive an
++    /// ambiguous transport event, nested APDU, or 1200 SDK ticker events.
++    /// A fault interrupts NBGL review; the application must erase its state.
++    pub fn set_strict_session(&mut self, active: bool) {
++        self.strict_session = active;
++        self.strict_ticks_left = if active { 1200 } else { 0 };
++    }
++
++    /// Latched until app teardown. A fault can never be approved away.
++    pub fn session_faulted(&self) -> bool { self.strict_faulted }
++
+     pub fn set_expected_cla(&mut self, cla: u8) {
+         self.expected_cla = Some(cla);
+     }
+diff --git a/ledger_device_sdk/src/io_new/callbacks.rs b/ledger_device_sdk/src/io_new/callbacks.rs
+index 5945a7c..7f15af5 100644
+--- a/ledger_device_sdk/src/io_new/callbacks.rs
++++ b/ledger_device_sdk/src/io_new/callbacks.rs
+@@ -151,6 +151,10 @@ pub(super) fn next_event_ahead_impl<const N: usize>() -> bool {
+             comm.pending_length = length;
+             true
+         }
++        RawEvent::SessionFault => {
++            crate::nbgl::abort_review();
++            false
++        }
+         _ => false,
+     }
+ }
+diff --git a/ledger_device_sdk/src/io_new/event.rs b/ledger_device_sdk/src/io_new/event.rs
+index 57a2e1e..f6f9331 100644
+--- a/ledger_device_sdk/src/io_new/event.rs
++++ b/ledger_device_sdk/src/io_new/event.rs
+@@ -35,6 +35,8 @@ pub(crate) enum RawEvent {
+     #[cfg(any(target_os = "stax", target_os = "flex", target_os = "apex_p"))]
+     Touch,
+     Ticker,
++    UiInternal,
++    SessionFault,
+     // Events for which no additional handling is required after decoding it
+     Ignored,
+ }
+@@ -45,7 +47,10 @@ impl RawEvent {
+     pub(crate) fn decode<const N: usize>(comm: &mut Comm<N>, len: usize) -> Self {
+         // If no data was received, return Ignored to avoid reading stale buffer data
+         if len == 0 {
+-            return RawEvent::Ignored;
++            return RawEvent::UiInternal;
++        }
++        if comm.strict_session && Self::is_device_locked() {
++            return RawEvent::SessionFault;
+         }
+ 
+         let pt = comm.buf[0];
+@@ -56,6 +61,9 @@ impl RawEvent {
+                 // Copy out SEPH payload (like original) or reinterpret in place.
+                 // Optimization: we can borrow slice without copying because io_buffer stores
+                 // [packet_type][payload...].
++                if len < 4 || 4 + u16::from_be_bytes([comm.buf[2], comm.buf[3]]) as usize > len {
++                    return RawEvent::Ignored;
++                }
+                 Self::decode_seph_event(comm, 1)
+             }
+             PacketTypes::PacketTypeRawApdu
+@@ -102,7 +110,7 @@ impl RawEvent {
+                 if let Some(btn_evt) = get_button_event(&mut comm.buttons, button_info) {
+                     return RawEvent::Button(btn_evt);
+                 }
+-                RawEvent::Ignored
++                RawEvent::UiInternal
+             }
+ 
+             // SCREEN TOUCH EVENT
+@@ -172,7 +180,7 @@ impl RawEvent {
+                     }
+                     _ => {}
+                 }
+-                RawEvent::Ignored
++                if seph_buffer[3] == ITC_UX_REDISPLAY { RawEvent::UiInternal } else { RawEvent::Ignored }
+             }
+             // DEFAULT EVENT
+             _ => {
+@@ -189,7 +197,20 @@ impl RawEvent {
+                 if !cfg!(feature = "nano_nbgl") {
+                     crate::uxapp::UxEvent::Event.request();
+                 }
+-                RawEvent::Ignored
++                // Do not confuse partial button releases/display completion
++                // with link failures. These benign events must survive review.
++                if tag as u32 == SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT {
++                    RawEvent::UiInternal
++                } else if tag as u32 == SEPROXYHAL_TAG_STATUS_EVENT && u16::from_be_bytes([seph_buffer[1], seph_buffer[2]]) >= 4 {
++                    let flags = u32::from_be_bytes([seph_buffer[3], seph_buffer[4], seph_buffer[5], seph_buffer[6]]);
++                    let usb = comm.apdu_type == OS_IO_PACKET_TYPE_USB_HID_APDU
++                        || comm.apdu_type == OS_IO_PACKET_TYPE_USB_WEBUSB_APDU;
++                    if usb && flags & u32::from(SEPROXYHAL_TAG_STATUS_EVENT_FLAG_USB_POWERED) == 0 {
++                        RawEvent::Ignored
++                    } else { RawEvent::UiInternal }
++                } else {
++                    RawEvent::Ignored
++                }
+             }
+         }
+     }
+@@ -221,31 +242,16 @@ impl RawEvent {
+             p1: apdu_buffer[2],
+             p2: apdu_buffer[3],
+         };
+-        if rx_len == 4 {
+-            return Self::new_apdu(header, 4, 0);
++        // Pearl protocol v1 has exactly CLA INS P1 P2 Lc [data]. No case-1
++        // four-byte commands, extended length, Le byte, or trailing data.
++        if rx_len < 5 {
++            return Self::bad_len(header);
+         }
+-        let first_len_byte = apdu_buffer[4];
+-
+-        match (first_len_byte, rx_len) {
+-            (0, 5) => {
+-                // Non-conforming zero-data APDU (TODO: per the standard, this should actually be read as a 256-byte long APDU; but that's likely to break things as lots)
+-                Self::new_apdu(header, 4, 0)
+-            }
+-            (0, 6) => Self::bad_len(header),
+-            (0, _) => {
+-                let len = u16::from_be_bytes([apdu_buffer[5], apdu_buffer[6]]) as usize;
+-                if rx_len != len + 7 {
+-                    return Self::bad_len(header);
+-                }
+-                Self::new_apdu(header, 1 + 7, len)
+-            }
+-            (len, _) => {
+-                if rx_len != len as usize + 5 {
+-                    return Self::bad_len(header);
+-                }
+-                Self::new_apdu(header, 1 + 5, len as usize)
+-            }
++        let length = apdu_buffer[4] as usize;
++        if rx_len != 5 + length {
++            return Self::bad_len(header);
+         }
++        Self::new_apdu(header, offset + 5, length)
+     }
+ 
+     fn bad_len(header: ApduHeader) -> Self {
+diff --git a/ledger_device_sdk/src/nbgl.rs b/ledger_device_sdk/src/nbgl.rs
+index d90e877..c26a9a5 100644
+--- a/ledger_device_sdk/src/nbgl.rs
++++ b/ledger_device_sdk/src/nbgl.rs
+@@ -140,6 +140,16 @@ impl From<SyncNbgl> for u8 {
+ 
+ static mut G_RET: u8 = 0;
+ static mut G_ENDED: bool = false;
++// Pearl-only: called synchronously by the borrowed Comm's NBGL callback.
++// No pointers into application state and no outstanding Comm alias are used.
++#[cfg(feature = "io_new")]
++pub(crate) fn abort_review() {
++    unsafe {
++        G_RET = SyncNbgl::UxSyncRetRejected.into();
++        G_ENDED = true;
++    }
++}
++
+ static mut G_CONFIRM_ASK_WHEN_TRUE: bool = false;
+ static mut G_CONFIRM_ASK_WHEN_FALSE: bool = false;
+ 
+diff --git a/ledger_secure_sdk_sys/src/c/src.c b/ledger_secure_sdk_sys/src/c/src.c
+index cd171f2..9400580 100644
+--- a/ledger_secure_sdk_sys/src/c/src.c
++++ b/ledger_secure_sdk_sys/src/c/src.c
+@@ -396,3 +396,20 @@ int c_main(int arg0) {
+   }
+   return 0;
+ }
++
++/* Pearl: bind the Ledger-standard checked BIP32 wrapper. Catch exceptions in C
++ * so no longjmp crosses Rust secret guards. The newer sys_hdkey_derive syscall
++ * does not implement ordinary BIP32 in the pinned Speculos. No seed/curve
++ * selector is exposed, and there is no fallback or root derivation route. */
++#include "libcxng.h"
++#include "os_seed.h"
++cx_err_t pearl_derive_bip32_no_throw(const uint32_t *path,
++                                   size_t path_len,
++                                   uint8_t raw_private[static 64],
++                                   uint8_t chain_code[static 32]) {
++    if (path == NULL || (path_len != 3 && path_len != 5)) {
++        return CX_INVALID_PARAMETER;
++    }
++    return os_derive_bip32_no_throw(CX_CURVE_SECP256K1, path,
++                                     (unsigned int) path_len, raw_private, chain_code);
++}

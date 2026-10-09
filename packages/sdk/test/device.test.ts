@@ -275,3 +275,162 @@ test("Speculos uses documented POST /apdu and verifies HTTP response", async () 
   await transport.close();
   await assert.rejects(transport.exchange(sdk.command(0)));
 });
+
+test("ignored abort and late review response cannot resume the signing session", async () => {
+  const d = new PublicFixtureDevice();
+  const c = new sdk.LedgerPearlClient(d, "regtest");
+  const abort = new AbortController();
+  let reviewEntered!: () => void;
+  const entered = new Promise<void>((resolve) => {
+    reviewEntered = resolve;
+  });
+  let release!: (value: Uint8Array) => void;
+  d.hook = async (a) => {
+    if (a[1] === sdk.INS.REVIEW) {
+      reviewEntered();
+      return new Promise<Uint8Array>((resolve) => {
+        release = resolve;
+      });
+    }
+    return undefined;
+  };
+  const signing = c.signBundle(bundle(), account, { signal: abort.signal });
+  await entered;
+  abort.abort();
+  await assert.rejects(signing, /cancelled/);
+  assert.equal(c.sessionState, "failed");
+  release(ok(sdk.concat(Uint8Array.of(2), sdk.fromHex(fixture.bundleSha256))));
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(
+    d.commands.some((a) => a[1] === sdk.INS.SIGNATURE),
+    false,
+  );
+});
+
+test("an unresponsive transport is bounded and terminal", async () => {
+  let closed = false;
+  const transport: sdk.ApduTransport = {
+    exchange: async () => new Promise<Uint8Array>(() => {}),
+    close: async () => {
+      closed = true;
+    },
+  };
+  const client = new sdk.LedgerPearlClient(transport, "regtest", {
+    timeoutMs: 10,
+  });
+  await assert.rejects(client.capabilities(), /timed out/);
+  assert.equal(client.sessionState, "failed");
+  assert.equal(closed, true);
+});
+
+test("oversized transport responses fail before protocol parsing", async () => {
+  const device = new PublicFixtureDevice();
+  device.hook = async () => ok(new Uint8Array(4096));
+  const client = new sdk.LedgerPearlClient(device, "regtest");
+  await assert.rejects(client.capabilities(), /Malformed/);
+  assert.equal(client.sessionState, "failed");
+});
+
+test("verify-address account index is snapshotted before awaiting capabilities", async () => {
+  const device = new PublicFixtureDevice();
+  const client = new sdk.LedgerPearlClient(device, "regtest");
+  const mutableAccount = sdk.accountFromJson(fixture.publicAccount);
+  const verifying = client.verifyAddress(mutableAccount, 0, 0);
+  mutableAccount.account = 1;
+  assert.equal(await verifying, fixture.addresses.input);
+});
+
+test("only explicit review rejection carries the safe review instruction marker", async () => {
+  for (const instruction of [sdk.INS.REVIEW, sdk.INS.SIGNATURE]) {
+    const device = new PublicFixtureDevice();
+    device.hook = async (a) =>
+      a[1] === instruction ? Uint8Array.of(0x69, 0x85) : undefined;
+    const client = new sdk.LedgerPearlClient(device, "regtest");
+    await assert.rejects(
+      client.signBundle(bundle(), account),
+      (error: unknown) => {
+        assert.ok(error instanceof sdk.DeviceError);
+        assert.equal(error.status, 0x6985);
+        assert.equal(error.instruction, instruction);
+        return true;
+      },
+    );
+    assert.equal(client.sessionState, "failed");
+  }
+});
+
+for (const operation of ["reset", "close"] as const) {
+  test(`${operation} exclusively owns asynchronous abort against signing and capabilities`, async () => {
+    const device = new PublicFixtureDevice();
+    const client = new sdk.LedgerPearlClient(device, "regtest");
+    let release!: (value: Uint8Array) => void;
+    device.hook = async (apdu) =>
+      apdu[1] === sdk.INS.ABORT
+        ? new Promise<Uint8Array>((resolve) => {
+            release = resolve;
+          })
+        : undefined;
+    const pending = client[operation]();
+    assert.equal(
+      client.sessionState,
+      operation === "close" ? "closed" : "busy",
+    );
+    await assert.rejects(client.capabilities(), /no command sent/);
+    await assert.rejects(
+      client.signBundle(bundle(), account),
+      /no command sent/,
+    );
+    await assert.rejects(client.reset(), /Cannot reset/);
+    if (operation === "reset") await assert.rejects(client.close(), /Cancel/);
+    else await client.close(); // Idempotent, and never sends another ABORT.
+    assert.deepEqual(
+      device.commands.map((apdu) => apdu[1]),
+      [sdk.INS.ABORT],
+    );
+    release(ok());
+    await pending;
+    assert.equal(
+      client.sessionState,
+      operation === "close" ? "closed" : "ready",
+    );
+    if (operation === "close")
+      await assert.rejects(client.capabilities(), /closed/);
+  });
+}
+test("failed reset remains failed and a failed close remains terminal", async () => {
+  const device = new PublicFixtureDevice();
+  const client = new sdk.LedgerPearlClient(device, "regtest");
+  device.hook = async () => Uint8Array.of(0x6f, 0);
+  await assert.rejects(client.reset());
+  assert.equal(client.sessionState, "failed");
+  await client.close();
+  assert.equal(client.sessionState, "closed");
+});
+
+test("unresponsive transport cleanup cannot hang an expired operation", async () => {
+  const client = new sdk.LedgerPearlClient(
+    {
+      exchange: async () => new Promise<Uint8Array>(() => {}),
+      close: async () => new Promise<void>(() => {}),
+    },
+    "regtest",
+    { timeoutMs: 5 },
+  );
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    await assert.rejects(
+      Promise.race([
+        client.capabilities(),
+        new Promise<never>((_, reject) => {
+          timer = setTimeout(() => reject(new Error("TEST_TIMEOUT")), 500);
+        }),
+      ]),
+      /Device operation.*timed out/,
+    );
+    assert.equal(client.sessionState, "failed");
+    await assert.rejects(client.close(), /cleanup timed out/);
+    assert.equal(client.sessionState, "closed");
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
+  }
+});

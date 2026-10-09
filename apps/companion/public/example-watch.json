@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "account": {
+    "network": "regtest",
+    "account": 0,
+    "masterFingerprint": "11223344",
+    "publicKey": "0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798",
+    "chainCode": "4242424242424242424242424242424242424242424242424242424242424242"
+  },
+  "genesisHash": "78d0ab27df6a51a8e9dbbdefffca1ebbbeb3818cb083ce2c2f43b047247e5832",
+  "tip": {
+    "height": 200,
+    "hash": "00000000000000000000000000000000000000000000000000000000000000c8"
+  },
+  "coverage": {
+    "externalScannedThrough": 19,
+    "changeScannedThrough": 19,
+    "gapLimit": 20
+  },
+  "coins": [
+    {
+      "rawTransaction": "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff020100ffffffff010065cd1d0000000022512090b78baf6c075944a0665fe3ffe9c57e5151567988e12b36524b596fc2acda5300000000",
+      "txid": "9abb74232e4b9a279681e767d72957922facc9ce3f5b52711dfcd0b8dd526f38",
+      "vout": 0,
+      "branch": 0,
+      "index": 0,
+      "block": {
+        "height": 1,
+        "hash": "0000000000000000000000000000000000000000000000000000000000000001"
+      }
+    },
+    {
+      "rawTransaction": "0100000001111111111111111111111111111111111111111111111111111111111111111100000000020101ffffffff014059730700000000225120fda1728649120bb560b718a7f2b90f9b754fdebd6dbb2b25e2fd9f2343bb3e4a00000000",
+      "txid": "bf07a7da9fba15846ad6d2facc78e3b903fac0bea831eca23cfdf29215c56dac",
+      "vout": 0,
+      "branch": 0,
+      "index": 1,
+      "block": {
+        "height": 1,
+        "hash": "0000000000000000000000000000000000000000000000000000000000000001"
+      }
+    }
+  ]
+}

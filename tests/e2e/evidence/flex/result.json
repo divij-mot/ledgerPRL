@@ -1,0 +1,163 @@
+{
+  "startedAt": "2026-10-09T14:59:09.338Z",
+  "network": "simnet",
+  "inputCount": 16,
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "firmware": {
+    "path": "apps/ledger/target/artifacts/pearl-flex-simnet.elf",
+    "sha256": "0bfbeb5b5325463710604618676a3019c1b67db1e8facfcdb6ec7eec00ff9ade",
+    "model": "flex"
+  },
+  "pearlNode": {
+    "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+  },
+  "cases": [
+    {
+      "name": "native firmware advertises simnet and protocol bounds",
+      "status": "passed"
+    },
+    {
+      "name": "device public account export requires UI approval",
+      "status": "passed"
+    },
+    {
+      "name": "device receive address matches public-only BIP86 derivation",
+      "status": "passed"
+    },
+    {
+      "name": "native out-of-order signature and malformed transfer fail closed",
+      "status": "passed"
+    },
+    {
+      "name": "isolated Pearl simnet genesis and no peers",
+      "status": "passed"
+    },
+    {
+      "name": "mine 115 native Pearl simnet blocks to device-derived address",
+      "status": "passed"
+    },
+    {
+      "name": "public-account discovery scans both branches and exact UTXOs",
+      "status": "passed"
+    },
+    {
+      "name": "production bridge validates exact mined prevouts before signing",
+      "status": "passed"
+    },
+    {
+      "name": "native wrong network bundle rejected before signing",
+      "status": "passed"
+    },
+    {
+      "name": "native input ownership and change ownership independently reject substitutions",
+      "status": "passed"
+    },
+    {
+      "name": "native bundle hash mismatch clears session before review",
+      "status": "passed"
+    },
+    {
+      "name": "native user rejection releases no signature and clears session",
+      "status": "passed"
+    },
+    {
+      "name": "native 16-input BIP340 signing and independent host verification",
+      "status": "passed"
+    },
+    {
+      "name": "native consumed signatures cannot be replayed",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl rejects a bit-flipped native witness",
+      "status": "passed"
+    },
+    {
+      "name": "native signed transaction broadcasts only to isolated simnet",
+      "status": "passed"
+    },
+    {
+      "name": "production bridge excludes confirmed inputs spent in Pearl mempool",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl mines and confirms exact recipient/change and spent inputs",
+      "status": "passed"
+    },
+    {
+      "name": "wallet refresh removes spent inputs and discovers recipient/change",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl invalidation detaches confirmation and reconsideration restores it",
+      "status": "passed"
+    }
+  ],
+  "capabilities": {
+    "protocol": 1,
+    "version": "0.1.0",
+    "network": "simnet",
+    "maxInputs": 16,
+    "maxBundleSize": 1507
+  },
+  "accountTiming": {
+    "totalWallMs": 4137,
+    "afterApprovalWallMs": 2519
+  },
+  "account": {
+    "network": "simnet",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "addressTiming": {
+    "totalWallMs": 1530,
+    "afterApprovalWallMs": 264
+  },
+  "minedFirstBlock": "3e38d3b24d80d67cf766609c494bd5c47575f8a7657904b1c2c341826e6f898c",
+  "signTiming": {
+    "totalWallMs": 14255,
+    "afterApprovalWallMs": 8861
+  },
+  "transaction": {
+    "bundleBytes": 1507,
+    "txid": "a7dc1115152301425cd36615ea07c0d772d7fd0116dc4c3b8ea056d8468e2c83",
+    "wtxid": "da9666ee546180bb91787a02f4acf285730aaacd38a5d14e8ee240bb7a81455b",
+    "vsize": 1017,
+    "inputs": 16,
+    "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+    "amountGrains": "123456789",
+    "feeGrains": "10000",
+    "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+    "signatures": [
+      "d0e3bafd138d83a35f0f77cf09e07d867d899ec783698294ac0d7d90495840ce065be2a27128d4465ffacc0fbfcca10beb51f80f2ec28c4d284a55ed261f4caf",
+      "f8e1dc2213d73251f96e8edce8453e5abce719ef465c0db47bbdea1b62f36ee2411f8cef6c522c29284a0705a21d52a00e00d703cfa748a443df7ad7550448f8",
+      "03696e155f4c110e78aaae1a1768ccdbda7d723825b01f695245c3ac32120319897e658dcd83a8ea33d338d95c665667a800d00c369442adc3bc91d8b37d71c1",
+      "29bdc6b39de6927c5dd65e04ed52129459cf9765a5b563fc1dcd252030d350b497f4613a20f17baac8d16d0823c8244401bb7727380b94f05f2ee73119874fa9",
+      "44dc6b0ac2c8ec952fdb238b41ff60e484357cf57a33ca560a3d1c3c6be3d6e977e2100dec45c6701f94922d76cc853902b5913ffbc8f12ab9a64ccba9f05766",
+      "0b80ff983c910a0080e35ccadad7756be9a8a85e56d4e7e99eaf3a805df19ef8272331f98ebea78074633f774122487322548ebb8dd16a7cb7fb138e152d695f",
+      "b5aa6e395ecb8eb815a64b51c9d60f60b7e159131c1d8d5ddd5162e3c39c8cb519018b2a5cca14966f73fc118a86c27cabdc125bcb5b7ba5611b403c7e7b95c5",
+      "8a52aa699f0e098948212cbda856c3f7b7a1cd6b81a844849d4f72ac185d768ac09bed72e7711d17b4e33e8eb39c212246a07171f4335c096ef01f0be94923e2",
+      "4c756c902afa2716688d1bc71fcdcd4fe62ab1167f95303de7fd68ac69ee48ba3491e135c88e998b6ffc6a01f1b55fd2cc0f6283ace2216d1534f320f42e0fbb",
+      "d43cf6b34d4e17b1eab355de7d5d32a0df56d9def37e39e20967993107e8f27a2c996a18f5d5368614bc83ee6177171d05c8c092db9f93988eb8898f746e4144",
+      "4ec7af90e427056bbdb9be224e19a6a5be0ee1ab530683572680c324ba573e80343e897b0addf373d4a27bdaa737282db5a123639bc93d6e7b2e1b8f49406dbd",
+      "4c4571754dc4c5c6fa98ac4c8c45c3a923397a749dd161935c3b3728b19a546bc79fd3e1bd99e6c99ac0f3c6122ab6d2fbd909edd33b14a4ed73dbc599b1e2ea",
+      "8bfadcd89795138c67f2b237b97fd7d5159f642583eaa069b69312965936d7a6ac0d621f50ed41a9f5928fc97cf0aaca5979b5f24ff7929ddef4ea9e8c74e4d9",
+      "fea466a205872f44450b7a29bbdaf16e3fc9e24e8d54b8fb665ccb81daffe285af45b560bf1048f50b6c71f0e25f58d5f7f523ca73eb792aa091d70905ec39a7",
+      "c07d546fd837120eb30e95dc4c3af01c15cfab56fc95a505796a17ad0acf6660b3a8145b316655dccaf9736a205f89f52e82311cbc3c9dde642eb240576bdd85",
+      "335e750159cd4854535058275dbbf96e33995cc5022bfde53bfed4418d51aee53a6ce432a3341501c1d20086eeba2c88d6e30091b0184c2b876d20b953405827"
+    ]
+  },
+  "status": "passed",
+  "finishedAt": "2026-10-09T14:59:44.716Z",
+  "provenance": {
+    "pearlCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+    "ledgerRustSdkCommit": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+    "ledgerSecureSdkCommit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "ledgerApiLevel": 27,
+    "speculosVersion": "0.27.1",
+    "pearlNodeHarnessOnlyChange": "defaultHomeDir is redirected by PEARL_TEST_HOME; no consensus changes",
+    "originalRunRecordSha256": "6d383804ffdb463a714214ca293dd408d6aec6394ace08aba33cf16dded11fec"
+  }
+}

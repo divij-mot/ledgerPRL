@@ -1,0 +1,149 @@
+{
+  "startedAt": "2026-10-09T14:58:41.711Z",
+  "network": "simnet",
+  "inputCount": 2,
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "firmware": {
+    "path": "apps/ledger/target/artifacts/pearl-stax-simnet.elf",
+    "sha256": "f446ad22325302d230f03803312e87c9c915b242fb572e1dc4e36f57b579bdb3",
+    "model": "stax"
+  },
+  "pearlNode": {
+    "sha256": "dedca59b19feeeed7ffd0d91806b094be00a93d0705419aa5a9ccb315e9f79ec"
+  },
+  "cases": [
+    {
+      "name": "native firmware advertises simnet and protocol bounds",
+      "status": "passed"
+    },
+    {
+      "name": "device public account export requires UI approval",
+      "status": "passed"
+    },
+    {
+      "name": "device receive address matches public-only BIP86 derivation",
+      "status": "passed"
+    },
+    {
+      "name": "native out-of-order signature and malformed transfer fail closed",
+      "status": "passed"
+    },
+    {
+      "name": "isolated Pearl simnet genesis and no peers",
+      "status": "passed"
+    },
+    {
+      "name": "mine 101 native Pearl simnet blocks to device-derived address",
+      "status": "passed"
+    },
+    {
+      "name": "public-account discovery scans both branches and exact UTXOs",
+      "status": "passed"
+    },
+    {
+      "name": "production bridge validates exact mined prevouts before signing",
+      "status": "passed"
+    },
+    {
+      "name": "native wrong network bundle rejected before signing",
+      "status": "passed"
+    },
+    {
+      "name": "native input ownership and change ownership independently reject substitutions",
+      "status": "passed"
+    },
+    {
+      "name": "native bundle hash mismatch clears session before review",
+      "status": "passed"
+    },
+    {
+      "name": "native user rejection releases no signature and clears session",
+      "status": "passed"
+    },
+    {
+      "name": "native 2-input BIP340 signing and independent host verification",
+      "status": "passed"
+    },
+    {
+      "name": "native consumed signatures cannot be replayed",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl rejects a bit-flipped native witness",
+      "status": "passed"
+    },
+    {
+      "name": "native signed transaction broadcasts only to isolated simnet",
+      "status": "passed"
+    },
+    {
+      "name": "production bridge excludes confirmed inputs spent in Pearl mempool",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl mines and confirms exact recipient/change and spent inputs",
+      "status": "passed"
+    },
+    {
+      "name": "wallet refresh removes spent inputs and discovers recipient/change",
+      "status": "passed"
+    },
+    {
+      "name": "Pearl invalidation detaches confirmation and reconsideration restores it",
+      "status": "passed"
+    }
+  ],
+  "capabilities": {
+    "protocol": 1,
+    "version": "0.1.0",
+    "network": "simnet",
+    "maxInputs": 16,
+    "maxBundleSize": 1507
+  },
+  "accountTiming": {
+    "totalWallMs": 3724,
+    "afterApprovalWallMs": 2507
+  },
+  "account": {
+    "network": "simnet",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "addressTiming": {
+    "totalWallMs": 1457,
+    "afterApprovalWallMs": 264
+  },
+  "minedFirstBlock": "6f04f837bcb57c4608221e409d47895dbe8e9aa9699c9a62cd0269e34fcb8dd7",
+  "signTiming": {
+    "totalWallMs": 5243,
+    "afterApprovalWallMs": 3107
+  },
+  "transaction": {
+    "bundleBytes": 289,
+    "txid": "8f108f5b034cce42886f1857eb9a2183a7a7354cbb07f6e02c0c8012806435bf",
+    "wtxid": "310677ac1ac7552df8d6b8cf861f6f81cc233396acca6ff0559646f528b01f18",
+    "vsize": 212,
+    "inputs": 2,
+    "recipient": "rprl1pgsursm2qfzenc524cr364gzt8jcp5wj5cwmcfmk6vds2p7lakpzsj5ntyl",
+    "amountGrains": "123456789",
+    "feeGrains": "1000",
+    "changeAddress": "rprl1pe2avzwvk5fxvanucwcwfkrklzajt6r82g2f9eqktmtuxtzmpkp7smy9l6m",
+    "signatures": [
+      "4d949744ad4836daf73bad391eaaa3b08642d505a0f55e7bac7d7b2b1a6da09696cb179fe1e3ce9f056435a745ec9b2aa02acddffe0bb892e33ee00dc8ed7299",
+      "e8ad3156e1f9a155f7fa83b2410049981f9ead1ab8b3183baf941d007168009a900c6cb11edd5a89e357d54b536bc3f6028e8f949a0274b59ffcb24b570087d4"
+    ]
+  },
+  "status": "passed",
+  "finishedAt": "2026-10-09T14:58:59.009Z",
+  "provenance": {
+    "pearlCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+    "ledgerRustSdkCommit": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+    "ledgerSecureSdkCommit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "ledgerApiLevel": 27,
+    "speculosVersion": "0.27.1",
+    "pearlNodeHarnessOnlyChange": "defaultHomeDir is redirected by PEARL_TEST_HOME; no consensus changes",
+    "originalRunRecordSha256": "a5ac82a0bd6985cb9ae2aaddc9826e6d0996b5b470f13948a2588b0a3dac1bb4"
+  }
+}

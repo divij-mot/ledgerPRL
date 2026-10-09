@@ -75,6 +75,10 @@ export function taprootOutputKey(publicKey: Uint8Array): Uint8Array {
     publicKey.length === 32 || publicKey.length === 33,
     "Invalid internal key length",
   );
+  assert(
+    publicKey.length === 32 || publicKey[0] === 2 || publicKey[0] === 3,
+    "Invalid compressed internal key prefix",
+  );
   const x = publicKey.slice(-32);
   const point = secp256k1.ProjectivePoint.fromHex(concat(Uint8Array.of(2), x));
   const tweak = BigInt("0x" + hex(taggedHash("TapTweak", x)));
