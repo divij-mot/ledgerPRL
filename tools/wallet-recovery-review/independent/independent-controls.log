@@ -1,0 +1,16 @@
+SOURCE main.ts SHA-256: f9b6a71c64799c59326352cf182b9ebbf975678c7efd684e4ea6b4233afa2f2f
+PASS independent count 0 archived=false: 1 batches, 80000ms budget, cleanup
+PASS independent count 1 archived=false: 1 batches, 80000ms budget, cleanup
+PASS independent count 100 archived=false: 1 batches, 80000ms budget, cleanup
+PASS independent count 101 archived=false: 2 batches, 160000ms budget, cleanup
+PASS independent count 2000 archived=false: 20 batches, 1600000ms budget, cleanup
+PASS independent count 2000 archived=true: 1 batches, 80000ms budget, cleanup
+PASS independent count 2001 archived=false: 0 batches, 0ms budget, cleanup
+PASS independent teardown preabort: unchanged exact journal; no owned timer or abort listener
+PASS independent teardown fetch-error: unchanged exact journal; no owned timer or abort listener
+PASS independent teardown cancel-fetch: unchanged exact journal; no owned timer or abort listener
+PASS independent teardown deadline-fetch: unchanged exact journal; no owned timer or abort listener
+PASS independent teardown cancel-queued-commit: unchanged exact journal; no owned timer or abort listener
+PASS independent teardown deadline-queued-commit: unchanged exact journal; no owned timer or abort listener
+PASS independent teardown storage-error: unchanged exact journal; no owned timer or abort listener
+SUMMARY: all 14 independent controls passed (7 count/budget + 7 teardown).

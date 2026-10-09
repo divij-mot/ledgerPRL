@@ -1,0 +1,10 @@
+{
+  "boundary": "Actual unchanged validator in Node worker_threads; browser Worker API is a test adapter, not a browser upload or browser CSP test",
+  "records": 2000,
+  "signatures": 32000,
+  "bytes": 16218359,
+  "importMs": 185708.651589,
+  "mainThread25msTicks": 7374,
+  "maxTickGapMs": 35.2662180000043,
+  "cancelMs": 1.029198000000065
+}

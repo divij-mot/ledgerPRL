@@ -1,0 +1,36 @@
+{
+  "verdict": "No blocking defect found",
+  "independentControls": {
+    "passed": 14,
+    "failed": 0,
+    "sourceSha256": "f9b6a71c64799c59326352cf182b9ebbf975678c7efd684e4ea6b4233afa2f2f",
+    "log": "independent-controls.log",
+    "signatureVerification": "explicitly modeled",
+    "rpcDomStorage": "explicitly modeled"
+  },
+  "focusedTests": {
+    "passed": 24,
+    "failed": 0,
+    "log": "focused-tests.log",
+    "scope": "isolated combination of final patches before integration"
+  },
+  "workspaceTypechecks": {
+    "passed": true,
+    "log": "typecheck.log"
+  },
+  "actualBrowserTested": false,
+  "parentFinalCapacityEvidence": {
+    "path": "../reconcile-parent-final.json",
+    "ownership": "separate verified parent report; not produced by the independent-controls script",
+    "records": 2000,
+    "signatures": 32000,
+    "elapsedMs": 296701.384493,
+    "batches": 20,
+    "readOnlyRpcCalls": 2180,
+    "journalCommits": 1
+  },
+  "historicalPatchSha256": {
+    "backupWorker": "db5f83875c11aac54e8a0f73a21cefa93c4f8d105744de2395b624a7a5515fd7",
+    "reconciliationBudget": "2f72c1e5ff951d9f00d40b1b2d5baf589770d0a86c0f57ed2380ba3f5f095971"
+  }
+}

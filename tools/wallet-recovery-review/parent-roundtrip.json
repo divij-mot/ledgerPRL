@@ -1,0 +1,17 @@
+{
+  "records": 2000,
+  "signatures": 32000,
+  "bytes": 16218359,
+  "exportMs": 28.88234799999998,
+  "importMs": 191157.858952,
+  "timerMs": 191263.09851100002,
+  "timerRanDuringImport": false,
+  "exportSha256": "54d70adaecb7ace97221ca34912c9c93e0a180d94195533605219a65e4ae96b3",
+  "sourceSha256": {
+    "packages/wallet/src/recovery.ts": "9ab76005ef1d4793a8e8a501e265cdeba5c5a73fc3e8ca37180544c96f4b5cc4",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/sdk/src/keys.ts": "5a26b0198f94e1435b731b3b00991832123f984968fbb6dbd662e9bf0fd1d1ef",
+    "packages/sdk/src/bundle.ts": "8f7cc2c5b1fdc2660e8314aa8ded9e1caf96300777a3de2fb63cea3252a2afc1"
+  },
+  "semantics": "All recovery fields exact; only local diagnostics omitted on export and imported archival authority discarded by unchanged validation"
+}

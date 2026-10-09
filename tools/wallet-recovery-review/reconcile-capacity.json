@@ -1,0 +1,15 @@
+{
+  "records": 2000,
+  "signatures": 32000,
+  "deadlineMs": 80000,
+  "elapsedMs": 80065.32732499999,
+  "requests": 0,
+  "rpcCalls": 0,
+  "journalMutations": 0,
+  "error": {
+    "name": "Error",
+    "message": "Reconciliation deadline exceeded; journal unchanged"
+  },
+  "sourceSha256": "3b30e7fb37403d999a8803069d0bf1928acc4840526e263e532136cafa630998",
+  "observation": "REPRODUCED: fixed deadline prevents reconciliation of a valid restored maximum-input journal on this host; reservations unchanged"
+}

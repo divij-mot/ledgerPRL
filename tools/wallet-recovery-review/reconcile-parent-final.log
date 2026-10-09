@@ -1,0 +1,20 @@
+{
+  "records": 2000,
+  "signatures": 32000,
+  "elapsedMs": 296701.384493,
+  "firstRequestMs": 176593.77577,
+  "bridgeValidationMs": 119968.29756600014,
+  "requests": 20,
+  "rpcCalls": 2180,
+  "journalMutations": 1,
+  "error": null,
+  "sourceSha256": "f9b6a71c64799c59326352cf182b9ebbf975678c7efd684e4ea6b4233afa2f2f",
+  "dependencySha256": {
+    "apps/companion/src/bridge.ts": "c8f8ba93fa7d4c3295b95061a5dc339d91063c7aeccfc704ab1f01e54b98635b",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/sdk/src/keys.ts": "5a26b0198f94e1435b731b3b00991832123f984968fbb6dbd662e9bf0fd1d1ef",
+    "packages/sdk/src/bundle.ts": "8f7cc2c5b1fdc2660e8314aa8ded9e1caf96300777a3de2fb63cea3252a2afc1",
+    "packages/wallet/src/journal.ts": "4e4fb50ec5058d25895bfde0a5459514792aa560d1d1a9d46444caeb5a000b4f"
+  },
+  "observation": "CONTROL: reconciliation fit within deadline on this host"
+}

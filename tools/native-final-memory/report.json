@@ -1,0 +1,397 @@
+{
+  "status": "passed-instrumented-software-only",
+  "cryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "nativeSourcesUnchanged": true,
+  "parentVendorsUnchanged": true,
+  "isolatedVendorCopies": true,
+  "rustSdk": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+  "secureSdk": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "features": [
+    "simnet",
+    "ledger_device_sdk/stack_usage"
+  ],
+  "memoryPatchSha256": "239aee20dac28c21562a7f99ca1e2ccf872d2d99da2c9dca520dedb3b903427b",
+  "releasePatchSha256": "49b0ebcd4632c59a5312ed49966b14c51104bb400c9e7917f28f2b560507f09b",
+  "measurementFlows": 15,
+  "mixedSessions": 100,
+  "models": [
+    {
+      "model": "nanosp",
+      "device": "nanosplus",
+      "instrumentedElfSha256": "1f8a6e5a25fc41f251a17485a553bb4e2cd9c2bc5bbabd628517ba0cae351abd",
+      "memoryEvidenceSha256": "8b9f80306783e03a1b12b12c3cebc1046a6a5ebf48320713ebe0fa233e961cb9",
+      "stabilityEvidenceSha256": "95a94eee0d8741ac7c2314bf81e30c772cfabe04970ef00512c0ddfb19181c0f",
+      "measurements": [
+        {
+          "flow": "max16-ordinary",
+          "stackSpan": 31968,
+          "stackUsed": 12544,
+          "stackRemaining": 19424,
+          "heapPeak": 1668,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6524
+        },
+        {
+          "flow": "max16-all-warnings",
+          "stackSpan": 31968,
+          "stackUsed": 12544,
+          "stackRemaining": 19424,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6520
+        },
+        {
+          "flow": "max16-absolute-bounds",
+          "stackSpan": 31968,
+          "stackUsed": 12544,
+          "stackRemaining": 19424,
+          "heapPeak": 1836,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6356
+        }
+      ],
+      "completedMixedSessions": 20,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "resources": [
+        {
+          "completed": 0,
+          "emulatorProcessRssKiB": 43752,
+          "hostHarnessHeapBytes": 14571632,
+          "stackHighWater": 11712,
+          "heapPeak": 160,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 10,
+          "emulatorProcessRssKiB": 46516,
+          "hostHarnessHeapBytes": 20105336,
+          "stackHighWater": 12544,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 20,
+          "emulatorProcessRssKiB": 47200,
+          "hostHarnessHeapBytes": 18957352,
+          "stackHighWater": 12544,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        }
+      ],
+      "buildLogSha256": "53113ee4de4bbc4e72e720f8dd33b47f0af85c097f0f4ed4216620dcb239022f"
+    },
+    {
+      "model": "nanox",
+      "device": "nanox",
+      "instrumentedElfSha256": "16242b89ef8725a24aaf11d561bac317e367862ae83ecda32873860f596c471c",
+      "memoryEvidenceSha256": "b9d1f18073702939f452449e85797ee996c615094402ac52911cafad9d456dad",
+      "stabilityEvidenceSha256": "fbfac9e07e9deafc2d942095ae36dac893c8d92b9e556db1255046f959810fb1",
+      "measurements": [
+        {
+          "flow": "max16-ordinary",
+          "stackSpan": 19660,
+          "stackUsed": 12824,
+          "stackRemaining": 6836,
+          "heapPeak": 1668,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6524
+        },
+        {
+          "flow": "max16-all-warnings",
+          "stackSpan": 19660,
+          "stackUsed": 12824,
+          "stackRemaining": 6836,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6520
+        },
+        {
+          "flow": "max16-absolute-bounds",
+          "stackSpan": 19660,
+          "stackUsed": 12824,
+          "stackRemaining": 6836,
+          "heapPeak": 1836,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6356
+        }
+      ],
+      "completedMixedSessions": 20,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "resources": [
+        {
+          "completed": 0,
+          "emulatorProcessRssKiB": 43656,
+          "hostHarnessHeapBytes": 14627128,
+          "stackHighWater": 12032,
+          "heapPeak": 160,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 10,
+          "emulatorProcessRssKiB": 46488,
+          "hostHarnessHeapBytes": 20518592,
+          "stackHighWater": 12824,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 20,
+          "emulatorProcessRssKiB": 47320,
+          "hostHarnessHeapBytes": 21240960,
+          "stackHighWater": 12824,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        }
+      ],
+      "buildLogSha256": "64aff88de475ccf4b79ed55f246465e7e8e1dad26c04f367068125790df77bf1"
+    },
+    {
+      "model": "stax",
+      "device": "stax",
+      "instrumentedElfSha256": "a7945fba9c4dee05081111abe1c533526be9bd641f9df82f167bfd8431c4e319",
+      "memoryEvidenceSha256": "cf71b47b543f2fe42361b8174b1fc35b6e4a1ebb5b9707a5335097246cd90cec",
+      "stabilityEvidenceSha256": "3da0354828c0fc65d5230989d9a2c47fc3776fdf541b2315633899026b1250fd",
+      "measurements": [
+        {
+          "flow": "max16-ordinary",
+          "stackSpan": 26772,
+          "stackUsed": 12640,
+          "stackRemaining": 14132,
+          "heapPeak": 1668,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6524
+        },
+        {
+          "flow": "max16-all-warnings",
+          "stackSpan": 26772,
+          "stackUsed": 12640,
+          "stackRemaining": 14132,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6520
+        },
+        {
+          "flow": "max16-absolute-bounds",
+          "stackSpan": 26772,
+          "stackUsed": 12640,
+          "stackRemaining": 14132,
+          "heapPeak": 1836,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6356
+        }
+      ],
+      "completedMixedSessions": 20,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "resources": [
+        {
+          "completed": 0,
+          "emulatorProcessRssKiB": 66204,
+          "hostHarnessHeapBytes": 14549232,
+          "stackHighWater": 11704,
+          "heapPeak": 160,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 10,
+          "emulatorProcessRssKiB": 91324,
+          "hostHarnessHeapBytes": 19151616,
+          "stackHighWater": 12640,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 20,
+          "emulatorProcessRssKiB": 94460,
+          "hostHarnessHeapBytes": 22713872,
+          "stackHighWater": 12640,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        }
+      ],
+      "buildLogSha256": "1c263614e7d099a81ff6aca5a739b83668bc1887e0e4ea98e6460b8a79e63185"
+    },
+    {
+      "model": "flex",
+      "device": "flex",
+      "instrumentedElfSha256": "09146f601a99d9c94185ad1422399e22a32174701c7ef589ea68805de67ae9e8",
+      "memoryEvidenceSha256": "99f1ee9e0581d669db6cbc32546be9047a94cd40b4f98262be9506a6a4bcce7b",
+      "stabilityEvidenceSha256": "cc3a7bdc3b45a26974b6d836fc4b59b7bb20d07c8b1dbebb841d828168b14ce9",
+      "measurements": [
+        {
+          "flow": "max16-ordinary",
+          "stackSpan": 26772,
+          "stackUsed": 12648,
+          "stackRemaining": 14124,
+          "heapPeak": 1668,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6524
+        },
+        {
+          "flow": "max16-all-warnings",
+          "stackSpan": 26772,
+          "stackUsed": 12648,
+          "stackRemaining": 14124,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6520
+        },
+        {
+          "flow": "max16-absolute-bounds",
+          "stackSpan": 26772,
+          "stackUsed": 12648,
+          "stackRemaining": 14124,
+          "heapPeak": 1836,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6356
+        }
+      ],
+      "completedMixedSessions": 20,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "resources": [
+        {
+          "completed": 0,
+          "emulatorProcessRssKiB": 67924,
+          "hostHarnessHeapBytes": 14593864,
+          "stackHighWater": 11712,
+          "heapPeak": 160,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 10,
+          "emulatorProcessRssKiB": 92676,
+          "hostHarnessHeapBytes": 16737904,
+          "stackHighWater": 12648,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 20,
+          "emulatorProcessRssKiB": 93692,
+          "hostHarnessHeapBytes": 22454880,
+          "stackHighWater": 12648,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        }
+      ],
+      "buildLogSha256": "6f99ce7438ce67af49b13a3f160830de5a8d52d2460b843f59e0840a7e2b0936"
+    },
+    {
+      "model": "apex_p",
+      "device": "apex_p",
+      "instrumentedElfSha256": "2ae3b4eb98ce425af6fbb90f55238d195df509e3045fadece736bcd0dffba274",
+      "memoryEvidenceSha256": "8759811d0ccee9ed81617d5b1f1b4aea558525f11b0a3463754c7f2db4bf6870",
+      "stabilityEvidenceSha256": "161c5b11784fc7de910895b17e3ef7d13a746c30201022a694ff237244d91b47",
+      "measurements": [
+        {
+          "flow": "max16-ordinary",
+          "stackSpan": 30868,
+          "stackUsed": 12648,
+          "stackRemaining": 18220,
+          "heapPeak": 1668,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6524
+        },
+        {
+          "flow": "max16-all-warnings",
+          "stackSpan": 30868,
+          "stackUsed": 12648,
+          "stackRemaining": 18220,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6520
+        },
+        {
+          "flow": "max16-absolute-bounds",
+          "stackSpan": 30868,
+          "stackUsed": 12648,
+          "stackRemaining": 18220,
+          "heapPeak": 1836,
+          "heapCurrent": 160,
+          "heapCapacity": 8192,
+          "heapRemaining": 6356
+        }
+      ],
+      "completedMixedSessions": 20,
+      "checkedSignatures": {
+        "complete": 44,
+        "partial": 2
+      },
+      "resources": [
+        {
+          "completed": 0,
+          "emulatorProcessRssKiB": 53968,
+          "hostHarnessHeapBytes": 14496000,
+          "stackHighWater": 11712,
+          "heapPeak": 160,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 10,
+          "emulatorProcessRssKiB": 64452,
+          "hostHarnessHeapBytes": 20284888,
+          "stackHighWater": 12648,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        },
+        {
+          "completed": 20,
+          "emulatorProcessRssKiB": 66316,
+          "hostHarnessHeapBytes": 17752960,
+          "stackHighWater": 12648,
+          "heapPeak": 1672,
+          "heapCurrent": 160,
+          "heapCapacity": 8192
+        }
+      ],
+      "buildLogSha256": "ccecf6e0a39ea8cf678966ebb1d16703381573396d32df2b0f7c945e3ff57797"
+    }
+  ],
+  "limitations": [
+    "Separate instrumented ELF, not release binary",
+    "OS/syscall stack unmeasured",
+    "Observed app-stack/allocator high-water, not formal worst-case proof",
+    "Allocator peak occupancy does not establish worst-case fragmentation",
+    "Speculos does not establish physical device margin",
+    "Runtime uses copied native/core/SDK source; later host recovery export changes are unrelated and not imported"
+  ]
+}

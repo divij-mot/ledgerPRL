@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "verifiedAtUtc": "2026-10-09T20:28:44.535Z",
+  "node": "v24.19.0",
+  "boundary": "Actual worker entry and client wrapper; unchanged SDK/wallet validation in Node worker_threads. Browser Worker API adapter only; no actual browser, upload, CSP execution, IndexedDB, device or network.",
+  "input": {
+    "bytes": 16218359,
+    "sha256": "54d70adaecb7ace97221ca34912c9c93e0a180d94195533605219a65e4ae96b3"
+  },
+  "records": 2000,
+  "signatures": 32000,
+  "importMs": 179266.430073,
+  "mainThread25msTicks": 7126,
+  "maximumObservedTickGapMs": 30.5410600000032,
+  "resultTailGapMs": 45.06733700001496,
+  "cancellation": {
+    "delayAfterWorkerRequestMs": 150,
+    "responseMs": 0.7737620000000334,
+    "workerExitMs": 3.3612380000000144,
+    "workerTerminations": 1
+  },
+  "completionWorkerTerminations": 1,
+  "synchronousMergeMs": 2602.2806379999965,
+  "heartbeatScope": "Worker validation plus startup; resultTailGapMs separately bounds the final interval to promise resolution. Merge is timed separately and stays synchronous.",
+  "sourceHashes": {
+    "apps/companion/index.html": "96ad7bc9e85d38d85e8b9d920f46acee1a4415f40d59974cfba0aa5e8c463930",
+    "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
+    "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
+    "apps/companion/src/main.ts": "f9b6a71c64799c59326352cf182b9ebbf975678c7efd684e4ea6b4233afa2f2f",
+    "apps/companion/src/storage.ts": "3b84bd8013448c325ad7aad49d1f1f38ddbd6a2ee74eb6e8ef35435141648891",
+    "apps/companion/vite.config.ts": "0da333943fdd713674063715557b8244714f2c1281311a4144eafd7ca6a3bc46",
+    "package-lock.json": "e07e6d210196b3e2ad94274b41618d9b993d69fc2e86e9ddc94106eb712cd047",
+    "packages/sdk/src/amount.ts": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+    "packages/sdk/src/bundle.ts": "8f7cc2c5b1fdc2660e8314aa8ded9e1caf96300777a3de2fb63cea3252a2afc1",
+    "packages/sdk/src/bytes.ts": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+    "packages/sdk/src/device.ts": "955f9b097cb34cda7235157775d9a52e48a53debd6d04a372c2393f3527a92c8",
+    "packages/sdk/src/http.ts": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+    "packages/sdk/src/index.ts": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+    "packages/sdk/src/keys.ts": "5a26b0198f94e1435b731b3b00991832123f984968fbb6dbd662e9bf0fd1d1ef",
+    "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/wallet/src/discovery.ts": "ecb3f6cd3ba62789963bfba6642cee0970bc23b41dcd16967ec2e427e6425100",
+    "packages/wallet/src/index.ts": "4fa0b29aa2407cb5c1d0600adf75785710d9ef3af4dcef90a3b4247c5288e1c5",
+    "packages/wallet/src/journal.ts": "4e4fb50ec5058d25895bfde0a5459514792aa560d1d1a9d46444caeb5a000b4f",
+    "packages/wallet/src/policy.ts": "22e31418395be68588e19cd9a4b4e6a56bbe1906252de645e53198e34b2e8005",
+    "packages/wallet/src/recovery.ts": "9ab76005ef1d4793a8e8a501e265cdeba5c5a73fc3e8ca37180544c96f4b5cc4",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0"
+  }
+}

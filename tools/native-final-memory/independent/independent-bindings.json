@@ -1,0 +1,148 @@
+{
+  "scope": "Read-only independent source, ELF, patch, inventory, and raw result review. No build or emulator replay.",
+  "sourceInputs": {
+    "native": 24,
+    "allCopied": 60,
+    "matchedParentAndMirror": true,
+    "nativeInventoryComplete": true
+  },
+  "vendors": {
+    "ledger-device-rust-sdk": {
+      "pin": "4123d2dc85a2085115e6a36826460a9fe742cfb1",
+      "trackedFilesChecked": 201,
+      "byteDifferences": [],
+      "sharedInodes": [],
+      "beforeAfterCurrentDiffsMatch": true,
+      "symlinks": []
+    },
+    "ledger-secure-sdk": {
+      "pin": "6709cd2bdfebb224ee070f7c1211b54254262579",
+      "trackedFilesChecked": 1898,
+      "byteDifferences": [],
+      "sharedInodes": [],
+      "beforeAfterCurrentDiffsMatch": true,
+      "symlinks": []
+    }
+  },
+  "instrumentationDelta": {
+    "exactPatchReproduced": true,
+    "changedTrackedFiles": {
+      "ledger_device_sdk/src/testing.rs": {
+        "release": "e4773fa12631bd4b5185fb8008095215d281cd75f31ff17c8b66a0867285578b",
+        "instrumented": "7783d925164aefabae29b986bc95985dba5559d450c7a56152af0239bdf51d98"
+      },
+      "ledger_secure_sdk_sys/src/lib.rs": {
+        "release": "1e272721984b841e703ff6c8d5592487f8cd0c3f92cf8c88c92afadc9554adc2",
+        "instrumented": "7d98978007b716cbe4d9d565a5eb735011fda80cf7fcbb472e742d7a76894191"
+      }
+    }
+  },
+  "models": [
+    {
+      "model": "nanosp",
+      "ELF_and_two_tested_snapshots_identical": true,
+      "linkerStackSpan": 31968,
+      "stackMax": 12544,
+      "heapPeak": 1836,
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      },
+      "signatures": 46,
+      "rawProvenanceAndHarnessHashesVerified": true
+    },
+    {
+      "model": "nanox",
+      "ELF_and_two_tested_snapshots_identical": true,
+      "linkerStackSpan": 19660,
+      "stackMax": 12824,
+      "heapPeak": 1836,
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      },
+      "signatures": 46,
+      "rawProvenanceAndHarnessHashesVerified": true
+    },
+    {
+      "model": "stax",
+      "ELF_and_two_tested_snapshots_identical": true,
+      "linkerStackSpan": 26772,
+      "stackMax": 12640,
+      "heapPeak": 1836,
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      },
+      "signatures": 46,
+      "rawProvenanceAndHarnessHashesVerified": true
+    },
+    {
+      "model": "flex",
+      "ELF_and_two_tested_snapshots_identical": true,
+      "linkerStackSpan": 26772,
+      "stackMax": 12648,
+      "heapPeak": 1836,
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      },
+      "signatures": 46,
+      "rawProvenanceAndHarnessHashesVerified": true
+    },
+    {
+      "model": "apex_p",
+      "ELF_and_two_tested_snapshots_identical": true,
+      "linkerStackSpan": 30868,
+      "stackMax": 12648,
+      "heapPeak": 1836,
+      "sessionKinds": {
+        "sign": 4,
+        "address": 2,
+        "abort-upload": 2,
+        "reject-review": 2,
+        "invalid-ownership-or-point": 2,
+        "partial-signature-abort": 2,
+        "invalid-upload": 2,
+        "export": 2,
+        "max16": 2
+      },
+      "signatures": 46,
+      "rawProvenanceAndHarnessHashesVerified": true
+    }
+  ],
+  "totals": {
+    "memoryFlows": 15,
+    "mixedSessions": 100,
+    "mixedSignatures": 230,
+    "memoryFlowSignaturesFromAuditedHarness": 240
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "checkedAtUtc": "2026-10-09T20:23:00Z",
+  "sourceCommit": "46975695397fc59c93cb4c6612e5cbb60276eb08",
+  "packageLockSha256": "e07e6d210196b3e2ad94274b41618d9b993d69fc2e86e9ddc94106eb712cd047",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "commands": [
+    "npm audit --omit=dev --json",
+    "npm audit --json"
+  ],
+  "exitCodes": [
+    0,
+    0
+  ]
+}

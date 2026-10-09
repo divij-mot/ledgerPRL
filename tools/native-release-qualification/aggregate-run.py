@@ -7,6 +7,9 @@ import json
 import pathlib
 import subprocess
 
+if not __debug__:
+    raise SystemExit("Optimized Python disables required evidence checks; run without -O/-OO")
+
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', required=True, type=pathlib.Path)
 parser.add_argument('--run', required=True, type=pathlib.Path)

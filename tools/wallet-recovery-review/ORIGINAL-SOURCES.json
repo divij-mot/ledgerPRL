@@ -1,0 +1,13 @@
+{
+  "commit": "d1fd0d38069c09b871b836377812e2fc4bef8b3d",
+  "sha256": {
+    "apps/companion/src/main.ts": "3b30e7fb37403d999a8803069d0bf1928acc4840526e263e532136cafa630998",
+    "apps/companion/src/bridge.ts": "c8f8ba93fa7d4c3295b95061a5dc339d91063c7aeccfc704ab1f01e54b98635b",
+    "packages/wallet/src/recovery.ts": "7d4a32e1c0195247e27dcfcd94e68ce91252088c32a39bbc7ce6451c940871f5",
+    "packages/wallet/src/journal.ts": "4e4fb50ec5058d25895bfde0a5459514792aa560d1d1a9d46444caeb5a000b4f",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/sdk/src/keys.ts": "5a26b0198f94e1435b731b3b00991832123f984968fbb6dbd662e9bf0fd1d1ef",
+    "packages/sdk/src/bundle.ts": "8f7cc2c5b1fdc2660e8314aa8ded9e1caf96300777a3de2fb63cea3252a2afc1",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d"
+  }
+}

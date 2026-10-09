@@ -1,0 +1,13 @@
+{
+  "verifiedAtUtc": "2026-10-09T20:19:25Z",
+  "node": "v24.19.0",
+  "terminalExitCode": 0,
+  "sourceReadbackMatched": true,
+  "sourceBaseCommit": "46975695397fc59c93cb4c6612e5cbb60276eb08",
+  "finalMainSha256": "f9b6a71c64799c59326352cf182b9ebbf975678c7efd684e4ea6b4233afa2f2f",
+  "reconcileFunctionSha256": "8923aa047a401e11462c845a10ef3d52e9da9b4a0833e570456762891c4b4d48",
+  "journalSha256": "54d70adaecb7ace97221ca34912c9c93e0a180d94195533605219a65e4ae96b3",
+  "journalBytes": 16218359,
+  "signatureFixture": "Published BIP32 vector-one fixture; no private user key or real funds",
+  "boundary": "Actual SDK/UI/bridge validation; explicit local DOM/storage/RPC mocks; no browser import/upload or network"
+}

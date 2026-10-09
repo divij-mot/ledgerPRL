@@ -1,0 +1,7 @@
+{
+  "boundary": "Direct unchanged mergeRestoredJournal of 2000-record fixture journal with imported archive claims removed into emptyJournal; no browser or IndexedDB",
+  "records": 2000,
+  "outpoints": 32000,
+  "mergeMs": 2454.9419869999997,
+  "includedInWorkerPatch": false
+}

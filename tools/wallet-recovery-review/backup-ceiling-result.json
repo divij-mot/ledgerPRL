@@ -1,0 +1,9 @@
+{
+  "records": 2000,
+  "inputs": 32000,
+  "totalRaw": 7240000,
+  "backupBytes": 16944441,
+  "compactBytes": 16218359,
+  "maxBackupBytes": 16777216,
+  "lastTxid": "d4220a5e1b49e27823a429065a6c9258ba86d0f211d9cf1e2c1a3c00ac437ddd"
+}

@@ -19,3 +19,5 @@ __pycache__/
 # Source-bound native qualification logs; generated replay output is not tracked.
 !tools/native-release-qualification/*.log
 !tools/native-release-qualification/packages/unit-tests.log
+!tools/native-final-memory/builds/*.log
+!tools/wallet-recovery-review/**/*.log

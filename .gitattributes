@@ -8,3 +8,7 @@ tools/core-state-review/provenance/original-harness-Cargo.toml whitespace=-blank
 
 # Retain the exact historical SDK patch used by the qualified firmware.
 tools/native-release-qualification/source-snapshot/apps/ledger/patches/strict-transport.patch whitespace=-blank-at-eol
+# Preserve reviewed patch context and exact retained tool output.
+tools/native-final-memory/sources/memory-instrumentation.patch whitespace=-blank-at-eol,-blank-at-eof
+tools/native-final-memory/sources/strict-transport.patch whitespace=-blank-at-eol
+tools/wallet-recovery-review/independent/typecheck.log whitespace=-blank-at-eof

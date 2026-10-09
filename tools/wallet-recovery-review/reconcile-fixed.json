@@ -1,0 +1,13 @@
+{
+  "records": 2000,
+  "signatures": 32000,
+  "elapsedMs": 308550.338103,
+  "firstRequestMs": 183733.664589,
+  "bridgeValidationMs": 124681.50486100002,
+  "requests": 20,
+  "rpcCalls": 2180,
+  "journalMutations": 1,
+  "error": null,
+  "sourceSha256": "70b311ec61af425344108783af19ae733bc1baad8c7f4aa1ccc7d4eee5beb851",
+  "observation": "CONTROL: reconciliation fit within deadline on this host"
+}

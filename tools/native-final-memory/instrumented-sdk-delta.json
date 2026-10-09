@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "onlyChangedTrackedFiles": {
+    "ledger_device_sdk/src/testing.rs": {
+      "release": "e4773fa12631bd4b5185fb8008095215d281cd75f31ff17c8b66a0867285578b",
+      "instrumented": "7783d925164aefabae29b986bc95985dba5559d450c7a56152af0239bdf51d98"
+    },
+    "ledger_secure_sdk_sys/src/lib.rs": {
+      "release": "1e272721984b841e703ff6c8d5592487f8cd0c3f92cf8c88c92afadc9554adc2",
+      "instrumented": "7d98978007b716cbe4d9d565a5eb735011fda80cf7fcbb472e742d7a76894191"
+    }
+  },
+  "exactReviewedPatchApplied": true,
+  "patchSha256": "239aee20dac28c21562a7f99ca1e2ccf872d2d99da2c9dca520dedb3b903427b"
+}

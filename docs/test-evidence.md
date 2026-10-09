@@ -39,9 +39,17 @@ The final `crypto.rs` source hash is `50203747bb0b6a5a5ba43d36e51b3369598df95c8d
 - [Canonical-path reproducibility](../tools/build-reproducibility/README.md): all 25 isolated rebuilds and complete packages match their reference bytes exactly. Four different-path builds differ in loadable code/data; three remapping pilots did not solve that. The tested builder uses fixed logical paths, pinned installed tools and private SDK/cache copies. This is not a claim of arbitrary-builder portability.
 - [Fresh release crosscheck](../tools/final-release-review/README.md): independent artifact/source/count checks and six negative/portability controls passed, including a separate root replay.
 
-These results do not retroactively rebind older resource reports or later host changes to this source. Physical and exceptional OS behavior remain separate.
+- [Final-source instrumented memory](../tools/native-final-memory/README.md): 15 worst-case flows and 100 separate instrumented mixed sessions passed. Peak observed app stack was 12,824 B on Nano X (6,836 B remaining span); peak allocator occupancy was 1,836/8,192 B, with 160 B stable idle occupancy. These are separate instrumented emulator measurements, not release/physical/OS-stack bounds.
+
+These results do not retroactively rebind later host changes to this source. Physical and exceptional OS behavior remain separate.
 
 Reports apply to their recorded source/tool/artifact hashes, not automatically to later edits. [Checkpoint mappings](checkpoints.json) relate retained local source commits to published commits with the same Git tree.
+
+## Final large-wallet recovery checks
+
+- [Capacity and recovery review](../tools/wallet-recovery-review/REPORT.md): a genuine 2,000-record / 32,000-signature public fixture reproduced the backup-size and reconciliation-budget failures. Compact export preserves all recovery data within 16 MiB; final reconciliation preserves every signed byte and input reservation through 20 bounded batches and one atomic commit. The actual SDK/UI/bridge code runs against explicit local DOM/storage/RPC mocks, not a live browser or chain.
+- The companion now validates full backups in a one-shot same-origin worker using the unchanged validator. Worker cancellation, late replies and queued/committed merge boundaries have regressions. Actual Node worker and Vite asset checks are separate from browser Worker/CSP/IndexedDB qualification. The maximum-history atomic merge still takes roughly 2.5–2.6 seconds synchronously on the measured host.
+- Final combined host checks passed 100 SDK, 71 wallet and 88 companion tests, workspace typechecks and production build. [Dependency advisory snapshots](../tools/dependency-review/README.md) returned zero known npm advisories for the recorded lockfile; that is not a vulnerability-free guarantee.
 
 ## Not established
 

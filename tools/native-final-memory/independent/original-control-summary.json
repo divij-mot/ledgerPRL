@@ -1,0 +1,116 @@
+{
+  "scope": "Observed original verifier behavior before the evidence-only hardening; compact command outcomes without private paths",
+  "originalVerifierSha256": "537747d6d10efc5ce8a7428aa8a0894602b8ed7f46ed3399aef2d87fa41d8d2b",
+  "cases": [
+    {
+      "name": "baseline",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "optimized-O-baseline",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "optimized-OO-baseline",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "changed-report-normal",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "changed-report-O",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "changed-report-OO",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "missing-model-normal",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "missing-model-O",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "changed-artifact-normal",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "changed-artifact-O",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "changed-raw-memory",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "changed-raw-stability",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "changed-build-log",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "changed-patch",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "changed-signature-summary",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "changed-sdk-feature-summary",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "changed-source-map",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "removed-crypto-input-binding",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "guarded-baseline",
+      "exitCode": 0,
+      "reportedPass": true
+    },
+    {
+      "name": "guarded-O",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "guarded-OO",
+      "exitCode": 1,
+      "reportedPass": false
+    },
+    {
+      "name": "guarded-PYTHONOPTIMIZE",
+      "exitCode": 1,
+      "reportedPass": false
+    }
+  ]
+}

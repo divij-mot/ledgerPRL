@@ -82,7 +82,8 @@ python3 tools/native-release-qualification/aggregate-run.py \
 
 The parameterized aggregator was replayed successfully; every report field matched
 except its new generation timestamp. Output must be new; earlier evidence is not
-replaced.
+replaced. Optimized Python (`-O`, `-OO`, or `PYTHONOPTIMIZE`) is rejected because
+the aggregator uses assertions for its source and artifact checks.
 
 For an independent Pearl replay, use Go 1.26.6 and the pinned module locks:
 

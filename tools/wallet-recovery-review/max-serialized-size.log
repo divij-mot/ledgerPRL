@@ -1,0 +1,5 @@
+{"conservativePrettyBytes":29364466,"limit32MiB":33554432}
+{"mode":"compact","bytes":28618384,"limit16MiB":16777216}
+{"mode":"compact-without-archive","bytes":28284384,"limit16MiB":16777216}
+{"mode":"compact-without-archive-error","bytes":16254384,"limit16MiB":16777216}
+{"mode":"compact-without-error-preserve-archive","bytes":16588384,"limit16MiB":16777216}

@@ -1,0 +1,17 @@
+PASS Canonical original fixture remains accepted at the broadcast verifier
+PASS Cryptographically valid original signatures reject altered recipient value
+PASS Cryptographically valid original signatures reject altered fee
+PASS Cryptographically valid original signatures reject altered recipient script
+PASS Cryptographically valid original signatures reject altered input amount
+PASS Cryptographically valid original signatures reject altered input outpoint hash
+PASS Cryptographically valid original signatures reject altered input outpoint index
+PASS Cryptographically valid original signatures reject altered input order
+PASS Cryptographically valid original signatures reject altered output order
+PASS Bridge rejects configured-network mismatch before any RPC
+PASS Documented chain-ID limitation reproduced: same transaction has same regtest/simnet digest
+PASS Concurrent caller mutations cannot replace the immutable transferred/reviewed payment
+PASS wrong-review terminates the client without fetching remaining signatures
+PASS wrong-signature terminates the client without fetching remaining signatures
+PASS Uncertain backup cannot restore rejection ownership or release reservations
+PASS Signed backup strips stale archive authority; byte, txid and reservation mutations reject
+16 independent offline boundary checks passed

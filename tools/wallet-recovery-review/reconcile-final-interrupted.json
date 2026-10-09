@@ -1,0 +1,7 @@
+{
+  "status": "incomplete",
+  "reason": "Executor transport disconnected during the run; the old session could not resume and no terminal result file was produced.",
+  "session": 14781,
+  "lastCheckedUtc": "2026-10-09T20:13:49Z",
+  "qualification": "This run is not counted as a pass. A fresh replay against the current parent follows."
+}

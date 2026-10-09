@@ -1,0 +1,15 @@
+PASS control-flow: success Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.
+PASS control-flow: slow-local-success Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.
+PASS control-flow: slow-two-batch-success Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.
+PASS control-flow: clock-budget-second Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.
+PASS control-flow: cancel-local Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.
+PASS control-flow: cancel-second Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.
+PASS control-flow: deadline-second Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.
+PASS control-flow: tip-change-second Bounded batches, cancellable local validation, all-or-none archive and202 locks retained.
+BOUNDARY: signature verification stubbed for synthetic many-record control flow. Genuine-signature bridge/UI tests are in node-reconciliation.test.ts and node-reconciliation-ui.mjs.
+PASS: bridge exact-byte, signature, wrong-network, reorg, pending, unknown, tip-change, grouped checkpoint and2000-checkpoint boundary checks.
+Actual Pearl omitted-confirmation pending shape: pending
+PASS: actual UI normal control enabled; backup proof stripped/requalified; checkpoint reuse; incomplete-response atomicity; reorg/5conf/missing legacy receipt stay active; concurrent-tab guard; exact bytes and2 input locks retained.
+PASS: 100-active cap blocks; qualifying archival frees one active slot without unlocking; reorg restores active count and blocks again with all202 outpoint reservations retained.
+PASS: an over-budget reconciliation response leaves exact journal bytes unchanged.
+PASS: an expired network deadline sends no RPC request and preserves the prior journal.

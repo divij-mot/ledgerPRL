@@ -1,0 +1,34 @@
+▶ actual backup handler cancels safely, rejects stale work and atomically merges current storage
+  ✔ busy prevents repeat imports; cancellation terminates and ignores late replies after an account switch (34.279177ms)
+  ✔ account changes during validation reject before any merge (6.240922ms)
+  ✔ cancel while storage is queued prevents its atomic update (14.445974ms)
+  ✔ an interleaved latest journal is merged without downgrading state or losing bounds (23.62368ms)
+  ✔ conflicting payment leaves the atomic journal and current account unchanged (2.453058ms)
+  ✔ cancel after durable merge reports saved reservations and does not switch accounts (3.322114ms)
+  ✔ cancel during device closure cannot apply a stale account completion (2.866759ms)
+✔ actual backup handler cancels safely, rejects stale work and atomically merges current storage (281.819927ms)
+✔ actual worker validates exact signed bytes and rejects the same malformed backups (1618.090333ms)
+▶ bounded one-shot worker preserves validation results and releases every resource
+  ✔ successful response, immutable Blob, fixed local module URL and listener cleanup (4.211841ms)
+  ✔ pre-abort and oversize inputs never start a worker (10.396057ms)
+  ✔ abort terminates immediately and stale completion cannot settle another operation (0.599371ms)
+  ✔ validation failure rejects without a fallback and terminates (0.49207ms)
+  ✔ runtime failure rejects without a fallback and terminates (0.347523ms)
+  ✔ message failure rejects without a fallback and terminates (0.291458ms)
+  ✔ malformed failure rejects without a fallback and terminates (0.257366ms)
+  ✔ post failure rejects without a fallback and terminates (0.19979ms)
+  ✔ worker construction error stays an error (0.317207ms)
+✔ bounded one-shot worker preserves validation results and releases every resource (22.622956ms)
+✔ local-node archival UI preserves locks, handles reorgs and respects capacity/deadline limits (1474.750518ms)
+✔ multi-batch control flow honors a count-bounded network deadline and local cancellation (signature verification mocked) (5692.067732ms)
+✔ development and preview reject framing and retain the node bridge proxy (103.988695ms)
+✔ development serves the linked stylesheet as CSS under the strict CSP (161.056308ms)
+✔ production keeps the strict CSP and emits a linked CSS asset (2583.156185ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7413.318915

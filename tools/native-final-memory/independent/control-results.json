@@ -1,0 +1,286 @@
+{
+  "status": "passed",
+  "scope": "Retained evidence and checker negative controls only; no builds or emulator replay",
+  "controls": 30,
+  "successfulControls": 30,
+  "sourceCryptoSha256": "50203747bb0b6a5a5ba43d36e51b3369598df95c8d29702f8985956fe9ab7fa1",
+  "evidenceSha256": {
+    "verify.py": "4fb37e555f591ff30f4da9fa5ef9ef84064d7d85ae6e68f1f5e5375ac5633235",
+    "prepare-isolated.py": "bec65ed5e6b6cac0681d5109f5271567ac323515982b30a07c47cb333cfe4562",
+    "run-isolated.sh": "a9f7064a669ad040d91ca6e68d8f7a04a2bd7ee5b0e0523c959a7dde75ccafe0",
+    "README.md": "d9e7c5e5ff3cc3db6740cb4d17af535005b9e3f50ddfa26448a3cc51e3357d1f",
+    "report.json": "0d00658a279680934c94462972cf32ec0247dc83bbe57cf789e3e113295ff1ad",
+    "mirror-input-hashes.json": "86b989d2a7b0a5c62f0511a44dd11cd81222c118048eed8358d8c13bc3e5e185",
+    "parent-native-source-before.json": "d900d6dce8f54eae3c3a20ed0c8f89fea692df87646794283a0208eb476fdd22",
+    "parent-native-source-after.json": "1af08894d22908d7f9145021aeadbf2d39e05c9a1ae52849048d3ca27c623dcf",
+    "mirror-native-source-after.json": "1af08894d22908d7f9145021aeadbf2d39e05c9a1ae52849048d3ca27c623dcf",
+    "instrumented-sdk-delta.json": "18d36bb7bff197460c5fbf7df87b8100f9db43183969370c7e795393299ec46c",
+    "sources/memory-instrumentation.patch": "239aee20dac28c21562a7f99ca1e2ccf872d2d99da2c9dca520dedb3b903427b",
+    "sources/strict-transport.patch": "49b0ebcd4632c59a5312ed49966b14c51104bb400c9e7917f28f2b560507f09b",
+    "sources/ledger-build-instrumented.sh": "a39f2b6f0e50a5b0869d9d92a0220c2628d2f9e2c3128bdd1bad8f44eab6ae07",
+    "memory/apex_p.json": "8759811d0ccee9ed81617d5b1f1b4aea558525f11b0a3463754c7f2db4bf6870",
+    "memory/flex.json": "99f1ee9e0581d669db6cbc32546be9047a94cd40b4f98262be9506a6a4bcce7b",
+    "memory/nanosp.json": "8b9f80306783e03a1b12b12c3cebc1046a6a5ebf48320713ebe0fa233e961cb9",
+    "memory/nanox.json": "b9d1f18073702939f452449e85797ee996c615094402ac52911cafad9d456dad",
+    "memory/stax.json": "cf71b47b543f2fe42361b8174b1fc35b6e4a1ebb5b9707a5335097246cd90cec",
+    "stability/apex_p.json": "161c5b11784fc7de910895b17e3ef7d13a746c30201022a694ff237244d91b47",
+    "stability/flex.json": "cc3a7bdc3b45a26974b6d836fc4b59b7bb20d07c8b1dbebb841d828168b14ce9",
+    "stability/nanosp.json": "95a94eee0d8741ac7c2314bf81e30c772cfabe04970ef00512c0ddfb19181c0f",
+    "stability/nanox.json": "fbfac9e07e9deafc2d942095ae36dac893c8d92b9e556db1255046f959810fb1",
+    "stability/stax.json": "3da0354828c0fc65d5230989d9a2c47fc3776fdf541b2315633899026b1250fd",
+    "builds/apex_p.log": "ccecf6e0a39ea8cf678966ebb1d16703381573396d32df2b0f7c945e3ff57797",
+    "builds/flex.log": "6f99ce7438ce67af49b13a3f160830de5a8d52d2460b843f59e0840a7e2b0936",
+    "builds/nanosplus.log": "53113ee4de4bbc4e72e720f8dd33b47f0af85c097f0f4ed4216620dcb239022f",
+    "builds/nanox.log": "64aff88de475ccf4b79ed55f246465e7e8e1dad26c04f367068125790df77bf1",
+    "builds/stax.log": "1c263614e7d099a81ff6aca5a739b83668bc1887e0e4ea98e6460b8a79e63185"
+  },
+  "instrumentedElfSha256": {
+    "pearl-apex_p-simnet-INSTRUMENTED.elf": "2ae3b4eb98ce425af6fbb90f55238d195df509e3045fadece736bcd0dffba274",
+    "pearl-flex-simnet-INSTRUMENTED.elf": "09146f601a99d9c94185ad1422399e22a32174701c7ef589ea68805de67ae9e8",
+    "pearl-nanosplus-simnet-INSTRUMENTED.elf": "1f8a6e5a25fc41f251a17485a553bb4e2cd9c2bc5bbabd628517ba0cae351abd",
+    "pearl-nanox-simnet-INSTRUMENTED.elf": "16242b89ef8725a24aaf11d561bac317e367862ae83ecda32873860f596c471c",
+    "pearl-stax-simnet-INSTRUMENTED.elf": "a7945fba9c4dee05081111abe1c533526be9bd641f9df82f167bfd8431c4e319"
+  },
+  "results": [
+    {
+      "name": "baseline",
+      "expected": "accept",
+      "returncode": 0,
+      "correct": true,
+      "stdout": "{\n  \"status\": \"passed\",\n  \"scope\": \"Retained instrumented software measurements; no hardware or OS-stack guarantee\",\n  \"models\": 5,\n  \"memoryFlows\": 15,\n  \"mixedSessions\": 100,\n  \"actualInstrumentedElfsChecked\": 5\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "optimized--O",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Verification requires assertions; rerun without -O, -OO, or PYTHONOPTIMIZE\n"
+    },
+    {
+      "name": "optimized--OO",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Verification requires assertions; rerun without -O, -OO, or PYTHONOPTIMIZE\n"
+    },
+    {
+      "name": "PYTHONOPTIMIZE-1",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Verification requires assertions; rerun without -O, -OO, or PYTHONOPTIMIZE\n"
+    },
+    {
+      "name": "PYTHONOPTIMIZE-2",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Verification requires assertions; rerun without -O, -OO, or PYTHONOPTIMIZE\n"
+    },
+    {
+      "name": "failed-report",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/failed/verify.py\", line 29, in <module>\n    assert report['status']=='passed-instrumented-software-only'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "missing-model",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/missing-model/verify.py\", line 86, in <module>\n    assert seen==set(expected) and flows==report['measurementFlows']==15 and sessions==report['mixedSessions']==100\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "wrong-pins-features",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/pins/verify.py\", line 30, in <module>\n    assert report['rustSdk']=='4123d2dc85a2085115e6a36826460a9fe742cfb1'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "wrong-aggregate-count",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/counts/verify.py\", line 77, in <module>\n    assert row['checkedSignatures']==s['checkedSignatures']==counts=={'complete':44,'partial':2}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "omitted-crypto-inventory",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/inventory/verify.py\", line 25, in <module>\n    assert set(inputs)==required_inputs, 'Incomplete or unexpected copied input inventory'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Incomplete or unexpected copied input inventory\n"
+    },
+    {
+      "name": "omitted-native-inventory",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/native-inventory/verify.py\", line 21, in <module>\n    assert set(before)==native_required, 'Incomplete native source inventory'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Incomplete native source inventory\n"
+    },
+    {
+      "name": "changed-retained-build-script",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/script-copy/verify.py\", line 38, in <module>\n    assert sha(e/'sources/ledger-build-instrumented.sh')==inputs['scripts/ledger-build-instrumented.sh']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "changed-memory",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/changed-memory/verify.py\", line 49, in <module>\n    assert sha(mp)==row['memoryEvidenceSha256'] and sha(sp)==row['stabilityEvidenceSha256']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "changed-stability",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/changed-stability/verify.py\", line 49, in <module>\n    assert sha(mp)==row['memoryEvidenceSha256'] and sha(sp)==row['stabilityEvidenceSha256']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "changed-log",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/changed-log/verify.py\", line 50, in <module>\n    assert sha(e/'builds'/(expected[model]+'.log'))==row['buildLogSha256']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "changed-patch",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/changed-patch/verify.py\", line 34, in <module>\n    assert sha(e/'sources/memory-instrumentation.patch')==report['memoryPatchSha256']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "changed-ELF",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/base/verify.py\", line 84, in <module>\n    if a.artifacts:assert sha(a.artifacts/f'pearl-{expected[model]}-simnet-INSTRUMENTED.elf')==row['instrumentedElfSha256']\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "rehashed-inconsistent-signature-count",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/raw-counts/verify.py\", line 77, in <module>\n    assert row['checkedSignatures']==s['checkedSignatures']==counts=={'complete':44,'partial':2}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "rehashed-wrong-raw-model",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/raw-model/verify.py\", line 53, in <module>\n    assert m['firmware']['model']==s['firmware']['model']==s['model']==model\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "rehashed-wrong-raw-patch",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/raw-patch/verify.py\", line 58, in <module>\n    assert m['instrumentationPatchSha256']==report['memoryPatchSha256']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "rehashed-wrong-harness-source",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/raw-harness/verify.py\", line 60, in <module>\n    assert s['sourceSha256']=={key:inputs[rel] for key,rel in {'harness':'apps/ledger/tests/native-stability.ts','driver':'apps/ledger/tests/speculos-driver.ts','fixture':'fixtures/protocol-v1.json','dependencyLock':'package-lock.json'}.items()}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "rehashed-wrong-session-kind",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/raw-sessions/verify.py\", line 74, in <module>\n    assert [x['kind'] for x in s['records']]==expected_kinds\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "name": "prepare--O",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Isolation checks require assertions; rerun without -O, -OO, or PYTHONOPTIMIZE\n"
+    },
+    {
+      "name": "prepare--OO",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Isolation checks require assertions; rerun without -O, -OO, or PYTHONOPTIMIZE\n"
+    },
+    {
+      "name": "wrapper-PYTHONOPTIMIZE-1",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Replay requires assertions; unset PYTHONOPTIMIZE\n"
+    },
+    {
+      "name": "wrapper-PYTHONOPTIMIZE-2",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Replay requires assertions; unset PYTHONOPTIMIZE\n"
+    },
+    {
+      "name": "prepare-existing-output",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<TEMP>/base/prepare-isolated.py\", line 21, in <module>\n    assert not OUT.exists(), 'Fresh directory required'\n           ^^^^^^^^^^^^^^^^\nAssertionError: Fresh directory required\n"
+    },
+    {
+      "name": "prepare-rejects-direct-child",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Output must be outside the source checkout\n"
+    },
+    {
+      "name": "prepare-rejects-symlink-child",
+      "expected": "reject",
+      "returncode": 1,
+      "correct": true,
+      "stdout": "",
+      "stderr": "Output must be outside the source checkout\n"
+    },
+    {
+      "name": "wrapper-bash-syntax",
+      "expected": "accept",
+      "returncode": 0,
+      "correct": true,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

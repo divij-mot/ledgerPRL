@@ -183,17 +183,17 @@ Memory instrumentation is applied only to a separate mirrored source/build tree.
 SPECULOS_MODEL=nanox node --import tsx apps/ledger/tests/native-memory.ts
 ```
 
-Three flows passed on all five instrumented models: ordinary 16-input signing; all input/change recovery warnings plus a high fee; and absolute permitted bounds with account/index 2³¹−1, total input at Pearl MAX_MONEY, and the longest amount/path display strings. Measurements initialize while idle, complete trusted review/signing/all signature fetches, then query while idle. Active-session BOLOS fault handling stays enabled.
+The [final lexical-source memory matrix](../tools/native-final-memory/README.md) reran three flows on all five instrumented models: ordinary 16-input signing; all input/change recovery warnings plus a high fee; and absolute permitted bounds with account/index 2³¹−1, total input at Pearl MAX_MONEY, and the longest amount/path display strings. Measurements initialize while idle, complete trusted review/signing/all signature fetches, then query while idle. Active-session BOLOS fault handling stays enabled.
 
 | Model       | Linker app-stack span | Measured app-stack high-water | Remaining span | Peak allocator occupancy |
 | ----------- | --------------------: | ----------------------------: | -------------: | -----------------------: |
-| Nano S Plus |              31,968 B |                      12,472 B |       19,496 B |           1,836 /8,192 B |
-| Nano X      |              19,660 B |                      12,752 B |        6,908 B |           1,836 /8,192 B |
-| Stax        |              26,772 B |                      12,568 B |       14,204 B |           1,836 /8,192 B |
-| Flex        |              26,772 B |                      12,576 B |       14,196 B |           1,836 /8,192 B |
-| Nano Gen5   |              30,868 B |                      12,576 B |       18,292 B |           1,836 /8,192 B |
+| Nano S Plus |              31,968 B |                      12,544 B |       19,424 B |           1,836 /8,192 B |
+| Nano X      |              19,660 B |                      12,824 B |        6,836 B |           1,836 /8,192 B |
+| Stax        |              26,772 B |                      12,640 B |       14,132 B |           1,836 /8,192 B |
+| Flex        |              26,772 B |                      12,648 B |       14,124 B |           1,836 /8,192 B |
+| Nano Gen5   |              30,868 B |                      12,648 B |       18,220 B |           1,836 /8,192 B |
 
-Ordinary-flow heap peak was 1,668 B; the longer warning flow reached 1,672 B; absolute bounds reached 1,836 B, leaving 6,356 B of the configured heap. App-stack high-water did not increase. Each report includes the instrumented ELF and both patch hashes. These are observed **instrumented Speculos app** measurements, not strict upper bounds for release code, physical-device guarantees or OS/syscall-stack measurements. Instrumentation changes code layout and may slightly change stack use. Allocator occupancy does not establish the largest available contiguous block or worst-case fragmentation.
+Ordinary-flow heap peak was 1,668 B; the longer warning flow reached 1,672 B; absolute bounds reached 1,836 B, leaving 6,356 B of the configured heap. Final-source stack observations were 72 B above the earlier source snapshot. Each report includes the instrumented ELF and both patch hashes. These are observed **instrumented Speculos app** measurements, not strict upper bounds for release code, physical-device guarantees or OS/syscall-stack measurements. Instrumentation changes code layout and may slightly change stack use. Allocator occupancy does not establish the largest available contiguous block or worst-case fragmentation.
 
 ## Repeated-session timing
 

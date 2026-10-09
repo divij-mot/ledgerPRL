@@ -1,0 +1,95 @@
+Pinned SDKs verified in /workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/vendor
+patching file ledger_device_sdk/src/io_new.rs
+patching file ledger_device_sdk/src/io_new/callbacks.rs
+patching file ledger_device_sdk/src/io_new/event.rs
+patching file ledger_device_sdk/src/nbgl.rs
+patching file ledger_secure_sdk_sys/src/c/src.c
+patching file ledger_secure_sdk_sys/src/lib.rs
+patching file ledger_device_sdk/src/testing.rs
+   Compiling compiler_builtins v0.1.160 (/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/compiler-builtins/compiler-builtins)
+   Compiling core v0.0.0 (/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core)
+   Compiling proc-macro2 v1.0.107
+   Compiling cfg-if v1.0.5
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling memchr v2.8.3
+   Compiling glob v0.3.4
+   Compiling prettyplease v0.2.37
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.190
+   Compiling regex-syntax v0.8.11
+   Compiling minimal-lexical v0.2.1
+   Compiling bitflags v2.13.2
+   Compiling generic-array v0.14.7
+   Compiling clang-sys v1.9.1
+   Compiling simd-adler32 v0.3.10
+   Compiling nom v7.1.3
+   Compiling libloading v0.8.9
+   Compiling adler2 v2.0.1
+   Compiling crc32fast v1.5.2
+   Compiling either v1.19.0
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling bindgen v0.72.1
+   Compiling itertools v0.13.0
+   Compiling log v0.4.34
+   Compiling syn v2.0.119
+   Compiling rustc-hash v2.1.3
+   Compiling serde_json v1.0.151
+   Compiling shlex v2.0.1
+   Compiling shlex v1.3.0
+   Compiling find-msvc-tools v0.1.14
+   Compiling cc v1.6.0
+   Compiling regex-automata v0.4.18
+   Compiling cexpr v0.6.0
+   Compiling miniz_oxide v0.9.1
+   Compiling itoa v1.0.18
+   Compiling syn v1.0.109
+   Compiling autocfg v1.5.1
+   Compiling flate2 v1.1.10
+   Compiling miniz_oxide v0.8.9
+   Compiling regex v1.13.1
+   Compiling num-traits v0.2.19
+   Compiling fdeflate v0.3.7
+   Compiling weezl v0.1.12
+   Compiling color_quant v1.1.0
+   Compiling gif v0.14.2
+   Compiling png v0.18.1
+   Compiling ledger_device_sdk v1.41.0 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk)
+warning: ledger_device_sdk@1.41.0: Root directory: "/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger"
+warning: ledger_device_sdk@1.41.0: Looking for ledger metadata...
+warning: ledger_device_sdk@1.41.0: Found ledger metadata in package: pearl-ledger
+warning: ledger_device_sdk@1.41.0: Found ledger metadata in package: pearl-ledger
+warning: ledger_device_sdk@1.41.0: Building variant `3`
+warning: ledger_device_sdk@1.41.0: Device is nanosplus
+warning: ledger_device_sdk@1.41.0: APP_NAME is Pearl Sim Dev
+warning: ledger_device_sdk@1.41.0: APP_FLAGS is 0
+warning: ledger_device_sdk@1.41.0: APP_VERSION is 0.1.0
+warning: ledger_device_sdk@1.41.0: curves are ["secp256k1"]
+warning: ledger_device_sdk@1.41.0: paths are ["86'/1'"]
+warning: ledger_device_sdk@1.41.0: APP_ICON is icons/pearl-14.png
+warning: ledger_device_sdk@1.41.0: C SDK path is "/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/vendor/ledger-secure-sdk"
+warning: ledger_device_sdk@1.41.0: Output file for icon2glyph is "/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger/target/nanosplus/release/build/ledger_device_sdk-fba167ba908ad7c6/out/icon.hex"
+warning: ledger_device_sdk@1.41.0: INSTALL_PARAMS_BYTES is [0x01,0x0d,0x50,0x65,0x61,0x72,0x6c,0x20,0x53,0x69,0x6d,0x20,0x44,0x65,0x76,0x02,0x05,0x30,0x2e,0x31,0x2e,0x30,0x03,0x21,0x0e,0x00,0x0e,0x00,0x00,0x19,0x00,0x00,0x00,0x00,0x1e,0x01,0xfe,0x0e,0x1c,0x30,0x31,0x80,0x66,0x01,0x98,0x06,0x60,0x18,0xc0,0xc3,0x87,0x07,0xf8,0x07,0x80,0x00,0x00,0x04,0x0a,0x01,0x02,0x80,0x00,0x00,0x56,0x80,0x00,0x00,0x01]
+warning: ledger_device_sdk@1.41.0: INSTALL_PARAMS_LEN is 69
+   Compiling include_gif v1.3.2 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger/vendor/ledger-device-rust-sdk/include_gif)
+   Compiling ledger_secure_sdk_sys v1.17.0 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger/vendor/ledger-device-rust-sdk/ledger_secure_sdk_sys)
+   Compiling alloc v0.0.0 (/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc)
+   Compiling typenum v1.20.1
+   Compiling critical-section v1.2.0
+   Compiling linked_list_allocator v0.10.6
+   Compiling zeroize v1.8.1
+   Compiling rand_core v0.6.4
+   Compiling bech32 v0.11.0
+   Compiling const-zero v0.1.1
+   Compiling numtoa v0.2.4
+   Compiling embedded-alloc v0.5.1
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+warning: ledger_secure_sdk_sys@1.17.0: NBGL is built
+   Compiling pearl-core v0.1.0 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/crates/pearl-core)
+   Compiling pearl-ledger v0.1.0 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger)
+    Finished `release` profile [optimized] target(s) in 19.15s
+1f8a6e5a25fc41f251a17485a553bb4e2cd9c2bc5bbabd628517ba0cae351abd  /workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/pearl-nanosplus-simnet-INSTRUMENTED.elf

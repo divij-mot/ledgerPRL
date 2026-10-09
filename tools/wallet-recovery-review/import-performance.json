@@ -1,0 +1,8 @@
+{
+  "records": 2000,
+  "signatures": 32000,
+  "bytes": 16218359,
+  "importMs": 187603.678501,
+  "zeroDelayTimerMs": 187622.441412,
+  "timerRanDuringImport": false
+}

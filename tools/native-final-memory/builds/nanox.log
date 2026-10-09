@@ -1,0 +1,50 @@
+Pinned SDKs verified in /workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/vendor
+patching file ledger_device_sdk/src/io_new.rs
+patching file ledger_device_sdk/src/io_new/callbacks.rs
+patching file ledger_device_sdk/src/io_new/event.rs
+patching file ledger_device_sdk/src/nbgl.rs
+patching file ledger_secure_sdk_sys/src/c/src.c
+patching file ledger_secure_sdk_sys/src/lib.rs
+patching file ledger_device_sdk/src/testing.rs
+   Compiling compiler_builtins v0.1.160 (/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/compiler-builtins/compiler-builtins)
+   Compiling core v0.0.0 (/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core)
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling ledger_secure_sdk_sys v1.17.0 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger/vendor/ledger-device-rust-sdk/ledger_secure_sdk_sys)
+   Compiling ledger_device_sdk v1.41.0 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger/vendor/ledger-device-rust-sdk/ledger_device_sdk)
+warning: ledger_device_sdk@1.41.0: Root directory: "/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger"
+warning: ledger_device_sdk@1.41.0: Looking for ledger metadata...
+warning: ledger_device_sdk@1.41.0: Found ledger metadata in package: pearl-ledger
+warning: ledger_device_sdk@1.41.0: Found ledger metadata in package: pearl-ledger
+warning: ledger_device_sdk@1.41.0: Building variant `3`
+warning: ledger_device_sdk@1.41.0: Device is nanox
+warning: ledger_device_sdk@1.41.0: APP_NAME is Pearl Sim Dev
+warning: ledger_device_sdk@1.41.0: APP_FLAGS is 0x200
+warning: ledger_device_sdk@1.41.0: APP_VERSION is 0.1.0
+warning: ledger_device_sdk@1.41.0: curves are ["secp256k1"]
+warning: ledger_device_sdk@1.41.0: paths are ["86'/1'"]
+warning: ledger_device_sdk@1.41.0: APP_ICON is icons/pearl-14.png
+warning: ledger_device_sdk@1.41.0: C SDK path is "/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/vendor/ledger-secure-sdk"
+warning: ledger_device_sdk@1.41.0: Output file for icon2glyph is "/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger/target/nanox/release/build/ledger_device_sdk-9ae09e042c39ff3a/out/icon.hex"
+warning: ledger_device_sdk@1.41.0: INSTALL_PARAMS_BYTES is [0x01,0x0d,0x50,0x65,0x61,0x72,0x6c,0x20,0x53,0x69,0x6d,0x20,0x44,0x65,0x76,0x02,0x05,0x30,0x2e,0x31,0x2e,0x30,0x03,0x21,0x0e,0x00,0x0e,0x00,0x00,0x19,0x00,0x00,0x00,0x00,0x1e,0x01,0xfe,0x0e,0x1c,0x30,0x31,0x80,0x66,0x01,0x98,0x06,0x60,0x18,0xc0,0xc3,0x87,0x07,0xf8,0x07,0x80,0x00,0x00,0x04,0x0a,0x01,0x02,0x80,0x00,0x00,0x56,0x80,0x00,0x00,0x01]
+warning: ledger_device_sdk@1.41.0: INSTALL_PARAMS_LEN is 69
+warning: ledger_secure_sdk_sys@1.17.0: NBGL is built
+   Compiling alloc v0.0.0 (/tmp/pearl-rustup/toolchains/nightly-2025-12-05-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc)
+   Compiling typenum v1.20.1
+   Compiling critical-section v1.2.0
+   Compiling linked_list_allocator v0.10.6
+   Compiling zeroize v1.8.1
+   Compiling cfg-if v1.0.5
+   Compiling numtoa v0.2.4
+   Compiling rand_core v0.6.4
+   Compiling const-zero v0.1.1
+   Compiling bech32 v0.11.0
+   Compiling embedded-alloc v0.5.1
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling pearl-core v0.1.0 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/crates/pearl-core)
+   Compiling pearl-ledger v0.1.0 (/workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/source/apps/ledger)
+    Finished `release` profile [optimized] target(s) in 12.94s
+16242b89ef8725a24aaf11d561bac317e367862ae83ecda32873860f596c471c  /workspace/shared/pearl-final-memory-20261009-1946/mirror/apps/ledger/target/memory-measurement/pearl-nanox-simnet-INSTRUMENTED.elf

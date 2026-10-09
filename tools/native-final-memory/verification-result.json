@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "scope": "Retained instrumented software measurements; no hardware or OS-stack guarantee",
+  "models": 5,
+  "memoryFlows": 15,
+  "mixedSessions": 100,
+  "actualInstrumentedElfsChecked": 5
+}
