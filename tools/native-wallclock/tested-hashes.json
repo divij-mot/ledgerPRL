@@ -1,0 +1,19 @@
+{
+  "fullyReplayedPortableHarnessSha256": "320a5a038ff623167e6cefc284101481508b7882d794726ef210570e8c26c7d9",
+  "preflightControlsTestScriptSha256": "660d86bc3bd3116d63188657b5a8d0d315f25b72d5b6eeab390e9f5aa7a920ed",
+  "independentReplayValidatorSha256": "127a670c2010825910f70b0d1944dd6fd7203407c7e2285c85311ba7a7b59d4b",
+  "originalHarnessHashes": {
+    "recordedRunHarnesses": {
+      "wallclock.py": "4bcca0ac3d4c8d0b695fdb28ade75992e5134712fb80bb89607faf1362425fbf",
+      "wallclock-v2.py": "4d008702fced95d4d6818c6e7eb436f332f1a095e6451573388a19b43e35fc32",
+      "wallclock-v3.py": "1822e1293621b156fb9a802a008e42fbbd2079bf84c35ff00780f1f38e8e08a2",
+      "wallclock-v4.py": "46579c4d0cbab1277f6f0d6692d636d5281d4ee8c42594dafef7918a767ff8e9",
+      "verify.cjs": "e3186dce58450ec6f4dac1eb35ac8c7ca87203b03ac5bfff5d67d91bb6efcf1d",
+      "validate-final.py": "f9125ce8315bf1faaa5333ea0fae8cb365cecf5b350e19ff2803b8a88521a232",
+      "test-harness.py": "8b58194cad2b7ca0b9a31d2d6a01457e241ea901f33568dc812ad959b04336f9"
+    },
+    "portableHarness": "25ca8ec1af24bbf46534fa612e5af7dfc53aa49abf17a1bc16c042ae6e85e95b",
+    "originalSourceEvidenceInventory": "d18f44b20210d162fdd993a1aac08fa1a0b4703df7c445d2dd9d8d69aa41672b"
+  },
+  "portableSourceOnlyChanges": "Exact snapshot source-map equality and copied ELF/manifest verification under lock; no production changes."
+}

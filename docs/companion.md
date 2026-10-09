@@ -4,7 +4,7 @@ A local, seedless, watch-only companion for the development Pearl Ledger protoco
 
 ## Run
 
-From the repository root, install the pinned lockfile with `npm ci`, then:
+From the repository root, install the pinned lockfile with `npm ci --ignore-scripts`, then:
 
 ```sh
 npm run dev --workspace @pearl-ledger/companion
@@ -41,6 +41,7 @@ The adapter requires a consistent in-sync indexer/backend status and matching ge
 - Blockbook's `txs` counts confirmed transactions and `unconfirmedTxs` is separate. The adapter checks collected unique IDs against their sum. The deployed upstream's older pending/confirmed pagination can drop records; such responses fail closed. A large or active mining account may need a larger dedicated indexer rather than this bounded prototype.
 - Verified receive issuance and change allocation update durable public recovery high-water marks. Receive addresses must be issued consecutively or their prior public recovery record must be restored. Light-mode change indexes outside the recovery range are rejected. Change allocations never roll back after cancellation.
 - Export the **public recovery record** after issuing addresses. It preserves the account and issued ranges, allowing a new browser to extend its scan beyond a gap of unused addresses. It contains no private keys and is not a Ledger seed backup. It does **not** transfer payment reservations between different browser profiles/computers; reconcile pending/signed transactions before changing profiles.
+- Use **Back up full watch wallet** to preserve the account, issued ranges, payment journal, reservations and any verified signed bytes. Restore through **Complete watch-wallet backup** before using another browser profile. Restoration validates and merges records without clearing signing/broadcast uncertainty; it does not restore source validation, public-service consent or trusted archival status. Separate profiles do not coordinate subsequent activity.
 - A bare public-account JSON remains accepted, but has no issued-range metadata. Offline snapshot import does not establish discovery completeness.
 
 ## Device, receive and payment flow
@@ -68,7 +69,7 @@ WebHID is feature-detected. Intended test targets are desktop Chrome/Edge on loc
 - A distinct checkbox and **Broadcast signed transaction** button disclose the current network/provider and submit only those exact verified bytes. The server verifies the bundle, witnesses, signatures and transaction ID again. Public broadcast uses the documented POST `/api/v2/sendtx/`; local-node broadcast is off by default.
 - Before sending, the journal moves to `broadcast-unknown`. A timeout or error keeps the reservation and exact bytes. An explicit rebroadcast uses the same bytes; the app never silently constructs a replacement payment. A matching returned transaction ID means node/indexer acceptance, not confirmation. Previously accepted but currently unarchived records expose **Explicitly rebroadcast exact bytes** with a fresh approval checkbox. This repeats the stored bytes and transaction ID; it never selects new inputs or signs again. A currently archived receipt must first be reconciled. Timeout, rejection or an already-known error preserves uncertainty and all reservations; importing an older accepted backup cannot clear that uncertainty.
 
-A proven `0x6985` rejection of **REVIEW**, before signatures are released, returns the payment to its unsigned draft. The caller may then discard it or reconnect and review again. Rejection during signature fetch, transport loss, timeout and any other uncertain result retain the signing reservation. There is intentionally no “clear all locks” button. A recovery/reconciliation workflow for stranded ambiguous signing sessions is not yet implemented. Do not clear browser storage to reuse uncertain inputs.
+A proven `0x6985` rejection of **REVIEW** can return an initial signing attempt to its unsigned draft only while that attempt still owns the unchanged record. The caller may then discard it or reconnect and review again. A recovery attempt's rejection cannot clear earlier signing uncertainty. Rejection during signature fetch, transport loss, timeout and any other uncertain result retain the signing reservation. The explicit identical-payment recovery above is implemented; automatic retrieval of earlier missing signed bytes and release of ambiguous or conflicted input locks are not. There is intentionally no “clear all locks” button. Do not clear browser storage to reuse uncertain inputs.
 
 ## Optional authenticated local-node bridge
 
@@ -135,7 +136,9 @@ npm run build --workspace @pearl-ledger/companion
 
 Tests cover integer precision, raw-outpoint/path substitution, duplicates and wrong genesis, maturity boundaries, explicit dust/fee rules, reservations/change allocation, irreversible uncertain state, reorg removal, stale validation, address gap discovery, spent-address discovery, history-spend exclusion, source schema/pagination constraints, URL/origin boundaries and disabled local broadcast. Other repository tests cover SDK APDUs, serialization/signatures and native-node interoperability.
 
-The sandbox's installed Chromium could not launch because its process-singleton Unix socket is denied (`socket() EPERM`), including the allowed isolated-profile escalation. Therefore this checkpoint has **no successful rendered-browser or physical-WebHID QA claim**. A checked-in browser test can be run in a normal development environment once its browser is available. Device connection, screen comparison, approval/rejection, USB disconnect, all supported hardware models and real user browser/OS combinations remain release gates. Public backend liveness/CORS/schema observations are documented separately in `docs/backend-evidence.md`; a working endpoint is not an audited trust guarantee.
+An actual [cloud-browser review](../apps/companion/test/evidence/rendering/README.md) on 2026-10-09 verified the built preview's desktop empty-state rendering, section navigation, guarded Receive/Send views and disabled empty Activity controls at 1180 × 757 CSS pixels. The rebuilt safety footer was rechecked, and the strict CSP allowed the external built stylesheet. This supersedes the earlier local Chromium launch failure for that narrow rendering scope only. Loaded account/import flows, real IndexedDB persistence and cross-tab recovery, interruption/reload behavior, development-server styling and narrow-screen layout were not exercised by that review. The [companion boundary tests](../apps/companion/test/README.md) use explicit DOM/storage/transport mocks and do not replace those browser checks.
+
+Physical WebHID connection, screen comparison, approval/rejection, USB disconnect, all five supported hardware models and real user browser/OS combinations remain release gates. Public backend liveness/CORS/schema observations are documented separately in [backend evidence](backend-evidence.md); a working endpoint is not an audited trust guarantee.
 
 ## API references
 

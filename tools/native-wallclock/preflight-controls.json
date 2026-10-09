@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "harnessSha256": "320a5a038ff623167e6cefc284101481508b7882d794726ef210570e8c26c7d9",
+  "sourceSnapshotScriptSha256": "f8bfa464f53fe6b40bc05e5d782dfac51bfa1b0ac77c654bf2d3e4196633bbe2",
+  "testsRun": 12,
+  "controls": [
+    {
+      "name": "valid exact source map",
+      "status": "passed",
+      "sourceCount": 24
+    },
+    {
+      "name": "empty manifest sources",
+      "status": "passed",
+      "rejection": "exact source-map mismatch"
+    },
+    {
+      "name": "missing manifest source",
+      "status": "passed",
+      "rejection": "exact source-map mismatch"
+    },
+    {
+      "name": "extra manifest source",
+      "status": "passed",
+      "rejection": "exact source-map mismatch"
+    },
+    {
+      "name": "changed manifest source hash",
+      "status": "passed",
+      "rejection": "exact source-map mismatch"
+    },
+    {
+      "name": "empty native snapshot",
+      "status": "passed",
+      "rejection": "nonempty source snapshot required"
+    },
+    {
+      "name": "stage rejects empty sources before copy",
+      "status": "passed",
+      "emulatorStarted": false,
+      "copiesCreated": 0
+    },
+    {
+      "name": "valid stage verifies exact copied ELF and manifest",
+      "status": "passed",
+      "elfSha256": "d13b966468ed2a87658d01cde3610875b9dba198778cd16f62f7112bb5780abd"
+    },
+    {
+      "name": "copied ELF mismatch fails closed",
+      "status": "passed",
+      "emulatorStarted": false,
+      "simulatedMutation": "test-fixture copy read only"
+    },
+    {
+      "name": "copied manifest byte mismatch fails closed",
+      "status": "passed",
+      "emulatorStarted": false,
+      "simulatedMutation": "test-fixture copy read only"
+    },
+    {
+      "name": "source ELF mismatch",
+      "status": "passed"
+    },
+    {
+      "name": "target/network mismatch",
+      "status": "passed"
+    }
+  ],
+  "scope": "Only independent test fixtures and mocked copy reads; no emulator launch or production source/artifact changes."
+}

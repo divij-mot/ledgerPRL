@@ -219,6 +219,12 @@ Release reports include exact ELF and test-source hashes, all session results, s
 
 All five models passed 100 successive mixed release sessions and a separate 20-session instrumented replay on 2026-10-09. The release runs verified 1,130 signatures. Instrumented idle heap stayed at 160 B at initialization and sessions 10/20; cumulative peak remained 1,672 B after the first cycle. Host emulator RSS increased by 2.2–8.4 MiB over release sessions 10–100, which is retained separately and is not attributed to native allocation. Full distributions, hashes, limitations and replay commands are in `apps/ledger/tests/evidence/stability/README.md`.
 
+## Normal-clock pending-state expiry
+
+The [portable wall-clock qualification](../tools/native-wallclock/README.md) ran untouched Speculos 0.27.1 with its normal 100 ms ticker on all five simnet models. Incomplete upload, unapproved final review, and approved-but-partly-exported signatures each caused explicit native exit after 1,200 observed normal ticks. The final portability replay measured 120.127–120.958 seconds across those 15 cases; five completed-session idle controls remained responsive after 125 seconds.
+
+All 60 stale-state restart probes rejected old fetch/review/append requests. A new transaction required fresh emulated approval and independently verified signatures. Twelve preflight controls check exact source inventories and copied ELF/manifest identity before execution. Original qualification and full portable replay are separate evidence for the same matrix, not additional unique coverage. No accelerated or injected ticker was used. These are emulator results, not a guarantee of physical-device timing, RAM erasure, or every transport/scheduling race.
+
 ## Required release validation
 
 - Verify API27 firmware rollout/device compatibility, pin a builder image digest, then reproduce every target/network build

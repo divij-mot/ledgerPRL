@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "sourceInputsUnchanged": 25,
+  "toolFilesUnchanged": 53,
+  "sourceAndCopiedElfsUnchanged": 5,
+  "usedPortRangeNotListening": [
+    5401,
+    5440
+  ],
+  "repoStatusAtEnd": " M apps/companion/src/styles.css\n",
+  "testedHarnessSha256": "320a5a038ff623167e6cefc284101481508b7882d794726ef210570e8c26c7d9",
+  "noSourceOrNativeArtifactEdits": true
+}

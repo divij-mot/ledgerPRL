@@ -1,0 +1,17 @@
+test_01_valid_complete_snapshot (__main__.Checks.test_01_valid_complete_snapshot) ... ok
+test_02_empty_manifest_source_map (__main__.Checks.test_02_empty_manifest_source_map) ... ok
+test_03_missing_source (__main__.Checks.test_03_missing_source) ... ok
+test_04_extra_source (__main__.Checks.test_04_extra_source) ... ok
+test_05_changed_source_hash (__main__.Checks.test_05_changed_source_hash) ... ok
+test_06_empty_snapshot (__main__.Checks.test_06_empty_snapshot) ... ok
+test_07_stage_empty_sources_before_copy (__main__.Checks.test_07_stage_empty_sources_before_copy) ... ok
+test_08_valid_stage_copy_verified (__main__.Checks.test_08_valid_stage_copy_verified) ... ok
+test_09_copy_elf_mismatch (__main__.Checks.test_09_copy_elf_mismatch) ... ok
+test_10_copy_manifest_mismatch (__main__.Checks.test_10_copy_manifest_mismatch) ... ok
+test_11_source_elf_mismatch (__main__.Checks.test_11_source_elf_mismatch) ... ok
+test_12_target_network_mismatch (__main__.Checks.test_12_target_network_mismatch) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.224s
+
+OK

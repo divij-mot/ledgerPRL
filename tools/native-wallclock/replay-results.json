@@ -1,0 +1,412 @@
+{
+  "status": "passed",
+  "kind": "Separate full portable-harness replay of previously qualified matrix; not additional unique coverage",
+  "models": [
+    {
+      "model": "nanosp",
+      "elfSha256": "016a24fb3dce05d48a08118575802a44d561c29781572fbeab9d037bda77a661",
+      "preflightChecks": {
+        "exactSourceMap": true,
+        "copiedElfHash": true,
+        "copiedManifestBytes": true
+      },
+      "states": [
+        {
+          "name": "incomplete-receiving",
+          "elapsedSeconds": 120.194055856,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100146165,
+          "maxTickIntervalSeconds": 0.103516684,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/nanosp/01-incomplete-receiving",
+          "evidenceSha256": {
+            "result.json": "875600e9b8fc6f7923e03ada6e02581d0480c24b8b259adbebe3a33bfd6a6b90",
+            "apdu-transcript.json": "bd0fda703dc5a56773bfd55e1c95748c1df410f15f3c9de722650864923d99a7",
+            "ticker-observations.json": "244d79086a2f4aefc27f6189a039153acdef7cf0fbbe6efcdbe9e351ae9f77cc",
+            "speculos-monotonic.log": "605299e1d405a7dc9bf56e01bab396c9c1b2833f31f89a448b0bc1e5e569522d",
+            "screens.json": "37ab5a7eab185531de4076a8a51f0a5c995a1b8953b9e64b7553433bb1587407"
+          }
+        },
+        {
+          "name": "unapproved-review",
+          "elapsedSeconds": 120.613169679,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100150763,
+          "maxTickIntervalSeconds": 0.104100463,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [
+            "6986"
+          ],
+          "evidenceId": "measurements/nanosp/02-unapproved-review",
+          "evidenceSha256": {
+            "result.json": "b81258a240744655dfeea61ef065384adc6b4d5ace4eab444247b9d983deea73",
+            "apdu-transcript.json": "f647f5b86742e9f642e18d1c4102fac7c73996902df06e4d9242b519aad70050",
+            "ticker-observations.json": "15b8a7f3b2230bed57b97a1a9694ef5160b417865000d9be8f3f0067a11981ee",
+            "speculos-monotonic.log": "850d5a5b452398166067f15588f470ff507278469cf68177ca816c09db484916",
+            "screens.json": "116e57bc4e4763c32dc3f60f4e5ed19ff53b8390c77e27602e585a3ba9cc9105"
+          }
+        },
+        {
+          "name": "approved-partial-export",
+          "elapsedSeconds": 120.180034629,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100162661,
+          "maxTickIntervalSeconds": 0.126698651,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/nanosp/03-approved-partial-export",
+          "evidenceSha256": {
+            "result.json": "a71d5091bd300a664456541c02625218f5f7d94da3f7d9f407bca29bf069ca44",
+            "apdu-transcript.json": "07977c67a2c342138f31831d4792d95cf0c7b142f79749608cd54457cd51c642",
+            "ticker-observations.json": "3d0d878d6c17347e3b95ca15b9ccbea980205f969320fdb4702ea86f66769f48",
+            "speculos-monotonic.log": "0691b5d6bc50f646597ec426ef1398f2bae877f9fc5817e2c2b272b5b11744af",
+            "screens.json": "e013789f699daf46ad2ec7546316efc951736c67ad4d7301e11749fb349a8e9a"
+          }
+        }
+      ],
+      "idle": {
+        "elapsedSeconds": 125.006628402,
+        "normalTicks": 1247,
+        "sameHomeText": true,
+        "infoWorks": true,
+        "evidenceId": "measurements/nanosp/04-recovery-and-ordinary-idle",
+        "evidenceSha256": {
+          "result.json": "9169b4a09fb1922604ab9826a5994a9449b0df580498b8c5d941b03a1fe9c365",
+          "apdu-transcript.json": "97ee0b57b407b0409c80c33ab8384fc35edf3a33859581357f60efcbe3ea7271",
+          "ticker-observations.json": "d5629614511ae68f5ffd2473bb02f5a7091be993ae6f493e2507949761a6db22",
+          "speculos-monotonic.log": "f593a15e7e8aefcd66dc67309d33c49a2f858cf9e2ad8b34fc2ebd5ffcc2c3a7",
+          "screens.json": "43fd6ecbe4dd2a56e769cc845519228ddecada51cf44370b5c128d3f734298bb"
+        }
+      },
+      "postExpiryStaleStateRejections": 12,
+      "freshPostExpiryApprovalAndTwoVerifiedSignatures": true
+    },
+    {
+      "model": "nanox",
+      "elfSha256": "4771a8b5349042bfac313e33e5b66229c2e76e327469e8af01c86dede68356a0",
+      "preflightChecks": {
+        "exactSourceMap": true,
+        "copiedElfHash": true,
+        "copiedManifestBytes": true
+      },
+      "states": [
+        {
+          "name": "incomplete-receiving",
+          "elapsedSeconds": 120.196308866,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100169396,
+          "maxTickIntervalSeconds": 0.103660352,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/nanox/01-incomplete-receiving",
+          "evidenceSha256": {
+            "result.json": "334bd95a9d8d9d34556b202e6e276bbd84954aefa5ed1af9c0c16ecfd785d87f",
+            "apdu-transcript.json": "b94ea996a854cdfe26a340770e3df596a4324b5905ca19c896036cb88a3b5dfb",
+            "ticker-observations.json": "e1afb1b4dd8337af71075ea8351e936f95ed5eeb5717112222c3e63a1decb9ca",
+            "speculos-monotonic.log": "adf2fae8a9c37128edc05070a44660067c224463e2c6a10881042340e958710d",
+            "screens.json": "375da010100b9bb9c2f1f612687ae7d2f738e4cc8b62e1795f687a5b71d6cab6"
+          }
+        },
+        {
+          "name": "unapproved-review",
+          "elapsedSeconds": 120.648824492,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100159277,
+          "maxTickIntervalSeconds": 0.103074913,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [
+            "6986"
+          ],
+          "evidenceId": "measurements/nanox/02-unapproved-review",
+          "evidenceSha256": {
+            "result.json": "23a4bfc590411a385c5df3e3b88335092249a932a7368264842c007ce0452790",
+            "apdu-transcript.json": "c153603d2dfee816e1a5b17d777ddf15861d055a20b9af40636b92ec304460b2",
+            "ticker-observations.json": "e52e21da4eb962402b11cf4edee933805bb9eed9847cfc73fc30efc263ffab10",
+            "speculos-monotonic.log": "80458f489c079fe8752426b278dba1d2833e1b093311d656724cc5aea0cf4cf6",
+            "screens.json": "c3f878b17b0fe59490171915e410a32e8fd8bf1947e46cb96235090f7526c787"
+          }
+        },
+        {
+          "name": "approved-partial-export",
+          "elapsedSeconds": 120.185158488,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100159768,
+          "maxTickIntervalSeconds": 0.103882488,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/nanox/03-approved-partial-export",
+          "evidenceSha256": {
+            "result.json": "0ef10e6cbba8bf0565ed4582db7619409557a3c194839daec9206a913e19f86f",
+            "apdu-transcript.json": "60dc8a41682d665a8985872065c4a2cb8e8016e43d71e1a61baa42392bf9a227",
+            "ticker-observations.json": "99a91d11922f6c964d3860ba53e2b678312d150705b1a7c0943710f3db04dd08",
+            "speculos-monotonic.log": "387c8848cd43b2b26af9db6fb9641921bbd9d3feb5de4319a25663ad221de726",
+            "screens.json": "19d454e7af2277d2314708e27d77ffb7a25935adc0838c5a8221af169f861389"
+          }
+        }
+      ],
+      "idle": {
+        "elapsedSeconds": 125.006222257,
+        "normalTicks": 1248,
+        "sameHomeText": true,
+        "infoWorks": true,
+        "evidenceId": "measurements/nanox/04-recovery-and-ordinary-idle",
+        "evidenceSha256": {
+          "result.json": "2f5f6e0d98cefe907abf91f36bca9c363b8b139d254cc8160c018bc27a439e84",
+          "apdu-transcript.json": "0c686415e44dc22f375672df087a05b8c85943d5c6ae3a85f32123026e6af543",
+          "ticker-observations.json": "1df4d2e7a627a7d52a96db187b5976c266ac27aa67fd486e405769f6fa55d813",
+          "speculos-monotonic.log": "39da9087d06236c45353d2a2abd2652ca2f7bcc10c8c679bffc085ae1ba4a46d",
+          "screens.json": "4c9ef3d0d5f127b87daa776ad7116460459ee5b4324d36470f8cd684dfac523d"
+        }
+      },
+      "postExpiryStaleStateRejections": 12,
+      "freshPostExpiryApprovalAndTwoVerifiedSignatures": true
+    },
+    {
+      "model": "stax",
+      "elfSha256": "7232fb09694fc9d2f27040ed19685277fb7065c6dfe9e6aa28647391e7fcc678",
+      "preflightChecks": {
+        "exactSourceMap": true,
+        "copiedElfHash": true,
+        "copiedManifestBytes": true
+      },
+      "states": [
+        {
+          "name": "incomplete-receiving",
+          "elapsedSeconds": 120.142378191,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.10015274,
+          "maxTickIntervalSeconds": 0.107188512,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/stax/01-incomplete-receiving",
+          "evidenceSha256": {
+            "result.json": "e2ff41573ff938cfb6bb6a2f3bf4a9294c42242254f920044ea9b0475836e5a0",
+            "apdu-transcript.json": "2d0e77ba4a4a4c361febf2fc27135c2fab1d684b13838d3a39ead3ef9ddd49a3",
+            "ticker-observations.json": "bc0f1816afd5dd4c15fae3dc58752fda0e480cef1d1ecd532781a9c8a3fd52c1",
+            "speculos-monotonic.log": "d10bdad732d765c5601e666714f535d1c044948e3289d4104c3868244febfe7b",
+            "screens.json": "598197a3f6a2c30fd32674cad2f31a2f917ec7766704f42d82b463a8dfe55875"
+          }
+        },
+        {
+          "name": "unapproved-review",
+          "elapsedSeconds": 120.747134117,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100150904,
+          "maxTickIntervalSeconds": 0.180569391,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [
+            "6986"
+          ],
+          "evidenceId": "measurements/stax/02-unapproved-review",
+          "evidenceSha256": {
+            "result.json": "0f616bb90fff0be0ca816ddf40394f28d13ce3b1d29eaaba9de400b1b8e4345f",
+            "apdu-transcript.json": "7190fa46d252543f045e1dd4d6735d82a667b0385adb2804e3f5b06ce81bf806",
+            "ticker-observations.json": "7c9a4ef82cd00370a30b6a855490588860c072525ccfbacc42a3262aea021128",
+            "speculos-monotonic.log": "29fa2244c2f8446206f7b934d660e0d0769cade59d3adf382c4b13299932d438",
+            "screens.json": "2e98aa0d2771b8ac4fed8bb60bc74d697561f76315e4e4eae400c71f5ac4d0a7"
+          }
+        },
+        {
+          "name": "approved-partial-export",
+          "elapsedSeconds": 120.164619355,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100169209,
+          "maxTickIntervalSeconds": 0.105162118,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/stax/03-approved-partial-export",
+          "evidenceSha256": {
+            "result.json": "f32439ac3ea88f623c6790bf9062170c463cbf65097a9bec1490e88ce4a57414",
+            "apdu-transcript.json": "8518bf2ff7c39ee1be1080bb9da66c11c2ed1af84b4b811c3330fb2f040cad93",
+            "ticker-observations.json": "68e24714eb1bd598a0b961538831d5f84259b4e6986a856de13182e70b02ef1a",
+            "speculos-monotonic.log": "1854f446e904f495fe04bb2a620d14b52c8f28863689d2e29b24f441e9d54aac",
+            "screens.json": "10993769d2d9b9af18a7e49b53003d7dd8321e5c0c5346631a127f79ba33e2e1"
+          }
+        }
+      ],
+      "idle": {
+        "elapsedSeconds": 125.06203336,
+        "normalTicks": 1249,
+        "sameHomeText": true,
+        "infoWorks": true,
+        "evidenceId": "measurements/stax/04-recovery-and-ordinary-idle",
+        "evidenceSha256": {
+          "result.json": "969f1e56e54cbe349da41afd4953b252441284d2ead4b02719bc6df7da432899",
+          "apdu-transcript.json": "38c39518f70d9d66c2d50238f8f4cbdb36d1e1eab93659aeed2fc5d0276cdafa",
+          "ticker-observations.json": "f985cbd634a50d2cf8cdbf74653d43eb134ad138568726a5d30bb086dfd17acc",
+          "speculos-monotonic.log": "9832ac959966016d95f1345380698acafcccbc8f974aaf2adcddcb65da86b90a",
+          "screens.json": "983533294eaed5d4eae7b549b8475195b9cbee10ee530ccfa3489ab397715bc6"
+        }
+      },
+      "postExpiryStaleStateRejections": 12,
+      "freshPostExpiryApprovalAndTwoVerifiedSignatures": true
+    },
+    {
+      "model": "flex",
+      "elfSha256": "07405a1c64c6fadfa289ede2fa1d9c4593cb29f784d85a219ac8a672d7b4b8fd",
+      "preflightChecks": {
+        "exactSourceMap": true,
+        "copiedElfHash": true,
+        "copiedManifestBytes": true
+      },
+      "states": [
+        {
+          "name": "incomplete-receiving",
+          "elapsedSeconds": 120.127230507,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.10015378,
+          "maxTickIntervalSeconds": 0.107734316,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/flex/01-incomplete-receiving",
+          "evidenceSha256": {
+            "result.json": "735c0afdf2a4d948e203d4c7d0cc46525d9dd13c3a9bc1e9fcf6f05bbf936065",
+            "apdu-transcript.json": "3c7ae93b612a8532f4d29e6043f67b5c374cd90e71e94330729f2a7bb26ddeb3",
+            "ticker-observations.json": "55459ec4f4a3d05b627447d3fb70779b49eac51e7879bf2772b4dddc214ea133",
+            "speculos-monotonic.log": "1b1b63f54975455450bf7ce687b59e79d11698672ad79c052eccf8760821f6a0",
+            "screens.json": "ff51bd71a9a8550d20d54dccce9f536f4a172f167a6cff1ff537027128d3557c"
+          }
+        },
+        {
+          "name": "unapproved-review",
+          "elapsedSeconds": 120.673191156,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100158129,
+          "maxTickIntervalSeconds": 0.159803139,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [
+            "6986"
+          ],
+          "evidenceId": "measurements/flex/02-unapproved-review",
+          "evidenceSha256": {
+            "result.json": "859bae46ef8e0e3e96a50cc6d9d34cfc201f9133234cdfdd2f94fbd4df49a3a3",
+            "apdu-transcript.json": "22fb1bcc9da2876a5e9d9b0638128c43ff11a94a8462e1e64f5e127c9e49920f",
+            "ticker-observations.json": "0e67af5ff93f74caa89a3b972f17d52dfbe6d581177f073a3c7467dfeae879d7",
+            "speculos-monotonic.log": "0c3487167c6b6626c0fce2121b14e3ee864f549f3d8ee09e0eaa394a3097acbd",
+            "screens.json": "ea56cf7e781b1f7a47ec74d89365e7e243bfc4e4a760422696e995dd4fe6d65f"
+          }
+        },
+        {
+          "name": "approved-partial-export",
+          "elapsedSeconds": 120.156653757,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100170196,
+          "maxTickIntervalSeconds": 0.113144973,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/flex/03-approved-partial-export",
+          "evidenceSha256": {
+            "result.json": "b4fcead74edd43d08a7d3b142b39c9f31d1745df6f99d414ca478ba6735472e3",
+            "apdu-transcript.json": "3c1571c9b3407e1f67d67e3b9510f1c1a1da86b700c95f5775673b370c427826",
+            "ticker-observations.json": "b52b02872ea5393cd65d6473ae683090b28b30524814235b540299b16e86975e",
+            "speculos-monotonic.log": "8bdf644f868036348782ffe7b20fd7992b615b7e39f9b9a2bf7c86cb75786180",
+            "screens.json": "5cfe2fcccaf7d53c831427b2f5f9c6ce6229526f45735ae34fc1a4c631aa2b32"
+          }
+        }
+      ],
+      "idle": {
+        "elapsedSeconds": 125.063932148,
+        "normalTicks": 1249,
+        "sameHomeText": true,
+        "infoWorks": true,
+        "evidenceId": "measurements/flex/04-recovery-and-ordinary-idle",
+        "evidenceSha256": {
+          "result.json": "91b0b8212bf5677c6cc7b57d96001cd8844118735ad88e5e260abef89c6f931e",
+          "apdu-transcript.json": "542c55d6b264bbda65586166599b97f4cec28c309cf90566bb4df661deb8ef29",
+          "ticker-observations.json": "6b84608ce17d1c4543725f2ad1004f0608dc0e31f7cb3d36f0f9ce0ed5834dad",
+          "speculos-monotonic.log": "fe540ba6d3f034c6dcda302c78c65c1400d9b90e9cc089fe299989c610f17414",
+          "screens.json": "5877b293205b621891ce4dc7d24cc8a99ed803902534b6cc4dbdcb11765867af"
+        }
+      },
+      "postExpiryStaleStateRejections": 12,
+      "freshPostExpiryApprovalAndTwoVerifiedSignatures": true
+    },
+    {
+      "model": "apex_p",
+      "elfSha256": "4efa4e5a91bdb1ffcaba3c6c022f048972b09554601bf7da4027b23f60aa3592",
+      "preflightChecks": {
+        "exactSourceMap": true,
+        "copiedElfHash": true,
+        "copiedManifestBytes": true
+      },
+      "states": [
+        {
+          "name": "incomplete-receiving",
+          "elapsedSeconds": 120.236662423,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.10015537,
+          "maxTickIntervalSeconds": 0.108121823,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/apex_p/01-incomplete-receiving",
+          "evidenceSha256": {
+            "result.json": "3163f555c76a5fedfeb7e45c6ef57221e288b9ee04b19658e3eda8ee16895027",
+            "apdu-transcript.json": "baef08ae488045971621526f98a6a14772b4a5f1c30a59a0752cccc7819b8052",
+            "ticker-observations.json": "b56a83127bb5280433ab14511385a6c8cb593e18236b98b2bb69587f8f93cf2a",
+            "speculos-monotonic.log": "a1d1d64849d8b01e2fe21470fb1f76082d4d7ddee88b9d64e8731d2c87f21cdc",
+            "screens.json": "e911899da4955541de4f526b09c96bc7f51c6a5ad96c4bf750d600a9e28caa42"
+          }
+        },
+        {
+          "name": "unapproved-review",
+          "elapsedSeconds": 120.958436985,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100158115,
+          "maxTickIntervalSeconds": 0.226574051,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [
+            "6986"
+          ],
+          "evidenceId": "measurements/apex_p/02-unapproved-review",
+          "evidenceSha256": {
+            "result.json": "83f669ff04f995044fa1583e071916b9abe2fff90e587af924197bf1a0535e6a",
+            "apdu-transcript.json": "0d90d920e1c51ebb4c4ca130741a913a94e058bc79287be04126e9b6e225d7dc",
+            "ticker-observations.json": "2cf4eed75edd34a402657f8215fb5f831fc173e4cfbb4d07267901dacc8a896d",
+            "speculos-monotonic.log": "e4f572cd0eb4e9b2b561f10ee353fb7aa6e570a456c9f66853b60117f4e41bde",
+            "screens.json": "aface23d53c45ffb02e0f237929ef51ca3587c6e11d305726049298a2b9c7487"
+          }
+        },
+        {
+          "name": "approved-partial-export",
+          "elapsedSeconds": 120.168232684,
+          "normalTicks": 1200,
+          "medianTickIntervalSeconds": 0.100150679,
+          "maxTickIntervalSeconds": 0.10337997,
+          "nativeExitCode": 1,
+          "postReferenceResponseHex": [],
+          "evidenceId": "measurements/apex_p/03-approved-partial-export",
+          "evidenceSha256": {
+            "result.json": "18731c72b6ca12877216461ee447f28a1855f42f6e9475ac5c05abf1187fca27",
+            "apdu-transcript.json": "2ed644a8348fdcfee017e61f65d1533c9748eb651510514d43738a7e86f01614",
+            "ticker-observations.json": "fa98a7b7718bf067c05a61c5e7b9f25b837d243be86b56da368e6866c8a6b4c7",
+            "speculos-monotonic.log": "198f16f1825f426e605ea9cd91f9aa9e4de51f41909ff8441aa959405aaa3979",
+            "screens.json": "103f3ee1fef1a0845507de3c305af0a27dab563e2b36322f0d05b16b45a287d6"
+          }
+        }
+      ],
+      "idle": {
+        "elapsedSeconds": 125.034602857,
+        "normalTicks": 1247,
+        "sameHomeText": true,
+        "infoWorks": true,
+        "evidenceId": "measurements/apex_p/04-recovery-and-ordinary-idle",
+        "evidenceSha256": {
+          "result.json": "bba9564214bc539dd55a38046b98a5f97abd7124794b83e232b12edec4a8d3b4",
+          "apdu-transcript.json": "45888f202ce1743562cc55a97a6c49986fe79784faf03fb4bde6f3b69a431136",
+          "ticker-observations.json": "f6bb60d798b5a7650280e6f2bf03be507517ae233545c92bb2265884e7c4cd28",
+          "speculos-monotonic.log": "8ca844a3f9a25b3e30f495ea0f343ee274e38f1f40ba57c7a8df883dd35fb186",
+          "screens.json": "5333cb79b69eb5d2eb6c644f8fe93559a0cb7ee6205cd7a7ba9bf256d6f1e5c3"
+        }
+      },
+      "postExpiryStaleStateRejections": 12,
+      "freshPostExpiryApprovalAndTwoVerifiedSignatures": true
+    }
+  ],
+  "testedHarnessSha256": "320a5a038ff623167e6cefc284101481508b7882d794726ef210570e8c26c7d9",
+  "runInputSha256": "f03c28e48f8208da849993031c8b963e5d7836f2e3a6cf870a56490dd06a2f6a",
+  "runProvenanceSha256": "09ed10d8f302cca26097f648887516bbc89cf933c9cd1a09fdccc68a7940372a",
+  "normalTickerOnly": true,
+  "injectedTicks": false,
+  "uniqueCoverage": "Five models x three pending states plus one idle/recovery control each. Replay does not expand that matrix."
+}

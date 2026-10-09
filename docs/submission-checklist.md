@@ -2,6 +2,8 @@
 
 This is preparation, not a submission or approval. No agreement has been accepted on the owner's behalf; no app/OS has been installed on hardware; no custom CA, generic test seed, PIN, trust setting or provider has been changed. Pearl is not available in My Ledger.
 
+Recorded [native/emulator evidence](../apps/ledger/tests/evidence/README.md) and [offline package verification](../apps/ledger/tests/evidence/packaging/README.md) already cover development snapshots. The unchecked reproduction items below apply to the final release artifacts and complete intended matrix; they do not mean those earlier checks were never run. The five modeled targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is unsupported.
+
 ## Source, packaging and publication configuration
 
 - [ ] Owner selects a project license and approves any disclosure; preserve dependency/upstream notices. SDK-inherited workspace license metadata is not a license choice for Pearl.
@@ -18,6 +20,7 @@ This is preparation, not a submission or approval. No agreement has been accepte
 
 - [ ] Reproduce native Speculos account/address/signing/rejection/lifecycle tests on all five targets and every network/load-permission variant.
 - [ ] Reproduce signing vectors and actual isolated Pearl acceptance/confirmation/reorg evidence against exact artifacts.
+- [ ] Qualify loaded-account browser flows, imports, real IndexedDB persistence/cross-tab locking, interruption/reload recovery and supported viewport/OS combinations. The completed desktop empty-state rendering review and mocked host regressions do not establish these behaviors.
 - [ ] Obtain a Ledger-controlled physical-test/distribution arrangement for **retail Nano X**, which cannot ordinarily sideload. A special-development-device host option is not a retail workaround. Pearl is not deployed to a vendor test provider.
 - [ ] Separately authorize app installation on dedicated, no-value test devices for each supported route. Verify target/API, secure-display app identity and package hashes before use.
 - [ ] Document a seed-preserving **app-install** procedure; never hide recovery-phrase entry, quick setup, factory reset, custom CA enrollment, provider changes or host security-warning bypasses in its prerequisites.
