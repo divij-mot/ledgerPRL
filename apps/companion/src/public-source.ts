@@ -15,7 +15,12 @@ export function browserPublicSource(
   const base = BLOCKBOOK_HOSTS[selected];
   const proxyFetch: typeof fetch = async (input, init) => {
     assert(
-      typeof input === "string" && input.startsWith(base + "/api/v2/"),
+      typeof input === "string" &&
+        (input.startsWith(base + "/api/v2/") ||
+          (input.startsWith(base) &&
+            /^\/api\/v1\/estimatefee\/(?:1|10|25)$/.test(
+              input.slice(base.length),
+            ))),
       "Unexpected public source",
     );
     const response = await fetch("/api/indexer/read", {

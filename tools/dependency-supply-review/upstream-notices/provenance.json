@@ -1,0 +1,102 @@
+[
+  {
+    "name": "@ledgerhq/lumen-ui-react",
+    "version": "0.1.65",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/LedgerHQ/lumen",
+    "revision": "cf3c5fbad324cb3aa5af9882695d54992ca5a86e",
+    "url": "https://raw.githubusercontent.com/LedgerHQ/lumen/cf3c5fbad324cb3aa5af9882695d54992ca5a86e/LICENSE.MD",
+    "scope": "The npm package omits a license file. This is the unchanged root Apache-2.0 license from the exact official package release tag; package metadata alone is not treated as the full notice.",
+    "notices": [
+      {
+        "path": "tools/dependency-supply-review/upstream-notices/LICENSE.lumen-ui-design",
+        "sha256": "81d29f0bcc4e026c913424a66bcdf3bd31e03ab58e1ac7c4be5f367414557d10"
+      }
+    ]
+  },
+  {
+    "name": "@ledgerhq/lumen-design-core",
+    "version": "0.1.33",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/LedgerHQ/lumen",
+    "revision": "cf3c5fbad324cb3aa5af9882695d54992ca5a86e",
+    "url": "https://raw.githubusercontent.com/LedgerHQ/lumen/cf3c5fbad324cb3aa5af9882695d54992ca5a86e/LICENSE.MD",
+    "scope": "The npm package omits a license file. This is the unchanged root Apache-2.0 license from the exact official package release tag; package metadata alone is not treated as the full notice.",
+    "notices": [
+      {
+        "path": "tools/dependency-supply-review/upstream-notices/LICENSE.lumen-ui-design",
+        "sha256": "81d29f0bcc4e026c913424a66bcdf3bd31e03ab58e1ac7c4be5f367414557d10"
+      }
+    ]
+  },
+  {
+    "name": "@ledgerhq/lumen-utils-shared",
+    "version": "0.1.16",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/LedgerHQ/lumen",
+    "revision": "eefb54d842a3e5adcd4fcefc7453d7f34e512412",
+    "url": "https://raw.githubusercontent.com/LedgerHQ/lumen/eefb54d842a3e5adcd4fcefc7453d7f34e512412/LICENSE.MD",
+    "scope": "The npm package omits a license file. This is the unchanged root Apache-2.0 license from the exact official package release tag; package metadata alone is not treated as the full notice.",
+    "notices": [
+      {
+        "path": "tools/dependency-supply-review/upstream-notices/LICENSE.lumen-utils",
+        "sha256": "81d29f0bcc4e026c913424a66bcdf3bd31e03ab58e1ac7c4be5f367414557d10"
+      }
+    ]
+  },
+  {
+    "name": "@ledgerhq/wallet-api-core",
+    "version": "2.1.0",
+    "license": "MIT",
+    "repository": "https://github.com/LedgerHQ/wallet-api",
+    "revision": "41635e5543772af043ef0f1b7e725fa7a733dd93",
+    "url": "https://raw.githubusercontent.com/LedgerHQ/wallet-api/41635e5543772af043ef0f1b7e725fa7a733dd93/packages/core/package.json",
+    "scope": "Unresolved attribution gap: the published package and this exact official source tag declare MIT but contain no core or repository-wide license/copyright file. The original declaration is preserved below. The Apache license of the separate Wallet API client is not assigned to core. Full applicable notices and copyright attribution require upstream clarification before public distribution.",
+    "notices": [
+      {
+        "path": "tools/dependency-supply-review/upstream-notices/wallet-api-core-package.json",
+        "sha256": "e9eb6238bd79758cbe586fbb94a4668c5a30c23e370a0e3c3fd3ba5830ee5274"
+      }
+    ]
+  },
+  {
+    "name": "@ledgerhq/hw-transport",
+    "version": "6.36.0",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/LedgerHQ/ts-libs",
+    "revision": "cbf3769cb49601b7ccf4c0e48881d42ceb72d3a3",
+    "url": "https://raw.githubusercontent.com/LedgerHQ/ts-libs/cbf3769cb49601b7ccf4c0e48881d42ceb72d3a3/libs/hw-transport/package.json",
+    "termsUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "scope": "The published package and exact official release tag declare Apache-2.0 but omit a license/NOTICE file. The original declaration and unmodified standard Apache 2.0 text from the Apache Software Foundation are retained; no package-specific copyright or NOTICE is invented.",
+    "notices": [
+      {
+        "path": "tools/dependency-supply-review/upstream-notices/hw-transport-package.json",
+        "sha256": "032c7a5e13fb416ee0625a4d3a0d547152b019d0bf6059dfb84be4862a78d54b"
+      },
+      {
+        "path": "tools/dependency-supply-review/upstream-notices/LICENSE.apache-2.0",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ]
+  },
+  {
+    "name": "@ledgerhq/logs",
+    "version": "6.19.0",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/LedgerHQ/ts-libs",
+    "revision": "f316ff1cc26e85757bf34b2a8f5f2b92e6b1a3f2",
+    "url": "https://raw.githubusercontent.com/LedgerHQ/ts-libs/f316ff1cc26e85757bf34b2a8f5f2b92e6b1a3f2/libs/logs/package.json",
+    "termsUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "scope": "The published package and exact official release tag declare Apache-2.0 but omit a license/NOTICE file. The original declaration and unmodified standard Apache 2.0 text from the Apache Software Foundation are retained; no package-specific copyright or NOTICE is invented.",
+    "notices": [
+      {
+        "path": "tools/dependency-supply-review/upstream-notices/logs-package.json",
+        "sha256": "9e1e5368dc3d8ef42a31d80f5c86072f0c384251c2ca02d3ef0cd425ec4b08fb"
+      },
+      {
+        "path": "tools/dependency-supply-review/upstream-notices/LICENSE.apache-2.0",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ]
+  }
+]

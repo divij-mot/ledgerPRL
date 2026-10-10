@@ -134,14 +134,14 @@ export async function otherTab(receive, change) {
         name: "public-state-boundaries",
         setup(build) {
           build.onResolve(
-            { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+            { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
             (args) => ({ path: args.path, namespace: "test-boundary" }),
           );
           build.onLoad(
             { filter: /.*/, namespace: "test-boundary" },
             (args) => ({
               loader: "js",
-              contents: args.path.includes("ledger")
+              contents: args.path.includes("device")
                 ? 'export async function connectLedger() { throw Error("No device in this test"); }'
                 : args.path.includes("storage")
                   ? `export class WatchStorage {

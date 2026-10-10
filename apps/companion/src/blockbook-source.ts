@@ -50,7 +50,7 @@ export class BlockbookSource implements WatchSource {
   }
   async get(path: string): Promise<unknown> {
     const route =
-      /^\/api\/v2\/(?:|block-index\/[0-9]+|utxo\/([a-zA-Z0-9]+)|tx\/[0-9a-f]{64}|address\/([a-zA-Z0-9]+)\?details=txids&pageSize=1000&page=[1-2])$/.exec(
+      /^(?:\/api\/v2\/(?:|block-index\/[0-9]+|utxo\/([a-zA-Z0-9]+)|tx\/[0-9a-f]{64}|address\/([a-zA-Z0-9]+)\?details=txids&pageSize=1000&page=[1-2])|\/api\/v1\/estimatefee\/(?:1|10|25))$/.exec(
         path,
       );
     assert(
@@ -72,10 +72,13 @@ export class BlockbookSource implements WatchSource {
       response.ok,
       `Public indexer unavailable (HTTP ${response.status}); no balance update was applied`,
     );
+    const maximum = path.startsWith("/api/v1/estimatefee/")
+      ? 1024
+      : 4 * 1024 * 1024;
     const length = Number(response.headers.get("content-length") ?? 0);
-    assert(length <= 4 * 1024 * 1024, "Indexer response too large");
-    const text = await readBoundedText(response, 4 * 1024 * 1024);
-    assert(text.length <= 4 * 1024 * 1024, "Indexer response too large");
+    assert(length <= maximum, "Indexer response too large");
+    const text = await readBoundedText(response, maximum);
+    assert(text.length <= maximum, "Indexer response too large");
     return JSON.parse(text);
   }
   async blockHash(height: number): Promise<string> {

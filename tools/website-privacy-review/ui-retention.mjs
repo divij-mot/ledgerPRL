@@ -40,7 +40,7 @@ const built = await build({
         }));
         b.onLoad({ filter: /.*/, namespace: "privacy-mock" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("Device access forbidden in privacy test");}'
             : `export class WatchStorage{
     async journal(k){return structuredClone(globalThis.reviewRows.get(k)??{schema:1,issuedReceiveThrough:-1,nextChangeIndex:0,payments:[]});}

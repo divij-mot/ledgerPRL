@@ -1,5 +1,6 @@
-name: Offline Ledger packaging preflight
+name: Historical Rust packaging preflight
 
+# Historical apps/ledger Rust implementation only; not the current C signer.
 # Manual only. This is neither the official enforcer nor a publication workflow.
 # No native build, hardware loader, vendor submission, credential or release job.
 on:

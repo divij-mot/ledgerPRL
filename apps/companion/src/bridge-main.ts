@@ -5,7 +5,7 @@ const config: BridgeConfig = {
   rpcUser: process.env.PEARL_RPC_USER ?? "",
   rpcPassword: process.env.PEARL_RPC_PASSWORD ?? "",
   network: (process.env.PEARL_NETWORK ?? "regtest") as NetworkName,
-  origin: process.env.PEARL_COMPANION_ORIGIN ?? "http://127.0.0.1:5173",
+  origin: process.env.PEARL_COMPANION_ORIGIN ?? "http://127.0.0.1:5188",
   port: Number(process.env.PEARL_BRIDGE_PORT ?? "8787"),
   allowBroadcast: process.env.PEARL_ALLOW_BROADCAST === "1",
 };

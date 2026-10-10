@@ -257,11 +257,11 @@ const built = await build({
       name: "isolated-state-stubs",
       setup(b) {
         b.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "audit" }),
         );
         b.onLoad({ filter: /.*/, namespace: "audit" }, (a) => ({
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? `export async function connectLedger(cb){globalThis.auditDisconnectCallback=cb;return globalThis.auditTransport;}`
             : a.path.includes("storage")
               ? `export class WatchStorage{constructor(){this.rows=new Map();}async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],nextChangeIndex:0,issuedReceiveThrough:-1});}async mutate(k,fn){const j=await this.journal(k);const result=fn(j);if(globalThis.auditDelaySigned&&j.payments.some(p=>p.state==='signed')){globalThis.auditDelaySigned=false;globalThis.auditSignedCommitReached();await globalThis.auditSignedCommitGate;}this.rows.set(k,structuredClone(j));return result;}}`

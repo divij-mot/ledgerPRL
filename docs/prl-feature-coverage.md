@@ -1,21 +1,39 @@
 # PRL feature coverage and compatibility audit
 
-Audit date: **2026-10-09**. This is an implementation scope and acceptance-test document, not a claim of release readiness or a general security audit.
+Protocol audit: **2026-10-09**. Desktop parity and qualification update: **2026-10-10**. This is an implementation scope and acceptance-test document, not a claim of release readiness or a general security audit.
 
 ## Decision summary
 
 An ordinary Pearl wallet can use the mature Ledger Bitcoin signing implementation for **BIP86 Taproot key-path custody**, with Pearl-specific derivation, network identity, monetary bounds, address display and transaction policy. The inspected Oyster wallet's default receive/change and ordinary transaction construction agree with this approach. [Default transaction fields/signing][S32] A useful wallet also needs discovery, history, spendability, recovery, fee handling and durable pending-payment state; these do not come from the hardware signer.
 
-**“All PRL features are supported” is not an accurate claim for the restricted profile.** The most important address-coverage gap is **sending to P2MR destinations**, which can be added independently of P2MR or XMSS custody. The most consequential everyday limitations are fragmented miner UTXOs, bounded account discovery, backend uncertainty and browser/device recovery. Message signing, advanced scripts and stateful XMSS require separate designs. They must not become enabled merely because the Bitcoin base contains a corresponding-looking command.
+**“All PRL features are supported” is not an accurate claim for the restricted profile.** **P2MR recipient support is implemented** in the host and Bitcoin-derived signer. Owned inputs/change remain ordinary BIP86 P2TR; this does not add P2MR/XMSS custody. Qualification is bounded by the [current Nano S Plus emulator](../tools/live-app-native-review/README.md) and [physical smoke](../tools/live-app-physical-review/README.md) evidence. The most consequential everyday limitations are fragmented miner UTXOs, bounded account discovery, backend uncertainty and browser/device recovery. Message signing, advanced scripts and stateful XMSS require separate designs.
 
-Recommended product description: **a development Ledger-backed Pearl wallet for ordinary Taproot accounts, with an explicit supported-destination and transaction-policy list**. MetaMask integration adds an origin-bound interface to that wallet. It does not turn PRL into an EVM network, provide a second private-key store, or establish production availability in MetaMask's normal account/send interface.
+Recommended product description: **a development Ledger-backed Pearl wallet for ordinary Taproot accounts, with an explicit supported-destination and transaction-policy list**. The standalone website and Ledger Wallet Live App are the current interfaces. The optional MetaMask experiment does not establish availability in MetaMask's normal account/send interface.
+
+## Current desktop/lite parity
+
+This comparison uses the actual official desktop sources at the immutable pin below. A fresh 10 October source review verified all 130 desktop `src/` blobs against their Git object hashes. Desktop features are distinct from features available only through node/wallet RPCs or the script engine.
+
+| Everyday feature | Official desktop behavior | Current companion |
+| --- | --- | --- |
+| Send and receive | Ordinary BIP86 account, one recipient in the desktop form [S2], [S35] | Implemented with Ledger approval and independent signature verification. P2TR and P2MR destinations; owned P2TR only. No funded transfer qualified |
+| QR and fresh receive address | QR plus `getnewaddress` on entering Receive [S36] | Verified-only QR and explicit New address implemented. New addresses stay within the durable recovery range and need fresh device approval |
+| Send Max | Max control, recalculated around the selected fee [S35] | Exact-integer Max for ≤16 eligible unreserved inputs implemented. Manual or capped selection is labeled separately from the full account balance; the explicit fee and normal policy checks remain |
+| Fees | Blockbook estimates for 1/10/25 blocks [S35], [S30] | Optional network-bound 1/10/25-block quotes, exact PRL/kvB parsing and explicit total-fee selection implemented. Quotes expire after two minutes. Manual fee, vsize/rate and relay minimum remain visible; live quote availability is unverified |
+| Activity | Paginated history, timestamps, confirmations, fee, copy txid [S37] | Paginated display, copy txid and validated-tip confirmation counts implemented. History remains fully retained; timestamps and general transaction fees are not supplied by the current history schema |
+| Pending payments | Rebroadcast and optional Remove [S37] | Explicit exact-byte retry and durable reservations. No Remove action that forgets signatures or releases uncertain inputs |
+| Unconfirmed spending | Desktop sends with minimum confirmations 0 [S2] | Requires one confirmation for ordinary inputs and 100 for coinbase |
+| Chain verification | Desktop starts the wallet with `--usespv` [S38] | Public indexer or configured node trust, plus genesis/raw-transaction/ownership/consistency checks. No independent Pearl SPV verifier |
+| Software keys and password recovery | Software-wallet import and unlock [S2] | Intentionally excluded. Recovery phrases/private keys never enter the companion |
+
+The current source adaptations preserve Ledger Wallet's modal and step structure; they are not the unmodified Ledger application. Remaining live-chain gates and the intended user-run approximately 10 PRL trial are documented in [mainnet testing](mainnet-testing.md). That trial amount is not a wallet cap.
 
 ## 1. Evidence and version boundary
 
 | Evidence | Immutable reference / observation |
 | --- | --- |
-| Latest official release | [v1.4.11][release], commit `2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4`, published 2026-09-29 |
-| Current official source | [`2f8b770cac8f8b74be05c1fc51c2baeb76ce0701`][current], verified as `master` during this audit |
+| Latest official release at the 9 October check | [v1.4.11][release], commit `2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4`, published 2026-09-29 |
+| Official source pin | [`2f8b770cac8f8b74be05c1fc51c2baeb76ce0701`][current], verified as `master` at the 9 October check |
 | FP8 proposal | [PR #311][fp8], head `684f7045f3b3b7c5b7598f46c06b7dceb506f74b`; open and unmerged during this audit |
 | Existing local implementation baseline | Commit `7a332f6e2a8e654720c104a5c58ed65cf9414257`; the new Bitcoin-derived signer and MetaMask adapter were work in progress while this matrix was written |
 
@@ -29,7 +47,7 @@ FP8's inspected proposal changes block/certificate/header code. Its `wallet`, tr
 
 - **Required**: necessary for a useful, honest ordinary self-custody wallet, even if implemented in the host rather than firmware.
 - **Optional / separate policy**: valid Pearl functionality which is not necessary for basic receiving and paying, but must be advertised as unsupported until implemented and tested.
-- **Baseline**: existing `sdk`, `wallet` and companion functionality, not automatic proof that the in-progress Bitcoin/MetaMask route preserves it.
+- **Baseline**: the implementation at the original protocol audit; historical evidence does not automatically qualify later source or transports.
 - **Supported destination** and **owned spend policy** are different. Paying an address does not require knowing its owner's witness script, private key or signature algorithm.
 
 ## 2. Ordinary-wallet coverage matrix
@@ -37,14 +55,14 @@ FP8's inspected proposal changes block/certificate/header code. Its `wallet`, tr
 | Capability | Official Pearl behavior | Requirement and restricted-profile impact | Existing component to preserve / remaining gate |
 | --- | --- | --- | --- |
 | Connect hardware and identify account | Oyster is a software wallet; its secret storage is not a Ledger integration | **Required.** Pin app/network/path and bind public account to the connected device. An xpub supplied by a web page is not proof it came from Ledger | Account export, matching device address and explicit connect. Re-qualify against the Bitcoin-derived app; never fall back to the MetaMask seed or Oyster private keys |
-| Receive ordinary PRL | `getnewaddress` defaults `pq` to false; desktop calls it without PQ arguments. BIP86 receive branch 0 is used [S1], [S2] | **Required.** `m/86'/808276'/account'/0/index` on mainnet; coin type 1 on the supported test networks. Full address/network must be verifiable on Ledger | SDK public derivation, receive review, issued-index journal. Real-device address/restore interoperability remains a gate |
+| Receive ordinary PRL | `getnewaddress` defaults `pq` to false; desktop calls it without PQ arguments. BIP86 receive branch 0 is used [S1], [S2] | **Required.** `m/86'/808276'/account'/0/index` on mainnet; coin type 1 on the supported test networks. Full address/network must be verifiable on Ledger | SDK public derivation, receive review and issued-index journal. One Nano S Plus physical address check passed; device restoration and broader interoperability remain gates |
 | Pay ordinary P2TR destinations | Node address decoder and `PayToAddrScript` recognize witness 1/32-byte Taproot. A recipient can have a hidden script tree [S3] | **Required.** The device does not need the recipient's tree. Only owned inputs/change must be proven empty-tree BIP86 | Preserve exact amount, recipient and fee display; independently re-derive owned change and verify signatures |
-| Pay P2MR destinations | Witness 2/32-byte Merkle-root address is accepted by address/script and consensus validation [S3], [S4] | **Required for coverage of both genuine Pearl address types.** The original P2TR-only recipient restriction excludes these payments. Recipient-only support does not require XMSS or P2MR input signing | Coordinated host/core/device extension, precise version 2 address display, oracle and native-display tests. Do not report implemented solely from this audit's node probe |
+| Pay P2MR destinations | Witness 2/32-byte Merkle-root address is accepted by address/script and consensus validation [S3], [S4] | **Required for coverage of both genuine Pearl address types.** Implemented in the current restricted profile. Recipient-only support does not require XMSS or P2MR input signing | Current host/core/device code supports version 2 external recipients; retain exact address/display, malformed-change and independent-signature tests. Node compatibility and native qualification are separate evidence |
 | Exact balance | 1 PRL = 100,000,000 grains; maximum transaction amount 21,000,000,000 PRL [S5] | **Required.** Integer grains throughout; values exceed JavaScript's safe integer range. A total balance is not the spendable balance | Existing bigint SDK; show available, pending, immature and reserved separately. Reject overflow and rounded JSON numbers |
 | UTXOs and coin control | Wallet selects eligible outputs, excludes locks and enforces account/maturity; CLI exposes lock/unlock [S6] | **Required.** Raw previous transaction, txid, vout, amount and script must agree. A bounded selection is acceptable if limits are visible | Existing exact raw-transaction checks, explicit selection and reservations. Preserve no-duplicate/no-foreign-input rules |
 | Mining and pool receipts | Coinbase maturity 100; ordinary pool payments are not themselves coinbases [S6], [S7] | **Required for PRL mining users.** Identify coinbase from raw bytes, not amount/label. Recompute after reorg. Signing 16 inputs is a wallet limit, not a Pearl limit | Existing maturity split. Large payout accounts can exceed signer and scan limits; see §5 |
 | History and payment details | Wallet RPC exposes transaction history/detail, pending balances and confirmation counts; desktop/CLI display them [S8] | **Required.** Account history must include fully spent addresses and both receive/change branches; pending and detached must remain distinct | Existing discovery/history and journal. Preserve pagination/count validation and show partial/unknown state instead of zero |
-| Fees and dust | Node default 1,000 grains/kvB; vsize uses witness discount 4; P2TR/P2MR default dust boundary 333 grains [S9], [S10] | **Required.** Compute final shape's fee/vsize exactly; expose total fee and rate. A configured relay floor is not a confirmation forecast | Existing policy checks. UI currently declares pinned default rather than fetching live policy/estimates; dynamic estimates are an improvement, not established coverage |
+| Fees and dust | Node default 1,000 grains/kvB; vsize uses witness discount 4; P2TR/P2MR default dust boundary 333 grains [S9], [S10] | **Required.** Compute final shape's fee/vsize exactly; expose total fee and rate. A configured relay floor is not a confirmation forecast | Exact policy checks plus optional bounded Blockbook estimates. Unsupported/malformed/expired quotes fail closed to manual fee entry; successful live quote retrieval remains unverified |
 | Change | Ordinary author uses BIP86 branch 1 and passes `pq=false`; at most one change output; output position can be randomized [S11] | **Required.** Derive on-device from approved account; preserve durable high-water index; do not mistake “second output” for change | Existing independent ownership checks and journal. Both output orders must work; interrupted review must not reuse issued change |
 | Recovery and gap discovery | Oyster recovery tracks receive/change horizons independently and expands after finding use [S12] | **Required.** Scan from a safe birthday, keep issued bounds, use historical activity rather than balance, and reveal incomplete coverage | Existing gap 20 and recovery backups. Explicit extended scan/import route needed outside current hard bounds |
 | Confirmed spendability | Wallet can be configured with different minimum confirmations; desktop's send wrapper requests minconf 0 [S2], [S6] | **Required safety policy, not exact desktop parity.** This profile intentionally spends ordinary inputs only after ≥1 confirmation and coinbase after 100 | Existing host policy. No change to consensus; unconfirmed spending remains unsupported rather than falsely “invalid PRL” |
@@ -61,7 +79,6 @@ The audited starting profile is: ordinary no-script BIP86 owned P2TR inputs/chan
 
 | Feature | Genuine upstream status | Why the profile excludes it / decision |
 | --- | --- | --- |
-| External P2MR payment | Actual consensus/address support, not only a proposal [S3], [S4] | Original external-script allowlist accepts only `0x5120`. Add narrowly as a recipient policy while preserving all owned-input/change rules |
 | More than 16 inputs | Node standard transaction limit is 100,000 vB, not 16 inputs [S9] | Bounded hardware memory/time/review design. Do not silently drop inputs or turn a payment into several payments. Raise only after device measurements, or offer explicit separately reviewed consolidation/payment plans |
 | Multiple recipients / `sendmany` | Implemented Oyster RPC accepts a map of destinations [S8], [S15] | One-recipient UI is a deliberate subset. Expanding outputs needs review-order, screen, fee, change classification and resource tests; not needed for basic send |
 | Tx version 2 | Node's normal mempool is configured to admit versions 1–2 [S16] | Ordinary Oyster author still creates version 1. Version 2 exclusion blocks some advanced timelock transactions and virtual message formats, not ordinary transfers |
@@ -84,7 +101,7 @@ Unsupported features must fail before private-key derivation/signing where possi
 
 ## 4. Narrow P2MR recipient support
 
-This is the highest-value address-compatibility extension because it does **not** need to broaden the custody algorithm.
+This recipient policy is implemented without broadening the custody algorithm. Current Nano S Plus mainnet/regtest emulator replays verify the full P2MR destination, label, amount, fee and returned signatures on the recorded ELFs. Physical P2MR display and live relay remain unqualified. See the [P2MR native evidence](../tools/live-app-native-review/p2mr/README.md).
 
 ### Exact representation
 
@@ -206,7 +223,7 @@ The ordinary-send acceptance gate must exercise the actual sequence: connected M
 ### P0: honest, useful ordinary wallet
 
 1. Preserve ordinary BIP86 custody and all existing fail-closed watch/journal/recovery semantics through the new signer and MetaMask route.
-2. Support both P2TR and P2MR **external destinations** if the final device display/host/oracle tests pass. Continue rejecting P2MR-owned inputs/change.
+2. Preserve the implemented P2TR and P2MR **external destination** support and its exact display/host/oracle checks. Continue rejecting P2MR-owned inputs/change; extend qualification to remaining devices and live relay.
 3. Publish an exact capability list and actionable unsupported errors, including input/scan caps, no message signing, no XMSS and no arbitrary scripts.
 4. Run end-to-end synthetic ordinary sends, receive verification, rejection, transport interruption, account/network switching, stale-backend rejection, fee/dust boundaries, backup/restore and reorg reconciliation on the final integrated source.
 5. Keep physical hardware, device restoration, human security review and distribution/vendor gates explicit. Passing an emulator does not retire them.
@@ -244,7 +261,7 @@ These can improve usefulness without enabling new cryptographic spend policies. 
 | Payment lifecycle | Persisted signed bytes, exact explicit rebroadcast, fresh confirmation reconciliation | Crash before/after signature persistence, partial signature fetch, broadcast timeout, old backup downgrade, cross-tab race |
 | Capability boundary | Supported transaction accepted on final app/host | Direct unsupported APDU/PSBT commands, unknown descriptors/fields, Bitcoin message command, hot-key fallback |
 
-This audit executed the 39-case P2MR node-side probe and verified source provenance/compatibility. It did not execute this entire integration matrix, change the signer policy, use physical devices, handle credentials, contact vendors, broadcast transactions, or establish production readiness.
+The original 9 October protocol audit executed the 39-case P2MR node-side probe and verified source provenance/compatibility; it did not use physical devices or execute the entire integration matrix. The later emulator and physical checkpoints linked above have their own artifact identities and narrower test scopes. None establishes funded broadcast, confirmation or production readiness.
 
 ## Primary sources
 
@@ -289,6 +306,10 @@ The immutable current source links below identify the actual inspected implement
 [S32]: https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/wallet/wallet/txauthor/author.go
 [S33]: https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/wallet/waddrmgr/xmss_keys.go#L17-L66
 [S34]: https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/xmss/README.md
+[S35]: https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/apps/apps/pearl-desktop-wallet/src/renderer/src/pages/send-transaction/SendTransaction.tsx
+[S36]: https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/apps/apps/pearl-desktop-wallet/src/renderer/src/pages/ReceiveTransaction.tsx
+[S37]: https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/apps/apps/pearl-desktop-wallet/src/renderer/src/pages/ActivityPage.tsx
+[S38]: https://github.com/pearl-research-labs/pearl/blob/2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/apps/apps/pearl-desktop-wallet/src/main/services/wallet-process.ts#L91
 
 ## Appendix: retained P2MR probe
 

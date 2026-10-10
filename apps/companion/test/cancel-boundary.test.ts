@@ -29,7 +29,7 @@ test("cancellation survives connection and storage boundaries without dropping s
   );
   assert.equal(
     result.stdout.split("\n").filter((line) => line.startsWith("PASS:")).length,
-    7,
+    11,
     result.stdout,
   );
 });

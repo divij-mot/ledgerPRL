@@ -28,6 +28,7 @@ const source =
   `
 export { connect };
 export function cancel() { currentAbort?.abort(); }
+export function oldTransport(t) {transport=t;}
 export function state() { return { busy, account, notification }; }
 export async function prepareAudit(a,b) {
  account=a; network=a.network;
@@ -54,13 +55,13 @@ const built = await build({
       name: "cancel-test-boundaries",
       setup(build) {
         build.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "test-boundary" }),
         );
         build.onLoad({ filter: /.*/, namespace: "test-boundary" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
-            ? `export async function connectLedger() { return globalThis.connectGate; }`
+          contents: a.path.includes("device")
+            ? `export async function connectLedger() { globalThis.connectCalls++; return globalThis.connectGate; }`
             : a.path.includes("storage")
               ? `export class WatchStorage {
         constructor() { this.rows = new Map(); }
@@ -97,11 +98,12 @@ const moduleURL =
   Buffer.from(built.outputFiles[0].text).toString("base64");
 let serial = 0;
 function gate() {
-  let release;
-  const pending = new Promise((resolve) => {
+  let release, reject;
+  const pending = new Promise((resolve, fail) => {
     release = resolve;
+    reject = fail;
   });
-  return { pending, release };
+  return { pending, release, reject };
 }
 function device() {
   return createPsbtEndpoint();
@@ -129,6 +131,8 @@ async function backend(route) {
   );
 }
 async function fresh() {
+  globalThis.window.location = undefined;
+  globalThis.connectCalls = 0;
   globalThis.pauseBoundary = undefined;
   globalThis.fetch = backend;
   const app = await import(`${moduleURL}#${serial++}`);
@@ -174,6 +178,64 @@ function pauseAt(phase, state) {
     "PASS: canceled pending connection closes its late transport without exporting an account",
   );
 }
+{
+  const { app } = await fresh(),
+    closing = gate();
+  app.oldTransport({ close: () => closing.pending });
+  const unhandled = [];
+  const observe = (error) => unhandled.push(error);
+  process.on("unhandledRejection", observe);
+  globalThis.connectGate = Promise.reject(new Error("Picker rejected"));
+  const operation = app.connect();
+  await new Promise(setImmediate);
+  closing.release();
+  await operation;
+  process.removeListener("unhandledRejection", observe);
+  assert.deepEqual(unhandled, []);
+  assert.match(app.state().notification, /Picker rejected/);
+  console.log(
+    "PASS: early picker rejection is owned while previous session cleanup waits",
+  );
+}
+{
+  const { app, d } = await fresh(),
+    connecting = gate();
+  app.oldTransport({
+    close: async () => {
+      throw new Error("Old cleanup failed");
+    },
+  });
+  globalThis.connectGate = connecting.pending;
+  const operation = app.connect();
+  await new Promise(setImmediate);
+  assert.equal(app.state().busy, true);
+  connecting.release(d.transport);
+  await operation;
+  assert.equal(d.closes(), 1);
+  assert.deepEqual(d.commands, []);
+  assert.match(app.state().notification, /Old cleanup failed/);
+  console.log(
+    "PASS: failed prior cleanup closes a late picker result without using it",
+  );
+}
+for (const cancel of [false, true]) {
+  const { app, d } = await fresh(),
+    closing = gate();
+  globalThis.window.location = { pathname: "/live.html" };
+  app.oldTransport({ close: () => closing.pending });
+  const operation = app.connect();
+  assert.equal(globalThis.connectCalls, 0);
+  if (cancel) app.cancel();
+  closing.release();
+  await operation;
+  assert.equal(globalThis.connectCalls, cancel ? 0 : 1);
+  assert.equal(app.state().account === null, cancel);
+  if (cancel) assert.deepEqual(d.commands, []);
+  console.log(
+    `PASS: Ledger Wallet reconnect ${cancel ? "cancellation prevents" : "waits for prior cleanup before"} new host transport`,
+  );
+}
+
 for (const [phase, state, expected] of [
   ["journal", "draft", "draft"],
   ["before-update", "draft", "draft"],

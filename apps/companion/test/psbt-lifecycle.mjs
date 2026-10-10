@@ -47,12 +47,12 @@ const built = await build({
       name: "explicit-lifecycle-mock-boundaries",
       setup(b) {
         b.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "lifecycle-mock" }),
         );
         b.onLoad({ filter: /.*/, namespace: "lifecycle-mock" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("No real device permitted")}'
             : a.path.includes("storage")
               ? `export class WatchStorage {

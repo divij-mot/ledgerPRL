@@ -59,7 +59,7 @@ function send(response: ServerResponse, status: number, body: unknown) {
   });
   response.end(text);
 }
-export function lightMiddleware(origin = "http://127.0.0.1:5173") {
+export function lightMiddleware(origin = "http://127.0.0.1:5188") {
   const expected = new URL(origin);
   assert(
     ["127.0.0.1", "localhost"].includes(expected.hostname),

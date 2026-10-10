@@ -75,8 +75,8 @@ GET_EXTENDED_PUBKEY (`00`), GET_WALLET_ADDRESS (`03`), SIGN_PSBT (`04`) and
 GET_MASTER_FINGERPRINT (`05`). Merkle continuations use CLA `f8`, INS `01`.
 Top-level command bodies are consumed exactly. The latest source adds exact
 leaf-index reply consumption and empty signature-acknowledgement checks to the
-existing proof/preimage bounds. These source corrections have not been compiled
-or exercised in native execution; earlier artifacts do not include them. The
+existing proof/preimage bounds. These source corrections are included in the limited current-source Nano S Plus
+mainnet/regtest checkpoint linked below; earlier artifacts do not include them. The
 original findings remain in the
 [source review](../../tools/device-source-review/README.md).
 
@@ -92,8 +92,10 @@ parsing requires the exact decoded length before checksum access. See the
 [parser findings and patch](../../tools/native-parser-review/PATCH.md) and
 [independent static review](../../tools/canonical-parser-review/REPORT.md).
 
-These are unqualified source changes. Native/emulator execution remains paused;
-fresh builds and positive/negative qualification are required before use.
+The owner resumed isolated emulator testing on 10 October 2026. Current-source
+Nano S Plus mainnet/regtest account, Receive and signing pilots passed, together
+with 75 regtest hostile cases and explicit rejection. See the [exact checkpoint](../../tools/live-app-native-review/README.md).
+Full device/matrix qualification and physical installation remain open.
 
 Custom GET_NETWORK_INFO (`e1 06 00 01 00`) returns 58 bytes:
 

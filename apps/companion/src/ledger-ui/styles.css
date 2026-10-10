@@ -1,0 +1,284 @@
+/* Ledger Wallet 4.23.0 Modal/Header/Content/Footer and Stepper styles,
+   adapted from styled-components to static CSS. See vendor provenance. */
+.ledger-modal {
+  width: 500px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  margin: auto;
+  color: var(--text-base);
+  background: #1c1d1f;
+  font: inherit;
+  overflow: auto;
+}
+.ledger-modal::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+.ledger-modal-header {
+  min-height: 66px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.ledger-modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 500;
+}
+.ledger-modal-header button {
+  position: absolute;
+  right: 20px;
+}
+.ledger-modal-content {
+  padding: 20px 20px 40px;
+}
+.ledger-modal-footer {
+  border-top: 1px solid #3c3c3c;
+  padding: 20px;
+}
+.ledger-modal-footer > div > .ghost {
+  margin-left: 12px;
+}
+.ledger-step-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid #3c3c3c;
+}
+.ledger-step-footer > :last-child {
+  margin-left: auto;
+}
+.ledger-button {
+  font-size: 12px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 24px;
+  border-radius: 4px;
+}
+.ledger-breadcrumb {
+  display: flex;
+  align-items: flex-start;
+  margin: 0 0 55px;
+  padding-top: 2px;
+}
+.ledger-step {
+  flex: 1;
+  position: relative;
+  text-align: center;
+  font-size: 9px;
+  color: #717070;
+}
+.ledger-step::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: -50%;
+  width: 100%;
+  height: 1px;
+  background: #3c3c3c;
+}
+.ledger-step:first-child::before {
+  display: none;
+}
+.ledger-step-number {
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid #3c3c3c;
+  font-size: 10px;
+  height: 18px;
+  line-height: 18px;
+  width: 18px;
+  box-sizing: content-box;
+  background: #1c1d1f;
+}
+.ledger-step-label {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  font-size: 13px;
+  line-height: 1.2;
+  padding: 0 4px;
+  font-weight: 500;
+}
+.ledger-step[data-status="active"],
+.ledger-step[data-status="valid"] {
+  color: #bbb0ff;
+}
+.ledger-step[data-status="active"] .ledger-step-number,
+.ledger-step[data-status="valid"] .ledger-step-number {
+  color: #000;
+  background: #bbb0ff;
+  border-color: #bbb0ff;
+}
+.ledger-step[data-status="active"] .ledger-step-label {
+  font-weight: 600;
+}
+.ledger-step[data-status="valid"]::before,
+.ledger-step[data-status="active"]::before {
+  background: #bbb0ff;
+}
+.ledger-step[data-status="error"] {
+  color: #ff6868;
+}
+.ledger-step[data-status="error"] .ledger-step-number {
+  background: #ff6868;
+  color: #000;
+}
+.ledger-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ledger-fields .field {
+  margin: 0;
+}
+.ledger-account-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.ledger-account-row span {
+  color: #949494;
+}
+.ledger-currency-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  background: #131214;
+}
+.ledger-currency-input input {
+  border: 0;
+  background: transparent;
+}
+.ledger-currency-input > span {
+  padding: 0 12px;
+  color: #949494;
+  font-size: 14px;
+}
+.ledger-summary {
+  margin: 0 20px;
+  font-size: 14px;
+}
+.ledger-from-to {
+  display: grid;
+  gap: 20px;
+}
+.ledger-from-to p {
+  margin: 4px 0 0;
+}
+.ledger-label {
+  color: #949494;
+  font-weight: 500;
+}
+.ledger-recipient {
+  word-break: break-all;
+}
+.ledger-separator {
+  height: 1px;
+  background: #3c3c3c;
+  width: 100%;
+  margin: 15px 0;
+}
+.ledger-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.ledger-summary-row > :last-child {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.ledger-summary .transaction-details {
+  margin: 24px 0 0;
+}
+.ledger-address-row {
+  display: flex;
+  align-items: stretch;
+}
+.ledger-address {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px 0 0 4px;
+  background: #131214;
+  text-align: center;
+  font-size: 14px;
+  user-select: text;
+  word-break: break-all;
+}
+.ledger-address span:last-child {
+  word-break: keep-all;
+}
+.ledger-copy {
+  border-radius: 0 4px 4px 0;
+  border-left: 0;
+}
+.ledger-device {
+  text-align: center;
+  padding: 20px 0;
+}
+.ledger-device h3 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+.ledger-device p {
+  color: #949494;
+  font-size: 14px;
+  margin: 12px 0;
+}
+.ledger-confirmation-title {
+  text-align: center;
+  font-size: 18px;
+  margin: 0 0 24px;
+}
+.ledger-modal .advanced {
+  margin-top: 24px;
+}
+@media (max-width: 500px) {
+  .ledger-step-label {
+    font-size: 11px;
+  }
+  .ledger-summary {
+    margin: 0;
+  }
+  .ledger-modal-content {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+.ledger-receive-qr {
+  width: 208px;
+  height: 208px;
+  border: 24px solid white;
+  background: white;
+  margin: 0 auto 12px;
+}
+.ledger-field-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.ledger-field-label > button.ghost {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}

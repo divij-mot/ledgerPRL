@@ -53,12 +53,12 @@ const compiled = await build({
       name: "boundaries",
       setup(b) {
         b.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "probe" }),
         );
         b.onLoad({ filter: /.*/, namespace: "probe" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("No real device allowed")}'
             : a.path.includes("storage")
               ? `export class WatchStorage{constructor(){this.tab=globalThis.nextTab;}async mutate(k,fn){const previous=globalThis.storeTail;let done;globalThis.storeTail=new Promise(r=>done=r);await previous;try{const j=structuredClone(globalThis.storeRows.get(k)??{schema:1,payments:[],issuedReceiveThrough:-1,nextChangeIndex:0});const result=fn(j);globalThis.storeRows.set(k,structuredClone(j));return result}finally{done()}}async journal(k){const j=await this.mutate(k,v=>structuredClone(v));await globalThis.afterRead?.(this.tab,j);return j}}`

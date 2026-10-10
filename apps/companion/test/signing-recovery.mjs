@@ -81,12 +81,12 @@ const built = await build({
       name: "recovery-boundaries",
       setup(build) {
         build.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "recovery" }),
         );
         build.onLoad({ filter: /.*/, namespace: "recovery" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("No physical connection in this test");}'
             : a.path.includes("storage")
               ? `export class WatchStorage {

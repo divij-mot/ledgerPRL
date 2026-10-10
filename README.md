@@ -2,7 +2,7 @@
 
 A Ledger-backed wallet website for Pearl (PRL), with a narrowly adapted Ledger Bitcoin device app and exact-integer PRL host adapter.
 
-**Development software. Do not use with valuable funds.** Software and emulator tests do not establish Ledger approval, physical-device validation, human audit, or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
+**Development software. Do not use with valuable funds.** Limited emulator and Nano S Plus physical tests have passed; funded sending and live-chain confirmation remain unverified. These tests do not establish Ledger approval, a human security audit or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
 
 ## What is implemented
 
@@ -13,13 +13,13 @@ A Ledger-backed wallet website for Pearl (PRL), with a narrowly adapted Ledger B
 - Durable local payment recovery, optional watch cache and optional local-only authenticated node bridge
 - Public deterministic cross-language vectors, actual Pearl script-engine oracle, adversarial tests and ongoing security review
 
-Only ordinary no-script BIP86 P2TR owned inputs/change, one recipient, at most one change, at most 16 inputs and SIGHASH_DEFAULT are supported. The input cap still needs physical-device measurement. No arbitrary hash/message signing, seed entry, hot-wallet fallback, XMSS, script-path signing, RBF or automated consolidation.
+Only ordinary no-script BIP86 P2TR owned inputs/change, one P2TR or P2MR recipient, at most one change, at most 16 inputs and SIGHASH_DEFAULT are supported. The input cap still needs physical-device measurement. P2MR recipients do not imply P2MR/XMSS custody. No arbitrary hash/message signing, seed entry, hot-wallet fallback, XMSS, script-path signing, RBF or automated consolidation.
 
 ## Run the companion locally
 
 Requirements: Node.js 24.19 or newer compatible 24.x release and npm. Use a WebHID-capable desktop browser such as current Chromium. Hardware connection requires a compatible app already running on the Ledger; development installation is a separate gated step.
 
-Intended build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. Latest C-source corrections are not compiled or native-tested; no current-source full matrix or physical-device support is qualified. SDK/API mappings do not guarantee current retail rollout or compatibility with future OS versions. Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround. See the [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate).
+Intended build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. The current C source passed bounded mainnet/regtest Nano S Plus emulator tests, including P2MR recipients and 75 hostile-request rejections. One physical Nano S Plus on OS 1.7.0 passed Live App account/receive verification and a separate synthetic HID signing pilot. Other models, physical P2MR review, restore, fault and maximum-input matrices remain unqualified. See the [native evidence](tools/live-app-native-review/README.md), [physical evidence](tools/live-app-physical-review/README.md) and [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate). Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround.
 
 The current app and companion are **USB-only**: Bluetooth is disabled in the C app and the website uses WebHID. Desktop Chrome/Edge on HTTPS or loopback are intended test targets; mobile, Safari and Firefox are not qualified. The website does not install the Ledger app or update Ledger OS.
 
@@ -30,9 +30,9 @@ npm ci --ignore-scripts
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. The public-indexer option requires an explicit privacy choice before derived addresses are queried. Mainnet and Testnet2 use distinct, genesis-checked backends. Original testnet, regtest and simnet require an appropriate node. Public account import/offline inspection does not prove spendability or sign anything.
+Open http://127.0.0.1:5188. The public-indexer option requires an explicit privacy choice before derived addresses are queried. Mainnet and Testnet2 use distinct, genesis-checked backends. Original testnet, regtest and simnet require an appropriate node. Public account import/offline inspection does not prove spendability or sign anything.
 
-The frontend and narrow proxy can run locally together or behind HTTPS using the production host described in [website hosting](docs/website-hosting.md). The public website does not expose the local-node bridge. Public TLS deployment and current live-indexer availability remain unqualified. See [companion instructions](docs/companion.md) for recovery metadata and limitations.
+The frontend and narrow proxy can run locally together or behind HTTPS using the production host described in [website hosting](docs/website-hosting.md). The public website does not expose the local-node bridge. The latest mainnet and Testnet2 checks timed out before TCP/TLS connection or address queries; no live balance was established. See [mainnet testing](docs/mainnet-testing.md) for the intended small user-run trial, and [companion instructions](docs/companion.md) for recovery metadata and limitations.
 
 Private keys remain on Ledger. The browser keeps receive/change recovery ranges and payment reservations, including already-signed bytes. Optional watch-cache saves also contain the account public key and chain code. These records contain no private signing keys but are financially sensitive; do not publish backups. The hosted proxy sees requested addresses/transaction IDs, not account derivation keys.
 
@@ -61,9 +61,15 @@ The current device port is documented in [Ledger Bitcoin PRL port](apps/ledger-b
 - [Exact-build reproduction and limits](tools/build-reproducibility/README.md)
 - [Implementation and release gates](docs/implementation-status.md)
 - [Recovery and safe migration](docs/recovery.md)
+- [Current lite-client feature coverage](docs/prl-feature-coverage.md#current-desktoplite-parity)
+- [Mainnet trial and current blockers](docs/mainnet-testing.md)
 - [FP8 compatibility](docs/fp8-compatibility.md)
 - [Public backend evidence and limitations](docs/backend-evidence.md)
 - [Submission preparation](docs/submission-checklist.md)
 - [Licensing status](docs/licensing.md)
 
 This provides conventional secure-element custody. It does not claim quantum resistance. A project license has not yet been selected; preserve all third-party licenses and notices.
+
+## Ledger Wallet integration
+
+The companion also has an explicit developer-loaded Live App entry using Ledger Wallet API and Ledger Lumen UI. See [setup and verification](docs/live-app.md). The same PRL wallet and Bitcoin-derived signing checks back both interfaces.

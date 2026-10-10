@@ -321,5 +321,5 @@ test("current companion and CLI instantiate only the PSBT client, with no legacy
     new URL("../../apps/companion/src/main.ts", import.meta.url),
     "utf8",
   );
-  assert.match(main, /\}, "bitcoin-prl"\)/);
+  assert.match(main, /\},\s*"bitcoin-prl",\s*network,?\s*\)/);
 });

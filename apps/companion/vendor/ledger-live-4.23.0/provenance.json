@@ -1,0 +1,105 @@
+{
+  "repository": "https://github.com/LedgerHQ/ledger-live",
+  "commit": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+  "tag": "@ledgerhq/live-desktop@4.23.0",
+  "license": "MIT",
+  "sources": [
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/Modal/ModalBody.tsx",
+      "original": "original/components/Modal/ModalBody.tsx",
+      "sha256": "07702f716569995057a7312ad09d982861eb31b599d935d6856b89812058fa40",
+      "adapted": "src/ledger-ui/ModalBody.tsx",
+      "adaptedSha256": "a88d2262d1513cc5753250bd9fcff3fdd9b8abd6a39e6bf79d70193d15dd39a9"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/ReadOnlyAddressField.tsx",
+      "original": "original/components/ReadOnlyAddressField.tsx",
+      "sha256": "987c6f93409d15e8000e4f31b1df70fd98363673986085dc4053c65e880120c1",
+      "adapted": "src/ledger-ui/ReadOnlyAddressField.tsx",
+      "adaptedSha256": "fcb6a41b3f85fd51d67c0664424cc1de62dbc665e3da80bc0513f9bb75e33e96"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/Stepper/Breadcrumb.tsx",
+      "original": "original/components/Stepper/Breadcrumb.tsx",
+      "sha256": "913ba284f12507b771bd2ce8ccf5ac0eb87e0752d706b04eb8a935aadf3dfce0",
+      "adapted": "src/ledger-ui/Stepper/Breadcrumb.tsx",
+      "adaptedSha256": "f98cbe5bdfadaac6f0b2809bc5ea5e61e3c14b01fe8a719e40a11c892fedb7d6"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/Stepper/Step.tsx",
+      "original": "original/components/Stepper/Step.tsx",
+      "sha256": "75ea12701ac8a6bfe96f3b5b7b2f5c6248d5115cc1e5329576514ca0775a3f05",
+      "adapted": "src/ledger-ui/Stepper/Step.tsx",
+      "adaptedSha256": "ca19a2cfc28e8c620db13655124d420dbdde7fac473584d0c63f2ecb121c6b99"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/modals/Receive/steps/StepReceiveFunds.tsx",
+      "original": "original/modals/Receive/steps/StepReceiveFunds.tsx",
+      "sha256": "f38243d5e77d36b4f085b49646d0675310b52424400bc184a1ffe0d70e8b5a6f",
+      "adapted": "src/ledger-ui/StepReceiveFunds.tsx",
+      "adaptedSha256": "b3e583e63f7446461448333bafd93a8a03b98abe6ff058da7942de698f2bce75"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/modals/Send/steps/StepAmount.tsx",
+      "original": "original/modals/Send/steps/StepAmount.tsx",
+      "sha256": "a96089224eed2a690097bc8c8a440bcbea0851f6614be7b113bc431616731e9e",
+      "adapted": "src/ledger-ui/StepAmount.tsx",
+      "adaptedSha256": "d9a65957b0f12f8637ba5d75d2f26ae59c3a23e45445b0329a74fb0078252608"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/modals/Send/steps/StepRecipient.tsx",
+      "original": "original/modals/Send/steps/StepRecipient.tsx",
+      "sha256": "76481debeab8cba69cdae57ad89c1b4c50165db2d303b31c780574c2db5da56d",
+      "adapted": "src/ledger-ui/StepRecipient.tsx",
+      "adaptedSha256": "190b295ef1eff21c43aaed5f823bba69762d67bca5d5c860ad92f35b57a5c455"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/modals/Send/steps/StepSummary.tsx",
+      "original": "original/modals/Send/steps/StepSummary.tsx",
+      "sha256": "b6e851c1f39a31ea8215dec7931ad3fa3e0cb89d224ecf5bc8a4acaeddf25a4d",
+      "adapted": "src/ledger-ui/StepSummary.tsx",
+      "adaptedSha256": "47f6c590b73b419338f2911c503fdf3c152659dcf9488de4a493a60ce2ad4472"
+    }
+  ],
+  "supportingSources": [
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/Modal/index.tsx",
+      "original": "original/components/Modal/index.tsx",
+      "sha256": "eb9102b6b0f41d8cfc467eb3a76a56bf354062f3b0f00943545a6faf02691105"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/Modal/ModalHeader.tsx",
+      "original": "original/components/Modal/ModalHeader.tsx",
+      "sha256": "030765203fcac385e1787b43e14e4cba9b99ff3d3957cb903635327cf36cba01"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/Modal/ModalContent.tsx",
+      "original": "original/components/Modal/ModalContent.tsx",
+      "sha256": "0de03dabd124c1189ce129811109fd2226549705725323210cafaf85321e6cff"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/Modal/ModalFooter.ts",
+      "original": "original/components/Modal/ModalFooter.ts",
+      "sha256": "77d6bc9f61cfb5256cb9dfde5831fe2f53cbb59008e6c77053f376a4bba89f33"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/renderer/components/ButtonV3.tsx",
+      "original": "original/components/ButtonV3.tsx",
+      "sha256": "dc450cf52b9426fc7780e12aa04e841aec6e55ad24b765ebce99e02e0fb1263c"
+    }
+  ],
+  "derivedFiles": [
+    {
+      "path": "src/ledger-ui/index.tsx",
+      "sha256": "035247ef4160890a5a72a2378d24eb7711a67e6dad802056dc02ca59d3050594",
+      "kind": "PRL render adapter"
+    },
+    {
+      "path": "src/ledger-ui/styles.css",
+      "sha256": "3c0e1de9b807c31d9a8565f14c4cae71d2ad0a0053957f6a0c9492a270ed3c01",
+      "kind": "static extraction of upstream styled-components"
+    }
+  ],
+  "patchSha256": "92d14dec5bb0a775b811e6b2d2a3aa0e9b4509947c2152f9df5326000dcb3e89",
+  "licenseSha256": "c43174d759c87c3e8a423cb0cb6ee914feddc4eac5176350fd24674857a8ef5f"
+}

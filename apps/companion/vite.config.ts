@@ -1,13 +1,16 @@
 import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+import { fileURLToPath } from "node:url";
 import { lightMiddleware } from "./src/blockbook.js";
 import { indexerProxy } from "./src/indexer-proxy.js";
-const origin = "http://127.0.0.1:5173";
+const origin = "http://127.0.0.1:5188";
 const headers = {
   "Content-Security-Policy": "frame-ancestors 'none'",
   "X-Frame-Options": "DENY",
 };
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     {
       name: "pearl-public-watch-only",
       configureServer(server) {
@@ -23,7 +26,7 @@ export default defineConfig({
   server: {
     headers,
     host: "127.0.0.1",
-    port: 5173,
+    port: 5188,
     strictPort: true,
     allowedHosts: ["127.0.0.1", "localhost"],
     proxy: {
@@ -33,6 +36,15 @@ export default defineConfig({
       },
     },
   },
-  preview: { host: "127.0.0.1", port: 5173, strictPort: true, headers },
-  build: { target: "es2022", sourcemap: false },
+  preview: { host: "127.0.0.1", port: 5188, strictPort: true, headers },
+  build: {
+    target: "es2022",
+    sourcemap: false,
+    rollupOptions: {
+      input: {
+        index: fileURLToPath(new URL("./index.html", import.meta.url)),
+        live: fileURLToPath(new URL("./live.html", import.meta.url)),
+      },
+    },
+  },
 });

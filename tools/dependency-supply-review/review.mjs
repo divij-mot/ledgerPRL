@@ -2,10 +2,12 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { build } from "vite";
+import { build as traceConfig } from "esbuild";
 import config from "../../apps/companion/vite.config.ts";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
@@ -55,12 +57,23 @@ for (const [location, item] of Object.entries(lock.packages)) {
 check("All present registry packages have their locked version", installedMismatches.length === 0);
 check("Missing registry packages are optional platform packages", missingInstalled.every((name) => lock.packages[name].optional));
 
-const mainModules = new Set(), workerModules = new Set();
+const mainModules = new Set(), workerModules = new Set(), cssModules = new Set();
+const chunkModules = new Map();
 const graphPlugin = (name, destination) => ({
   name,
   generateBundle(_options, bundle) {
-    for (const chunk of Object.values(bundle)) if (chunk.type === "chunk")
-      for (const name of Object.keys(chunk.modules)) destination.add(name.replace(root, ""));
+    for (const chunk of Object.values(bundle)) if (chunk.type === "chunk") {
+      const names = Object.keys(chunk.modules).map((name) => name.replace(root, ""));
+      chunkModules.set(chunk.fileName, names);
+      for (const name of names) destination.add(name);
+    }
+    // Tailwind consumes CSS and the Lumen preset at build time. These sources
+    // contribute distributed CSS despite not appearing as executable JS modules.
+    for (const file of this.getWatchFiles()) {
+      const name = file.replace(root, "");
+      if (/node_modules\/.*\.css$/.test(name) || /apps\/companion\/src\/ledger-ui\/.*\.css$/.test(name) ||
+          /node_modules\/@ledgerhq\/lumen-design-core\/.*\.js$/.test(name)) cssModules.add(name);
+    }
   },
 });
 // Import the actual config, but do not re-bundle/load it through a temporary config file.
@@ -72,10 +85,40 @@ const built = await build({
   worker: { plugins: () => [graphPlugin("supply-worker-graph", workerModules)] },
 });
 const bundles = (Array.isArray(built) ? built : [built]).flatMap((entry) => entry.output);
-const modules = [...new Set([...mainModules, ...workerModules])].sort();
+// Tailwind's config loader does not expose preset dependencies to Rollup's
+// watch graph. Trace the real config separately to retain emitted token sources.
+const presetGraph = await traceConfig({
+  entryPoints: [path.join(root, "apps/companion/tailwind.config.ts")],
+  absWorkingDir: root, bundle: true, write: false, metafile: true,
+  platform: "node", format: "esm", logLevel: "silent",
+});
+for (const emitted of Object.values(presetGraph.metafile.outputs))
+  for (const [name, contribution] of Object.entries(emitted.inputs))
+    if (contribution.bytesInOutput > 0 && name.startsWith("node_modules/@ledgerhq/lumen-design-core/")) cssModules.add(name);
+check("Lumen CSS preset inputs are included in attribution", [...cssModules].some((name) => name.includes("lumen-design-core/")));
+const modules = [...new Set([...mainModules, ...workerModules, ...cssModules])].sort();
 const forbiddenModules = modules.filter((name) => /(?:^|\/)(?:test|tests|fixtures)\/|apps\/cli\/|packages\/metamask-snap\/|node_modules\/@metamask\/|apps\/companion\/src\/(?:bridge|blockbook\.ts|indexer-proxy|web-server)|packages\/sdk\/src\/device\.ts/.test(name));
 check("Fresh browser graph excludes tests, fixtures, CLI, MetaMask and server/legacy device code", forbiddenModules.length === 0);
 const assetBytes = bundles.map((item) => ({ item, bytes: Buffer.from(item.type === "chunk" ? item.code : item.source) }));
+// Bind emitted font assets to the unchanged installed-wallet copies and OFL.
+const fontDirectory = "apps/companion/src/fonts";
+const fontProvenancePath = `${fontDirectory}/PROVENANCE.txt`;
+const fontLicensePath = `${fontDirectory}/OFL.txt`;
+const fontProvenance = await read(fontProvenancePath);
+const recordedFonts = [...fontProvenance.matchAll(/Asset: ([A-Za-z0-9-]+\.woff2)\nArchive path: ([^\n]+)\nSHA256: ([a-f0-9]{64})/g)];
+const emittedFonts = assetBytes.filter(({ item }) => item.fileName.endsWith(".woff2"));
+check("Build emits every recorded local font", emittedFonts.length === recordedFonts.length && recordedFonts.length === 3);
+const fontAssets = [];
+for (const [, name, archivePath, sha256] of recordedFonts) {
+  const sourcePath = `${fontDirectory}/${name}`, bytes = await fs.readFile(path.join(root, sourcePath));
+  check(`${name}: exact recorded Ledger Wallet font bytes`, hash(bytes) === sha256);
+  const emitted = emittedFonts.filter((asset) => hash(asset.bytes) === sha256);
+  check(`${name}: emitted asset preserves exact font bytes`, emitted.length === 1);
+  fontAssets.push({ file: emitted[0].item.fileName, sourcePath, bytes: bytes.length, archivePath, sha256 });
+}
+const fonts = { name: "Inter", version: "Ledger Wallet 4.23.0 distribution", license: "OFL-1.1",
+  repository: "https://github.com/rsms/inter", provenance: fontProvenancePath,
+  notices: [{ path: fontLicensePath, sha256: hash(await read(fontLicensePath)) }], assets: fontAssets };
 const browserCode = assetBytes.filter(({ item }) => /\.js$/.test(item.fileName)).map(({ bytes }) => bytes.toString()).join("\n");
 const forbiddenMarkers = ["PEARL_RPC_PASSWORD", "PEARL_RPC_USER", "PEARL_RPC_URL", "000102030405060708090a0b0c0d0e0f", "abandon abandon abandon", "test test test test test test", "createNodeRpc"];
 check("Emitted code has no known public seed fixture or RPC credential config markers", forbiddenMarkers.every((marker) => !browserCode.includes(marker)));
@@ -89,18 +132,64 @@ function packageRoot(module) {
 }
 const packageRoots = [...new Set(modules.map(packageRoot).filter(Boolean))].sort();
 const browserPackages = [];
+const supplemental = await json("tools/dependency-supply-review/upstream-notices/provenance.json");
 for (const directory of packageRoots) {
   const packageFile = `${directory}/package.json`;
   const metadata = await json(packageFile);
-  const files = (await fs.readdir(path.join(root, directory))).filter((file) => /license|copyright|notice/i.test(file));
+  const files = (await fs.readdir(path.join(root, directory))).filter((file) => /licen[cs]e|copyright|notice/i.test(file));
   browserPackages.push({
     name: metadata.name, version: metadata.version, directory, license: metadata.license,
     moduleCount: modules.filter((entry) => packageRoot(entry) === directory).length,
     mainModules: [...mainModules].filter((entry) => packageRoot(entry) === directory).sort(),
     workerModules: [...workerModules].filter((entry) => packageRoot(entry) === directory).sort(),
+    cssModules: [...cssModules].filter((entry) => packageRoot(entry) === directory).sort(),
+    supplemental: supplemental.find((entry) => entry.name === metadata.name && entry.version === metadata.version),
     notices: await Promise.all(files.map(async (file) => ({ path: `${directory}/${file}`, sha256: hash(await read(`${directory}/${file}`)) }))),
   });
 }
+const uiDirectory = "apps/companion/vendor/ledger-live-4.23.0";
+const uiProvenancePath = `${uiDirectory}/provenance.json`;
+const uiProvenance = await json(uiProvenancePath);
+const uiLicensePath = `${uiDirectory}/LICENSE.txt`, uiPatchPath = `${uiDirectory}/adaptation.patch`;
+check("Ledger Wallet UI license matches retained provenance", hash(await read(uiLicensePath)) === uiProvenance.licenseSha256);
+check("Ledger Wallet UI patch matches retained provenance", hash(await read(uiPatchPath)) === uiProvenance.patchSha256);
+const uiSourcePaths = [];
+for (const source of uiProvenance.sources) {
+  const original = `${uiDirectory}/${source.original}`;
+  const adapted = `apps/companion/${source.adapted}`;
+  check(`${source.path}: exact retained upstream UI bytes`, hash(await read(original)) === source.sha256);
+  check(`${source.adapted}: exact recorded UI adaptation`, hash(await read(adapted)) === source.adaptedSha256);
+  uiSourcePaths.push(original, adapted);
+}
+for (const source of uiProvenance.supportingSources) {
+  const original = `${uiDirectory}/${source.original}`;
+  check(`${source.path}: exact retained UI style source`, hash(await read(original)) === source.sha256);
+  uiSourcePaths.push(original);
+}
+for (const source of uiProvenance.derivedFiles) {
+  const file = `apps/companion/${source.path}`;
+  check(`${source.path}: exact recorded UI glue/style extraction`, hash(await read(file)) === source.sha256);
+  uiSourcePaths.push(file);
+}
+// Reconstruct the adapted views independently; matching unrelated file hashes
+// alone would not prove that the retained patch represents these modifications.
+const patchDirectory = await fs.mkdtemp(path.join(tmpdir(), "pearl-ledger-ui-source-"));
+try {
+  for (const source of uiProvenance.sources) {
+    const destination = path.join(patchDirectory, source.adapted);
+    await fs.mkdir(path.dirname(destination), { recursive: true });
+    await fs.copyFile(path.join(root, uiDirectory, source.original), destination);
+  }
+  execFileSync("patch", ["-f", "-p1", "-d", patchDirectory], { input: await read(uiPatchPath), encoding: "utf8" });
+  for (const source of uiProvenance.sources)
+    check(`${source.adapted}: patch reproduces exact UI adaptation`, hash(await fs.readFile(path.join(patchDirectory, source.adapted))) === source.adaptedSha256);
+  for (const source of uiProvenance.derivedFiles)
+    check(`${source.path}: patch reproduces exact UI glue/styles`, hash(await fs.readFile(path.join(patchDirectory, source.path))) === source.sha256);
+} finally { await fs.rm(patchDirectory, { recursive: true, force: true }); }
+const uiModules = [...new Set([...mainModules, ...cssModules])].filter((name) => name.startsWith("apps/companion/src/ledger-ui/")).sort();
+check("Every recorded UI adaptation is in the emitted browser graph", uiProvenance.sources.every((source) => uiModules.includes(`apps/companion/${source.adapted}`)));
+const copiedUi = { ...uiProvenance, modules: uiModules, provenance: uiProvenancePath, patch: uiPatchPath,
+  notices: [{ path: uiLicensePath, sha256: uiProvenance.licenseSha256 }] };
 const legalMarkers = ["Copyright", "Apache License", "Permission is hereby granted", "Redistribution and use", "Microsoft Corporation", "Paul Miller"];
 const noticeObservations = assetBytes.filter(({ item }) => /\.(js|html|css)$/.test(item.fileName)).map(({ item, bytes }) => ({
   file: item.fileName,
@@ -118,24 +207,29 @@ for (const name of (await fs.readdir(path.join(root, ".github/workflows"))).sort
 }
 check("Host CI suppresses npm installation lifecycle scripts", (await read(".github/workflows/ci.yml")).includes("npm ci --ignore-scripts"));
 const sourcePaths = [...new Set([
-  ...manifestPaths, "package-lock.json", "apps/companion/vite.config.ts", "apps/companion/src/web-server.ts",
+  fontProvenancePath, fontLicensePath, ...fontAssets.map((asset) => asset.sourcePath),
+  uiProvenancePath, uiLicensePath, uiPatchPath, ...uiSourcePaths,
+  ...manifestPaths, "package-lock.json", "apps/companion/vite.config.ts", "apps/companion/tailwind.config.ts", "apps/companion/index.html", "apps/companion/live.html", "apps/companion/src/web-server.ts",
+  "tools/dependency-supply-review/upstream-notices/provenance.json",
+  "tools/dependency-supply-review/review.mjs", "tools/dependency-supply-review/generate-notices.mjs", "tools/dependency-supply-review/notices.test.mjs", "docs/live-app.md",
   "apps/ledger-bitcoin-prl/UPSTREAM.json", "apps/ledger-bitcoin-prl/UPSTREAM_TREE.txt",
   "tools/bitcoin-prl-port/build.sh", "tools/bitcoin-prl-port/provenance.py", "tools/bitcoin-prl-port/README.md",
   "apps/ledger/packaging-requirements.txt", "docs/licensing.md", "docs/implementation-status.md", "docs/test-evidence.md",
   "README.md", "SECURITY.md", ...workflows.map((entry) => entry.path),
-  ...modules.filter((name) => !name.includes("\0") && !name.includes("?") && !name.startsWith("../")),
+  ...modules.filter((name) => !name.includes("\0") && !name.includes("?") && !name.startsWith("../") && name !== "__vite-browser-external"),
 ])].sort();
 const sourceHashes = {};
 for (const file of sourcePaths) sourceHashes[file] = hash(await fs.readFile(path.join(root, file)));
 const report = {
-  schema: 1, reviewedOn: "2026-10-09", head: execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim(),
+  schema: 2, reviewedOn: "2026-10-10", head: execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim(),
   nodeVersion: process.version, lockfileSha256: hash(await read("package-lock.json")),
   checks, counts: { registryRecords: registryRecords.length, installedRegistryRecords: registryRecords.length - missingInstalled.length,
     missingOptionalPlatformPackages: missingInstalled.length, browserMainModules: mainModules.size, browserWorkerModules: workerModules.size,
-    browserUnionModules: modules.length, browserPackages: browserPackages.length },
-  installedMismatches, missingInstalled, installLifecycle, browserPackages, noticeObservations,
-  chunks: assetBytes.map(({ item, bytes }) => ({ file: item.fileName, type: item.type, bytes: bytes.length, sha256: hash(bytes) })),
-  workflows, mainModules: [...mainModules].sort(), workerModules: [...workerModules].sort(), registryRecords, sourceHashes,
+    browserCssInputs: cssModules.size, browserUnionModules: modules.length, browserPackages: browserPackages.length },
+  installedMismatches, missingInstalled, installLifecycle, browserPackages, noticeObservations, fonts, copiedUi,
+  chunks: assetBytes.map(({ item, bytes }) => ({ file: item.fileName, type: item.type, bytes: bytes.length, sha256: hash(bytes), modules: chunkModules.get(item.fileName) ?? [],
+    cssModules: item.fileName.endsWith(".css") ? [...cssModules].sort() : [] })),
+  workflows, mainModules: [...mainModules].sort(), workerModules: [...workerModules].sort(), cssModules: [...cssModules].sort(), registryRecords, sourceHashes,
   limits: ["Structural tarball integrity and installed package version checks do not authenticate installed file contents.",
     "No dependency installation/update, native toolchain/build/emulator, physical Ledger, secrets, live indexer, deployment or fund movement.",
     "Only known public fixture markers and reachable module paths are screened; this is not universal secret detection.",

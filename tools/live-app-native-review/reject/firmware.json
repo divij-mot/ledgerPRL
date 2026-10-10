@@ -1,0 +1,9 @@
+{
+  "model": "nanosp",
+  "sourceElf": "/workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-regtest/app.elf",
+  "testedSnapshot": "/workspace/evidence/reject/deny-and-restart-cleanly/tested-firmware.elf",
+  "sha256": "113a556b2c3708f3aa2edf04467bb204d4f9fd510c78c9f015ae50acd9d48446",
+  "speculos": "0.27.1",
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "injector": null
+}

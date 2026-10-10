@@ -134,6 +134,7 @@ async function loadBuild(
   }
   await load(join(root, "index.html"), "/", "text/html; charset=utf-8");
   assets.set("/index.html", assets.get("/")!);
+  await load(join(root, "live.html"), "/live.html", "text/html; charset=utf-8");
   await load(
     join(root, "third-party-notices.txt"),
     "/third-party-notices.txt",
@@ -159,16 +160,18 @@ async function loadBuild(
       TYPES[match[1]!]!,
     );
   }
-  const html = assets.get("/")!.bytes.toString("utf8");
-  const linked = [...html.matchAll(/(?:src|href)="(\/[^"\s]+)"/g)].map(
-    (match) => match[1]!,
-  );
-  requireCondition(
-    linked.some((path) => path.endsWith(".js")) &&
-      linked.some((path) => path.endsWith(".css")) &&
-      linked.every((path) => path.startsWith("/assets/") && assets.has(path)),
-    "Build first: index.html must refer only to emitted allowlisted assets",
-  );
+  for (const entry of ["/", "/live.html"]) {
+    const html = assets.get(entry)!.bytes.toString("utf8");
+    const linked = [...html.matchAll(/(?:src|href)="(\/[^"\s]+)"/g)].map(
+      (match) => match[1]!,
+    );
+    requireCondition(
+      linked.some((path) => path.endsWith(".js")) &&
+        linked.some((path) => path.endsWith(".css")) &&
+        linked.every((path) => path.startsWith("/assets/") && assets.has(path)),
+      "Build first: wallet HTML must refer only to emitted allowlisted assets",
+    );
+  }
   return assets;
 }
 function headers(response: ServerResponse) {
@@ -226,7 +229,24 @@ export async function createWalletServer(options: WalletServerOptions) {
         reject(request, response, 403, "Same-origin request required");
         return;
       }
-      const target = request.url ?? "";
+      let target = request.url ?? "";
+      // Ledger adds these non-authoritative display preferences at launch.
+      // Accept only this exact entry and bounded, nonduplicate query keys.
+      if (target.startsWith("/live.html?") && target.length <= 128) {
+        const query = new URLSearchParams(target.slice("/live.html?".length));
+        const pairs = [...query];
+        if (
+          pairs.length > 0 &&
+          pairs.length <= 2 &&
+          new Set(pairs.map(([key]) => key)).size === pairs.length &&
+          pairs.every(([key, value]) =>
+            key === "theme"
+              ? /^(light|dark)$/.test(value)
+              : key === "lang" && /^[a-z]{2}(?:-[A-Za-z]{2})?$/.test(value),
+          )
+        )
+          target = "/live.html";
+      }
       // No decoding/normalizing of hostile paths, queries, encoded slashes, dot segments or absolute URLs.
       if (
         target.length > 512 ||

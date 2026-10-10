@@ -53,12 +53,12 @@ const output = await build({
       name: "boundaries",
       setup(build) {
         build.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "probe" }),
         );
         build.onLoad({ filter: /.*/, namespace: "probe" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("No device allowed in this probe")}'
             : a.path.includes("storage")
               ? `export class WatchStorage{constructor(){this.rows=new Map()} async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],issuedReceiveThrough:-1,nextChangeIndex:0})} async mutate(k,fn){const j=await this.journal(k);const result=fn(j);await globalThis.auditBeforeCommit?.(j);this.rows.set(k,structuredClone(j));return result}}`
@@ -271,7 +271,7 @@ if (fixed) {
     await app.auditSeed(a, saved);
     assert.match(
       dom.innerHTML,
-      /A confirmed receipt is archived/,
+      /Payment confirmed\. Refresh its status before any retry/,
       "every archived signed state must show the archive notice",
     );
     assert.doesNotMatch(

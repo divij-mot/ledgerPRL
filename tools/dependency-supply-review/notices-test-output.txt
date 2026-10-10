@@ -1,9 +1,12 @@
-✔ notices verification accepts exact bytes and rejects a stale distributed file (391.110727ms)
-ℹ tests 1
+✔ notices verification accepts exact bytes and rejects a stale distributed file (446.929167ms)
+✔ notices cover both entries, shared chunks, worker and build-time Lumen CSS (1.617334ms)
+✔ font notices cover exact unmodified Inter assets and retain the full OFL (1.2195ms)
+✔ adapted Ledger Wallet UI retains its MIT copyright and measured source attribution (1.294208ms)
+ℹ tests 4
 ℹ suites 0
-ℹ pass 1
+ℹ pass 4
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 473.737621
+ℹ duration_ms 500.536583

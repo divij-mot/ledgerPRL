@@ -12,7 +12,8 @@ import { webHidTransportFactory } from "@ledgerhq/device-transport-kit-web-hid";
 import { firstValueFrom, take, timeout } from "rxjs";
 import { assert, concat, type ApduTransport } from "@pearl-ledger/sdk";
 
-export type PearlDeviceProtocol = "prl1" | "bitcoin-prl";
+import { assertPearlApdu, type PearlDeviceProtocol } from "./pearl-apdu.js";
+export type { PearlDeviceProtocol } from "./pearl-apdu.js";
 
 /** Real DMK custom-command adapter. No LedgerJS, fake device, software key or signing fallback. */
 export class PearlCommand implements Command<Uint8Array> {
@@ -23,23 +24,7 @@ export class PearlCommand implements Command<Uint8Array> {
       protocol === "bitcoin-prl"
         ? "Pearl Bitcoin-based PSBT protocol"
         : "Pearl protocol v1";
-    assert(
-      bytes.length >= 5 && bytes.length === 5 + bytes[4]!,
-      "Invalid short APDU",
-    );
-    const legacy =
-      protocol === "prl1" &&
-      bytes[0] === 0xe0 &&
-      bytes[2] === 0 &&
-      bytes[3] === 0 &&
-      [0, 1, 2, 0x10, 0x11, 0x12, 0x13, 0x14].includes(bytes[1]!);
-    const bitcoinPrl =
-      protocol === "bitcoin-prl" &&
-      bytes[2] === 0 &&
-      bytes[3] === 1 &&
-      ((bytes[0] === 0xe1 && [0, 3, 4, 5, 6].includes(bytes[1]!)) ||
-        (bytes[0] === 0xf8 && bytes[1] === 1));
-    assert(legacy || bitcoinPrl, "Unsupported Pearl command or protocol");
+    assertPearlApdu(bytes, protocol);
     this.bytes = bytes.slice();
   }
   getApdu() {

@@ -50,13 +50,13 @@ const result = await build({
     {
       name: "explicit-host-test-boundaries",
       setup(builder) {
-        builder.onResolve({ filter: /^\.\/(storage|ledger)\.js$/ }, (a) => ({
+        builder.onResolve({ filter: /^\.\/(storage|device)\.js$/ }, (a) => ({
           path: a.path,
           namespace: "review",
         }));
         builder.onLoad({ filter: /.*/, namespace: "review" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? `export function connectLedger(){throw Error('No hardware access in review');}`
             : `
 export class WatchStorage {
@@ -191,15 +191,18 @@ async function assertTerminal(t: any) {
   assert.equal(state.client.sessionState, "failed");
   assert.equal(state.verifiedReceive, null);
   module.pageForReview("receive");
-  assert.match(dom.innerHTML, />Not device verified</);
-  assert.doesNotMatch(dom.innerHTML, />Verified on device</);
+  assert.match(
+    dom.innerHTML,
+    />Verify the address on your Ledger before using it\.</,
+  );
+  assert.doesNotMatch(dom.innerHTML, />Address verified on your Ledger\.</);
   assert.equal(context.nodes.get("copy-address").disabled, true);
   assert.equal(context.nodes.get("verify-receive").disabled, true);
   assert.match(dom.innerHTML, />Connect Ledger</);
   assert.doesNotMatch(dom.innerHTML, />Reconnect Ledger</);
   module.pageForReview("overview");
-  assert.match(dom.innerHTML, />Watch only</);
-  assert.doesNotMatch(dom.innerHTML, />Device connected</);
+  assert.match(dom.innerHTML, />Connect Ledger</);
+  assert.doesNotMatch(dom.innerHTML, />Reconnect Ledger</);
   const before = endpoint.commands.length;
   await assert.rejects(state.client.verifyAddress(owner, 0, 0), /failed/);
   await assert.rejects(state.client.signBundle(bundle, owner), /failed/);
@@ -211,8 +214,8 @@ async function assertTerminal(t: any) {
   assert.equal(endpoint.closes(), 1);
   for (const frame of context.frames) {
     if (frame.deviceState === "failed") {
-      assert.doesNotMatch(frame.html, />Verified on device</);
-      assert.doesNotMatch(frame.html, />Device connected</);
+      assert.doesNotMatch(frame.html, />Address verified on your Ledger\.</);
+      assert.doesNotMatch(frame.html, />Reconnect Ledger</);
     }
   }
 }
@@ -225,7 +228,7 @@ test("Successful signing preserves same-session receive verification and exact d
   assert.equal(state.verifiedReceive, address);
   assert.equal(t.context.nodes.get("copy-address").disabled, false);
   assert.equal(t.context.nodes.get("verify-receive").disabled, false);
-  assert.match(t.dom.innerHTML, />Verified on device</);
+  assert.match(t.dom.innerHTML, />Address verified on your Ledger\.</);
   assert.match(t.dom.innerHTML, />Reconnect Ledger</);
   const saved = assertReserved(t.context);
   assert.equal(saved.state, "signed");
@@ -235,7 +238,7 @@ test("Successful signing preserves same-session receive verification and exact d
   assert.equal(t.endpoint.closes(), 0);
   assert.equal(t.endpoint.acknowledgements(), 1);
   t.module.pageForReview("overview");
-  assert.match(t.dom.innerHTML, />Device connected</);
+  assert.match(t.dom.innerHTML, />Reconnect Ledger</);
 });
 for (const fault of [
   "lost",
@@ -309,7 +312,7 @@ test("Signed storage failure preserves exact emergency recovery and locks, clear
     t.context.frames.filter(
       (frame: any) =>
         frame.deviceState === "failed" &&
-        />Verified on device</.test(frame.html),
+        />Address verified on your Ledger\.</.test(frame.html),
     ).length,
     0,
     "No render may retain the verified label after the session fails, even before a storage await",
@@ -356,8 +359,11 @@ test("Storage failure followed by stalled journal refresh never renders stale de
     }
     assert.equal(t.module.stateForReview().client.sessionState, "failed");
     assert.equal(t.module.stateForReview().verifiedReceive, null);
-    assert.match(t.dom.innerHTML, />Not device verified</);
-    assert.doesNotMatch(t.dom.innerHTML, />Verified on device</);
+    assert.match(
+      t.dom.innerHTML,
+      />Verify the address on your Ledger before using it\.</,
+    );
+    assert.doesNotMatch(t.dom.innerHTML, />Address verified on your Ledger\.</);
     assert.equal(t.context.nodes.get("copy-address").disabled, true);
     assert.equal(t.context.nodes.get("verify-receive").disabled, true);
     const emergency = t.module.stateForReview().emergencySignedRecovery;
@@ -408,10 +414,10 @@ test("Lost final ACK followed by stalled journal refresh removes the displayed v
     assert.equal(t.module.stateForReview().verifiedReceive, null);
     assert.match(
       t.dom.innerHTML,
-      />Not device verified</,
+      />Verify the address on your Ledger before using it\.</,
       "Displayed label must clear before any finalizer storage await",
     );
-    assert.doesNotMatch(t.dom.innerHTML, />Verified on device</);
+    assert.doesNotMatch(t.dom.innerHTML, />Address verified on your Ledger\.</);
     assert.equal(t.context.nodes.get("copy-address").disabled, true);
     const saved = assertReserved(t.context);
     assert.equal(saved.state, "signed");

@@ -1,82 +1,57 @@
 # Dependency and build supply-chain review
 
-Review date: 2026-10-09. Read-only production inspection and an in-memory host build. This is a bounded source review, not an independent human audit, dependency-authenticity proof, Ledger approval, physical qualification, or a release certification. No firmware, emulator, native build, live indexer, device, real seed, deployment, or funds were used.
+Reviewed 2026-10-10 against the file hashes in `results.json`. This is a bounded source/build inspection, not an independent human audit, installed-file authenticity proof, legal opinion, Ledger approval or physical-device qualification. The recorded Git HEAD is context; the source hashes identify the measured working tree.
 
-Later explicitly authorized attribution-only work is documented in [SOURCE-ATTRIBUTION.md](SOURCE-ATTRIBUTION.md): 33 modified upstream C/header files received one prominent change-notice comment, with all original bytes preserved and before/after hashes retained. That follow-up did not execute native code or alter copied TypeScript modules.
+## Current measured graph
 
-## Useful result
+The in-memory production build includes both `index.html` and `live.html`, their shared JavaScript/CSS assets, and the backup-import worker. Attribution maps modules to each actual emitted chunk, without assuming a filename beginning with `index-`. Rollup does not expose the Tailwind config loader's complete preset dependencies, so a separate in-memory esbuild trace of the actual `tailwind.config.ts` captures the contributing Lumen design-core preset/token sources as **CSS build inputs**, not browser-executed JavaScript.
 
-The npm/CI baseline is already deliberately constrained: exact direct versions, consistent lock metadata, official-registry tarball integrity fields, suppressed install hooks, pinned CI action commits, read-only workflow permissions, and no production-browser import of MetaMask, CLI, private-node bridge, tests or fixture modules. The official-registry advisory lookup returned **zero known npm advisories** for this lockfile. This does not imply no vulnerabilities.
+- 757 structural/build checks pass.
+- 345 official-registry lock records have SHA-512 integrity fields; 249 installed versions match the lock. The remaining 96 are optional platform packages.
+- 765 main/shared modules, 27 worker modules and 50 CSS inputs produce a union of 816 module/input paths.
+- Notices cover 48 npm package/version instances (47 distinct names), Vite/CommonJS runtime helpers, and six adapted Ledger Bitcoin host modules, eight adapted Ledger Wallet UI views/components plus their glue/styles, and the three unmodified Inter font assets.
+- The graph excludes tests, fixtures, CLI, MetaMask, private-node/server modules and the historical SDK device implementation. Known public test-seed and RPC configuration markers are absent from generated code. These bounded checks are not universal secret detection.
+- All direct dependency versions are exact and match lock metadata. Existing CI uses `npm ci --ignore-scripts`, complete action commit pins and read-only contents permissions.
+- A fresh official npm advisory lookup reports **zero known advisories** for the current lockfile. This does not establish that dependencies have no vulnerabilities. The raw response is in `npm-audit.json`.
 
-The actionable website distribution gap was **missing third-party notices in delivered assets**. The coordinating implementation has now integrated the verified candidate and a stale-notice CI check. A separate documentation review is correcting legacy Rust evidence labels. The new C native build's previously overstated provenance wording is now corrected, with complete builder-input binding explicitly left as a future release gate; it must not inherit the old Rust build's reproducibility claims.
+The lock SHA-256 is `7ffdfb4ad695aab839152b6423d6660e19d0b3044b5579e6f1621c76a999ad50`. Structural integrity syntax and version checks do not cryptographically authenticate the installed package contents.
 
-## Finding 1: website distribution drops third-party notices
+## Distribution notices and remaining gap
 
-**Priority: before distributing the website; licensing/release preparation, not a demonstrated key compromise.**
+`apps/companion/public/third-party-notices.txt` exactly matches the generated candidate: **287,620 bytes**, SHA-256 `051e80f86cacb41704c9b5012aa0384a8a39d97688f2651911ff6997dab83628`. The application links the file and its server serves the fixed notices route. The generator retains source license bodies unchanged, including original line endings, with a UTF-8 BOM for local preview display. `license-inventory.json` maps the corresponding files, source modules, versions and license hashes.
 
-- The actual Vite production build's main JS, backup worker, HTML and CSS contain none of the inspected license/copyright markers. No notices artifact was initially emitted or served.
-- The real module graph includes **25 npm package/version instances with 24 distinct names**, not the entire installed workspace graph. Both `tslib@1.14.1` and nested `rxjs/node_modules/tslib@2.8.1` are reachable. The worker includes only `@noble/curves@1.9.7`, `@noble/hashes@1.8.0`, `@scure/base@1.2.6`, and `@scure/bip32@1.7.0`.
-- Vite emits its module-preload polyfill and CommonJS interoperability helpers. Their notices must not be missed just because Vite is a development dependency. The complete installed Vite license file is retained conservatively; its additional build-tool notices are not a claim that every bundled Vite dependency runs in the wallet.
-- Six adapted Ledger Bitcoin host modules also appear in the main graph. Their Apache license and the local modification/provenance notice are included separately.
-- Source retention was already good: the Ledger C app's license and nested third-party license files match recorded upstream Git blob identities. `packages/bitcoin-prl-adapter/provenance/verify_upstream.py` passes for the six adapted source files, original files, license and exact patch. The problem is browser distribution, not missing source provenance.
+The adapted Ledger Wallet send/receive views form a separate **MIT** source group from the **Apache-2.0** Bitcoin protocol modules. The inventory maps the UI's actual JavaScript and extracted CSS to release `@ledgerhq/live-desktop@4.23.0`, commit `abed962b08ca4b746f20192b28ce5b6c06a6c6a4`. The review checks eight original/adapted pairs, five supporting style originals, two derived glue/style files, the original MIT license and complete patch. It applies that patch to an isolated temporary copy and verifies that all ten resulting files exactly reproduce the recorded adaptations. A separate local comparison confirmed all 13 retained originals and the MIT license match the pinned upstream checkout. Supporting originals are not represented as browser-executed modules; newly written glue is explicitly distinguished from original Ledger code.
 
-### Implemented narrow correction
+The three Inter 400/500/600 fonts are unchanged copies from installed Ledger Wallet 4.23.0, distributed under SIL Open Font License 1.1. The review verifies each source SHA-256 against the extraction provenance and then verifies that the corresponding hash-named emitted WOFF2 retains those exact bytes. The complete copyright and OFL text is included in the distributed notice; no upstream Inter release version is inferred from the Wallet version.
 
-The coordinating implementation copied `THIRD-PARTY-NOTICES.proposed.txt` into `apps/companion/public/third-party-notices.txt`, added a footer link, and serves only the exact notices route through the existing bounded in-memory/no-symlink loader. It also added the fresh graph/generator check to CI after `npm run check`. The coordinator reports **10 passing real-loopback server tests**, including text MIME, GET/HEAD, rejection of unrelated text paths, and rejection of missing/symlinked notices at startup, plus a passing fresh inventory/distributed-file check after integration. These are host software results, not qualification of a public HTTPS deployment. This reviewer authored only files in this review folder; the coordinating implementation owns production changes and the final combined regression run.
+Several official npm packages omit license files. [Supplemental provenance](upstream-notices/README.md) records exact release tags and retained sources:
 
-The candidate is **186,206 bytes**, SHA-256 **`ccea80c549383223e6cf762fa9fabb3648379b61763ab2222570e90e670a3808`**. `license-inventory.json` maps every component to the measured main/worker file hashes and records each installed license/copyright source hash. All referenced notice bodies are retained verbatim, including their original line endings. A UTF-8 BOM precedes the generated document so local preview servers without an explicit charset display Unicode correctly; the production server also sends an explicit UTF-8 Content-Type. No blanket project license is invented; newly authored project licensing remains an owner decision. This is a proposed technical notices artifact, not a legal opinion.
+- Lumen UI/design-core Apache-2.0 licenses come from their exact official repository release commit. Lumen design-core is included for its distributed CSS contribution.
+- Ledger transport/logging packages declare Apache-2.0 but their exact source tags also omit license/NOTICE files. Their original declarations and the standard ASF Apache 2.0 text are retained without inventing copyright holders.
+- **Wallet API core 2.1.0 declares MIT but provides no license/copyright body in its tarball or exact source tag.** The distributed artifact preserves the declaration and calls out the attribution gap. The separate client's Apache license is not assigned to core. Obtain the missing applicable notices from upstream before public distribution.
 
-## Finding 2: C build attribution wording corrected; complete builder binding remains open
+A passing byte comparison means the delivered file matches the measured artifact; it does **not** resolve this legal attribution gap. Newly authored project licensing remains an owner decision. Packages absent from the emitted graph are not included merely because they are in the lockfile; retained supplemental material for Lumen utils-shared therefore is not automatically distributed.
 
-**Priority: correct the description now; close provenance gaps before a future native release qualification. No native execution is needed or authorized by this finding.**
+## Reproduce
 
-The original `tools/bitcoin-prl-port/README.md:26-28` described exact source/compiler/linker/SDK/binary hash manifests. The actual `provenance.py:8-12,19-24` records app-source SHA-256 values, ELF/HEX/build-log SHA-256 values, declared upstream metadata, an SDK path and the first `--version` lines of three tools. It does **not** hash the compiler/linker executables, objcopy, sysroot/newlib, Python dependencies, build wrapper, or provenance script. `build.sh:11-13` checks the SDK commit and cleanliness before the build; its before/after comparison snapshots only the app inputs, without rechecking the SDK at completion.
-
-Existing mitigation matters: exact clean SDK checks, explicit app source hashes, per-target serialization, cleaning when changing network, and refusal of changed app source already provide useful local attribution. The report does not allege a malicious tool or SDK change occurred. It identifies an overstatement and inputs that a future reproducer cannot recover from this manifest alone.
-
-At the coordinator's explicit follow-up request, this reviewer corrected only the native-port README to describe those fields and pre-build/app-source check boundaries accurately. It now records exact builder/recipe/tool/library binding and final SDK revision/cleanliness verification as unqualified future release gates. No provenance/build code was changed or executed. This is not a request to restart the paused native lane or replace mature Ledger code.
-
-## Historical evidence labels
-
-At review start, `docs/implementation-status.md:15-23` and `docs/test-evidence.md` still presented the retained Rust app's five-model/25-build/source-final/reproducibility results without an upfront historical label. The root README and SECURITY already separated the new C port correctly. The coordinating release-evidence review is correcting the subordinate documents. This review does not count the old Rust outcomes as qualification of the new C app.
-
-## Verified existing controls
-
-- `package-lock.json` is version 3; all seven workspace/root manifest dependency sets match it and all declared direct package versions are exact. **198 registry records** have official npm HTTPS tarball URLs and valid SHA-512 integrity fields. The **124 present registry package versions** match the lock; the remaining **74** records are optional platform packages. Integrity syntax/version checks do not cryptographically authenticate already-installed file contents.
-- The lock marks three installation-script packages: `esbuild@0.25.12`, `vite/node_modules/esbuild@0.28.2`, and optional `fsevents@2.3.3` (not installed on this host). CI and supported setup instructions use `npm ci --ignore-scripts`. Other packages' publishing/prepare scripts are not treated as evidence that registry installs ran them. Explicit build/test scripts remain executable code and need trusted build dependencies.
-- The fresh in-memory browser build has **341 main modules**, **27 worker modules**, **342 in their union**. It excludes server/bridge, CLI, MetaMask, legacy SDK device implementation, tests and fixture modules. No known public BIP32/test mnemonic marker or RPC-credential environment name is in the emitted code. This is a bounded marker/module check, not universal secret scanning.
-- Vite copies the public synthetic example-watch JSON into ordinary `dist`, but the dedicated production host does not serve its route. The existing fixed allowlist, disabled source maps, no arbitrary filesystem lookup, and docs prohibiting public Vite dev/preview hosting already mitigate fixture/source leakage. No fixture-removal change is recommended solely because that file exists in `dist`.
-- Sentry's helper code and generic private-key/signing methods exist in mature libraries. Existing privacy evidence already distinguishes them from configured telemetry/private-key wallet workflows. The app does not initialize a Sentry client and the production CSP restricts connections to its own origin. Do not replace mature crypto libraries merely to remove unused method names.
-- All enabled `.github/workflows` action references are 40-character commit pins, permission is `contents: read`, checkout does not persist credentials, and there is no `pull_request_target` or publication job. The official Ledger publication workflow remains inactive. `npm audit --audit-level=moderate` is already a host CI gate.
-- Root `Cargo.lock` has 74 registry entries and the historical native lock has 67; every registry entry has a checksum and neither lock includes an unpinned Git source. Host Cargo commands use `--locked`. The Go oracle uses a commit-addressed module version, `go.sum`, and `-mod=readonly`.
-- The manual legacy packaging preflight uses exact Python version requirements but no artifact hashes or `--require-hashes`. The inherited C app test `requirements.txt` contains ranges and is not used by enabled CI/the website. These are not production-browser dependencies. Do not elevate these development installs to a reproducible production release process unchanged; no dependency update/install was performed here.
-- No workflow, README or primary security page claims vendor approval, physical validation, a human audit or security equivalence solely from professional Ledger source reuse. Those gates remain unmet and explicitly documented.
-
-## Reproduce and prevent stale notices
-
-From repository root, using already-installed locked dependencies:
-
-```sh
-node --import tsx tools/dependency-supply-review/review.mjs
-node tools/dependency-supply-review/generate-notices.mjs
-node --test tools/dependency-supply-review/notices.test.mjs
-```
-
-The following pair is now the integrated dependency-update/release CI check:
+With the locked dependencies already installed:
 
 ```sh
 node --import tsx tools/dependency-supply-review/review.mjs
 node tools/dependency-supply-review/generate-notices.mjs --check apps/companion/public/third-party-notices.txt
+node --test tools/dependency-supply-review/notices.test.mjs
 ```
 
-The first command performs a fresh production host build with `write:false` and captures both main and worker graphs. It leaves deployment `dist` untouched. The second rejects changed lock/build inputs, changed package metadata or notice hashes, and unclassified virtual runtime helpers, then compares the complete regenerated notice bytes with the distributed file. It never overwrites that distributed file. The unit control confirms an exact file passes and one extra byte sequence fails.
+The review builds with `write:false`, leaving `dist` untouched. The generator rejects changed lock/build inputs, installed package metadata, notice hashes and unknown virtual runtime helpers. It never overwrites the distributed file. Four tests cover exact/stale byte checks, both entries/shared chunks/worker/CSS attribution, emitted Inter font assets/full OFL retention, and the source-derived Ledger Wallet UI MIT attribution. Removing the Buffer initialization shim separately reproduced the browser startup failure caught by the Wallet API browser-bundle regression.
 
-The official advisory command used was:
+The advisory command is read-only and transmits public dependency names/versions to npm:
 
 ```sh
 npm audit --package-lock-only --ignore-scripts --registry=https://registry.npmjs.org --json
 ```
 
-It returned exit 0 and zero reported vulnerabilities. `npm-audit.json` preserves the raw response. This lookup transmits public package names/versions to npm, not wallet data. It does not install or update anything. Its npm-update notice was not followed.
+## Boundaries and earlier source attribution
 
-`results.json` contains source hashes, exact build-output hashes, action pins, lock entries and graph membership; `review-output.txt` preserves the 419 passing structural/graph assertions. `notices-test-output.txt` contains the stale-notice negative-control result. The lockfile reviewed has SHA-256 `816e757d18507e6d3d402157df3bd9eb30ca0599bca08d6e87f51e47d4e4baea`. The checkout was being changed concurrently, so the recorded Git HEAD is context only: use the precise file hashes and rerun on final source. No source/authenticity verification is implied for uninspected dependency code.
+No firmware build, emulator, physical Ledger operation, live indexer, deployment or fund movement was performed by these scripts. No source-level authenticity or security claim is inferred from reuse or a passing advisory lookup. The bounded current C firmware checkpoint is recorded separately in [native evidence](../live-app-native-review/README.md); historical Rust results do not qualify it.
+
+Earlier attribution-only work on 33 upstream C/header files remains documented in [SOURCE-ATTRIBUTION.md](SOURCE-ATTRIBUTION.md), with original-byte preservation and before/after hashes. The native build provenance limitations remain in `tools/bitcoin-prl-port/README.md`; this browser review does not close those gates.

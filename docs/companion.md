@@ -1,6 +1,6 @@
 # Pearl Ledger companion
 
-A seedless, watch-only wallet website for the development Pearl Ledger Bitcoin-based PSBT protocol. It can run locally or through the [dedicated HTTPS host](website-hosting.md). It is **not audited, Ledger-approved, or qualified on physical hardware**. Do not use valuable funds. The signer is classical BIP86 Taproot; this is not post-quantum custody.
+A seedless, watch-only wallet website for the development Pearl Ledger Bitcoin-based PSBT protocol. It can run locally or through the [dedicated HTTPS host](website-hosting.md). It is **development software, not professionally audited or Ledger-approved**. A bounded Nano S Plus physical account/address and synthetic-signing checkpoint is recorded in [physical evidence](../tools/live-app-physical-review/README.md); funded mainnet sending remains unverified. Do not use valuable funds. The signer is classical BIP86 Taproot; this is not post-quantum custody.
 
 ## Run
 
@@ -10,7 +10,7 @@ From the repository root, install the pinned lockfile with `npm ci --ignore-scri
 npm run dev --workspace @pearl-ledger/companion
 ```
 
-Open **http://127.0.0.1:5173/**. The local Vite server includes the narrow public-indexer adapter, so light mode needs no RPC credentials or local full node. `npm run build --workspace @pearl-ledger/companion` followed by `npm run preview --workspace @pearl-ledger/companion` serves the built app and the same adapter. Do not serve the static `dist` directory alone and expect the adapter to exist. Do not expose the server to a LAN or the public internet.
+Open **http://127.0.0.1:5188/**. The local Vite server includes the narrow public-indexer adapter, so light mode needs no RPC credentials or local full node. `npm run build --workspace @pearl-ledger/companion` followed by `npm run preview --workspace @pearl-ledger/companion` serves the built app and the same adapter. Do not serve the static `dist` directory alone and expect the adapter to exist. Do not expose the server to a LAN or the public internet.
 
 The package scripts load `tsx` before Vite so the server-side middleware can resolve workspace TypeScript exports, including the SDK's `.js` ESM specifiers. Node 24.19.0 or a newer compatible 24.x release is required. No hot-wallet daemon, recovery words or seed import is used.
 
@@ -48,7 +48,7 @@ The adapter requires a consistent in-sync indexer/backend status and matching ge
 
 The browser adapter uses pinned `@ledgerhq/device-management-kit` 1.11.0, `@ledgerhq/device-transport-kit-web-hid` 1.2.4, typed `Command`/`ApduBuilder`, and `dmk.sendCommand`. Its interfaces were checked against the installed declarations as well as official docs. Legacy LedgerJS transports are not used. The session refresher is disabled during the custom protocol to avoid unrelated commands interrupting signing.
 
-WebHID is feature-detected. Intended test targets are desktop Chrome/Edge on localhost or HTTPS. Safari, Firefox, mobile browsers, every OS/device combination and physical USB are **not qualified**. There is no simulated-device control or software signer in the production UI.
+WebHID is feature-detected. Intended test targets are desktop Chrome/Edge on localhost or HTTPS. Safari, Firefox, mobile browsers and the full OS/device matrix are **not qualified**. The recorded Nano S Plus USB smoke test does not qualify other combinations. There is no simulated-device control or software signer in the production UI.
 
 - Connect checks protocol capabilities/network before account export. A failed/cancelled/disconnected operation closes the transport; reconnect explicitly. Never retry signing APDUs automatically.
 - Receive derives locally, asks the Ledger to display/approve the full address, compares the returned value and only then enables **Copy verified address**. The verified label does not survive a changed address/account/session.
@@ -82,7 +82,7 @@ export PEARL_RPC_URL=http://127.0.0.1:8334
 npm run bridge --workspace @pearl-ledger/companion
 ```
 
-The default RPC URL is an example; use your node's actual port. The bridge binds `127.0.0.1:8787`. The GUI forwards only `/api/check`, `/api/reconcile` and `/api/broadcast`. It requires exact `Origin` and `Host` for `http://127.0.0.1:5173`, JSON content type and a custom same-origin header. No permissive CORS is enabled. Non-loopback HTTP node URLs, embedded URL credentials/query/fragment and redirects are rejected; remote nodes must use HTTPS with normal certificate verification. HTTP Basic RPC credentials remain server-side. Regtest/simnet share the pinned genesis, so the explicit configured network remains necessary.
+The default RPC URL is an example; use your node's actual port. The bridge binds `127.0.0.1:8787`. The GUI forwards only `/api/check`, `/api/reconcile` and `/api/broadcast`. It requires exact `Origin` and `Host` for `http://127.0.0.1:5188`, JSON content type and a custom same-origin header. No permissive CORS is enabled. Non-loopback HTTP node URLs, embedded URL credentials/query/fragment and redirects are rejected; remote nodes must use HTTPS with normal certificate verification. HTTP Basic RPC credentials remain server-side. Regtest/simnet share the pinned genesis, so the explicit configured network remains necessary.
 
 Allowed node methods are `getblockchaininfo`, `getblockhash`, `getblockcount`, `gettxout`, `getrawtransaction`, `getrawmempool`, and separately gated `sendrawtransaction`. Pearl's `getrawtransaction` verbose argument is the integer `0` for raw bytes or `1` for reconciliation metadata, not a Bitcoin-style boolean. No `walletpassphrase`, seed/key export, wallet signing, `sendmany`, `sendtoaddress` or arbitrary RPC method is exposed.
 

@@ -36,8 +36,9 @@ cross-machine reproducibility claim.
 Before native release qualification, bind the exact tool executables,
 sysroot/libraries, Python dependencies and build recipe, or an equivalent
 immutable reviewed builder, and verify SDK revision/cleanliness again after the
-build. These remain unqualified release gates. This documentation does not
-restart or authorize the paused native build/emulator lane.
+build. These remain unqualified release gates. The owner resumed isolated emulator testing on 10 October 2026; the limited
+[Nano S Plus checkpoint](../live-app-native-review/README.md) records exact artifacts
+and remaining qualification limits.
 
 Clang 19 does not recognize one metadata-only SDK `nonstring` advisory attribute.
 The Makefile retains that warning but waives `-Werror=unknown-attributes` for

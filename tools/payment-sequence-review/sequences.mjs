@@ -92,8 +92,8 @@ export async function sequenceSelect(){await refreshJournal();activePayment=jour
 export async function sequenceRefresh(){await refreshJournal();render();}
 `;
 const compiled=await build({stdin:{contents,resolveDir:path.join(root,'apps/companion/src'),loader:'ts'},bundle:true,write:false,platform:'node',format:'esm',logLevel:'silent',plugins:[{name:'offline-boundaries',setup(build){
-  build.onResolve({filter:/^\.\/(ledger\.js|storage\.js|styles\.css|backup-import\.js)$/},a=>({path:a.path,namespace:'sequence'}));
-  build.onLoad({filter:/.*/,namespace:'sequence'},a=>({loader:'js',contents:a.path.includes('ledger')?'export async function connectLedger(){throw Error("No physical device permitted")}':a.path.includes('storage')?`
+  build.onResolve({filter:/^\.\/(device\.js|storage\.js|styles\.css|backup-import\.js)$/},a=>({path:a.path,namespace:'sequence'}));
+  build.onLoad({filter:/.*/,namespace:'sequence'},a=>({loader:'js',contents:a.path.includes('device')?'export async function connectLedger(){throw Error("No physical device permitted")}':a.path.includes('storage')?`
     export class WatchStorage {constructor(){this.model=globalThis.__sequenceModel} async journal(k){await this.model.tail;return globalThis.__sequenceValidate(structuredClone(this.model.rows.get(k)??{schema:1,nextChangeIndex:0,issuedReceiveThrough:-1,payments:[]}))} async mutate(k,fn){const pending=this.model.tail;let release;this.model.tail=new Promise(r=>release=r);await pending;try{const j=globalThis.__sequenceValidate(structuredClone(this.model.rows.get(k)??{schema:1,nextChangeIndex:0,issuedReceiveThrough:-1,payments:[]}));const result=fn(j);globalThis.__sequenceValidate(j);if(this.model.signedWriteFailure&&j.payments.some(p=>p.state==='signed')){this.model.signedWriteFailure=false;throw Error('Injected signed storage failure')}this.model.rows.set(k,structuredClone(j));this.model.commits++;return result}finally{release()}}}
   `:a.path.includes('backup-import')?'export async function importWalletBackupFile(blob,signal){signal.throwIfAborted();return globalThis.__sequenceImport(await blob.text())}':''}));
 }}]});

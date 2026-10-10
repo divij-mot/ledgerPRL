@@ -5,16 +5,18 @@ import fs from "node:fs";
 import { build } from "esbuild";
 import { fileURLToPath } from "node:url";
 import { emptyJournal } from "../../../packages/wallet/src/index.ts";
-import { publicAccount } from "../../../packages/wallet/test/fixtures.ts";
+import { publicAccount, rawTransaction } from "../../../packages/wallet/test/fixtures.ts";
 Error.stackTraceLimit = 3;
+import { deriveAddress } from "../../../packages/sdk/src/index.ts";
 const account = { ...publicAccount, network: "mainnet" };
 const source =
   fs.readFileSync(new URL("../src/main.ts", import.meta.url), "utf8") +
   `
 export async function mountPublic(a){account=a;network=a.network;sourceMode='public';privacyConsent=true;snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:100,hash:'cc'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:[]};await refreshJournal();}
 export async function startPublic(kind){await run(kind,kind==='discover'?syncPublic:checkNode);}
+export function selectPublicReceive(index,address){receiveIndex=index;verifiedReceive=address;}
 export function cancelPublic(){currentAbort?.abort();}
-export function statePublic(){return{snapshot,validation,syncComplete,notification,busy};}
+export function statePublic(){return{snapshot,validation,syncComplete,notification,busy,receiveIndex,verifiedReceive};}
 `;
 const built = await build({
   stdin: {
@@ -34,19 +36,19 @@ const built = await build({
         b.onResolve(
           {
             filter:
-              /^\.\/(ledger|storage|styles|public-source|blockbook-source)\.(?:js|css)$/,
+              /^\.\/(device|storage|styles|public-source|blockbook-source)\.(?:js|css)$/,
           },
           (a) => ({ path: a.path, namespace: "public-model" }),
         );
         b.onLoad({ filter: /.*/, namespace: "public-model" }, (a) => ({
           loader: "js",
           resolveDir: fileURLToPath(new URL("../src", import.meta.url)),
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("No device permitted")}'
             : a.path.includes("storage")
               ? `export class WatchStorage{constructor(){this.context=globalThis.publicLifecycle;}async journal(){return structuredClone(this.context.journal);}async mutate(k,fn){await this.context.beforeUpdate?.();const j=structuredClone(this.context.journal);const result=fn(j);this.context.journal=structuredClone(j);this.context.commits++;return result;}}`
               : a.path.includes("public-source")
-                ? `import {NETWORKS} from '@pearl-ledger/sdk';export function browserPublicSource(network,consent,signal){const c=globalThis.publicLifecycle;c.signal=signal;return{network,async tip(){await c.beforeSource?.();return{genesisHash:NETWORKS[network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)}};},async blockHash(){return 'aa'.repeat(32)},async address(){return{used:false,confirmedTxCount:0,pendingTxCount:0,txids:[],utxos:[]}},async transaction(){throw Error('No transactions in empty fixture')}}}`
+                ? `import {NETWORKS} from '@pearl-ledger/sdk';export function browserPublicSource(network,consent,signal){const c=globalThis.publicLifecycle;c.signal=signal;return{network,async tip(){await c.beforeSource?.();return{genesisHash:NETWORKS[network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)}};},async blockHash(){return 'aa'.repeat(32)},async address(address){return c.addresses?.get(address)??{used:false,confirmedTxCount:0,pendingTxCount:0,txids:[],utxos:[]}},async transaction(id){const tx=c.transactions?.get(id);if(tx)return tx;throw Error('No transaction in fixture')}}}`
                 : a.path.includes("blockbook-source")
                   ? `export async function checkLightSnapshot(source,snapshot){await globalThis.publicLifecycle.beforeSource?.();return{network:snapshot.account.network,genesisHash:snapshot.genesisHash,tip:{height:200,hash:'aa'.repeat(32)},checkedAt:Date.now(),coins:[]}}`
                   : "",
@@ -177,4 +179,26 @@ for (const kind of ["discover", "check"]) {
   console.log(
     "PASS: cancellation during input checking cannot apply a late unspent result or claim fresh validation",
   );
+}
+
+{
+  const t = await mount();
+  const address = deriveAddress(account, 0, 0).address;
+  const tx = rawTransaction(100_000_000n, 0);
+  t.context.addresses = new Map([[address, {
+    used: true, confirmedTxCount: 1, pendingTxCount: 0,
+    txids: [tx.txid], utxos: [{txid: tx.txid, vout: 0, height: 1}],
+  }]]);
+  t.context.transactions = new Map([[tx.txid, {
+    rawTransaction: tx.rawTransaction, block: {height: 1, hash: 'aa'.repeat(32)}, confirmations: 200,
+  }]]);
+  t.app.selectPublicReceive(0, address);
+  await t.app.startPublic('discover');
+  assert.equal(t.app.statePublic().syncComplete, true, t.app.statePublic().notification);
+  assert.equal(t.app.statePublic().receiveIndex, 1);
+  assert.equal(t.app.statePublic().verifiedReceive, null);
+  assert.equal(t.context.journal.issuedReceiveThrough, 0,
+    'selection must not issue an address before the existing durable verification flow');
+  assert.equal(t.app.statePublic().snapshot.coins.length, 1);
+  console.log('PASS: real discovery advances a used receive address and clears its copy authority without issuing the next address');
 }

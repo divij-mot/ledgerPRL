@@ -1,0 +1,19 @@
+{
+  "candidateHash": "2f902273ee3fde9d82bbd334f7349dbc86bc0af8ffc8be67a90d7cc58abb5635",
+  "network": "mainnet",
+  "synthetic": true,
+  "broadcast": false,
+  "capabilitiesVerified": true,
+  "accountExportApproved": true,
+  "addressVerified": true,
+  "syntheticSignaturesVerified": true,
+  "completionWarning": null,
+  "ok": true,
+  "baseCommit": "96aa2e09a7f87ffbb8474c6825c575fa8cec0a27",
+  "testSourceSha256": {
+    "tools/physical-ledger/run.ts": "43297e27e5fedcf23152ca25acc758513bdf10c1f621f6b870e427309dd4e69d",
+    "tools/physical-ledger/bridge.py": "460205f76ab76983cea0690de715d684807a0632158ca7505afe4aedb73de3fa",
+    "packages/bitcoin-prl-adapter/src/client.ts": "cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db"
+  },
+  "privateOutputPermissionsVerified": true
+}

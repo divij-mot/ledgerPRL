@@ -60,13 +60,13 @@ const built = await build({
     {
       name: "operation-review-explicit-mocks",
       setup(b) {
-        b.onResolve({ filter: /^\.\/(ledger\.js|storage\.js)$/ }, (a) => ({
+        b.onResolve({ filter: /^\.\/(device\.js|storage\.js)$/ }, (a) => ({
           path: a.path,
           namespace: "review-mock",
         }));
         b.onLoad({ filter: /.*/, namespace: "review-mock" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? `export async function connectLedger(cb){const c=globalThis.operationReview;c.disconnects.push(cb);return c.endpoint.transport;}`
             : `
 export class WatchStorage{
@@ -461,11 +461,8 @@ test("REGRESSION E2: unload warns while verified signatures await storage comple
   assert.equal(t.c.rows.get(owner).payments[0].state, "signing");
   assert.equal(t.app.auditState().emergency.paymentId, id);
   assert.equal(t.app.auditState().emergency.pending, true);
-  assert.match(t.dom.innerHTML, /Saving signed payment/);
-  assert.doesNotMatch(
-    t.dom.innerHTML,
-    /Signed payment needs a recovery backup/,
-  );
+  assert.match(t.dom.innerHTML, /Saving payment/);
+  assert.doesNotMatch(t.dom.innerHTML, /Payment could not be saved/);
   const backup = wallet.importWalletBackup(t.app.auditState().emergency.text);
   assert.equal(backup.journal.payments[0].rawTx, f.rawTx);
   let prevented = 0;
@@ -630,7 +627,7 @@ test("REGRESSION E2: closing the account after signed-storage failure cannot dis
   await t.app.auditSign();
   const recovery = t.app.auditState().emergency;
   assert.equal(recovery.pending, false);
-  assert.match(t.dom.innerHTML, /Signed payment needs a recovery backup/);
+  assert.match(t.dom.innerHTML, /Payment could not be saved/);
   assert.equal(
     wallet.importWalletBackup(recovery.text).journal.payments[0].rawTx,
     f.rawTx,
@@ -675,8 +672,8 @@ test("REGRESSION E3: settled signed write with failed read-back retains a warnin
       .payments[0].rawTx,
     f.rawTx,
   );
-  assert.match(t.dom.innerHTML, /Signed payment needs a recovery backup/);
-  assert.doesNotMatch(t.dom.innerHTML, /Saving signed payment/);
+  assert.match(t.dom.innerHTML, /Payment could not be saved/);
+  assert.doesNotMatch(t.dom.innerHTML, /Saving payment/);
   assert.doesNotMatch(
     t.app.auditState().notification,
     /exact signed bytes saved/,

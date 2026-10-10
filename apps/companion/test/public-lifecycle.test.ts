@@ -25,7 +25,7 @@ test("mocked source/storage scheduling: actual UI total budgets and cancellation
   assert.equal(result.status, 0, diagnostic);
   assert.equal(
     result.stdout.split("\n").filter((line) => line.startsWith("PASS:")).length,
-    4,
+    5,
     diagnostic,
   );
 });

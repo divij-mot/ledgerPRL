@@ -17,6 +17,7 @@ async function fixture(t: TestContext) {
   t.after(() => rm(directory, { recursive: true, force: true }));
   await mkdir(join(directory, "assets"));
   await writeFile(join(directory, "index.html"), html);
+  await writeFile(join(directory, "live.html"), html);
   await writeFile(
     join(directory, "third-party-notices.txt"),
     "Public dependency notices\n",
@@ -471,4 +472,28 @@ test("raw HTTP duplicate Host and Origin headers are rejected rather than normal
     /^HTTP\/1\.1 421 /,
   );
   assert.match(await raw("X-Forwarded-Proto: https\r\n"), /^HTTP\/1\.1 421 /);
+});
+
+test("Live App entry accepts only Ledger display preferences and retains isolation", async (t) => {
+  const { request } = await start(t);
+  for (const target of [
+    "/live.html",
+    "/live.html?theme=dark&lang=en",
+    "/live.html?lang=pt-BR&theme=light",
+  ]) {
+    const result = await request(target);
+    assert.equal(result.status, 200, target);
+    assert.equal(result.headers["x-frame-options"], "DENY");
+    assert.equal(result.headers["content-security-policy"], WALLET_CSP);
+  }
+  for (const target of [
+    "/live.html?account=xpub",
+    "/live.html?theme=dark&theme=light",
+    "/live.html?lang=en&url=https://evil.example",
+    "/live.html?theme=system",
+    "/?theme=dark",
+    "/api/indexer/read?theme=dark",
+  ]) {
+    assert.equal((await request(target)).status, 404, target);
+  }
 });

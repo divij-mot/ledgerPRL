@@ -1,6 +1,6 @@
 # Test evidence
 
-Development checkpoint, 2026-10-09. Passing software tests are not physical Ledger proof, a human security audit, or mainnet readiness.
+Development checkpoint, updated 2026-10-10. Passing software tests are not physical Ledger proof, a human security audit, or mainnet readiness.
 
 ## Current C-port and direct-website checkpoint
 
@@ -12,7 +12,7 @@ The current signer is `apps/ledger-bitcoin-prl`, a restricted Ledger Bitcoin-bas
 - [Real-browser public-fixture review](../apps/companion/test/evidence/website-qa/astra-real-browser-2026-10-09.md): 12 bounded cases passed on `index-B9WJtHC4.js`, SHA-256 `4062ec6b173da7cb05dbc27a91928225571530a88171b47d2fbde8f1b4b671e0`. Explicit restore, close/form reset, narrow optional-cache removal and preservation of an existing unsigned draft/receive range across reload were observed through the actual UI. File imports, crash/eviction/cross-tab races, actual Ledger signing, live chain and public TLS were not exercised.
 - [Public-indexer review](../tools/public-indexer-review/README.md): 18 existing and six independent offline cases passed, and selected pinned upstream source identities were checked. The fresh actual-client live probe was cancelled and produced zero usable live observations. Historical backend observations do not establish current availability or deployed-proxy compatibility.
 - [Static native source review](../tools/device-source-review/README.md): provenance/control-flow inspection identified two unfixed low-severity trailing-byte/acknowledgement validation gaps. No build or native execution was performed. This does not establish an approval bypass or prove the absence of one.
-- [Historical C-port checkpoint](../tools/bitcoin-prl-independent-review/README.md): the 29 hostile requests, three approved signing cases and Pearl oracle results apply only to recorded Nano S Plus ELF `8e45823f822fbc675dcd2e2c0868667905e4e26e64a711dc62fec0392febf737`. Its source list was observed after review and is not a proven build-to-source manifest. Other native candidates retain separate evidence; none inherits these results automatically. The current native/emulator lane is paused after a blocked test, and no final current-source/native matrix is claimed.
+- [Historical C-port checkpoint](../tools/bitcoin-prl-independent-review/README.md): the 29 hostile requests, three approved signing cases and Pearl oracle results apply only to recorded Nano S Plus ELF `8e45823f822fbc675dcd2e2c0868667905e4e26e64a711dc62fec0392febf737`. Its source list was observed after review and is not a proven build-to-source manifest. Other native candidates retain separate evidence; none inherits these results automatically. The owner resumed the native lane for the [limited current-source Nano S Plus checkpoint](../tools/live-app-native-review/README.md); no complete current-source/native matrix is claimed.
 
 ## Historical host and previous-Rust core checks
 
@@ -67,4 +67,16 @@ Reports apply to their recorded source/tool/artifact hashes, not automatically t
 
 ## Not established
 
-Physical installation/signing/screens/restore, physical app/OS memory and latency, the final C-port source-linked native/model/network matrix, full browser import/cross-tab/crash/interrupted-signing workflows, public TLS deployment, current live-indexer availability, final published-commit CI for the new changes, third-party human audit and Ledger functional/release approval remain gates. The bounded public-fixture UI checks above do not establish these broader flows. The original Nano S is unsupported; retail Nano X requires a vendor-controlled distribution route. No passing software result authorizes valuable-funds use, hardware changes, submission or publication.
+The complete physical fault/display/restore matrix, physical app/OS memory and latency, the final C-port source-linked native/model/network matrix, full browser import/cross-tab/crash/interrupted-signing workflows, public TLS deployment, current live-indexer availability, final published-commit CI for the new changes, third-party human audit and Ledger functional/release approval remain gates. The bounded public-fixture UI checks above do not establish these broader flows. The original Nano S is unsupported; retail Nano X requires a vendor-controlled distribution route. No passing software result authorizes valuable-funds use, hardware changes, submission or publication.
+
+## Current physical checkpoint
+
+The [Nano S Plus checkpoint](../tools/live-app-physical-review/README.md) records approved installation of the exact emulator-tested Pearl Dev mainnet build, real Ledger Wallet account export and verified Receive, and independently checked direct-HID synthetic signing. No payment was broadcast. This does not qualify full Wallet API signing/cancellation/reconnect or funded-chain acceptance. [Public source checks](../tools/live-app-public-review/README.md) currently fail before any address query due to TCP timeouts.
+
+## Live App delivery checkpoint (10 October 2026)
+
+The final `npm run check` passed **504 tests** across six workspaces, TypeScript checks, all workspace builds and the tracked-file secret-pattern scan. The companion production build was repeated after publishing regenerated notices. The supply review passed **757 checks**, four notice tests, and the npm advisory lookup returned zero known vulnerabilities. The [Astra security review](../tools/live-app-audit/security.md) and [lean/parity review](../tools/live-app-audit/lean-parity.md) are separate AI reviews with their own scope and results; neither substitutes for an external human audit.
+
+Final Chrome checks used only the built-in public regtest example: empty amount guidance, Max preserving 0.00001000 PRL fee, 6.24999000 PRL recipient plus fee exactly matching 6.25000000 PRL selected balance, unsigned summary, and disabled hardware confirmation without a device. Receive required device verification before sharing. The one synthetic unsigned draft was discarded. The Discover entry loaded mainnet and rejected browser-only connection without opening WebHID. An actual Ledger Wallet Discover reload displayed the final entry; no further device approval or funded payment was requested.
+
+Public mainnet status navigation in Chrome also timed out; it did not supply evidence of a working alternative network path. The [read-only indexer probe](../tools/live-app-public-review/README.md) remains the detailed recorded reachability result. Funding, real-chain acceptance and confirmation are not claimed.

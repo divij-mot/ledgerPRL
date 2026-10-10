@@ -114,12 +114,12 @@ export function testSaved(a) { return store.journal(accountId(a)); }
         name: "backup-ui-boundaries",
         setup(build) {
           build.onResolve(
-            { filter: /^\.\/(ledger\.js|storage\.js)$/ },
+            { filter: /^\.\/(device\.js|storage\.js)$/ },
             (args) => ({ path: args.path, namespace: "backup-test" }),
           );
           build.onLoad({ filter: /.*/, namespace: "backup-test" }, (args) => ({
             loader: "js",
-            contents: args.path.includes("ledger")
+            contents: args.path.includes("device")
               ? 'export async function connectLedger() { throw Error("No device in this test"); }'
               : `export class WatchStorage {
             constructor() { this.rows = new Map(); }

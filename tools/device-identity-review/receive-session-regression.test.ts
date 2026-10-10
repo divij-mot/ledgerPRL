@@ -61,13 +61,13 @@ const built = await build({
     {
       name: "operation-review-explicit-mocks",
       setup(b) {
-        b.onResolve({ filter: /^\.\/(ledger\.js|storage\.js)$/ }, (a) => ({
+        b.onResolve({ filter: /^\.\/(device\.js|storage\.js)$/ }, (a) => ({
           path: a.path,
           namespace: "review-mock",
         }));
         b.onLoad({ filter: /.*/, namespace: "review-mock" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? `export async function connectLedger(cb){const c=globalThis.operationReview;c.disconnects.push(cb);return c.endpoint.transport;}`
             : `
 export class WatchStorage{
@@ -239,6 +239,11 @@ for (const fault of ["rejected-ack", "lost-ack"] as const) {
     const expected = sdk.deriveAddress(fixtureAccount, 0, 0).address;
     assert.equal(t.app.auditState().verifiedReceive, expected);
     assert.equal(t.c.nodes.get("copy-address").disabled, false);
+    assert.match(t.dom.innerHTML, />Address verified on your Ledger\.</);
+    assert.match(
+      t.dom.innerHTML,
+      /data-status="active" aria-current="step"><span class="ledger-step-number">3<\/span><span class="ledger-step-label">Receive<\/span>/,
+    );
     await t.app.auditSign();
     const after = t.app.auditState();
     assert.equal(after.client.sessionState, "failed");
@@ -251,7 +256,15 @@ for (const fault of ["rejected-ack", "lost-ack"] as const) {
     );
     assert.equal(after.verifiedReceive, null);
     t.app.auditPage("receive");
-    assert.match(t.dom.innerHTML, />Not device verified</);
+    assert.match(
+      t.dom.innerHTML,
+      />Verify the address on your Ledger before using it\.</,
+    );
+    assert.doesNotMatch(t.dom.innerHTML, />Address verified on your Ledger\.</);
+    assert.doesNotMatch(
+      t.dom.innerHTML,
+      /data-status="active" aria-current="step"><span class="ledger-step-number">3<\/span><span class="ledger-step-label">Receive<\/span>/,
+    );
     assert.equal(t.c.nodes.get("copy-address").disabled, true);
     assert.equal(t.c.nodes.get("verify-receive").disabled, true);
     const count = t.c.endpoint.commands.length;
@@ -292,6 +305,7 @@ test("control: device review rejection before any signatures clears the prior ve
   assert.equal(t.app.auditState().client.sessionState, "failed");
   assert.equal(t.app.auditState().verifiedReceive, null);
   t.app.auditPage("receive");
+  assert.doesNotMatch(t.dom.innerHTML, />Address verified on your Ledger\.</);
   assert.equal(t.c.nodes.get("copy-address").disabled, true);
   assert.equal(t.c.rows.get(owner).payments[0].state, "signing");
   assert.equal(t.c.rows.get(owner).payments[0].rawTx, undefined);
@@ -336,13 +350,21 @@ test("failed signed-storage render stays unverified while the next journal read 
   );
   assert.equal(wallet.reservedOutpoints(t.c.rows.get(owner)).size, 2);
   assert.equal(t.c.rows.get(owner).payments[0].state, "signing");
-  assert.match(t.dom.innerHTML, />Not device verified</);
+  assert.match(
+    t.dom.innerHTML,
+    />Verify the address on your Ledger before using it\.</,
+  );
+  assert.doesNotMatch(t.dom.innerHTML, />Address verified on your Ledger\.</);
+  assert.doesNotMatch(
+    t.dom.innerHTML,
+    /data-status="active" aria-current="step"><span class="ledger-step-number">3<\/span><span class="ledger-step-label">Receive<\/span>/,
+  );
   assert.equal(t.c.nodes.get("copy-address").disabled, true);
   assert.equal(
     t.c.frames.filter(
       (frame: any) =>
         frame.deviceState === "failed" &&
-        />Verified on device</.test(frame.html),
+        />Address verified on your Ledger\.</.test(frame.html),
     ).length,
     0,
   );
@@ -373,6 +395,11 @@ test("ordinary successful signing preserves valid same-session receive verificat
   assert.equal(t.app.auditState().client.sessionState, "ready");
   assert.equal(t.app.auditState().verifiedReceive, expected);
   assert.equal(t.c.nodes.get("copy-address").disabled, false);
+  assert.match(t.dom.innerHTML, />Address verified on your Ledger\.</);
+  assert.match(
+    t.dom.innerHTML,
+    /data-status="active" aria-current="step"><span class="ledger-step-number">3<\/span><span class="ledger-step-label">Receive<\/span>/,
+  );
   assert.equal(t.c.rows.get(owner).payments[0].rawTx, f.rawTx);
   assert.equal(wallet.reservedOutpoints(t.c.rows.get(owner)).size, 2);
 });
@@ -412,8 +439,15 @@ test("lost final ACK immediately clears the displayed label before a stalled jou
   try {
     assert.equal(t.app.auditState().client.sessionState, "failed");
     assert.equal(t.app.auditState().verifiedReceive, null);
-    assert.match(t.dom.innerHTML, />Not device verified</);
-    assert.doesNotMatch(t.dom.innerHTML, />Verified on device</);
+    assert.match(
+      t.dom.innerHTML,
+      />Verify the address on your Ledger before using it\.</,
+    );
+    assert.doesNotMatch(t.dom.innerHTML, />Address verified on your Ledger\.</);
+    assert.doesNotMatch(
+      t.dom.innerHTML,
+      /data-status="active" aria-current="step"><span class="ledger-step-number">3<\/span><span class="ledger-step-label">Receive<\/span>/,
+    );
     assert.equal(t.c.nodes.get("copy-address").disabled, true);
     assert.equal(t.c.nodes.get("verify-receive").disabled, true);
     assert.equal(t.c.rows.get(owner).payments[0].rawTx, f.rawTx);

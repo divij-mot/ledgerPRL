@@ -60,13 +60,13 @@ const built = await build({
     {
       name: "operation-review-explicit-mocks",
       setup(b) {
-        b.onResolve({ filter: /^\.\/(ledger\.js|storage\.js)$/ }, (a) => ({
+        b.onResolve({ filter: /^\.\/(device\.js|storage\.js)$/ }, (a) => ({
           path: a.path,
           namespace: "review-mock",
         }));
         b.onLoad({ filter: /.*/, namespace: "review-mock" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? `export async function connectLedger(cb){const c=globalThis.operationReview;c.disconnects.push(cb);return c.endpoint.transport;}`
             : `
 export class WatchStorage{
@@ -234,8 +234,8 @@ test("independent: settled signed write with failed read-back must leave a recov
     false,
     "read-back has failed and signing settled; no storage task remains pending",
   );
-  assert.match(t.dom.innerHTML, /Signed payment needs a recovery backup/);
-  assert.doesNotMatch(t.dom.innerHTML, /Saving signed payment/);
+  assert.match(t.dom.innerHTML, /Payment could not be saved/);
+  assert.doesNotMatch(t.dom.innerHTML, /Saving payment/);
 });
 
 test("independent: successful exact-match read-back clears recovery and unload warning", async () => {

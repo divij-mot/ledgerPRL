@@ -10,8 +10,9 @@ import {
   accountFromJson,
   accountToJson,
   deriveAddress,
+  addressToScript,
   formatPrl,
-  hex,
+  MAX_INPUTS,
   NETWORKS,
   assert,
   finalizeTransaction,
@@ -27,6 +28,7 @@ import {
   type ChainValidation,
   type WalletJournal,
   type PaymentRecord,
+  type PaymentRequest,
   type HistoryEntry,
   record,
   exactKeys,
@@ -42,7 +44,6 @@ import {
   outpoint,
   preparePayment,
   previewPaymentPolicy,
-  inspectPaymentPolicy,
   assertPaymentPolicy,
   reservedOutpoints,
   reservePayment,
@@ -60,13 +61,28 @@ import {
   applyValidation,
   requireFreshValidation,
 } from "@pearl-ledger/wallet";
-import { connectLedger, type DmkPearlTransport } from "./ledger.js";
+import { connectLedger, type PearlTransport } from "./device.js";
 import { browserPublicSource } from "./public-source.js";
 import { checkLightSnapshot } from "./blockbook-source.js";
 import { WatchStorage } from "./storage.js";
 import { signedRecoveryBackup } from "./signed-recovery.js";
 import { importWalletBackupFile } from "./backup-import.js";
-import { countLabel, navigationIcon } from "./presentation.js";
+import { countLabel } from "./presentation.js";
+import { walletShell, walletButton } from "./ui.js";
+import {
+  selectPaymentInputs,
+  selectablePaymentCoins,
+  maximumPayment,
+} from "./coin-selection.js";
+import { walletMessage } from "./wallet-copy.js";
+import {
+  FEE_TARGETS,
+  loadFeeQuotes,
+  quotedPayment,
+  type FeeQuote,
+} from "./fee-quotes.js";
+import { historyConfirmations, pageItems } from "./activity.js";
+import { sendForm, reviewFlow, receiveFlow } from "./ledger-ui/index.js";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 const hostedMode = window.location?.protocol === "https:";
@@ -78,13 +94,18 @@ let sourceMode: "node" | "public" = "node",
 let history: HistoryEntry[] = [],
   lastUsed: [number, number] = [-1, -1];
 let page: "overview" | "receive" | "send" | "activity" = "overview";
-let network: NetworkName = hostedMode ? "testnet2" : "regtest",
+let network: NetworkName =
+    window.location?.pathname === "/live.html"
+      ? "mainnet"
+      : hostedMode
+        ? "testnet2"
+        : "regtest",
   accountIndex = 0,
   account: AccountPublicKey | null = null;
 let snapshot: WatchSnapshot | null = null,
   validation: ChainValidation | null = null;
 let client: LedgerBitcoinPrlClient | null = null,
-  transport: DmkPearlTransport | null = null;
+  transport: PearlTransport | null = null;
 let journal: WalletJournal = emptyJournal(),
   activePayment: string | null = null;
 let busy = false,
@@ -107,8 +128,27 @@ type SignedRecovery = {
 let emergencySignedRecovery: SignedRecovery | null = null;
 let journalRefreshGeneration = 0;
 const selected = new Set<string>();
+let manualSelection = false;
+let coinControlOpen = false;
+let settingsOpen = false;
+let historyPage = 0,
+  paymentPage = 0;
+let historyTip: { height: number; hash: string } | null = null;
+let sendStep = 0,
+  receiveStep = 0;
+let signingRequested = false;
+let feeQuotes: FeeQuote[] = [];
+let feeQuoteNetwork: NetworkName | null = null;
+let feeQuoteStatus = "Enter a manual fee or refresh network estimates.";
 const form = { recipient: "", amount: "", fee: "0.00001000", changeIndex: "0" };
 function clearPaymentForm() {
+  feeQuotes = [];
+  feeQuoteNetwork = null;
+  feeQuoteStatus = "Enter a manual fee or refresh network estimates.";
+  historyPage = paymentPage = 0;
+  historyTip = null;
+  sendStep = receiveStep = 0;
+  manualSelection = false;
   Object.assign(form, {
     recipient: "",
     amount: "",
@@ -159,6 +199,7 @@ async function run(
   currentAbort = new AbortController();
   busyText = label;
   notification = "";
+  notificationType = "success";
   render();
   try {
     await work(currentAbort.signal);
@@ -294,40 +335,76 @@ function render() {
   if (client?.sessionState === "failed") verifiedReceive = null;
   const active = getPayment(),
     b = snapshot ? balances(snapshot, reservedOutpoints(journal)) : null;
-  app.innerHTML = `<div class="layout"><aside class="sidebar"><div><div class="brand"><span class="pearl" aria-hidden="true"></span>pearl</div><div class="subtitle">Ledger companion</div></div><nav class="nav" aria-label="Main navigation">${(["overview", "receive", "send", "activity"] as const).map((p) => `<button data-nav="${p}" class="${page === p ? "active" : ""}" ${disabled(busy)}><span aria-hidden="true">${navigationIcon(p)}</span>${p[0]!.toUpperCase() + p.slice(1)}</button>`).join("")}</nav><div class="sidebar-bottom"><span class="status-dot"></span>Watch-only by design<br>Your keys stay on your Ledger.<br><br>PSBT signer · Development build<br>No recovery phrase needed.</div></aside><main class="main"><header class="topbar"><div><p class="eyebrow">Your Pearl, under your control</p><h1>${{ overview: "Account overview", receive: "Receive Pearl", send: "Send with confidence", activity: "Payment activity" }[page]}</h1></div><div class="actions"><span class="tag ${network === "mainnet" ? "warn" : ""}">${e(network)}</span><button id="connect" ${disabled(busy)}>${client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger"}</button></div></header><div class="notice">Development prototype. Not audited, Ledger-approved or verified on physical hardware. Use disposable test funds only. Classical Taproot custody; no post-quantum claim.</div>${emergencySignedRecovery ? `<section class="notice ${emergencySignedRecovery.pending ? "busy" : "error"}" role="${emergencySignedRecovery.pending ? "status" : "alert"}"><strong>${emergencySignedRecovery.pending ? "Saving signed payment" : "Signed payment needs a recovery backup"}</strong><p>${emergencySignedRecovery.pending ? "Exact signed bytes are being saved. Keep this page open. If saving stalls, download the recovery copy below." : "Signed bytes have not been confirmed in local storage. Do not close or refresh this page. Download the signed-payment backup before continuing."} Keep it private: anyone with these signed bytes can broadcast this exact payment. Inputs remain reserved; do not create a replacement payment.</p><p class="mono">${e(emergencySignedRecovery.txid)}</p><button id="download-signed-recovery">Download signed-payment backup</button></section>` : ""}${notification ? `<div role="status" class="notice ${notificationType}">${e(notification)} <button id="dismiss" class="ghost" aria-label="Dismiss notification">Dismiss</button></div>` : ""}${busy ? `<div role="status" class="notice busy">${e(busyText)}${currentAbort ? '<button id="cancel-device" class="ghost">Cancel operation</button>' : ""}</div>` : ""}${page === "overview" ? overview(b) : page === "receive" ? receive() : page === "send" ? send(active) : activity()}<footer class="footer"><span>Public data only. Never enter recovery words or private keys.</span><span>BIP86 accounts · PRL PSBT protocol · <a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></span></footer></main></div>`;
+  const visibleNotification = walletMessage(notification);
+  const feedback = `${emergencySignedRecovery ? `<section class="notice ${emergencySignedRecovery.pending ? "busy" : "error"}" role="${emergencySignedRecovery.pending ? "status" : "alert"}"><strong>${emergencySignedRecovery.pending ? "Saving payment" : "Payment could not be saved"}</strong><p>${emergencySignedRecovery.pending ? "Keep this window open while your approved payment is saved. If saving stalls, download a backup." : "Keep this window open and download a backup before continuing."} Keep it private: it can be used to send this payment. These funds remain unavailable; do not create a replacement payment.</p><p class="mono">${e(emergencySignedRecovery.txid)}</p><button id="download-signed-recovery">Download backup</button></section>` : ""}${visibleNotification ? `<div role="status" class="notice ${notificationType}">${e(visibleNotification)} <button id="dismiss" class="ghost" aria-label="Dismiss notification">Dismiss</button></div>` : ""}${busy ? `<div role="status" class="notice busy">${e(busyText)}${currentAbort ? '<button id="cancel-device" class="ghost">Cancel operation</button>' : ""}</div>` : ""}`;
+  const hasFlow =
+    (page === "receive" && !!account) ||
+    (page === "send" && (!!snapshot || !!active));
+  const content = `${hasFlow ? "" : feedback}${page === "overview" ? overview(b) : page === "receive" ? receive(feedback) : page === "send" ? send(active, feedback) : activity()}`;
+  app.innerHTML = walletShell({
+    page,
+    network,
+    busy,
+    settings: settings(),
+    content,
+  });
   bind();
 }
 function lightCard() {
   if (!account || !["mainnet", "testnet2"].includes(network)) return "";
-  return `<section class="card"><p class="eyebrow">No local full node required</p><h2>Public light sync</h2><p class="hint">Discover balances and transaction history through Pearl’s ${network === "mainnet" ? "blockbook.pearlresearch.ai" : "blockbook.testnet.pearlresearch.ai"} service over HTTPS. The operator can link queried addresses and your IP. Public account keys stay in your browser. The wallet host and indexer can link these requests.</p><label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy)}>I allow this session to query my receive/change addresses and transaction IDs with this public service and trust its chain view.</label><button id="sync-public" ${disabled(busy || !privacyConsent)}>${syncComplete ? "Resync account & history" : "Discover watch account"}</button><p class="hint">Both branches · gap 20 · bounded recovery scan. No recovery words. Current limit: index 999 per branch, 2,000 history transactions and 256 UTXOs. Limit exhaustion is reported as incomplete.</p></section>`;
+  return `<section class="card sync-card"><div><h2>${syncComplete ? "Account synced" : "Sync your account"}</h2><p class="hint">${syncComplete && snapshot ? `Last synced at block ${snapshot.tip.height}. ` : ""}</p><label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy)}>Use Pearl’s public indexer (shares wallet addresses)</label></div>${walletButton("sync-public", syncComplete ? "Sync account" : "Sync balance & history", busy || !privacyConsent)}<details class="sync-details"><summary>About public sync</summary><p class="hint">Queries share your addresses, transactions and IP with the wallet host and Pearl’s public service. Balances rely on its responses.</p><p class="hint">Service: ${network === "mainnet" ? "blockbook.pearlresearch.ai" : "blockbook.testnet.pearlresearch.ai"}. Public account keys stay in your browser.</p></details></section>`;
 }
 function paymentStatus(payment: PaymentRecord): string {
-  if (payment.archived)
-    return `archived: confirmed at block ${payment.archived.block.height} (locks retained)`;
-  if (!payment.txid) return payment.state;
-  const tx = history.find((h) => h.txid === payment.txid);
-  return tx?.state === "confirmed"
-    ? `confirmed (${snapshot ? Math.max(0, snapshot.tip.height - tx.block!.height + 1) : "?"})`
-    : tx?.state === "detached"
-      ? "detached / conflicted; review required"
-      : payment.state === "accepted"
-        ? "previously accepted; current confirmation unverified"
-        : payment.state;
+  if (payment.archived) return "Confirmed";
+  const tx = payment.txid
+    ? history.find((h) => h.txid === payment.txid)
+    : undefined;
+  if (tx?.state === "confirmed") return "Confirmed";
+  if (tx?.state === "detached") return "Needs review";
+  return {
+    draft: "Draft",
+    signing: "Needs review",
+    signed: "Ready to send",
+    "broadcast-unknown": "Status unknown",
+    accepted: "Pending confirmation",
+  }[payment.state];
+}
+function pagination(name: string, pageNumber: number, pages: number) {
+  return pages <= 1
+    ? ""
+    : `<div class="activity-pagination"><button id="${name}-prev" class="ghost" ${disabled(busy || pageNumber === 0)}>Previous</button><span class="hint">${pageNumber + 1} / ${pages}</span><button id="${name}-next" class="ghost" ${disabled(busy || pageNumber + 1 >= pages)}>Next</button></div>`;
 }
 function historyCard(): string {
   if (!history.length) return "";
-  return `<section class="card"><h2>Discovered transaction history</h2><p class="hint">Rebuilt from the public source on each explicit resync. Detached records stay visible. Node/indexer acceptance is not confirmation.</p>${history
+  const sorted = history
     .slice()
     .sort(
       (a, b) =>
         (b.block?.height ?? Number.MAX_SAFE_INTEGER) -
-        (a.block?.height ?? Number.MAX_SAFE_INTEGER),
-    )
-    .map(
-      (h) =>
-        `<div class="journal-item"><div class="row"><b class="small">${e(h.state)}${h.block ? ` · block ${h.block.height}` : ""}</b><span class="small">Received ${money(h.received)} / spent ${money(h.spent)}</span></div><p class="mono">${e(h.txid)}</p></div>`,
-    )
-    .join("")}</section>`;
+          (a.block?.height ?? Number.MAX_SAFE_INTEGER) ||
+        a.txid.localeCompare(b.txid),
+    );
+  const slice = pageItems(sorted, historyPage);
+  historyPage = slice.page;
+  return `<section class="card"><h2>Transactions</h2>${slice.items
+    .map((h) => {
+      const net = h.received - h.spent;
+      const count = historyConfirmations(
+        h,
+        snapshot?.tip,
+        syncComplete ? historyTip : null,
+      );
+      const status =
+        h.state === "pending"
+          ? "Pending"
+          : h.state === "detached"
+            ? "Needs review"
+            : count === null
+              ? "Confirmation status unavailable"
+              : countLabel(count, "confirmation");
+      return `<div class="journal-item"><div class="row"><div><b class="small">${net > 0n ? "Received" : net < 0n ? "Sent" : "Transaction"}</b><p class="hint">${status}</p></div><strong class="small">${net > 0n ? "+" : net < 0n ? "−" : ""}${money(net < 0n ? -net : net)}</strong></div><details><summary>Transaction details</summary><p class="mono">${e(h.txid)}</p><button class="ghost" data-copy-txid="${e(h.txid)}" ${disabled(busy)}>Copy transaction ID</button><p class="hint">Received ${money(h.received)} · Spent ${money(h.spent)}.</p></details></div>`;
+    })
+    .join("")}${pagination("history", slice.page, slice.pages)}</section>`;
 }
 async function syncPublic() {
   const signal = AbortSignal.any([
@@ -431,8 +508,15 @@ async function syncPublic() {
   });
   signal.throwIfAborted();
   lastUsed = nextLastUsed;
+  // Match a normal UTXO wallet: after discovery, offer an unused receive
+  // address. The existing range guard still blocks exhausted recovery ranges.
+  if (receiveIndex <= lastUsed[0]) {
+    receiveIndex = lastUsed[0] + 1;
+    verifiedReceive = null;
+  }
   snapshot = next;
   history = nextHistory;
+  historyTip = { ...next.tip };
   sourceMode = "public";
   syncComplete = true;
   validation = null;
@@ -441,94 +525,246 @@ async function syncPublic() {
   notification = `Public account discovered through block ${next.tip.height}: ${next.coins.length} outputs and ${nextHistory.length} transactions. ${network === "testnet2" ? "This endpoint is testnet2, despite its testnet hostname." : ""}`;
 }
 function overview(b: ReturnType<typeof balances> | null) {
-  return `<div class="grid"><div><section class="card balance-card"><p class="eyebrow">${snapshot ? (syncComplete ? "Discovered eligible balance" : "Imported eligible balance") : "Watch-only balance"}</p><div class="balance">${b ? formatPrl(b.available) : "Data unavailable"}${b ? "<small>PRL</small>" : ""}</div><span class="small">${validation ? "Checked against your authenticated source" : snapshot ? "Imported estimates. Recheck your selected source before spending." : "Load public watch data to view funds. No automatic zero balance."}</span><div class="balance-row"><div><label>Immature mining</label>${b ? e(formatPrl(b.immature)) : "—"}</div><div><label>Reserved</label>${b ? e(formatPrl(b.reserved)) : "—"}</div><div><label>Unconfirmed</label>${b ? e(formatPrl(b.pending)) : "—"}</div></div></section><section class="card"><div class="section-head"><h2>Public account</h2><span class="tag">${client?.sessionState === "ready" ? "Device connected" : "Watch only"}</span></div><div class="inline-fields"><div class="field"><label for="network">Network</label><select id="network" ${disabled(busy || !!account)}>${Object.keys(
+  if (!account)
+    return `<section class="connect-panel"><h2>Add your Pearl account</h2><p>Open Pearl on your Ledger to get started.</p>${walletButton("connect-inline", "Add account", busy)}</section>`;
+  return `<section class="balance-card"><p class="hint">Available balance</p><div class="balance">${b ? formatPrl(b.available) : "—"}<small>PRL</small></div><div class="actions account-actions"><button data-nav="receive" ${disabled(busy)}>Receive</button><button data-nav="send" ${disabled(busy)}>Send</button></div>${b && (b.immature || b.reserved || b.pending) ? `<p class="hint">${b.immature ? `${money(b.immature)} immature · ` : ""}${b.reserved ? `${money(b.reserved)} in pending payments · ` : ""}${b.pending ? `${money(b.pending)} unconfirmed` : ""}</p>` : ""}</section>${lightCard()}${history.length ? historyCard() : `<section class="transactions"><h2>Transactions</h2><p class="hint">${syncComplete ? "No transactions yet" : "Sync your account to see transactions"}</p></section>`}`;
+}
+function settings() {
+  return `<details id="settings" class="settings" ${settingsOpen ? "open" : ""}><summary>Settings</summary><div class="settings-panel"><div class="section-head"><h2>Settings</h2><button id="close-settings" class="ghost">Close</button></div><section><div class="actions">${walletButton("connect", client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger", busy)}${account ? `<button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button>` : ""}</div><div class="field"><label for="network">Network</label><select id="network" ${disabled(busy || !!account)}>${Object.keys(
     NETWORKS,
   )
     .map((n) => `<option ${network === n ? "selected" : ""}>${n}</option>`)
-    .join(
-      "",
-    )}</select></div><div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div></div>${account ? `<dl class="data-list"><div><dt>Derivation</dt><dd class="mono">${e(deriveAddress(account, 0, 0).path.replace("/0/0", ""))}</dd></div><div><dt>Fingerprint</dt><dd class="mono">${hex(account.masterFingerprint)}</dd></div><div><dt>Public key</dt><dd class="mono">${hex(account.publicKey)}</dd></div></dl><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy)}>Back up full watch wallet</button><button id="export-public" class="secondary" ${disabled(busy)}>Export public recovery record</button><button id="save-cache" class="secondary" ${disabled(busy || !snapshot)}>Save watch data locally</button><button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button></div><p class="hint">Saving exposes addresses and balances to anyone using this browser profile. Recovery exports can link all account addresses; full backups also contain signed payments that anyone holding the file can broadcast. Keep exports private. Payment reservations stay local to prevent accidental reuse.</p>` : `<div class="empty"><div class="symbol" aria-hidden="true">◇</div><h3>Start with your Ledger</h3><p>Open the matching Pearl app, then connect and approve the public account export. Your device stays in charge of every signature.</p><button id="connect-inline" ${disabled(busy)}>Connect Ledger</button></div>`}</section>${snapshot ? `<section class="card"><div class="section-head"><h2>${syncComplete ? "Synced watch account" : "Watch data"}</h2><span class="tag ${validation ? "ok" : "warn"}">${validation ? (sourceMode === "public" ? "HTTPS indexer checked" : "Node checked") : "Chain metadata unverified"}</span></div><dl class="data-list"><div><dt>Snapshot block</dt><dd>${snapshot.tip.height}<br><span class="mono">${snapshot.tip.hash}</span></dd></div><div><dt>Address coverage</dt><dd>Receive 0–${snapshot.coverage.externalScannedThrough}; change 0–${snapshot.coverage.changeScannedThrough}; gap ${snapshot.coverage.gapLimit}</dd></div><div><dt>Outputs</dt><dd>${snapshot.coins.length} · ${money(b!.total)} observed total</dd></div></dl><p class="hint">${syncComplete ? "Scanned both branches through a gap of 20 unused addresses. This trusts the selected indexer and is not SPV." : "Imported data is not a complete scan or proof of chain inclusion."} Coinbase outputs need 100 confirmations. Reorgs invalidate detached outputs; reserved inputs remain locked.</p><button id="check-node" class="secondary" ${disabled(busy)}>Refresh input status</button></section>` : ""}</div><div>${lightCard()}<section class="card"><p class="eyebrow">Three deliberate steps</p><h2>Your device is the signer</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Verify your receive address</b><span class="muted">Compare the full address on your Ledger before using it for payouts.</span></div></div><div class="step"><span class="number">2</span><div><b>Review every detail</b><span class="muted">Choose inputs, recipient, amount, exact fee and derived change.</span></div></div><div class="step"><span class="number">3</span><div><b>Sign, then broadcast</b><span class="muted">Signatures are verified independently. Broadcast is a separate explicit action.</span></div></div></div></section><section class="card"><h2>Import public watch data</h2><p class="hint">Use the documented JSON snapshot format. Raw transactions are parsed locally to check exact grain amounts, transaction IDs and ownership. Never import a seed or private key.</p><div class="field"><label for="backup-file">Complete watch-wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account / range recovery JSON</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Public snapshot JSON</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved data</button><button id="clear-cache" class="ghost" ${disabled(busy)}>Clear saved watch copy</button>${hostedMode ? "" : `<button id="load-demo" class="ghost" ${disabled(busy)}>Explore public example</button>`}</div></section><section class="card"><h2>Browser support</h2><p class="hint">Ledger connection uses current DMK + WebHID. Desktop Chrome / Edge on localhost or HTTPS are the intended test targets. Mobile, Safari and Firefox are not qualified.</p><p class="hint">${window.isSecureContext && "hid" in navigator ? "WebHID is available in this browser." : "WebHID is unavailable here. Public watch data remains viewable."}</p></section></div></div>`;
+    .join("")}</select></div></section>
+  <details class="advanced"><summary>Advanced</summary><div class="advanced-body"><div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div>
+  ${account ? `<div class="inline-fields"><div class="field"><label for="receive-index">Receive address index</label><input id="receive-index" type="number" min="0" max="${Math.min(979, journal.issuedReceiveThrough + 1)}" value="${receiveIndex}" ${disabled(busy)}></div><div class="field"><label for="change-index">Change address index</label><input id="change-index" value="${e(form.changeIndex)}" type="number" min="${journal.nextChangeIndex}" max="2147483646" ${disabled(busy)}></div></div><p class="mono muted">${e(deriveAddress(account, 0, receiveIndex).path)}</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy)}>Export backup</button><button id="export-public" class="secondary" ${disabled(busy)}>Export account</button><button id="save-cache" class="secondary" ${disabled(busy || !snapshot)}>Save account locally</button></div><p class="hint">Keep backups private: anyone with a signed payment can submit it.</p>` : ""}
+  ${snapshot ? `<button id="${page === "send" ? "settings-check-node" : "check-node"}" class="secondary" ${disabled(busy)}>Refresh balance</button>` : ""}
+  ${notificationType === "error" && notification && walletMessage(notification) !== notification ? `<details><summary>Troubleshooting</summary><p class="hint">${e(notification)}</p></details>` : ""}<h3>Import</h3><div class="field"><label for="backup-file">Wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Balance snapshot</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><p class="hint">Public account files only. Never enter a recovery phrase.</p><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved account</button><button id="clear-cache" class="ghost" ${disabled(busy)}>Clear saved balance data</button>${hostedMode ? "" : `<button id="load-demo" class="ghost" ${disabled(busy)}>Load example</button>`}</div><p class="hint">Saved data is visible to anyone using this browser profile.</p><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Refresh payment status</button></div></details>
+  <details class="advanced"><summary>About</summary><div class="advanced-body"><p class="hint">Development build. Not audited or Ledger-approved. Use test funds only.</p><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></div></details></div></details>`;
 }
-function receive() {
+function receive(feedback = "") {
   if (!account)
-    return `<section class="card empty"><h2>Connect a public account first</h2><p>Receive addresses must be derived from the device-approved account.</p><button data-nav="overview">Go to account</button></section>`;
+    return `<section class="card empty"><h2>Connect a public account first</h2><button data-nav="overview">Go to account</button></section>`;
   const derived = deriveAddress(account, 0, receiveIndex);
-  return `<div class="grid"><section class="card"><div class="section-head"><h2>Receive address</h2><span class="tag ${verifiedReceive === derived.address ? "ok" : "warn"}">${verifiedReceive === derived.address ? "Verified on device" : "Not device verified"}</span></div><div class="field"><label for="receive-index">Receive index</label><input id="receive-index" type="number" min="0" max="${Math.min(979, journal.issuedReceiveThrough + 1)}" value="${receiveIndex}" ${disabled(busy)}></div><p class="mono muted">${e(derived.path)}</p>${receiveIndex > Math.min(979, journal.issuedReceiveThrough + 1) ? '<div class="notice error">This address is outside the saved consecutive recovery range. Use the next receive index, or restore a public recovery record. The bounded companion supports issued indexes 0–979.</div>' : ""}<div class="address">${e(derived.address)}</div><div class="actions"><button id="verify-receive" ${disabled(busy || client?.sessionState !== "ready" || receiveIndex > Math.min(979, journal.issuedReceiveThrough + 1))}>Verify on Ledger</button><button id="copy-address" class="secondary" ${disabled(busy || verifiedReceive !== derived.address)}>Copy verified address</button></div><p class="hint">Latest saved receive index: ${journal.issuedReceiveThrough < 0 ? "none" : journal.issuedReceiveThrough}. Export your public recovery record after issuing addresses; it records skipped/unused ranges for a restored browser. Use consecutive receive indexes to preserve gap-limit recovery. Skipping 20 or more unused addresses requires an extended recovery scan. Verify the full address on the Ledger screen. This label is cleared when you change account, address index or device session.</p></section><section class="card"><h2>Mining payouts</h2><p class="hint">A verified public receive address can be used for compatible Pearl miner or pool payouts. Mining stays on your host. Ledger only derives addresses and signs spending transactions.</p><p class="hint">Coinbase rewards remain immature until 100 confirmations. Imported chain metadata alone cannot establish spendability.</p></section></div>`;
+  const verified = verifiedReceive === derived.address;
+  return receiveFlow({
+    feedback,
+    accountName: `Pearl ${accountIndex + 1}`,
+    address: derived.address,
+    network,
+    verified,
+    connected: client?.sessionState === "ready",
+    busy,
+    stage: verified ? 2 : receiveStep,
+    rangeError: receiveIndex > Math.min(979, journal.issuedReceiveThrough + 1),
+    canNewAddress:
+      Math.max(receiveIndex, journal.issuedReceiveThrough, lastUsed[0]) < 979,
+  });
+}
+function currentFeeRequest(): PaymentRequest {
+  assert(snapshot, "Sync your account to prepare a payment");
+  return {
+    selected: manualSelection
+      ? [...selected]
+      : selectPaymentInputs(
+          snapshot,
+          form.amount,
+          form.fee,
+          reservedOutpoints(journal),
+        ),
+    recipient: form.recipient.trim(),
+    amountPrl: form.amount,
+    feePrl: form.fee,
+    changeIndex: Number(form.changeIndex),
+  };
 }
 function feePolicyHint(): string {
-  if (!snapshot || !selected.size)
-    return "Select inputs and enter a recipient, amount and fee to calculate the exact relay-policy minimum.";
+  if (!snapshot) return "Sync your account to prepare a payment.";
+  if (!form.amount.trim())
+    return "Enter an amount to calculate the minimum fee.";
   try {
     const p = previewPaymentPolicy(
       snapshot,
-      {
-        selected: [...selected],
-        recipient: form.recipient.trim(),
-        amountPrl: form.amount,
-        feePrl: form.fee,
-        changeIndex: Number(form.changeIndex),
-      },
+      currentFeeRequest(),
       reservedOutpoints(journal),
     );
-    return `${p.vsize} vB (${countLabel(p.inputCount, "input")}, ${countLabel(p.outputCount, "output")}). Declared default minimum fee: ${formatPrl(p.minimumFee)} PRL (${p.minimumFee} grains); P2TR dust minimum: ${p.dustThreshold} grains. ${p.fee < p.minimumFee ? "Entered fee is below this minimum. " : ""}Node policy can differ; this is not a fee estimate. Your amount and fee are never changed automatically.`;
+    return `${p.fee < p.minimumFee ? "Fee too low. " : ""}Minimum fee: ${formatPrl(p.minimumFee)} PRL.`;
   } catch (error) {
     return error instanceof Error
-      ? error.message
-      : "Complete the payment fields to calculate the policy minimum.";
+      ? walletMessage(error.message)
+      : "Complete the payment fields to calculate the minimum fee.";
   }
 }
-function send(active: PaymentRecord | undefined) {
-  if (active) return review(active);
-  if (!snapshot)
-    return `<section class="card empty"><h2>Load watch data to prepare a payment</h2><p>Select known public UTXOs, then verify their current status through your local node.</p><button data-nav="overview">Go to account</button></section>`;
-  const reserved = reservedOutpoints(journal);
-  return `<div class="grid"><section class="card"><h2>1. Choose inputs</h2><p class="hint">Select 1–16 confirmed, mature inputs. Amounts come from raw previous transactions. Input selection links these outputs publicly.</p>${
-    snapshot.coins.length
-      ? snapshot.coins
-          .map((c) => {
-            const key = outpoint(c),
-              status = reserved.has(key)
-                ? "reserved"
-                : coinEligibility(c, snapshot!.tip);
-            return `<label class="coin"><input type="checkbox" data-coin="${e(key)}" ${selected.has(key) ? "checked" : ""} ${disabled(busy || status !== "eligible")}><span class="coin-info"><span class="mono">${e(key)}</span><span class="muted">${c.coinbase ? "Mining reward" : "Transfer"} · ${confirmations(c, snapshot!.tip)} confirmations · ${status}</span></span><span class="coin-value">${e(formatPrl(c.amount))}<br><span class="muted">PRL</span></span></label>`;
-          })
-          .join("")
-      : '<p class="hint">No outputs in this watch snapshot.</p>'
-  }<p class="hint">${countLabel(selected.size, "input")} selected. Balances and confirmations reflect the current imported/node view.</p><button id="check-node" class="secondary" ${disabled(busy)}>Refresh node status</button></section><section class="card"><h2>2. Set the payment</h2><div class="field"><label for="recipient">Recipient address (P2TR or P2MR)</label><input id="recipient" value="${e(form.recipient)}" autocomplete="off" spellcheck="false" placeholder="${NETWORKS[network].hrp}1p…" ${disabled(busy)}></div><div class="field"><label for="amount">Amount in PRL</label><input id="amount" value="${e(form.amount)}" inputmode="decimal" placeholder="0.00000000" ${disabled(busy)}></div><div class="field"><label for="fee">Exact total fee in PRL</label><input id="fee" value="${e(form.fee)}" inputmode="decimal" ${disabled(busy)}></div><div class="field"><label for="change-index">Change index (branch 1)</label><input id="change-index" value="${e(form.changeIndex)}" type="number" min="${journal.nextChangeIndex}" max="2147483646" ${disabled(busy)}></div><p id="fee-policy" class="hint">${e(feePolicyHint())}</p><p class="hint">Remaining value returns to the device-derived change address. Fee is explicit, not a market estimate. Dust under the default policy is rejected.</p><button id="prepare" ${disabled(busy || !selected.size)}>Prepare & reserve inputs</button><p class="hint">Preparation saves public transaction details and input reservations in this browser profile. Signing requires a fresh authenticated node check.</p></section></div>`;
+function feeQuoteOptions() {
+  if (!snapshot || sourceMode !== "public" || feeQuoteNetwork !== network)
+    return [];
+  return feeQuotes.map((quote) => {
+    try {
+      const request = quotedPayment(
+        snapshot!,
+        currentFeeRequest(),
+        reservedOutpoints(journal),
+        quote,
+        manualSelection,
+      );
+      return {
+        blocks: quote.blocks,
+        label: `${quote.blocks}-block target · ${request.feePrl} PRL`,
+        disabled: false,
+        feePrl: request.feePrl,
+      };
+    } catch {
+      return {
+        blocks: quote.blocks,
+        label: `${quote.blocks}-block target · unavailable`,
+        disabled: true,
+        feePrl: null,
+      };
+    }
+  });
 }
-function review(payment: PaymentRecord) {
+function send(active: PaymentRecord | undefined, feedback = "") {
+  if (active) return review(active, feedback);
+  if (!snapshot)
+    return `<section class="card empty"><h2>Sync your account to send Pearl</h2><p>Your balance and available funds need to be loaded first.</p><button data-nav="overview">Go to account</button></section>`;
+  const reserved = reservedOutpoints(journal);
+  return sendForm({
+    feedback,
+    step: sendStep,
+    recipient: form.recipient,
+    amount: form.amount,
+    fee: form.fee,
+    available: money(balances(snapshot, reserved).available),
+    maxLabel:
+      manualSelection ||
+      selectablePaymentCoins(snapshot, reserved).length > MAX_INPUTS
+        ? "Max selected inputs"
+        : "Max",
+    maxDisabled: manualSelection
+      ? selected.size === 0
+      : selectablePaymentCoins(snapshot, reserved).length === 0,
+    feeHint: feePolicyHint(),
+    quotes: feeQuoteOptions(),
+    quoteStatus:
+      sourceMode === "public" && ["mainnet", "testnet2"].includes(network)
+        ? feeQuoteStatus
+        : "",
+    quotesSupported:
+      sourceMode === "public" && ["mainnet", "testnet2"].includes(network),
+    accountName: `Pearl ${accountIndex + 1}`,
+    network,
+    busy,
+    advanced: `<details id="coin-control" class="card advanced" ${coinControlOpen ? "open" : ""}><summary>Coin control</summary><div class="advanced-body"><button id="check-node" class="secondary" ${disabled(busy)}>Refresh balance</button>${
+      snapshot.coins.length
+        ? snapshot.coins
+            .map((c) => {
+              const key = outpoint(c),
+                status = reserved.has(key)
+                  ? "reserved"
+                  : coinEligibility(c, snapshot!.tip);
+              return `<label class="coin"><input type="checkbox" data-coin="${e(key)}" ${selected.has(key) ? "checked" : ""} ${disabled(busy || status !== "eligible")}><span class="coin-info"><span class="mono">${e(key)}</span><span class="muted">${c.coinbase ? "Mining reward" : "Transfer"} · ${confirmations(c, snapshot!.tip)} confirmations · ${status === "reserved" ? "pending payment" : status === "eligible" ? "available" : status}</span></span><span class="coin-value">${e(formatPrl(c.amount))}<br><span class="muted">PRL</span></span></label>`;
+            })
+            .join("")
+        : '<p class="hint">No available funds.</p>'
+    }<p class="hint">${manualSelection ? countLabel(selected.size, "input") + " selected manually." : "Automatic selection"}</p><button id="auto-inputs" class="secondary" ${disabled(busy)}>Use automatic selection</button></div></details>`,
+  });
+}
+function review(payment: PaymentRecord, feedback = "") {
   const bundle = paymentBundle(payment),
     recipient = bundle.outputs.find((o) => o.role === "recipient")!,
     change = bundle.outputs.find((o) => o.role === "change");
   const total = bundle.inputs.reduce((s, i) => s + i.amount, 0n),
     fee = total - bundle.outputs.reduce((s, o) => s + o.amount, 0n);
   const highFee = fee > 100_000n && fee * 10n >= total;
-  const policy = inspectPaymentPolicy(bundle);
-  return `<div class="grid"><section class="card review"><div class="section-head"><h2>Review the exact payment</h2><span class="tag">${e(paymentStatus(payment))}</span></div>${highFee ? '<div class="notice error"><b>Unusually high fee.</b> The fee exceeds 100,000 grains and is at least 10% of the selected input value. Review the fee carefully on the Ledger.</div>' : ""}<dl class="data-list"><div><dt>Network</dt><dd>${bundle.network}</dd></div><div><dt>Recipient</dt><dd class="mono">${scriptToAddress(recipient.scriptPubKey, bundle.network)}</dd></div><div><dt>Amount</dt><dd>${money(recipient.amount)}</dd></div><div><dt>Exact fee</dt><dd>${money(fee)}</dd></div><div><dt>Default relay policy</dt><dd>${policy.vsize} vB; minimum ${money(policy.minimumFee)}; dust ${policy.dustThreshold} grains. Node policy may differ.</dd></div><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span><br>Branch 1 / index ${change.index}` : ""}</dd></div><div><dt>Inputs</dt><dd>${countLabel(bundle.inputs.length, "reserved output")}</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl>${payment.state === "draft" ? `<button id="sign" ${disabled(busy || client?.sessionState !== "ready")}>Review & sign on Ledger</button> <button id="discard" class="ghost" ${disabled(busy)}>Discard unsigned draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Signatures independently verified. Nothing has been broadcast by this app." : payment.state === "accepted" ? "Previously accepted by the node; current confirmation is unverified. An explicit retry sends only these same signed bytes and transaction ID." : "Broadcast outcome may be unknown. This exact transaction may already be accepted. Keep inputs reserved; never construct a replacement payment just because of a timeout."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve broadcasting these exact signed bytes to ${sourceMode === "public" ? "the public Pearl Blockbook service" : "the configured local node"} on ${bundle.network}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Explicitly rebroadcast exact bytes" : "Broadcast signed transaction"}</button>` : payment.archived ? '<div class="notice success">A confirmed receipt is archived. Reconcile its current chain status before retrying these bytes; all input locks remain retained.</div>' : `<div class="notice error">Signing was started. The result may be unknown after an interruption. Inputs remain reserved. If every original input is still verified unspent, you can explicitly recover this identical payment with fresh Ledger account approval and full review. A rejection cannot clear the earlier uncertainty.</div><button id="recover-signing" ${disabled(busy || client?.sessionState !== "ready" || !snapshot)}>Recover identical payment on Ledger</button>`}</section><section class="card"><h2>Check your Ledger screen</h2><div class="steps"><div class="step"><span class="number">1</span><div><b>Network and full recipient</b><span class="muted">Compare the entire address, not only its first or last characters.</span></div></div><div class="step"><span class="number">2</span><div><b>Amount, fee and change</b><span class="muted">The device recomputes the signing digest from this complete transaction.</span></div></div><div class="step"><span class="number">3</span><div><b>Physical approval</b><span class="muted">Reject if any detail differs. No blind-sign or software-signing fallback exists.</span></div></div></div><button id="back-payments" class="ghost" ${disabled(busy)}>Back to activity</button></section></div>`;
+  const stage =
+    signingRequested && busy
+      ? 3
+      : payment.state === "draft"
+        ? 2
+        : payment.state === "signing"
+          ? 3
+          : 4;
+  return reviewFlow({
+    feedback,
+    accountName: `Pearl ${accountIndex + 1}`,
+    recipient: scriptToAddress(recipient.scriptPubKey, bundle.network),
+    amount: money(recipient.amount),
+    fee: money(fee),
+    total: money(recipient.amount + fee),
+    network: bundle.network,
+    busy,
+    stage,
+    status: payment.archived
+      ? "Confirmed"
+      : payment.state === "signed"
+        ? "Ready to send"
+        : payment.state === "accepted"
+          ? "Submitted"
+          : payment.state === "broadcast-unknown"
+            ? "Submission status unknown"
+            : paymentStatus(payment),
+    warning: highFee
+      ? "Unusually high fee. Check it carefully before signing."
+      : "",
+    details: `<details class="transaction-details"><summary>Transaction details</summary><dl class="data-list"><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span>` : ""}</dd></div><div><dt>Inputs</dt><dd>${countLabel(bundle.inputs.length, "input")}</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl></details>`,
+    actions: `${payment.state === "draft" ? `${walletButton("sign", "Confirm on Ledger", busy || client?.sessionState !== "ready")} <button id="discard" class="ghost" ${disabled(busy)}>Discard draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Approved on Ledger. Your payment is ready to send." : payment.state === "accepted" ? "Payment submitted. Confirmation is still being checked. Retrying sends the same payment." : "We could not confirm whether this payment was received. It may already be sent. Retry only this same payment; its funds remain reserved."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve sending this signed payment on ${bundle.network} through ${sourceMode === "public" ? "Pearl’s public service" : "my configured node"}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Retry same payment" : "Send payment"}</button>` : payment.archived ? '<div class="notice success">Payment confirmed. Refresh its status before any retry.</div>' : `<div class="notice error">Signing was interrupted. A signature may already exist, so these funds remain reserved. Reconnect your Ledger to recover and review this same payment.</div><button id="recover-signing" ${disabled(busy || client?.sessionState !== "ready" || !snapshot)}>Recover payment on Ledger</button>`}`,
+  });
 }
 function activity() {
-  return `<section class="card"><div class="section-head"><h2>Reserved payments</h2><span class="tag">${countLabel(journal.payments.length, "record")}</span></div><p class="hint">Reservations are shared atomically across this browser's tabs and persist after restart. They do not coordinate separate browser profiles or computers. Signed or interrupted payments never auto-expire. Browser eviction or profile loss can remove this state: export a complete backup before switching profiles.</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy || !account)}>Back up full watch wallet</button><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Archive confirmed records</button></div><p class="hint">Archival requires six confirmations in a completed source view. Archived exact bytes and outpoint locks are retained through reorgs; they no longer count against the 100-active-payment limit. Conflicted/unknown records remain reserved.</p>${
-    journal.payments.length
-      ? journal.payments
-          .slice()
-          .reverse()
-          .map(
-            (p) =>
-              `<div class="journal-item"><div class="row"><div><b class="small">${e(paymentStatus(p))}</b><p class="hint">${countLabel(p.outpoints.length, "input")} · ${e(new Date(p.createdAt).toLocaleString())}</p></div><button data-payment="${e(p.id)}" class="secondary" ${disabled(busy)}>Review</button></div>${p.txid ? `<p class="mono">${e(p.txid)}</p>` : ""}</div>`,
-          )
-          .join("")
-      : '<div class="empty"><div class="symbol">≋</div><h3>No prepared payments yet</h3><p>Transactions appear here after you reserve inputs, before a signature is requested.</p></div>'
-  }</section>${historyCard()}`;
+  const slice = pageItems(journal.payments.slice().reverse(), paymentPage);
+  paymentPage = slice.page;
+  return `${historyCard()}<section class="card"><div class="section-head"><h2>Your payments</h2><span class="tag">${countLabel(journal.payments.length, "record")}</span></div>${slice.items.length ? slice.items.map((p) => `<div class="journal-item"><div class="row"><div><b class="small">${e(paymentStatus(p))}</b><p class="hint">${e(new Date(p.createdAt).toLocaleString())}</p></div><button data-payment="${e(p.id)}" class="secondary" ${disabled(busy)}>View payment</button></div>${p.txid ? `<details><summary>Transaction ID</summary><p class="mono">${e(p.txid)}</p><button class="ghost" data-copy-txid="${e(p.txid)}" ${disabled(busy)}>Copy transaction ID</button></details>` : ""}</div>`).join("") : '<div class="empty"><h3>No payments yet</h3><p>Your payments will appear here.</p></div>'}${pagination("payments", slice.page, slice.pages)}</section>`;
 }
 function bind() {
+  document.getElementById("settings")?.addEventListener("toggle", (event) => {
+    settingsOpen = (event.target as HTMLDetailsElement).open;
+  });
   const click = (id: string, fn: () => void) =>
     document.getElementById(id)?.addEventListener("click", fn);
+  for (const [id, move] of [
+    ["history-prev", () => historyPage--],
+    ["history-next", () => historyPage++],
+    ["payments-prev", () => paymentPage--],
+    ["payments-next", () => paymentPage++],
+  ] as const)
+    click(id, () => {
+      if (!busy) {
+        move();
+        render();
+      }
+    });
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-copy-txid]")
+    .forEach((el) => {
+      el.onclick = () => {
+        const txid = el.dataset.copyTxid;
+        if (
+          busy ||
+          !txid ||
+          (!history.some((h) => h.txid === txid) &&
+            !journal.payments.some((p) => p.txid === txid))
+        )
+          return;
+        void (async () => {
+          try {
+            await navigator.clipboard.writeText(txid);
+            el.textContent = "Copied";
+          } catch {
+            notify(
+              "Could not copy. Select the transaction ID and copy it.",
+              true,
+            );
+          }
+        })();
+      };
+    });
   document.querySelectorAll<HTMLButtonElement>("[data-nav]").forEach(
     (el) =>
       (el.onclick = () => {
         if (!busy) {
           page = el.dataset.nav as typeof page;
+          sendStep = receiveStep = 0;
           activePayment = null;
+          if (notificationType === "success") notification = "";
           render();
         }
       }),
@@ -547,18 +783,11 @@ function bind() {
       privacyConsent = (event.target as HTMLInputElement).checked;
       render();
     });
-  click(
-    "sync-public",
-    () =>
-      void run(
-        "Discovering public addresses and checking exact transactions. This can take a minute.",
-        syncPublic,
-      ),
-  );
+  click("sync-public", () => void run("Syncing account…", syncPublic));
   document.getElementById("public-file")?.addEventListener(
     "change",
     (event) =>
-      void run("Loading public account only", async (signal) => {
+      void run("Loading account…", async (signal) => {
         const file = (event.target as HTMLInputElement).files?.[0];
         if (!file) return;
         const owner = account;
@@ -619,7 +848,7 @@ function bind() {
   click(
     "backup-export",
     () =>
-      void run("Exporting the latest watch-wallet backup", async () => {
+      void run("Exporting backup…", async () => {
         if (!account) return;
         const owner = account;
         download(
@@ -631,81 +860,80 @@ function bind() {
   document.getElementById("backup-file")?.addEventListener(
     "change",
     (event) =>
-      void run(
-        "Validating and merging complete public wallet backup",
-        async (signal) => {
-          const file = (event.target as HTMLInputElement).files?.[0];
-          if (!file) return;
-          const owner = account;
-          const backup = await importWalletBackupFile(file, signal);
-          const requireCurrent = () => {
-            signal.throwIfAborted();
-            assert(
-              account === owner,
-              "Account changed during backup validation",
-            );
-          };
+      void run("Restoring backup…", async (signal) => {
+        const file = (event.target as HTMLInputElement).files?.[0];
+        if (!file) return;
+        const owner = account;
+        const backup = await importWalletBackupFile(file, signal);
+        const requireCurrent = () => {
+          signal.throwIfAborted();
+          assert(account === owner, "Account changed during backup validation");
+        };
+        requireCurrent();
+        await store.mutate(accountId(backup.account), (j) => {
+          // The storage read may have queued behind another tab's write.
           requireCurrent();
-          await store.mutate(accountId(backup.account), (j) => {
-            // The storage read may have queued behind another tab's write.
-            requireCurrent();
-            mergeRestoredJournal(j, backup.journal);
-          });
-          channel.postMessage("journal");
-          const requireOpen = () =>
-            assert(
-              !signal.aborted && account === owner,
-              "Backup merged; opening the restored account was cancelled. Reservations remain saved.",
-            );
-          requireOpen();
-          await transport?.close();
-          transport = null;
-          client = null;
-          verifiedReceive = null;
-          requireOpen();
-          clearPaymentForm();
-          account = backup.account;
-          network = account.network;
-          accountIndex = account.account;
-          snapshot = null;
-          validation = null;
-          syncComplete = false;
-          history = [];
-          lastUsed = [-1, -1];
-          sourceMode = "node";
-          privacyConsent = false;
-          verifiedReceive = null;
-          receiveIndex = 0;
-          activePayment = null;
-          selected.clear();
-          await refreshJournal();
-          page = "activity";
-          notification =
-            "Complete watch backup merged. Reservations and exact signed bytes restored; prior verification, consent and archival claims require fresh checks.";
-        },
-      ),
+          mergeRestoredJournal(j, backup.journal);
+        });
+        channel.postMessage("journal");
+        const requireOpen = () =>
+          assert(
+            !signal.aborted && account === owner,
+            "Backup merged; opening the restored account was cancelled. Reservations remain saved.",
+          );
+        requireOpen();
+        await transport?.close();
+        transport = null;
+        client = null;
+        verifiedReceive = null;
+        requireOpen();
+        clearPaymentForm();
+        account = backup.account;
+        network = account.network;
+        accountIndex = account.account;
+        snapshot = null;
+        validation = null;
+        syncComplete = false;
+        history = [];
+        lastUsed = [-1, -1];
+        sourceMode = "node";
+        privacyConsent = false;
+        verifiedReceive = null;
+        receiveIndex = 0;
+        activePayment = null;
+        selected.clear();
+        await refreshJournal();
+        page = "activity";
+        notification =
+          "Complete watch backup merged. Reservations and exact signed bytes restored; prior verification, consent and archival claims require fresh checks.";
+      }),
   );
   click(
     "reconcile",
     () =>
-      void run(
-        "Archiving confirmed payments without releasing locks",
-        async (signal) => {
-          if (sourceMode === "node") {
-            await reconcileNodePayments(signal);
-            return;
-          }
-          assert(
-            account && snapshot && syncComplete,
-            "Complete source resync required",
-          );
-          const count = await store.mutate(accountId(account), (j) =>
-            reconcileConfirmed(j, history, snapshot!.tip),
-          );
-          channel.postMessage("journal");
-          notification = `${count} confirmed records archived; exact signed bytes and all input locks retained. Unknown or conflicted records were not released.`;
-        },
-      ),
+      void run("Refreshing payment status…", async (signal) => {
+        if (sourceMode === "node") {
+          await reconcileNodePayments(signal);
+          return;
+        }
+        assert(
+          account && snapshot && syncComplete,
+          "Complete source resync required",
+        );
+        const count = await store.mutate(accountId(account), (j) =>
+          reconcileConfirmed(j, history, snapshot!.tip),
+        );
+        channel.postMessage("journal");
+        notification = `${count} confirmed records archived; exact signed bytes and all input locks retained. Unknown or conflicted records were not released.`;
+      }),
+  );
+  click("close-settings", () => {
+    settingsOpen = false;
+    render();
+  });
+  click(
+    "settings-check-node",
+    () => void run("Checking available funds…", checkNode),
   );
   click("dismiss", () => {
     notification = "";
@@ -718,6 +946,57 @@ function bind() {
         emergencySignedRecovery.text,
       );
   });
+  const closeFlow = () => {
+    if (!busy) {
+      page = "overview";
+      activePayment = null;
+      render();
+    }
+  };
+  click("flow-close", closeFlow);
+  click("recipient-continue", () => {
+    if (busy) return;
+    try {
+      addressToScript(form.recipient.trim(), network);
+      form.recipient = form.recipient.trim();
+      sendStep = 1;
+      notification = "";
+      render();
+    } catch (error) {
+      notify(
+        error instanceof Error ? error.message : "Check the recipient address",
+        true,
+      );
+    }
+  });
+  click("send-back-recipient", () => {
+    if (!busy) {
+      sendStep = 0;
+      render();
+    }
+  });
+  click("receive-continue", () => {
+    if (!busy) {
+      receiveStep = 1;
+      render();
+    }
+  });
+  click("receive-back", () => {
+    if (!busy) {
+      receiveStep = 0;
+      render();
+    }
+  });
+  const dialog = document.getElementById(
+    "ledger-flow",
+  ) as HTMLDialogElement | null;
+  if (dialog && typeof dialog.showModal === "function") {
+    dialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      closeFlow();
+    });
+    dialog.showModal();
+  }
   click("connect", () => void connect());
   click("connect-inline", () => void connect());
   click(
@@ -755,18 +1034,15 @@ function bind() {
   document.getElementById("snapshot-file")?.addEventListener(
     "change",
     (event) =>
-      void run(
-        "Checking raw previous transactions and public ownership",
-        async (signal) => {
-          const file = (event.target as HTMLInputElement).files?.[0];
-          if (!file) return;
-          const owner = account;
-          assert(file.size <= 4 * 1024 * 1024, "Snapshot exceeds 4 MiB");
-          await importSnapshot(await file.text(), signal, owner);
-          notification =
-            "Imported public outputs. Chain and completeness claims remain unverified until checked against your source.";
-        },
-      ),
+      void run("Checking imported account data…", async (signal) => {
+        const file = (event.target as HTMLInputElement).files?.[0];
+        if (!file) return;
+        const owner = account;
+        assert(file.size <= 4 * 1024 * 1024, "Snapshot exceeds 4 MiB");
+        await importSnapshot(await file.text(), signal, owner);
+        notification =
+          "Imported public outputs. Chain and completeness claims remain unverified until checked against your source.";
+      }),
   );
   click(
     "load-demo",
@@ -787,7 +1063,7 @@ function bind() {
   click(
     "restore-cache",
     () =>
-      void run("Restoring public watch data", async (signal) => {
+      void run("Restoring saved account…", async (signal) => {
         const owner = account;
         const text = await store.load<string>("last-snapshot");
         assert(text, "No locally saved watch data");
@@ -799,7 +1075,7 @@ function bind() {
   click(
     "clear-cache",
     () =>
-      void run("Removing the optional saved watch copy", async () => {
+      void run("Clearing saved balance data…", async () => {
         await store.removeSavedSnapshot();
         notification =
           "Saved watch snapshot removed. The current account and payment recovery records are unchanged.";
@@ -808,7 +1084,7 @@ function bind() {
   click(
     "save-cache",
     () =>
-      void run("Saving public watch data", async () => {
+      void run("Saving account…", async () => {
         assert(snapshot, "No snapshot");
         await store.save("last-snapshot", snapshotToJson(snapshot));
         notification =
@@ -818,7 +1094,7 @@ function bind() {
   click(
     "export-public",
     () =>
-      void run("Exporting the latest public recovery record", async () => {
+      void run("Exporting account…", async () => {
         if (!account) return;
         const owner = account;
         download(
@@ -837,6 +1113,32 @@ function bind() {
         render();
       } else notify("Invalid receive index", true);
     });
+  click(
+    "new-receive",
+    () =>
+      void run("Preparing address…", async (signal) => {
+        assert(
+          account &&
+            verifiedReceive === deriveAddress(account, 0, receiveIndex).address,
+          "Verify the current address first",
+        );
+        const owner = account;
+        verifiedReceive = null;
+        receiveStep = 1;
+        render();
+        await refreshJournal();
+        signal.throwIfAborted();
+        assert(account === owner, "Account changed; select the account again");
+        const next =
+          Math.max(receiveIndex, journal.issuedReceiveThrough, lastUsed[0]) + 1;
+        assert(
+          next <= 979 && next <= journal.issuedReceiveThrough + 1,
+          "No new address available in this account's supported range",
+        );
+        receiveIndex = next;
+        notification = "";
+      }),
+  );
   click(
     "verify-receive",
     () =>
@@ -888,14 +1190,7 @@ function bind() {
         notification = "Verified receive address copied.";
       }),
   );
-  click(
-    "check-node",
-    () =>
-      void run(
-        "Checking chain identity and current inputs with your local node",
-        checkNode,
-      ),
-  );
+  click("check-node", () => void run("Checking available funds…", checkNode));
   for (const [id, key] of [
     ["recipient", "recipient"],
     ["amount", "amount"],
@@ -906,24 +1201,149 @@ function bind() {
       form[key] = (event.target as HTMLInputElement).value;
       const hint = document.getElementById("fee-policy");
       if (hint) hint.textContent = feePolicyHint();
+      for (const option of feeQuoteOptions()) {
+        const button = document.getElementById(
+          `fee-target-${option.blocks}`,
+        ) as HTMLButtonElement | null;
+        if (button) {
+          button.textContent = option.label;
+          button.disabled = busy || option.disabled;
+        }
+      }
     });
   document.querySelectorAll<HTMLInputElement>("[data-coin]").forEach(
     (el) =>
       (el.onchange = () => {
+        manualSelection = true;
         el.checked
           ? selected.add(el.dataset.coin!)
           : selected.delete(el.dataset.coin!);
         render();
       }),
   );
+  document
+    .getElementById("coin-control")
+    ?.addEventListener("toggle", (event) => {
+      coinControlOpen = (event.target as HTMLDetailsElement).open;
+    });
+  click(
+    "refresh-fees",
+    () =>
+      void run("Getting network fee estimates…", async (signal) => {
+        assert(
+          sourceMode === "public" && ["mainnet", "testnet2"].includes(network),
+          "Use a manual fee on this network",
+        );
+        const requestedNetwork = network;
+        let quotes: FeeQuote[] = [];
+        try {
+          quotes = await loadFeeQuotes(
+            browserPublicSource(
+              requestedNetwork,
+              true,
+              AbortSignal.any([signal, AbortSignal.timeout(15_000)]),
+            ),
+          );
+        } catch {
+          signal.throwIfAborted();
+        }
+        signal.throwIfAborted();
+        assert(
+          network === requestedNetwork && sourceMode === "public",
+          "Network changed; request new estimates",
+        );
+        feeQuotes = quotes;
+        feeQuoteNetwork = requestedNetwork;
+        feeQuoteStatus = quotes.length
+          ? "Block targets are estimates, not guarantees. Choose a total fee to apply it."
+          : "Estimates unavailable. Enter a manual fee; the relay minimum is shown above.";
+      }),
+  );
+  for (const blocks of FEE_TARGETS)
+    click(
+      `fee-target-${blocks}`,
+      () =>
+        void run("Applying fee estimate…", async (signal) => {
+          assert(
+            snapshot &&
+              account &&
+              sourceMode === "public" &&
+              feeQuoteNetwork === network,
+            "Request estimates for this network first",
+          );
+          const owner = account,
+            watch = snapshot,
+            quote = feeQuotes.find((item) => item.blocks === blocks);
+          const displayed = feeQuoteOptions().find(
+            (item) => item.blocks === blocks,
+          )?.feePrl;
+          assert(
+            quote && displayed,
+            "Fee estimate unavailable or expired; refresh estimates",
+          );
+          await refreshJournal();
+          signal.throwIfAborted();
+          assert(
+            account === owner && snapshot === watch,
+            "Account changed; review the fee again",
+          );
+          const next = quotedPayment(
+            watch,
+            currentFeeRequest(),
+            reservedOutpoints(journal),
+            quote,
+            manualSelection,
+          );
+          assert(
+            next.feePrl === displayed,
+            "Available inputs changed; review the refreshed estimate",
+          );
+          form.fee = next.feePrl;
+        }),
+    );
+  click(
+    "send-max",
+    () =>
+      void run("Calculating maximum…", async (signal) => {
+        assert(snapshot && account, "Sync your account first");
+        const owner = account,
+          watch = snapshot;
+        await refreshJournal();
+        signal.throwIfAborted();
+        assert(
+          snapshot === watch && account === owner,
+          "Account changed; review the amount again",
+        );
+        const maximum = maximumPayment(
+          watch,
+          {
+            recipient: form.recipient.trim(),
+            feePrl: form.fee,
+            changeIndex: Number(form.changeIndex),
+          },
+          reservedOutpoints(journal),
+          manualSelection ? [...selected] : undefined,
+        );
+        form.amount = maximum.amountPrl;
+        selected.clear();
+        for (const id of maximum.selected) selected.add(id);
+        manualSelection = true;
+      }),
+  );
+  click("auto-inputs", () => {
+    manualSelection = false;
+    selected.clear();
+    render();
+  });
   click(
     "prepare",
     () =>
-      void run("Atomically reserving selected inputs", async (signal) => {
+      void run("Preparing payment…", async (signal) => {
         assert(snapshot && account, "Load account");
         const owner = account,
           watch = snapshot,
           source = sourceMode,
+          useManualSelection = manualSelection,
           request = {
             selected: [...selected],
             recipient: form.recipient.trim(),
@@ -950,7 +1370,15 @@ function bind() {
         const id = crypto.randomUUID();
         await store.mutate(accountId(owner), (j) => {
           requireCurrent();
-          const bundle = preparePayment(watch, request, reservedOutpoints(j));
+          const reserved = reservedOutpoints(j);
+          if (!useManualSelection)
+            request.selected = selectPaymentInputs(
+              watch,
+              request.amountPrl,
+              request.feePrl,
+              reserved,
+            );
+          const bundle = preparePayment(watch, request, reserved);
           reservePayment(j, bundle, id);
         });
         channel.postMessage("journal");
@@ -963,8 +1391,7 @@ function bind() {
           "Unsigned payment saved; opening the review was cancelled. Inputs remain reserved; review or discard the draft from activity.",
         );
         activePayment = id;
-        notification =
-          "Unsigned payment prepared. Inputs are reserved across this browser’s sessions.";
+        notification = "";
       }),
   );
   click(
@@ -982,17 +1409,8 @@ function bind() {
           "Unsigned draft discarded. Inputs released; allocated change index will not be reused.";
       }),
   );
-  click(
-    "sign",
-    () => void run("Rechecking inputs, then review on Ledger", sign),
-  );
-  click(
-    "recover-signing",
-    () =>
-      void run("Recovering only the identical reserved payment", (signal) =>
-        sign(signal, true),
-      ),
-  );
+  click("sign", () => void signFromView());
+  click("recover-signing", () => void signFromView(true));
   click("cancel-device", () => currentAbort?.abort());
   document
     .getElementById("broadcast-approval")
@@ -1018,9 +1436,7 @@ function bind() {
       rawTx: payment.rawTx,
       txid: payment.txid,
     });
-    void run("Broadcasting the exact signed transaction", (signal) =>
-      broadcast(signal, approval),
-    );
+    void run("Sending payment…", (signal) => broadcast(signal, approval));
   });
   click("back-payments", () => {
     activePayment = null;
@@ -1081,23 +1497,54 @@ async function importSnapshot(
 async function connect() {
   // Call discovery synchronously from the click before any await breaks the picker gesture.
   if (busy) return;
-  const connecting = connectLedger(() => {
-    verifiedReceive = null;
-    client = null;
-    currentAbort?.abort();
-    notification =
-      "Ledger disconnected. Exit and reopen the Pearl app on the device before reconnecting; payment reservations remain locked.";
-    notificationType = "error";
-    render();
-  }, "bitcoin-prl");
+  const beginConnection = () =>
+    connectLedger(
+      () => {
+        verifiedReceive = null;
+        client = null;
+        currentAbort?.abort();
+        notification =
+          "Ledger disconnected. Exit and reopen the Pearl app on the device before reconnecting; payment reservations remain locked.";
+        notificationType = "error";
+        render();
+      },
+      "bitcoin-prl",
+      network,
+    );
+  // WebHID needs the click gesture. Ledger Wallet instead reuses a single
+  // host transport ID, so finish the old close before requesting a new one.
+  // Observe early picker rejection while old-session cleanup is still pending.
+  const connecting =
+    window.location?.pathname === "/live.html"
+      ? null
+      : beginConnection().then(
+          (transport) => ({ transport }),
+          (error: unknown) => ({ error }),
+        );
   await run(
-    "Choose your Ledger, open Pearl, and approve the public account export",
+    "Open Pearl on your Ledger and approve the account.",
     async (signal) => {
-      await transport?.close();
+      const previous = transport;
       transport = null;
       client = null;
       verifiedReceive = null;
-      const connected = await connecting;
+      try {
+        await previous?.close();
+      } catch (error) {
+        // Own the gesture-started picker even if old-session cleanup fails.
+        if (connecting) {
+          const outcome = await connecting;
+          if ("transport" in outcome)
+            await outcome.transport.close().catch(() => {});
+        }
+        throw error;
+      }
+      if (!connecting) signal.throwIfAborted();
+      const outcome = connecting
+        ? await connecting
+        : { transport: await beginConnection() };
+      if ("error" in outcome) throw outcome.error;
+      const connected = outcome.transport;
       try {
         signal.throwIfAborted();
         transport = connected;
@@ -1140,6 +1587,19 @@ async function connect() {
       }
     },
   );
+}
+async function signFromView(recovery = false) {
+  if (busy) return;
+  signingRequested = true;
+  try {
+    await run(
+      recovery ? "Recovering payment…" : "Checking payment…",
+      (signal) => sign(signal, recovery),
+    );
+  } finally {
+    signingRequested = false;
+    render();
+  }
 }
 async function sign(signal: AbortSignal, recovery = false) {
   assert(

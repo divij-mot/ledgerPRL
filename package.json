@@ -14,13 +14,14 @@
   "scripts": {
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace @pearl-ledger/companion",
     "dev": "npm run dev --workspace @pearl-ledger/companion",
     "cli": "node --import tsx apps/cli/src/index.ts",
-    "check": "npm run typecheck && npm test && npm run build && python3 scripts/secret_scan.py",
+    "check": "npm run typecheck && npm test && npm run build:all && python3 scripts/secret_scan.py",
     "start": "npm run dev",
     "preview": "npm run preview --workspace @pearl-ledger/companion",
-    "test:oracle": "cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json"
+    "test:oracle": "cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json",
+    "build:all": "npm run build --workspaces --if-present"
   },
   "dependencies": {
     "@ledgerhq/device-management-kit": "1.11.0",

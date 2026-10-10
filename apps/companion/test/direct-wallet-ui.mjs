@@ -2,6 +2,9 @@
  * storage, backend and device endpoint. No browser/hardware/native execution,
  * upload, live RPC, real broadcast, private seed, or MetaMask is involved. */
 import assert from "node:assert/strict";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server.edge";
+import { QRCodeSVG } from "qrcode.react";
 import fs from "node:fs";
 import { build } from "esbuild";
 import { fileURLToPath } from "node:url";
@@ -21,13 +24,16 @@ const account = sdk.accountFromJson(f.publicAccount),
 const source =
   fs.readFileSync(new URL("../src/main.ts", import.meta.url), "utf8") +
   `
-export function auditState(){return{busy,notification,account,privacyConsent,verifiedReceive,receiveIndex,sourceMode,activePayment,hasClient:!!client};}
+export function auditState(){return{busy,notification,account,privacyConsent,verifiedReceive,receiveIndex,sourceMode,activePayment,hasClient:!!client,sendStep,receiveStep,historyCount:history.length,form:{...form}};}
 export function auditShow(p){page=p;render();}
 export function auditReplaceAccount(a){account=a;network=a.network;verifiedReceive=null;render();}
 export async function auditOpenPublicPayment(a,id){account=a;network=a.network;sourceMode='public';privacyConsent=true;activePayment=id;page='send';await refreshJournal();render();}
 export function auditAlterBroadcastContext(kind){if(kind==='owner')account={...account,chainCode:new Uint8Array(32).fill(9)};if(kind==='network')network='testnet2';if(kind==='source')sourceMode='node';if(kind==='payment')activePayment='another-payment';}
 export async function auditLoadWatch(a,b){snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:b.inputs.map(i=>({...i,rawTransaction:'',coinbase:false,block:{height:1,hash:'bb'.repeat(32)}}))};page='send';await refreshJournal();render();}
 export async function auditSync(){await run('Explicit public discovery',syncPublic);}
+export async function auditHistory(a,entries,tip){account=a;network=a.network;history=entries;snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip,coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:[]};historyTip={...tip};syncComplete=true;page='activity';await refreshJournal();render();}
+export function auditAdvanceHistoryTip(){snapshot={...snapshot,tip:{height:snapshot.tip.height+1,hash:'cd'.repeat(32)}};render();}
+export async function auditReceiveLimit(){await store.mutate(accountId(account),j=>{j.issuedReceiveThrough=979});await refreshJournal();receiveIndex=979;verifiedReceive=deriveAddress(account,0,979).address;page='receive';render();}
 `;
 const built = await build({
   stdin: {
@@ -45,12 +51,12 @@ const built = await build({
       name: "direct-ui-mock-boundaries",
       setup(b) {
         b.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "direct-ui-mock" }),
         );
         b.onLoad({ filter: /.*/, namespace: "direct-ui-mock" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? `export async function connectLedger(cb,protocol){if(protocol!=='bitcoin-prl')throw Error('Legacy fallback is forbidden');globalThis.directContext.disconnect=cb;return globalThis.directContext.endpoint.transport;}`
             : a.path.includes("storage")
               ? `export class WatchStorage{
@@ -122,6 +128,12 @@ async function setup(options = {}) {
       context.coins = [...value.matchAll(/data-coin="([^"]+)"/g)].map(
         ([, id]) => ({ dataset: { coin: id }, checked: false }),
       );
+      context.txids = [...value.matchAll(/data-copy-txid="([^"]+)"/g)].map(
+        ([, txid]) => ({
+          dataset: { copyTxid: txid },
+          textContent: "Copy transaction ID",
+        }),
+      );
       context.nav = [...value.matchAll(/data-nav="([^"]+)"/g)].map(
         ([, nav]) => ({ dataset: { nav } }),
       );
@@ -135,7 +147,9 @@ async function setup(options = {}) {
         ? context.coins
         : selector === "[data-nav]"
           ? context.nav
-          : [],
+          : selector === "[data-copy-txid]"
+            ? context.txids
+            : [],
     getElementById: (id) => context.nodes.get(id) ?? null,
   };
   globalThis.window = {
@@ -666,5 +680,147 @@ for (const fail of [false, true]) {
   );
   console.log(
     `PASS: optional snapshot clear ${fail ? "failure" : "success"} never touches payment journals or sends a request`,
+  );
+}
+
+{
+  const t = await setup();
+  await t.click("connect");
+  await t.app.auditLoadWatch(account, bundle);
+  const before = structuredClone(t.context.rows);
+  const recipient = sdk.scriptToAddress(
+    bundle.outputs.find((o) => o.role === "recipient").scriptPubKey,
+    "regtest",
+  );
+  t.input("recipient", "invalid-address");
+  await t.click("recipient-continue");
+  assert.equal(t.app.auditState().sendStep, 0);
+  assert.match(
+    t.dom.innerHTML,
+    /<dialog[^>]+id="ledger-flow"[\s\S]+role="status"/,
+  );
+  t.input("recipient", "  " + recipient + "  ");
+  await t.click("recipient-continue");
+  assert.equal(t.app.auditState().sendStep, 1);
+  assert.equal(t.app.auditState().form.recipient, recipient);
+  t.input("amount", "0.10000000");
+  await t.click("send-back-recipient");
+  assert.equal(t.app.auditState().sendStep, 0);
+  assert.equal(t.app.auditState().form.amount, "0.10000000");
+  assert.deepEqual(t.context.rows, before);
+  assert.equal(t.context.requests.length, 0);
+  await t.click("flow-close");
+  assert.doesNotMatch(t.dom.innerHTML, /id="ledger-flow"/);
+  t.app.auditShow("receive");
+  const receiveDialog = t.dom.innerHTML.match(
+    /<dialog\b[\s\S]*?<\/dialog>/,
+  )?.[0];
+  assert(receiveDialog);
+  assert.doesNotMatch(
+    receiveDialog,
+    /receive-index|change-index|Address details|recovery range|gap.limit|PSBT|BIP86/,
+  );
+  assert.match(
+    t.dom.innerHTML,
+    /<details class="advanced"><summary>Advanced<\/summary>[\s\S]*id="receive-index"/,
+  );
+  assert.equal(t.app.auditState().receiveStep, 0);
+  const commands = [...t.context.endpoint.commands];
+  await t.click("receive-continue");
+  assert.equal(t.app.auditState().receiveStep, 1);
+  assert.deepEqual(t.context.endpoint.commands, commands);
+  assert.equal(t.context.nodes.get("copy-address").disabled, true);
+  console.log(
+    "PASS: source-derived recipient/amount and receive steps preserve form, explicit device approval and wallet state",
+  );
+}
+
+// Real pinned SVG encoder; compare its complete matrix output for the verified value.
+{
+  const t = await setup();
+  await t.click("connect");
+  t.app.auditShow("receive");
+  assert.doesNotMatch(t.dom.innerHTML, /data-qrcode-address/);
+  await t.click("verify-receive");
+  const address = sdk.deriveAddress(account, 0, 0).address;
+  const qr = renderToStaticMarkup(
+    createElement(QRCodeSVG, {
+      value: address,
+      size: 160,
+      level: "M",
+      marginSize: 0,
+      title: "Verified receive address",
+      "data-qrcode-address": address,
+    }),
+  );
+  assert(
+    t.dom.innerHTML.includes(qr),
+    "QR matrix must encode exactly the device-verified address",
+  );
+  const before = structuredClone(t.saved());
+  const commands = [...t.context.endpoint.commands];
+  await t.click("new-receive");
+  assert.equal(t.app.auditState().receiveIndex, 1);
+  assert.equal(t.app.auditState().verifiedReceive, null);
+  assert.equal(t.context.nodes.get("copy-address").disabled, true);
+  assert.doesNotMatch(t.dom.innerHTML, /data-qrcode-address/);
+  assert.deepEqual(
+    t.saved(),
+    before,
+    "Choosing a new address cannot mark it issued before verification",
+  );
+  assert.deepEqual(
+    t.context.endpoint.commands,
+    commands,
+    "New address must not automatically access the device",
+  );
+  await t.click("verify-receive");
+  assert.equal(t.saved().issuedReceiveThrough, 1);
+  assert.equal(
+    t.app.auditState().verifiedReceive,
+    sdk.deriveAddress(account, 0, 1).address,
+  );
+  await t.app.auditReceiveLimit();
+  assert.equal(t.context.nodes.get("new-receive").disabled, true);
+  console.log(
+    "PASS: verified QR uses the exact approved address and New address preserves consecutive durable approval boundaries",
+  );
+}
+{
+  const t = await setup();
+  const entries = Array.from({ length: 23 }, (_, i) => ({
+    txid: (i + 1).toString(16).padStart(64, "0"),
+    received: 100n,
+    spent: 0n,
+    state: "confirmed",
+    block: { height: i + 1, hash: "ab".repeat(32) },
+  }));
+  await t.app.auditHistory(account, entries, {
+    height: 200,
+    hash: "aa".repeat(32),
+  });
+  assert.equal(t.context.txids.length, 10);
+  assert.match(t.dom.innerHTML, /178 confirmations/);
+  const first = t.context.txids[0];
+  first.onclick();
+  await new Promise(setImmediate);
+  assert.equal(t.context.clipboard.at(-1), entries[22].txid);
+  assert.equal(first.textContent, "Copied");
+  await t.click("history-next");
+  assert.equal(t.context.txids.length, 10);
+  await t.click("history-next");
+  assert.equal(t.context.txids.length, 3);
+  assert.equal(t.context.nodes.get("history-next").disabled, true);
+  assert.equal(
+    t.app.auditState().historyCount,
+    23,
+    "Pagination must not truncate discovery data",
+  );
+  t.app.auditAdvanceHistoryTip();
+  assert.match(t.dom.innerHTML, /Confirmation status unavailable/);
+  assert.doesNotMatch(t.dom.innerHTML, /[0-9]+ confirmations/);
+  assert.equal(t.context.requests.length, 0);
+  console.log(
+    "PASS: history pagination and transaction-ID copy preserve all records and require matching validated history tip for counts",
   );
 }
