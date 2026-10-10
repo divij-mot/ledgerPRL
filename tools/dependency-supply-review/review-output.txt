@@ -884,14 +884,6 @@
       "cssModules": []
     },
     {
-      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
-      "type": "asset",
-      "bytes": 95652,
-      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
-      "modules": [],
-      "cssModules": []
-    },
-    {
       "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "type": "asset",
       "bytes": 89212,
@@ -904,6 +896,14 @@
       "type": "asset",
       "bytes": 95224,
       "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
+      "modules": [],
+      "cssModules": []
+    },
+    {
+      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
+      "type": "asset",
+      "bytes": 95652,
+      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
       "modules": [],
       "cssModules": []
     },

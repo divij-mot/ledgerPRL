@@ -3,13 +3,15 @@ on:
   push:
     branches: [main, ledger-bitcoin-prl]
   pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: checks-${{ github.ref }}
+  group: checks-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   host:
+    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -24,6 +26,7 @@ jobs:
       - run: node --import tsx tools/dependency-supply-review/review.mjs && node tools/dependency-supply-review/generate-notices.mjs --check apps/companion/public/third-party-notices.txt
       - run: npm audit --audit-level=moderate
   rust-core:
+    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -35,6 +38,7 @@ jobs:
       - run: cargo +1.99.0 clippy --locked --workspace --all-targets -- -D warnings
       - run: cargo +1.99.0 fmt --all -- --check
   pearl-oracle:
+    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -47,3 +51,27 @@ jobs:
           cache: false
       - run: go run -mod=readonly . ../../fixtures/protocol-v1.json
         working-directory: tools/pearl-oracle
+  public-mainnet-read:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - run: npm ci --ignore-scripts
+      - name: Read public chain through the actual companion proxy
+        shell: bash
+        run: |
+          npm run dev > /tmp/pearl-public-probe-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:5188/live.html > /dev/null; then break; fi
+            sleep 1
+          done
+          node --import tsx tools/live-app-public-review/probe.mjs
+          node --input-type=module -e 'import fs from "node:fs"; const r=JSON.parse(fs.readFileSync("tools/live-app-public-review/results.json","utf8")); const m=r.cases.find(c=>c.network==="mainnet"&&c.mode==="proxy"); if(!m?.tipValidated||!m.genesisValidated||!m.discovery?.complete) process.exit(1);'

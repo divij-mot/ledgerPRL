@@ -30,15 +30,15 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
       "components": 3
     },
     {
-      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
-      "components": 1
-    },
-    {
       "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "components": 1
     },
     {
       "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "components": 1
+    },
+    {
+      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
       "components": 1
     },
     {

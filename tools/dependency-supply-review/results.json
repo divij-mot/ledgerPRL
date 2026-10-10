@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "head": "96aa2e09a7f87ffbb8474c6825c575fa8cec0a27",
+  "head": "3575198a68c2408118a6eec2a5e7d88a852365ae",
   "nodeVersion": "v24.19.0",
   "lockfileSha256": "7ffdfb4ad695aab839152b6423d6660e19d0b3044b5579e6f1621c76a999ad50",
   "checks": [
@@ -5845,14 +5845,6 @@
       "cssModules": []
     },
     {
-      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
-      "type": "asset",
-      "bytes": 95652,
-      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
-      "modules": [],
-      "cssModules": []
-    },
-    {
       "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "type": "asset",
       "bytes": 89212,
@@ -5865,6 +5857,14 @@
       "type": "asset",
       "bytes": 95224,
       "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
+      "modules": [],
+      "cssModules": []
+    },
+    {
+      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
+      "type": "asset",
+      "bytes": 95652,
+      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
       "modules": [],
       "cssModules": []
     },
@@ -5983,13 +5983,15 @@
   "workflows": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "a11a70ecd5cf14290b539492382d74af583b07996c3f95a33c49dbea18dc2908",
+      "sha256": "e3e1eaee61e9ebd72dc990b57cccee90a59b7284d71ba2b931b149e76294f6a8",
       "actions": [
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
         "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
-        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
       ]
     },
     {
@@ -9612,7 +9614,7 @@
     }
   ],
   "sourceHashes": {
-    ".github/workflows/ci.yml": "a11a70ecd5cf14290b539492382d74af583b07996c3f95a33c49dbea18dc2908",
+    ".github/workflows/ci.yml": "e3e1eaee61e9ebd72dc990b57cccee90a59b7284d71ba2b931b149e76294f6a8",
     ".github/workflows/ledger-review.yml": "a56bcac50ce8dc5342e5df530b561ae67de15a7f7d6aaabb7f86ea825da30fa4",
     "README.md": "7e17e9cbc6d45f43f202294eabee134a81f48a557dbf55d9c47302d1fe4715ea",
     "SECURITY.md": "53cd5ec8b0f907d3eec1e9d457a3968d8a4c0809edb9eab42ebb478875af36c5",

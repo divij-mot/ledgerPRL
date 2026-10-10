@@ -20,3 +20,14 @@ node --import tsx tools/live-app-public-review/probe.mjs
 ```
 
 The discovery branch runs only after complete pinned status/genesis validation, and remains bounded by the existing gap/response/time limits. Failure is retained as unavailable, never reported as an empty wallet. These results do not establish live balances, sending, confirmation or physical-device behavior.
+
+## Manual remote-network probe
+
+The existing host-check workflow also exposes a manual dispatch that runs this
+same read-only probe through a temporary loopback companion on a GitHub runner.
+It uses only repository public fixtures, keeps TLS verification enabled, and
+requires complete mainnet proxy discovery for success. No Ledger, user account,
+signing or broadcast is involved. Both fixed networks are observed; a pass is
+read-path evidence only, not funded-transfer qualification. The manual event has
+its own concurrency group so it cannot cancel normal CI. This diagnostic helps
+distinguish this Mac's egress failures from an upstream API/schema problem.
