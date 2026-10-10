@@ -1,0 +1,100 @@
+PASS receive rejection -> reload -> consecutive issuance -> prepare/discard preserves both high-water marks
+FAIL review-rejected -> original signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL review-rejected -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL before-first-yield -> original signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL before-first-yield -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL after-first-yield -> original signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL after-first-yield -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL cancel-after-first-yield -> original signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual signing cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:139:49)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL cancel-after-first-yield -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual signing cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:139:49)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL ack-lost -> original signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL ack-lost -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL storage-failed -> original signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL storage-failed -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL ok -> original signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+FAIL ok -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg AssertionError [ERR_ASSERTION]: Actual broadcast cancellation was not observed
+
+0 !== 1
+
+    at <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:159:128)
+    at async run (/tmp/payment-sequence-noop-cancel-after-fix.mjs:117:63)
+    at async <anonymous> (/tmp/payment-sequence-noop-cancel-after-fix.mjs:129:3)
+SUMMARY 1 passed; 14 failed; sources unchanged=true
