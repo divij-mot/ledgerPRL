@@ -2,17 +2,17 @@
 
 A Pearl (PRL) wallet with one interface for local SPV use and hosted Ledger Wallet Discover, backed by a narrowly adapted Ledger Bitcoin device app and exact-integer host adapter.
 
-**Development software. Do not use with valuable funds.** Limited emulator and Nano S Plus physical tests have passed. The [local mainnet checkpoint](tools/local-mainnet-review/README.md) observed a real incoming payment and confirmations; outgoing mainnet hardware signing, broadcast and destination confirmation remain unverified. These tests do not establish Ledger approval, a human security audit or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
+**Development software. Do not use with valuable funds.** Limited emulator and Nano S Plus physical tests have passed. The [local mainnet checkpoint](tools/local-mainnet-review/README.md) observed a real incoming payment and confirmations; the owner later reported an outgoing mainnet submission shown accepted with pending change. Destination confirmation has not yet been independently established. These tests do not establish Ledger approval, a human security audit or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
 
 ## Two ways to use the same wallet
 
 | Mode | Open | Chain data and connection |
 | --- | --- | --- |
 | Local | `python3 scripts/run-local.py` opens `http://127.0.0.1:5188/` | Native Pearl SPV on this computer; direct Ledger WebHID in desktop Chrome/Edge |
-| Hosted | Planned `https://pearl-ledger-wallet.vercel.app/live.html` inside Ledger Wallet Discover | Fixed Pearl public-indexer service; Ledger Wallet API on desktop/Android |
-| Hosted browser | Planned `https://pearl-ledger-wallet.vercel.app/` | Same public-indexer flow; direct WebHID in desktop Chrome/Edge |
+| Hosted | [Hosted Discover entry](https://pearl-ledger-wallet.vercel.app/live.html) inside Ledger Wallet Discover | Fixed Pearl public-indexer service; Ledger Wallet API on desktop/Android |
+| Hosted browser | [Hosted browser wallet](https://pearl-ledger-wallet.vercel.app/) | Same public-indexer flow; direct WebHID in desktop Chrome/Edge |
 
-**Hosted deployment is pending verification.** The Vercel Hobby project exists, but the planned URLs are not yet claimed as deployed or tested. Hosted clients need no running Mac or native helper. Android is a source-supported target: responsive browser and simulated Wallet API checks do not qualify the real Android app, camera permissions, USB/BLE or device flows. Native Android SDK testing was explicitly declined. Public Discover listing and device-app distribution still require Ledger's separate approval.
+**Hosted production is live.** Release [`e6b0ff1`](https://github.com/divij-mot/ledgerPRL/commit/e6b0ff154faf2dc177457400baeb38005b0e12a7) passed 17 live boundary checks and all 15 public files matched the reviewed build. See the [release evidence](tools/hosted-wallet-review/release.md). The [hosted Discover manifest](apps/companion/ledger-live.hosted.manifest.json) passed schema checks and was subsequently imported with owner approval into desktop Ledger Wallet; its exact hosted page opened at Add account. Hosted clients need no running Mac or native helper. Android is a source-supported target: responsive browser and simulated Wallet API checks do not qualify the real Android app, camera permissions, USB/BLE or device flows. Native Android SDK testing was explicitly declined. Public Discover listing and device-app distribution still require Ledger's separate approval.
 
 The UI is shared: Send/Receive, verified receive QR, camera/image payment-QR input, Max, fee choices, transaction history and recovery. Fast/Medium/Slow retain equal-priced options and show brief block-target time estimates; active Amount screens refresh anonymous fee quotes before their 120-second expiry. Hosted functions are stateless: no application database, account profile or server wallet cache. Public account metadata, cached display data and payment journals stay in the client browser. Cached balances never restore spend validation or a device approval.
 

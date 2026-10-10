@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/LedgerHQ/ledger-live",
+  "commit": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+  "tag": "@ledgerhq/live-desktop@4.23.0",
+  "files": {
+    "apps/ledger-live-desktop/src/renderer/screens/account/AccountBalanceSummaryHeader.tsx": "f2e62d759518504648395800ccf5dfcb6d0b2bd9cff8886de16cf46864e002b3",
+    "apps/ledger-live-desktop/src/renderer/screens/account/BalanceSummary.tsx": "c89d3169fdb9e4af225ddffb66db4b7ffa2c64e47eabb539a707ff4333493b9b",
+    "apps/ledger-live-desktop/src/renderer/modals/Send/Body.tsx": "5e3f44064f0fb011fd469bcfaacf67c681a91a12651134c3f4cf02499f3d35bb",
+    "libs/ledger-live-common/src/portfolio/portfolio.ts": "63d060e6c577b3d1012d74dbe2a4550c480abb2d39147f541fcdb1d668e91408",
+    "libs/coin-modules/coin-bitcoin/src/synchronisation.ts": "23e48fd229ff735508e25ddaa87a8ffd53e0654a65db0b5bcd62bc0accc9f8c3",
+    "libs/ledger-wallet-framework/src/account/pending.ts": "e7590188974f85243bf1709f93bac29076ce8cd4f9f25ea80143f85bfcdea51c"
+  }
+}

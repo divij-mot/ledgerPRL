@@ -396,8 +396,8 @@ export function discardDraft(journal: WalletJournal, id: string): void {
   journal.payments = journal.payments.filter((p) => p.id !== id);
 }
 
-/** Only the owning initial attempt may undo its protocol-proven REVIEW rejection. */
-export function rejectBeforeSigning(
+/** Only the owning initial attempt may reset after the signer fails without a complete result. */
+export function resetUnsignedAttempt(
   journal: WalletJournal,
   id: string,
   attemptId: string,

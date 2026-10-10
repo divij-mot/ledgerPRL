@@ -235,7 +235,7 @@ await check("invalid/replayed rejection ownership cannot release uncertainty", 5
     const state = pick(states.filter(x => x !== "draft")), j = journal(state);
     const before = clone(j);
     const attempted = i % 2 ? attemptId.replace(/1$/, "2") : "bad-attempt";
-    assert.throws(() => w.rejectBeforeSigning(j, "property-payment", attempted));
+    assert.throws(() => w.resetUnsignedAttempt(j, "property-payment", attempted));
     assert.deepEqual(j, before);
     assert.throws(() => w.discardDraft(j, "property-payment"));
     assert.equal(w.reservedOutpoints(j).size, 2);

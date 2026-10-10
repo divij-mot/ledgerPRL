@@ -79,7 +79,7 @@ for(const mode of ['wrong-review','wrong-signature']){
  const parsed=w.importWalletBackup(w.exportWalletBackup(account,journal));
  assert.equal(parsed.journal.payments[0].state,'signing');
  assert.equal(parsed.journal.payments[0].signingAttempt,undefined);
- assert.throws(()=>w.rejectBeforeSigning(parsed.journal,'boundary-original','11111111-1111-4111-8111-111111111111'));
+ assert.throws(()=>w.resetUnsignedAttempt(parsed.journal,'boundary-original','11111111-1111-4111-8111-111111111111'));
  assert.throws(()=>w.discardDraft(parsed.journal,'boundary-original'));
  assert.equal(w.reservedOutpoints(parsed.journal).size,2);
  pass('Uncertain backup cannot restore rejection ownership or release reservations');

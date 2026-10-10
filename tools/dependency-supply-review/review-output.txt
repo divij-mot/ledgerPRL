@@ -4,10 +4,10 @@
     "registryRecords": 346,
     "installedRegistryRecords": 250,
     "missingOptionalPlatformPackages": 96,
-    "browserMainModules": 773,
+    "browserMainModules": 774,
     "browserWorkerModules": 27,
     "browserCssInputs": 50,
-    "browserUnionModules": 824,
+    "browserUnionModules": 825,
     "browserPackages": 49
   },
   "installLifecycle": [
@@ -36,11 +36,11 @@
   ],
   "noticeObservations": [
     {
-      "file": "assets/index-B33raa-Q.js",
+      "file": "assets/index-ByVGc--d.js",
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/live-BoDMryH_.js",
+      "file": "assets/live-VcgfFvtq.js",
       "presentLicenseMarkers": []
     },
     {
@@ -48,7 +48,7 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/main-CxG4wHQb.js",
+      "file": "assets/main-BmAxsC9p.js",
       "presentLicenseMarkers": []
     },
     {
@@ -56,7 +56,7 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/qr-reader-XSzcwxEi.js",
+      "file": "assets/qr-reader-BRNRvs-M.js",
       "presentLicenseMarkers": []
     },
     {
@@ -72,20 +72,20 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "presentLicenseMarkers": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "presentLicenseMarkers": []
     }
   ],
   "chunks": [
     {
-      "file": "assets/index-B33raa-Q.js",
+      "file": "assets/index-ByVGc--d.js",
       "type": "chunk",
       "bytes": 269846,
-      "sha256": "ad842fc64e2c1c5306db166c542da0226f2b1427988c8b424ec17e76ac66b109",
+      "sha256": "2a9f3d2ad2069d9d0f6678d9788d273da097b117929b2ad3222a00968fac843c",
       "modules": [
         "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-exports",
         "node_modules/reflect-metadata/Reflect.js",
@@ -380,10 +380,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/live-BoDMryH_.js",
+      "file": "assets/live-VcgfFvtq.js",
       "type": "chunk",
       "bytes": 445670,
-      "sha256": "c783dab01c7f3cf57e36ee8de829578fa931999aa5ac20d3bded6448dd02e239",
+      "sha256": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
       "modules": [
         "apps/companion/src/wallet-buffer.ts",
         "node_modules/bignumber.js/bignumber.mjs",
@@ -766,10 +766,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/main-CxG4wHQb.js",
+      "file": "assets/main-BmAxsC9p.js",
       "type": "chunk",
-      "bytes": 489180,
-      "sha256": "357e1ab77b78203b3de68d6ab9c48f9fc971819d0f36bb667b41dbe3cf5f0c11",
+      "bytes": 493807,
+      "sha256": "0aa70488611f5c9a84efe80ccf9e5c5e6203ecb1870d79819db5f8c894bd0053",
       "modules": [
         "node_modules/@noble/hashes/esm/_u64.js",
         "node_modules/@noble/hashes/esm/crypto.js",
@@ -809,6 +809,7 @@
         "packages/wallet/src/recovery.ts",
         "apps/companion/src/blockbook-source.ts",
         "apps/companion/src/public-source.ts",
+        "apps/companion/src/pending-monitor.ts",
         "apps/companion/src/account-cache.ts",
         "apps/companion/src/storage.ts",
         "apps/companion/src/signed-recovery.ts",
@@ -896,10 +897,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/qr-reader-XSzcwxEi.js",
+      "file": "assets/qr-reader-BRNRvs-M.js",
       "type": "chunk",
       "bytes": 3269,
-      "sha256": "8dfa5cd3679b2c8fa2f41a098b1e409053e7870f6a37ddf504b9152f714c582b",
+      "sha256": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
       "modules": [
         "apps/companion/src/qr-reader.ts"
       ],
@@ -1037,18 +1038,18 @@
       "cssModules": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "type": "asset",
-      "bytes": 885,
-      "sha256": "628eed4df079af5327c1bf813447244084889104ad6039070a9687a92b8724ef",
+      "bytes": 813,
+      "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
       "modules": [],
       "cssModules": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "type": "asset",
-      "bytes": 813,
-      "sha256": "849bb76a253a70ea52c2dbebf714f9de3a3d8904025ed38728c623f75e362f72",
+      "bytes": 885,
+      "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
       "modules": [],
       "cssModules": []
     }

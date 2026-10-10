@@ -1,0 +1,10 @@
+✔ portfolio total stays unchanged by an unsigned reservation and never calls it network pending (301.706125ms)
+✔ portfolio includes source-reported unconfirmed own change while Send still rejects it (151.467334ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 769.266084

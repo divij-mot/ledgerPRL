@@ -333,19 +333,22 @@ for (const status of ["spent-or-unknown", "reorged", "timeout"]) {
   await captured.promise;
   originalDevice.review.open();
   await oldRun;
-  assert.equal(saved().payments[0].state, "signing");
+  // A captured read is not durable recovery ownership. The unchanged initial
+  // attempt may clear; the resumed stale reader must fail before any APDU.
+  assert.equal(saved().payments.length, 0);
+  assert.equal(wallet.reservedOutpoints(saved()).size, 0);
+  assert.equal(saved().nextChangeIndex, 1);
+  const issued = saved().issuedReceiveThrough;
   release.open();
   await newRun;
   delete globalThis.afterRead;
-  assert.equal(saved().payments[0].state, "signed");
-  assert.equal(saved().payments[0].rawTx, f.rawTx);
-  assert.equal(wallet.reservedOutpoints(saved()).size, 2);
-  assert.equal(
-    recoveryDevice.sent.filter((ins) => ins === P.SIGN_PSBT).length,
-    1,
-  );
+  assert.equal(saved().payments.length, 0);
+  assert.equal(wallet.reservedOutpoints(saved()).size, 0);
+  assert.equal(saved().nextChangeIndex, 1);
+  assert.equal(saved().issuedReceiveThrough, issued);
+  assert.equal(recoveryDevice.sent.length, 0);
   console.log(
-    "PASS opposite ordering: generic initial rejection retains locks until fresh explicit identical-payment recovery verifies every signature",
+    "PASS opposite ordering: initial no-result cleanup removes the unsigned record and a stale recovery read cannot resurrect or sign it",
   );
 }
 {

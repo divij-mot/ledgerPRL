@@ -5,12 +5,15 @@ import {
   deriveAddress,
   fromHex,
   hex,
+  sha256,
   type ApduTransport,
   type FinalizedTransaction,
 } from "@pearl-ledger/sdk";
 import {
   BITCOIN_PRL_PROTOCOL as P,
   LedgerBitcoinPrlClient,
+  BitcoinPrlDeviceError,
+  SigningFailedWithoutResultError,
   parseAccountXpub,
   parseNetworkInfo,
   parseYieldedSignature,
@@ -61,7 +64,10 @@ function signingTransport(
     yieldOrder?: number[];
     mutateYield?: (bytes: Uint8Array, i: number) => Uint8Array;
     finalAck?: () => Uint8Array | Promise<Uint8Array>;
-    onCommand?: (apdu: Uint8Array, n: number) => void;
+    onCommand?: (
+      apdu: Uint8Array,
+      n: number,
+    ) => void | Uint8Array | Promise<Uint8Array>;
   } = {},
 ) {
   const fixture = options.fixture ?? publicFixture(),
@@ -73,7 +79,8 @@ function signingTransport(
   let nextYield = 0;
   const order = options.yieldOrder ?? bundle.inputs.map((_, i) => i);
   const transport = new FakeTransport(async (apdu, n) => {
-    options.onCommand?.(apdu, n);
+    const override = options.onCommand?.(apdu, n);
+    if (override !== undefined) return override;
     if (apdu[0] === P.cla) {
       if (apdu[1] === P.GET_NETWORK_INFO)
         return ok(networkInfo(deviceAccount.network));
@@ -101,6 +108,234 @@ function signingTransport(
   });
   return { transport, ...fixture };
 }
+
+test("initial and continuation denials produce no complete result and preserve their original cause", async () => {
+  for (const continuation of [false, true]) {
+    const { transport, bundle, account } = signingTransport({
+      onCommand(apdu) {
+        if (apdu[0] === P.cla && apdu[1] === P.SIGN_PSBT)
+          return continuation
+            ? interrupted(
+                concat(
+                  Uint8Array.of(0x40, 0),
+                  sha256(new TextEncoder().encode("tr(@0/**)")),
+                ),
+              )
+            : Uint8Array.of(0x69, 0x85);
+        if (apdu[0] === P.FRAMEWORK_CLA) return Uint8Array.of(0x69, 0x85);
+      },
+    });
+    const client = new LedgerBitcoinPrlClient(transport, account.network);
+    let persisted = 0;
+    await assert.rejects(
+      client.signBundle(bundle, account, {
+        onVerifiedSigned() {
+          persisted++;
+        },
+      }),
+      (error: unknown) =>
+        error instanceof SigningFailedWithoutResultError &&
+        error.cause instanceof BitcoinPrlDeviceError &&
+        error.status === 0x6985 &&
+        error.instruction === (continuation ? P.CONTINUE : P.SIGN_PSBT),
+    );
+    assert.equal(persisted, 0);
+    assert.equal(client.sessionState, "failed");
+    assert(transport.closed);
+    assert.equal(
+      transport.commands.filter((c) => c[0] === P.FRAMEWORK_CLA).length,
+      continuation ? 1 : 0,
+    );
+  }
+});
+
+test("identity failures and arbitrary signing failures preserve their causes without a complete result", async () => {
+  for (const denied of [
+    P.GET_NETWORK_INFO,
+    P.GET_MASTER_FINGERPRINT,
+    P.GET_EXTENDED_PUBKEY,
+  ]) {
+    const { transport, bundle, account } = signingTransport({
+      onCommand(apdu) {
+        if (apdu[0] === P.cla && apdu[1] === denied)
+          return Uint8Array.of(0x69, 0x85);
+      },
+    });
+    await assert.rejects(
+      new LedgerBitcoinPrlClient(transport, account.network).signBundle(
+        bundle,
+        account,
+      ),
+      (e) =>
+        e instanceof SigningFailedWithoutResultError &&
+        e.cause instanceof BitcoinPrlDeviceError,
+    );
+    assert(
+      !transport.commands.some((c) => c[0] === P.cla && c[1] === P.SIGN_PSBT),
+    );
+  }
+  for (const response of [
+    Uint8Array.of(0x6a, 0x80),
+    Uint8Array.of(0x10, 0, 0x69, 0x85),
+    null,
+  ]) {
+    const { transport, bundle, account } = signingTransport({
+      onCommand(apdu) {
+        if (apdu[0] === P.cla && apdu[1] === P.SIGN_PSBT) {
+          if (response) return response;
+          throw new BitcoinPrlDeviceError(
+            "transport status lookalike",
+            0x6985,
+            P.SIGN_PSBT,
+          );
+        }
+      },
+    });
+    await assert.rejects(
+      new LedgerBitcoinPrlClient(transport, account.network).signBundle(
+        bundle,
+        account,
+      ),
+      (e) =>
+        e instanceof SigningFailedWithoutResultError &&
+        e.cause instanceof BitcoinPrlDeviceError,
+    );
+    assert(transport.closed);
+  }
+});
+
+test("failure after a valid partial signature still has no complete result", async () => {
+  const { transport, bundle, account } = signingTransport({
+    onCommand(apdu) {
+      if (apdu[0] === P.FRAMEWORK_CLA) return Uint8Array.of(0x69, 0x85);
+    },
+  });
+  let yielded = 0,
+    persisted = 0;
+  await assert.rejects(
+    new LedgerBitcoinPrlClient(transport, account.network).signBundle(
+      bundle,
+      account,
+      {
+        onProgress(phase, done) {
+          if (phase === "signatures") yielded = done;
+        },
+        onVerifiedSigned() {
+          persisted++;
+        },
+      },
+    ),
+    (e) =>
+      e instanceof SigningFailedWithoutResultError &&
+      e.status === 0x6985 &&
+      e.cause instanceof BitcoinPrlDeviceError,
+  );
+  assert.equal(yielded, 1);
+  assert.equal(persisted, 0);
+  assert(transport.closed);
+});
+
+test("malformed signature yield has no complete result and is not acknowledged", async () => {
+  const { transport, bundle, account } = signingTransport({
+    mutateYield: () => Uint8Array.of(0x10),
+    onCommand(apdu) {
+      if (apdu[0] === P.FRAMEWORK_CLA) return Uint8Array.of(0x69, 0x85);
+    },
+  });
+  await assert.rejects(
+    new LedgerBitcoinPrlClient(transport, account.network).signBundle(
+      bundle,
+      account,
+    ),
+    (e) =>
+      e instanceof SigningFailedWithoutResultError && e.cause instanceof Error,
+  );
+  assert.equal(
+    transport.commands.filter((c) => c[0] === P.FRAMEWORK_CLA).length,
+    0,
+  );
+  assert(transport.closed);
+});
+
+test("cancellation after a partial signature ignores a late final wire signature", async () => {
+  let resolve!: (value: Uint8Array) => void, entered!: () => void;
+  const reached = new Promise<void>((r) => (entered = r)),
+    abort = new AbortController();
+  const { transport, bundle, account, signatures } = signingTransport({
+    onCommand(apdu) {
+      if (apdu[0] === P.FRAMEWORK_CLA) {
+        entered();
+        return new Promise<Uint8Array>((r) => (resolve = r));
+      }
+    },
+  });
+  let persisted = 0,
+    observed = 0;
+  const client = new LedgerBitcoinPrlClient(transport, account.network);
+  const pending = client.signBundle(bundle, account, {
+    signal: abort.signal,
+    onVerifiedSigned() {
+      persisted++;
+    },
+    onProgress(phase, done) {
+      if (phase === "signatures") observed = done;
+    },
+  });
+  const rejected = assert.rejects(
+    pending,
+    (e) =>
+      e instanceof SigningFailedWithoutResultError && e.cause instanceof Error,
+  );
+  await reached;
+  assert.equal(observed, 1);
+  abort.abort();
+  await rejected;
+  assert(transport.closed);
+  assert.equal(client.sessionState, "failed");
+  const commandCount = transport.commands.length;
+  resolve(interrupted(yielded(bundle, signatures, 1)));
+  await new Promise((r) => setImmediate(r));
+  assert.equal(persisted, 0);
+  assert.equal(observed, 1);
+  assert.equal(transport.commands.length, commandCount);
+});
+
+test("signing timeout has no result while a completed transaction survives final ACK denial", async () => {
+  const stalled = signingTransport({
+    onCommand(apdu) {
+      if (apdu[0] === P.cla && apdu[1] === P.SIGN_PSBT)
+        return new Promise<Uint8Array>(() => {});
+    },
+  });
+  await assert.rejects(
+    new LedgerBitcoinPrlClient(stalled.transport, stalled.account.network, {
+      timeoutMs: 100,
+    }).signBundle(stalled.bundle, stalled.account),
+    (e) =>
+      e instanceof SigningFailedWithoutResultError &&
+      e.cause instanceof BitcoinPrlDeviceError,
+  );
+  assert(
+    stalled.transport.commands.some(
+      (c) => c[0] === P.cla && c[1] === P.SIGN_PSBT,
+    ),
+  );
+  const complete = signingTransport({
+    finalAck: () => Uint8Array.of(0x69, 0x85),
+  });
+  let saved: FinalizedTransaction | undefined;
+  const result = await new LedgerBitcoinPrlClient(
+    complete.transport,
+    complete.account.network,
+  ).signBundle(complete.bundle, complete.account, {
+    onVerifiedSigned(value) {
+      saved = value;
+    },
+  });
+  assert.equal(result.rawTx, complete.rawTx);
+  assert.equal(saved?.rawTx, complete.rawTx);
+  assert.equal(result.completionWarning, "device-acknowledgement-unconfirmed");
+});
 test("native signature set matches published txid/wtxid and rejects wrong index/key/length/digest", () => {
   const { account, bundle, signatures, txid, wtxid } = publicFixture();
   const partials = signatures.map((_, i) =>
@@ -277,11 +512,16 @@ test("a failing final progress observer cannot discard complete verified signed 
   let persisted: FinalizedTransaction | undefined;
   let acknowledgements = 0;
   const { transport, bundle, account, txid } = signingTransport({
-    finalAck: () => { acknowledgements++; return ok(); },
+    finalAck: () => {
+      acknowledgements++;
+      return ok();
+    },
   });
   const client = new LedgerBitcoinPrlClient(transport, account.network);
   const final = await client.signBundle(bundle, account, {
-    onVerifiedSigned: (transaction) => { persisted = transaction; },
+    onVerifiedSigned: (transaction) => {
+      persisted = transaction;
+    },
     onProgress: (phase, completed, total) => {
       if (phase === "signatures" && completed === total) {
         assert.equal(persisted?.txid, txid);
@@ -306,8 +546,8 @@ test("cancellation triggered by final received yield still persists it without s
     },
   });
   const client = new LedgerBitcoinPrlClient(transport, account.network);
-  // If abort wins before the response is observed, the payment remains ambiguous; this
-  // test cancels from the durable callback to guarantee the complete set was observed.
+  // Cancel from the durable callback to guarantee the complete set was observed.
+  // Cancellation before a complete result is tested separately below.
   const noRace = signingTransport();
   const c = new LedgerBitcoinPrlClient(
       noRace.transport,
@@ -345,6 +585,7 @@ test("durability callback rejection carries verified bytes and prevents final AC
     error = e;
   }
   assert(error instanceof VerifiedSigningResultError);
+  assert(!(error instanceof SigningFailedWithoutResultError));
   assert.equal(error.signedTransaction.txid, txid);
   assert.match(String(error.failure), /disk full/);
   assert.equal(client.sessionState, "failed");

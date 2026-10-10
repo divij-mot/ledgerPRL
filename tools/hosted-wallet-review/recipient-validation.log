@@ -1,0 +1,14 @@
+✔ QR requests validate network and exact amount without accepting foreign URLs or hidden instructions (1.75925ms)
+✔ real jsQR decodes the actual receive QR pixels; mocked image decoding is closed afterward (57.196208ms)
+✔ cancelling camera permission before it resolves stops the late stream without applying a QR (4.021166ms)
+✔ canonical decoder and QR reject malformed network, length, checksum, witness and padding across all networks (8.020833ms)
+✔ actual manual Continue rejects bad addresses before amount entry and bypassed Prepare reserves nothing (390.00525ms)
+✔ manual input accepts normalized surrounding whitespace and valid uppercase P2TR/P2MR with exact recipient scripts (644.8285ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1345.560958

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checkpoint": "final CLI prebuilt validation, before live HTTPS check",
+  "checkpoint": "completed production HTTPS and deployed-public-byte verification",
   "timestampUtc": "2026-10-10T22:10:42.838660+00:00",
   "sourceSha256": {
     "vercel.json": "12675dc9e81c8503423b2fc0ac7974f4c94e4c2dab5904b6c9e5581421eb3c4a",
@@ -45,9 +45,24 @@
     "verify-prebuilt.mjs": "b7809fe155722711ca6ca6c7cede8c34281a0fd13e846601c9f0449637befcb2",
     "prebuilt-validation.json": "5d4d615866704f15932523d320b3724fc98131fb4cbd9282cedd8d01d8818d37",
     "prebuilt-validation.txt": "3ccf8c05c97c43ca8e6cee465edf13337f9d3b6266e87701e0d7b9b35c53abef",
-    "preview-check.mjs": "49003e66d35fbcf17a352877fa9ea290c09fc4f7f38baf3c05cfcb28f0b17c6b"
+    "preview-check.mjs": "49003e66d35fbcf17a352877fa9ea290c09fc4f7f38baf3c05cfcb28f0b17c6b",
+    "preview-results.json": "44c74f6fa2b1c7dd64c488365bf353f0fe9a1ec2ab3125c4e82d83881d7a6e82",
+    "preview-check.txt": "b70da69de575345eff674805bd26a475292092807c409644ba2deaebd881c0e3",
+    "compare-deployed.mjs": "c14237b3df926a651fe0e1ed2207c28feb7d53afe33e0669753a2fdb99589aec",
+    "deployed-byte-comparison.json": "815d8b86aefd50fc96b9d00fdcc5858ea9bdcd2bb0952b68a44273d94291dab8",
+    "deployed-byte-comparison.txt": "cc9d50655ca9b3c6a27357a5113d969ac235aa0d28a9ff119aa4373830df9106",
+    "deployment.md": "3c80a9feb92e70d3f10da9f0e44dfdd980ea8767cd2393548afceb6639cc5591"
   },
   "localManifestUnchanged": true,
   "applicationDatabase": false,
-  "nativeAndroidQualification": false
+  "nativeAndroidQualification": false,
+  "verifiedAtUtc": "2026-10-10T22:16:49.128361+00:00",
+  "deployment": {
+    "origin": "https://pearl-ledger-wallet.vercel.app",
+    "id": "dpl_7YzB4AnkdoW77CRSNNoXfiFBUDw2",
+    "sourceCommit": "e6b0ff154faf2dc177457400baeb38005b0e12a7",
+    "checksPassed": 17,
+    "matchingPublicFiles": 15,
+    "matchingPublicBytes": 2222424
+  }
 }

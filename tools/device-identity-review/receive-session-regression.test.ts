@@ -307,8 +307,11 @@ test("control: device review rejection before any signatures clears the prior ve
   t.app.auditPage("receive");
   assert.doesNotMatch(t.dom.innerHTML, />Address verified on your Ledger\.</);
   assert.equal(t.c.nodes.get("copy-address").disabled, true);
-  assert.equal(t.c.rows.get(owner).payments[0].state, "signing");
-  assert.equal(t.c.rows.get(owner).payments[0].rawTx, undefined);
+  const after = t.c.rows.get(owner);
+  assert.deepEqual(after.payments, []);
+  assert.equal(wallet.reservedOutpoints(after).size, 0);
+  assert.equal(after.nextChangeIndex, j.nextChangeIndex);
+  assert.equal(after.issuedReceiveThrough, j.issuedReceiveThrough);
 });
 
 test("failed signed-storage render stays unverified while the next journal read is stalled", async () => {

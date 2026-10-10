@@ -9,11 +9,11 @@
   },
   "bundles": [
     {
-      "file": "assets/index-B33raa-Q.js",
+      "file": "assets/index-ByVGc--d.js",
       "components": 18
     },
     {
-      "file": "assets/live-BoDMryH_.js",
+      "file": "assets/live-VcgfFvtq.js",
       "components": 13
     },
     {
@@ -21,7 +21,7 @@
       "components": 1
     },
     {
-      "file": "assets/main-CxG4wHQb.js",
+      "file": "assets/main-BmAxsC9p.js",
       "components": 15
     },
     {
@@ -29,15 +29,11 @@
       "components": 3
     },
     {
-      "file": "assets/qr-reader-XSzcwxEi.js",
+      "file": "assets/qr-reader-BRNRvs-M.js",
       "components": 1
     },
     {
       "file": "assets/jsQR-Dk72IcmC.js",
-      "components": 1
-    },
-    {
-      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "components": 1
     },
     {
@@ -46,6 +42,10 @@
     },
     {
       "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "components": 1
+    },
+    {
+      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "components": 1
     },
     {
@@ -83,11 +83,11 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
   },
   "bundles": [
     {
-      "file": "assets/index-B33raa-Q.js",
+      "file": "assets/index-ByVGc--d.js",
       "components": 18
     },
     {
-      "file": "assets/live-BoDMryH_.js",
+      "file": "assets/live-VcgfFvtq.js",
       "components": 13
     },
     {
@@ -95,7 +95,7 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
       "components": 1
     },
     {
-      "file": "assets/main-CxG4wHQb.js",
+      "file": "assets/main-BmAxsC9p.js",
       "components": 15
     },
     {
@@ -103,15 +103,11 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
       "components": 3
     },
     {
-      "file": "assets/qr-reader-XSzcwxEi.js",
+      "file": "assets/qr-reader-BRNRvs-M.js",
       "components": 1
     },
     {
       "file": "assets/jsQR-Dk72IcmC.js",
-      "components": 1
-    },
-    {
-      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "components": 1
     },
     {
@@ -120,6 +116,10 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
     },
     {
       "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "components": 1
+    },
+    {
+      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "components": 1
     },
     {

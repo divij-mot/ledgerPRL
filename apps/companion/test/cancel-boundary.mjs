@@ -239,10 +239,11 @@ for (const cancel of [false, true]) {
 for (const [phase, state, expected] of [
   ["journal", "draft", "draft"],
   ["before-update", "draft", "draft"],
-  ["after-commit", "signing", "signing"],
-  ["journal", "signing", "signing"],
+  ["after-commit", "signing", null],
+  ["journal", "signing", null],
 ]) {
   const { app, d } = await prepared(),
+    before = await app.saved(),
     boundary = pauseAt(phase, state);
   const operation = app.startSign();
   await boundary.reached;
@@ -251,12 +252,19 @@ for (const [phase, state, expected] of [
   await operation;
   const journal = await app.saved();
   assert.deepEqual(d.commands, []);
-  assert.equal(journal.payments[0].state, expected);
-  assert.equal(journal.payments[0].rawTx, undefined);
-  assert.equal(wallet.reservedOutpoints(journal).size, 2);
+  if (expected === null) {
+    assert.deepEqual(journal.payments, []);
+    assert.equal(wallet.reservedOutpoints(journal).size, 0);
+  } else {
+    assert.equal(journal.payments[0].state, expected);
+    assert.equal(journal.payments[0].rawTx, undefined);
+    assert.equal(wallet.reservedOutpoints(journal).size, 2);
+  }
+  assert.equal(journal.nextChangeIndex, before.nextChangeIndex);
+  assert.equal(journal.issuedReceiveThrough, before.issuedReceiveThrough);
   if (phase === "journal" && state === "draft") assert.equal(backendCalls, 0);
   console.log(
-    `PASS: cancellation at ${phase}/${state} sends no signing commands and preserves ${expected} reservations`,
+    `PASS: cancellation at ${phase}/${state} sends no signing commands and ${expected === null ? "discards the owned unsigned attempt without reusing change" : "preserves draft reservations"}`,
   );
 }
 {

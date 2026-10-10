@@ -1,0 +1,31 @@
+✔ absolute early deadline survives rendering; unchanged pending costs one read/minute (1.249375ms)
+✔ at most four reads per cycle rotate fairly through known payments (0.200958ms)
+✔ multiple status changes request one full scan per cycle (0.949959ms)
+✔ hidden, busy, review, local and closed contexts cannot poll; returning resumes deadline (0.202875ms)
+✔ missing or unavailable transactions never refresh or retry inside a cycle (0.193792ms)
+✔ owner change aborts in-flight work and excludes late response (0.174292ms)
+✔ selection change aborts in-flight work and excludes late response (0.115417ms)
+✔ hidden change aborts in-flight work and excludes late response (0.153875ms)
+✔ public refresh reads advancing chain and updates balance/history before archival (265.863041ms)
+✔ public missing transaction source does not release signed reservations (231.023208ms)
+✔ public unavailable source does not release signed reservations (143.011542ms)
+✔ local refresh reads advancing chain and updates balance/history before archival (494.430708ms)
+✔ local missing transaction source does not release signed reservations (473.943208ms)
+✔ local unavailable source does not release signed reservations (138.588791ms)
+✔ owner change during fresh read cannot apply or archive another view (240.661666ms)
+✔ active payment change during fresh read cannot apply or archive another view (237.29275ms)
+✔ abort change during fresh read cannot apply or archive another view (238.156667ms)
+✔ public pending monitor scans once on confirmation and updates the actual account (245.599084ms)
+✔ pending source failure keeps the real view and all signed reservations (131.611125ms)
+✔ actual monitor eligibility excludes local, unsigned review and address display (139.011833ms)
+✔ owned payment confirmations two through five stay cheap; sixth scans, archives, and stops (233.435625ms)
+✔ manual recheck detaches an archived payment after reorg without releasing signed inputs (236.296416ms)
+✔ restored mature history still reconciles an unarchived submitted journal record (233.958833ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4126.069292

@@ -126,7 +126,7 @@ await run('receive rejection -> reload -> consecutive issuance -> prepare/discar
 });
 
 for(const mode of ['review-rejected','before-first-yield','after-first-yield','cancel-after-first-yield','ack-lost','storage-failed','ok'])for(const alternate of [false,true]){
-  await run(`${mode} -> ${alternate?'alternate':'original'} signed bytes -> timeout/retry -> reload -> archive/reorg`,async()=>{
+  await run(['review-rejected','before-first-yield','after-first-yield','cancel-after-first-yield'].includes(mode)?`${mode} -> initial no-result release -> historical recovery -> ${alternate?'alternate':'original'} bytes -> retry/archive`:`${mode} -> ${alternate?'alternate':'original'} signed bytes -> timeout/retry -> reload -> archive/reorg`,async()=>{
     reset();await open(endpoint(mode==='storage-failed'?'ok':mode,alternate));app.sequenceForm(b);await event('prepare');assert.equal(payment().bundleHex,f.bundleHex);const draft=exportBackup(),id=payment().id;model.identity={id,createdAt:payment().createdAt};
     if(mode==='storage-failed')model.signedWriteFailure=true;
     await event('sign');assert.equal(broadcastCount(),0);
@@ -138,6 +138,22 @@ for(const mode of ['review-rejected','before-first-yield','after-first-yield','c
     if(mode!=='ok')assert(first.closes()>0,'Failed attempt must close its mock transport');
     if(mode==='cancel-after-first-yield')assert.equal(model.signCancelObserved,1,'Actual signing cancellation was not observed');
     if(mode==='ack-lost')assert.match(app.sequenceState().notification,/acknowledgement was not confirmed/);
+    if(['review-rejected','before-first-yield','after-first-yield','cancel-after-first-yield'].includes(mode)){
+      const released=saved();assert.equal(released.payments.length,0);assert.equal(wallet.reservedOutpoints(released).size,0);
+      assert.equal(released.nextChangeIndex,1);assert.equal(released.issuedReceiveThrough,7);
+      assert.equal(app.sequenceState().activePayment,null);assert.equal(app.sequenceState().emergencySignedRecovery,null);
+      assert.equal(first.yields(),mode==='review-rejected'?0:mode==='before-first-yield'?1:2);assert.equal(broadcastCount(),0);
+      const releasedBackup=exportBackup();await open();
+      assert.deepEqual(saved(),released,'Reload restored the explicitly rejected payment');
+      const round=wallet.importWalletBackup(releasedBackup).journal;
+      assert.equal(round.payments.length,0);assert.equal(wallet.reservedOutpoints(round).size,0);
+      assert.equal(round.nextChangeIndex,1);assert.equal(round.issuedReceiveThrough,7);assert.equal(broadcastCount(),0);
+      // Separate fixture for records created before this policy: no durable proof of
+      // the prior attempt's outcome exists. Restoring it must NOT apply new cleanup.
+      const historical=wallet.importWalletBackup(draft).journal;
+      wallet.transitionPayment(historical,id,'signing');delete historical.payments[0].signingAttempt;
+      model.rows.set(owner,clone(historical));await open();stable('signing',undefined);
+    }
     const unsigned=['review-rejected','before-first-yield','after-first-yield','cancel-after-first-yield','storage-failed'].includes(mode);
     let exact=alternate?alt.rawTx:f.rawTx;
     if(unsigned){

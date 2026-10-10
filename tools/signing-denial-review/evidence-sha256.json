@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "files": {
+    "008-before-denial.png": "21701dc366c54fb83e55625884ba69528977a8cddbf8b6bc4482a28f3adeb064",
+    "009-explicit-reject.png": "f0c5023f00a3b0aae4aab197d34bf3718fc326298a741667a46aea06cd73223b",
+    "039-recovery-reject.png": "f0c5023f00a3b0aae4aab197d34bf3718fc326298a741667a46aea06cd73223b",
+    "README.md": "38c2286e4a01d10317ed6932eef111a4c3963d02e8896d07577965019276f55c",
+    "frames.json": "327938382d9036cb1073d60b29203b8c2e406a6c19212ec03a67f9a17009d15c",
+    "native-denial.ts": "5dc39b3e68825808fc94db11606819f3fb962e42e4125ebe0cbbe30a14bb4c07",
+    "native-replay.txt": "447719b93cf2c54171d7bec8de59148629211acf2decb8f81d40e30c86e59091",
+    "result.json": "802d7e7fe89bd2cf582fd00bf4ee85c0c32d3bb802def21b9cf5d8788fdd1dd1",
+    "screens.json": "70a58aa66a6a4ebc15c6ac9f1b9ee3259dc26c33f6d39e1d79880c1d8d6163ed",
+    "source-build-check.json": "14d0caf88dd243cf8ce819dc86c8514702212ade90ad587032faba712d044d51"
+  },
+  "firmwareBuildManifestSha256": "23ecd64ae55dda237ab1b6f03b17cd6fbeff94243ead99b09e29fac826c58723",
+  "ownedContainersRemaining": 0
+}

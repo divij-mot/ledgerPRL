@@ -55,6 +55,20 @@ export class BitcoinPrlDeviceError extends Error {
     this.name = "BitcoinPrlDeviceError";
   }
 }
+/** This attempt ended without producing a complete, independently verified transaction.
+ * Partial device signatures may exist; this says nothing about earlier attempts. */
+export class SigningFailedWithoutResultError extends BitcoinPrlDeviceError {
+  constructor(readonly cause: unknown) {
+    super(
+      cause instanceof Error
+        ? cause.message
+        : "Signing ended without a complete verified transaction",
+      cause instanceof BitcoinPrlDeviceError ? cause.status : undefined,
+      cause instanceof BitcoinPrlDeviceError ? cause.instruction : undefined,
+    );
+    this.name = "SigningFailedWithoutResultError";
+  }
+}
 /** A complete signed transaction exists even though transport, cancellation or durable storage failed. */
 export class VerifiedSigningResultError extends BitcoinPrlDeviceError {
   constructor(
@@ -315,12 +329,13 @@ export class LedgerBitcoinPrlClient {
     );
     const status =
       response[response.length - 2]! * 256 + response[response.length - 1]!;
-    if (status !== 0x9000 && status !== 0xe000)
+    if (status !== 0x9000 && status !== 0xe000) {
       throw new BitcoinPrlDeviceError(
         `Device rejected command (0x${status.toString(16)})`,
         status,
         ins,
       );
+    }
     return { status, data: Buffer.from(response.subarray(0, -2)) };
   }
   // The continuation framing matches upstream AppClient.makeRequest. Added bounds,
@@ -589,7 +604,7 @@ export class LedgerBitcoinPrlClient {
           completionWarning: "device-acknowledgement-unconfirmed",
         };
       }
-      throw error;
+      throw new SigningFailedWithoutResultError(error);
     }
   }
   signBundle(

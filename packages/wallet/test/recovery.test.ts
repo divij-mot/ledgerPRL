@@ -14,7 +14,7 @@ import {
   exportPublicRecovery,
   importPublicRecovery,
   recordVerifiedReceive,
-  rejectBeforeSigning,
+  resetUnsignedAttempt,
   recordRecoveryPaths,
   preparePayment,
   parseWatchSnapshot,
@@ -123,7 +123,7 @@ test("consecutive receive issuance and public recovery ranges survive export", (
     1,
   );
 });
-test("proven review rejection becomes discardable unsigned draft; generic signed state cannot reset", () => {
+test("failed unsigned initial attempt becomes discardable draft; generic signed state cannot reset", () => {
   const journal = emptyJournal();
   reservePayment(journal, bundle, "payment-fixture");
   const attemptId = "00000000-0000-4000-8000-000000000001";
@@ -131,32 +131,32 @@ test("proven review rejection becomes discardable unsigned draft; generic signed
     id: attemptId,
     recovery: false,
   };
-  rejectBeforeSigning(journal, "payment-fixture", attemptId);
+  resetUnsignedAttempt(journal, "payment-fixture", attemptId);
   assert.equal(journal.payments[0]!.state, "draft");
   assert.equal(journal.payments[0]!.signingAttempt, undefined);
   assert.throws(() =>
-    rejectBeforeSigning(signedJournal(), "payment-fixture", attemptId),
+    resetUnsignedAttempt(signedJournal(), "payment-fixture", attemptId),
   );
 });
 
-test("interrupted signing requires owned initial rejection; recovery and old records cannot reset", () => {
+test("interrupted signing requires an owned initial attempt; recovery and old records cannot reset", () => {
   const j = emptyJournal(),
     id = "payment-fixture",
     attemptId = "00000000-0000-4000-8000-000000000001";
   reservePayment(j, bundle, id);
   const p = transitionPayment(j, id, "signing");
-  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  assert.throws(() => resetUnsignedAttempt(j, id, attemptId));
   p.signingAttempt = { id: attemptId, recovery: true };
-  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  assert.throws(() => resetUnsignedAttempt(j, id, attemptId));
   p.signingAttempt.recovery = false;
   assert.throws(() =>
-    rejectBeforeSigning(j, id, "00000000-0000-4000-8000-000000000002"),
+    resetUnsignedAttempt(j, id, "00000000-0000-4000-8000-000000000002"),
   );
   p.rawTx = "";
-  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  assert.throws(() => resetUnsignedAttempt(j, id, attemptId));
   delete p.rawTx;
   p.txid = vector.txid;
-  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  assert.throws(() => resetUnsignedAttempt(j, id, attemptId));
   delete p.txid;
   assert.equal(p.state, "signing");
   assert.equal(reservedOutpoints(j).size, bundle.inputs.length);
@@ -211,7 +211,7 @@ test("equal-state ambiguous backup merge revokes rollback without importing owne
   assert.equal(p.signingAttempt, undefined);
   delete before.payments[0]!.signingAttempt;
   assert.deepEqual(j, before);
-  assert.throws(() => rejectBeforeSigning(j, id, attemptId));
+  assert.throws(() => resetUnsignedAttempt(j, id, attemptId));
   const empty = emptyJournal();
   mergeRestoredJournal(empty, incoming);
   assert.equal(empty.payments[0]!.signingAttempt, undefined);
@@ -221,7 +221,7 @@ test("equal-state ambiguous backup merge revokes rollback without importing owne
   mergeRestoredJournal(draft, incoming);
   assert.equal(draft.payments[0]!.state, "signing");
   assert.equal(draft.payments[0]!.signingAttempt, undefined);
-  assert.throws(() => rejectBeforeSigning(draft, id, attemptId));
+  assert.throws(() => resetUnsignedAttempt(draft, id, attemptId));
 });
 
 import {

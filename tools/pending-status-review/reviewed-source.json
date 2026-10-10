@@ -1,0 +1,34 @@
+{
+  "reviewedAt": "2026-10-10T22:57:02.767997+00:00",
+  "scope": "Fresh-source manual status and bounded read-only pending monitor; hashes captured after root reported production formatting freeze",
+  "files": {
+    "apps/companion/src/main.ts": "971d2e33c75a2f44d56515c65d6ef5ad2670cfb73789cdd67dcb923d3804ad9f",
+    "apps/companion/src/pending-monitor.ts": "aa90b68a3f63a032f3b5c5436fc290159f16163d9d99373f98e64bd9f6b5df47",
+    "apps/companion/src/blockbook-source.ts": "f646e176144a0eee45d334e606148d029c4f70d577076c2f93e83764a356506a",
+    "apps/companion/src/public-source.ts": "cd54d95cb849ce356223211bbbee20a23ef1a232cb3d1ab5f48b07ae9fc3ec84",
+    "apps/companion/src/local-source.ts": "72d21df66ab3a988186a87bb3f01f628acdb2b67e851813cb50354962dbf0ffb",
+    "apps/companion/src/local-sync.ts": "e846034c9b245dbb82a66e312bedbc3f103ae9df682e8725bbf719f9851f4362",
+    "packages/wallet/src/journal.ts": "011ceddddfa1729a2e11c91b74ea5ada6cfddb5191fd83c3b3795339279bd459",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/preprocess_inputs.c": "f3ed6c4d94968fd9ed2dfd75c99a7460c252ac291ab1e2e66e2ce93ec56d63b1",
+    "apps/companion/test/pending-monitor.test.ts": "145ab4fc062b2eb547af3cd929211e689313e418a3da50021cf0f57bfd4839fc",
+    "apps/companion/test/payment-status-refresh.test.ts": "56d602e637fa8549dcdea72b4f1013f0b01d2b36706fc5d5168cef4c4a52859f",
+    "tools/pending-status-review/refresh.test.ts": "4827ffac6ac846afc9aa206f940b6bf9214cd3057a6e97198d51bc011a8c1460",
+    "tools/pending-status-review/monitor-tests.txt": "52db74690495f6e6824a16b4c8cbeea5a1addad87f626abd919b099a5a2f1db5",
+    "tools/pending-status-review/refresh-tests.txt": "514a503f8ea4f04993843849a267d24d0acc94e6c1d0ccdde87e5776f748cf1e"
+  },
+  "ledgerCommit": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+  "pearlCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+  "upstreamFiles": {
+    "Ledger/libs/ledger-wallet-framework/src/account/pending.ts": "e7590188974f85243bf1709f93bac29076ce8cd4f9f25ea80143f85bfcdea51c",
+    "Ledger/libs/ledger-wallet-framework/src/bridge/jsHelpers.ts": "3eb5fcb73105b74b51ffc039edd23a18862ad4073bf525deeff3dc9d62f17a8a",
+    "Ledger/shared/env/src/definitions/team-coin-integration/index.ts": "fdc5fa131fa248091a7d37aa2058ee524a21c208e8bd2c7f1dc18983196a233b",
+    "Ledger/libs/coin-modules/coin-bitcoin/src/synchronisation.ts": "23e48fd229ff735508e25ddaa87a8ffd53e0654a65db0b5bcd62bc0accc9f8c3",
+    "Ledger/libs/ledger-live-common/src/families/bitcoin/editTransaction/operation.ts": "966eb6fa862b6d26812592bf5b25efe5045cad5647a25df97326c49c5bbc23c4",
+    "Ledger/libs/ledger-live-common/src/families/bitcoin/editTransaction/buildRbfTransaction.ts": "e4e4ef0862914c22b2a0e2ee1f17269408a6a0420fd733a22f3f0370b31179d3",
+    "Ledger/libs/ledger-live-common/src/families/bitcoin/editTransaction/isStrategyDisabled.ts": "f6764ebddef385a151c149028ed68a92c0fffc2983cc2b5bd718d67a0a11192d",
+    "Pearl/node/mempool/mempool.go": "f8bca80259d0b49ab216ecacf82b731bdd2304372cdc383a4b889d108a3b843c",
+    "Pearl/node/config.go": "8a85a5cf01ad249ed82f184b37d0828e8ad0147ceb77d6ccfcc344999e4d1410",
+    "Pearl/node/server.go": "26062f41ff47fe2948f46541d29a830054aac07e93b17a7688c02fa7801fb5a0"
+  }
+}

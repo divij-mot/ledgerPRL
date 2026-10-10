@@ -22,6 +22,7 @@ const directory = fileURLToPath(
 );
 const appended = `
 export async function auditMount(s,complete=true){account=s.account;network=account.network;accountIndex=account.account;sourceMode='public';privacyConsent=true;snapshot=s;syncComplete=complete;page='send';sendStep=1;selected.clear();manualSelection=false;maxAmount=false;feeSelection='standard';Object.assign(form,{recipient:deriveAddress(account,0,7).address,amount:'0.00008000',fee:'0.00001000',changeIndex:'0'});await refreshJournal();render();}
+export function auditConsent(value){privacyConsent=value;render();}
 export function auditQuotes(q){feeQuotes=q;feeQuoteNetwork=network;render();}
 export function auditState(){return {network,account,snapshot,validation,verifiedReceive,activePayment,syncComplete,page,sendStep,busy,notification,feeSelection,feeQuotes,feeTime:feeTime(),feeLoading:!!feeLoad,form:{...form},maxAmount,selected:[...selected],journal};}
 export function auditOptions(){return feeQuoteOptions();}
@@ -85,11 +86,11 @@ async function until(check: () => boolean) {
     await new Promise((r) => setImmediate(r));
   }
 }
-function watch(amounts = [10_000n, 9_000n]) {
+function watch(amounts = [10_000n, 9_000n], coinbase = true) {
   return wallet.parseWatchSnapshot(
     JSON.stringify(
       snapshotFixture(
-        amounts.map((v, i) => rawTransaction(v, i)),
+        amounts.map((v, i) => rawTransaction(v, i, coinbase)),
         200,
         "mainnet",
       ),
@@ -837,4 +838,57 @@ test("amount edits update option prices without destroying their ETA children", 
   assert.equal(c.c.nodes.get("fee-target-1").disabled, false);
   assert.equal(c.c.requests.length, 6);
   assert.equal(c.c.rows.size, 0);
+});
+
+test("hosted Sync uses the public service without a separate checkbox", async () => {
+  const t = await setup();
+  await t.app.auditMount(watch(), false);
+  t.app.auditConsent(false);
+  t.app.auditPage("overview");
+  assert(!t.dom.innerHTML.includes('id="privacy-consent"'));
+  assert(!t.dom.innerHTML.includes("Sync using Pearl"));
+  assert.equal(t.c.nodes.get("sync-public").disabled, false);
+  assert.match(t.dom.innerHTML, />Sync<\/span>/);
+  t.event("sync-public");
+  await t.settle();
+  assert(t.c.requests.length > 0);
+  assert(t.c.requests.every((r: any) => r.body.consent === true));
+  assert.equal(t.c.signCalls, 0);
+});
+
+test("local default still uses native synchronization", async () => {
+  const t = await setup({ protocol: "http:", pathname: "/" });
+  await t.app.auditMount(watch(), false);
+  t.app.auditConsent(false);
+  t.app.auditPage("overview");
+  assert(t.c.nodes.has("sync-local"));
+  assert(!t.c.nodes.has("sync-public"));
+  assert.equal(t.c.requests.length, 0);
+});
+
+test("portfolio headline includes unconfirmed owned change without making it spendable", async () => {
+  const t = await setup();
+  const s = watch([320_000n], false);
+  s.coins[0]!.block = null;
+  await t.app.auditMount(s);
+  t.app.auditPage("overview");
+  assert.match(t.dom.innerHTML, /class="hint">Balance<\/p>/);
+  assert.match(t.dom.innerHTML, /class="balance">0\.00320000<small>PRL/);
+  assert.match(t.dom.innerHTML, /0\.00320000 PRL unconfirmed/);
+  assert.equal(wallet.balances(s).available, 0n);
+  t.app.auditPage("send", 1);
+  assert.match(t.dom.innerHTML, /Available: 0\.00000000 PRL/);
+  assert(t.c.nodes.get("send-max").disabled);
+});
+
+test("confirmed and pending funds contribute once to the portfolio headline", async () => {
+  const t = await setup();
+  const s = watch([320_000n, 180_000n], false);
+  s.coins[1]!.block = null;
+  await t.app.auditMount(s);
+  t.app.auditPage("overview");
+  assert.match(t.dom.innerHTML, /class="balance">0\.00500000<small>PRL/);
+  assert.match(t.dom.innerHTML, /0\.00180000 PRL unconfirmed/);
+  assert.equal(wallet.balances(s).available, 320_000n);
+  assert.equal(t.c.requests.length, 0);
 });

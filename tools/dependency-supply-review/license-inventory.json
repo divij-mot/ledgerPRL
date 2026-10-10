@@ -1,15 +1,15 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "sourceHead": "c9b21f30211d7a516576ee4c2fcaa51412143a66",
+  "sourceHead": "e6b0ff154faf2dc177457400baeb38005b0e12a7",
   "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
   "scope": "Actual Rollup entry/shared-chunk and worker graph plus watched CSS/preset build inputs, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
   "bundles": [
     {
-      "file": "assets/index-B33raa-Q.js",
+      "file": "assets/index-ByVGc--d.js",
       "type": "chunk",
       "bytes": 269846,
-      "sha256": "ad842fc64e2c1c5306db166c542da0226f2b1427988c8b424ec17e76ac66b109",
+      "sha256": "2a9f3d2ad2069d9d0f6678d9788d273da097b117929b2ad3222a00968fac843c",
       "components": [
         "node_modules/@inversifyjs/common@1.5.0",
         "node_modules/@inversifyjs/container@1.9.1",
@@ -32,10 +32,10 @@
       ]
     },
     {
-      "file": "assets/live-BoDMryH_.js",
+      "file": "assets/live-VcgfFvtq.js",
       "type": "chunk",
       "bytes": 445670,
-      "sha256": "c783dab01c7f3cf57e36ee8de829578fa931999aa5ac20d3bded6448dd02e239",
+      "sha256": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
       "components": [
         "node_modules/@ledgerhq/hw-transport@6.36.0",
         "node_modules/@ledgerhq/logs@6.19.0",
@@ -62,10 +62,10 @@
       ]
     },
     {
-      "file": "assets/main-CxG4wHQb.js",
+      "file": "assets/main-BmAxsC9p.js",
       "type": "chunk",
-      "bytes": 489180,
-      "sha256": "357e1ab77b78203b3de68d6ab9c48f9fc971819d0f36bb667b41dbe3cf5f0c11",
+      "bytes": 493807,
+      "sha256": "0aa70488611f5c9a84efe80ccf9e5c5e6203ecb1870d79819db5f8c894bd0053",
       "components": [
         "node_modules/@ledgerhq/lumen-ui-react@0.1.65",
         "node_modules/@noble/curves@1.9.7",
@@ -96,10 +96,10 @@
       ]
     },
     {
-      "file": "assets/qr-reader-XSzcwxEi.js",
+      "file": "assets/qr-reader-BRNRvs-M.js",
       "type": "chunk",
       "bytes": 3269,
-      "sha256": "8dfa5cd3679b2c8fa2f41a098b1e409053e7870f6a37ddf504b9152f714c582b",
+      "sha256": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
       "components": [
         "source:LedgerHQ/ledger-live@abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
       ]
@@ -165,17 +165,17 @@
       ]
     },
     {
-      "file": "live.html",
-      "type": "asset",
-      "bytes": 885,
-      "sha256": "628eed4df079af5327c1bf813447244084889104ad6039070a9687a92b8724ef",
-      "components": []
-    },
-    {
       "file": "index.html",
       "type": "asset",
       "bytes": 813,
-      "sha256": "849bb76a253a70ea52c2dbebf714f9de3a3d8904025ed38728c623f75e362f72",
+      "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
+      "components": []
+    },
+    {
+      "file": "live.html",
+      "type": "asset",
+      "bytes": 885,
+      "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
       "components": []
     }
   ],
@@ -196,7 +196,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/common",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -220,7 +220,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/container",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -244,7 +244,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/core",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -268,7 +268,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/reflect-metadata-utils",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -292,7 +292,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/device-management-kit",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -438,7 +438,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/device-transport-kit-web-hid",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -465,7 +465,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/hw-transport",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -495,7 +495,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/logs",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -595,7 +595,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/lumen-ui-react",
       "bundles": [
-        "assets/main-CxG4wHQb.js",
+        "assets/main-BmAxsC9p.js",
         "assets/pearl-apdu-CnYMOtYj.css"
       ],
       "sourceModules": {
@@ -639,7 +639,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/wallet-api-client",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -673,7 +673,7 @@
       "license": "MIT",
       "directory": "node_modules/@ledgerhq/wallet-api-core",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -798,7 +798,7 @@
       "license": "MIT",
       "directory": "node_modules/@noble/curves",
       "bundles": [
-        "assets/main-CxG4wHQb.js",
+        "assets/main-BmAxsC9p.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -835,7 +835,7 @@
       "license": "MIT",
       "directory": "node_modules/@noble/hashes",
       "bundles": [
-        "assets/main-CxG4wHQb.js",
+        "assets/main-BmAxsC9p.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -876,7 +876,7 @@
       "license": "MIT",
       "directory": "node_modules/@radix-ui/react-compose-refs",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "sourceModules": {
         "main": [
@@ -900,7 +900,7 @@
       "license": "MIT",
       "directory": "node_modules/@radix-ui/react-slot",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "sourceModules": {
         "main": [
@@ -924,7 +924,7 @@
       "license": "MIT",
       "directory": "node_modules/@scure/base",
       "bundles": [
-        "assets/main-CxG4wHQb.js",
+        "assets/main-BmAxsC9p.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -951,7 +951,7 @@
       "license": "MIT",
       "directory": "node_modules/@scure/bip32",
       "bundles": [
-        "assets/main-CxG4wHQb.js",
+        "assets/main-BmAxsC9p.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -978,7 +978,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/hub",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1005,7 +1005,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/minimal",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1029,7 +1029,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/utils",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1062,7 +1062,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/core",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -1254,7 +1254,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/crypto",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -1309,7 +1309,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/crypto-primitives",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -1369,7 +1369,7 @@
       "license": "MIT",
       "directory": "node_modules/bignumber.js",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -1419,7 +1419,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/class-variance-authority",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "sourceModules": {
         "main": [
@@ -1443,7 +1443,7 @@
       "license": "MIT",
       "directory": "node_modules/clsx",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "sourceModules": {
         "main": [
@@ -1467,7 +1467,7 @@
       "license": "MIT",
       "directory": "node_modules/events",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -1518,7 +1518,7 @@
       "license": "MIT",
       "directory": "node_modules/isomorphic-ws",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1568,7 +1568,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/jssha",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -1593,7 +1593,7 @@
       "license": "ISC",
       "directory": "node_modules/purify-ts",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1620,7 +1620,7 @@
       "license": "ISC",
       "directory": "node_modules/qrcode.react",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "sourceModules": {
         "main": [
@@ -1644,7 +1644,7 @@
       "license": "MIT",
       "directory": "node_modules/react",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "sourceModules": {
         "main": [
@@ -1677,7 +1677,7 @@
       "license": "MIT",
       "directory": "node_modules/react-dom",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "sourceModules": {
         "main": [
@@ -1711,7 +1711,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/reflect-metadata",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1741,7 +1741,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/rxjs",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1839,7 +1839,7 @@
       "license": "0BSD",
       "directory": "node_modules/rxjs/node_modules/tslib",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1867,7 +1867,7 @@
       "license": "ISC",
       "directory": "node_modules/semver",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -1937,7 +1937,7 @@
       "license": "MIT",
       "directory": "node_modules/tailwind-merge",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "sourceModules": {
         "main": [
@@ -1985,7 +1985,7 @@
       "license": "0BSD",
       "directory": "node_modules/tslib",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -2013,7 +2013,7 @@
       "license": "Unlicense",
       "directory": "node_modules/tweetnacl",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -2038,7 +2038,7 @@
       "license": "MIT",
       "directory": "node_modules/uuid",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -2065,7 +2065,7 @@
       "license": "MIT",
       "directory": "node_modules/xstate",
       "bundles": [
-        "assets/index-B33raa-Q.js"
+        "assets/index-ByVGc--d.js"
       ],
       "sourceModules": {
         "main": [
@@ -2092,7 +2092,7 @@
       "license": "MIT",
       "directory": "node_modules/zod",
       "bundles": [
-        "assets/live-BoDMryH_.js"
+        "assets/live-VcgfFvtq.js"
       ],
       "sourceModules": {
         "main": [
@@ -2132,7 +2132,7 @@
       "kind": "bundler-generated-runtime",
       "license": "MIT",
       "bundles": [
-        "assets/live-BoDMryH_.js",
+        "assets/live-VcgfFvtq.js",
         "assets/pearl-apdu-DTLxDe13.js"
       ],
       "sourceModules": {
@@ -2161,7 +2161,7 @@
       "kind": "copied-source",
       "license": "Apache-2.0",
       "bundles": [
-        "assets/main-CxG4wHQb.js"
+        "assets/main-BmAxsC9p.js"
       ],
       "repository": "https://github.com/LedgerHQ/app-bitcoin",
       "revision": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
@@ -2218,8 +2218,8 @@
       "kind": "copied-source",
       "license": "MIT",
       "bundles": [
-        "assets/main-CxG4wHQb.js",
-        "assets/qr-reader-XSzcwxEi.js",
+        "assets/main-BmAxsC9p.js",
+        "assets/qr-reader-BRNRvs-M.js",
         "assets/pearl-apdu-CnYMOtYj.css"
       ],
       "repository": "https://github.com/LedgerHQ/ledger-live",

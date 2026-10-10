@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "head": "c9b21f30211d7a516576ee4c2fcaa51412143a66",
+  "head": "e6b0ff154faf2dc177457400baeb38005b0e12a7",
   "nodeVersion": "v24.19.0",
   "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
   "checks": [
@@ -3058,10 +3058,10 @@
     "registryRecords": 346,
     "installedRegistryRecords": 250,
     "missingOptionalPlatformPackages": 96,
-    "browserMainModules": 773,
+    "browserMainModules": 774,
     "browserWorkerModules": 27,
     "browserCssInputs": 50,
-    "browserUnionModules": 824,
+    "browserUnionModules": 825,
     "browserPackages": 49
   },
   "installedMismatches": [],
@@ -4876,11 +4876,11 @@
   ],
   "noticeObservations": [
     {
-      "file": "assets/index-B33raa-Q.js",
+      "file": "assets/index-ByVGc--d.js",
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/live-BoDMryH_.js",
+      "file": "assets/live-VcgfFvtq.js",
       "presentLicenseMarkers": []
     },
     {
@@ -4888,7 +4888,7 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/main-CxG4wHQb.js",
+      "file": "assets/main-BmAxsC9p.js",
       "presentLicenseMarkers": []
     },
     {
@@ -4896,7 +4896,7 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/qr-reader-XSzcwxEi.js",
+      "file": "assets/qr-reader-BRNRvs-M.js",
       "presentLicenseMarkers": []
     },
     {
@@ -4912,11 +4912,11 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "presentLicenseMarkers": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "presentLicenseMarkers": []
     }
   ],
@@ -5091,10 +5091,10 @@
   },
   "chunks": [
     {
-      "file": "assets/index-B33raa-Q.js",
+      "file": "assets/index-ByVGc--d.js",
       "type": "chunk",
       "bytes": 269846,
-      "sha256": "ad842fc64e2c1c5306db166c542da0226f2b1427988c8b424ec17e76ac66b109",
+      "sha256": "2a9f3d2ad2069d9d0f6678d9788d273da097b117929b2ad3222a00968fac843c",
       "modules": [
         "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-exports",
         "node_modules/reflect-metadata/Reflect.js",
@@ -5389,10 +5389,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/live-BoDMryH_.js",
+      "file": "assets/live-VcgfFvtq.js",
       "type": "chunk",
       "bytes": 445670,
-      "sha256": "c783dab01c7f3cf57e36ee8de829578fa931999aa5ac20d3bded6448dd02e239",
+      "sha256": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
       "modules": [
         "apps/companion/src/wallet-buffer.ts",
         "node_modules/bignumber.js/bignumber.mjs",
@@ -5775,10 +5775,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/main-CxG4wHQb.js",
+      "file": "assets/main-BmAxsC9p.js",
       "type": "chunk",
-      "bytes": 489180,
-      "sha256": "357e1ab77b78203b3de68d6ab9c48f9fc971819d0f36bb667b41dbe3cf5f0c11",
+      "bytes": 493807,
+      "sha256": "0aa70488611f5c9a84efe80ccf9e5c5e6203ecb1870d79819db5f8c894bd0053",
       "modules": [
         "node_modules/@noble/hashes/esm/_u64.js",
         "node_modules/@noble/hashes/esm/crypto.js",
@@ -5818,6 +5818,7 @@
         "packages/wallet/src/recovery.ts",
         "apps/companion/src/blockbook-source.ts",
         "apps/companion/src/public-source.ts",
+        "apps/companion/src/pending-monitor.ts",
         "apps/companion/src/account-cache.ts",
         "apps/companion/src/storage.ts",
         "apps/companion/src/signed-recovery.ts",
@@ -5905,10 +5906,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/qr-reader-XSzcwxEi.js",
+      "file": "assets/qr-reader-BRNRvs-M.js",
       "type": "chunk",
       "bytes": 3269,
-      "sha256": "8dfa5cd3679b2c8fa2f41a098b1e409053e7870f6a37ddf504b9152f714c582b",
+      "sha256": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
       "modules": [
         "apps/companion/src/qr-reader.ts"
       ],
@@ -6046,18 +6047,18 @@
       "cssModules": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "type": "asset",
-      "bytes": 885,
-      "sha256": "628eed4df079af5327c1bf813447244084889104ad6039070a9687a92b8724ef",
+      "bytes": 813,
+      "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
       "modules": [],
       "cssModules": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "type": "asset",
-      "bytes": 813,
-      "sha256": "849bb76a253a70ea52c2dbebf714f9de3a3d8904025ed38728c623f75e362f72",
+      "bytes": 885,
+      "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
       "modules": [],
       "cssModules": []
     }
@@ -6252,6 +6253,7 @@
     "apps/companion/src/local-sync.ts",
     "apps/companion/src/main.ts",
     "apps/companion/src/pearl-apdu.ts",
+    "apps/companion/src/pending-monitor.ts",
     "apps/companion/src/presentation.ts",
     "apps/companion/src/public-source.ts",
     "apps/companion/src/qr-reader.ts",
@@ -9716,8 +9718,8 @@
   "sourceHashes": {
     ".github/workflows/ci.yml": "cec4e34ef3444a7dd5b5711c474156fab481ec6d855dbf9109e503698c0f3855",
     ".github/workflows/ledger-review.yml": "a56bcac50ce8dc5342e5df530b561ae67de15a7f7d6aaabb7f86ea825da30fa4",
-    "README.md": "6204c005cf8523d1c608cdc841a735de0f7fc78065c4b3075e22803d27c536ec",
-    "SECURITY.md": "53cd5ec8b0f907d3eec1e9d457a3968d8a4c0809edb9eab42ebb478875af36c5",
+    "README.md": "545f4909ae7c70ad72dd79cc60d0aa3d244b4b960919c267fe7dd7ec2bc806ec",
+    "SECURITY.md": "b0f3e53457d2cd6c57af4ce7776bb414b5b0e4976edf191b816691ef6136baf8",
     "apps/cli/package.json": "23fd6bc66bc6d89d622ad3f2d7bdeb4fb9de5a26deb99315e155b19f8c99dad5",
     "apps/companion/index.html": "0eb3a7706eba0260630874f37b0880f8353dee7c2a4a02f2e40ce3c46a6c67d1",
     "apps/companion/live.html": "4541b9bd2c27730d55a6203b0226462c434377c13ef121c70cfffcca18ab59cb",
@@ -9750,8 +9752,9 @@
     "apps/companion/src/local-session.ts": "4aef3c34ac9baadd45974af70e3355b2aadd46a0dca216a465834b0ba3c63f23",
     "apps/companion/src/local-source.ts": "72d21df66ab3a988186a87bb3f01f628acdb2b67e851813cb50354962dbf0ffb",
     "apps/companion/src/local-sync.ts": "e846034c9b245dbb82a66e312bedbc3f103ae9df682e8725bbf719f9851f4362",
-    "apps/companion/src/main.ts": "ce355e3e006dd3ba12a5dfead17ba701e103ca248728497aee55589040550da2",
+    "apps/companion/src/main.ts": "971d2e33c75a2f44d56515c65d6ef5ad2670cfb73789cdd67dcb923d3804ad9f",
     "apps/companion/src/pearl-apdu.ts": "1ee14d6f3de6de263f2335b57c69ddcf51cecc654315694be875626c6f966efe",
+    "apps/companion/src/pending-monitor.ts": "aa90b68a3f63a032f3b5c5436fc290159f16163d9d99373f98e64bd9f6b5df47",
     "apps/companion/src/presentation.ts": "9df4914b7f907427ae1107a00195cc4aa0c279d5a4cc8ed42097cda300738a64",
     "apps/companion/src/public-source.ts": "cd54d95cb849ce356223211bbbee20a23ef1a232cb3d1ab5f48b07ae9fc3ec84",
     "apps/companion/src/qr-reader.ts": "e7ea26c85f3a8def3090a2394f25aed0ae83e4ae57bb3ed466e12acfc3531781",
@@ -9786,9 +9789,9 @@
     "apps/ledger-bitcoin-prl/UPSTREAM.json": "7c4d361fe5e6355f22b8f40e4a9ad993d88aad49a3b0d5631481ef211aa432a8",
     "apps/ledger-bitcoin-prl/UPSTREAM_TREE.txt": "c9341199651ab43eaa2d0248a5c011c70bec639e77225b9f26aaebdff3cef1b3",
     "apps/ledger/packaging-requirements.txt": "af04b740c42c3e42ddcb673471deaab3c3b67f7c3a0b1622b5c464ccd982fee9",
-    "docs/implementation-status.md": "f3d79965c5cb7ac4fb1ad18ffb08ab216f5d7661058cb845da956a1fefce1d8a",
+    "docs/implementation-status.md": "cc59c2cf95edeab2b4acfb4adbd26c401cff4690a1afc792aa423aa47cff428a",
     "docs/licensing.md": "0145fe001e68952f2d6d02c4edcc956ba17003149a8363390944503904f18a5b",
-    "docs/live-app.md": "6e1afa50b6d8c2a64979d5dc8e17bb24736fcf3978689e22c8705855ccea6b7e",
+    "docs/live-app.md": "81b712f69b91fea02287f8814c77304e88f626af81daf4519f00f1cde47797b1",
     "docs/test-evidence.md": "8a09f1641edf9c0dc5799a66b4ba259f80e27d7c9d39568c691f4ced0a1560be",
     "node_modules/@inversifyjs/common/lib/esm/index.js": "96cf7f4bdbd75fa6b10472bb534562056d7892d9fa980dbc0dcc5f3adb7863a8",
     "node_modules/@inversifyjs/container/lib/esm/index.js": "6daf96b7e0314c428b94a3263a168996d3b5f239e59ec8450df7a6d904820762",
@@ -10419,7 +10422,7 @@
     "package-lock.json": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
     "package.json": "377ca4d89d4d843e1d662533e3d2696bac29a0f35f3ff5f074cf18f425cfbb69",
     "packages/bitcoin-prl-adapter/package.json": "3e74a3437d5e7ddb755fdc5f4014963cd7a539f600d0029e22aa86c9bd903012",
-    "packages/bitcoin-prl-adapter/src/client.ts": "cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db",
+    "packages/bitcoin-prl-adapter/src/client.ts": "453541a29ca90f42d87c7dd5a6ea6461f9de784710973ad6620eeb33f1ceefa7",
     "packages/bitcoin-prl-adapter/src/policy.ts": "31e0276b65e1d8d7775c1df702336594e3abb10b71a711e82579e3612b5990f4",
     "packages/bitcoin-prl-adapter/src/psbt.ts": "25612cff0093dcba14f8db1c376de9196ea665acb3e14f2daa2b11acabc3d1d5",
     "packages/bitcoin-prl-adapter/src/upstream/buffertools.ts": "c42f2af89bebd8abd77b23009cf089fb41aabf841ce1111dedb420dae31b99b3",
@@ -10439,7 +10442,7 @@
     "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
     "packages/wallet/package.json": "84c226f3f130aa54f919b6f2298e9bcadd6f4264afbdd85ef15b10850e7bd039",
     "packages/wallet/src/discovery.ts": "4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2",
-    "packages/wallet/src/journal.ts": "0c60e801c630b18a731c7ed7f83f23cefdd8df05dd98cdc7c55a4d02ab1ce718",
+    "packages/wallet/src/journal.ts": "011ceddddfa1729a2e11c91b74ea5ada6cfddb5191fd83c3b3795339279bd459",
     "packages/wallet/src/policy.ts": "22e31418395be68588e19cd9a4b4e6a56bbe1906252de645e53198e34b2e8005",
     "packages/wallet/src/recovery.ts": "ae0ec6a09963e05359ec70a744a023735c14d9dd9ed99d64004e62e6b4295fac",
     "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",

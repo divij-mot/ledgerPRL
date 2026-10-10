@@ -1,0 +1,191 @@
+{
+  "startedAt": "2026-10-10T22:49:08.321Z",
+  "finishedAt": "2026-10-10T22:49:46.649Z",
+  "node": "v24.19.0",
+  "sourceUnchanged": true,
+  "sourceHashes": {
+    "packages/sdk/src/amount.ts": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "packages/sdk/src/bytes.ts": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+    "packages/sdk/src/device.ts": "7e11c7cff4dc70b1b3eecde4772f041845f8690eb784d08975bd3e10b95f312d",
+    "packages/sdk/src/http.ts": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+    "packages/sdk/src/index.ts": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/wallet/src/discovery.ts": "4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2",
+    "packages/wallet/src/index.ts": "4fa0b29aa2407cb5c1d0600adf75785710d9ef3af4dcef90a3b4247c5288e1c5",
+    "packages/wallet/src/journal.ts": "011ceddddfa1729a2e11c91b74ea5ada6cfddb5191fd83c3b3795339279bd459",
+    "packages/wallet/src/policy.ts": "22e31418395be68588e19cd9a4b4e6a56bbe1906252de645e53198e34b2e8005",
+    "packages/wallet/src/recovery.ts": "ae0ec6a09963e05359ec70a744a023735c14d9dd9ed99d64004e62e6b4295fac",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "packages/bitcoin-prl-adapter/src/client.ts": "453541a29ca90f42d87c7dd5a6ea6461f9de784710973ad6620eeb33f1ceefa7",
+    "packages/bitcoin-prl-adapter/src/index.ts": "e564552f552f8f482a73b6197a8d090c1a074f187654e98aa843fade1388f4ae",
+    "packages/bitcoin-prl-adapter/src/policy.ts": "31e0276b65e1d8d7775c1df702336594e3abb10b71a711e82579e3612b5990f4",
+    "packages/bitcoin-prl-adapter/src/psbt.ts": "25612cff0093dcba14f8db1c376de9196ea665acb3e14f2daa2b11acabc3d1d5",
+    "packages/bitcoin-prl-adapter/src/upstream/buffertools.ts": "c42f2af89bebd8abd77b23009cf089fb41aabf841ce1111dedb420dae31b99b3",
+    "packages/bitcoin-prl-adapter/src/upstream/clientCommands.ts": "3087e3e6c8e3e70138e8f9135e9f95b53586f965a9eddc139679385cf5a6114b",
+    "packages/bitcoin-prl-adapter/src/upstream/merkle.ts": "46845ef8d1ced9ed44aeb76ae62307b975ab5c80b96d86051a5c2d2ab7c7c7c3",
+    "packages/bitcoin-prl-adapter/src/upstream/merkleMap.ts": "d6c02c5820d7e4b4650ce35a4b84e59ff86b5a33c2ccb7529ffa3739f130d969",
+    "packages/bitcoin-prl-adapter/src/upstream/policy.ts": "894a7e1b8b0822f45da6233caff5c2b01cfd9d029a21d4e10e1e57c50dba46eb",
+    "packages/bitcoin-prl-adapter/src/upstream/varint.ts": "ad1c86d8591caa1ac1321b14765ac006ea997c8e69b2596ab25244fe82b8c112",
+    "apps/companion/src/main.ts": "d9cc590aae7ee4a8a4580ac930639bfd0d66c5d724545e08c1ebd701f50969e4",
+    "apps/companion/src/signed-recovery.ts": "be11a29f37f50a953ce9f94b1fd9520886ea7444b54d7826f68d5588ef47af4c",
+    "apps/companion/src/storage.ts": "fa43760192f8b77457674d947cdaf8162ef8adb4e126ec1d7cfa3197e1c684d4",
+    "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
+    "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
+    "apps/companion/test/psbt-endpoint.mjs": "2ccc78495302a4ae14c6699fdaec14e0892afa783363ff892b3f47ad66c5094b",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+    "apps/companion/test/fixtures/psbt-apdu-public.json": "72e38141c07be663f6f50bc0e2787eb93a28cb8caa9709bb0a635eead5cb6995",
+    "apps/companion/test/fixtures/signing-recovery-alternate.json": "9842ec6c7d101ddc0abb3053730fd515c48938357821de30b04ead5db8329371",
+    "packages/bitcoin-prl-adapter/test/fixtures/ledger-psbt-v2.json": "95ee2a570f8f1ceb10612937378ba316e71477e8c5ec5ff25d5118a3dfc3bb4c",
+    "package-lock.json": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974"
+  },
+  "results": [
+    {
+      "name": "receive rejection -> reload -> consecutive issuance -> prepare/discard preserves both high-water marks",
+      "outcome": "pass",
+      "durationMs": 489,
+      "requests": 0,
+      "broadcasts": 0,
+      "deviceSessions": 1,
+      "imports": 1
+    },
+    {
+      "name": "review-rejected -> initial no-result release -> historical recovery -> original bytes -> retry/archive",
+      "outcome": "pass",
+      "durationMs": 2609,
+      "requests": 16,
+      "broadcasts": 9,
+      "deviceSessions": 3,
+      "imports": 12
+    },
+    {
+      "name": "review-rejected -> initial no-result release -> historical recovery -> alternate bytes -> retry/archive",
+      "outcome": "pass",
+      "durationMs": 2687,
+      "requests": 16,
+      "broadcasts": 9,
+      "deviceSessions": 3,
+      "imports": 12
+    },
+    {
+      "name": "before-first-yield -> initial no-result release -> historical recovery -> original bytes -> retry/archive",
+      "outcome": "pass",
+      "durationMs": 2881,
+      "requests": 16,
+      "broadcasts": 9,
+      "deviceSessions": 3,
+      "imports": 12
+    },
+    {
+      "name": "before-first-yield -> initial no-result release -> historical recovery -> alternate bytes -> retry/archive",
+      "outcome": "pass",
+      "durationMs": 2784,
+      "requests": 16,
+      "broadcasts": 9,
+      "deviceSessions": 3,
+      "imports": 12
+    },
+    {
+      "name": "after-first-yield -> initial no-result release -> historical recovery -> original bytes -> retry/archive",
+      "outcome": "pass",
+      "durationMs": 3040,
+      "requests": 16,
+      "broadcasts": 9,
+      "deviceSessions": 3,
+      "imports": 12
+    },
+    {
+      "name": "after-first-yield -> initial no-result release -> historical recovery -> alternate bytes -> retry/archive",
+      "outcome": "pass",
+      "durationMs": 3149,
+      "requests": 16,
+      "broadcasts": 9,
+      "deviceSessions": 3,
+      "imports": 12
+    },
+    {
+      "name": "cancel-after-first-yield -> initial no-result release -> historical recovery -> original bytes -> retry/archive",
+      "outcome": "pass",
+      "durationMs": 3221,
+      "requests": 16,
+      "broadcasts": 9,
+      "deviceSessions": 3,
+      "imports": 12
+    },
+    {
+      "name": "cancel-after-first-yield -> initial no-result release -> historical recovery -> alternate bytes -> retry/archive",
+      "outcome": "pass",
+      "durationMs": 3449,
+      "requests": 16,
+      "broadcasts": 9,
+      "deviceSessions": 3,
+      "imports": 12
+    },
+    {
+      "name": "ack-lost -> original signed bytes -> timeout/retry -> reload -> archive/reorg",
+      "outcome": "pass",
+      "durationMs": 2638,
+      "requests": 14,
+      "broadcasts": 9,
+      "deviceSessions": 1,
+      "imports": 10
+    },
+    {
+      "name": "ack-lost -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg",
+      "outcome": "pass",
+      "durationMs": 2635,
+      "requests": 14,
+      "broadcasts": 9,
+      "deviceSessions": 1,
+      "imports": 10
+    },
+    {
+      "name": "storage-failed -> original signed bytes -> timeout/retry -> reload -> archive/reorg",
+      "outcome": "pass",
+      "durationMs": 2277,
+      "requests": 14,
+      "broadcasts": 9,
+      "deviceSessions": 1,
+      "imports": 12
+    },
+    {
+      "name": "storage-failed -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg",
+      "outcome": "pass",
+      "durationMs": 2001,
+      "requests": 14,
+      "broadcasts": 9,
+      "deviceSessions": 1,
+      "imports": 12
+    },
+    {
+      "name": "ok -> original signed bytes -> timeout/retry -> reload -> archive/reorg",
+      "outcome": "pass",
+      "durationMs": 2101,
+      "requests": 14,
+      "broadcasts": 9,
+      "deviceSessions": 1,
+      "imports": 10
+    },
+    {
+      "name": "ok -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg",
+      "outcome": "pass",
+      "durationMs": 2263,
+      "requests": 14,
+      "broadcasts": 9,
+      "deviceSessions": 1,
+      "imports": 10
+    }
+  ],
+  "passed": 15,
+  "failed": 0,
+  "limits": [
+    "Finite host-only sequence checks; no security proof or exhaustive interleaving coverage.",
+    "Actual main.ts handlers, SDK signatures, wallet state/import/merge and PSBT adapter execute.",
+    "Storage, DOM, node replies and module-worker dispatch are mocks; no IndexedDB, browser/WebHID, physical firmware, native emulator, endpoints, credentials, funds or secret keys.",
+    "Mock snapshot starts after prior-output admission; this does not test raw prevout import or chain truth.",
+    "Frozen public signatures and existing frozen PSBT endpoint are reused; cryptography and endpoint are not independently implemented.",
+    "Reload creates a new app module over an in-memory cloned durable store; this is not power-loss durability."
+  ]
+}

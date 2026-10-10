@@ -44,12 +44,13 @@ python -m ledgerblue.loadApp \
 The sizes are specific to this exact image and were read from its linker map.
 There is deliberately no delete option. Follow the device's installation
 prompts and check that the app is **Pearl**, version **0.1.0**. Do not approve an
-unexpected reset, firmware change or different app. Keeping the older Pearl Dev
-app installed temporarily is harmless; the current companion requests Pearl.
+unexpected reset, firmware change or different app. The recorded owner later
+requested removal of Pearl Dev; app enumeration confirmed it was removed while
+Pearl retained installed-app hash `22c0f2fd025c73c9713ea39b3ecf525b4e617d0ff74a9213d51800543ecbbda7`.
 
 Open Pearl on the device, reopen Ledger Wallet and select Pearl in Discover.
-Use the chosen local or hosted route; the hosted URL remains pending deployment
-verification. Local direct WebHID opens with `python3 scripts/run-local.py`. Reconnect the device
+Use the chosen local or [live hosted route](https://pearl-ledger-wallet.vercel.app/);
+[release checks](../tools/hosted-wallet-review/release.md) do not replace device verification. Local direct WebHID opens with `python3 scripts/run-local.py`. Reconnect the device
 and compare a receiving address before the first outgoing payment. The previous
 watch-only account, local chain cache and pending-payment journal remain local;
 installing this image does not import or replace the Ledger seed.

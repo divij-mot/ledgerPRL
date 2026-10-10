@@ -1,5 +1,6 @@
 import {
   LedgerBitcoinPrlClient,
+  SigningFailedWithoutResultError,
   VerifiedSigningResultError,
 } from "@pearl-ledger/bitcoin-prl-adapter";
 import {
@@ -50,6 +51,7 @@ import {
   reservePayment,
   transitionPayment,
   discardDraft,
+  resetUnsignedAttempt,
   exportWalletBackup,
   mergeRestoredJournal,
   reconcileConfirmed,
@@ -65,6 +67,7 @@ import {
 } from "@pearl-ledger/wallet";
 import { connectLedger, type PearlTransport } from "./device.js";
 import { browserPublicSource } from "./public-source.js";
+import { PendingMonitor, type PendingView } from "./pending-monitor.js";
 import { checkLightSnapshot } from "./blockbook-source.js";
 import { accountCache, parseAccountCache } from "./account-cache.js";
 import { WatchStorage } from "./storage.js";
@@ -160,6 +163,25 @@ let qrScanning = false;
 let feeQuotes: FeeQuote[] = [];
 let feeQuoteNetwork: NetworkName | null = null;
 const form = { recipient: "", amount: "", fee: "0.00001000", changeIndex: "0" };
+const pendingMonitor = new PendingMonitor(
+  pendingView,
+  async (txid, signal) => {
+    assert(account, "Account closed");
+    const tx = await browserPublicSource(
+      account.network,
+      privacyConsent,
+      signal,
+    ).transaction(txid);
+    assert(
+      parseTransaction(tx.rawTransaction).txid === txid,
+      "Transaction changed",
+    );
+    return tx.block
+      ? `${tx.block.height}:${tx.block.hash}:${tx.confirmations >= 6 ? "settled" : "mined"}`
+      : "pending";
+  },
+  refreshPendingAccount,
+);
 function clearPaymentForm() {
   clearTimeout(localRefreshTimer);
   localSyncAbort?.abort();
@@ -392,6 +414,7 @@ function render() {
     content,
   });
   bind();
+  pendingMonitor.update();
 }
 function networkHealth() {
   const supported = ["mainnet", "testnet2"].includes(network);
@@ -446,7 +469,7 @@ function lightCard() {
         : "Blockchain data stays on this computer.";
     return `<section class="card sync-card"><div><h2>${label}</h2><p class="hint">${detail}</p></div>${walletButton("sync-local", "Sync account", busy || !!localSyncAbort)}</section>`;
   }
-  return `<section class="card sync-card"><div><h2>${syncComplete ? "Account synced" : "Sync your account"}</h2><p class="hint">${syncComplete ? "Up to date" : ""}</p>${privacyConsent ? "" : `<label class="check"><input id="privacy-consent" type="checkbox" ${disabled(busy)}>Sync using Pearl’s public network service</label><p class="hint">Wallet addresses are shared with the service. Signing keys stay on Ledger.</p>`}</div>${walletButton("sync-public", "Sync account", busy || !privacyConsent)}</section>`;
+  return `<section class="card sync-card"><div><h2>${syncComplete ? "Account synced" : "Sync your account"}</h2><p class="hint">${syncComplete ? "Up to date" : ""}</p>${hostedMode || privacyConsent ? "" : `<label class="check"><input id="privacy-consent" type="checkbox" ${disabled(busy)}>Sync using Pearl’s public network service</label><p class="hint">Wallet addresses are shared with the service. Signing keys stay on Ledger.</p>`}</div>${walletButton("sync-public", "Sync", busy || (!hostedMode && !privacyConsent))}</section>`;
 }
 function paymentStatus(payment: PaymentRecord): string {
   if (payment.archived) return "Confirmed";
@@ -500,6 +523,89 @@ function historyCard(): string {
     })
     .join("")}${pagination("history", slice.page, slice.pages)}</section>`;
 }
+function pendingView(): PendingView | null {
+  const payment = getPayment();
+  if (
+    !account ||
+    sourceMode !== "public" ||
+    !privacyConsent ||
+    busy ||
+    document.visibilityState === "hidden" ||
+    emergencySignedRecovery ||
+    page === "receive" ||
+    (page === "send" &&
+      (!payment || !["accepted", "broadcast-unknown"].includes(payment.state)))
+  )
+    return null;
+  const pending = new Map<string, string>();
+  for (const entry of history)
+    if (entry.state === "pending") pending.set(entry.txid, "pending");
+  for (const payment of journal.payments) {
+    if (
+      payment.archived ||
+      !payment.txid ||
+      !payment.rawTx ||
+      !["accepted", "broadcast-unknown"].includes(payment.state)
+    )
+      continue;
+    const seen = history.find((entry) => entry.txid === payment.txid);
+    if (seen?.state === "confirmed" && seen.block) {
+      // A restored/full-sync view can already be mature while its journal
+      // record still needs reconciliation. Only archival ends owned tracking.
+      pending.set(
+        payment.txid,
+        `${seen.block.height}:${seen.block.hash}:mined`,
+      );
+    } else if (!pending.has(payment.txid)) pending.set(payment.txid, "missing");
+  }
+  return {
+    owner: account,
+    selection: activePayment,
+    transactions: [...pending].map(([txid, status]) => ({ txid, status })),
+  };
+}
+async function refreshPendingAccount(
+  signal: AbortSignal,
+  current: () => boolean,
+) {
+  const owner = account;
+  assert(owner && current(), "Account changed");
+  const operation = AbortSignal.any([signal, AbortSignal.timeout(300_000)]);
+  await refreshJournal();
+  operation.throwIfAborted();
+  if (!current()) return;
+  const minimumIndex: [number, number] = [
+    Math.max(lastUsed[0], journal.issuedReceiveThrough),
+    Math.max(lastUsed[1], journal.nextChangeIndex - 1),
+  ];
+  const discovered = await discoverAccount(
+    browserPublicSource(owner.network, privacyConsent, operation),
+    owner,
+    { minimumIndex },
+  );
+  operation.throwIfAborted();
+  if (!current()) return;
+  await applyDiscovery(
+    discovered,
+    owner,
+    minimumIndex,
+    "public",
+    operation,
+    current,
+  );
+  if (!current() || !snapshot) return;
+  const tip = { ...snapshot.tip },
+    checkedHistory = history;
+  await store.mutate(accountId(owner), (j) => {
+    operation.throwIfAborted();
+    if (current()) reconcileConfirmed(j, checkedHistory, tip);
+  });
+  if (!current()) return;
+  await refreshJournal();
+  if (!current()) return;
+  channel.postMessage("journal");
+  render();
+}
 async function syncPublic() {
   void refreshFeeQuotes();
   const signal = AbortSignal.any([
@@ -537,11 +643,14 @@ async function applyDiscovery(
   minimumIndex: [number, number],
   mode: "public" | "local",
   signal: AbortSignal,
+  explicitApplyGuard?: () => boolean,
 ) {
   signal.throwIfAborted();
   assert(account === ownerAccount, "Account changed during sync");
   const mayApply = () =>
-    mode !== "local" || (!busy && page !== "send" && page !== "receive");
+    explicitApplyGuard
+      ? explicitApplyGuard()
+      : mode !== "local" || (!busy && page !== "send" && page !== "receive");
   // The native scan continues, but a background result must not advance the
   // receive address or replace the watch view while the user reviews a flow.
   // The normal refresh timer obtains fresh data once that flow has closed.
@@ -795,7 +904,7 @@ function scheduleLocalRefresh(owner: AccountPublicKey) {
 function overview(b: ReturnType<typeof balances> | null) {
   if (!account)
     return `<section class="connect-panel"><h2>Add your Pearl account</h2><p>Open Pearl on your Ledger to get started.</p>${walletButton("connect-inline", "Add account", busy)}</section>`;
-  return `<section class="balance-card"><p class="hint">${hostedMode && !syncComplete && snapshot ? "Last synced balance" : "Available balance"}</p><div class="balance">${b ? formatPrl(b.available) : "—"}<small>PRL</small></div><div class="actions account-actions"><button data-nav="receive" ${disabled(busy)}>Receive</button><button data-nav="send" ${disabled(busy || !!localSyncAbort || (hostedMode && !syncComplete))}>Send</button></div>${b && (b.immature || b.reserved || b.pending) ? `<p class="hint">${b.immature ? `${money(b.immature)} immature · ` : ""}${b.reserved ? `${money(b.reserved)} in pending payments · ` : ""}${b.pending ? `${money(b.pending)} unconfirmed` : ""}</p>` : ""}</section>${lightCard()}${history.length ? historyCard() : `<section class="transactions"><h2>Transactions</h2><p class="hint">${syncComplete ? "No transactions yet" : "Sync your account to see transactions"}</p></section>`}`;
+  return `<section class="balance-card"><p class="hint">${hostedMode && !syncComplete && snapshot ? "Last synced balance" : "Balance"}</p><div class="balance">${b ? formatPrl(b.total) : "—"}<small>PRL</small></div><div class="actions account-actions"><button data-nav="receive" ${disabled(busy)}>Receive</button><button data-nav="send" ${disabled(busy || !!localSyncAbort || (hostedMode && !syncComplete))}>Send</button></div>${b && (b.immature || b.pending) ? `<p class="hint">${b.immature ? `${money(b.immature)} immature · ` : ""}${b.pending ? `${money(b.pending)} unconfirmed` : ""}</p>` : ""}</section>${lightCard()}${history.length ? historyCard() : `<section class="transactions"><h2>Transactions</h2><p class="hint">${syncComplete ? "No transactions yet" : "Sync your account to see transactions"}</p></section>`}`;
 }
 function settings() {
   return `<details id="settings" class="settings" ${settingsOpen ? "open" : ""}><summary>Settings</summary><div class="settings-panel"><div class="section-head"><h2>Settings</h2><button id="close-settings" class="ghost">Close</button></div><section><div class="actions">${walletButton("connect", client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger", busy)}${account ? `<button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button>` : ""}</div><div class="field"><label for="network">Network</label><select id="network" ${disabled(busy || !!account)}>${Object.keys(
@@ -806,7 +915,7 @@ function settings() {
   <details class="advanced"><summary>Advanced</summary><div class="advanced-body">${!hostedMode && network === "mainnet" && account?.account === 0 ? `<label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy || !!localSyncAbort)}>Use the public indexer instead (shares wallet addresses)</label>` : ""}<div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div>
   ${account ? `<div class="inline-fields"><div class="field"><label for="receive-index">Receive address index</label><input id="receive-index" type="number" min="0" max="${Math.min(979, journal.issuedReceiveThrough + 1)}" value="${receiveIndex}" ${disabled(busy)}></div><div class="field"><label for="change-index">Change address index</label><input id="change-index" value="${e(form.changeIndex)}" type="number" min="${journal.nextChangeIndex}" max="2147483646" ${disabled(busy)}></div></div><p class="mono muted">${e(deriveAddress(account, 0, receiveIndex).path)}</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy)}>Export backup</button><button id="export-public" class="secondary" ${disabled(busy)}>Export account</button><button id="save-cache" class="secondary" ${disabled(busy || !snapshot)}>Save account locally</button></div><p class="hint">Keep backups private: anyone with a signed payment can submit it.</p>` : ""}
   ${snapshot ? `<button id="${page === "send" ? "settings-check-node" : "check-node"}" class="secondary" ${disabled(busy)}>Refresh balance</button>` : ""}
-  ${notificationType === "error" && notification && walletMessage(notification) !== notification ? `<details><summary>Troubleshooting</summary><p class="hint">${e(notification)}</p></details>` : ""}<h3>Import</h3><div class="field"><label for="backup-file">Wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Balance snapshot</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><p class="hint">Public account files only. Never enter a recovery phrase.</p><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved account</button><button id="clear-cache" class="ghost" ${disabled(busy)}>Clear saved balance data</button></div><p class="hint">Saved data is visible to anyone using this browser profile.</p><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Refresh payment status</button></div></details>
+  ${notificationType === "error" && notification && walletMessage(notification) !== notification ? `<details><summary>Troubleshooting</summary><p class="hint">${e(notification)}</p></details>` : ""}<h3>Import</h3><div class="field"><label for="backup-file">Wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Balance snapshot</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><p class="hint">Public account files only. Never enter a recovery phrase.</p><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved account</button><button id="clear-cache" class="ghost" ${disabled(busy)}>Clear saved balance data</button></div><p class="hint">Saved data is visible to anyone using this browser profile.</p><button id="reconcile" class="secondary" ${disabled(busy || !account)}>Refresh payment status</button></div></details>
   <details class="advanced"><summary>About</summary><div class="advanced-body"><p class="hint">Community app. Independent security review pending.</p><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></div></details></div></details>`;
 }
 function receive(feedback = "") {
@@ -1166,7 +1275,7 @@ function send(active: PaymentRecord | undefined, feedback = "") {
                     status = reserved.has(key)
                       ? "reserved"
                       : coinEligibility(c, snapshot!.tip);
-                  return `<label class="coin"><input type="checkbox" data-coin="${e(key)}" ${selected.has(key) ? "checked" : ""} ${disabled(busy || status !== "eligible")}><span class="coin-info"><span class="mono">${e(key)}</span><span class="muted">${c.coinbase ? "Mining reward" : "Transfer"} · ${confirmations(c, snapshot!.tip)} confirmations · ${status === "reserved" ? "pending payment" : status === "eligible" ? "available" : status}</span></span><span class="coin-value">${e(formatPrl(c.amount))}<br><span class="muted">PRL</span></span></label>`;
+                  return `<label class="coin"><input type="checkbox" data-coin="${e(key)}" ${selected.has(key) ? "checked" : ""} ${disabled(busy || status !== "eligible")}><span class="coin-info"><span class="mono">${e(key)}</span><span class="muted">${c.coinbase ? "Mining reward" : "Transfer"} · ${confirmations(c, snapshot!.tip)} confirmations · ${status === "reserved" ? "reserved" : status === "eligible" ? "available" : status}</span></span><span class="coin-value">${e(formatPrl(c.amount))}<br><span class="muted">PRL</span></span></label>`;
                 })
                 .join("")
             : '<p class="hint">No available funds.</p>'
@@ -1292,7 +1401,15 @@ function bind() {
         void rememberLocalAccount(account).catch(() => {});
       render();
     });
-  click("sync-public", () => void run("Syncing account…", syncPublic));
+  click("sync-public", () => {
+    if (busy) return;
+    if (hostedMode) privacyConsent = true;
+    void run("Syncing account…", async () => {
+      await syncPublic();
+      if (hostedMode && account)
+        await rememberLocalAccount(account).catch(() => {});
+    });
+  });
   click("sync-local", startLocalSync);
   click("check-services", () => {
     if (!busy) void refreshFeeQuotes(true);
@@ -1432,20 +1549,75 @@ function bind() {
   click(
     "reconcile",
     () =>
-      void run("Refreshing payment status…", async (signal) => {
+      void run("Refreshing payment status…", async (cancel) => {
         if (sourceMode === "node") {
-          await reconcileNodePayments(signal);
+          assert(!hostedMode, "Sync this account with the public source first");
+          await reconcileNodePayments(cancel);
           return;
         }
-        assert(
-          account && snapshot && syncComplete,
-          "Complete source resync required",
+        const signal = AbortSignal.any([cancel, AbortSignal.timeout(300_000)]);
+        assert(account, "Select an account before checking payment status");
+        const owner = account,
+          mode = sourceMode,
+          selectedPayment = activePayment;
+        const mayApply = () =>
+          !signal.aborted &&
+          account === owner &&
+          sourceMode === mode &&
+          activePayment === selectedPayment;
+        const requireCurrent = () => {
+          signal.throwIfAborted();
+          assert(
+            mayApply(),
+            "Account or payment changed during the status check",
+          );
+        };
+        await refreshJournal();
+        requireCurrent();
+        const minimumIndex: [number, number] = [
+          Math.max(lastUsed[0], journal.issuedReceiveThrough),
+          Math.max(lastUsed[1], journal.nextChangeIndex - 1),
+        ];
+        // A manual status check must read the chain, not archive a cached view.
+        // Invalidate spend authority while keeping the previous display/locks.
+        syncComplete = false;
+        validation = null;
+        const local =
+          mode === "local" ? await localSource(owner, post, signal) : null;
+        const source =
+          local ?? browserPublicSource(owner.network, privacyConsent, signal);
+        requireCurrent();
+        const effectiveMinimum: [number, number] = local
+          ? [
+              Math.max(minimumIndex[0], local.status.lastUsed[0]),
+              Math.max(minimumIndex[1], local.status.lastUsed[1]),
+            ]
+          : minimumIndex;
+        const discovered = await discoverAccount(source, owner, {
+          minimumIndex: effectiveMinimum,
+        });
+        requireCurrent();
+        // Explicit refresh may update a busy local view; background scans keep
+        // their existing no-update-during-review rule.
+        await applyDiscovery(
+          discovered,
+          owner,
+          effectiveMinimum,
+          mode,
+          signal,
+          mayApply,
         );
-        const count = await store.mutate(accountId(account), (j) =>
-          reconcileConfirmed(j, history, snapshot!.tip),
-        );
+        requireCurrent();
+        assert(snapshot && syncComplete, "Fresh source check did not complete");
+        const tip = { ...snapshot.tip },
+          checkedHistory = history;
+        await store.mutate(accountId(owner), (j) => {
+          requireCurrent();
+          return reconcileConfirmed(j, checkedHistory, tip);
+        });
+        requireCurrent();
         channel.postMessage("journal");
-        notification = `${count} confirmed records archived; exact signed bytes and all input locks retained. Unknown or conflicted records were not released.`;
+        notification = "Payment status updated.";
       }),
   );
   click("close-settings", () => {
@@ -2249,44 +2421,6 @@ async function sign(signal: AbortSignal, recovery = false) {
     current.signingAttempt = { id: attemptId, recovery };
     return JSON.stringify(current);
   });
-  signal.throwIfAborted();
-  await refreshJournal();
-  signal.throwIfAborted();
-  channel.postMessage("journal");
-  if (recovery) {
-    // Claim callback ownership before any recovery APDU. Failed sessions must
-    // reconnect; ready sessions still require fresh device-approved identity.
-    const exported = await device.exportAccount(owner.account, signal);
-    signal.throwIfAborted();
-    assert(
-      accountId(exported) === ownerId,
-      "Recovery Ledger account does not match the reserved payment",
-    );
-    const now = Date.now();
-    if (
-      !validation ||
-      now < validation.checkedAt ||
-      now - validation.checkedAt > 60_000
-    ) {
-      // Human approval can take longer than the input-check lifetime. Refresh
-      // once, never loop or infer unspent status from an unavailable source.
-      await checkNode(signal);
-      signal.throwIfAborted();
-    }
-    const current = (await store.journal(ownerId)).payments.find(
-      (p) => p.id === paymentId,
-    );
-    signal.throwIfAborted();
-    assert(
-      JSON.stringify(current) === signingRecord,
-      "Payment changed during recovery approval; review its current state",
-    );
-  }
-  // An account-export approval can take longer than the source-check lifetime.
-  requireFreshValidation(snapshot, validation, bundle);
-  signal.throwIfAborted();
-  busyText = "Check network, recipient, amount, fee and change on your Ledger";
-  render();
   let persistedRawTx: string | null = null;
   let stagedRecovery: SignedRecovery | null = null;
   const persistVerifiedSigned = async (result: FinalizedTransaction) => {
@@ -2371,10 +2505,71 @@ async function sign(signal: AbortSignal, recovery = false) {
       : "Signatures independently verified and exact signed bytes saved. Broadcast requires a separate approval.";
     persistedRawTx = result.rawTx;
   };
+  const cancelOwnedInitialAttempt = async () => {
+    if (recovery || stagedRecovery || persistedRawTx !== null) return false;
+    await store.mutate(ownerId, (j) => {
+      const current = j.payments.find((p) => p.id === paymentId);
+      assert(
+        JSON.stringify(current) === signingRecord,
+        "Payment changed during cancellation; existing reservation retained",
+      );
+      resetUnsignedAttempt(j, paymentId, attemptId);
+      discardDraft(j, paymentId);
+    });
+    channel.postMessage("journal");
+    if (account === owner && activePayment === paymentId) {
+      activePayment = null;
+      page = "overview";
+      selected.clear();
+    }
+    notification = "Payment cancelled. Nothing was sent.";
+    return true;
+  };
   // Persist at the last independently verified signature yield, before the
   // final device ACK. A missing ACK must not discard a spendable transaction.
   let result;
+  let signingInvoked = false;
   try {
+    signal.throwIfAborted();
+    await refreshJournal();
+    signal.throwIfAborted();
+    channel.postMessage("journal");
+    if (recovery) {
+      // Claim callback ownership before any recovery APDU. Failed sessions must
+      // reconnect; ready sessions still require fresh device-approved identity.
+      const exported = await device.exportAccount(owner.account, signal);
+      signal.throwIfAborted();
+      assert(
+        accountId(exported) === ownerId,
+        "Recovery Ledger account does not match the reserved payment",
+      );
+      const now = Date.now();
+      if (
+        !validation ||
+        now < validation.checkedAt ||
+        now - validation.checkedAt > 60_000
+      ) {
+        // Human approval can take longer than the input-check lifetime. Refresh
+        // once, never loop or infer unspent status from an unavailable source.
+        await checkNode(signal);
+        signal.throwIfAborted();
+      }
+      const current = (await store.journal(ownerId)).payments.find(
+        (p) => p.id === paymentId,
+      );
+      signal.throwIfAborted();
+      assert(
+        JSON.stringify(current) === signingRecord,
+        "Payment changed during recovery approval; review its current state",
+      );
+    }
+    // An account-export approval can take longer than the source-check lifetime.
+    requireFreshValidation(snapshot, validation, bundle);
+    signal.throwIfAborted();
+    busyText =
+      "Check network, recipient, amount, fee and change on your Ledger";
+    render();
+    signingInvoked = true;
     result = await device.signBundle(bundle, owner, {
       signal,
       onVerifiedSigned: persistVerifiedSigned,
@@ -2403,6 +2598,11 @@ async function sign(signal: AbortSignal, recovery = false) {
       };
       render();
     }
+    if (
+      (!signingInvoked || error instanceof SigningFailedWithoutResultError) &&
+      (await cancelOwnedInitialAttempt())
+    )
+      return;
     throw error;
   }
   if (persistedRawTx === null) await persistVerifiedSigned(result);
@@ -2856,9 +3056,11 @@ window.addEventListener("beforeunload", (event) => {
     event.returnValue = "";
   }
   currentAbort?.abort();
+  pendingMonitor.stop();
   void transport?.close();
 });
 document.addEventListener?.("visibilitychange", () => {
+  pendingMonitor.update();
   if (
     document.visibilityState === "visible" &&
     page === "send" &&

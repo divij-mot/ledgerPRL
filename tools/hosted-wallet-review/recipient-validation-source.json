@@ -1,0 +1,14 @@
+{
+  "scope": "Recipient validation only; unrelated main handlers may be edited concurrently",
+  "files": {
+    "apps/companion/src/main.ts": "d9cc590aae7ee4a8a4580ac930639bfd0d66c5d724545e08c1ebd701f50969e4",
+    "apps/companion/src/qr-reader.ts": "e7ea26c85f3a8def3090a2394f25aed0ae83e4ae57bb3ed466e12acfc3531781",
+    "apps/companion/test/recipient-validation.test.ts": "b0c3503714ba1262d314ea035a14bf76c2289b56c384856cbde8827fa329ccbc",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/preprocess_outputs.c": "4d827e9e6e012bde4d72d4f11cafe34204474ec732ac77d028e6de8f033de733",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/transaction_display.c": "4fc03a890f4875189e8b7ce8c8b3e20f51cf4eccd7ed4870de0208173b46d7e7",
+    "apps/ledger-bitcoin-prl/src/common/script.c": "8b440d34995f3cb52178aa342567a71a2011b7069d95a28e35b390d614fb4cae",
+    "apps/ledger-bitcoin-prl/src/common/segwit_addr.c": "e744bc6f8d985f09f9eb1599b42f7b07ec4a03f0f0ccc708c837525a322abb54"
+  }
+}

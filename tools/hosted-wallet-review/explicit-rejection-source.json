@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-10T22:50:44.190060+00:00",
+  "scope": "Final public-fixture initial app-result/pre-adapter cleanup review: 23 actual-main cases and 15 composed histories; no user data/native/physical execution.",
+  "sha256": {
+    "tools/hosted-wallet-review/explicit-rejection-ui.test.ts": "027033d3df9bdefdb161b1961dc884fa109f4062a529ff1ae1d6678b6ea307b6",
+    "apps/companion/test/explicit-rejection-ui.test.ts": "07fdeae858027df5d8da182ae3cce53f158952014152474268c4c328880dfffa",
+    "tools/payment-sequence-review/sequences.mjs": "e141afe90d732a8fd091873cbb0fd2981a1a13c342d7caba72e2ec6208afed33",
+    "apps/companion/src/main.ts": "ebb6afbcd243fe1f1e7cf527f46618c444d71e77ed1a354c0dcf90dc9baa910d",
+    "packages/bitcoin-prl-adapter/src/client.ts": "453541a29ca90f42d87c7dd5a6ea6461f9de784710973ad6620eeb33f1ceefa7",
+    "packages/bitcoin-prl-adapter/src/index.ts": "e564552f552f8f482a73b6197a8d090c1a074f187654e98aa843fade1388f4ae",
+    "packages/wallet/src/journal.ts": "011ceddddfa1729a2e11c91b74ea5ada6cfddb5191fd83c3b3795339279bd459",
+    "docs/recovery.md": "8d03d73d782ee6f805b90ec7cf6a2660285f38b54dbe218562803ede9c8e8ac8",
+    "docs/companion.md": "38fa8ebfeda3174fe4f57d2b4d5199d952e383e19b813ca9a5fa3dacfe12abea",
+    "docs/mainnet-testing.md": "e899e53cc03c2f71a2ccc446c5a36e48f374af18684613ad922da7cbf68f4537",
+    "docs/prl-feature-coverage.md": "4b4174d42ee2d42969f0b6cfed88ab9e7ffe4681a36b5fb977740d71ab1ca5c3",
+    "tools/hosted-wallet-review/explicit-rejection-review.md": "00c36aff4f02d5b155a50d6bce55033c7d12ee6f00df93a433280b356206d40a"
+  }
+}

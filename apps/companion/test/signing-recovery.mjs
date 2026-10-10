@@ -375,15 +375,23 @@ for (const state of ["spent-or-unknown", "reorged"]) {
   await checked.promise;
   review.release();
   await running;
-  assert.equal(saved().payments[0].state, "signing");
+  // The recovery has only read/checked the old record; it has not atomically
+  // claimed it. Initial no-result cleanup may win, and the stale recovery must
+  // not recreate the payment or send any device command afterward.
+  assert.equal(saved().payments.length, 0);
+  assert.equal(wallet.reservedOutpoints(saved()).size, 0);
+  assert.equal(saved().nextChangeIndex, before.nextChangeIndex);
+  assert.equal(saved().issuedReceiveThrough, before.issuedReceiveThrough);
+  assert.equal(first.yields(), 0);
   checkGate.release();
   await recovering;
-  assert.equal(second.commands.filter((ins) => ins === P.SIGN_PSBT).length, 1);
-  assert.equal(saved().payments[0].state, "signed");
-  assert.equal(saved().payments[0].rawTx, f.rawTx);
-  unchangedPayment(before);
+  assert.equal(second.commands.length, 0);
+  assert.equal(saved().payments.length, 0);
+  assert.equal(wallet.reservedOutpoints(saved()).size, 0);
+  assert.equal(saved().nextChangeIndex, before.nextChangeIndex);
+  assert.equal(saved().issuedReceiveThrough, before.issuedReceiveThrough);
   console.log(
-    "PASS: initial generic rejection retains ambiguity until explicit matching recovery saves exact verified bytes",
+    "PASS: initial no-result cleanup wins before recovery ownership; stale recovery cannot resurrect or sign the removed payment",
   );
 }
 {

@@ -1,0 +1,68 @@
+UI nanosp account: Confirm public key
+UI nanosp account: Network | Regtest
+UI nanosp account: Path | 86'/1'/0'
+UI nanosp account: Public key (1/3) | tpubDDXRVY4eRY4p | 4iqLUQNQokx89YLZE | pTyA8UdLVYRMV8Ha
+UI nanosp account: Public key (2/3) | cVdwHRi1TWKMSY3k | h8WpNBA4kB4Xet3h | CxxVvSw83DZ5fhqiSy
+UI nanosp account: Public key (3/3) | sSsYCWJ7k79E
+UI nanosp account: Approve public key
+UI nanosp before-denial: Sign transaction
+UI nanosp explicit-reject: Reject transaction
+UI nanosp fresh-approval: Transaction rejected
+UI nanosp fresh-approval: Loading transaction
+UI nanosp fresh-approval: Review transaction | to send PRL
+UI nanosp fresh-approval: Network | Regtest
+UI nanosp fresh-approval: From account | m/86'/1'/0'
+UI nanosp fresh-approval: Amount | 90071992.5474 PRL
+UI nanosp fresh-approval: To (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924
+UI nanosp fresh-approval: To (2/2) | e8scdxtvf
+UI nanosp fresh-approval: Change amount | 9.99999993 PRL
+UI nanosp fresh-approval: Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7
+UI nanosp fresh-approval: Change...ss (2/2) | smy9l6m
+UI nanosp fresh-approval: Change path | m/86'/1'/0'/1/0
+UI nanosp fresh-approval: Fees | 0.00001 PRL
+UI nanosp fresh-approval: Sign transaction
+UI nanosp fresh-approval: Signing transaction
+UI nanosp partial-then-bad-ack: Transaction signed
+UI nanosp partial-then-bad-ack: Loading transaction
+UI nanosp partial-then-bad-ack: Network | Regtest
+UI nanosp partial-then-bad-ack: From account | m/86'/1'/0'
+UI nanosp partial-then-bad-ack: Amount | 90071992.5474 PRL
+UI nanosp partial-then-bad-ack: To (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924
+UI nanosp partial-then-bad-ack: To (2/2) | e8scdxtvf
+UI nanosp partial-then-bad-ack: Change amount | 9.99999993 PRL
+UI nanosp partial-then-bad-ack: Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7
+UI nanosp partial-then-bad-ack: Change...ss (2/2) | smy9l6m
+UI nanosp partial-then-bad-ack: Change path | m/86'/1'/0'/1/0
+UI nanosp partial-then-bad-ack: Fees | 0.00001 PRL
+UI nanosp partial-then-bad-ack: Sign transaction
+UI nanosp partial-then-bad-ack: Signing transaction
+UI nanosp recovery-reject: Reject transaction
+{
+  "output": "/var/folders/ym/10885q1n18n38bv878bs72fc0000gn/T/pearl-explicit-denial-tAi2Ht",
+  "denial": {
+    "status": "0x6985",
+    "payloadBytes": 0,
+    "rawYields": 0,
+    "terminalFrame": "6985",
+    "merkleContinuations": 304,
+    "gesture": "both buttons on Reject transaction"
+  },
+  "freshApproval": {
+    "status": "0x9000",
+    "signatures": 2,
+    "independentlyVerified": true,
+    "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f"
+  },
+  "partialThenBadAck": {
+    "status": "0x6a80",
+    "rawYields": 1,
+    "signatureIndependentlyValid": true
+  },
+  "recoveryDenial": {
+    "status": "0x6985",
+    "rawYieldsThisAttempt": 0,
+    "priorSignatureRemainsValid": true,
+    "priorCompleteTransactionRemainsValid": true
+  },
+  "outcome": "passed"
+}

@@ -1,0 +1,31 @@
+✔ initial review denial without a complete app result releases only its owning attempt across reload (447.261125ms)
+✔ no-result rejection of a recovery attempt retains the old ambiguity and every reservation (220.657916ms)
+✔ queued initial denial retains a concurrently signed payment (227.616625ms)
+✔ queued initial denial retains a concurrently replaced-attempt payment (224.882375ms)
+✔ queued initial denial retains a concurrently restored-ambiguity payment (221.498042ms)
+✔ queued initial denial retains a concurrently record-updated payment (218.3785ms)
+✔ transport without a complete verified app result releases a fresh initial attempt (370.414667ms)
+✔ before-first without a complete verified app result releases a fresh initial attempt (389.931083ms)
+✔ partial without a complete verified app result releases a fresh initial attempt (359.11125ms)
+✔ partial-cancel without a complete verified app result releases a fresh initial attempt (372.299875ms)
+✔ an unclassified UI-boundary failure has no adapter result proof and cannot unlock (169.406875ms)
+✔ partial during historical recovery retains every old reservation (225.335917ms)
+✔ partial-cancel during historical recovery retains every old reservation (224.20875ms)
+✔ complete verified result with failed durable callback remains recoverable and reserved (289.355667ms)
+✔ complete result carried by the adapter before UI staging is preserved before any cleanup (204.701583ms)
+✔ ack: complete verified bytes survive and are never released or broadcast (289.432458ms)
+✔ late-final-race: complete verified bytes survive and are never released or broadcast (297.954792ms)
+✔ reserved fixture funds are described as reserved, not necessarily network-pending (159.261333ms)
+✔ post-commit abort before adapter invocation releases initial attempt (187.227041ms)
+✔ post-commit read-failure before adapter invocation releases initial attempt (174.746959ms)
+✔ post-commit abort before adapter invocation retains recovery (181.595792ms)
+✔ post-commit read-failure before adapter invocation retains recovery (186.738584ms)
+✔ post-commit pre-adapter cancellation cannot erase a concurrent record update (175.719542ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6155.381041
