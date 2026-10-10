@@ -25,3 +25,6 @@ tools/device-session-review/*.log whitespace=-blank-at-eol,-blank-at-eof
 tools/account-discovery-review/*.log whitespace=-blank-at-eol,-blank-at-eof
 tools/discovery-consistency-review/*.log whitespace=-blank-at-eol,-blank-at-eof
 tools/combined-host-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/host-gap-triage/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/cli-durability-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/host-gap-triage/cli-intent-fix.diff whitespace=-blank-at-eol

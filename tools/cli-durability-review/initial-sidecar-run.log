@@ -1,0 +1,27 @@
+✔ signed success preserves immutable intent and syncs signed bytes before final ACK (322.114663ms)
+✔ initial-write: fail closed before any APDU (8.720099ms)
+✔ initial-sync: fail closed before any APDU (7.309528ms)
+✔ directory-sync: fail closed before any APDU (3.923849ms)
+✔ signed-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (99.661782ms)
+✔ signed-partial-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (112.485356ms)
+✔ signed-zero-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (98.131187ms)
+✔ signed-sync: preserve intent, expose exact typed recovery bytes and withhold final ACK (102.695833ms)
+✔ short positive writes are completed and synced before final ACK (110.980368ms)
+✔ cancellation before signatures retains uncertainty and sends no continuation (54.169033ms)
+✔ cancel-after-sign: exact signed bytes stay durable and result reports unconfirmed acknowledgement (96.902485ms)
+✔ cancel-during-write: exact signed bytes stay durable and result reports unconfirmed acknowledgement (97.021383ms)
+✔ final-reject: exact signed bytes stay durable and result reports unconfirmed acknowledgement (91.006381ms)
+✔ final-lost: exact signed bytes stay durable and result reports unconfirmed acknowledgement (96.21398ms)
+✔ descriptor write never overwrites an unrelated replacement output path (98.290701ms)
+✔ existing output collision fails before any APDU without overwriting user data (4.084891ms)
+✔ symlink output collision fails before any APDU without overwriting user data (3.024216ms)
+✔ dangling-symlink output collision fails before any APDU without overwriting user data (2.677885ms)
+✔ directory output collision fails before any APDU without overwriting user data (2.564826ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1776.284376

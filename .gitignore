@@ -46,3 +46,5 @@ __pycache__/
 !tools/account-discovery-review/*.log
 !tools/discovery-consistency-review/*.log
 !tools/combined-host-review/*.log
+!tools/host-gap-triage/*.log
+!tools/cli-durability-review/*.log

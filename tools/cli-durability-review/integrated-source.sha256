@@ -1,0 +1,3 @@
+556ed61699371f1696c265f00356ac30447e95f84ff181ab1206765bae26893c  apps/cli/src/index.ts
+7043de8a4784bfd8ccb89f24399bef4be5090ee6e0cfb90661ff20b45174ccaf  apps/cli/test/durability-matrix.test.ts
+6e56ccdf8bc5885c9e24fd0c356cd3999b244039241651452ca335d74d4c8e7e  apps/cli/test/intent-durability.test.ts

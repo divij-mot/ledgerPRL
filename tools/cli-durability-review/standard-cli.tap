@@ -1,0 +1,53 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @pearl-ledger/cli@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ CLI offline build/inspect/derive keep exact amounts and exclusive0600 files (1484.527675ms)
+✔ CLI capabilities use PRL Bitcoin protocol and stringify maximum grains exactly (264.276577ms)
+✔ CLI signs through native PSBT protocol and syncs exclusive output before final device ACK (462.689702ms)
+✔ CLI retains saved verified bytes and warns when final acknowledgement fails (840.404484ms)
+✔ CLI keeps signing uncertainty on a pre-sign rejection; no automatic retry (404.696473ms)
+✔ existing, symlinked and invalid output paths fail before any device command (717.333736ms)
+✔ signed success preserves immutable intent and syncs signed bytes before final ACK (265.061286ms)
+✔ initial-write: fail closed before any APDU (25.946006ms)
+✔ initial-sync: fail closed before any APDU (8.374901ms)
+✔ directory-sync: fail closed before any APDU (3.96404ms)
+✔ sidecar-directory-sync: fail closed before any APDU (6.40878ms)
+✔ initial-output-write: fail closed before any APDU (9.31926ms)
+✔ initial-output-sync: fail closed before any APDU (8.962023ms)
+✔ signed-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (103.279541ms)
+✔ signed-partial-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (99.517205ms)
+✔ signed-zero-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (123.190444ms)
+✔ signed-sync: preserve intent, expose exact typed recovery bytes and withhold final ACK (106.632546ms)
+✔ short positive writes are completed and synced before final ACK (117.274556ms)
+✔ cancellation before signatures retains uncertainty and sends no continuation (65.408903ms)
+✔ cancel-after-sign: exact signed bytes stay durable and result reports unconfirmed acknowledgement (96.424991ms)
+✔ cancel-during-write: exact signed bytes stay durable and result reports unconfirmed acknowledgement (98.352318ms)
+✔ final-reject: exact signed bytes stay durable and result reports unconfirmed acknowledgement (99.21141ms)
+✔ final-lost: exact signed bytes stay durable and result reports unconfirmed acknowledgement (102.177889ms)
+✔ descriptor write never overwrites an unrelated replacement output path (111.248446ms)
+✔ existing output collision fails before any APDU without overwriting user data (4.537482ms)
+✔ symlink output collision fails before any APDU without overwriting user data (3.397298ms)
+✔ dangling-symlink output collision fails before any APDU without overwriting user data (3.341658ms)
+✔ directory output collision fails before any APDU without overwriting user data (2.589473ms)
+✔ existing intent-sidecar collision fails before any APDU without overwriting user data (3.943554ms)
+✔ symlink intent-sidecar collision fails before any APDU without overwriting user data (4.382308ms)
+✔ dangling-symlink intent-sidecar collision fails before any APDU without overwriting user data (6.043356ms)
+✔ directory intent-sidecar collision fails before any APDU without overwriting user data (4.424512ms)
+✔ control: real CLI and adapter save frozen signed bytes before final ACK (516.943419ms)
+✔ post-truncate write failure preserves immutable intent and exact stderr recovery (485.679283ms)
+✔ process interruption after real truncate retains canonical reconciliation intent (527.914872ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4467.264724
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

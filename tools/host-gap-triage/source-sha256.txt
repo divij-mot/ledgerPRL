@@ -1,0 +1,6 @@
+556ed61699371f1696c265f00356ac30447e95f84ff181ab1206765bae26893c  apps/cli/src/index.ts
+beafbe44771761502042ccc2d374285e9469e7b974a659f2dbff9037bc2c4e4b  apps/cli/README.md
+6e56ccdf8bc5885c9e24fd0c356cd3999b244039241651452ca335d74d4c8e7e  apps/cli/test/intent-durability.test.ts
+14ef67003c8bb0fc8eed008ec8427e3c5934f3ef0d7182369a8558349ac8b87f  docs/recovery.md
+eb0b81a270903e10c696af46d1584616f2aa2842168b930e67fd62d4891980cf  tools/host-gap-triage/cli-recovery-gap.test.ts
+b892abf223ae064c1ee3c4cb78a64c107b195de45b2f7ecaa92d94e8b43a3b87  tools/host-gap-triage/cli-storage-child.mts

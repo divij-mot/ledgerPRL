@@ -36,6 +36,8 @@ requires the matching ledger-bitcoin-prl app and approval in Speculos/the
  device UI. It never clicks Approve. No legacy PRL1 downgrade is attempted.
 Signing reserves the exclusive output path before any device command. If it
 fails, retain its signing-uncertain record and reconcile before trying again.
+The immutable <output.json>.intent.json sidecar preserves that intent if writing
+the signed output is interrupted. Keep both files in a trusted private directory.
 There is deliberately no broadcast command; review/export then use a trusted
 node's explicit sendrawtransaction action. Do not use development apps with funds.`;
 function integer(text: string | undefined): number {
@@ -95,8 +97,12 @@ async function reserveOutput(path: string): Promise<FileHandle> {
 }
 /** Only the descriptor created exclusively by this invocation can be updated. */
 async function writeReserved(file: FileHandle, value: unknown): Promise<void> {
-  const bytes = Buffer.from(jsonText(value));
   await file.truncate(0);
+  await writeNewReserved(file, value);
+}
+/** Write once through an exclusively created descriptor, without truncation or path replacement. */
+async function writeNewReserved(file: FileHandle, value: unknown): Promise<void> {
+  const bytes = Buffer.from(jsonText(value));
   let offset = 0;
   while (offset < bytes.length) {
     const { bytesWritten } = await file.write(
@@ -175,9 +181,12 @@ export async function main(args: string[]) {
   const cancel = () => controller.abort();
   process.once("SIGINT", cancel);
   let output: FileHandle | undefined;
+  let intent: FileHandle | undefined;
   try {
     if (operation === "account" || operation === "sign")
       output = await reserveOutput(rest[2]!);
+    if (operation === "sign")
+      intent = await reserveOutput(`${rest[2]!}.intent.json`);
     if (operation === "capabilities")
       print(await client.capabilities(controller.signal));
     else if (operation === "account") {
@@ -200,15 +209,18 @@ export async function main(args: string[]) {
       const b = await bundle(rest[0]!),
         a = accountFromJson(await json(rest[1]!));
       print(inspectBundle(b));
-      // This survives interruption. It is a conservative intent/reconciliation record,
-      // not evidence that signatures do or do not exist, and is not a wallet journal.
-      await writeReserved(output!, {
+      // The separate intent is written once and never truncated, replaced or
+      // removed. It survives a later interrupted signed-output replacement.
+      // Neither file proves signatures do or do not exist; this is not a wallet journal.
+      const uncertain = {
         kind: "pearl-cli-signing-uncertain",
         network: b.network,
         bundle: bundleToJson(b),
         warning:
           "Signing may be incomplete or may already have succeeded. Do not create a replacement payment before reconciliation.",
-      });
+      };
+      await writeNewReserved(intent!, uncertain);
+      await writeReserved(output!, uncertain);
       let savedRawTx: string | undefined;
       const result = await client.signBundle(b, a, {
         signal: controller.signal,
@@ -233,6 +245,7 @@ export async function main(args: string[]) {
         txid: result.txid,
         vsize: result.vsize,
         saved: rest[2],
+        intent: `${rest[2]!}.intent.json`,
         ...(result.completionWarning
           ? { completionWarning: result.completionWarning }
           : {}),
@@ -259,8 +272,12 @@ export async function main(args: string[]) {
     try {
       await output?.close();
     } finally {
-      process.removeListener("SIGINT", cancel);
-      await client.close().catch(() => transport.close());
+      try {
+        await intent?.close();
+      } finally {
+        process.removeListener("SIGINT", cancel);
+        await client.close().catch(() => transport.close());
+      }
     }
   }
 }

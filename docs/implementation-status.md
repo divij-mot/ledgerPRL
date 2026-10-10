@@ -1,6 +1,6 @@
 # Implementation and verification status
 
-Development checkpoint, 2026-10-09, approximately 23:56 UTC. This is conventional Ledger seed custody software, not an audited or vendor-approved release. No physical-device validation or real-funds transaction has been performed. The current device application is the [Ledger Bitcoin-based C port](../apps/ledger-bitcoin-prl/README.md); the previous Rust device application and its qualification records are historical reference only.
+Development checkpoint, 2026-10-10, approximately 00:30 UTC. This is conventional Ledger seed custody software, not an audited or vendor-approved release. No physical-device validation or real-funds transaction has been performed. The current device application is the [Ledger Bitcoin-based C port](../apps/ledger-bitcoin-prl/README.md); the previous Rust device application and its qualification records are historical reference only.
 
 ## Implemented software
 
@@ -12,6 +12,7 @@ Development checkpoint, 2026-10-09, approximately 23:56 UTC. This is conventiona
 
 ## Current C-port and website evidence
 
+- [CLI durable-recovery correction](../tools/cli-durability-review/README.md): an immutable private intent sidecar now survives interruption of the separate signed-output write. The original failure was reproduced with actual local filesystem operations and child-process termination. All 35 ordinary CLI tests and the combined 464-test host suite pass; trusted-directory and OS/storage limitations remain explicit. This adds no broadcast or software-signing path.
 - [Final combined-build browser smoke](../apps/companion/test/evidence/website-qa/astra-real-browser-combined-smoke-2026-10-09.md): direct Chrome observations on `index-d0S-5XX6.js` passed restore, all four views, disabled unverified receive controls, retained draft, Close and reload. This is normal public-fixture UI coverage, not physical signing, live discovery or crash/race qualification.
 - [Combined host checkpoint](../tools/combined-host-review/README.md): 435 workspace tests, all workspace typechecks/builds, 419 dependency-graph checks and exact third-party-notice generation passed with the final UI/discovery source hashes unchanged. The exact published combined checkpoint `766a3f7ff1d61c7ff0e60d5484ef7c4250545aad` passed [host/oracle/Rust CI](https://github.com/divij-mot/ledgerPRL/actions/runs/38006393030). These checks do not build or qualify the current C device app.
 - [Device identity/session review](../tools/device-identity-review/REPORT.md) and [independent verification](../tools/device-session-review/README.md): exact protocol/network bindings, cancellation and terminal-session behavior were tested with real host adapters and synthetic transport boundaries. Failed-session views now clear historical receive verification even when storage stalls; independently verified signed bytes and reservations are retained. Protocol claims are not firmware attestation or enforcement of a particular app release.
