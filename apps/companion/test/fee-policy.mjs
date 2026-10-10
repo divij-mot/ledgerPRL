@@ -118,7 +118,10 @@ app.auditSelection([wallet.outpoint(snapshot.coins[0])]);
 assert.match(app.auditState().hint, /154 vB/);
 assert.deepEqual(app.auditState().form, originalForm);
 listeners.get("amount:input")({ target: { value: "4.99999000" } });
-assert.match(elements.get("fee-policy").textContent, /111 vB.*1 outputs/);
+assert.match(
+  elements.get("fee-policy").textContent,
+  /111 vB.*1 input, 1 output\b/,
+);
 assert.equal(app.auditState().form.fee, "0.00001000");
 listeners.get("fee:input")({ target: { value: "0.00000100" } });
 assert.match(

@@ -1,0 +1,109 @@
+{
+  "captured_at_utc": "2026-10-10T02:47:28Z/2026-10-10T02:48:34Z",
+  "browser": "dot cloud Chrome, tab 40",
+  "url": "http://127.0.0.1:5173/",
+  "bundle": "/assets/index-e9deRFQv.js",
+  "bundle_sha256": "5497c2f43cd65ea5b39756d8e7c8cfc78939bf573aca19a85c159d3e848b79aa",
+  "data": "Existing public synthetic regtest fixture; Ledger disconnected",
+  "files": [
+    {
+      "name": "01-closed-account-viewport.png",
+      "dimensions": [
+        1180,
+        757
+      ],
+      "bytes": 85337,
+      "sha256": "f682ad5121c1f8f43056eced0cce5b4b41de693cfdc2cfc1a2c0897e83a2f5b6"
+    },
+    {
+      "name": "01-closed-account.png",
+      "dimensions": [
+        1165,
+        1467
+      ],
+      "bytes": 135559,
+      "sha256": "97c5b3a4555a94fc7f2a75bbc55adc211744c125e2a9ef93c6dd415e97077a4f"
+    },
+    {
+      "name": "02-overview-viewport.png",
+      "dimensions": [
+        1180,
+        757
+      ],
+      "bytes": 87835,
+      "sha256": "e39c6fc42555d552f9525d49192ebda8bd234bac9a35ecb79a52af5be47ba043"
+    },
+    {
+      "name": "02-overview.png",
+      "dimensions": [
+        1165,
+        1697
+      ],
+      "bytes": 187706,
+      "sha256": "ac4520a3695f70453f59a3308516bfa012c4db4e52337ef169649ccaf0842348"
+    },
+    {
+      "name": "03-receive-viewport.png",
+      "dimensions": [
+        1180,
+        757
+      ],
+      "bytes": 86278,
+      "sha256": "3262d504dcfdd3798f44a8502ff344aacb51dd915c5f2c45f65bd95f8fe54592"
+    },
+    {
+      "name": "03-receive.png",
+      "dimensions": [
+        1165,
+        919
+      ],
+      "bytes": 95694,
+      "sha256": "1a2dec35efe4db9a3c6adaebda48dc59707f2ba9e8a2d1f89773a7eda6089d60"
+    },
+    {
+      "name": "04-send-viewport.png",
+      "dimensions": [
+        1180,
+        757
+      ],
+      "bytes": 82222,
+      "sha256": "cb89db443062ac9c6663e5aa5567c9b907c429d057683fddce769f24f7516190"
+    },
+    {
+      "name": "04-send.png",
+      "dimensions": [
+        1165,
+        1123
+      ],
+      "bytes": 106655,
+      "sha256": "c4127289390c1a5bd4cc26ab2cdc3b058aa55b1c36aaeeac28e131c579b1cc02"
+    },
+    {
+      "name": "05-activity-viewport.png",
+      "dimensions": [
+        1180,
+        757
+      ],
+      "bytes": 82000,
+      "sha256": "513f20350f103ac05e2e8105cac7da7d2e1241d0845d7bdd695603694a8bb80d"
+    },
+    {
+      "name": "05-activity.png",
+      "dimensions": [
+        1180,
+        757
+      ],
+      "bytes": 82474,
+      "sha256": "ed98f634926d22b102558aefbf253058538ac7d8482d353a85d2dc30ce0a7dde"
+    },
+    {
+      "name": "06-review-existing-draft.png",
+      "dimensions": [
+        1165,
+        944
+      ],
+      "bytes": 94866,
+      "sha256": "457124fb3940fb48cf4e77918ca810fb6fa2aedfa4ff11c06b334ed85941c206"
+    }
+  ]
+}

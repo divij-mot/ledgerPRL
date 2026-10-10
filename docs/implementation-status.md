@@ -1,6 +1,6 @@
 # Implementation and verification status
 
-Development checkpoint, 2026-10-10, approximately 01:42 UTC. This is conventional Ledger seed custody software, not an audited or vendor-approved release. No physical-device validation or real-funds transaction has been performed. The current device application is the [Ledger Bitcoin-based C port](../apps/ledger-bitcoin-prl/README.md); the previous Rust device application and its qualification records are historical reference only.
+Development checkpoint, 2026-10-10, approximately 02:50 UTC. This is conventional Ledger seed custody software, not an audited or vendor-approved release. No physical-device validation or real-funds transaction has been performed. The current device application is the [Ledger Bitcoin-based C port](../apps/ledger-bitcoin-prl/README.md); the previous Rust device application and its qualification records are historical reference only.
 
 ## Implemented software
 
@@ -11,6 +11,8 @@ Development checkpoint, 2026-10-10, approximately 01:42 UTC. This is conventiona
 - Cross-language fixtures, pinned actual Pearl script-engine oracle and bounded independent software/source reviews; the optional MetaMask experiment is outside the direct website flow
 
 ## Current C-port and website evidence
+
+- [Final presentation and browser review](../tools/wallet-visual-review/QA-summary.md): font-independent navigation icons, singular-count labels and the P2TR/P2MR recipient label were corrected without changing control gates or signing logic. All 139 companion tests passed with serial concurrency, plus typecheck/build. Default-parallel local runs terminated the serving-policy test process with SIGKILL and are not claimed as passes; the underlying cause is unestablished. All six wallet views and Close/Back/reload were observed on exact bundle `index-e9deRFQv.js`. Device captures remain historical.
 
 - [Independent amount/display source review](../tools/display-boundary-review/README.md): exact grain, recipient and change bindings were traced through preparation, PSBT, host verification and native display inputs. No new material defect was established. Native high-fee warnings are more conservative than the companion banner at low values; this does not suppress a device warning. This is static review, not screen or hardware qualification.
 

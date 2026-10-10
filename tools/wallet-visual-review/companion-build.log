@@ -1,0 +1,15 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @pearl-ledger/companion@0.1.0 build
+> node --import tsx ../../node_modules/vite/bin/vite.js build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 616 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                 0.73 kB │ gzip:   0.42 kB
+dist/assets/backup-import.worker-Dtrkqa4Y.js   72.73 kB
+dist/assets/index-DK-3_Qur.css                  7.50 kB │ gzip:   2.48 kB
+dist/assets/index-e9deRFQv.js                 476.35 kB │ gzip: 144.56 kB
+✓ built in 2.14s
