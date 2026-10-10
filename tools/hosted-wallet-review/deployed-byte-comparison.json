@@ -1,10 +1,10 @@
 {
   "origin": "https://pearl-ledger-wallet.vercel.app",
-  "checkedAt": "2026-10-10T22:15:31.710Z",
+  "checkedAt": "2026-10-10T23:04:33.246Z",
   "outcome": "passed",
   "comparedFiles": 15,
   "newRequests": 13,
-  "totalMatchedBytes": 2222424,
+  "totalMatchedBytes": 2227051,
   "results": [
     {
       "file": "assets/backup-import.worker-Dtrkqa4Y.js",
@@ -17,9 +17,9 @@
       "contentEncoding": "br"
     },
     {
-      "file": "assets/index-B33raa-Q.js",
-      "target": "/assets/index-B33raa-Q.js",
-      "sha256": "ad842fc64e2c1c5306db166c542da0226f2b1427988c8b424ec17e76ac66b109",
+      "file": "assets/index-ByVGc--d.js",
+      "target": "/assets/index-ByVGc--d.js",
+      "sha256": "2a9f3d2ad2069d9d0f6678d9788d273da097b117929b2ad3222a00968fac843c",
       "bytes": 269846,
       "match": true,
       "reusedImmediateLiveCheck": false,
@@ -77,9 +77,9 @@
       "contentEncoding": "br"
     },
     {
-      "file": "assets/live-BoDMryH_.js",
-      "target": "/assets/live-BoDMryH_.js",
-      "sha256": "c783dab01c7f3cf57e36ee8de829578fa931999aa5ac20d3bded6448dd02e239",
+      "file": "assets/live-VcgfFvtq.js",
+      "target": "/assets/live-VcgfFvtq.js",
+      "sha256": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
       "bytes": 445670,
       "match": true,
       "reusedImmediateLiveCheck": false,
@@ -87,10 +87,10 @@
       "contentEncoding": "br"
     },
     {
-      "file": "assets/main-CxG4wHQb.js",
-      "target": "/assets/main-CxG4wHQb.js",
-      "sha256": "357e1ab77b78203b3de68d6ab9c48f9fc971819d0f36bb667b41dbe3cf5f0c11",
-      "bytes": 489180,
+      "file": "assets/main-BmAxsC9p.js",
+      "target": "/assets/main-BmAxsC9p.js",
+      "sha256": "0aa70488611f5c9a84efe80ccf9e5c5e6203ecb1870d79819db5f8c894bd0053",
+      "bytes": 493807,
       "match": true,
       "reusedImmediateLiveCheck": false,
       "cacheControl": "public, max-age=31536000, immutable",
@@ -117,9 +117,9 @@
       "contentEncoding": "br"
     },
     {
-      "file": "assets/qr-reader-XSzcwxEi.js",
-      "target": "/assets/qr-reader-XSzcwxEi.js",
-      "sha256": "8dfa5cd3679b2c8fa2f41a098b1e409053e7870f6a37ddf504b9152f714c582b",
+      "file": "assets/qr-reader-BRNRvs-M.js",
+      "target": "/assets/qr-reader-BRNRvs-M.js",
+      "sha256": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
       "bytes": 3269,
       "match": true,
       "reusedImmediateLiveCheck": false,
@@ -129,7 +129,7 @@
     {
       "file": "index.html",
       "target": "/",
-      "sha256": "849bb76a253a70ea52c2dbebf714f9de3a3d8904025ed38728c623f75e362f72",
+      "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
       "bytes": 813,
       "match": true,
       "reusedImmediateLiveCheck": false,
@@ -139,7 +139,7 @@
     {
       "file": "live.html",
       "target": "/live.html",
-      "sha256": "628eed4df079af5327c1bf813447244084889104ad6039070a9687a92b8724ef",
+      "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
       "bytes": 885,
       "match": true,
       "reusedImmediateLiveCheck": true,
@@ -154,5 +154,13 @@
       "reusedImmediateLiveCheck": true,
       "cacheControl": "no-store"
     }
-  ]
+  ],
+  "deployment": {
+    "origin": "https://pearl-ledger-wallet.vercel.app",
+    "id": "dpl_FDmzyLPoeqC3DyQYyucY1bs72fUp",
+    "sourceCommit": "fca78a828362ea2d65cfe10872ca57626c52b866",
+    "checksPassed": 17,
+    "matchingPublicFiles": 15,
+    "matchingPublicBytes": 2227051
+  }
 }

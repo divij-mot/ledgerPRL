@@ -1,0 +1,10 @@
+✔ interrupted signing recovers only the identical payment without rollback or replacement (5571.853833ms)
+✔ independent interrupted-signing review probes remain reproducible (5251.646959ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10946.628875

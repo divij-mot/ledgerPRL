@@ -12,7 +12,7 @@ This supersedes the narrower intermediate bare-denial classifier. Reservations r
 
 ## Executed independent UI regressions
 
-**23/23 passed** in `explicit-rejection-ui.test.ts`:
+**24/24 passed** in `explicit-rejection-ui.test.ts`:
 
 - Initial review denial, generic transport loss, failure before the first signature, one valid partial signature followed by failure, and cancellation after a valid partial: the current initial record clears, no broadcast occurs, high-water marks remain, and reload does not recreate the cleared attempt.
 - Recovery denial and partial/cancelled recovery retain every prior reservation and the historical signing ambiguity.
@@ -38,4 +38,4 @@ Evidence: `explicit-rejection-ui.txt`, `explicit-rejection-wrapper.txt`, `explic
 
 ## Portfolio presentation follow-up
 
-Two focused actual-main cases passed after the portfolio headline changed from spendable balance to total unspent owned balance. An unsigned reservation leaves the headline unchanged and does not display the full reserved input as a network-pending payment. A source-reported unconfirmed own-change fixture appears in total Balance, while the real wallet preparation policy rejects it as unconfirmed and Send availability stays zero. The latter fixture is synthetic and unrelated to the owner’s values. No optimistic amount subtraction or fabricated change is used. The test file now contains 24 cases; its full rerun is deferred until the pending-monitor source freeze, as requested. Earlier 23-case and 15-history results retain their prior source scope.
+Two focused actual-main cases passed after the portfolio headline changed from spendable balance to total unspent owned balance. An unsigned reservation leaves the headline unchanged and does not display the full reserved input as a network-pending payment. A source-reported unconfirmed own-change fixture appears in total Balance, while the real wallet preparation policy rejects it as unconfirmed and Send availability stays zero. The latter fixture is synthetic and unrelated to the owner’s values. No optimistic amount subtraction or fabricated change is used. The final frozen-source run passed all 24 cases and the normal wrapper. The 15 composed histories also passed with before/after/current production hashes matching. Two legacy wrappers were updated only for the ordering in which an initial attempt clears before recovery has atomically claimed it: they now require zero stale recovery APDUs and no resurrection. All 18 and 19 underlying probes passed, preserving the already-claimed recovery and exact complete-byte assertions.

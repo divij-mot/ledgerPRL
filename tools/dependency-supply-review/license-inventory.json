@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "sourceHead": "e6b0ff154faf2dc177457400baeb38005b0e12a7",
+  "sourceHead": "fca78a828362ea2d65cfe10872ca57626c52b866",
   "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
   "scope": "Actual Rollup entry/shared-chunk and worker graph plus watched CSS/preset build inputs, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
   "bundles": [
@@ -123,19 +123,19 @@
       ]
     },
     {
-      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
+      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
       "type": "asset",
-      "bytes": 95652,
-      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
+      "bytes": 95224,
+      "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
       "components": [
         "font:Inter:LedgerWallet-4.23.0"
       ]
     },
     {
-      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
       "type": "asset",
-      "bytes": 95224,
-      "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
+      "bytes": 95652,
+      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
       "components": [
         "font:Inter:LedgerWallet-4.23.0"
       ]

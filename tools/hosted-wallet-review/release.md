@@ -1,40 +1,36 @@
-# Hosted release checkpoint — 10 October 2026
-
-Production is live on Vercel Hobby:
+# Production release — 10 October 2026
 
 - [Desktop WebHID wallet](https://pearl-ledger-wallet.vercel.app/)
 - [Ledger Discover entry](https://pearl-ledger-wallet.vercel.app/live.html)
-- Source commit: [`e6b0ff154faf2dc177457400baeb38005b0e12a7`](https://github.com/divij-mot/ledgerPRL/commit/e6b0ff154faf2dc177457400baeb38005b0e12a7)
-- Deployment: `dpl_7YzB4AnkdoW77CRSNNoXfiFBUDw2`, production READY, as confirmed by the parent.
+- Source: [`fca78a828362ea2d65cfe10872ca57626c52b866`](https://github.com/divij-mot/ledgerPRL/commit/fca78a828362ea2d65cfe10872ca57626c52b866)
+- Vercel production: `dpl_FDmzyLPoeqC3DyQYyucY1bs72fUp`, confirmed live on the canonical Hobby-project origin.
+- CI is tracked separately in [run 38093601532](https://github.com/divij-mot/ledgerPRL/actions/runs/38093601532); this document does not assert its completion state.
 
-## Verified release evidence
+## What shipped
 
-The final local `npm run check` passed **568/568** checks, typechecks and production builds. Release `e6b0ff1` [CI run 38090567445](https://github.com/divij-mot/ledgerPRL/actions/runs/38090567445) passed all four jobs: host, Pearl oracle, Rust core and native local-light-client; the parent’s completed watch returned exit 0. Later source changes require separate CI.
+The same wallet runs locally through `python3 scripts/run-local.py` with native Pearl SPV, or hosted through the stateless public-indexer adapter. The launcher opens `/` for desktop WebHID; Discover uses `/live.html` and needs no running Mac.
 
-The independent deployment reviewer ran **17/17 passing live checks** against this production origin: Discover page, security/cache headers, real anonymous status request, fixed-route/origin/consent validation, oversized/compressed-body rejection, and 404 responses for native/private/local-only paths. A consent-false broadcast request was rejected before submission; no valid broadcast payload, wallet address or private account data was used. [Results](preview-results.json), [review](deployment.md).
+The update ships total-unspent **Balance** in Portfolio, separate stricter Send availability, one hosted **Sync** action, fresh manual payment-status discovery and a bounded visible/idle pending-transaction monitor. No optimistic balance subtraction was added. A current initial signing attempt clears only before adapter signing is invoked or after engine unwind without a complete verified app result, with atomic ownership checks. Complete signed results, historical/recovery uncertainty and concurrent changes remain protected. The older interrupted user record was not automatically changed.
 
-All **15 public files**, totaling **2,222,424 bytes**, matched the reviewed prebuilt SHA-256 values. Two immediately preceding responses were reused; 13 additional reads completed the comparison. Private server-function identity is bound through the reviewed prebuilt artifacts and parent-owned prebuilt deployment, not by downloading function code from the public site. [Byte comparison](deployed-byte-comparison.json), [prebuilt validation](prebuilt-validation.json).
+## Verification
 
-The parent’s error-level log query for this exact deployment over the preceding hour returned zero records; this is a bounded log observation, not an uptime guarantee.
+- Final local `npm run check`: **587/587 passed**, with typechecks and production builds, as reported by the parent.
+- Live deployment: **17/17 boundary checks passed**. These cover the Discover page, CSP/cache/security headers, actual anonymous public status, rejected origins/unsupported requests, body bounds and 404s for native/private/local-only paths. A consent-false broadcast request was rejected before submission; no valid broadcast payload or personal account data was used. [Results](preview-results.json), [deployment review](deployment.md).
+- All **15 public files**, totaling **2,227,051 bytes**, matched the reviewed prebuilt SHA-256 values. Private function identity is bound through the reviewed prebuilt artifacts and parent-owned prebuilt deployment, not a public function-code download. [Byte comparison](deployed-byte-comparison.json), [prebuilt validation](prebuilt-validation.json).
+- The parent reloaded the production Chrome page and observed the corrected Balance headline, single Sync action and available network services. The sender wallet's freshly synced view showed the outgoing payment as confirmed. This is a sender/public-source observation, **not independent observation in the recipient wallet**. No amount, address, recipient or transaction ID is retained here.
+- Independent result-policy UI: **24/24 cases passed**, including total-versus-available balance, initial cleanup, recovery/concurrency retention, complete-result preservation and the pre-adapter gap. The **15/15** composed payment histories passed with production source unchanged. The two adapted legacy wrappers passed all **18 and 19** underlying probes. [Review](explicit-rejection-review.md).
+- Adapter result classification and pending-state refresh have separate [adapter](signing-result-adapter-review.md) and [pending monitor](../pending-status-review/README.md) reviews. Earlier **16/16** C-firmware → real Pearl regtest cases retain their exact source/node/firmware identities in [simulator evidence](simulator/README.md); they are not historical Rust results.
 
-The parent separately observed Chrome loading the production wallet with its network-service indicator available. That is a browser/UI observation, not a physical Ledger signing test.
+## Discover, hardware and limits
 
-The [current C-signer/regtest roundtrip](simulator/README.md) passed **16/16** cases, including real node acceptance and mined confirmation for P2TR/P2MR recipients using only the public fixture seed. The [final fee/QR/cache review](README.md) passed 46 focused cases. These retain their own source/artifact identities and scopes.
+The [hosted manifest](../../apps/companion/ledger-live.hosted.manifest.json) passed Ledger Wallet 4.23.0 schema checks and was imported with owner approval into desktop Ledger Wallet. Its exact production page opened at Add account. Deployment does not create a public Discover listing. [Loading instructions](../../docs/live-app.md).
 
-## Discover loading and remaining limits
+Pearl 0.1.0 was installed with owner approval on the recorded Nano S Plus OS 1.7.0, and account/Receive verification passed. At the owner's request, Pearl Dev was later removed; Pearl's installed-app hash remained `22c0f2fd025c73c9713ea39b3ecf525b4e617d0ff74a9213d51800543ecbbda7`. These observations do not qualify all hardware models or failure/recovery conditions.
 
-Use [apps/companion/ledger-live.hosted.manifest.json](../../apps/companion/ledger-live.hosted.manifest.json), which names the exact production `/live.html` origin, desktop/Android platforms and four Wallet API permissions. It passed the installed Ledger Wallet 4.23.0 schema checks. **Owner-approved desktop import subsequently succeeded**, and the exact production page opened at Add account. The schema record predates that import. No Android import or hosted outgoing-payment qualification is claimed. Deployment does not create a public Discover listing. The localhost developer manifest remains separate. [Manifest validation](manifest-validation.json), [loading instructions](../../docs/live-app.md).
+Native Android SDK testing was declined. Android evidence remains source, simulated Wallet API and responsive-browser checks; stock Android WebView, permissions and device transport are not qualified. Hosted indexer trust remains distinct from local native SPV. There is no application server database/account profile, but infrastructure metadata, provider availability, request budgets and costs still apply. The [Wallet API core attribution gap](../dependency-supply-review/core-attribution-recheck.json) remains unresolved; no blanket licensing/security audit or Ledger approval is implied.
 
-Native Android testing was explicitly declined; no stock Android WebView, phone camera/permissions, USB/BLE or hardware-flow qualification is claimed. The separately recorded owner-approved Pearl 0.1.0 Nano S Plus installation and account/Receive checks do not establish independently observed destination confirmation. The owner later reported submission shown accepted with pending own change; that bounded observation is recorded below.
+## Previous baseline
 
-Hosted functions retain no application account database/server wallet profiles; the client stores its display cache and recovery journal. Hosted indexer trust differs from local native SPV. Infrastructure metadata, request budgets, provider availability and cost limits remain as described in the [deployment review](deployment.md). The [Wallet API core attribution gap](../dependency-supply-review/core-attribution-recheck.json) remains unresolved; no blanket licensing/security audit or Ledger approval is implied.
+The earlier `e6b0ff154faf2dc177457400baeb38005b0e12a7` deployment was `dpl_7YzB4AnkdoW77CRSNNoXfiFBUDw2`. It had 568 passing local checks, 17 passing live checks and 15 matching public files totaling 2,222,424 bytes. Its [CI run 38090567445](https://github.com/divij-mot/ledgerPRL/actions/runs/38090567445) passed all four jobs. Those are historical baseline results, not the counts or CI status of this update.
 
-This documentation update changes no production code or shipped notices. No personal addresses, balances, transaction IDs or wallet files are retained in this release record.
-
-## Later owner-approved observations and source follow-up
-
-The parent imported the hosted manifest into desktop Ledger Wallet and opened the exact production `/live.html` URL at its Add account screen. This is an actual desktop manifest/load observation; no hosted outgoing transaction or native Android check is implied. At the owner’s explicit request, Pearl Dev was removed from the device. App enumeration confirmed its removal while Pearl retained installed-app hash `22c0f2fd025c73c9713ea39b3ecf525b4e617d0ff74a9213d51800543ecbbda7`.
-
-The latest source follow-up simplifies hosted discovery to one **Sync** action and adopts the reviewed current-initial-attempt no-result cleanup policy. Those source changes require their own subsequent release/deployment record; they are not retroactively attributed to the `e6b0ff1` deployment above. The older interrupted user record was preserved, with no automated migration or deletion. Outgoing mainnet payment qualification remains open.
-
-The owner subsequently reported an outgoing mainnet submission, and UI/public-source evidence showed acceptance with pending own change. Recipient confirmation is not independently established. No wallet amount, address, recipient or transaction ID is retained in this report. A later deployment for the balance/result-policy/pending-monitor source changes will be recorded only after confirmation; it is not implied by the earlier release above.
+This final documentation pass changes no production code or notices and contains no personal wallet values, transaction identifiers or wallet files.

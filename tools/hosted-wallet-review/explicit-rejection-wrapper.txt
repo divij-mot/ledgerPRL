@@ -1,4 +1,4 @@
-✔ initial no-result cleanup preserves complete transactions and prior uncertainty (6743.654084ms)
+✔ initial no-result cleanup preserves complete transactions and prior uncertainty (7871.243375ms)
 ℹ tests 1
 ℹ suites 0
 ℹ pass 1
@@ -6,4 +6,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 6858.409417
+ℹ duration_ms 8024.251667

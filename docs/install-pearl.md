@@ -55,8 +55,8 @@ and compare a receiving address before the first outgoing payment. The previous
 watch-only account, local chain cache and pending-payment journal remain local;
 installing this image does not import or replace the Ledger seed.
 
-Complete the small, owner-approved send and confirmation sequence in
+The owner’s send and the sender-view confirmation observation are documented in
 [mainnet testing](mainnet-testing.md). The current C firmware’s [real regtest roundtrip](../tools/hosted-wallet-review/simulator/README.md)
 passed signing, node acceptance and mined confirmation. Those public-fixture
-results and observed mainnet incoming payments do not establish the final
-physical outgoing mainnet step.
+results retain their own scope. The later confirmed sender-wallet entry does
+not establish independent recipient-wallet observation or broad hardware qualification.

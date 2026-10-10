@@ -8,7 +8,7 @@ The in-memory production build includes both `index.html` and `live.html`, their
 
 - 762 structural/build checks pass.
 - 346 official-registry lock records have SHA-512 integrity fields; 250 installed versions match the lock. The remaining 96 are optional platform packages.
-- 773 main/shared modules, 27 worker modules and 50 CSS inputs produce a union of 824 module/input paths.
+- 774 main/shared modules, 27 worker modules and 50 CSS inputs produce a union of 825 module/input paths.
 - Notices cover 49 npm package/version instances (48 distinct names), Vite/CommonJS runtime helpers, and six adapted Ledger Bitcoin host modules, nine adapted Ledger Wallet UI/QR views/components plus their glue/styles, and the three unmodified Inter font assets.
 - The graph excludes tests, fixtures, CLI, MetaMask, private-node/server modules and the historical SDK device implementation. Known public test-seed and RPC configuration markers are absent from generated code. These bounded checks are not universal secret detection.
 - All direct dependency versions are exact and match lock metadata. Existing CI uses `npm ci --ignore-scripts`, complete action commit pins and read-only contents permissions.

@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "checkpoint": "completed production HTTPS and deployed-public-byte verification",
-  "timestampUtc": "2026-10-10T22:10:42.838660+00:00",
+  "checkpoint": "fix release: completed production HTTPS and deployed-public-byte verification",
+  "timestampUtc": "2026-10-10T23:05:04.876746+00:00",
   "sourceSha256": {
     "vercel.json": "12675dc9e81c8503423b2fc0ac7974f4c94e4c2dab5904b6c9e5581421eb3c4a",
     ".vercelignore": "05018d523f78bc683dc6edaa37181cdd3803ff9bd90bf246a9bf751f400eb407",
@@ -14,7 +14,7 @@
     "apps/companion/src/operation.ts": "196935c03ed04c84f1a3e6ca2ef7d4a604c5da0cfdd0e772bf848d247005bbdb",
     "apps/companion/src/blockbook-source.ts": "f646e176144a0eee45d334e606148d029c4f70d577076c2f93e83764a356506a",
     "apps/companion/src/public-source.ts": "cd54d95cb849ce356223211bbbee20a23ef1a232cb3d1ab5f48b07ae9fc3ec84",
-    "apps/companion/src/main.ts": "ce355e3e006dd3ba12a5dfead17ba701e103ca248728497aee55589040550da2",
+    "apps/companion/src/main.ts": "971d2e33c75a2f44d56515c65d6ef5ad2670cfb73789cdd67dcb923d3804ad9f",
     "apps/companion/src/qr-reader.ts": "e7ea26c85f3a8def3090a2394f25aed0ae83e4ae57bb3ed466e12acfc3531781",
     "apps/companion/src/account-cache.ts": "179cc1b7510557d7d0142c8de959d0e3302928687d8faa2ef92877e9232b4fda",
     "apps/companion/src/fee-quotes.ts": "5f87154c890555c62fb79796415fdce8f721240f45d28ccd0590adbd77eb2e22",
@@ -32,7 +32,8 @@
     "apps/companion/vendor/ledger-live-4.23.0/provenance.json": "bb677aab0f855283c37a895c8408cae3f9b848e398c4a1039e6589903476f040",
     "apps/companion/package.json": "e6891d8708fb099f1d5f0e24b0fce6c7a462369c7d22d58d11650f5bd98551d4",
     "package.json": "377ca4d89d4d843e1d662533e3d2696bac29a0f35f3ff5f074cf18f425cfbb69",
-    "package-lock.json": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974"
+    "package-lock.json": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
+    "apps/companion/src/pending-monitor.ts": "aa90b68a3f63a032f3b5c5436fc290159f16163d9d99373f98e64bd9f6b5df47"
   },
   "evidenceSha256": {
     "deployment.test.ts": "a3b64f54e4f5c6ef5ca1ea274aff97ec014dab5d88e9e01d66062fc826610e27",
@@ -43,21 +44,29 @@
     "qr-browser-result.json": "c3055187c83bc9de540cc65088badb7445fbf6ca9210022d53e45a06a8aa0c9d",
     "manifest-validation.json": "09cfbda124531204f476983c0999943929606cee54fe9755c262d24a1e8e9741",
     "verify-prebuilt.mjs": "b7809fe155722711ca6ca6c7cede8c34281a0fd13e846601c9f0449637befcb2",
-    "prebuilt-validation.json": "5d4d615866704f15932523d320b3724fc98131fb4cbd9282cedd8d01d8818d37",
-    "prebuilt-validation.txt": "3ccf8c05c97c43ca8e6cee465edf13337f9d3b6266e87701e0d7b9b35c53abef",
+    "prebuilt-validation.json": "d88a41e5659c6066542c002e2dc31856d10c3fa66140007ceaaec1d133d1530b",
     "preview-check.mjs": "49003e66d35fbcf17a352877fa9ea290c09fc4f7f38baf3c05cfcb28f0b17c6b",
-    "preview-results.json": "44c74f6fa2b1c7dd64c488365bf353f0fe9a1ec2ab3125c4e82d83881d7a6e82",
+    "preview-results.json": "db5d36d12b70b2c0d01151031913700148c29ff41cd3178506e6406756ec6eab",
     "preview-check.txt": "b70da69de575345eff674805bd26a475292092807c409644ba2deaebd881c0e3",
     "compare-deployed.mjs": "c14237b3df926a651fe0e1ed2207c28feb7d53afe33e0669753a2fdb99589aec",
-    "deployed-byte-comparison.json": "815d8b86aefd50fc96b9d00fdcc5858ea9bdcd2bb0952b68a44273d94291dab8",
-    "deployed-byte-comparison.txt": "cc9d50655ca9b3c6a27357a5113d969ac235aa0d28a9ff119aa4373830df9106",
-    "deployment.md": "3c80a9feb92e70d3f10da9f0e44dfdd980ea8767cd2393548afceb6639cc5591"
+    "deployed-byte-comparison.json": "5e59e7a125cc913119265fd1abe02346fe375c7e2373841c1a12af645f840c59",
+    "deployed-byte-comparison.txt": "be698b8a4df5442ed68fa5f2debae1323ecdd11239497205c32995c978248a6b",
+    "deployment.md": "10eabd608224ef500bed7bb00545911ac45f0bd5a7dedbb6a1e5f9d8b7c72641",
+    "prebuilt-check.txt": "dfaa156c291b3da5927766f1f64a473e779fbc07c9d60be16efa73ad522a2927"
   },
   "localManifestUnchanged": true,
   "applicationDatabase": false,
   "nativeAndroidQualification": false,
-  "verifiedAtUtc": "2026-10-10T22:16:49.128361+00:00",
+  "verifiedAtUtc": "2026-10-10T23:05:04.876746+00:00",
   "deployment": {
+    "origin": "https://pearl-ledger-wallet.vercel.app",
+    "id": "dpl_FDmzyLPoeqC3DyQYyucY1bs72fUp",
+    "sourceCommit": "fca78a828362ea2d65cfe10872ca57626c52b866",
+    "checksPassed": 17,
+    "matchingPublicFiles": 15,
+    "matchingPublicBytes": 2227051
+  },
+  "priorDeployment": {
     "origin": "https://pearl-ledger-wallet.vercel.app",
     "id": "dpl_7YzB4AnkdoW77CRSNNoXfiFBUDw2",
     "sourceCommit": "e6b0ff154faf2dc177457400baeb38005b0e12a7",

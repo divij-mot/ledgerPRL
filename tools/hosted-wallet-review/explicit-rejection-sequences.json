@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-10-10T22:49:08.321Z",
-  "finishedAt": "2026-10-10T22:49:46.649Z",
+  "startedAt": "2026-10-10T22:56:46.186Z",
+  "finishedAt": "2026-10-10T22:57:33.733Z",
   "node": "v24.19.0",
   "sourceUnchanged": true,
   "sourceHashes": {
@@ -29,7 +29,7 @@
     "packages/bitcoin-prl-adapter/src/upstream/merkleMap.ts": "d6c02c5820d7e4b4650ce35a4b84e59ff86b5a33c2ccb7529ffa3739f130d969",
     "packages/bitcoin-prl-adapter/src/upstream/policy.ts": "894a7e1b8b0822f45da6233caff5c2b01cfd9d029a21d4e10e1e57c50dba46eb",
     "packages/bitcoin-prl-adapter/src/upstream/varint.ts": "ad1c86d8591caa1ac1321b14765ac006ea997c8e69b2596ab25244fe82b8c112",
-    "apps/companion/src/main.ts": "d9cc590aae7ee4a8a4580ac930639bfd0d66c5d724545e08c1ebd701f50969e4",
+    "apps/companion/src/main.ts": "971d2e33c75a2f44d56515c65d6ef5ad2670cfb73789cdd67dcb923d3804ad9f",
     "apps/companion/src/signed-recovery.ts": "be11a29f37f50a953ce9f94b1fd9520886ea7444b54d7826f68d5588ef47af4c",
     "apps/companion/src/storage.ts": "fa43760192f8b77457674d947cdaf8162ef8adb4e126ec1d7cfa3197e1c684d4",
     "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
@@ -45,7 +45,7 @@
     {
       "name": "receive rejection -> reload -> consecutive issuance -> prepare/discard preserves both high-water marks",
       "outcome": "pass",
-      "durationMs": 489,
+      "durationMs": 1387,
       "requests": 0,
       "broadcasts": 0,
       "deviceSessions": 1,
@@ -54,7 +54,7 @@
     {
       "name": "review-rejected -> initial no-result release -> historical recovery -> original bytes -> retry/archive",
       "outcome": "pass",
-      "durationMs": 2609,
+      "durationMs": 7723,
       "requests": 16,
       "broadcasts": 9,
       "deviceSessions": 3,
@@ -63,7 +63,7 @@
     {
       "name": "review-rejected -> initial no-result release -> historical recovery -> alternate bytes -> retry/archive",
       "outcome": "pass",
-      "durationMs": 2687,
+      "durationMs": 4250,
       "requests": 16,
       "broadcasts": 9,
       "deviceSessions": 3,
@@ -72,7 +72,7 @@
     {
       "name": "before-first-yield -> initial no-result release -> historical recovery -> original bytes -> retry/archive",
       "outcome": "pass",
-      "durationMs": 2881,
+      "durationMs": 3140,
       "requests": 16,
       "broadcasts": 9,
       "deviceSessions": 3,
@@ -81,7 +81,7 @@
     {
       "name": "before-first-yield -> initial no-result release -> historical recovery -> alternate bytes -> retry/archive",
       "outcome": "pass",
-      "durationMs": 2784,
+      "durationMs": 3214,
       "requests": 16,
       "broadcasts": 9,
       "deviceSessions": 3,
@@ -90,7 +90,7 @@
     {
       "name": "after-first-yield -> initial no-result release -> historical recovery -> original bytes -> retry/archive",
       "outcome": "pass",
-      "durationMs": 3040,
+      "durationMs": 3248,
       "requests": 16,
       "broadcasts": 9,
       "deviceSessions": 3,
@@ -99,7 +99,7 @@
     {
       "name": "after-first-yield -> initial no-result release -> historical recovery -> alternate bytes -> retry/archive",
       "outcome": "pass",
-      "durationMs": 3149,
+      "durationMs": 3268,
       "requests": 16,
       "broadcasts": 9,
       "deviceSessions": 3,
@@ -108,7 +108,7 @@
     {
       "name": "cancel-after-first-yield -> initial no-result release -> historical recovery -> original bytes -> retry/archive",
       "outcome": "pass",
-      "durationMs": 3221,
+      "durationMs": 3651,
       "requests": 16,
       "broadcasts": 9,
       "deviceSessions": 3,
@@ -117,7 +117,7 @@
     {
       "name": "cancel-after-first-yield -> initial no-result release -> historical recovery -> alternate bytes -> retry/archive",
       "outcome": "pass",
-      "durationMs": 3449,
+      "durationMs": 3753,
       "requests": 16,
       "broadcasts": 9,
       "deviceSessions": 3,
@@ -126,7 +126,7 @@
     {
       "name": "ack-lost -> original signed bytes -> timeout/retry -> reload -> archive/reorg",
       "outcome": "pass",
-      "durationMs": 2638,
+      "durationMs": 2658,
       "requests": 14,
       "broadcasts": 9,
       "deviceSessions": 1,
@@ -135,7 +135,7 @@
     {
       "name": "ack-lost -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg",
       "outcome": "pass",
-      "durationMs": 2635,
+      "durationMs": 2585,
       "requests": 14,
       "broadcasts": 9,
       "deviceSessions": 1,
@@ -144,7 +144,7 @@
     {
       "name": "storage-failed -> original signed bytes -> timeout/retry -> reload -> archive/reorg",
       "outcome": "pass",
-      "durationMs": 2277,
+      "durationMs": 2287,
       "requests": 14,
       "broadcasts": 9,
       "deviceSessions": 1,
@@ -153,7 +153,7 @@
     {
       "name": "storage-failed -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg",
       "outcome": "pass",
-      "durationMs": 2001,
+      "durationMs": 1996,
       "requests": 14,
       "broadcasts": 9,
       "deviceSessions": 1,
@@ -171,7 +171,7 @@
     {
       "name": "ok -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg",
       "outcome": "pass",
-      "durationMs": 2263,
+      "durationMs": 2107,
       "requests": 14,
       "broadcasts": 9,
       "deviceSessions": 1,

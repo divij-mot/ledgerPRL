@@ -1,6 +1,6 @@
 {
   "origin": "https://pearl-ledger-wallet.vercel.app",
-  "checkedAt": "2026-10-10T22:14:45.036Z",
+  "checkedAt": "2026-10-10T23:04:21.184Z",
   "outcome": "passed",
   "realBroadcasts": 0,
   "walletAddresses": 0,
@@ -10,7 +10,7 @@
       "target": "/live.html",
       "status": 200,
       "bytes": 885,
-      "bodySha256": "628eed4df079af5327c1bf813447244084889104ad6039070a9687a92b8724ef",
+      "bodySha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
       "headers": {
         "content-type": "text/html; charset=utf-8",
         "cache-control": "no-store",
@@ -23,7 +23,7 @@
     },
     {
       "label": "Immutable script cache",
-      "target": "/assets/live-BoDMryH_.js",
+      "target": "/assets/live-VcgfFvtq.js",
       "status": 200,
       "bytes": 0,
       "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -58,7 +58,7 @@
       "target": "/.env",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "9f94c4daee47a8b2f73340c5ac54c8c8d62c372fe2cb7dec8dea98fe10f15485",
+      "bodySha256": "838e9773345475feb52f00ad863bf98912afff4498b94378937f154368cbe3da",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -74,7 +74,7 @@
       "target": "/.local-light/.owner.json",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "e5b6be23dd03f9bf647bc743943648df2d88029954e0e30a40ca0c3925c68646",
+      "bodySha256": "d87eca8b0aa862dc36b8d55ddd35ef02a25eeaaf70da69388d6c2f32f5ceaa6e",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -90,7 +90,7 @@
       "target": "/apps/light-client/bin/pearl-watch",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "0fe423e7a6f71599f7b98328d63549b9aa6c4854178b1ca7d0e2118bfc170abc",
+      "bodySha256": "1389a2edb652e0cc2211faf9bfe346e7c4082bc3e755070099f04b45d46bc4b0",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -106,7 +106,7 @@
       "target": "/api/local/status",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "559b3955f5f75e1fd7f8886d1460a24129e82c1f30fc0001884b09ca87d6715f",
+      "bodySha256": "4e8d727738bf7f71f75454ba45d7b2dc20fb1122ce253a894fb30e914138aadd",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -122,7 +122,7 @@
       "target": "/api/check",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "0455397f7a0a30ca92084be1e27c50b300a2f0f93e22c3d3d344cad2d3cf021c",
+      "bodySha256": "0be1defea28fc9ca63db86594e80db4dad1e417e0caea18e3d1196fdf6041b32",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -153,8 +153,8 @@
       "label": "Public chain status via raw adapter",
       "target": "/api/indexer/read",
       "status": 200,
-      "bytes": 780,
-      "bodySha256": "13392260d64726817e01ec45fc290a0df727d5f01ed806eef0f4e9b86713026d",
+      "bytes": 779,
+      "bodySha256": "beec14543a55fce4a3a7841b01a51dd765e3292880f8b91aa1a351180e2868a3",
       "headers": {
         "content-type": "application/json",
         "cache-control": "no-store",
@@ -277,5 +277,13 @@
         "x-content-type-options": "nosniff"
       }
     }
-  ]
+  ],
+  "deployment": {
+    "origin": "https://pearl-ledger-wallet.vercel.app",
+    "id": "dpl_FDmzyLPoeqC3DyQYyucY1bs72fUp",
+    "sourceCommit": "fca78a828362ea2d65cfe10872ca57626c52b866",
+    "checksPassed": 17,
+    "matchingPublicFiles": 15,
+    "matchingPublicBytes": 2227051
+  }
 }
