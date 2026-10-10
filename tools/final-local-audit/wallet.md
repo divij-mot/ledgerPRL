@@ -74,3 +74,7 @@ No real hardware or chain transaction was signed or submitted by this reviewer.
 ## Remaining qualification limits
 
 These finite host tests do not exhaust asynchronous interleavings or establish real IndexedDB crash durability. Mock endpoint signatures and public fixtures are not a physical Ledger trial. Installation of the final Pearl 0.1.0 device application, actual user-confirmed address/account/signing flows inside Ledger Discover, and any small mainnet send remain later physical-user work. The old installed PearlDev application does not establish compatibility with the final app identity.
+
+## CI portability follow-up
+
+Reviewed the test-only `light-runtime.test.ts` delta replacing the macOS-specific `/private/tmp` prefix with `path.join(await fs.realpath(tmpdir()), "pearl-light-runtime-test-")`. This chooses the platform temporary directory while preserving the canonical-path invariant required by the runtime ownership checks. No production code or test assertions changed. Independently reran all 15 cases on Node 24.19.0: 15 passed; Ubuntu CI remains the parent task’s next verification. The existing `wallet-runtime-portability.log` records the parent’s matching local run. Added this previously unlisted test file’s SHA-256 to the manifest; every existing reviewed hash and metadata field was preserved.

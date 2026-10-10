@@ -30,7 +30,7 @@
     "apps/companion/vendor/ledger-live-4.23.0/provenance.json": "569e9daa79f1179f60ea77e5c278dd430f206c60e1d76772d4e1cb54d4a12bea",
     "apps/companion/vendor/ledger-live-4.23.0/adaptation.patch": "92d14dec5bb0a775b811e6b2d2a3aa0e9b4509947c2152f9df5326000dcb3e89",
     "scripts/build-light-client.py": "0960ec89d7df72707c31e4784561934be80c681e378d8be9b62bc03dff408e9c",
-    "tools/final-local-audit/wallet-source-hashes.json": "33d8a1c12bfe3f93c5db356032ca8d685bcbd2ffd0f691d36d7ce6884fceb6a7",
+    "tools/final-local-audit/wallet-source-hashes.json": "20f73486ff9023a66931a36fcee8f22d112abfa3b1e5ac5fbf1d941119c18aa5",
     "tools/final-local-audit/product.md": "4b501665995470201b763319a087940f0103441e41917a4b7084a61044427031"
   }
 }

@@ -82,6 +82,7 @@
     "packages/wallet/src/recovery.ts": "ae0ec6a09963e05359ec70a744a023735c14d9dd9ed99d64004e62e6b4295fac",
     "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
     "scripts/build-light-client.py": "0960ec89d7df72707c31e4784561934be80c681e378d8be9b62bc03dff408e9c",
-    "tools/final-local-audit/wallet-switch-regression.test.ts": "eb2d2bb7d8989460a1ebfdca3a85cd16f64cf74a2764ad5a655a2918f91ae8d9"
+    "tools/final-local-audit/wallet-switch-regression.test.ts": "eb2d2bb7d8989460a1ebfdca3a85cd16f64cf74a2764ad5a655a2918f91ae8d9",
+    "apps/companion/test/light-runtime.test.ts": "49abdc7b88cbe8e522b657109b4ab8917cd279c56469531ddafdf548c1acecf4"
   }
 }

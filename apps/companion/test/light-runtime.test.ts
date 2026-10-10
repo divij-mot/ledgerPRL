@@ -6,6 +6,7 @@ import { PassThrough } from "node:stream";
 import { createHash } from "node:crypto";
 import * as fs from "node:fs/promises";
 import path from "node:path";
+import { tmpdir } from "node:os";
 import type { ChildProcess, SpawnOptions } from "node:child_process";
 import { accountToJson, NETWORKS } from "@pearl-ledger/sdk";
 import { publicAccount } from "../../../packages/wallet/test/fixtures.js";
@@ -41,7 +42,9 @@ class Child extends EventEmitter {
   }
 }
 async function fixture(t: TestContext) {
-  const folder = await fs.mkdtemp("/private/tmp/pearl-light-runtime-test-");
+  const folder = await fs.mkdtemp(
+    path.join(await fs.realpath(tmpdir()), "pearl-light-runtime-test-"),
+  );
   const root = path.join(folder, "owned"),
     executable = path.join(folder, "native-helper");
   const bytes = "test-only process boundary; never executable native code";
