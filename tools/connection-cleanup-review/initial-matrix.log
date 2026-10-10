@@ -1,0 +1,29 @@
+✔ real installed stack: chooser rejection closes DMK and destroys HID listeners (14.103221ms)
+✔ real installed stack: empty chooser selection rejects and cleans resources (3.556106ms)
+✔ real installed stack: vanished device between choice and connection rejects cleanly (3.048582ms)
+✔ real installed stack: HID open rejection removes global discovery listeners and sessions (6.550047ms)
+✔ injected defensive branch: start-sync leaves no session or global HID listeners (4.486124ms)
+✔ injected defensive branch: start-error leaves no session or global HID listeners (1.66952ms)
+✔ injected defensive branch: start-empty leaves no session or global HID listeners (2.910896ms)
+✔ injected defensive branch: stop-sync leaves no session or global HID listeners (1.701829ms)
+✔ injected defensive branch: stop-reject leaves no session or global HID listeners (1.850422ms)
+✔ injected defensive branch: connect-sync leaves no session or global HID listeners (2.072155ms)
+✔ injected defensive branch: connect-reject leaves no session or global HID listeners (1.767697ms)
+✔ injected defensive branch: connect-after-session leaves no session or global HID listeners (8.52778ms)
+✔ real installed stack: successful connection and idempotent close release sessions/listeners (4.746245ms)
+✔ cleanup throwing after actual cleanup still rejects and runs both owners' teardown (1.980548ms)
+✔ 30 repeated alternating chooser failures and successes do not accumulate global listeners or sessions (49.760345ms)
+✔ actual main.ts cancel during chooser: late completion closes session before application APDU (13.435297ms)
+✔ actual main.ts cancel during stop: late completion closes session before application APDU (10.77629ms)
+✔ actual main.ts cancel during open: late completion closes session before application APDU (4.208156ms)
+✔ actual main.ts unload during chooser: late completion closes session before application APDU (3.734454ms)
+✔ actual main.ts unload during stop: late completion closes session before application APDU (4.09757ms)
+✔ actual main.ts unload during open: late completion closes session before application APDU (4.063037ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 754.993256

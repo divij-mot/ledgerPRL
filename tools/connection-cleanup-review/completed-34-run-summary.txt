@@ -1,0 +1,27 @@
+Recovered verbatim terminal summary from the completed standalone matrix run,
+tool output chunk 018123, observed at 2026-10-10 00:34:29 UTC.
+This is a transcript excerpt, not a re-executed or regenerated test log.
+
+Command:
+node --import tsx --test tools/connection-cleanup-review/connection-cleanup.test.ts
+
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6863.253668
+
+The preceding standalone command also completed with no diagnostics:
+node node_modules/typescript/bin/tsc -p tools/connection-cleanup-review/tsconfig.json
+
+The shell tool result for this sequence had exit_code 0.
+
+Subsequent change before the denied combined rerun:
+Only the injected-fault test assertions were strengthened. Instead of accepting
+any rejection, they checked EmptyError for start-empty or exact Injected <fault>
+messages, plus expected factory/start/stop/connect counts. That interrupted
+rerun printed all 34 individual case passes but never returned a final summary.
+The actual production modules and harness were unchanged between these runs.

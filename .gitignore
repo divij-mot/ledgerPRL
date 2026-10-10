@@ -48,3 +48,4 @@ __pycache__/
 !tools/combined-host-review/*.log
 !tools/host-gap-triage/*.log
 !tools/cli-durability-review/*.log
+!tools/connection-cleanup-review/*.log
