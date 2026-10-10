@@ -10,13 +10,15 @@ Use the repository's Node requirement, then run from the repository root:
 
 ```sh
 npm ci --ignore-scripts
-npm run typecheck
-npm test
-npm run build
-npm run preview
+npm run setup:light
+npm start
 ```
 
-The preview serves the built page at `http://127.0.0.1:5188/live.html`. `npm run dev` serves the same entry for development. Keep the exact hostname and port: `localhost` is a different origin with different browser storage. The local manifest is [apps/companion/ledger-live.manifest.json](../apps/companion/ledger-live.manifest.json).
+`setup:light` requires Python 3, Go (selected version 1.26.6), Cargo/Rust 1.90.0, a C compiler and make. It downloads the checksum-pinned official Pearl source, builds its native XMSS/ZK libraries, tests and builds the watch-only helper, and records its executable/source identity under `.tools/light-client`. Repeat it after helper source changes. It does not install anything on Ledger.
+
+`npm start` builds the frontend, then serves the app and native sync middleware at `http://127.0.0.1:5188/live.html`. Keep that terminal running. The process starts the helper only when an account needs local synchronization. No full-node credentials, separate wallet window or cloud service are required. `npm run dev` and `npm run preview` are development alternatives with the same local middleware; a static file server alone is insufficient. Stop the existing server before starting another on port 5188.
+
+Keep the exact hostname and port: `localhost` is a different origin with different browser storage. The local manifest is [apps/companion/ledger-live.manifest.json](../apps/companion/ledger-live.manifest.json). The supported default is mainnet account 0. Approved/imported public account data can be remembered locally; reopening resumes sync but never restores device approval. Receive still requires a freshly checked Ledger address, and sending requires fresh device review and a separate broadcast action.
 
 Browser checks can exercise layout, recovery and the unavailable-host state before the hardware is needed. A mock Wallet API host exercises transport failures and protocol boundaries; it does not qualify Ledger Wallet or the physical signer.
 
@@ -42,7 +44,7 @@ The installed host's manifest validator requires plural `platforms`, plus `visib
 
 `wallet.capabilities` lists installed handlers, independently of the manifest's permission checks. All three device methods must be supported and explicitly permitted. The [Device module](https://developers.ledger.com/docs/ledger-live/discover/integration/wallet-api/core/modules/device) returns a Ledger transport; the Pearl adapter uses raw `exchange`, retaining status words such as continuation `0xe000`.
 
-The connection request uses an exact network-specific app name, for example `device.transport({appName: "Pearl Dev"})` for mainnet. A physical test showed that omitting the name defaults to BOLOS and sends the device back to its dashboard. Manually opening the matching installed PRL app allows the host to match its name without depending on catalog metadata for an unpublished app. The Live App defaults to mainnet; standalone development defaults are unchanged. Pearl's own protocol capability and network checks reject an incompatible response before deriving accounts or signing. These checks are not firmware attestation. Do not add `appVersionRange` to this host without rechecking: 4.23.0's handler rejects when its supplied semver range _matches_ the returned version.
+The connection request uses an exact network-specific app name, currently `device.transport({appName: "Pearl"})` for mainnet. The earlier physical evidence used **Pearl Dev**; it does not qualify the renamed **Pearl 0.1.0** binary, which must be installed only with the owner’s separate approval. A physical test showed that omitting the name defaults to BOLOS and sends the device back to its dashboard. Manually opening the matching installed PRL app allows the host to match its name without depending on catalog metadata for an unpublished app. The Live App defaults to mainnet; standalone development defaults are unchanged. Pearl's own protocol capability and network checks reject an incompatible response before deriving accounts or signing. These checks are not firmware attestation. Do not add `appVersionRange` to this host without rechecking: 4.23.0's handler rejects when its supplied semver range _matches_ the returned version.
 
 The host maintains one transport and returns ID `"1"`; its close handler operates on that shared transport. Teardown must finish before reconnecting. An unresolved open, exchange or close requires reopening the Live App rather than allowing stale cleanup to close another session. Cancelling the host request cannot promise to dismiss a physical review. A winning valid signature response still needs independent verification and durable recovery before any final protocol acknowledgement.
 
@@ -57,6 +59,8 @@ The stable `cacheBustingId: 1` selects persistent host storage `persist:pearlloc
 Read-only host inspection confirms code paths, not a successful end-to-end run. Record browser, actual host, cancellation/reconnect, storage recovery and physical-device results separately. Current-source Nano S Plus mainnet/regtest builds and limited public-seed signing/rejection replays now pass in Speculos; exact evidence and remaining device gates are in [firmware status](firmware.md) and the [native checkpoint](../tools/live-app-native-review/README.md). Those direct emulator tests do not establish the Ledger Wallet bridge or physical-device behavior. Historical binaries and Rust tests remain separate evidence. Device installation, firmware/security changes, seed reset and real-fund tests are not part of loading this local web app.
 
 ## Dependency notices
+
+The native helper adds official Pearl wallet/node, Neutrino, XMSS and ZK-proof libraries. Their upstream source notices must be preserved alongside npm/UI notices before distributing a binary. The [local light-client design](../tools/light-client-review/design.md) records the source pin and ISC/MIT/Plonky2 license boundaries; the browser-only notice inventory does not cover the linked native dependency graph. The project still has no license grant for newly authored code.
 
 The developer app serves [third-party notices](../apps/companion/public/third-party-notices.txt) for the measured browser entries, shared code, CSS and worker. Lumen's exact release-tag Apache-2.0 license and the separate Wallet API client's Apache license are retained. The CSS inventory includes the Lumen design-core preset even though it runs during the build.
 

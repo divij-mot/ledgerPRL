@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
 import { lightMiddleware } from "./src/blockbook.js";
 import { indexerProxy } from "./src/indexer-proxy.js";
+import { createLocalLightService } from "./src/local-service.js";
 const origin = "http://127.0.0.1:5188";
 const headers = {
   "Content-Security-Policy": "frame-ancestors 'none'",
@@ -14,10 +15,20 @@ export default defineConfig({
     {
       name: "pearl-public-watch-only",
       configureServer(server) {
+        const local = createLocalLightService(origin);
+        server.middlewares.use(local.middleware);
+        server.httpServer?.once("close", () => {
+          void local.stop();
+        });
         server.middlewares.use(indexerProxy(origin));
         server.middlewares.use(lightMiddleware(origin));
       },
       configurePreviewServer(server) {
+        const local = createLocalLightService(origin);
+        server.middlewares.use(local.middleware);
+        server.httpServer?.once("close", () => {
+          void local.stop();
+        });
         server.middlewares.use(indexerProxy(origin));
         server.middlewares.use(lightMiddleware(origin));
       },

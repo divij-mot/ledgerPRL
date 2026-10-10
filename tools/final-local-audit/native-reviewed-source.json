@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "audit": "independent-native-local-audit",
+  "sourceFreezeConfirmedBy": "root after final BestPeerHeight fix",
+  "recordedAtUtc": "2026-10-10T12:41:30.878999+00:00",
+  "localReviewedSourceSha256": {
+    "apps/light-client/go.mod": "c31eb750846dd531bd668d7353c4d6a93da49a0de5ca7ce7fbc44ec4878dc22c",
+    "apps/light-client/go.sum": "c1c3dd0c8e764f51b73b39b5ee55e2eabcadef87f0cc8eac6ae8b34207f4519d",
+    "apps/light-client/protocol.ts": "50e45436dc7a10c2ae520237a56b3e3aa953d523ddb052288259e5f6cd80cc0a",
+    "apps/light-client/cmd/pearl-watch/main.go": "42bd97ec6e6ced674d48c9c0ebe5b47e8ce52b3a4cab455da6cf06bb374ff279",
+    "apps/light-client/cmd/pearl-watch/main_test.go": "c57638cf38ce82948ef4c7c37737ee4a2c7b6ed1e13fc877c103599d639e4b02",
+    "apps/light-client/cmd/pearl-watch/serve_native.go": "2bdedcc8b3e44d04c09d06312e0593cd1a88e2ba4c44ab48e68223d50e5e2122",
+    "apps/light-client/cmd/pearl-watch/serve_native_test.go": "1308a40799be267bafb388c8c3f3e495f972108909a4c19a0f9e6c9d6524d6b3",
+    "apps/light-client/cmd/pearl-watch/serve_stub.go": "eecdda011c5a93bd07c07490a5665eb6fca98e63a030a9581037f273ac01b954",
+    "scripts/build-light-client.py": "0960ec89d7df72707c31e4784561934be80c681e378d8be9b62bc03dff408e9c",
+    "apps/companion/src/light-runtime.ts": "5d5864941fe0d4d6389649e51cddb48782cf8f68da87816b93eb1e7410fb7eae",
+    "apps/companion/src/local-light.ts": "839377376779862303f806d47c705fa2b10f038a55b2be96bb74991364ceb368",
+    "apps/companion/src/local-source.ts": "72d21df66ab3a988186a87bb3f01f628acdb2b67e851813cb50354962dbf0ffb",
+    "apps/ledger-bitcoin-prl/Makefile": "187f4913b15134236e900555c6d342d2c39c946bce2eb2a593cd902f78f93290",
+    "apps/ledger-bitcoin-prl/src/prl.h": "1932be875dd14d0cba6afad49b36b8118dcd31e9623b6a50e8ca5756a055c50c",
+    "apps/ledger-bitcoin-prl/src/ui/menu_nbgl.c": "7294db3657adf22d33d354a5a003a394edcff8123a844d3d4a2d26c25d95a379",
+    "apps/ledger-bitcoin-prl/src/ui/display.c": "d34126a4363530370800eeb45d3817e423c03a2253cccf1459edeff469796766",
+    "apps/ledger-bitcoin-prl/src/ui/display_nbgl.c": "1572dfed5ed372455bc45830ac5ca393c25c87b9d5f0d4bc4a9d3c3cd07cdc0d",
+    "apps/ledger-bitcoin-prl/src/boilerplate/dispatcher.c": "82d0b0cb3ab3b5de2fccb2d6dffdf84d16628eb036d03b98244265b60006329e",
+    "apps/ledger-bitcoin-prl/src/boilerplate/prl_review_io.c": "3ec5f9279c29a1d67d9afdd7fbd919520460aeddd0b7ced8395721cff1512363",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/prl_psbt.c": "94edbd97014b7de51ade07284ac55211bb2a5f501f5f3118f1079d448cb79f65",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/preprocess_inputs.c": "f3ed6c4d94968fd9ed2dfd75c99a7460c252ac291ab1e2e66e2ce93ec56d63b1",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/preprocess_outputs.c": "4d827e9e6e012bde4d72d4f11cafe34204474ec732ac77d028e6de8f033de733",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/process_in_outs.c": "9c414dfe522eb6915b15e1ed022fc7629902ff0253535e0cbea543cd70f304b3",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/sign_input.c": "cab97c361169298fe2f71b0033c555cb0580b66722bed1d8cf67fe40a64ddedf",
+    "apps/ledger-bitcoin-prl/src/handler/sign_psbt/transaction_display.c": "4fc03a890f4875189e8b7ce8c8b3e20f51cf4eccd7ed4870de0208173b46d7e7"
+  },
+  "upstreamCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+  "upstreamArchiveSha256": "26dec47642a249fa1728f2520670d4d3b2788696207a3c074e0382cc63237396",
+  "upstreamArchiveComparison": {
+    "files": 4621,
+    "mismatches": 0
+  },
+  "upstreamReviewedSourceSha256": {
+    "wallet/wallet/wallet.go": "d31ce0d9fbd382c4592cf90fa58df353275df93dbc87356e8b599f9fdfd797e3",
+    "wallet/wallet/loader.go": "3173ad43f449c5966c67ef85ef40cf865b7f39eccb84a53232d616526bd42c49",
+    "wallet/wallet/utxos.go": "f1f7667e93ed997ec56e10fc645b44e381a354a99e6e972d89c2f1d8259a5a99",
+    "wallet/wallet/recovery.go": "ecc7e1d85ca7e8ea48e4cb5a7760a3b57b28b6b898edcd4ec1f441e9fc6cebd4",
+    "wallet/wallet/rescan.go": "a546bc672a81b4056ca7764ada58289b046a87eb4694ad90e35894aae91f38f9",
+    "wallet/wallet/chainntfns.go": "337bca96edf4de3e9d830bcc3aba0a7ea46d28b1f2f93856171152796cffd4e1",
+    "wallet/chain/neutrino.go": "31f8f51fbbec32ae9f4636fca5a14f3d3cc61d5dcde337186f4df1c800d89233",
+    "wallet/waddrmgr/manager.go": "ce948817a0eea19d875a8c6b010ed46cdb931acbaaa782fc1f1ef589dfe0cc41",
+    "wallet/waddrmgr/sync.go": "aa29d26a8ffdb7dff804ba6980ea94a41e405c8a3929eb7b836429ab1ced7286",
+    "spv/neutrino.go": "f5d7e70b27d359734ba70e3445b9a6ee2fabd6fd6c70b0ccaf6e2a8e9b2e416e",
+    "spv/blockmanager.go": "02aff9678f02d224be719a73733b7bf9045d7f160fefcf8e296427a9a5ddc176",
+    "spv/query.go": "ab31746f7edd69fb0b5faeb9e4ac738d5ec4a7d7dde813b3635223bff80157e0",
+    "spv/verification.go": "09db7e272fff6b040e9351ed82dcefc75f0af01d8f33de7880f43c99b54a58b3",
+    "spv/headerfs/store.go": "129438116e93a0b756fd6e0369685e08331d2eeed1a9d66bbb3ed12bcdb7db00",
+    "spv/headerfs/index.go": "3f93942894283e3977e6a109fa6381dee4ad07514933493688e6b48f3b4ca46e",
+    "spv/headerfs/file.go": "da2e16ecdabffa0783dd774f31c4a3cb5a9c44e7b768c37f2aa267708caf9073",
+    "spv/filterdb/db.go": "c9745301aeee735bd631cbb90580db6c71881da1dd83c7a19c30dcc9f169d70a",
+    "spv/banman/store.go": "15d971b9f409bd78008664f82487dc21c0d9d862457dcb25c465e19035bed781",
+    "node/wire/blockheader.go": "bee09095f6076f145023cf52ff5c4443e3009db5dd78ed928b9a16e9b53e5838",
+    "node/blockchain/validate.go": "25f797bcaa86ecbccece2758152e4ba0092e271dc1bdfa29b43bc54a37ac0163",
+    "node/blockchain/process.go": "3099971d20b1c46173c59b112692037b99937d5a0b5bd1a24c39f88f902effcd",
+    "node/zkpow/verify.go": "8cf852a4b2b637eeb4c009e565d3501f516e0ad6665df426a44285ef517180c5",
+    "node/zkpow/zkpow_stub.go": "b81c59911b74273ab64a8caef102ae8b788b2f912f40b23405cabd0c4df940d1"
+  },
+  "auditBinary": {
+    "path": "apps/light-client/bin/pearl-watch",
+    "sha256": "1a8cdcb5a19883a07ca4eade10745a5d5453fee4678dd4bd052c8387cbf2d0c6",
+    "bytes": 27519202,
+    "buildTags": [
+      "xmss",
+      "zkpow"
+    ],
+    "CGO_ENABLED": 1,
+    "goVersion": "1.26.6",
+    "macOSDeploymentTarget": "26.0"
+  },
+  "evidenceSha256": {
+    "native-go-tests.log": "5a0603f5bf92303a8d19e508472d3d5a64f3d7bc6141d3e5e37996ed37c078f2",
+    "native-upstream-tests.log": "cce018bf5b5556a6fd8e46c67bd76f12c38b8ff07f4e84c4d745539c46245a3e",
+    "native-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

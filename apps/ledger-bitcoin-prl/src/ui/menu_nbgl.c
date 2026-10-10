@@ -20,16 +20,16 @@
 #include "display.h"
 #include "menu.h"
 #include "prl.h"
-static const char *const INFO_TYPES[] = {"Version", "Network", "Base", "Status"};
-static const char *const INFO_CONTENTS[] = {APPVERSION, PRL_NETWORK_NAME, "Ledger Bitcoin 2.5.1", "Experimental"};
+static const char *const INFO_TYPES[] = {"Version", "Network", "Base"};
+static const char *const INFO_CONTENTS[] = {APPVERSION, PRL_NETWORK_NAME, "Ledger Bitcoin 2.5.1"};
 static const nbgl_contentInfoList_t infoList = {
-    .nbInfos = 4, .infoTypes = INFO_TYPES, .infoContents = INFO_CONTENTS,
+    .nbInfos = 3, .infoTypes = INFO_TYPES, .infoContents = INFO_CONTENTS,
 };
 extern void app_exit(void);
 void ui_menu_main(void) {
     nbgl_useCaseHomeAndSettings(APPNAME, &ICON_APP_HOME,
 #ifdef SCREEN_SIZE_WALLET
-                                "Development app.\nDo not use valuable funds.",
+                                "Send and receive Pearl.",
 #else
                                 NULL,
 #endif

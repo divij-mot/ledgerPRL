@@ -18,7 +18,8 @@
     "dev": "npm run dev --workspace @pearl-ledger/companion",
     "cli": "node --import tsx apps/cli/src/index.ts",
     "check": "npm run typecheck && npm test && npm run build:all && python3 scripts/secret_scan.py",
-    "start": "npm run dev",
+    "start": "npm run build && npm run local --workspace @pearl-ledger/companion",
+    "setup:light": "python3 scripts/build-light-client.py",
     "preview": "npm run preview --workspace @pearl-ledger/companion",
     "test:oracle": "cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json",
     "build:all": "npm run build --workspaces --if-present"

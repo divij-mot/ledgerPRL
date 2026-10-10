@@ -4,10 +4,10 @@
     "registryRecords": 345,
     "installedRegistryRecords": 249,
     "missingOptionalPlatformPackages": 96,
-    "browserMainModules": 765,
+    "browserMainModules": 768,
     "browserWorkerModules": 27,
     "browserCssInputs": 50,
-    "browserUnionModules": 816,
+    "browserUnionModules": 819,
     "browserPackages": 48
   },
   "installLifecycle": [
@@ -36,11 +36,11 @@
   ],
   "noticeObservations": [
     {
-      "file": "assets/index-lrKSkPhE.js",
+      "file": "assets/index-DsituAXt.js",
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/live-vV-aJHom.js",
+      "file": "assets/live-C2LD5aR2.js",
       "presentLicenseMarkers": []
     },
     {
@@ -48,7 +48,7 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/main-B8SljPN6.js",
+      "file": "assets/main-4gM_CD52.js",
       "presentLicenseMarkers": []
     },
     {
@@ -64,20 +64,20 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "presentLicenseMarkers": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "presentLicenseMarkers": []
     }
   ],
   "chunks": [
     {
-      "file": "assets/index-lrKSkPhE.js",
+      "file": "assets/index-DsituAXt.js",
       "type": "chunk",
-      "bytes": 269800,
-      "sha256": "c88f6d85eb7a96a1cbc7e0b1eb2e0757b7f980bf427dc3f8b104bcd74a0e7272",
+      "bytes": 269833,
+      "sha256": "9db5a68f0512426919cb0a3b23304a9edbc6c02f13c8a8b0e0ee2c964ee4b6eb",
       "modules": [
         "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-exports",
         "node_modules/reflect-metadata/Reflect.js",
@@ -372,10 +372,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/live-vV-aJHom.js",
+      "file": "assets/live-C2LD5aR2.js",
       "type": "chunk",
-      "bytes": 445644,
-      "sha256": "2e7ee18f2e512680cc57c8f0813c768d6703bc1b874326b386e3ff1af2827af3",
+      "bytes": 445657,
+      "sha256": "b4770931f74812d79c4f54751fd84d4af1d35f16db36b5e4727cfbd738859c29",
       "modules": [
         "apps/companion/src/wallet-buffer.ts",
         "node_modules/bignumber.js/bignumber.mjs",
@@ -758,10 +758,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/main-B8SljPN6.js",
+      "file": "assets/main-4gM_CD52.js",
       "type": "chunk",
-      "bytes": 469391,
-      "sha256": "7d8925cf52ec189bccbe41f16b173babd911cfec1c6d2788e51d1b22057f2d25",
+      "bytes": 478705,
+      "sha256": "77439568269b33cdf5eb79a10b5c34c5c7ee2f43c4cbf2adae71f046ea60aa69",
       "modules": [
         "node_modules/@noble/hashes/esm/_u64.js",
         "node_modules/@noble/hashes/esm/crypto.js",
@@ -852,6 +852,9 @@
         "apps/companion/src/coin-selection.ts",
         "apps/companion/src/wallet-copy.ts",
         "apps/companion/src/fee-quotes.ts",
+        "apps/companion/src/local-source.ts",
+        "apps/companion/src/local-sync.ts",
+        "apps/companion/src/local-session.ts",
         "apps/companion/src/activity.ts",
         "apps/companion/src/ledger-ui/Stepper/Step.tsx",
         "apps/companion/src/ledger-ui/Stepper/Breadcrumb.tsx",
@@ -1003,18 +1006,18 @@
       "cssModules": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "type": "asset",
-      "bytes": 813,
-      "sha256": "22abc9607eb99a1b6eda69f0f28013c7f268f2a5326344882930a0e8caffec90",
+      "bytes": 885,
+      "sha256": "3639070bca19a5332646a9adcd0c588bf4503c7061b85eabc42c5e0dd4a627e5",
       "modules": [],
       "cssModules": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "type": "asset",
-      "bytes": 885,
-      "sha256": "9358ff38e987090477d3af01bc20f55acbf2b2d374d8087154afdc58ad741819",
+      "bytes": 813,
+      "sha256": "3791badf3f5fa1efd792a12d1eef01ab29120f3327d9a6ffc43144290f7917e5",
       "modules": [],
       "cssModules": []
     }

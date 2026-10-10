@@ -21,7 +21,7 @@ python3 "$ROOT/tools/bitcoin-prl-port/provenance.py" snapshot > "$OUT/source-bef
 make -C "$APP" TARGET="$TARGET" COIN="$COIN" clean_target > "$OUT/build.log" 2>&1
 ARGS=()
 if [[ -n "${PRL_SYSROOT:-}" ]]; then ARGS+=("SYSROOT=$PRL_SYSROOT"); fi
-make -C "$APP" TARGET="$TARGET" COIN="$COIN" "${ARGS[@]}" -j"${PRL_BUILD_JOBS:-4}" bin/app.elf >> "$OUT/build.log" 2>&1
+make -C "$APP" TARGET="$TARGET" COIN="$COIN" DEBUG=0 DEBUG_OVER_USB=0 "${ARGS[@]}" -j"${PRL_BUILD_JOBS:-4}" bin/app.elf >> "$OUT/build.log" 2>&1
 python3 "$ROOT/tools/bitcoin-prl-port/provenance.py" snapshot > "$OUT/source-after.json"
 cmp "$OUT/source-before.json" "$OUT/source-after.json" || { echo 'Source changed during build; refusing artifact attribution' >&2; exit 1; }
 cp "$APP/build/$TARGET/bin/app.elf" "$OUT/app.elf"

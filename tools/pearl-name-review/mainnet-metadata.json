@@ -1,0 +1,17 @@
+{
+  "network": "mainnet",
+  "sha256": "0f58a289227ccd78a6e66735cb3b7db95f849b9890d454299e83ef15edbd3271",
+  "metadata": {
+    "ledger.target": "nanos2",
+    "ledger.target_name": "TARGET_NANOS2",
+    "ledger.target_id": "0x33100004",
+    "ledger.app_name": "Pearl",
+    "ledger.app_version": "0.1.0",
+    "ledger.api_level": "27",
+    "ledger.sdk_name": "ledger-secure-sdk",
+    "ledger.sdk_version": "v27.1.2",
+    "ledger.sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "ledger.sdk_graphics": "nbgl",
+    "ledger.app_flags": "0x40"
+  }
+}

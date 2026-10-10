@@ -552,7 +552,7 @@ for (const phase of ["file-read", "before-update", "after-update"]) {
       release = gate();
     const text = readFileSync(
       new URL(
-        "../../apps/companion/public/example-watch.json",
+        "../../apps/companion/test/fixtures/example-watch.json",
         import.meta.url,
       ),
       "utf8",

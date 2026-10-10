@@ -1,15 +1,15 @@
 # Pearl Ledger
 
-A Ledger-backed wallet website for Pearl (PRL), with a narrowly adapted Ledger Bitcoin device app and exact-integer PRL host adapter.
+A local Pearl (PRL) wallet in Ledger Wallet Discover, with a narrowly adapted Ledger Bitcoin device app, exact-integer host adapter and native watch-only light client.
 
-**Development software. Do not use with valuable funds.** Limited emulator and Nano S Plus physical tests have passed; funded sending and live-chain confirmation remain unverified. These tests do not establish Ledger approval, a human security audit or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
+**Development software. Do not use with valuable funds.** Limited emulator and Nano S Plus physical tests have passed. The [local mainnet checkpoint](tools/local-mainnet-review/README.md) observed a real incoming payment and confirmations; outgoing hardware signing, broadcast and destination confirmation remain unverified. These tests do not establish Ledger approval, a human security audit or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
 
 ## What is implemented
 
 - Pinned Ledger Bitcoin 2.5.1 C baseline with explicit PRL networks, BIP86 ownership/change checks, PSBT validation and trusted device review
 - Exact bigint PRL host adapter, independently verified signatures, transaction finalization and CLI
 - Direct Ledger DMK/WebHID website; no MetaMask, seed entry or software signing required
-- Browser-side public-account discovery and validation; same-origin fixed-endpoint public indexer proxy
+- Local mainnet account discovery through pinned official Pearl wallet/Neutrino code, with native XMSS/ZK verification libraries
 - Durable local payment recovery, optional watch cache and optional local-only authenticated node bridge
 - Public deterministic cross-language vectors, actual Pearl script-engine oracle, adversarial tests and ongoing security review
 
@@ -17,7 +17,7 @@ Only ordinary no-script BIP86 P2TR owned inputs/change, one P2TR or P2MR recipie
 
 ## Run the companion locally
 
-Requirements: Node.js 24.19 or newer compatible 24.x release and npm. Use a WebHID-capable desktop browser such as current Chromium. Hardware connection requires a compatible app already running on the Ledger; development installation is a separate gated step.
+Requirements: Node.js 24.19 or a newer compatible 24.x release, npm and Python 3. Building the native light client also requires Go (the build selects 1.26.6), Rust/Cargo with the 1.90.0 toolchain, a C compiler and make. The build downloads pinned upstream source and dependencies. Hardware connection requires the matching app already running on Ledger; installing it remains a separate user-approved step.
 
 Intended build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. The current C source passed bounded mainnet/regtest Nano S Plus emulator tests, including P2MR recipients and 75 hostile-request rejections. One physical Nano S Plus on OS 1.7.0 passed Live App account/receive verification and a separate synthetic HID signing pilot. Other models, physical P2MR review, restore, fault and maximum-input matrices remain unqualified. See the [native evidence](tools/live-app-native-review/README.md), [physical evidence](tools/live-app-physical-review/README.md) and [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate). Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround.
 
@@ -27,14 +27,15 @@ The current app and companion are **USB-only**: Bluetooth is disabled in the C a
 
 ```sh
 npm ci --ignore-scripts
-npm run dev
+npm run setup:light
+npm start
 ```
 
-Open http://127.0.0.1:5188. The public-indexer option requires an explicit privacy choice before derived addresses are queried. Mainnet and Testnet2 use distinct, genesis-checked backends. Original testnet, regtest and simnet require an appropriate node. Public account import/offline inspection does not prove spendability or sign anything.
+Keep the terminal running and open Pearl in Ledger Wallet → Discover using the [local manifest setup](docs/live-app.md). The app is served only at **http://127.0.0.1:5188/live.html**. `npm start` builds the frontend and starts its local server; `setup:light` builds the native helper once, and must be repeated after helper source changes. The helper communicates over private standard I/O and runs no wallet RPC listener. No cloud deployment or separate wallet GUI is needed.
 
-The frontend and narrow proxy can run locally together or behind HTTPS using the production host described in [website hosting](docs/website-hosting.md). The public website does not expose the local-node bridge. The latest mainnet and Testnet2 checks timed out before TCP/TLS connection or address queries; no live balance was established. See [mainnet testing](docs/mainnet-testing.md) for the intended small user-run trial, and [companion instructions](docs/companion.md) for recovery metadata and limitations.
+The default local flow supports **mainnet account 0**. After account approval it remembers the public account, starts synchronization, and resumes on reopening. Initial header/filter synchronization can take substantial time; an incomplete account shows unavailable balance instead of a synthetic zero. Blockchain peers are still required: local means processing and storage on this computer, not offline operation. Optional public-indexer and configured-node paths remain advanced compatibility options, not dependencies of local synchronization. See [companion instructions](docs/companion.md) and [mainnet testing](docs/mainnet-testing.md) for the bounded scope and remaining funded-transfer gates.
 
-Private keys remain on Ledger. The browser keeps receive/change recovery ranges and payment reservations, including already-signed bytes. Optional watch-cache saves also contain the account public key and chain code. These records contain no private signing keys but are financially sensitive; do not publish backups. The hosted proxy sees requested addresses/transaction IDs, not account derivation keys.
+Private keys remain on Ledger. The browser keeps receive/change recovery ranges and payment reservations, including already-signed bytes. Local account remembering and the native watch database contain the account public key and chain code. Optional balance snapshots contain public watch data. These records contain no private signing keys but are financially sensitive; do not publish backups. If optional public-indexer mode is used, its proxy sees requested addresses/transaction IDs, not account derivation keys. The default local path uses no hosted relay.
 
 ## Verify source and fixtures
 
@@ -72,4 +73,4 @@ This provides conventional secure-element custody. It does not claim quantum res
 
 ## Ledger Wallet integration
 
-The companion also has an explicit developer-loaded Live App entry using Ledger Wallet API and Ledger Lumen UI. See [setup and verification](docs/live-app.md). The same PRL wallet and Bitcoin-derived signing checks back both interfaces.
+The primary local interface is the developer-loaded Live App using Ledger Wallet API and adapted Ledger Bitcoin views with Lumen UI. See [setup and verification](docs/live-app.md). The same PRL wallet and Bitcoin-derived signing checks back both interfaces.

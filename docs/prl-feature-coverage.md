@@ -8,7 +8,7 @@ An ordinary Pearl wallet can use the mature Ledger Bitcoin signing implementatio
 
 **“All PRL features are supported” is not an accurate claim for the restricted profile.** **P2MR recipient support is implemented** in the host and Bitcoin-derived signer. Owned inputs/change remain ordinary BIP86 P2TR; this does not add P2MR/XMSS custody. Qualification is bounded by the [current Nano S Plus emulator](../tools/live-app-native-review/README.md) and [physical smoke](../tools/live-app-physical-review/README.md) evidence. The most consequential everyday limitations are fragmented miner UTXOs, bounded account discovery, backend uncertainty and browser/device recovery. Message signing, advanced scripts and stateful XMSS require separate designs.
 
-Recommended product description: **a development Ledger-backed Pearl wallet for ordinary Taproot accounts, with an explicit supported-destination and transaction-policy list**. The standalone website and Ledger Wallet Live App are the current interfaces. The optional MetaMask experiment does not establish availability in MetaMask's normal account/send interface.
+Recommended product description: **a development Ledger-backed Pearl wallet for ordinary Taproot accounts, with an explicit supported-destination and transaction-policy list**. The primary interface is the local Ledger Wallet Discover app; the standalone WebHID entry remains available for development. The optional MetaMask experiment does not establish availability in MetaMask's normal account/send interface.
 
 ## Current desktop/lite parity
 
@@ -16,15 +16,17 @@ This comparison uses the actual official desktop sources at the immutable pin be
 
 | Everyday feature | Official desktop behavior | Current companion |
 | --- | --- | --- |
-| Send and receive | Ordinary BIP86 account, one recipient in the desktop form [S2], [S35] | Implemented with Ledger approval and independent signature verification. P2TR and P2MR destinations; owned P2TR only. No funded transfer qualified |
+| Send and receive | Ordinary BIP86 account, one recipient in the desktop form [S2], [S35] | Implemented with Ledger approval and independent signature verification. P2TR and P2MR destinations; owned P2TR only. Real incoming-payment discovery/confirmations observed in the [local checkpoint](../tools/local-mainnet-review/README.md); outgoing signature/broadcast/destination confirmation remain unqualified |
 | QR and fresh receive address | QR plus `getnewaddress` on entering Receive [S36] | Verified-only QR and explicit New address implemented. New addresses stay within the durable recovery range and need fresh device approval |
 | Send Max | Max control, recalculated around the selected fee [S35] | Exact-integer Max for ≤16 eligible unreserved inputs implemented. Manual or capped selection is labeled separately from the full account balance; the explicit fee and normal policy checks remain |
-| Fees | Blockbook estimates for 1/10/25 blocks [S35], [S30] | Optional network-bound 1/10/25-block quotes, exact PRL/kvB parsing and explicit total-fee selection implemented. Quotes expire after two minutes. Manual fee, vsize/rate and relay minimum remain visible; live quote availability is unverified |
+| Fees | Blockbook estimates for 1/10/25 blocks [S35], [S30] | Local mode uses an explicit total fee with exact vsize/rate and pinned relay-minimum checks. Optional public mode supports network-bound 1/10/25-block quotes that expire after two minutes; current service availability is unverified. No local confirmation-speed estimate is claimed |
 | Activity | Paginated history, timestamps, confirmations, fee, copy txid [S37] | Paginated display, copy txid and validated-tip confirmation counts implemented. History remains fully retained; timestamps and general transaction fees are not supplied by the current history schema |
 | Pending payments | Rebroadcast and optional Remove [S37] | Explicit exact-byte retry and durable reservations. No Remove action that forgets signatures or releases uncertain inputs |
 | Unconfirmed spending | Desktop sends with minimum confirmations 0 [S2] | Requires one confirmation for ordinary inputs and 100 for coinbase |
-| Chain verification | Desktop starts the wallet with `--usespv` [S38] | Public indexer or configured node trust, plus genesis/raw-transaction/ownership/consistency checks. No independent Pearl SPV verifier |
+| Chain verification | Desktop starts the wallet with `--usespv` [S38] | Default mainnet account 0 uses pinned official Pearl wallet/Neutrino code in a native watch-only helper, linked with real XMSS/ZK verification libraries. Readiness requires completed canonical header/filter/wallet synchronization and coverage. Browser raw-transaction/ownership/consistency checks remain; this inherits upstream SPV assumptions and is not full-node validation. Optional public-indexer/node modes retain their distinct trust model |
 | Software keys and password recovery | Software-wallet import and unlock [S2] | Intentionally excluded. Recovery phrases/private keys never enter the companion |
+
+The local account is remembered as public metadata and resumes synchronization on reopening; device approval is never restored. Nonzero mainnet accounts require the explicitly consented public-source path because local synchronization currently supports account 0 only. The [final local reviews](../tools/final-local-audit/product.md) distinguish public-fixture tests, native sync evidence and remaining physical gates.
 
 The current source adaptations preserve Ledger Wallet's modal and step structure; they are not the unmodified Ledger application. Remaining live-chain gates and the intended user-run approximately 10 PRL trial are documented in [mainnet testing](mainnet-testing.md). That trial amount is not a wallet cap.
 

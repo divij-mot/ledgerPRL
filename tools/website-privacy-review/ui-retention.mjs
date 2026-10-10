@@ -99,7 +99,7 @@ const app = await import(
     Buffer.from(built.outputFiles[0].text).toString("base64")
 );
 const snapshot = await fs.readFile(
-  new URL("../../apps/companion/public/example-watch.json", import.meta.url),
+  new URL("../../apps/companion/test/fixtures/example-watch.json", import.meta.url),
   "utf8",
 );
 await app.reviewOpen(snapshot);

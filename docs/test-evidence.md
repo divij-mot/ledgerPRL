@@ -80,3 +80,21 @@ The final `npm run check` passed **504 tests** across six workspaces, TypeScript
 Final Chrome checks used only the built-in public regtest example: empty amount guidance, Max preserving 0.00001000 PRL fee, 6.24999000 PRL recipient plus fee exactly matching 6.25000000 PRL selected balance, unsigned summary, and disabled hardware confirmation without a device. Receive required device verification before sharing. The one synthetic unsigned draft was discarded. The Discover entry loaded mainnet and rejected browser-only connection without opening WebHID. An actual Ledger Wallet Discover reload displayed the final entry; no further device approval or funded payment was requested.
 
 Public mainnet status navigation in Chrome also timed out; it did not supply evidence of a working alternative network path. The [read-only indexer probe](../tools/live-app-public-review/README.md) remains the detailed recorded reachability result. Funding, real-chain acceptance and confirmation are not claimed.
+
+## Final local wallet checkpoint
+
+The final frozen-source `npm run check` passed **542 tests**, TypeScript checks,
+all workspace builds and the secret-pattern scan. The native light-client
+facade passed seven tests with real zkpow/XMSS libraries. Three fresh Astra
+reviews cover [native](../tools/final-local-audit/native.md),
+[wallet/transport](../tools/final-local-audit/wallet.md) and
+[product/parity](../tools/final-local-audit/product.md) boundaries; their source
+manifests distinguish reviewed code from later evidence.
+
+[Local mainnet evidence](../tools/local-mainnet-review/README.md) records cold
+sync, restart, recovery-range rescan, read cancellation, the actual funded
+account's read-only preflight, and an unsigned draft/discard in Ledger Wallet.
+No outgoing payment was signed or broadcast. The [Pearl 0.1.0 rename checkpoint](../tools/pearl-name-review/README.md)
+passed four emulator signing/receive pilots, 75 adversarial rejections and
+explicit reject/retry checks. [Physical installation](install-pearl.md) and
+owner-approved outgoing transfer remain separate manual gates.

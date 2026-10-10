@@ -29,13 +29,7 @@ include $(BOLOS_SDK)/Makefile.target
 APPVERSION_M = 0
 APPVERSION_N = 1
 APPVERSION_P = 0
-APPVERSION_SUFFIX = prl-dev
-
-ifeq ($(APPVERSION_SUFFIX),)
 APPVERSION = "$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)"
-else
-APPVERSION = "$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)-$(strip $(APPVERSION_SUFFIX))"
-endif
 
 # Application source files
 APP_SOURCE_PATH += src
@@ -65,24 +59,24 @@ DEFINES += COIN_P2PKH_VERSION=0 COIN_P2SH_VERSION=5
 ifeq ($(COIN),pearl)
     DEFINES += PRL_NETWORK_ID=0 BIP44_COIN_TYPE=808276 BIP32_PUBKEY_VERSION=0x0488B21E
     DEFINES += COIN_NATIVE_SEGWIT_PREFIX=\"prl\"
-    APPNAME = "Pearl Dev"
+    APPNAME = "Pearl"
     PATH_APP_LOAD_PARAMS = "86'/808276'"
 else ifeq ($(COIN),pearl_testnet)
     DEFINES += PRL_NETWORK_ID=1
     DEFINES += COIN_NATIVE_SEGWIT_PREFIX=\"tprl\"
-    APPNAME = "Pearl T1 Dev"
+    APPNAME = "Pearl T1"
 else ifeq ($(COIN),pearl_testnet2)
     DEFINES += PRL_NETWORK_ID=2
     DEFINES += COIN_NATIVE_SEGWIT_PREFIX=\"tprl\"
-    APPNAME = "Pearl T2 Dev"
+    APPNAME = "Pearl T2"
 else ifeq ($(COIN),pearl_regtest)
     DEFINES += PRL_NETWORK_ID=3
     DEFINES += COIN_NATIVE_SEGWIT_PREFIX=\"rprl\"
-    APPNAME = "Pearl Reg Dev"
+    APPNAME = "Pearl Reg"
 else ifeq ($(COIN),pearl_simnet)
     DEFINES += PRL_NETWORK_ID=4
     DEFINES += COIN_NATIVE_SEGWIT_PREFIX=\"rprl\"
-    APPNAME = "Pearl Sim Dev"
+    APPNAME = "Pearl Sim"
 else
     $(error Unsupported COIN - use pearl, pearl_testnet, pearl_testnet2, pearl_regtest, pearl_simnet)
 endif

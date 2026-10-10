@@ -59,14 +59,22 @@ export interface WalletServerOptions {
   distDirectory: string;
   /** Dependency injection for deterministic tests; never set by an HTTP parameter. */
   fetcher?: typeof fetch;
+  /** Local launcher only. This handler is never mounted by the HTTPS entry. */
+  localLight?: (
+    request: IncomingMessage,
+    response: ServerResponse,
+    next: () => void,
+  ) => Promise<void>;
 }
 function requireCondition(value: unknown, message: string): asserts value {
   if (!value) throw new Error(message);
 }
-function validateOrigin(origin: string): URL {
+function validateOrigin(origin: string, local = false): URL {
   const url = new URL(origin);
   requireCondition(
-    url.protocol === "https:" &&
+    (local
+      ? url.protocol === "http:" && url.hostname === "127.0.0.1"
+      : url.protocol === "https:") &&
       url.origin === origin &&
       !url.username &&
       !url.password,
@@ -200,7 +208,7 @@ function oneHeader(request: IncomingMessage, name: string): boolean {
 
 /** No sessions, cookies, telemetry, access logs, RPC credentials or private-node routes. */
 export async function createWalletServer(options: WalletServerOptions) {
-  const expected = validateOrigin(options.origin);
+  const expected = validateOrigin(options.origin, !!options.localLight);
   const assets = await loadBuild(options.distDirectory);
   const proxy = indexerProxy(options.origin, options.fetcher);
   const server = createServer(
@@ -217,7 +225,12 @@ export async function createWalletServer(options: WalletServerOptions) {
         !oneHeader(request, "origin") ||
         !oneHeader(request, "x-forwarded-proto") ||
         request.headers.host !== expected.host ||
-        request.headers["x-forwarded-proto"] !== "https"
+        (options.localLight
+          ? request.headers["x-forwarded-proto"] !== undefined ||
+            !["127.0.0.1", "::ffff:127.0.0.1"].includes(
+              request.socket.remoteAddress ?? "",
+            )
+          : request.headers["x-forwarded-proto"] !== "https")
       ) {
         reject(request, response, 421, "Unexpected wallet origin");
         return;
@@ -259,7 +272,8 @@ export async function createWalletServer(options: WalletServerOptions) {
       }
       if (
         target === "/api/indexer/read" ||
-        target === "/api/indexer/broadcast"
+        target === "/api/indexer/broadcast" ||
+        (options.localLight && target.startsWith("/api/local/"))
       ) {
         if (request.method !== "POST") {
           response.setHeader("Allow", "POST");
@@ -293,7 +307,10 @@ export async function createWalletServer(options: WalletServerOptions) {
           reject(request, response, 415, "Uncompressed JSON required");
           return;
         }
-        void proxy(request, response, () =>
+        const handler = target.startsWith("/api/local/")
+          ? options.localLight!
+          : proxy;
+        void handler(request, response, () =>
           reject(request, response, 404, "Not found"),
         ).catch(() => reject(request, response, 500, "Request failed"));
         return;

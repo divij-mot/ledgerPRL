@@ -1,0 +1,12 @@
+✔ pure-host UI authority, pending signed recovery and modeled two-tab storage boundaries (5326.837667ms)
+✔ pure-host device identity gates and failed-session receive verification (4767.426584ms)
+✔ mocked DOM/storage/source/device: direct website receive/send, consent and durable session boundaries (5293.298541ms)
+✔ mocked DOM/storage/source/device: actual main.ts PSBT persistence, interruption, and emergency recovery (4182.027916ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5443.084667

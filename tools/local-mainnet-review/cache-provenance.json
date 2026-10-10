@@ -1,0 +1,18 @@
+{
+  "source": "cleanly stopped public-fixture mainnet pilot",
+  "sourceCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+  "files": {
+    "neutrino.db": {
+      "sha256": "a5a7fbd0ecf30070255b8f8032fb4d8de744c30880a6b45e908fb3eb43bcc683",
+      "bytes": 16777216
+    },
+    "block_headers.bin": {
+      "sha256": "0f68eed586ea216f9a00494139bb81097d327d79441ce8a237f49e77e2af004d",
+      "bytes": 13590504
+    },
+    "reg_filter_headers.bin": {
+      "sha256": "d8a9b4c7decab93ba4d859f8f3b15b770fc62811fc46ad80b8471cffa2401f26",
+      "bytes": 4026816
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-10",
+  "upstreamCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+  "binarySha256": "bc10831e9c02dfe19d0ffbbc470b454baf048842e18a4660f2fb44800ea5b5f9",
+  "binaryBytes": 27585298,
+  "build": {
+    "go": "1.26.6 darwin/arm64",
+    "tags": [
+      "xmss",
+      "zkpow"
+    ],
+    "CGO_ENABLED": 1,
+    "MACOSX_DEPLOYMENT_TARGET": "26.0",
+    "nativeSourceRoot": "/private/tmp/astra-pearl-source",
+    "scratchModfile": "/private/tmp/pearl-light-native.mod"
+  },
+  "tests": {
+    "offlineInitializer": 5,
+    "native": 6,
+    "failures": 0,
+    "independentPublicDerivationCases": 6
+  },
+  "smoke": {
+    "publicFixtureOnly": true,
+    "statusCalls": 3,
+    "fullAccountBindingVerified": true,
+    "watchOnlyVerified": true,
+    "connections": 8,
+    "headerHeight": 300,
+    "filterHeight": 0,
+    "walletSynced": false,
+    "ready": false,
+    "cleanSigtermExit": 0,
+    "broadcasts": 0,
+    "hardwareOperations": 0,
+    "profileRoot": "/private/tmp/pearl-spv-smoke-4ek8eycu"
+  },
+  "sourceSha256": {
+    "apps/light-client/cmd/pearl-watch/main.go": "42bd97ec6e6ced674d48c9c0ebe5b47e8ce52b3a4cab455da6cf06bb374ff279",
+    "apps/light-client/cmd/pearl-watch/main_test.go": "c57638cf38ce82948ef4c7c37737ee4a2c7b6ed1e13fc877c103599d639e4b02",
+    "apps/light-client/cmd/pearl-watch/serve_native.go": "372807f3aee96d0846947e28ca5386b15cd68e7feb22130ec589f48507129300",
+    "apps/light-client/cmd/pearl-watch/serve_native_test.go": "b363225c89775241cc29839c33c7e407c0bfee8f3673a503198f5b6eab2c93f2",
+    "apps/light-client/cmd/pearl-watch/serve_stub.go": "eecdda011c5a93bd07c07490a5665eb6fca98e63a030a9581037f273ac01b954",
+    "apps/light-client/go.mod": "c31eb750846dd531bd668d7353c4d6a93da49a0de5ca7ce7fbc44ec4878dc22c",
+    "apps/light-client/go.sum": "c1c3dd0c8e764f51b73b39b5ee55e2eabcadef87f0cc8eac6ae8b34207f4519d",
+    "apps/light-client/protocol.ts": "50e45436dc7a10c2ae520237a56b3e3aa953d523ddb052288259e5f6cd80cc0a"
+  }
+}

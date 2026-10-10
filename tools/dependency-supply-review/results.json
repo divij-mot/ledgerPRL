@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "head": "3575198a68c2408118a6eec2a5e7d88a852365ae",
+  "head": "a1b19d28de6426af91d85d0e9fa7be7361bf90be",
   "nodeVersion": "v24.19.0",
   "lockfileSha256": "7ffdfb4ad695aab839152b6423d6660e19d0b3044b5579e6f1621c76a999ad50",
   "checks": [
@@ -3038,10 +3038,10 @@
     "registryRecords": 345,
     "installedRegistryRecords": 249,
     "missingOptionalPlatformPackages": 96,
-    "browserMainModules": 765,
+    "browserMainModules": 768,
     "browserWorkerModules": 27,
     "browserCssInputs": 50,
-    "browserUnionModules": 816,
+    "browserUnionModules": 819,
     "browserPackages": 48
   },
   "installedMismatches": [],
@@ -4836,11 +4836,11 @@
   ],
   "noticeObservations": [
     {
-      "file": "assets/index-lrKSkPhE.js",
+      "file": "assets/index-DsituAXt.js",
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/live-vV-aJHom.js",
+      "file": "assets/live-C2LD5aR2.js",
       "presentLicenseMarkers": []
     },
     {
@@ -4848,7 +4848,7 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/main-B8SljPN6.js",
+      "file": "assets/main-4gM_CD52.js",
       "presentLicenseMarkers": []
     },
     {
@@ -4864,11 +4864,11 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "presentLicenseMarkers": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "presentLicenseMarkers": []
     }
   ],
@@ -5035,10 +5035,10 @@
   },
   "chunks": [
     {
-      "file": "assets/index-lrKSkPhE.js",
+      "file": "assets/index-DsituAXt.js",
       "type": "chunk",
-      "bytes": 269800,
-      "sha256": "c88f6d85eb7a96a1cbc7e0b1eb2e0757b7f980bf427dc3f8b104bcd74a0e7272",
+      "bytes": 269833,
+      "sha256": "9db5a68f0512426919cb0a3b23304a9edbc6c02f13c8a8b0e0ee2c964ee4b6eb",
       "modules": [
         "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-exports",
         "node_modules/reflect-metadata/Reflect.js",
@@ -5333,10 +5333,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/live-vV-aJHom.js",
+      "file": "assets/live-C2LD5aR2.js",
       "type": "chunk",
-      "bytes": 445644,
-      "sha256": "2e7ee18f2e512680cc57c8f0813c768d6703bc1b874326b386e3ff1af2827af3",
+      "bytes": 445657,
+      "sha256": "b4770931f74812d79c4f54751fd84d4af1d35f16db36b5e4727cfbd738859c29",
       "modules": [
         "apps/companion/src/wallet-buffer.ts",
         "node_modules/bignumber.js/bignumber.mjs",
@@ -5719,10 +5719,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/main-B8SljPN6.js",
+      "file": "assets/main-4gM_CD52.js",
       "type": "chunk",
-      "bytes": 469391,
-      "sha256": "7d8925cf52ec189bccbe41f16b173babd911cfec1c6d2788e51d1b22057f2d25",
+      "bytes": 478705,
+      "sha256": "77439568269b33cdf5eb79a10b5c34c5c7ee2f43c4cbf2adae71f046ea60aa69",
       "modules": [
         "node_modules/@noble/hashes/esm/_u64.js",
         "node_modules/@noble/hashes/esm/crypto.js",
@@ -5813,6 +5813,9 @@
         "apps/companion/src/coin-selection.ts",
         "apps/companion/src/wallet-copy.ts",
         "apps/companion/src/fee-quotes.ts",
+        "apps/companion/src/local-source.ts",
+        "apps/companion/src/local-sync.ts",
+        "apps/companion/src/local-session.ts",
         "apps/companion/src/activity.ts",
         "apps/companion/src/ledger-ui/Stepper/Step.tsx",
         "apps/companion/src/ledger-ui/Stepper/Breadcrumb.tsx",
@@ -5964,18 +5967,18 @@
       "cssModules": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "type": "asset",
-      "bytes": 813,
-      "sha256": "22abc9607eb99a1b6eda69f0f28013c7f268f2a5326344882930a0e8caffec90",
+      "bytes": 885,
+      "sha256": "3639070bca19a5332646a9adcd0c588bf4503c7061b85eabc42c5e0dd4a627e5",
       "modules": [],
       "cssModules": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "type": "asset",
-      "bytes": 885,
-      "sha256": "9358ff38e987090477d3af01bc20f55acbf2b2d374d8087154afdc58ad741819",
+      "bytes": 813,
+      "sha256": "3791badf3f5fa1efd792a12d1eef01ab29120f3327d9a6ffc43144290f7917e5",
       "modules": [],
       "cssModules": []
     }
@@ -5983,11 +5986,13 @@
   "workflows": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "e3e1eaee61e9ebd72dc990b57cccee90a59b7284d71ba2b931b149e76294f6a8",
+      "sha256": "cec4e34ef3444a7dd5b5711c474156fab481ec6d855dbf9109e503698c0f3855",
       "actions": [
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
         "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
         "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
@@ -6160,6 +6165,9 @@
     "apps/companion/src/ledger-ui/index.tsx",
     "apps/companion/src/ledger.ts",
     "apps/companion/src/live-entry.ts",
+    "apps/companion/src/local-session.ts",
+    "apps/companion/src/local-source.ts",
+    "apps/companion/src/local-sync.ts",
     "apps/companion/src/main.ts",
     "apps/companion/src/pearl-apdu.ts",
     "apps/companion/src/presentation.ts",
@@ -9614,18 +9622,18 @@
     }
   ],
   "sourceHashes": {
-    ".github/workflows/ci.yml": "e3e1eaee61e9ebd72dc990b57cccee90a59b7284d71ba2b931b149e76294f6a8",
+    ".github/workflows/ci.yml": "cec4e34ef3444a7dd5b5711c474156fab481ec6d855dbf9109e503698c0f3855",
     ".github/workflows/ledger-review.yml": "a56bcac50ce8dc5342e5df530b561ae67de15a7f7d6aaabb7f86ea825da30fa4",
-    "README.md": "7e17e9cbc6d45f43f202294eabee134a81f48a557dbf55d9c47302d1fe4715ea",
+    "README.md": "6e87c8ea576bfeb7eae147f1446e2ec9a1691f1b868d4dc1789ff2c4616b74d8",
     "SECURITY.md": "53cd5ec8b0f907d3eec1e9d457a3968d8a4c0809edb9eab42ebb478875af36c5",
     "apps/cli/package.json": "23fd6bc66bc6d89d622ad3f2d7bdeb4fb9de5a26deb99315e155b19f8c99dad5",
     "apps/companion/index.html": "0eb3a7706eba0260630874f37b0880f8353dee7c2a4a02f2e40ce3c46a6c67d1",
     "apps/companion/live.html": "4541b9bd2c27730d55a6203b0226462c434377c13ef121c70cfffcca18ab59cb",
-    "apps/companion/package.json": "d95dd313e2ba3bd98ff6da0d7701d8feaa4b8c730020354181bd2a4b6805c68e",
+    "apps/companion/package.json": "99170526ddc39d08b9ea2e1d5ad4b93b5370ff07e626a1107774dbcc21b8fa15",
     "apps/companion/src/activity.ts": "99103c55d9ddad0d1cfd1741d9464c7e29903ae411340dcf33bb44da606ab39a",
     "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
     "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
-    "apps/companion/src/blockbook-source.ts": "e9ff8142be82eb1be01e518a647ec3841c4337ddf4b9bc296e1ca0e34b1cf5e4",
+    "apps/companion/src/blockbook-source.ts": "f646e176144a0eee45d334e606148d029c4f70d577076c2f93e83764a356506a",
     "apps/companion/src/coin-selection.ts": "fe9899a61c10d63608698f7f0a3ac22cd5c3205a9da733020f0ae91cfcd8356e",
     "apps/companion/src/device.ts": "c98c9a7441dcc5a8c28535a235a3f6031ad8c4f2715536c9e7bf1a98728be08d",
     "apps/companion/src/fee-quotes.ts": "7174a90e6697dcd97b00247991d8b1dcf239981e83162a0bec87aa06a4a83f21",
@@ -9645,8 +9653,11 @@
     "apps/companion/src/ledger-ui/index.tsx": "035247ef4160890a5a72a2378d24eb7711a67e6dad802056dc02ca59d3050594",
     "apps/companion/src/ledger-ui/styles.css": "3c0e1de9b807c31d9a8565f14c4cae71d2ad0a0053957f6a0c9492a270ed3c01",
     "apps/companion/src/ledger.ts": "03b9c77b16f00a9357621e3af45f3c5b8ad69a80a0aea24265d936bc780cc32b",
-    "apps/companion/src/live-entry.ts": "98f32ca1c03de5442f1516c2a3afb06b4b42193bd6b3f792543542d3289c8836",
-    "apps/companion/src/main.ts": "b58c4981650551fc8f424dad947765f0fdb4e04b9a3326972ccfd95b3d63d2d6",
+    "apps/companion/src/live-entry.ts": "f75d6061a4f2a77e996d43f6e099b41bdfa13ce3fe600d8842ef1077752db8d8",
+    "apps/companion/src/local-session.ts": "4aef3c34ac9baadd45974af70e3355b2aadd46a0dca216a465834b0ba3c63f23",
+    "apps/companion/src/local-source.ts": "72d21df66ab3a988186a87bb3f01f628acdb2b67e851813cb50354962dbf0ffb",
+    "apps/companion/src/local-sync.ts": "e846034c9b245dbb82a66e312bedbc3f103ae9df682e8725bbf719f9851f4362",
+    "apps/companion/src/main.ts": "4c2af9b31b22dc59683543bae09c5fd286665300c61a1a33bce30883ed1acf4d",
     "apps/companion/src/pearl-apdu.ts": "1ee14d6f3de6de263f2335b57c69ddcf51cecc654315694be875626c6f966efe",
     "apps/companion/src/presentation.ts": "9df4914b7f907427ae1107a00195cc4aa0c279d5a4cc8ed42097cda300738a64",
     "apps/companion/src/public-source.ts": "cd54d95cb849ce356223211bbbee20a23ef1a232cb3d1ab5f48b07ae9fc3ec84",
@@ -9654,11 +9665,11 @@
     "apps/companion/src/storage.ts": "fa43760192f8b77457674d947cdaf8162ef8adb4e126ec1d7cfa3197e1c684d4",
     "apps/companion/src/styles.css": "abf3a279559fde71319d0888c88e391796c992f80a1c50d4f32847fc8ddcb768",
     "apps/companion/src/ui.tsx": "4d6898c69704f0d9f409f4f61aa83a22ec03e3dcab44dc4040f356ba4b863195",
-    "apps/companion/src/wallet-api.ts": "29ee78b95b4a23fe8fcc2fa0ff07bec7bcfa6e7ed92f10444ed6c6f8c9cbb30d",
+    "apps/companion/src/wallet-api.ts": "d3c2901f3b30a0c77d14b2104c2129da3d6b40cfe1af79f56bd043ba2f3497c0",
     "apps/companion/src/wallet-buffer.ts": "b04cde5f0d7e4ca08e140e3aa7531f841e6887c8fb79cc8f1a2e910dac637b23",
     "apps/companion/src/wallet-copy.ts": "0895cf36f14323ea8a317ddbef90ce0e882aa333c07ae2741e45cab4be9038f4",
-    "apps/companion/src/web-entry.ts": "17ae7ae81ecd320e6198bd2cd21c5a76e9fc6ea505aa8fef94bafee3ea9c1ad1",
-    "apps/companion/src/web-server.ts": "ed408ae5f8eda71ba7e64ecfd8321ad795e52e55010e5f9e9880b916b8d3bc8c",
+    "apps/companion/src/web-entry.ts": "1314ba4a1d0d5da8eaf01274e7d88d3820748266607c525f0b061be63d9472bf",
+    "apps/companion/src/web-server.ts": "b5c40f181483d6f731c859ac15872cd18b2b65f7e48fe2fef33e40e54c4c45ba",
     "apps/companion/tailwind.config.ts": "8d86daecb80fa012567e1c6d1230795f66f4f1785b561d92090c5f6371765555",
     "apps/companion/vendor/ledger-live-4.23.0/LICENSE.txt": "c43174d759c87c3e8a423cb0cb6ee914feddc4eac5176350fd24674857a8ef5f",
     "apps/companion/vendor/ledger-live-4.23.0/adaptation.patch": "92d14dec5bb0a775b811e6b2d2a3aa0e9b4509947c2152f9df5326000dcb3e89",
@@ -9676,14 +9687,14 @@
     "apps/companion/vendor/ledger-live-4.23.0/original/modals/Send/steps/StepRecipient.tsx": "76481debeab8cba69cdae57ad89c1b4c50165db2d303b31c780574c2db5da56d",
     "apps/companion/vendor/ledger-live-4.23.0/original/modals/Send/steps/StepSummary.tsx": "b6e851c1f39a31ea8215dec7931ad3fa3e0cb89d224ecf5bc8a4acaeddf25a4d",
     "apps/companion/vendor/ledger-live-4.23.0/provenance.json": "569e9daa79f1179f60ea77e5c278dd430f206c60e1d76772d4e1cb54d4a12bea",
-    "apps/companion/vite.config.ts": "fe2ce7300d7c341e1c0760fc895028bda2f0e0ed642c708a65ddd818edbe9cf5",
+    "apps/companion/vite.config.ts": "83839a3ad1545a68cd259c0eae274e15b2146abbc49c5840388b31f8efb63dad",
     "apps/ledger-bitcoin-prl/UPSTREAM.json": "7c4d361fe5e6355f22b8f40e4a9ad993d88aad49a3b0d5631481ef211aa432a8",
     "apps/ledger-bitcoin-prl/UPSTREAM_TREE.txt": "c9341199651ab43eaa2d0248a5c011c70bec639e77225b9f26aaebdff3cef1b3",
     "apps/ledger/packaging-requirements.txt": "af04b740c42c3e42ddcb673471deaab3c3b67f7c3a0b1622b5c464ccd982fee9",
-    "docs/implementation-status.md": "fe84a5fa689a91ff581967b83290b7bfade19f603b507ce83af66019e23dd15e",
+    "docs/implementation-status.md": "ed77fe6e89a7dc42bae364c65f7da1698e08864b6c46ea6592a936f0fac6b08c",
     "docs/licensing.md": "0145fe001e68952f2d6d02c4edcc956ba17003149a8363390944503904f18a5b",
-    "docs/live-app.md": "2256ee75e76c22c3b02190dd45d1774c51958a1aeb60d320f75c02441c9f377d",
-    "docs/test-evidence.md": "112220e007f4d3062ab6c174c847334d0b011a7a7d18d532b385aa3049355393",
+    "docs/live-app.md": "aa8bc0660b9a01f9c0874b98eb3567394678d8997a9a62cd5908943252ddcae0",
+    "docs/test-evidence.md": "8a09f1641edf9c0dc5799a66b4ba259f80e27d7c9d39568c691f4ced0a1560be",
     "node_modules/@inversifyjs/common/lib/esm/index.js": "96cf7f4bdbd75fa6b10472bb534562056d7892d9fa980dbc0dcc5f3adb7863a8",
     "node_modules/@inversifyjs/container/lib/esm/index.js": "6daf96b7e0314c428b94a3263a168996d3b5f239e59ec8450df7a6d904820762",
     "node_modules/@inversifyjs/core/lib/esm/index.js": "bb85132a5a004cbc14adf3909e025a2204647af261d41b6bc1827560d56dea52",
@@ -10310,7 +10321,7 @@
     "node_modules/zod/v4/core/versions.js": "63b38035ff5e2a5a5cfe5665e271af72b0cf9791e770dccf5e99d977064fb96c",
     "node_modules/zod/v4/locales/en.js": "d5930e10d137b048b37823e168e4177947e1f696ada8419c71bb0d32da4333c0",
     "package-lock.json": "7ffdfb4ad695aab839152b6423d6660e19d0b3044b5579e6f1621c76a999ad50",
-    "package.json": "dd699fe237fd9d1c8e207171767016ab89d12432f079a2c6f90c45d4ad8791c0",
+    "package.json": "377ca4d89d4d843e1d662533e3d2696bac29a0f35f3ff5f074cf18f425cfbb69",
     "packages/bitcoin-prl-adapter/package.json": "3e74a3437d5e7ddb755fdc5f4014963cd7a539f600d0029e22aa86c9bd903012",
     "packages/bitcoin-prl-adapter/src/client.ts": "cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db",
     "packages/bitcoin-prl-adapter/src/policy.ts": "31e0276b65e1d8d7775c1df702336594e3abb10b71a711e82579e3612b5990f4",
@@ -10337,7 +10348,7 @@
     "packages/wallet/src/recovery.ts": "ae0ec6a09963e05359ec70a744a023735c14d9dd9ed99d64004e62e6b4295fac",
     "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
     "tools/bitcoin-prl-port/README.md": "bd6b34192dc642a577f9d88b38e73ff5d736e47e6dc9456136efb4ed796bc207",
-    "tools/bitcoin-prl-port/build.sh": "e0357cb291159a450c23bf7104745e6d1dcfb9d2e7f4db729dee6dbf2ae1da6f",
+    "tools/bitcoin-prl-port/build.sh": "782070fd3c64e2313c542a446954d03d4483857c79f518eedb02024b8fa379c0",
     "tools/bitcoin-prl-port/provenance.py": "025c76bc330b326a3dd3374c020c27c3bc1444529fff8053f417c0dca20bc2b3",
     "tools/dependency-supply-review/generate-notices.mjs": "0907824aa755f470120d14607e4c11f26f94a1d5a25b085ad31eca384c259124",
     "tools/dependency-supply-review/notices.test.mjs": "faaa1be662f4272adfd6af5e352e0a6ed352419466a20b22cc821d3d59b1cc5a",

@@ -23,7 +23,7 @@ function check(name, fn) {
   cases.push({ name, pass: true });
 }
 const sample = JSON.parse(
-  await read("apps/companion/public/example-watch.json"),
+  await read("apps/companion/test/fixtures/example-watch.json"),
 );
 const account = sdk.accountFromJson(sample.account);
 check(

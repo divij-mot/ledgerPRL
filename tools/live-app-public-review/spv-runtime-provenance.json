@@ -1,0 +1,62 @@
+{
+  "repository": "https://github.com/pearl-research-labs/pearl",
+  "tag": "v1.4.11",
+  "commit": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4",
+  "assetUrl": "https://github.com/pearl-research-labs/pearl/releases/download/v1.4.11/pearl-darwin-arm64-v1.4.11.tar.gz",
+  "assetBytes": 53652814,
+  "archiveSha256": "27324c98bb6288c29db86165d124b4f48f3a0806aee97354bbd9288287c6922b",
+  "apiAssetDigest": "sha256:27324c98bb6288c29db86165d124b4f48f3a0806aee97354bbd9288287c6922b",
+  "checksumsSha256": "eaa2abd2547c79208da69fcc01924dbbf1a848cdba4e6053745ca97075f64d13",
+  "extraction": "Validated relative paths; regular files/directories only; no links/special files/setuid/setgid; manually extracted into new private temporary directory; normalized modes700/600; nothing installed or executed.",
+  "runtimeDirectory": "/private/tmp/pearl-spv-runtime-ygy09w9x",
+  "files": [
+    {
+      "name": "oyster",
+      "bytes": 46340850,
+      "sha256": "64a5bc334ae797339ddfc9d6615afdfeb2b3972deb82eb891c5cd75612dbdf64"
+    },
+    {
+      "name": "oystercli",
+      "bytes": 14951026,
+      "sha256": "405fb31ee6b99e4eb0b733a5686d92c3c70629fc30970d787f77b580d349d5d5"
+    },
+    {
+      "name": "pearld",
+      "bytes": 34913842,
+      "sha256": "0d3a83ba76048bc10cb9ce70b915a20b22f9d102fa4fce2b1edb209a1e39c8d7"
+    },
+    {
+      "name": "prlctl",
+      "bytes": 11160946,
+      "sha256": "0ed782447c32229b3d34d3dc87aa6ec5cbb69f0adcce9bfcf1055d74211502d3"
+    }
+  ],
+  "helpInspection": {
+    "calls": [
+      {
+        "flag": "--version",
+        "exit": 0,
+        "version": "oyster version 1.4.11+2bb142f",
+        "helpRelevantLines": []
+      },
+      {
+        "flag": "--help",
+        "exit": 1,
+        "version": null,
+        "helpRelevantLines": [
+          "-C, --configfile=            Path to configuration file (default:",
+          "--create                 Create the wallet if it does not exist",
+          "--createtemp             Create a temporary simulation wallet",
+          "--createfromfile=        Create a wallet from a JSON file with",
+          "-A, --appdata=               Application data directory for wallet config,",
+          "the wallet was created with one",
+          "--usespv                 Enables the experimental use of SPV rather than",
+          "-b, --datadir=               DEPRECATED -- use appdata instead"
+        ]
+      }
+    ],
+    "createdDataDirectory": false,
+    "createdConfig": false,
+    "walletStarted": false
+  }
+}

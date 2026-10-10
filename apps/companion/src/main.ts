@@ -21,7 +21,7 @@ import {
   scriptToAddress,
   parseGrains,
 } from "@pearl-ledger/sdk";
-import { readBoundedText, readBoundedJson } from "@pearl-ledger/sdk";
+import { readBoundedJson } from "@pearl-ledger/sdk";
 import {
   discoverAccount,
   type WatchSnapshot,
@@ -30,6 +30,7 @@ import {
   type PaymentRecord,
   type PaymentRequest,
   type HistoryEntry,
+  type DiscoveryResult,
   record,
   exactKeys,
   safeInteger,
@@ -81,6 +82,9 @@ import {
   quotedPayment,
   type FeeQuote,
 } from "./fee-quotes.js";
+import { localSource, waitForLocalSource } from "./local-sync.js";
+import type { LocalStatus } from "./local-source.js";
+import { LocalSession } from "./local-session.js";
 import { historyConfirmations, pageItems } from "./activity.js";
 import { sendForm, reviewFlow, receiveFlow } from "./ledger-ui/index.js";
 
@@ -88,9 +92,13 @@ const app = document.querySelector<HTMLDivElement>("#app")!;
 const hostedMode = window.location?.protocol === "https:";
 const store = new WatchStorage();
 const channel = new BroadcastChannel("pearl-ledger-watch-v1");
-let sourceMode: "node" | "public" = "node",
+let sourceMode: "node" | "public" | "local" = "node",
   privacyConsent = false,
   syncComplete = false;
+const localSession = new LocalSession();
+let localSyncAbort: AbortController | null = null;
+let localSyncProgress: LocalStatus | null = null;
+let localRefreshTimer: ReturnType<typeof setTimeout> | undefined;
 let history: HistoryEntry[] = [],
   lastUsed: [number, number] = [-1, -1];
 let page: "overview" | "receive" | "send" | "activity" = "overview";
@@ -142,6 +150,10 @@ let feeQuoteNetwork: NetworkName | null = null;
 let feeQuoteStatus = "Enter a manual fee or refresh network estimates.";
 const form = { recipient: "", amount: "", fee: "0.00001000", changeIndex: "0" };
 function clearPaymentForm() {
+  clearTimeout(localRefreshTimer);
+  localSyncAbort?.abort();
+  localSyncAbort = null;
+  localSyncProgress = null;
   feeQuotes = [];
   feeQuoteNetwork = null;
   feeQuoteStatus = "Enter a manual fee or refresh network estimates.";
@@ -313,12 +325,25 @@ async function checkNode(signal?: AbortSignal) {
   );
   const result = applyValidation(
     snapshot,
-    sourceMode === "public"
+    sourceMode === "local"
       ? await checkLightSnapshot(
-          browserPublicSource(network, privacyConsent, signal),
+          await localSource(
+            snapshot.account,
+            post,
+            signal ?? new AbortController().signal,
+          ),
           snapshot,
         )
-      : await post("/api/check", JSON.parse(snapshotToJson(snapshot)), signal),
+      : sourceMode === "public"
+        ? await checkLightSnapshot(
+            browserPublicSource(network, privacyConsent, signal),
+            snapshot,
+          )
+        : await post(
+            "/api/check",
+            JSON.parse(snapshotToJson(snapshot)),
+            signal,
+          ),
   );
   signal.throwIfAborted();
   snapshot = result.snapshot;
@@ -352,7 +377,32 @@ function render() {
 }
 function lightCard() {
   if (!account || !["mainnet", "testnet2"].includes(network)) return "";
-  return `<section class="card sync-card"><div><h2>${syncComplete ? "Account synced" : "Sync your account"}</h2><p class="hint">${syncComplete && snapshot ? `Last synced at block ${snapshot.tip.height}. ` : ""}</p><label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy)}>Use Pearl’s public indexer (shares wallet addresses)</label></div>${walletButton("sync-public", syncComplete ? "Sync account" : "Sync balance & history", busy || !privacyConsent)}<details class="sync-details"><summary>About public sync</summary><p class="hint">Queries share your addresses, transactions and IP with the wallet host and Pearl’s public service. Balances rely on its responses.</p><p class="hint">Service: ${network === "mainnet" ? "blockbook.pearlresearch.ai" : "blockbook.testnet.pearlresearch.ai"}. Public account keys stay in your browser.</p></details></section>`;
+  if (
+    !hostedMode &&
+    network === "mainnet" &&
+    account.account === 0 &&
+    !privacyConsent
+  ) {
+    const progress = localSyncProgress;
+    const current = progress
+      ? Math.min(progress.headerHeight, progress.filterHeight)
+      : 0;
+    const target = progress?.bestPeerHeight ?? 0;
+    const label = localSyncAbort
+      ? "Syncing account…"
+      : syncComplete && sourceMode === "local"
+        ? "Account synced"
+        : "Sync your account";
+    const detail = localSyncAbort
+      ? target > 0 && current < target
+        ? `Downloading blockchain · ${Math.min(99, Math.floor((current * 100) / target))}%`
+        : "Checking transactions…"
+      : syncComplete && sourceMode === "local"
+        ? "Up to date"
+        : "Blockchain data stays on this computer.";
+    return `<section class="card sync-card"><div><h2>${label}</h2><p class="hint">${detail}</p></div>${walletButton("sync-local", "Sync account", busy || !!localSyncAbort)}</section>`;
+  }
+  return `<section class="card sync-card"><div><h2>${syncComplete ? "Account synced" : "Sync your account"}</h2><p class="hint">${syncComplete && snapshot ? `Last synced at block ${snapshot.tip.height}. ` : ""}</p>${!hostedMode && network === "mainnet" && account.account === 0 ? "" : `<label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy)}>Use Pearl’s public indexer (shares wallet addresses)</label>`}</div>${walletButton("sync-public", syncComplete ? "Sync account" : "Sync balance & history", busy || !privacyConsent)}<details class="sync-details"><summary>About public sync</summary><p class="hint">Queries share your addresses, transactions and IP with the wallet host and Pearl’s public service. Balances rely on its responses.</p><p class="hint">Service: ${network === "mainnet" ? "blockbook.pearlresearch.ai" : "blockbook.testnet.pearlresearch.ai"}. Public account keys stay in your browser.</p></details></section>`;
 }
 function paymentStatus(payment: PaymentRecord): string {
   if (payment.archived) return "Confirmed";
@@ -415,19 +465,43 @@ async function syncPublic() {
     account && privacyConsent,
     "Select a public account and approve address disclosure first",
   );
+  const ownerAccount = account;
   await refreshJournal();
   syncComplete = false;
-  const owner = accountId(account),
-    minimumIndex: [number, number] = [
-      Math.max(lastUsed[0], journal.issuedReceiveThrough),
-      Math.max(lastUsed[1], journal.nextChangeIndex - 1),
-    ];
+  const minimumIndex: [number, number] = [
+    Math.max(lastUsed[0], journal.issuedReceiveThrough),
+    Math.max(lastUsed[1], journal.nextChangeIndex - 1),
+  ];
   const discovered = await discoverAccount(
     browserPublicSource(network, privacyConsent, signal),
     account,
     { minimumIndex },
   );
   signal.throwIfAborted();
+  await applyDiscovery(
+    discovered,
+    ownerAccount,
+    minimumIndex,
+    "public",
+    signal,
+  );
+}
+async function applyDiscovery(
+  discovered: DiscoveryResult,
+  ownerAccount: AccountPublicKey,
+  minimumIndex: [number, number],
+  mode: "public" | "local",
+  signal: AbortSignal,
+) {
+  signal.throwIfAborted();
+  assert(account === ownerAccount, "Account changed during sync");
+  const mayApply = () =>
+    mode !== "local" || (!busy && page !== "send" && page !== "receive");
+  // The native scan continues, but a background result must not advance the
+  // receive address or replace the watch view while the user reviews a flow.
+  // The normal refresh timer obtains fresh data once that flow has closed.
+  if (!mayApply()) return;
+  const owner = accountId(ownerAccount);
   const result = {
     ...discovered,
     snapshot: JSON.parse(snapshotToJson(discovered.snapshot)),
@@ -483,8 +557,9 @@ async function syncPublic() {
     ),
     "Invalid discovery recovery range",
   );
-  await store.mutate(owner, (j) => {
+  const applied = await store.mutate(owner, (j) => {
     signal.throwIfAborted();
+    if (!mayApply()) return false;
     // The same atomic transaction that saves the result checks for recovery
     // ranges learned by another tab while this bounded scan was in flight.
     assert(
@@ -505,8 +580,11 @@ async function syncPublic() {
         )
           delete payment.archived;
       }
+    return true;
   });
   signal.throwIfAborted();
+  assert(account === ownerAccount, "Account changed during sync");
+  if (!applied || !mayApply()) return;
   lastUsed = nextLastUsed;
   // Match a normal UTXO wallet: after discovery, offer an unused receive
   // address. The existing range guard still blocks exhausted recovery ranges.
@@ -517,17 +595,150 @@ async function syncPublic() {
   snapshot = next;
   history = nextHistory;
   historyTip = { ...next.tip };
-  sourceMode = "public";
+  sourceMode = mode;
   syncComplete = true;
   validation = null;
   selected.clear();
   // Fresh input recheck is mandatory before every signature; discovery alone never bypasses it.
-  notification = `Public account discovered through block ${next.tip.height}: ${next.coins.length} outputs and ${nextHistory.length} transactions. ${network === "testnet2" ? "This endpoint is testnet2, despite its testnet hostname." : ""}`;
+  notification =
+    mode === "local"
+      ? ""
+      : `Public account discovered through block ${next.tip.height}: ${next.coins.length} outputs and ${nextHistory.length} transactions. ${network === "testnet2" ? "This endpoint is testnet2, despite its testnet hostname." : ""}`;
 }
+async function closeLocalSession(signal?: AbortSignal) {
+  clearTimeout(localRefreshTimer);
+  localSyncAbort?.abort();
+  localSyncAbort = null;
+  localSyncProgress = null;
+  await localSession.close(
+    post,
+    signal,
+    !hostedMode && account?.network === "mainnet" && account.account === 0
+      ? account
+      : null,
+  );
+}
+async function rememberLocalAccount(owner: AccountPublicKey) {
+  if (!hostedMode && owner.network === "mainnet" && owner.account === 0)
+    await store.save("last-account", accountToJson(owner));
+}
+async function runAccountRestore(
+  label: string,
+  work: (signal: AbortSignal) => Promise<void>,
+) {
+  let completed = false;
+  await run(label, async (signal) => {
+    await work(signal);
+    completed = true;
+  });
+  if (completed) resumeLocalAccount();
+}
+function resumeLocalAccount() {
+  if (!hostedMode && account?.network === "mainnet" && account.account === 0)
+    startLocalSync();
+}
+function startLocalSync() {
+  if (
+    busy ||
+    localSyncAbort ||
+    !account ||
+    hostedMode ||
+    account.network !== "mainnet" ||
+    account.account !== 0
+  )
+    return;
+  const ownerAccount = account;
+  const operation = new AbortController();
+  localSyncAbort = operation;
+  localSyncProgress = null;
+  sourceMode = "local";
+  syncComplete = false;
+  notification = "";
+  render();
+  void (async () => {
+    await refreshJournal();
+    operation.signal.throwIfAborted();
+    const minimumIndex: [number, number] = [
+      Math.max(lastUsed[0], journal.issuedReceiveThrough),
+      Math.max(lastUsed[1], journal.nextChangeIndex - 1),
+    ];
+    const source = await waitForLocalSource(
+      ownerAccount,
+      minimumIndex,
+      (route, body, signal) =>
+        route === "/api/local/start"
+          ? localSession.start(
+              ownerAccount,
+              (body as { minimumIndex: unknown }).minimumIndex,
+              post,
+            )
+          : post(route, body, signal),
+      operation.signal,
+      (progress) => {
+        if (account === ownerAccount && localSyncAbort === operation) {
+          localSyncProgress = progress;
+          if (!busy && (page === "overview" || page === "activity")) render();
+        }
+      },
+    );
+    // A retained native profile may know addresses beyond a fresh browser's
+    // journal gap. Preserve that proven recovery range in the SDK scan too.
+    const effectiveMinimum: [number, number] = [
+      Math.max(minimumIndex[0], source.status.lastUsed[0]),
+      Math.max(minimumIndex[1], source.status.lastUsed[1]),
+    ];
+    const discovered = await discoverAccount(source, ownerAccount, {
+      minimumIndex: effectiveMinimum,
+    });
+    await applyDiscovery(
+      discovered,
+      ownerAccount,
+      effectiveMinimum,
+      "local",
+      operation.signal,
+    );
+  })()
+    .catch((error) => {
+      if (!operation.signal.aborted && account === ownerAccount) {
+        notification =
+          error instanceof Error ? error.message : "Local sync unavailable";
+        notificationType = "error";
+      }
+    })
+    .finally(() => {
+      if (localSyncAbort === operation) {
+        localSyncAbort = null;
+        if (!busy) render();
+        if (
+          !operation.signal.aborted &&
+          account === ownerAccount &&
+          sourceMode === "local"
+        )
+          scheduleLocalRefresh(ownerAccount);
+      }
+    });
+}
+function scheduleLocalRefresh(owner: AccountPublicKey) {
+  clearTimeout(localRefreshTimer);
+  localRefreshTimer = setTimeout(() => {
+    if (account !== owner || sourceMode !== "local") return;
+    if (
+      busy ||
+      localSyncAbort ||
+      settingsOpen ||
+      page === "send" ||
+      page === "receive"
+    )
+      scheduleLocalRefresh(owner);
+    else startLocalSync();
+  }, 30_000);
+  localRefreshTimer.unref?.();
+}
+
 function overview(b: ReturnType<typeof balances> | null) {
   if (!account)
     return `<section class="connect-panel"><h2>Add your Pearl account</h2><p>Open Pearl on your Ledger to get started.</p>${walletButton("connect-inline", "Add account", busy)}</section>`;
-  return `<section class="balance-card"><p class="hint">Available balance</p><div class="balance">${b ? formatPrl(b.available) : "—"}<small>PRL</small></div><div class="actions account-actions"><button data-nav="receive" ${disabled(busy)}>Receive</button><button data-nav="send" ${disabled(busy)}>Send</button></div>${b && (b.immature || b.reserved || b.pending) ? `<p class="hint">${b.immature ? `${money(b.immature)} immature · ` : ""}${b.reserved ? `${money(b.reserved)} in pending payments · ` : ""}${b.pending ? `${money(b.pending)} unconfirmed` : ""}</p>` : ""}</section>${lightCard()}${history.length ? historyCard() : `<section class="transactions"><h2>Transactions</h2><p class="hint">${syncComplete ? "No transactions yet" : "Sync your account to see transactions"}</p></section>`}`;
+  return `<section class="balance-card"><p class="hint">Available balance</p><div class="balance">${b ? formatPrl(b.available) : "—"}<small>PRL</small></div><div class="actions account-actions"><button data-nav="receive" ${disabled(busy)}>Receive</button><button data-nav="send" ${disabled(busy || !!localSyncAbort)}>Send</button></div>${b && (b.immature || b.reserved || b.pending) ? `<p class="hint">${b.immature ? `${money(b.immature)} immature · ` : ""}${b.reserved ? `${money(b.reserved)} in pending payments · ` : ""}${b.pending ? `${money(b.pending)} unconfirmed` : ""}</p>` : ""}</section>${lightCard()}${history.length ? historyCard() : `<section class="transactions"><h2>Transactions</h2><p class="hint">${syncComplete ? "No transactions yet" : "Sync your account to see transactions"}</p></section>`}`;
 }
 function settings() {
   return `<details id="settings" class="settings" ${settingsOpen ? "open" : ""}><summary>Settings</summary><div class="settings-panel"><div class="section-head"><h2>Settings</h2><button id="close-settings" class="ghost">Close</button></div><section><div class="actions">${walletButton("connect", client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger", busy)}${account ? `<button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button>` : ""}</div><div class="field"><label for="network">Network</label><select id="network" ${disabled(busy || !!account)}>${Object.keys(
@@ -535,11 +746,11 @@ function settings() {
   )
     .map((n) => `<option ${network === n ? "selected" : ""}>${n}</option>`)
     .join("")}</select></div></section>
-  <details class="advanced"><summary>Advanced</summary><div class="advanced-body"><div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div>
+  <details class="advanced"><summary>Advanced</summary><div class="advanced-body">${!hostedMode && network === "mainnet" && account?.account === 0 ? `<label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy || !!localSyncAbort)}>Use the public indexer instead (shares wallet addresses)</label>` : ""}<div class="field"><label for="account-index">Account index</label><input id="account-index" type="number" min="0" max="2147483647" value="${accountIndex}" ${disabled(busy || !!account)}></div>
   ${account ? `<div class="inline-fields"><div class="field"><label for="receive-index">Receive address index</label><input id="receive-index" type="number" min="0" max="${Math.min(979, journal.issuedReceiveThrough + 1)}" value="${receiveIndex}" ${disabled(busy)}></div><div class="field"><label for="change-index">Change address index</label><input id="change-index" value="${e(form.changeIndex)}" type="number" min="${journal.nextChangeIndex}" max="2147483646" ${disabled(busy)}></div></div><p class="mono muted">${e(deriveAddress(account, 0, receiveIndex).path)}</p><div class="actions"><button id="backup-export" class="secondary" ${disabled(busy)}>Export backup</button><button id="export-public" class="secondary" ${disabled(busy)}>Export account</button><button id="save-cache" class="secondary" ${disabled(busy || !snapshot)}>Save account locally</button></div><p class="hint">Keep backups private: anyone with a signed payment can submit it.</p>` : ""}
   ${snapshot ? `<button id="${page === "send" ? "settings-check-node" : "check-node"}" class="secondary" ${disabled(busy)}>Refresh balance</button>` : ""}
-  ${notificationType === "error" && notification && walletMessage(notification) !== notification ? `<details><summary>Troubleshooting</summary><p class="hint">${e(notification)}</p></details>` : ""}<h3>Import</h3><div class="field"><label for="backup-file">Wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Balance snapshot</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><p class="hint">Public account files only. Never enter a recovery phrase.</p><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved account</button><button id="clear-cache" class="ghost" ${disabled(busy)}>Clear saved balance data</button>${hostedMode ? "" : `<button id="load-demo" class="ghost" ${disabled(busy)}>Load example</button>`}</div><p class="hint">Saved data is visible to anyone using this browser profile.</p><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Refresh payment status</button></div></details>
-  <details class="advanced"><summary>About</summary><div class="advanced-body"><p class="hint">Development build. Not audited or Ledger-approved. Use test funds only.</p><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></div></details></div></details>`;
+  ${notificationType === "error" && notification && walletMessage(notification) !== notification ? `<details><summary>Troubleshooting</summary><p class="hint">${e(notification)}</p></details>` : ""}<h3>Import</h3><div class="field"><label for="backup-file">Wallet backup</label><input id="backup-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="public-file">Public account</label><input id="public-file" type="file" accept="application/json,.json" ${disabled(busy)}><label for="snapshot-file">Balance snapshot</label><input id="snapshot-file" type="file" accept="application/json,.json" ${disabled(busy)}></div><p class="hint">Public account files only. Never enter a recovery phrase.</p><div class="actions"><button id="restore-cache" class="secondary" ${disabled(busy)}>Restore saved account</button><button id="clear-cache" class="ghost" ${disabled(busy)}>Clear saved balance data</button></div><p class="hint">Saved data is visible to anyone using this browser profile.</p><button id="reconcile" class="secondary" ${disabled(busy || !account || (sourceMode === "public" && !syncComplete))}>Refresh payment status</button></div></details>
+  <details class="advanced"><summary>About</summary><div class="advanced-body"><p class="hint">Community app. Independent security review pending.</p><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></div></details></div></details>`;
 }
 function receive(feedback = "") {
   if (!account)
@@ -706,7 +917,7 @@ function review(payment: PaymentRecord, feedback = "") {
       ? "Unusually high fee. Check it carefully before signing."
       : "",
     details: `<details class="transaction-details"><summary>Transaction details</summary><dl class="data-list"><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span>` : ""}</dd></div><div><dt>Inputs</dt><dd>${countLabel(bundle.inputs.length, "input")}</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl></details>`,
-    actions: `${payment.state === "draft" ? `${walletButton("sign", "Confirm on Ledger", busy || client?.sessionState !== "ready")} <button id="discard" class="ghost" ${disabled(busy)}>Discard draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Approved on Ledger. Your payment is ready to send." : payment.state === "accepted" ? "Payment submitted. Confirmation is still being checked. Retrying sends the same payment." : "We could not confirm whether this payment was received. It may already be sent. Retry only this same payment; its funds remain reserved."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve sending this signed payment on ${bundle.network} through ${sourceMode === "public" ? "Pearl’s public service" : "my configured node"}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Retry same payment" : "Send payment"}</button>` : payment.archived ? '<div class="notice success">Payment confirmed. Refresh its status before any retry.</div>' : `<div class="notice error">Signing was interrupted. A signature may already exist, so these funds remain reserved. Reconnect your Ledger to recover and review this same payment.</div><button id="recover-signing" ${disabled(busy || client?.sessionState !== "ready" || !snapshot)}>Recover payment on Ledger</button>`}`,
+    actions: `${payment.state === "draft" ? `${walletButton(client?.sessionState === "ready" ? "sign" : "connect-inline", client?.sessionState === "ready" ? "Confirm on Ledger" : "Connect Ledger", busy)} <button id="discard" class="ghost" ${disabled(busy)}>Discard draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Approved on Ledger. Your payment is ready to send." : payment.state === "accepted" ? "Payment submitted. Confirmation is still being checked. Retrying sends the same payment." : "We could not confirm whether this payment was received. It may already be sent. Retry only this same payment; its funds remain reserved."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve sending this signed payment on ${bundle.network} through ${sourceMode === "public" ? "Pearl’s public service" : sourceMode === "local" ? "the local Pearl light client" : "my configured node"}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Retry same payment" : "Send payment"}</button>` : payment.archived ? '<div class="notice success">Payment confirmed. Refresh its status before any retry.</div>' : `<div class="notice error">Signing was interrupted. A signature may already exist, so these funds remain reserved. Reconnect your Ledger to recover and review this same payment.</div><button id="recover-signing" ${disabled(busy || client?.sessionState !== "ready" || !snapshot)}>Recover payment on Ledger</button>`}`,
   });
 }
 function activity() {
@@ -784,10 +995,11 @@ function bind() {
       render();
     });
   click("sync-public", () => void run("Syncing account…", syncPublic));
+  click("sync-local", startLocalSync);
   document.getElementById("public-file")?.addEventListener(
     "change",
     (event) =>
-      void run("Loading account…", async (signal) => {
+      void runAccountRestore("Loading account…", async (signal) => {
         const file = (event.target as HTMLInputElement).files?.[0];
         if (!file) return;
         const owner = account;
@@ -818,6 +1030,8 @@ function bind() {
             "Public recovery range saved; opening the account was cancelled. Saved ranges remain retained.",
           );
         requireOpen();
+        await closeLocalSession(signal);
+        requireOpen();
         const previous = transport;
         await previous?.close();
         if (transport === previous) {
@@ -842,7 +1056,10 @@ function bind() {
         selected.clear();
         await refreshJournal();
         notification =
-          "Public account loaded. Approve public address disclosure to discover balances, or connect the matching Ledger.";
+          !hostedMode && a.network === "mainnet" && a.account === 0
+            ? "Public account restored. Local sync will resume; connect the matching Ledger to send."
+            : "Public account loaded. Approve public address disclosure to discover balances, or connect the matching Ledger.";
+        await rememberLocalAccount(a);
       }),
   );
   click(
@@ -860,7 +1077,7 @@ function bind() {
   document.getElementById("backup-file")?.addEventListener(
     "change",
     (event) =>
-      void run("Restoring backup…", async (signal) => {
+      void runAccountRestore("Restoring backup…", async (signal) => {
         const file = (event.target as HTMLInputElement).files?.[0];
         if (!file) return;
         const owner = account;
@@ -881,6 +1098,8 @@ function bind() {
             !signal.aborted && account === owner,
             "Backup merged; opening the restored account was cancelled. Reservations remain saved.",
           );
+        requireOpen();
+        await closeLocalSession(signal);
         requireOpen();
         await transport?.close();
         transport = null;
@@ -905,7 +1124,8 @@ function bind() {
         await refreshJournal();
         page = "activity";
         notification =
-          "Complete watch backup merged. Reservations and exact signed bytes restored; prior verification, consent and archival claims require fresh checks.";
+          "Backup restored. Reservations and exact signed bytes are retained. Sync and payment status require fresh checks.";
+        await rememberLocalAccount(backup.account);
       }),
   );
   click(
@@ -1002,7 +1222,15 @@ function bind() {
   click(
     "disconnect",
     () =>
-      void run("Closing device session", async () => {
+      void run("Closing account", async (signal) => {
+        await closeLocalSession(signal);
+        if (
+          !hostedMode &&
+          account?.network === "mainnet" &&
+          account.account === 0
+        )
+          await store.save("last-account", null);
+        clearPaymentForm();
         await transport?.close();
         transport = null;
         client = null;
@@ -1042,22 +1270,6 @@ function bind() {
         await importSnapshot(await file.text(), signal, owner);
         notification =
           "Imported public outputs. Chain and completeness claims remain unverified until checked against your source.";
-      }),
-  );
-  click(
-    "load-demo",
-    () =>
-      void run("Loading public example", async (signal) => {
-        const owner = account;
-        const response = await fetch("/example-watch.json", { signal });
-        assert(response.ok, "Example unavailable");
-        await importSnapshot(
-          await readBoundedText(response, 4 * 1024 * 1024),
-          signal,
-          owner,
-        );
-        notification =
-          "Public synthetic example loaded. These outputs are not real funds and cannot pass a real node check.";
       }),
   );
   click(
@@ -1362,7 +1574,7 @@ function bind() {
           );
         };
         requireCurrent();
-        if (source === "public")
+        if (source === "public" || source === "local")
           assert(
             request.changeIndex < 980,
             "Change index is outside light recovery bounds",
@@ -1466,6 +1678,8 @@ async function importSnapshot(
       "Snapshot recovery paths saved; opening the account was cancelled. Saved ranges remain retained.",
     );
   requireOpen();
+  await closeLocalSession(signal);
+  requireOpen();
   if (account && accountId(account) !== accountId(imported.account)) {
     const previous = transport;
     await previous?.close();
@@ -1521,6 +1735,7 @@ async function connect() {
           (transport) => ({ transport }),
           (error: unknown) => ({ error }),
         );
+  let preserveReviewedFlow = false;
   await run(
     "Open Pearl on your Ledger and approve the account.",
     async (signal) => {
@@ -1559,7 +1774,13 @@ async function connect() {
         );
         const exported = await client.exportAccount(accountIndex, signal);
         signal.throwIfAborted();
+        preserveReviewedFlow =
+          !!account &&
+          accountId(account) === accountId(exported) &&
+          (page === "send" || page === "receive");
         if (account && accountId(account) !== accountId(exported)) {
+          await closeLocalSession(signal);
+          signal.throwIfAborted();
           clearPaymentForm();
           snapshot = null;
           validation = null;
@@ -1575,6 +1796,7 @@ async function connect() {
         account = exported;
         await refreshJournal();
         signal.throwIfAborted();
+        await rememberLocalAccount(exported);
         notification = `Pearl PSBT signer connected. Public account ${exported.account} approved on the device.`;
       } catch (error) {
         await connected.close();
@@ -1587,6 +1809,17 @@ async function connect() {
       }
     },
   );
+  if (
+    account?.network === "mainnet" &&
+    account.account === 0 &&
+    !hostedMode &&
+    client?.sessionState === "ready"
+  ) {
+    // Preserve the reviewed draft/address now, then resume fresh background
+    // checks after the flow closes under the newly approved account object.
+    if (preserveReviewedFlow) scheduleLocalRefresh(account);
+    else startLocalSync();
+  }
 }
 async function signFromView(recovery = false) {
   if (busy) return;
@@ -2099,7 +2332,7 @@ type BroadcastApproval = Readonly<{
   ownerId: string;
   paymentId: string;
   network: NetworkName;
-  source: "node" | "public";
+  source: "node" | "public" | "local";
   rawTx: string;
   txid: string;
 }>;
@@ -2200,7 +2433,11 @@ async function broadcast(
   // authority again at the last synchronous boundary before sending bytes.
   requireApproval();
   const result = await post(
-    approval.source === "public" ? "/api/indexer/broadcast" : "/api/broadcast",
+    approval.source === "public"
+      ? "/api/indexer/broadcast"
+      : approval.source === "local"
+        ? "/api/local/broadcast"
+        : "/api/broadcast",
     approval.source === "public"
       ? {
           network: owner.network,
@@ -2208,7 +2445,9 @@ async function broadcast(
           rawTx: payment.rawTx,
           expectedTxid: payment.txid,
         }
-      : payload,
+      : approval.source === "local"
+        ? { owner: ownerId, payment: payload }
+        : payload,
     signal,
   );
   assert(
@@ -2231,8 +2470,7 @@ async function broadcast(
       transitionPayment(j, paymentId, "accepted");
   });
   channel.postMessage("journal");
-  notification =
-    "Node accepted the exact signed transaction. Confirmation is still pending.";
+  notification = "Payment submitted. Confirmation is pending.";
 }
 function download(name: string, text: string) {
   const url = URL.createObjectURL(
@@ -2265,3 +2503,28 @@ window.addEventListener("beforeunload", (event) => {
   void transport?.close();
 });
 render();
+// Remembering a public account never restores a device session or address approval.
+export async function restoreSavedAccount() {
+  if (hostedMode) return;
+  const initialNetwork = network;
+  await store
+    .load<unknown>("last-account")
+    .then(async (saved) => {
+      if (!saved || account || busy || network !== initialNetwork) return;
+      const restored = accountFromJson(saved);
+      if (restored.network !== "mainnet" || restored.account !== 0) return;
+      account = restored;
+      network = restored.network;
+      accountIndex = restored.account;
+      await refreshJournal();
+      render();
+      startLocalSync();
+    })
+    .catch(() => {
+      if (!account)
+        notify(
+          "Saved account could not be opened. Reconnect your Ledger.",
+          true,
+        );
+    });
+}

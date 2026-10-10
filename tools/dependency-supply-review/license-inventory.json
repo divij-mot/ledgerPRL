@@ -1,15 +1,15 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "sourceHead": "3575198a68c2408118a6eec2a5e7d88a852365ae",
+  "sourceHead": "a1b19d28de6426af91d85d0e9fa7be7361bf90be",
   "lockfileSha256": "7ffdfb4ad695aab839152b6423d6660e19d0b3044b5579e6f1621c76a999ad50",
   "scope": "Actual Rollup entry/shared-chunk and worker graph plus watched CSS/preset build inputs, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
   "bundles": [
     {
-      "file": "assets/index-lrKSkPhE.js",
+      "file": "assets/index-DsituAXt.js",
       "type": "chunk",
-      "bytes": 269800,
-      "sha256": "c88f6d85eb7a96a1cbc7e0b1eb2e0757b7f980bf427dc3f8b104bcd74a0e7272",
+      "bytes": 269833,
+      "sha256": "9db5a68f0512426919cb0a3b23304a9edbc6c02f13c8a8b0e0ee2c964ee4b6eb",
       "components": [
         "node_modules/@inversifyjs/common@1.5.0",
         "node_modules/@inversifyjs/container@1.9.1",
@@ -32,10 +32,10 @@
       ]
     },
     {
-      "file": "assets/live-vV-aJHom.js",
+      "file": "assets/live-C2LD5aR2.js",
       "type": "chunk",
-      "bytes": 445644,
-      "sha256": "2e7ee18f2e512680cc57c8f0813c768d6703bc1b874326b386e3ff1af2827af3",
+      "bytes": 445657,
+      "sha256": "b4770931f74812d79c4f54751fd84d4af1d35f16db36b5e4727cfbd738859c29",
       "components": [
         "node_modules/@ledgerhq/hw-transport@6.36.0",
         "node_modules/@ledgerhq/logs@6.19.0",
@@ -62,10 +62,10 @@
       ]
     },
     {
-      "file": "assets/main-B8SljPN6.js",
+      "file": "assets/main-4gM_CD52.js",
       "type": "chunk",
-      "bytes": 469391,
-      "sha256": "7d8925cf52ec189bccbe41f16b173babd911cfec1c6d2788e51d1b22057f2d25",
+      "bytes": 478705,
+      "sha256": "77439568269b33cdf5eb79a10b5c34c5c7ee2f43c4cbf2adae71f046ea60aa69",
       "components": [
         "node_modules/@ledgerhq/lumen-ui-react@0.1.65",
         "node_modules/@noble/curves@1.9.7",
@@ -147,17 +147,17 @@
       ]
     },
     {
-      "file": "index.html",
-      "type": "asset",
-      "bytes": 813,
-      "sha256": "22abc9607eb99a1b6eda69f0f28013c7f268f2a5326344882930a0e8caffec90",
-      "components": []
-    },
-    {
       "file": "live.html",
       "type": "asset",
       "bytes": 885,
-      "sha256": "9358ff38e987090477d3af01bc20f55acbf2b2d374d8087154afdc58ad741819",
+      "sha256": "3639070bca19a5332646a9adcd0c588bf4503c7061b85eabc42c5e0dd4a627e5",
+      "components": []
+    },
+    {
+      "file": "index.html",
+      "type": "asset",
+      "bytes": 813,
+      "sha256": "3791badf3f5fa1efd792a12d1eef01ab29120f3327d9a6ffc43144290f7917e5",
       "components": []
     }
   ],
@@ -178,7 +178,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/common",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -202,7 +202,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/container",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -226,7 +226,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/core",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -250,7 +250,7 @@
       "license": "MIT",
       "directory": "node_modules/@inversifyjs/reflect-metadata-utils",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -274,7 +274,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/device-management-kit",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -420,7 +420,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/device-transport-kit-web-hid",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -447,7 +447,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/hw-transport",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -477,7 +477,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/logs",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -577,7 +577,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/lumen-ui-react",
       "bundles": [
-        "assets/main-B8SljPN6.js",
+        "assets/main-4gM_CD52.js",
         "assets/pearl-apdu-B31ybitv.css"
       ],
       "sourceModules": {
@@ -621,7 +621,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/wallet-api-client",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -655,7 +655,7 @@
       "license": "MIT",
       "directory": "node_modules/@ledgerhq/wallet-api-core",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -780,7 +780,7 @@
       "license": "MIT",
       "directory": "node_modules/@noble/curves",
       "bundles": [
-        "assets/main-B8SljPN6.js",
+        "assets/main-4gM_CD52.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -817,7 +817,7 @@
       "license": "MIT",
       "directory": "node_modules/@noble/hashes",
       "bundles": [
-        "assets/main-B8SljPN6.js",
+        "assets/main-4gM_CD52.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -858,7 +858,7 @@
       "license": "MIT",
       "directory": "node_modules/@radix-ui/react-compose-refs",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "sourceModules": {
         "main": [
@@ -882,7 +882,7 @@
       "license": "MIT",
       "directory": "node_modules/@radix-ui/react-slot",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "sourceModules": {
         "main": [
@@ -906,7 +906,7 @@
       "license": "MIT",
       "directory": "node_modules/@scure/base",
       "bundles": [
-        "assets/main-B8SljPN6.js",
+        "assets/main-4gM_CD52.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -933,7 +933,7 @@
       "license": "MIT",
       "directory": "node_modules/@scure/bip32",
       "bundles": [
-        "assets/main-B8SljPN6.js",
+        "assets/main-4gM_CD52.js",
         "assets/backup-import.worker-Dtrkqa4Y.js"
       ],
       "sourceModules": {
@@ -960,7 +960,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/hub",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -987,7 +987,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/minimal",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1011,7 +1011,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/@sentry/utils",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1044,7 +1044,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/core",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -1236,7 +1236,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/crypto",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -1291,7 +1291,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/crypto-primitives",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -1351,7 +1351,7 @@
       "license": "MIT",
       "directory": "node_modules/bignumber.js",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -1401,7 +1401,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/class-variance-authority",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "sourceModules": {
         "main": [
@@ -1425,7 +1425,7 @@
       "license": "MIT",
       "directory": "node_modules/clsx",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "sourceModules": {
         "main": [
@@ -1449,7 +1449,7 @@
       "license": "MIT",
       "directory": "node_modules/events",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -1500,7 +1500,7 @@
       "license": "MIT",
       "directory": "node_modules/isomorphic-ws",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1524,7 +1524,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/jssha",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -1549,7 +1549,7 @@
       "license": "ISC",
       "directory": "node_modules/purify-ts",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1576,7 +1576,7 @@
       "license": "ISC",
       "directory": "node_modules/qrcode.react",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "sourceModules": {
         "main": [
@@ -1600,7 +1600,7 @@
       "license": "MIT",
       "directory": "node_modules/react",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "sourceModules": {
         "main": [
@@ -1633,7 +1633,7 @@
       "license": "MIT",
       "directory": "node_modules/react-dom",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "sourceModules": {
         "main": [
@@ -1667,7 +1667,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/reflect-metadata",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1697,7 +1697,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/rxjs",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1795,7 +1795,7 @@
       "license": "0BSD",
       "directory": "node_modules/rxjs/node_modules/tslib",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1823,7 +1823,7 @@
       "license": "ISC",
       "directory": "node_modules/semver",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1893,7 +1893,7 @@
       "license": "MIT",
       "directory": "node_modules/tailwind-merge",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "sourceModules": {
         "main": [
@@ -1941,7 +1941,7 @@
       "license": "0BSD",
       "directory": "node_modules/tslib",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1969,7 +1969,7 @@
       "license": "Unlicense",
       "directory": "node_modules/tweetnacl",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -1994,7 +1994,7 @@
       "license": "MIT",
       "directory": "node_modules/uuid",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -2021,7 +2021,7 @@
       "license": "MIT",
       "directory": "node_modules/xstate",
       "bundles": [
-        "assets/index-lrKSkPhE.js"
+        "assets/index-DsituAXt.js"
       ],
       "sourceModules": {
         "main": [
@@ -2048,7 +2048,7 @@
       "license": "MIT",
       "directory": "node_modules/zod",
       "bundles": [
-        "assets/live-vV-aJHom.js"
+        "assets/live-C2LD5aR2.js"
       ],
       "sourceModules": {
         "main": [
@@ -2088,7 +2088,7 @@
       "kind": "bundler-generated-runtime",
       "license": "MIT",
       "bundles": [
-        "assets/live-vV-aJHom.js",
+        "assets/live-C2LD5aR2.js",
         "assets/pearl-apdu-t5BlA35d.js"
       ],
       "sourceModules": {
@@ -2117,7 +2117,7 @@
       "kind": "copied-source",
       "license": "Apache-2.0",
       "bundles": [
-        "assets/main-B8SljPN6.js"
+        "assets/main-4gM_CD52.js"
       ],
       "repository": "https://github.com/LedgerHQ/app-bitcoin",
       "revision": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
@@ -2174,7 +2174,7 @@
       "kind": "copied-source",
       "license": "MIT",
       "bundles": [
-        "assets/main-B8SljPN6.js",
+        "assets/main-4gM_CD52.js",
         "assets/pearl-apdu-B31ybitv.css"
       ],
       "repository": "https://github.com/LedgerHQ/ledger-live",

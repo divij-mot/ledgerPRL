@@ -15,11 +15,11 @@ import { assertPearlApdu, type PearlDeviceProtocol } from "./pearl-apdu.js";
 /** Exact app names from apps/ledger-bitcoin-prl/Makefile. */
 export const WALLET_APP_NAMES: Readonly<Record<NetworkName, string>> =
   Object.freeze({
-    mainnet: "Pearl Dev",
-    testnet: "Pearl T1 Dev",
-    testnet2: "Pearl T2 Dev",
-    regtest: "Pearl Reg Dev",
-    simnet: "Pearl Sim Dev",
+    mainnet: "Pearl",
+    testnet: "Pearl T1",
+    testnet2: "Pearl T2",
+    regtest: "Pearl Reg",
+    simnet: "Pearl Sim",
   });
 
 const REQUIRED_METHODS = [

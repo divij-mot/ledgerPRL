@@ -19,6 +19,7 @@ import {
   importWalletBackup,
   importPublicRecovery,
   discoverAccount,
+  accountId,
   type WalletJournal,
   type WatchSnapshot,
 } from "@pearl-ledger/wallet";
@@ -102,6 +103,13 @@ test("actual snapshot import persists only owned paths and fresh exports preserv
     window: { addEventListener() {} },
     BroadcastChannel: class {
       postMessage() {}
+    },
+    fetch: async (route: string, options: RequestInit) => {
+      assert.equal(route, "/api/local/close");
+      assert.deepEqual(JSON.parse(options.body as string), {
+        owner: accountId(publicAccount),
+      });
+      return new Response(JSON.stringify({ closed: true }));
     },
   });
   URL.createObjectURL = (blob) => {
@@ -259,6 +267,12 @@ export async function otherTab(receive, change) {
     url: string | URL | Request,
     init?: RequestInit,
   ) => {
+    if (url === "/api/local/close") {
+      assert.deepEqual(JSON.parse(String(init!.body)), {
+        owner: accountId(publicAccount),
+      });
+      return new Response(JSON.stringify({ closed: true }));
+    }
     assert.equal(url, "/api/indexer/read");
     const request = JSON.parse(String(init!.body)) as {
       network: string;

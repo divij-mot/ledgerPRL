@@ -234,7 +234,7 @@ export class BlockbookSource implements WatchSource {
   }
 }
 export async function checkLightSnapshot(
-  source: BlockbookSource,
+  source: WatchSource,
   snapshot: WatchSnapshot,
 ): Promise<ChainValidation> {
   assert(

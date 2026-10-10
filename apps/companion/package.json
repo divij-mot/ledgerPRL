@@ -10,7 +10,8 @@
     "bridge": "node --import tsx src/bridge-main.ts",
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test test/*.test.ts",
-    "web": "node --import tsx src/web-server.ts"
+    "web": "node --import tsx src/web-server.ts",
+    "local": "node --import tsx src/local-main.ts"
   },
   "dependencies": {
     "@ledgerhq/device-management-kit": "1.11.0",

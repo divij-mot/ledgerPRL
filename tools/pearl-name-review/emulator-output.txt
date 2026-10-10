@@ -1,0 +1,226 @@
+Built nanos2 mainnet: /workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-mainnet/app.elf
+Built nanos2 regtest: /workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-regtest/app.elf
+EVIDENCE /workspace/evidence/mainnet-p2tr
+UI nanosp account: Confirm public key
+UI nanosp account: Network | Mainnet
+UI nanosp account: Path | 86'/808276'/0'
+UI nanosp account: Public key (1/3) | xpub6CmLJcTUDaYD | WTB7Qf8HgVhHB28Z | ErtQv1vZF84Ef91odK
+UI nanosp account: Public key (2/3) | rnaD2jtCr4xSe5VJPRf | zPJ8mTwt3uaMZ59hj | H9SZpzsactK6tSXSmv
+UI nanosp account: Public key (3/3) | qcbXjbA
+UI nanosp account: Approve public key
+UI nanosp address: Public key | approved
+UI nanosp address: Verify Pearl | address
+UI nanosp address: Address (1/2) | prl1pdmqd2wzd3e2u | nrkvq880t24acsrf8zff | zqjqr356pmd93cve9e
+UI nanosp address: Address (2/2) | qs4u7tjx
+UI nanosp address: Network | Mainnet
+UI nanosp address: Path | m/86'/808276'/0'/0/0
+UI nanosp address: Confirm
+UI nanosp sign: Address verified
+UI nanosp sign: Loading transaction
+UI nanosp sign: Review transaction | to send PRL
+UI nanosp sign: Network | Mainnet
+UI nanosp sign: From account | m/86'/808276'/0'
+UI nanosp sign: Amount | 90071992.5474 PRL
+UI nanosp sign: To (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e
+UI nanosp sign: To (2/2) | 8sfm7dk5
+UI nanosp sign: Change amount | 9.99999993 PRL
+UI nanosp sign: Change...ess (1/2) | prl1p7ear3npj7rlxjdp | mr8kxjxendgw9kzqj2c | 0fdppggs4z8kumxs0s
+UI nanosp sign: Change...ss (2/2) | w26w9t
+UI nanosp sign: Change path | m/86'/808276'/0'/1/0
+UI nanosp sign: Fees | 0.00001 PRL
+UI nanosp sign: Sign transaction
+UI nanosp sign: Signing transaction
+PASS nanosp: tagged app-bitcoin PRL fork, full account/address/signature proof
+EVIDENCE /workspace/evidence/mainnet-p2mr
+UI nanosp account: Confirm public key
+UI nanosp account: Network | Mainnet
+UI nanosp account: Path | 86'/808276'/0'
+UI nanosp account: Public key (1/3) | xpub6CmLJcTUDaYD | WTB7Qf8HgVhHB28Z | ErtQv1vZF84Ef91odK
+UI nanosp account: Public key (2/3) | rnaD2jtCr4xSe5VJPRf | zPJ8mTwt3uaMZ59hj | H9SZpzsactK6tSXSmv
+UI nanosp account: Public key (3/3) | qcbXjbA
+UI nanosp account: Approve public key
+UI nanosp address: Public key | approved
+UI nanosp address: Verify Pearl | address
+UI nanosp address: Address (1/2) | prl1pdmqd2wzd3e2u | nrkvq880t24acsrf8zff | zqjqr356pmd93cve9e
+UI nanosp address: Address (2/2) | qs4u7tjx
+UI nanosp address: Network | Mainnet
+UI nanosp address: Path | m/86'/808276'/0'/0/0
+UI nanosp address: Confirm
+UI nanosp sign: Address verified
+UI nanosp sign: Loading transaction
+UI nanosp sign: Review transaction | to send PRL
+UI nanosp sign: Network | Mainnet
+UI nanosp sign: Recipient type | P2MR
+UI nanosp sign: From account | m/86'/808276'/0'
+UI nanosp sign: Amount | 90071992.5474 PRL
+UI nanosp sign: To | prl1zlllllllllllllllllllllllllllll | llllllllllllllllllllllsns0kzn
+UI nanosp sign: Change amount | 9.99999993 PRL
+UI nanosp sign: Change...ess (1/2) | prl1p7ear3npj7rlxjdp | mr8kxjxendgw9kzqj2c | 0fdppggs4z8kumxs0s
+UI nanosp sign: Change...ss (2/2) | w26w9t
+UI nanosp sign: Change path | m/86'/808276'/0'/1/0
+UI nanosp sign: Fees | 0.00001 PRL
+UI nanosp sign: Sign transaction
+UI nanosp sign: Signing transaction
+PASS nanosp: tagged app-bitcoin PRL fork, full account/address/signature proof
+EVIDENCE /workspace/evidence/regtest-p2tr
+UI nanosp account: Confirm public key
+UI nanosp account: Network | Regtest
+UI nanosp account: Path | 86'/1'/0'
+UI nanosp account: Public key (1/3) | tpubDDXRVY4eRY4p | 4iqLUQNQokx89YLZE | pTyA8UdLVYRMV8Ha
+UI nanosp account: Public key (2/3) | cVdwHRi1TWKMSY3k | h8WpNBA4kB4Xet3h | CxxVvSw83DZ5fhqiSy
+UI nanosp account: Public key (3/3) | sSsYCWJ7k79E
+UI nanosp account: Approve public key
+UI nanosp address: Public key | approved
+UI nanosp address: Verify Pearl | address
+UI nanosp address: Address (1/2) | rprl1pzh75rtx74l85v2 | xqfr5uln7mhy40vyqz | m68ml4yngcqy9v085t
+UI nanosp address: Address (2/2) | qqjd9fxm
+UI nanosp address: Network | Regtest
+UI nanosp address: Path | m/86'/1'/0'/0/0
+UI nanosp address: Confirm
+UI nanosp sign: Address verified
+UI nanosp sign: Loading transaction
+UI nanosp sign: Network | Regtest
+UI nanosp sign: From account | m/86'/1'/0'
+UI nanosp sign: Amount | 90071992.5474 PRL
+UI nanosp sign: To (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924
+UI nanosp sign: To (2/2) | e8scdxtvf
+UI nanosp sign: Change amount | 9.99999993 PRL
+UI nanosp sign: Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7
+UI nanosp sign: Change...ss (2/2) | smy9l6m
+UI nanosp sign: Change path | m/86'/1'/0'/1/0
+UI nanosp sign: Fees | 0.00001 PRL
+UI nanosp sign: Sign transaction
+UI nanosp sign: Signing transaction
+PASS nanosp: tagged app-bitcoin PRL fork, full account/address/signature proof
+EVIDENCE /workspace/evidence/regtest-p2mr
+UI nanosp account: Confirm public key
+UI nanosp account: Network | Regtest
+UI nanosp account: Path | 86'/1'/0'
+UI nanosp account: Public key (1/3) | tpubDDXRVY4eRY4p | 4iqLUQNQokx89YLZE | pTyA8UdLVYRMV8Ha
+UI nanosp account: Public key (2/3) | cVdwHRi1TWKMSY3k | h8WpNBA4kB4Xet3h | CxxVvSw83DZ5fhqiSy
+UI nanosp account: Public key (3/3) | sSsYCWJ7k79E
+UI nanosp account: Approve public key
+UI nanosp address: Public key | approved
+UI nanosp address: Verify Pearl | address
+UI nanosp address: Address (1/2) | rprl1pzh75rtx74l85v2 | xqfr5uln7mhy40vyqz | m68ml4yngcqy9v085t
+UI nanosp address: Address (2/2) | qqjd9fxm
+UI nanosp address: Network | Regtest
+UI nanosp address: Path | m/86'/1'/0'/0/0
+UI nanosp address: Confirm
+UI nanosp sign: Address verified
+UI nanosp sign: Loading transaction
+UI nanosp sign: Review transaction | to send PRL
+UI nanosp sign: Network | Regtest
+UI nanosp sign: Recipient type | P2MR
+UI nanosp sign: From account | m/86'/1'/0'
+UI nanosp sign: Amount | 90071992.5474 PRL
+UI nanosp sign: To | rprl1zllllllllllllllllllllllllllll | lllllllllllllllllllllllszxhscw
+UI nanosp sign: Change amount | 9.99999993 PRL
+UI nanosp sign: Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7
+UI nanosp sign: Change...ss (2/2) | smy9l6m
+UI nanosp sign: Change path | m/86'/1'/0'/1/0
+UI nanosp sign: Fees | 0.00001 PRL
+UI nanosp sign: Sign transaction
+UI nanosp sign: Signing transaction
+PASS nanosp: tagged app-bitcoin PRL fork, full account/address/signature proof
+EVIDENCE /workspace/evidence/adversarial
+UI nanosp account: Confirm public key
+UI nanosp account: Network | Regtest
+UI nanosp account: Path | 86'/1'/0'
+UI nanosp account: Public key (1/3) | tpubDDXRVY4eRY4p | 4iqLUQNQokx89YLZE | pTyA8UdLVYRMV8Ha
+UI nanosp account: Public key (2/3) | cVdwHRi1TWKMSY3k | h8WpNBA4kB4Xet3h | CxxVvSw83DZ5fhqiSy
+UI nanosp account: Public key (3/3) | sSsYCWJ7k79E
+UI nanosp account: Approve public key
+PASS zero-inputs
+PASS zero-outputs
+PASS oversized-input-map-uint64
+PASS trailing-input-map-commitment
+PASS oversized-output-map
+PASS trailing-output-map-commitment
+PASS zero-progress-policy
+PASS zero-progress-merkle-leaf
+PASS zero-progress-stream
+PASS zero-progress-merkle-proof
+PASS preimage-trailing-response
+PASS merkle-proof-trailing-response
+PASS previous-tx-over-65536-bytes
+PASS missing-network
+PASS wrong-network-id
+PASS wrong-genesis
+PASS wrong-binding-schema
+PASS trailing-binding-byte
+PASS wrong-psbt-version
+PASS wrong-tx-version
+PASS nonzero-locktime
+PASS modifiable-transaction
+PASS count-mismatch
+PASS unknown-global
+PASS nonzero-wallet-hmac
+PASS trailing-apdu
+PASS forbidden-input-11
+PASS forbidden-input-12
+PASS forbidden-input-15
+PASS forbidden-input-18
+PASS forbidden-input-1b
+PASS forbidden-input-07
+PASS forbidden-input-08
+PASS sighash-all-forbidden
+PASS sighash-anyonecanpay-forbidden
+PASS rbf-sequence-forbidden
+PASS missing-sequence
+PASS missing-witness-utxo
+PASS missing-internal-key
+PASS wrong-internal-key
+PASS wrong-derivation-key
+PASS taproot-leafhash-forbidden
+PASS wrong-coin-origin
+PASS hardened-address-index
+PASS duplicate-outpoint
+PASS input-individual-max-plus-one
+PASS input-sum-max-plus-one
+PASS output-individual-max-plus-one
+PASS output-sum-max-plus-one
+PASS zero-recipient-amount
+PASS zero-change-amount
+PASS zero-input-amount
+PASS negative-fee
+PASS legacy-recipient-forbidden
+PASS segwit0-recipient-forbidden
+PASS segwit3-recipient-forbidden
+PASS p2tr-zero-invalid-point
+PASS p2tr-field-modulus
+PASS p2tr-invalid-point
+PASS p2mr-change-forbidden
+PASS forged-change-script
+PASS wrong-change-internal-key
+PASS unmarked-second-recipient
+PASS output-taptree-forbidden
+PASS invalid-merkle-proof
+PASS nanosp: 75 native hostile-host rejection cases
+EVIDENCE /workspace/evidence/rejection/deny-and-restart-cleanly
+UI nanosp account: Confirm public key
+UI nanosp account: Network | Regtest
+UI nanosp account: Path | 86'/1'/0'
+UI nanosp account: Public key (1/3) | tpubDDXRVY4eRY4p | 4iqLUQNQokx89YLZE | pTyA8UdLVYRMV8Ha
+UI nanosp account: Public key (2/3) | cVdwHRi1TWKMSY3k | h8WpNBA4kB4Xet3h | CxxVvSw83DZ5fhqiSy
+UI nanosp account: Public key (3/3) | sSsYCWJ7k79E
+UI nanosp account: Approve public key
+UI nanosp final-before-fault: Sign transaction
+UI nanosp deny: Reject transaction
+UI nanosp fresh-review: Transaction rejected
+UI nanosp fresh-review: Loading transaction
+UI nanosp fresh-review: Review transaction | to send PRL
+UI nanosp fresh-review: Network | Regtest
+UI nanosp fresh-review: From account | m/86'/1'/0'
+UI nanosp fresh-review: Amount | 90071992.5474 PRL
+UI nanosp fresh-review: To (1/2) | rprl1ptkfg5hcsgxwuu | 5qf3j9q2uk9cmyc8n0 | u29d3eyhf8q069j924
+UI nanosp fresh-review: To (2/2) | e8scdxtvf
+UI nanosp fresh-review: Change amount | 9.99999993 PRL
+UI nanosp fresh-review: Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7
+UI nanosp fresh-review: Change...ss (2/2) | smy9l6m
+UI nanosp fresh-review: Change path | m/86'/1'/0'/1/0
+UI nanosp fresh-review: Fees | 0.00001 PRL
+UI nanosp fresh-review: Sign transaction
+UI nanosp fresh-review: Signing transaction
+PASS nanosp deny-and-restart-cleanly
+PASS nanosp: 1 native review lifecycle cases; /workspace/evidence/rejection

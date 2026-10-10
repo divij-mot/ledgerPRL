@@ -1,0 +1,81 @@
+{
+  "executableSha256": "33a890f49cfc771e318f5a26ef68553aeac60a37a529077bb8929babf07b8214",
+  "sourceCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+  "broadcast": false,
+  "initial": {
+    "ready": true,
+    "synced": true,
+    "needsRegistration": false,
+    "tip": {
+      "height": 125837,
+      "hash": "8d6ad765e7fdc525969aa37b1923405efb30559fc4b235e4a9e06974672edf58"
+    },
+    "headerHeight": 125837,
+    "filterHeight": 125837,
+    "bestPeerHeight": 125837,
+    "connections": 5,
+    "lastUsed": [
+      -1,
+      -1
+    ],
+    "registeredThrough": [
+      19,
+      19
+    ]
+  },
+  "resume": true,
+  "readCancellationPreservedSync": true,
+  "afterExtension": {
+    "ready": true,
+    "synced": true,
+    "needsRegistration": false,
+    "tip": {
+      "height": 125837,
+      "hash": "8d6ad765e7fdc525969aa37b1923405efb30559fc4b235e4a9e06974672edf58"
+    },
+    "headerHeight": 125837,
+    "filterHeight": 125837,
+    "bestPeerHeight": 125837,
+    "connections": 6,
+    "lastUsed": [
+      -1,
+      -1
+    ],
+    "registeredThrough": [
+      20,
+      19
+    ]
+  },
+  "discovery": {
+    "complete": true,
+    "coverage": {
+      "externalScannedThrough": 20,
+      "changeScannedThrough": 19,
+      "gapLimit": 20
+    },
+    "coins": 0,
+    "history": 0
+  },
+  "afterRestart": {
+    "ready": true,
+    "synced": true,
+    "needsRegistration": false,
+    "tip": {
+      "height": 125837,
+      "hash": "8d6ad765e7fdc525969aa37b1923405efb30559fc4b235e4a9e06974672edf58"
+    },
+    "headerHeight": 125837,
+    "filterHeight": 125837,
+    "bestPeerHeight": 125837,
+    "connections": 3,
+    "lastUsed": [
+      -1,
+      -1
+    ],
+    "registeredThrough": [
+      20,
+      19
+    ]
+  },
+  "ok": true
+}

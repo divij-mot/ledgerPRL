@@ -10,11 +10,11 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
   },
   "bundles": [
     {
-      "file": "assets/index-lrKSkPhE.js",
+      "file": "assets/index-DsituAXt.js",
       "components": 18
     },
     {
-      "file": "assets/live-vV-aJHom.js",
+      "file": "assets/live-C2LD5aR2.js",
       "components": 13
     },
     {
@@ -22,7 +22,7 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
       "components": 1
     },
     {
-      "file": "assets/main-B8SljPN6.js",
+      "file": "assets/main-4gM_CD52.js",
       "components": 15
     },
     {
@@ -50,11 +50,11 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
       "components": 4
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "components": 0
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "components": 0
     }
   ],

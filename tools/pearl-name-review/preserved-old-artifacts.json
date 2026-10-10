@@ -1,0 +1,8 @@
+{
+  "workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-regtest/app.hex": "cc104df3981bf51eb1226db01866b7a4dd5e4ed892ec878c718cca579397ff0b",
+  "workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-regtest/app.elf": "113a556b2c3708f3aa2edf04467bb204d4f9fd510c78c9f015ae50acd9d48446",
+  "workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-regtest/app.map": "cb1a39665b4c69a0dbd4ceb4ce58a21627e28d4df2975067b220e87f9f21ea14",
+  "workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-mainnet/app.hex": "a5b6afa5833f80dab93e404f0f5e7439f9e10c66614ae7434cde15682bcceacf",
+  "workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-mainnet/app.elf": "729df866b5168192c50abf0904ee31db8f5b8edcf3cd30bd6056acb4bfacfb15",
+  "workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-mainnet/app.map": "af046e33b7bb656ce0bacc5d84511f0b4b6eb3175ebee34a05cbf3112a522747"
+}

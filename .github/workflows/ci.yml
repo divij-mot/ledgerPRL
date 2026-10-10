@@ -51,6 +51,21 @@ jobs:
           cache: false
       - run: go run -mod=readonly . ../../fixtures/protocol-v1.json
         working-directory: tools/pearl-oracle
+  local-light-client:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff
+        with:
+          go-version: '1.26.6'
+          cache: false
+      - run: rustup toolchain install 1.90.0 --profile minimal
+      - name: Build real verifiers and test the watch-only facade
+        run: python3 scripts/build-light-client.py
   public-mainnet-read:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04

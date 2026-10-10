@@ -228,7 +228,7 @@ test("official client exchanges through native messaging and ignores web-origin 
         };
         methods.push(request.method);
         if (request.method === "device.transport")
-          assert.deepEqual(request.params, { appName: "Pearl Dev" });
+          assert.deepEqual(request.params, { appName: "Pearl" });
         const result =
           request.method === "wallet.capabilities"
             ? { methodIds: METHODS }
@@ -361,11 +361,11 @@ test("browser bundle initializes the official SDK without a preexisting Buffer g
 
 test("selected network requests its exact Pearl device app with no dashboard default", async () => {
   const expected: Record<NetworkName, string> = {
-    mainnet: "Pearl Dev",
-    testnet: "Pearl T1 Dev",
-    testnet2: "Pearl T2 Dev",
-    regtest: "Pearl Reg Dev",
-    simnet: "Pearl Sim Dev",
+    mainnet: "Pearl",
+    testnet: "Pearl T1",
+    testnet2: "Pearl T2",
+    regtest: "Pearl Reg",
+    simnet: "Pearl Sim",
   };
   for (const network of Object.keys(expected) as NetworkName[]) {
     const f = fixture();

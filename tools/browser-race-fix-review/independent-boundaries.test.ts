@@ -356,7 +356,7 @@ for (const phase of ["before-update", "after-commit"]) {
             })
           : readFileSync(
               new URL(
-                "../../apps/companion/public/example-watch.json",
+                "../../apps/companion/test/fixtures/example-watch.json",
                 import.meta.url,
               ),
               "utf8",

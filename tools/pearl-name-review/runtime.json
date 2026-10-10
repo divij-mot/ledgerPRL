@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-10",
+  "container": "ghcr.io/ledgerhq/ledger-app-builder/ledger-app-dev-tools@sha256:8d3da9179dd1b241883c769c521ee9403352b60091c80405b5bef5801a003ba2",
+  "containerArchitecture": "linux/arm64",
+  "dockerDesktop": "4.41.2",
+  "engine": "28.1.1",
+  "speculos": "0.27.1",
+  "sdk": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "sdkApi": 27,
+  "node": "24.19.0",
+  "nodeArchiveSha256": "01443c1e1a29e531ccad5a46fefa6df490d2189c49f7955904aecdbb0fe86fdc",
+  "esbuild": "0.25.12",
+  "esbuildIntegrityVerifiedAgainstLockfile": true,
+  "isolation": {
+    "network": "none",
+    "readOnlyRoot": true,
+    "capabilities": "ALL dropped",
+    "noNewPrivileges": true,
+    "user": "501:20",
+    "physicalDeviceMounts": false,
+    "dockerSocketMounted": false
+  },
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "purpose": "Pearl 0.1.0 identity/menu checkpoint",
+  "workspace": "/private/tmp/pearl-name-review-q4wm1ypq/workspace",
+  "productionDebugFlags": {
+    "DEBUG": 0,
+    "DEBUG_OVER_USB": 0
+  },
+  "physicalOperations": 0
+}

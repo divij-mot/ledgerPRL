@@ -10,6 +10,8 @@ dist/
 __pycache__/
 .venv/
 .tools/
+.local-light/
+apps/light-client/bin/
 *.log
 # Frozen public-fixture evidence; runtime replay output remains ignored.
 !tools/fp8-compatibility/results/*.log
@@ -49,3 +51,4 @@ __pycache__/
 !tools/host-gap-triage/*.log
 !tools/cli-durability-review/*.log
 !tools/connection-cleanup-review/*.log
+!tools/final-local-audit/*.log
