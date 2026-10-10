@@ -1,28 +1,27 @@
-PASS: apps/companion/public/third-party-notices.txt exactly matches the current measured dependency notices.
 {
   "counts": {
-    "npmPackageInstances": 48,
-    "npmUniqueNames": 47,
+    "npmPackageInstances": 49,
+    "npmUniqueNames": 48,
     "generatedRuntimeGroups": 1,
     "copiedSourceGroups": 2,
     "fontGroups": 1,
-    "componentGroups": 52
+    "componentGroups": 53
   },
   "bundles": [
     {
-      "file": "assets/index-DsituAXt.js",
+      "file": "assets/index-B33raa-Q.js",
       "components": 18
     },
     {
-      "file": "assets/live-C2LD5aR2.js",
+      "file": "assets/live-BoDMryH_.js",
       "components": 13
     },
     {
-      "file": "assets/pearl-apdu-t5BlA35d.js",
+      "file": "assets/pearl-apdu-DTLxDe13.js",
       "components": 1
     },
     {
-      "file": "assets/main-4gM_CD52.js",
+      "file": "assets/main-CxG4wHQb.js",
       "components": 15
     },
     {
@@ -30,11 +29,15 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
       "components": 3
     },
     {
-      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
+      "file": "assets/qr-reader-XSzcwxEi.js",
       "components": 1
     },
     {
-      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "file": "assets/jsQR-Dk72IcmC.js",
+      "components": 1
+    },
+    {
+      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "components": 1
     },
     {
@@ -42,7 +45,11 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
       "components": 1
     },
     {
-      "file": "assets/pearl-apdu-B31ybitv.css",
+      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "components": 1
+    },
+    {
+      "file": "assets/pearl-apdu-CnYMOtYj.css",
       "components": 4
     },
     {
@@ -50,17 +57,91 @@ PASS: apps/companion/public/third-party-notices.txt exactly matches the current 
       "components": 4
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "components": 0
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "components": 0
     }
   ],
   "proposedNotices": {
     "file": "THIRD-PARTY-NOTICES.proposed.txt",
-    "bytes": 287620,
-    "sha256": "051e80f86cacb41704c9b5012aa0384a8a39d97688f2651911ff6997dab83628"
+    "bytes": 299181,
+    "sha256": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89"
+  }
+}
+PASS: apps/companion/public/third-party-notices.txt exactly matches the current measured dependency notices.
+{
+  "counts": {
+    "npmPackageInstances": 49,
+    "npmUniqueNames": 48,
+    "generatedRuntimeGroups": 1,
+    "copiedSourceGroups": 2,
+    "fontGroups": 1,
+    "componentGroups": 53
+  },
+  "bundles": [
+    {
+      "file": "assets/index-B33raa-Q.js",
+      "components": 18
+    },
+    {
+      "file": "assets/live-BoDMryH_.js",
+      "components": 13
+    },
+    {
+      "file": "assets/pearl-apdu-DTLxDe13.js",
+      "components": 1
+    },
+    {
+      "file": "assets/main-CxG4wHQb.js",
+      "components": 15
+    },
+    {
+      "file": "assets/index-D2rIokL7.js",
+      "components": 3
+    },
+    {
+      "file": "assets/qr-reader-XSzcwxEi.js",
+      "components": 1
+    },
+    {
+      "file": "assets/jsQR-Dk72IcmC.js",
+      "components": 1
+    },
+    {
+      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
+      "components": 1
+    },
+    {
+      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
+      "components": 1
+    },
+    {
+      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "components": 1
+    },
+    {
+      "file": "assets/pearl-apdu-CnYMOtYj.css",
+      "components": 4
+    },
+    {
+      "file": "assets/backup-import.worker-Dtrkqa4Y.js",
+      "components": 4
+    },
+    {
+      "file": "index.html",
+      "components": 0
+    },
+    {
+      "file": "live.html",
+      "components": 0
+    }
+  ],
+  "proposedNotices": {
+    "file": "THIRD-PARTY-NOTICES.proposed.txt",
+    "bytes": 299181,
+    "sha256": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89"
   }
 }

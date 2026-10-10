@@ -1,0 +1,28 @@
+[
+  {
+    "attempt": "initial-abort-timeout",
+    "status": "failed",
+    "startedAt": "2026-10-10T21:07:15.298Z",
+    "finishedAt": "2026-10-10T21:09:27.812Z",
+    "error": "TimeoutError: The operation was aborted due to timeout",
+    "maximumMinedHeight": 24,
+    "shutdownComplete": true,
+    "transactionsSignedOrBroadcast": 0,
+    "driverSha256": "ef00db573f374ac5ed692ae84d7303f184c3c2b1624cdd66330e8030d21605e2",
+    "nodeSha256": "0d3a83ba76048bc10cb9ce70b915a20b22f9d102fa4fce2b1edb209a1e39c8d7",
+    "firmwareSha256": "77e2dc35fed3443440a1393c42ed6cf03fad13ecf5532a84dab7de014890ce14"
+  },
+  {
+    "attempt": "http-headers-timeout",
+    "status": "failed",
+    "startedAt": "2026-10-10T21:09:43.236Z",
+    "finishedAt": "2026-10-10T21:14:57.051Z",
+    "error": "TypeError: fetch failed",
+    "maximumMinedHeight": 58,
+    "shutdownComplete": true,
+    "transactionsSignedOrBroadcast": 0,
+    "driverSha256": "1d195bd0915b94cf7cfde67856805bb87fb867fbe2cd22f65d5504d33b9b36e1",
+    "nodeSha256": "0d3a83ba76048bc10cb9ce70b915a20b22f9d102fa4fce2b1edb209a1e39c8d7",
+    "firmwareSha256": "77e2dc35fed3443440a1393c42ed6cf03fad13ecf5532a84dab7de014890ce14"
+  }
+]

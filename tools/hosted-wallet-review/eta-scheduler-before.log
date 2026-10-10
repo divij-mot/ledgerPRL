@@ -1,0 +1,54 @@
+✔ QR parser accepts only exact same-network Pearl requests and bounded positive decimal amounts (4.43575ms)
+✔ camera permission resolving after cancellation stops every acquired track (33.114958ms)
+✔ cancelled image decode closes the late bitmap without reading pixels (0.48725ms)
+✔ cached view binds account and validates raw owned outputs/history without restoring authority fields (15.389917ms)
+✔ standalone and Discover entry routes default to mainnet without starting wallet operations (1146.410667ms)
+✔ a nonzero local mainnet account is labeled as public network health (167.723459ms)
+✔ default applies live Medium, exposes Fast/Slow with automatic inputs, and labels fallback honestly (436.863291ms)
+✔ Max reprices recipient for a higher live rate and an exact custom total (575.162292ms)
+✔ new reservation and dust cannot silently reprice or reserve a draft (542.176334ms)
+✔ explicit quote expiring while the journal queues cannot create a draft (398.212667ms)
+✔ late quotes leave a prepared payment and its signed authorization fields unchanged (216.963084ms)
+✔ late fee response for a replaced account cannot install rates or rewrite form (180.922541ms)
+✔ QR amount supersedes earlier Max and never prepares or signs (399.151ms)
+✔ cancelled late QR result cannot replace recipient or create a payment (317.99225ms)
+✔ hosted cached view restores no validation or device approval and cannot sign without a fresh source (224.112583ms)
+✔ a delayed cached view cannot reopen an account after its actual Close handler completes (164.894292ms)
+✔ fresh ETAs remain on equal-rate Medium/Slow choices; expired ETAs become Unavailable (374.225542ms)
+✔ visible amount screen refreshes one anonymous batch at 105 seconds with an unreferenced timer (312.75425ms)
+✖ amount input cannot postpone the already scheduled pre-expiry refresh (366.632625ms)
+✔ hidden amount screen stops its polling and visibility return makes one cache-aware refresh (307.939625ms)
+✔ fee scheduler stops outside the amount screen: overview/0 (255.926375ms)
+✔ fee scheduler stops outside the amount screen: receive/0 (269.290209ms)
+✔ fee scheduler stops outside the amount screen: send/0 (311.114833ms)
+✔ fee timer never refreshes or reprices a prepared review (333.441625ms)
+✔ busy device scope defers fee requests with a bounded retry rather than interrupting context (333.493083ms)
+✔ automatic Continue waits for an in-flight estimate and handler also rejects forced activation (330.352459ms)
+✔ scheduled live fees cannot overwrite an exact custom fee or amount (321.38975ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 26
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8645.752041
+
+✖ failing tests:
+
+test at tools/hosted-wallet-review/ui.test.ts:17:15934
+✖ amount input cannot postpone the already scheduled pre-expiry refresh (366.632625ms)
+  AssertionError [ERR_ASSERTION]: Input activity postponed refresh beyond quote expiry
+
+  6 !== 12
+
+      at TestContext.<anonymous> (/Users/divijmotwani/Projects/pearlLedger/tools/hosted-wallet-review/ui.test.ts:682:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 6,
+    expected: 12,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

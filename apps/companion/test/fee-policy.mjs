@@ -34,14 +34,14 @@ const source =
 import { importWalletBackup } from "@pearl-ledger/wallet";
 export async function auditInputs(s) {
  account=s.account; network=s.account.network; snapshot=s; page='send'; activePayment=null;
- manualSelection=true; selected.clear(); for(const c of s.coins) selected.add(outpoint(c));
+ feeSelection='custom';maxAmount=false;manualSelection=true; selected.clear(); for(const c of s.coins) selected.add(outpoint(c));
  form.recipient=deriveAddress(account,0,18).address;form.amount='1';form.fee='0.00001000';form.changeIndex='20';
  await store.mutate(accountId(account), j=>Object.assign(j,emptyJournal())); await refreshJournal(); render();
 }
 export async function auditPublicInputs(s) {await auditInputs(s);sourceMode='public';render();}
 export function auditFeeMode(mode) {sourceMode=mode;render();}
 export function auditSelection(ids) {manualSelection=true;selected.clear();for(const id of ids)selected.add(id);render();}
-export function auditState() {return {form:{...form},hint:feePolicyHint(),journal,notification,busy,selected:[...selected],feeQuoteStatus,feeOptions:feeQuoteOptions()};}
+export function auditState() {return {form:{...form},hint:feePolicyHint(),journal,notification,busy,feeLoading:!!feeLoad,selected:[...selected],feeTime:feeTime(),feeOptions:feeQuoteOptions()};}
 export async function auditRestore(s,bundle) {
  await auditInputs(s);const j=emptyJournal();reservePayment(j,bundle,'policy-draft',1000);
  const restored=importWalletBackup(exportWalletBackup(account,j));
@@ -222,7 +222,7 @@ for (const kind of [
 
 async function clickAndSettle(id) {
   listeners.get(`${id}:click`)();
-  for (let attempt = 0; attempt < 200 && app.auditState().busy; attempt++)
+  for (let attempt = 0; attempt < 200 && (app.auditState().busy || app.auditState().feeLoading); attempt++)
     await new Promise((resolve) => setTimeout(resolve, 0));
   assert.equal(app.auditState().busy, false, `Operation did not settle: ${id}`);
 }
@@ -285,7 +285,7 @@ await clickAndSettle("refresh-fees");
 assert.deepEqual(app.auditState().form, beforeQuotes);
 assert.equal(app.auditState().feeOptions.length, 3);
 assert.equal(quotePaths.length, 6);
-assert.match(dom.innerHTML, /1-block target.*0.00000154 PRL/);
+assert.match(dom.innerHTML, /Fast.*0.00000154 PRL/);
 await clickAndSettle("fee-target-1");
 assert.equal(app.auditState().form.fee, "0.00000154");
 assert.equal(app.auditState().form.amount, beforeQuotes.amount);
@@ -296,17 +296,21 @@ globalThis.fetch = async () => {
 await clickAndSettle("refresh-fees");
 assert.deepEqual(app.auditState().form, afterChoice);
 assert.equal(app.auditState().feeOptions.length, 0);
-assert.match(app.auditState().feeQuoteStatus, /unavailable/);
+assert.equal(app.auditState().feeTime, "Unavailable");
 assert.equal(app.auditState().journal.payments.length, 0);
 let privateRequests = 0;
-globalThis.fetch = async () => {
+globalThis.fetch = async (route, options) => {
   privateRequests++;
-  throw new Error("Private mode must not query public fees");
+  assert.equal(route, "/api/indexer/read");
+  const body = JSON.parse(options.body);
+  assert.deepEqual(Object.keys(body).sort(), ["consent", "network", "path"]);
+  assert.equal(body.path, "/api/v2/");
+  throw new Error("Modeled anonymous fee-service outage");
 };
 app.auditFeeMode("node");
 await clickAndSettle("refresh-fees");
-assert.equal(privateRequests, 0);
+assert.equal(privateRequests, 1);
 assert.deepEqual(app.auditState().form, afterChoice);
 console.log(
-  "PASS: quote loading/failure leaves authorization unchanged; explicit choice sets only fee and private mode stays manual",
+  "PASS: quote loading/failure leaves authorization unchanged; explicit choice sets only fee and private mode sends only anonymous fee-service paths",
 );

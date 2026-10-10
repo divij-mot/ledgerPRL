@@ -282,3 +282,151 @@
   margin: 0;
   font-size: 12px;
 }
+
+/* The normal amount step shows a compact fee row; advanced controls are opt-in. */
+.ledger-fees {
+  border-top: 1px solid #3c3c3c;
+  border-bottom: 1px solid #3c3c3c;
+}
+.ledger-fees > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  list-style: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.ledger-fees > summary::-webkit-details-marker {
+  display: none;
+}
+.ledger-fees > summary > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: right;
+}
+.ledger-fees small {
+  display: block;
+  margin-top: 4px;
+  color: #949494;
+  font-weight: 400;
+  font-size: 12px;
+}
+.ledger-fee-options {
+  padding: 0 0 16px;
+}
+.ledger-fee-presets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.ledger-fee-presets button {
+  padding: 10px;
+  font-size: 12px;
+  min-height: 44px;
+}
+.ledger-fee-presets button[aria-pressed="true"] {
+  border-color: #bbb0ff;
+  color: #bbb0ff;
+}
+.ledger-fee-tools,
+.ledger-recipient-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+.ledger-fee-tools .ghost,
+.ledger-recipient-tools .ghost {
+  padding: 8px 0;
+  font-size: 13px;
+}
+.ledger-file-button {
+  cursor: pointer;
+  color: #bbb0ff;
+  font-size: 13px;
+  margin: 0;
+  padding: 8px 0;
+}
+.ledger-file-button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.ledger-file-button:focus-within {
+  outline: 2px solid #bbb0ff;
+  outline-offset: 3px;
+}
+.ledger-qr-camera {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #000;
+}
+.ledger-coin-control {
+  padding: 16px 0;
+}
+.ledger-coin-control h3 {
+  font-size: 14px;
+  margin: 0;
+}
+.ledger-coin-control .coin {
+  padding: 14px 0;
+  gap: 12px;
+  font-size: 12px;
+}
+.ledger-coin-control .coin input {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+}
+.ledger-coin-control .coin-info {
+  min-width: 0;
+}
+.ledger-coin-control .coin-info .mono {
+  max-width: 190px;
+}
+.ledger-coin-control .coin-value {
+  font-size: 13px;
+  white-space: nowrap;
+}
+@media (max-width: 500px) {
+  .ledger-modal {
+    width: 100%;
+    max-width: 100vw;
+    max-height: 100dvh;
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+  .ledger-modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #1c1d1f;
+  }
+  .ledger-step-footer {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .ledger-address-row {
+    min-width: 0;
+  }
+  .ledger-address {
+    min-width: 0;
+    padding: 12px;
+  }
+  .ledger-copy {
+    padding: 0 12px;
+  }
+  .ledger-coin-control .coin-info .mono {
+    max-width: 110px;
+  }
+  .ledger-fees > summary {
+    gap: 8px;
+  }
+}

@@ -15,9 +15,10 @@ export function walletShell(options: {
   network: string;
   busy: boolean;
   settings: string;
+  health?: { ok: boolean; message: string; details: string[] };
   content: string;
 }): string {
-  const { page, network, busy, settings, content } = options;
+  const { page, network, busy, settings, content, health } = options;
   // Account header / balance / actions / operations follow Ledger Wallet's
   // renderer/screens/account composition; the host already supplies its shell.
   return renderToStaticMarkup(
@@ -34,6 +35,29 @@ export function walletShell(options: {
           </div>
           <div className="account-tools">
             <span className="network-label">{network}</span>
+            {health && (
+              <details className="network-health">
+                <summary
+                  id="network-health-indicator"
+                  title={health.message}
+                  aria-label={
+                    health.ok
+                      ? "Network services available"
+                      : "Network service needs attention"
+                  }
+                >
+                  {health.ok ? "✓" : "×"}
+                </summary>
+                <div className="network-health-panel">
+                  {health.details.map((line) => (
+                    <p key={line}>{line}</p>
+                  ))}
+                  <button id="check-services" className="ghost" disabled={busy}>
+                    Check services
+                  </button>
+                </div>
+              </details>
+            )}
             <div dangerouslySetInnerHTML={{ __html: settings }} />
           </div>
         </header>

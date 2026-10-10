@@ -12,7 +12,8 @@ const account = { ...publicAccount, network: "mainnet" };
 const source =
   fs.readFileSync(new URL("../src/main.ts", import.meta.url), "utf8") +
   `
-export async function mountPublic(a){account=a;network=a.network;sourceMode='public';privacyConsent=true;snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:100,hash:'cc'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:[]};await refreshJournal();}
+// Isolate account-operation budgets from the separately tested anonymous fee prefetch.
+export async function mountPublic(a){feeLoadAt=Date.now();account=a;network=a.network;sourceMode='public';privacyConsent=true;snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:100,hash:'cc'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:[]};await refreshJournal();}
 export async function startPublic(kind){await run(kind,kind==='discover'?syncPublic:checkNode);}
 export function selectPublicReceive(index,address){receiveIndex=index;verifiedReceive=address;}
 export function cancelPublic(){currentAbort?.abort();}

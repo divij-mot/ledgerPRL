@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-10T22:06:28.622296+00:00",
+  "scope": "Final product/docs review after ETA, scheduler, option-child and health-label fixes; deployment pending; wallet review manifest binds the broader production/test snapshot.",
+  "sha256": {
+    "README.md": "6204c005cf8523d1c608cdc841a735de0f7fc78065c4b3075e22803d27c536ec",
+    "docs/live-app.md": "6e1afa50b6d8c2a64979d5dc8e17bb24736fcf3978689e22c8705855ccea6b7e",
+    "docs/companion.md": "535986805064ba5f0604b0bdaa19eb2610932e72480e8b55f3a89082253660c1",
+    "docs/mainnet-testing.md": "49bbc90aa38443d9549b75ad242cacb457e4a789a55e4926dd1e8446788bd853",
+    "docs/install-pearl.md": "56fb82decae77cebcaf10707b9af7a94d1d2ffcbf22ad7b8ccf9a0079a9d659c",
+    "docs/prl-feature-coverage.md": "bee9f31bf13ca2a9538bd840e32046f5d9e5766828724e00daf3598c4c33c200",
+    "docs/implementation-status.md": "f3d79965c5cb7ac4fb1ad18ffb08ab216f5d7661058cb845da956a1fefce1d8a",
+    "apps/companion/src/main.ts": "ce355e3e006dd3ba12a5dfead17ba701e103ca248728497aee55589040550da2",
+    "apps/companion/src/local-main.ts": "0f17776da044c685697a00d78f1be2c6b97f255cf04a831ced027ae0d58ae17b",
+    "apps/companion/src/fee-quotes.ts": "5f87154c890555c62fb79796415fdce8f721240f45d28ccd0590adbd77eb2e22",
+    "apps/companion/src/account-cache.ts": "179cc1b7510557d7d0142c8de959d0e3302928687d8faa2ef92877e9232b4fda",
+    "apps/companion/src/hosted-indexer.ts": "979a048b85e86ebfe195d424deb2fc83b8de28e65e1f571734faa5e8b6b06067",
+    "apps/companion/src/qr-reader.ts": "e7ea26c85f3a8def3090a2394f25aed0ae83e4ae57bb3ed466e12acfc3531781",
+    "apps/companion/src/ui.tsx": "1cf91bda49d1571b90239c8bf66c606e83206fe4612467c4a1cbb438d0e5415b",
+    "apps/companion/package.json": "e6891d8708fb099f1d5f0e24b0fce6c7a462369c7d22d58d11650f5bd98551d4",
+    "package-lock.json": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
+    "vercel.json": "12675dc9e81c8503423b2fc0ac7974f4c94e4c2dab5904b6c9e5581421eb3c4a",
+    ".vercelignore": "05018d523f78bc683dc6edaa37181cdd3803ff9bd90bf246a9bf751f400eb407",
+    "scripts/run-local.py": "5df2dc6a9bc40095758fd0f10bbf36a039216c425d10d41638e187d451c422bc",
+    "tools/hosted-wallet-review/product.md": "9c4f6076cf1fb04abf38b7b11606c443cd438d24c46367cd60a40b4c937a9c5c",
+    "apps/companion/src/ledger-ui/StepAmount.tsx": "490be6d3b1c6ded5c09a4f6d81228557b9fd0d2dc8bfbb2aa53d2ea360b3f44a",
+    "apps/companion/src/ledger-ui/index.tsx": "e2191f13e5281cac8574559b13d322b4e4a4433e7226cee6f696de5c5e27bf61",
+    "tools/hosted-wallet-review/reviewed-source.json": "2037e4c40e738a8e4388ea61de1a93b1eeb239bab77a99dee72b02e528ca77bf",
+    "tools/dependency-supply-review/README.md": "b556ad6e8cb226e522509e412a0e040c5fa1d378a13622b08454afd8dfc18a8f",
+    "tools/dependency-supply-review/upstream-notices/README.md": "f8ad29abc88f28a11f10c2bf178d427edb6bb1360fb2d14118e50375c34a11b7",
+    "tools/dependency-supply-review/core-attribution-recheck.json": "5423196ec9ab15d5b172258d6c7a98d3a70af3563691930f72dfc9d92df27198"
+  }
+}

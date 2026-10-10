@@ -1,0 +1,20 @@
+✔ hosted origins are explicit for production and deployment-bound for preview (0.759667ms)
+✔ raw adapter passes a bounded allowed read once with no storage or response cache (7.724958ms)
+✔ hosted boundary rejects malformed frames, helpers and cross-origin requests before fetching (2.044542ms)
+✔ arbitrary URL and undisclosed address requests remain rejected by the shared proxy (1.805625ms)
+✔ hosted signed relay checks chain identity and submits exact public fixture once (2.159708ms)
+✔ real Node HTTP stream remains compatible with the raw serverless adapter (13.1745ms)
+✔ QR requests validate network and exact amount without accepting foreign URLs or hidden instructions (1.561667ms)
+✔ real jsQR decodes the actual receive QR pixels; mocked image decoding is closed afterward (44.290292ms)
+✔ cancelling camera permission before it resolves stops the late stream without applying a QR (3.664667ms)
+✔ 17 simultaneous requests cap upstream work at 16 and disconnects release every slot (20.8855ms)
+✔ empty account discovery costs exactly 46 upstream reads, with address concurrency at most five (107.892584ms)
+✔ one uncached fee quote group costs six public non-address reads (1.175ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 283.394292

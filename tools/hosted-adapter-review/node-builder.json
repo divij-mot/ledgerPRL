@@ -1,0 +1,39 @@
+{
+  "builder": "@vercel/node 5.7.13",
+  "source": "installed Vercel CLI 52.0.0",
+  "externalRequests": 0,
+  "results": [
+    {
+      "entrypoint": "api/indexer/read.ts",
+      "runtime": "nodejs24.x",
+      "handler": "api/indexer/read.js",
+      "shouldAddHelpers": false,
+      "shouldDisableAutomaticFetchInstrumentation": true,
+      "fileCount": 4,
+      "forbiddenFiles": [],
+      "compiledHandlerFixture": "passed",
+      "files": [
+        "api/indexer/read.js",
+        "api/indexer/read.js.map",
+        "apps/companion/server/dist/indexer.mjs",
+        "package.json"
+      ]
+    },
+    {
+      "entrypoint": "api/indexer/broadcast.ts",
+      "runtime": "nodejs24.x",
+      "handler": "api/indexer/broadcast.js",
+      "shouldAddHelpers": false,
+      "shouldDisableAutomaticFetchInstrumentation": true,
+      "fileCount": 4,
+      "forbiddenFiles": [],
+      "compiledHandlerFixture": "passed",
+      "files": [
+        "api/indexer/broadcast.js",
+        "api/indexer/broadcast.js.map",
+        "apps/companion/server/dist/indexer.mjs",
+        "package.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+✔ hosted origins are explicit for production and deployment-bound for preview (0.825708ms)
+✔ raw adapter passes a bounded allowed read once with no storage or response cache (7.881666ms)
+✔ hosted boundary rejects malformed frames, helpers and cross-origin requests before fetching (2.263ms)
+✔ arbitrary URL and undisclosed address requests remain rejected by the shared proxy (2.01525ms)
+✔ hosted signed relay checks chain identity and submits exact public fixture once (2.130542ms)
+✔ real Node HTTP stream remains compatible with the raw serverless adapter (14.684542ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 208.198459

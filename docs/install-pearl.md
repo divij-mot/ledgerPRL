@@ -5,8 +5,13 @@ device runs Ledger OS 1.7.0. Do not use this image on another model or assume it
 matches another OS. The [identity checkpoint](../tools/pearl-name-review/README.md)
 records the build and emulator tests.
 
-Installation is still pending. It requires the owner to unlock the device and
-approve the installation on its screen. It does not require a recovery phrase,
+The owner-present installation completed on 10 October 2026 on the recorded
+Nano S Plus, Ledger OS 1.7.0. The device reported installed-app hash
+`22c0f2fd025c73c9713ea39b3ecf525b4e617d0ff74a9213d51800543ecbbda7`.
+Account export and Receive verification then passed in actual Ledger Discover;
+existing funds were unchanged. This installed-app hash is distinct from the
+ELF/HEX file hashes below. Further installations require the owner to unlock
+the target device and approve installation on its screen. It does not require a recovery phrase,
 firmware update, reset or deletion of another app. The app is independently
 built and is not Ledger-approved.
 
@@ -22,7 +27,7 @@ the matching source using the pinned SDK/builder recipe; it must not substitute
 an older binary. The account derivation is unchanged: `86'/808276'/0'`.
 Existing receiving addresses remain tied to the same Ledger seed and account.
 
-## Owner-present installation
+## Repeating the owner-present installation on the matching device
 
 Close Ledger Wallet to release USB, unlock the Nano S Plus and leave it on the
 dashboard. With the verified **ledgerblue 0.1.58** environment, check the image
@@ -43,11 +48,14 @@ unexpected reset, firmware change or different app. Keeping the older Pearl Dev
 app installed temporarily is harmless; the current companion requests Pearl.
 
 Open Pearl on the device, reopen Ledger Wallet and select Pearl in Discover.
-The local server should still be running with `npm start`. Reconnect the device
+Use the chosen local or hosted route; the hosted URL remains pending deployment
+verification. Local direct WebHID opens with `python3 scripts/run-local.py`. Reconnect the device
 and compare a receiving address before the first outgoing payment. The previous
 watch-only account, local chain cache and pending-payment journal remain local;
 installing this image does not import or replace the Ledger seed.
 
 Complete the small, owner-approved send and confirmation sequence in
-[mainnet testing](mainnet-testing.md). Emulator signing and observed incoming
-payments do not establish that final physical outgoing step.
+[mainnet testing](mainnet-testing.md). The current C firmware’s [real regtest roundtrip](../tools/hosted-wallet-review/simulator/README.md)
+passed signing, node acceptance and mined confirmation. Those public-fixture
+results and observed mainnet incoming payments do not establish the final
+physical outgoing mainnet step.

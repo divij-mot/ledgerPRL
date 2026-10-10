@@ -170,6 +170,13 @@ async function setup(rows = new Map<string, any>()) {
       postMessage() {}
     },
     fetch: async (route: string, options: any) => {
+      if (route === "/api/indexer/read") {
+        const body = JSON.parse(options.body);
+        assert.deepEqual(Object.keys(body).sort(), ["consent", "network", "path"]);
+        assert.match(body.path, /^\/api\/(?:v2\/(?:|block-index\/[0-9]+)|v1\/estimatefee\/(?:1|10|25))$/);
+        // Anonymous estimates are separate from the owned local-process requests under test.
+        throw new Error("Modeled fee service unavailable");
+      }
       c.requests.push({ route, body: JSON.parse(options.body) });
       if (route === "/api/local/close")
         return new Response(

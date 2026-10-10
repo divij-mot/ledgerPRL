@@ -567,3 +567,43 @@ summary {
   gap: 16px;
   margin-top: 16px;
 }
+
+.network-health {
+  position: relative;
+}
+.network-health > summary {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border, #555);
+  border-radius: 6px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--text-base);
+  font-size: 18px;
+}
+.network-health > summary::-webkit-details-marker {
+  display: none;
+}
+.network-health-panel {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  top: 36px;
+  width: 270px;
+  max-width: calc(100vw - 40px);
+  padding: 14px;
+  background: #1c1d1f;
+  border: 1px solid #555;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px #0006;
+}
+.network-health-panel p {
+  font-size: 12px;
+  margin: 0 0 8px;
+}
+.network-health-panel button {
+  font-size: 12px;
+  padding: 4px 0;
+}

@@ -348,6 +348,7 @@ for (const mode of ["mismatch", "cancel", "storage-failure"]) {
   const t = await setup();
   await t.click("connect");
   await t.app.auditLoadWatch(account, bundle);
+  await t.click("coin-control-open");
   for (const input of bundle.inputs) {
     const coin = t.context.coins.find(
       (c) => c.dataset.coin === wallet.outpoint(input),

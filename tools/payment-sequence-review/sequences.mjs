@@ -84,7 +84,7 @@ globalThis.fetch=async(route,options)=>{
 };
 const contents=fs.readFileSync(path.join(root,'apps/companion/src/main.ts'),'utf8')+`
 export async function sequenceOpen(a,s,t){account=a;network=a.network;accountIndex=a.account;sourceMode='node';snapshot=s;client=t?new LedgerBitcoinPrlClient(t,a.network):null;transport=t;activePayment=null;await refreshJournal();activePayment=journal.payments[0]?.id??null;page='send';render();}
-export function sequenceForm(b){selected.clear();b.inputs.forEach(i=>selected.add(outpoint(i)));form.recipient=scriptToAddress(b.outputs[0].scriptPubKey,b.network);form.amount=formatPrl(b.outputs[0].amount);form.fee=formatPrl(b.inputs.reduce((s,i)=>s+i.amount,0n)-b.outputs.reduce((s,o)=>s+o.amount,0n));form.changeIndex=String(b.outputs.find(o=>o.role==='change')?.index??journal.nextChangeIndex);render();}
+export function sequenceForm(b){feeSelection="custom";manualSelection=true;maxAmount=false;selected.clear();b.inputs.forEach(i=>selected.add(outpoint(i)));form.recipient=scriptToAddress(b.outputs[0].scriptPubKey,b.network);form.amount=formatPrl(b.outputs[0].amount);form.fee=formatPrl(b.inputs.reduce((s,i)=>s+i.amount,0n)-b.outputs.reduce((s,o)=>s+o.amount,0n));form.changeIndex=String(b.outputs.find(o=>o.role==='change')?.index??journal.nextChangeIndex);render();}
 export async function sequenceDevice(t){client=new LedgerBitcoinPrlClient(t,network);transport=t;render();}
 export function sequenceState(){return{busy,notification,notificationType,emergencySignedRecovery,verifiedReceive,validation,snapshot,activePayment,journal};}
 export function sequenceReceive(index){page='receive';receiveIndex=index;render();}

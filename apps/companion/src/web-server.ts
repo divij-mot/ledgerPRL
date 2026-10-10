@@ -32,7 +32,7 @@ const HEADERS = Object.freeze({
   "Cross-Origin-Opener-Policy": "same-origin",
   "Cross-Origin-Resource-Policy": "same-origin",
   "Permissions-Policy":
-    "hid=(self), usb=(), camera=(), microphone=(), geolocation=(), payment=()",
+    "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
   "Strict-Transport-Security": "max-age=31536000",
   "Cache-Control": "no-store",
 });

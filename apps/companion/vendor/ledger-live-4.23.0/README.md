@@ -17,3 +17,16 @@ patch -p1 -d <temporary> < vendor/ledger-live-4.23.0/adaptation.patch
 ```
 
 The resulting files must match every `adaptedSha256` and `derivedFiles[].sha256`. Supporting originals capture additional modal and button style declarations; they are not shipped as executable JavaScript.
+
+The QR camera loop additionally adapts the pinned mobile-sized desktop
+`mvvm/features/Send/screens/Recipient/hooks/useQrCodeScanner.ts`: the same
+`jsqr@1.4.0` decoder and 400 ms / 640-pixel camera sampling. The adaptation
+uses the existing operation cancellation instead of React hooks, stops late
+camera streams, and adds bounded image import and strict Pearl payment-URI
+validation. These are Pearl changes, not upstream security guarantees. The
+original, complete adaptation patch and exact hashes are included here.
+
+Fee presentation follows the same release's Bitcoin fee descriptor: presets
+and custom fees, with coin control as an advanced option. Pearl's rates come
+from Pearl's network service and its own relay policy; no Bitcoin fee rates
+or confirmation times are reused.

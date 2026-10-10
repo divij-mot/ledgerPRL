@@ -12,15 +12,25 @@ export function sendForm(props: {
   feedback: string;
   step: number;
   recipient: string;
+  scanning: boolean;
   amount: string;
   fee: string;
   available: string;
   maxLabel: string;
   maxDisabled: boolean;
   feeHint: string;
-  quotes: { blocks: number; label: string; disabled: boolean }[];
-  quoteStatus: string;
+  quotes: {
+    blocks: number;
+    label: string;
+    disabled: boolean;
+    selected?: boolean;
+    time?: string;
+  }[];
   quotesSupported: boolean;
+  feeMode: string;
+  feeTime: string;
+  feeLoading: boolean;
+  feeOptionsOpen: boolean;
   accountName: string;
   network: string;
   advanced: string;
@@ -36,6 +46,7 @@ export function sendForm(props: {
     >
       <StepRecipient
         recipient={props.recipient}
+        scanning={props.scanning}
         accountName={props.accountName}
         network={props.network}
         busy={props.busy}
@@ -49,8 +60,11 @@ export function sendForm(props: {
         maxDisabled={props.maxDisabled}
         feeHint={props.feeHint}
         quotes={props.quotes}
-        quoteStatus={props.quoteStatus}
         quotesSupported={props.quotesSupported}
+        feeMode={props.feeMode}
+        feeTime={props.feeTime}
+        feeLoading={props.feeLoading}
+        feeOptionsOpen={props.feeOptionsOpen}
         advanced={props.advanced}
         busy={props.busy}
         active={props.step === 1}

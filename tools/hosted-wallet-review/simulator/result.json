@@ -1,0 +1,217 @@
+{
+  "startedAt": "2026-10-10T21:16:04.285Z",
+  "network": "regtest",
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "output": "/var/folders/ym/10885q1n18n38bv878bs72fc0000gn/T/pearl-c-node-roundtrip-97LrdC",
+  "apiPort": 53117,
+  "rpcPort": 53118,
+  "containerName": "pearl-c-roundtrip-2b1c4640-936e-4879-b378-2add81ac2772",
+  "firmware": {
+    "name": "Pearl Reg",
+    "version": "0.1.0",
+    "model": "nanosp",
+    "sha256": "77e2dc35fed3443440a1393c42ed6cf03fad13ecf5532a84dab7de014890ce14"
+  },
+  "node": {
+    "release": "1.4.11",
+    "commit": "2bb142f0f15d5aa929bf3a46d91d31ac6397e2c4",
+    "sha256": "0d3a83ba76048bc10cb9ce70b915a20b22f9d102fa4fce2b1edb209a1e39c8d7"
+  },
+  "dockerImage": "ghcr.io/ledgerhq/ledger-app-builder/ledger-app-dev-tools@sha256:8d3da9179dd1b241883c769c521ee9403352b60091c80405b5bef5801a003ba2",
+  "cases": [
+    {
+      "name": "current C app capabilities and explicit public-account/address approval",
+      "status": "passed"
+    },
+    {
+      "name": "isolated real Pearl regtest genesis, no peers, and mature mined fixture coins",
+      "status": "passed"
+    },
+    {
+      "name": "p2tr: actual address/history discovery and spendable inputs",
+      "status": "passed"
+    },
+    {
+      "name": "p2tr: current UI fee calculation and fresh production input preflight",
+      "status": "passed"
+    },
+    {
+      "name": "p2tr: explicit C-firmware review/sign and verified-byte persistence",
+      "status": "passed"
+    },
+    {
+      "name": "p2tr: real node rejects mutated signature",
+      "status": "passed"
+    },
+    {
+      "name": "p2tr: explicit verified regtest submission and mempool acceptance",
+      "status": "passed"
+    },
+    {
+      "name": "p2tr: mine exact bytes and confirm spent inputs/output amounts",
+      "status": "passed"
+    },
+    {
+      "name": "p2tr: post-confirmation wallet refresh discovers change",
+      "status": "passed"
+    },
+    {
+      "name": "p2mr: actual address/history discovery and spendable inputs",
+      "status": "passed"
+    },
+    {
+      "name": "p2mr: current UI fee calculation and fresh production input preflight",
+      "status": "passed"
+    },
+    {
+      "name": "p2mr: explicit C-firmware review/sign and verified-byte persistence",
+      "status": "passed"
+    },
+    {
+      "name": "p2mr: real node rejects mutated signature",
+      "status": "passed"
+    },
+    {
+      "name": "p2mr: explicit verified regtest submission and mempool acceptance",
+      "status": "passed"
+    },
+    {
+      "name": "p2mr: mine exact bytes and confirm spent inputs/output amounts",
+      "status": "passed"
+    },
+    {
+      "name": "p2mr: post-confirmation wallet refresh discovers change",
+      "status": "passed"
+    }
+  ],
+  "transactions": [
+    {
+      "recipientType": "p2tr",
+      "request": {
+        "selected": [
+          "7d0f9720c155d2f462ab13114695db078824a0fd71d52a149ede10d5559acb06:0"
+        ],
+        "recipient": "rprl1pyz8vmclll4w4z36wzs20l5lfy3sfvt870r5mpd985d7trgew9lpq39euzh",
+        "amountPrl": "1.23456789",
+        "changeIndex": 0,
+        "feePrl": "0.00000308"
+      },
+      "bundle": {
+        "network": "regtest",
+        "account": 0,
+        "version": 1,
+        "lockTime": 0,
+        "inputs": [
+          {
+            "txid": "7d0f9720c155d2f462ab13114695db078824a0fd71d52a149ede10d5559acb06",
+            "vout": 0,
+            "amount": "322964134063",
+            "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+            "sequence": 4294967295,
+            "branch": 0,
+            "index": 0
+          }
+        ],
+        "outputs": [
+          {
+            "amount": "123456789",
+            "scriptPubKey": "5120208ecde3fffd5d51474e1414ffd3e92460962cfe78e9b0b4a7a37cb1a32e2fc2",
+            "role": "recipient",
+            "branch": 0,
+            "index": 0
+          },
+          {
+            "amount": "322840676966",
+            "scriptPubKey": "5120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d",
+            "role": "change",
+            "branch": 1,
+            "index": 0
+          }
+        ]
+      },
+      "fee": "0.00000308",
+      "txid": "f6ced6a61251e24a15409ad6861c4cc71ca6ae3213469f6f40edc9a37f7cba91",
+      "rawTx": "0100000000010106cb9a55d510de9e142ad571fda0248807db95461113ab62f4d255c120970f7d0000000000ffffffff0215cd5b0700000000225120208ecde3fffd5d51474e1414ffd3e92460962cfe78e9b0b4a7a37cb1a32e2fc266cacd2a4b000000225120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d014060851cf9aa7da53ac4ce7a3dded7c05a5309cd0dd4d0de448ebde53c99a8021b1523b25bc8b75436460f1c013d4bfa39f958c4811225939cf6c41351680ce78000000000",
+      "confirmations": 1
+    },
+    {
+      "recipientType": "p2mr",
+      "request": {
+        "selected": [
+          "421db8f9183adfc4fa1ddf7479fdc6700ced8b1fd40bf6e65b8196416a8af77f:0"
+        ],
+        "recipient": "rprl1zgfpyysjzgfpyysjzgfpyysjzgfpyysjzgfpyysjzgfpyysjzgfpqjknnxw",
+        "amountPrl": "1.23456789",
+        "changeIndex": 1,
+        "feePrl": "0.00000308"
+      },
+      "bundle": {
+        "network": "regtest",
+        "account": 0,
+        "version": 1,
+        "lockTime": 0,
+        "inputs": [
+          {
+            "txid": "421db8f9183adfc4fa1ddf7479fdc6700ced8b1fd40bf6e65b8196416a8af77f",
+            "vout": 0,
+            "amount": "322963140676",
+            "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+            "sequence": 4294967295,
+            "branch": 0,
+            "index": 0
+          }
+        ],
+        "outputs": [
+          {
+            "amount": "123456789",
+            "scriptPubKey": "52204242424242424242424242424242424242424242424242424242424242424242",
+            "role": "recipient",
+            "branch": 0,
+            "index": 0
+          },
+          {
+            "amount": "322839683579",
+            "scriptPubKey": "51209450706c1949cffff61606fb1a7d6735c80b2793e5f4312a45c692cbd98c8624",
+            "role": "change",
+            "branch": 1,
+            "index": 1
+          }
+        ]
+      },
+      "fee": "0.00000308",
+      "txid": "cb6c1188dace305d7e254419f9756b4a571264677b18a7db6e881fb1bb9b0c10",
+      "rawTx": "010000000001017ff78a6a4196815be6f60bd41f8bed0c70c6fd7974df1dfac4df3a18f9b81d420000000000ffffffff0215cd5b07000000002252204242424242424242424242424242424242424242424242424242424242424242fba1be2a4b0000002251209450706c1949cffff61606fb1a7d6735c80b2793e5f4312a45c692cbd98c86240140853c5c84ef7d8fae299ce643c2deb84c552b277d578b2144e534ad3787e13a61ff15ef9ec461d2e7a797d20f9716bea2097810027edb43d2705c3968bb92130100000000",
+      "confirmations": 1
+    }
+  ],
+  "speculos": "0.27.1",
+  "publicAccount": {
+    "network": "regtest",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "publicFixtureChainReuse": {
+    "source": "/var/folders/ym/10885q1n18n38bv878bs72fc0000gn/T/pearl-c-node-roundtrip-vXuuT7",
+    "priorResultSha256": "9bb203af48504345b0e2c7533115727b497e6fbf43480784782039e102fef773",
+    "reason": "Earlier HTTP mining-request header timeout; cleanly stopped public-only chain"
+  },
+  "initialFixtureHeight": 0,
+  "status": "passed",
+  "finishedAt": "2026-10-10T21:24:52.479Z",
+  "sourceHashesAtStart": {
+    "apps/companion/src/fee-quotes.ts": "e7921ebacd9e427da4d3a50cb18e734382caae16988b49c1c26695429fb7f685",
+    "packages/bitcoin-prl-adapter/src/client.ts": "cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db",
+    "apps/companion/src/bridge.ts": "c8f8ba93fa7d4c3295b95061a5dc339d91063c7aeccfc704ab1f01e54b98635b",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "tools/hosted-wallet-review/simulator/c-node-roundtrip.ts": "f3ce1a2cde1bf74784f3ed3c5d293649f99a073ec70627f93e2795487ab66529"
+  },
+  "sourceHashes": {
+    "apps/companion/src/fee-quotes.ts": "e7921ebacd9e427da4d3a50cb18e734382caae16988b49c1c26695429fb7f685",
+    "packages/bitcoin-prl-adapter/src/client.ts": "cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db",
+    "apps/companion/src/bridge.ts": "c8f8ba93fa7d4c3295b95061a5dc339d91063c7aeccfc704ab1f01e54b98635b",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "tools/hosted-wallet-review/simulator/c-node-roundtrip.ts": "f3ce1a2cde1bf74784f3ed3c5d293649f99a073ec70627f93e2795487ab66529"
+  }
+}

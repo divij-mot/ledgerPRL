@@ -1,0 +1,24 @@
+# Never upload local account state, native programs, build evidence or tooling.
+.git
+.agents
+.codex
+.aws
+.tools
+.local-light
+.env
+.env.*
+tools
+fixtures
+tests
+docs
+apps/light-client
+apps/ledger
+apps/ledger-bitcoin-prl
+apps/cli
+**/test
+**/tests
+**/*.db
+**/*.bin
+**/*.elf
+**/*.log
+**/dist

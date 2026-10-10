@@ -186,7 +186,8 @@ try {
   for (const source of uiProvenance.derivedFiles)
     check(`${source.path}: patch reproduces exact UI glue/styles`, hash(await fs.readFile(path.join(patchDirectory, source.path))) === source.sha256);
 } finally { await fs.rm(patchDirectory, { recursive: true, force: true }); }
-const uiModules = [...new Set([...mainModules, ...cssModules])].filter((name) => name.startsWith("apps/companion/src/ledger-ui/")).sort();
+const recordedUiModules = new Set([...uiProvenance.sources.map(source => `apps/companion/${source.adapted}`), ...uiProvenance.derivedFiles.map(source => `apps/companion/${source.path}`)]);
+const uiModules = [...new Set([...mainModules, ...cssModules])].filter(name => recordedUiModules.has(name)).sort();
 check("Every recorded UI adaptation is in the emitted browser graph", uiProvenance.sources.every((source) => uiModules.includes(`apps/companion/${source.adapted}`)));
 const copiedUi = { ...uiProvenance, modules: uiModules, provenance: uiProvenancePath, patch: uiPatchPath,
   notices: [{ path: uiLicensePath, sha256: uiProvenance.licenseSha256 }] };

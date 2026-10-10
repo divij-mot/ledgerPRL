@@ -59,12 +59,14 @@ import {
   recordRecoveryPaths,
   paymentBundle,
   emptyJournal,
+  DEFAULT_RELAY_POLICY,
   applyValidation,
   requireFreshValidation,
 } from "@pearl-ledger/wallet";
 import { connectLedger, type PearlTransport } from "./device.js";
 import { browserPublicSource } from "./public-source.js";
 import { checkLightSnapshot } from "./blockbook-source.js";
+import { accountCache, parseAccountCache } from "./account-cache.js";
 import { WatchStorage } from "./storage.js";
 import { signedRecoveryBackup } from "./signed-recovery.js";
 import { importWalletBackupFile } from "./backup-import.js";
@@ -78,8 +80,12 @@ import {
 import { walletMessage } from "./wallet-copy.js";
 import {
   FEE_TARGETS,
+  FEE_QUOTE_LIFETIME_MS,
+  paymentAtRate,
+  maximumPaymentAtRate,
   loadFeeQuotes,
-  quotedPayment,
+  quoteRate,
+  confirmationTime,
   type FeeQuote,
 } from "./fee-quotes.js";
 import { localSource, waitForLocalSource } from "./local-sync.js";
@@ -103,11 +109,10 @@ let history: HistoryEntry[] = [],
   lastUsed: [number, number] = [-1, -1];
 let page: "overview" | "receive" | "send" | "activity" = "overview";
 let network: NetworkName =
-    window.location?.pathname === "/live.html"
+    hostedMode ||
+    ["/", "/index.html", "/live.html"].includes(window.location?.pathname ?? "")
       ? "mainnet"
-      : hostedMode
-        ? "testnet2"
-        : "regtest",
+      : "regtest",
   accountIndex = 0,
   account: AccountPublicKey | null = null;
 let snapshot: WatchSnapshot | null = null,
@@ -137,7 +142,13 @@ let emergencySignedRecovery: SignedRecovery | null = null;
 let journalRefreshGeneration = 0;
 const selected = new Set<string>();
 let manualSelection = false;
+let maxAmount = false;
 let coinControlOpen = false;
+let feeOptionsOpen = false;
+let feeSelection: "standard" | "custom" | 1 | 10 | 25 = "standard";
+let feeLoad: AbortController | null = null;
+let feeLoadAt = 0;
+let feeRefreshTimer: ReturnType<typeof setTimeout> | undefined;
 let settingsOpen = false;
 let historyPage = 0,
   paymentPage = 0;
@@ -145,9 +156,9 @@ let historyTip: { height: number; hash: string } | null = null;
 let sendStep = 0,
   receiveStep = 0;
 let signingRequested = false;
+let qrScanning = false;
 let feeQuotes: FeeQuote[] = [];
 let feeQuoteNetwork: NetworkName | null = null;
-let feeQuoteStatus = "Enter a manual fee or refresh network estimates.";
 const form = { recipient: "", amount: "", fee: "0.00001000", changeIndex: "0" };
 function clearPaymentForm() {
   clearTimeout(localRefreshTimer);
@@ -156,11 +167,17 @@ function clearPaymentForm() {
   localSyncProgress = null;
   feeQuotes = [];
   feeQuoteNetwork = null;
-  feeQuoteStatus = "Enter a manual fee or refresh network estimates.";
+  feeLoad?.abort();
+  feeLoad = null;
+  feeLoadAt = 0;
+  clearTimeout(feeRefreshTimer);
+  feeSelection = "standard";
+  feeOptionsOpen = coinControlOpen = false;
   historyPage = paymentPage = 0;
   historyTip = null;
   sendStep = receiveStep = 0;
   manualSelection = false;
+  maxAmount = false;
   Object.assign(form, {
     recipient: "",
     amount: "",
@@ -371,9 +388,36 @@ function render() {
     network,
     busy,
     settings: settings(),
+    health: networkHealth(),
     content,
   });
   bind();
+}
+function networkHealth() {
+  const supported = ["mainnet", "testnet2"].includes(network);
+  const feesReady =
+    feeQuoteNetwork === network &&
+    feeQuotes.length === FEE_TARGETS.length &&
+    feeQuotes.every(
+      (quote) =>
+        Date.now() >= quote.receivedAt &&
+        Date.now() - quote.receivedAt <= FEE_QUOTE_LIFETIME_MS,
+    );
+  const local =
+    !hostedMode &&
+    network === "mainnet" &&
+    (account?.account ?? accountIndex) === 0 &&
+    !privacyConsent;
+  const chain = local ? syncComplete && sourceMode === "local" : feesReady;
+  const message = `${local ? "Local blockchain sync" : "Pearl public network"}: ${chain ? "Connected at last check" : localSyncAbort ? "Syncing" : "Not verified"}\nFee estimates: ${feeLoad ? "Checking" : feesReady ? "Available" : feeLoadAt ? "Unavailable or check expired" : "Not checked"}`;
+  return {
+    ok: supported && chain && feesReady,
+    message,
+    details: [
+      `${local ? "Local blockchain sync" : "Public network"}: ${chain ? "connected" : localSyncAbort ? "syncing" : "not verified"}`,
+      `Fee estimates: ${feeLoad ? "checking" : feesReady ? "available" : feeLoadAt ? "unavailable or check expired" : "not checked"}`,
+    ],
+  };
 }
 function lightCard() {
   if (!account || !["mainnet", "testnet2"].includes(network)) return "";
@@ -402,7 +446,7 @@ function lightCard() {
         : "Blockchain data stays on this computer.";
     return `<section class="card sync-card"><div><h2>${label}</h2><p class="hint">${detail}</p></div>${walletButton("sync-local", "Sync account", busy || !!localSyncAbort)}</section>`;
   }
-  return `<section class="card sync-card"><div><h2>${syncComplete ? "Account synced" : "Sync your account"}</h2><p class="hint">${syncComplete && snapshot ? `Last synced at block ${snapshot.tip.height}. ` : ""}</p>${!hostedMode && network === "mainnet" && account.account === 0 ? "" : `<label class="check"><input id="privacy-consent" type="checkbox" ${privacyConsent ? "checked" : ""} ${disabled(busy)}>Use Pearl’s public indexer (shares wallet addresses)</label>`}</div>${walletButton("sync-public", syncComplete ? "Sync account" : "Sync balance & history", busy || !privacyConsent)}<details class="sync-details"><summary>About public sync</summary><p class="hint">Queries share your addresses, transactions and IP with the wallet host and Pearl’s public service. Balances rely on its responses.</p><p class="hint">Service: ${network === "mainnet" ? "blockbook.pearlresearch.ai" : "blockbook.testnet.pearlresearch.ai"}. Public account keys stay in your browser.</p></details></section>`;
+  return `<section class="card sync-card"><div><h2>${syncComplete ? "Account synced" : "Sync your account"}</h2><p class="hint">${syncComplete ? "Up to date" : ""}</p>${privacyConsent ? "" : `<label class="check"><input id="privacy-consent" type="checkbox" ${disabled(busy)}>Sync using Pearl’s public network service</label><p class="hint">Wallet addresses are shared with the service. Signing keys stay on Ledger.</p>`}</div>${walletButton("sync-public", "Sync account", busy || !privacyConsent)}</section>`;
 }
 function paymentStatus(payment: PaymentRecord): string {
   if (payment.archived) return "Confirmed";
@@ -457,6 +501,7 @@ function historyCard(): string {
     .join("")}${pagination("history", slice.page, slice.pages)}</section>`;
 }
 async function syncPublic() {
+  void refreshFeeQuotes();
   const signal = AbortSignal.any([
     AbortSignal.timeout(300_000),
     ...(currentAbort ? [currentAbort.signal] : []),
@@ -600,6 +645,10 @@ async function applyDiscovery(
   validation = null;
   selected.clear();
   // Fresh input recheck is mandatory before every signature; discovery alone never bypasses it.
+  if (hostedMode) {
+    const cached = accountCache(next, nextHistory);
+    void store.save(`account-view:${owner}`, cached).catch(() => {});
+  }
   notification =
     mode === "local"
       ? ""
@@ -619,6 +668,11 @@ async function closeLocalSession(signal?: AbortSignal) {
   );
 }
 async function rememberLocalAccount(owner: AccountPublicKey) {
+  if (hostedMode)
+    await store.save("last-public-account", {
+      account: accountToJson(owner),
+      consent: privacyConsent,
+    });
   if (!hostedMode && owner.network === "mainnet" && owner.account === 0)
     await store.save("last-account", accountToJson(owner));
 }
@@ -634,10 +688,13 @@ async function runAccountRestore(
   if (completed) resumeLocalAccount();
 }
 function resumeLocalAccount() {
+  if (hostedMode && account && privacyConsent && !busy)
+    void run("Syncing account…", syncPublic);
   if (!hostedMode && account?.network === "mainnet" && account.account === 0)
     startLocalSync();
 }
 function startLocalSync() {
+  void refreshFeeQuotes();
   if (
     busy ||
     localSyncAbort ||
@@ -738,7 +795,7 @@ function scheduleLocalRefresh(owner: AccountPublicKey) {
 function overview(b: ReturnType<typeof balances> | null) {
   if (!account)
     return `<section class="connect-panel"><h2>Add your Pearl account</h2><p>Open Pearl on your Ledger to get started.</p>${walletButton("connect-inline", "Add account", busy)}</section>`;
-  return `<section class="balance-card"><p class="hint">Available balance</p><div class="balance">${b ? formatPrl(b.available) : "—"}<small>PRL</small></div><div class="actions account-actions"><button data-nav="receive" ${disabled(busy)}>Receive</button><button data-nav="send" ${disabled(busy || !!localSyncAbort)}>Send</button></div>${b && (b.immature || b.reserved || b.pending) ? `<p class="hint">${b.immature ? `${money(b.immature)} immature · ` : ""}${b.reserved ? `${money(b.reserved)} in pending payments · ` : ""}${b.pending ? `${money(b.pending)} unconfirmed` : ""}</p>` : ""}</section>${lightCard()}${history.length ? historyCard() : `<section class="transactions"><h2>Transactions</h2><p class="hint">${syncComplete ? "No transactions yet" : "Sync your account to see transactions"}</p></section>`}`;
+  return `<section class="balance-card"><p class="hint">${hostedMode && !syncComplete && snapshot ? "Last synced balance" : "Available balance"}</p><div class="balance">${b ? formatPrl(b.available) : "—"}<small>PRL</small></div><div class="actions account-actions"><button data-nav="receive" ${disabled(busy)}>Receive</button><button data-nav="send" ${disabled(busy || !!localSyncAbort || (hostedMode && !syncComplete))}>Send</button></div>${b && (b.immature || b.reserved || b.pending) ? `<p class="hint">${b.immature ? `${money(b.immature)} immature · ` : ""}${b.reserved ? `${money(b.reserved)} in pending payments · ` : ""}${b.pending ? `${money(b.pending)} unconfirmed` : ""}</p>` : ""}</section>${lightCard()}${history.length ? historyCard() : `<section class="transactions"><h2>Transactions</h2><p class="hint">${syncComplete ? "No transactions yet" : "Sync your account to see transactions"}</p></section>`}`;
 }
 function settings() {
   return `<details id="settings" class="settings" ${settingsOpen ? "open" : ""}><summary>Settings</summary><div class="settings-panel"><div class="section-head"><h2>Settings</h2><button id="close-settings" class="ghost">Close</button></div><section><div class="actions">${walletButton("connect", client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger", busy)}${account ? `<button id="disconnect" class="ghost" ${disabled(busy)}>Close account</button>` : ""}</div><div class="field"><label for="network">Network</label><select id="network" ${disabled(busy || !!account)}>${Object.keys(
@@ -771,34 +828,257 @@ function receive(feedback = "") {
       Math.max(receiveIndex, journal.issuedReceiveThrough, lastUsed[0]) < 979,
   });
 }
-function currentFeeRequest(): PaymentRequest {
-  assert(snapshot, "Sync your account to prepare a payment");
+function currentFeeRate(): bigint {
+  const target = feeSelection === "standard" ? 10 : feeSelection;
+  const quote =
+    feeQuoteNetwork === network
+      ? feeQuotes.find((item) => item.blocks === target)
+      : undefined;
+  const fresh =
+    quote &&
+    Date.now() >= quote.receivedAt &&
+    Date.now() - quote.receivedAt <= FEE_QUOTE_LIFETIME_MS;
+  if (fresh) return quote.grainsPerKvB;
+  assert(
+    feeSelection === "standard",
+    "Fee estimate expired. Refresh estimates or choose Standard.",
+  );
+  return DEFAULT_RELAY_POLICY.minRelayFeeGrainsPerKvB;
+}
+function feeLabel() {
+  if (feeSelection === "custom") return "Custom";
+  if (feeSelection === "standard") {
+    const medium =
+      feeQuoteNetwork === network &&
+      feeQuotes.find(
+        (q) =>
+          q.blocks === 10 &&
+          Date.now() >= q.receivedAt &&
+          Date.now() - q.receivedAt <= FEE_QUOTE_LIFETIME_MS,
+      );
+    return medium ? "Medium" : "Standard";
+  }
+  return ({ 1: "Fast", 10: "Medium", 25: "Slow" } as const)[feeSelection];
+}
+function feeTime(): string {
+  if (feeSelection === "custom" || !["mainnet", "testnet2"].includes(network))
+    return "";
+  const target = feeSelection === "standard" ? 10 : feeSelection;
+  const quote =
+    feeQuoteNetwork === network
+      ? feeQuotes.find((item) => item.blocks === target)
+      : undefined;
+  try {
+    assert(quote, "No estimate");
+    quoteRate(quote, network);
+    return confirmationTime(quote.blocks);
+  } catch {
+    return feeLoad ? "…" : "Unavailable";
+  }
+}
+function paymentFields(): PaymentRequest {
   return {
-    selected: manualSelection
-      ? [...selected]
-      : selectPaymentInputs(
-          snapshot,
-          form.amount,
-          form.fee,
-          reservedOutpoints(journal),
-        ),
+    selected: [...selected],
     recipient: form.recipient.trim(),
     amountPrl: form.amount,
     feePrl: form.fee,
     changeIndex: Number(form.changeIndex),
   };
 }
+function currentFeeRequest(): PaymentRequest {
+  assert(snapshot, "Sync your account first");
+  const request = paymentFields(),
+    reserved = reservedOutpoints(journal);
+  if (feeSelection !== "custom")
+    return paymentAtRate(
+      snapshot,
+      request,
+      reserved,
+      currentFeeRate(),
+      manualSelection,
+    );
+  if (!manualSelection)
+    request.selected = selectPaymentInputs(
+      snapshot,
+      form.amount,
+      form.fee,
+      reserved,
+    );
+  return request;
+}
+function updateAutomaticFee() {
+  if (!snapshot || !form.amount.trim()) return;
+  try {
+    if (maxAmount) {
+      const request = {
+        recipient: form.recipient.trim(),
+        changeIndex: Number(form.changeIndex),
+      };
+      const next =
+        feeSelection === "custom"
+          ? maximumPayment(
+              snapshot,
+              { ...request, feePrl: form.fee },
+              reservedOutpoints(journal),
+              [...selected],
+            )
+          : maximumPaymentAtRate(
+              snapshot,
+              request,
+              reservedOutpoints(journal),
+              currentFeeRate(),
+              [...selected],
+            );
+      form.amount = next.amountPrl;
+      form.fee = next.feePrl;
+    } else if (feeSelection !== "custom") form.fee = currentFeeRequest().feePrl;
+  } catch {
+    /* Preparation displays the validation error; no invalid payment is saved. */
+  }
+}
+function updateFeeFields() {
+  updateAutomaticFee();
+  const amount = document.getElementById("amount") as HTMLInputElement | null;
+  if (maxAmount && amount) amount.value = form.amount;
+  const total = document.getElementById("fee-total");
+  if (total) total.textContent = form.amount.trim() ? `${form.fee} PRL` : "—";
+  const label = document.getElementById("fee-mode-label");
+  if (label) label.textContent = feeLabel();
+  const timing = document.getElementById("fee-time");
+  if (timing) timing.textContent = feeTime() ? ` · ${feeTime()}` : "";
+  const input = document.getElementById("fee") as HTMLInputElement | null;
+  if (input && feeSelection !== "custom") input.value = form.fee;
+  const hint = document.getElementById("fee-policy");
+  if (hint) hint.textContent = feePolicyHint();
+  for (const option of feeQuoteOptions()) {
+    const button = document.getElementById(
+      `fee-target-${option.blocks}`,
+    ) as HTMLButtonElement | null;
+    if (button) {
+      const label = document.getElementById(
+        `fee-target-label-${option.blocks}`,
+      );
+      const time = document.getElementById(`fee-target-time-${option.blocks}`);
+      if (label) label.textContent = option.label;
+      if (time) time.textContent = option.time ?? "";
+      button.disabled = busy || option.disabled;
+    }
+  }
+}
+function scheduleFeeRefresh(delay?: number) {
+  clearTimeout(feeRefreshTimer);
+  if (
+    page !== "send" ||
+    sendStep !== 1 ||
+    activePayment ||
+    !["mainnet", "testnet2"].includes(network)
+  )
+    return;
+  feeRefreshTimer = setTimeout(
+    () => {
+      if (
+        page !== "send" ||
+        sendStep !== 1 ||
+        activePayment ||
+        document.visibilityState === "hidden"
+      )
+        return;
+      if (busy) {
+        scheduleFeeRefresh(15_000);
+        return;
+      }
+      void refreshFeeQuotes(true);
+    },
+    delay ??
+      Math.max(1_000, feeLoadAt + FEE_QUOTE_LIFETIME_MS - 15_000 - Date.now()),
+  );
+  feeRefreshTimer.unref?.();
+}
+async function refreshFeeQuotes(force = false) {
+  scheduleFeeRefresh();
+  if (
+    feeLoad ||
+    !["mainnet", "testnet2"].includes(network) ||
+    (!force && Date.now() - feeLoadAt < FEE_QUOTE_LIFETIME_MS)
+  )
+    return;
+  const owner = account,
+    requestedNetwork = network,
+    controller = new AbortController();
+  feeLoad = controller;
+  feeLoadAt = Date.now();
+  scheduleFeeRefresh();
+  const prepare = document.getElementById(
+    "prepare",
+  ) as HTMLButtonElement | null;
+  if (prepare && feeSelection !== "custom") prepare.disabled = true;
+  const timing = document.getElementById("fee-time");
+  if (timing) timing.textContent = feeTime() ? ` · ${feeTime()}` : "";
+  let quotes: FeeQuote[] = [];
+  try {
+    // These fixed status/fee paths disclose no wallet address or account key.
+    quotes = await loadFeeQuotes(
+      browserPublicSource(
+        requestedNetwork,
+        true,
+        AbortSignal.any([controller.signal, AbortSignal.timeout(8_000)]),
+      ),
+    );
+  } catch {
+    /* A failed estimate does not invalidate the local account. */
+  }
+  if (feeLoad !== controller) return;
+  feeLoad = null;
+  if (
+    controller.signal.aborted ||
+    account !== owner ||
+    network !== requestedNetwork
+  )
+    return;
+  feeQuotes = quotes;
+  feeQuoteNetwork = requestedNetwork;
+  const badge = document.getElementById("network-health-indicator");
+  if (badge) {
+    const health = networkHealth();
+    badge.textContent = health.ok ? "✓" : "×";
+    badge.setAttribute?.("title", health.message);
+    badge.setAttribute?.(
+      "aria-label",
+      health.ok
+        ? "Network services available"
+        : "Network service needs attention",
+    );
+  }
+  // Never alter an already prepared payment, or interrupt an active device operation.
+  if (page === "send" && !activePayment && !busy) {
+    const focused = document.activeElement as HTMLInputElement | null;
+    const id = focused?.id,
+      start = focused?.selectionStart,
+      end = focused?.selectionEnd;
+    render();
+    if (id) {
+      const replacement = document.getElementById(
+        id,
+      ) as HTMLInputElement | null;
+      replacement?.focus?.();
+      if (typeof start === "number" && typeof end === "number")
+        replacement?.setSelectionRange?.(start, end);
+    }
+  } else if (!busy && page !== "receive" && !activePayment) render();
+}
 function feePolicyHint(): string {
   if (!snapshot) return "Sync your account to prepare a payment.";
   if (!form.amount.trim())
-    return "Enter an amount to calculate the minimum fee.";
+    return "Fee is calculated from the transaction size.";
   try {
     const p = previewPaymentPolicy(
       snapshot,
       currentFeeRequest(),
       reservedOutpoints(journal),
     );
-    return `${p.fee < p.minimumFee ? "Fee too low. " : ""}Minimum fee: ${formatPrl(p.minimumFee)} PRL.`;
+    return feeSelection === "custom"
+      ? `${p.fee < p.minimumFee ? "Fee too low. " : ""}Minimum fee: ${formatPrl(p.minimumFee)} PRL.`
+      : "";
   } catch (error) {
     return error instanceof Error
       ? walletMessage(error.message)
@@ -806,27 +1086,39 @@ function feePolicyHint(): string {
   }
 }
 function feeQuoteOptions() {
-  if (!snapshot || sourceMode !== "public" || feeQuoteNetwork !== network)
-    return [];
+  if (!snapshot || feeQuoteNetwork !== network) return [];
   return feeQuotes.map((quote) => {
     try {
-      const request = quotedPayment(
-        snapshot!,
-        currentFeeRequest(),
-        reservedOutpoints(journal),
-        quote,
-        manualSelection,
-      );
+      const rate = quoteRate(quote, network);
+      const request = maxAmount
+        ? maximumPaymentAtRate(
+            snapshot!,
+            paymentFields(),
+            reservedOutpoints(journal),
+            rate,
+            [...selected],
+          )
+        : paymentAtRate(
+            snapshot!,
+            paymentFields(),
+            reservedOutpoints(journal),
+            rate,
+            manualSelection,
+          );
       return {
         blocks: quote.blocks,
-        label: `${quote.blocks}-block target · ${request.feePrl} PRL`,
+        time: confirmationTime(quote.blocks),
+        selected:
+          feeSelection === quote.blocks ||
+          (feeSelection === "standard" && quote.blocks === 10),
+        label: `${({ 1: "Fast", 10: "Medium", 25: "Slow" } as const)[quote.blocks]} · ${request.feePrl} PRL`,
         disabled: false,
         feePrl: request.feePrl,
       };
     } catch {
       return {
         blocks: quote.blocks,
-        label: `${quote.blocks}-block target · unavailable`,
+        label: `${({ 1: "Fast", 10: "Medium", 25: "Slow" } as const)[quote.blocks]} · unavailable`,
         disabled: true,
         feePrl: null,
       };
@@ -838,10 +1130,12 @@ function send(active: PaymentRecord | undefined, feedback = "") {
   if (!snapshot)
     return `<section class="card empty"><h2>Sync your account to send Pearl</h2><p>Your balance and available funds need to be loaded first.</p><button data-nav="overview">Go to account</button></section>`;
   const reserved = reservedOutpoints(journal);
+  updateAutomaticFee();
   return sendForm({
     feedback,
     step: sendStep,
     recipient: form.recipient,
+    scanning: qrScanning,
     amount: form.amount,
     fee: form.fee,
     available: money(balances(snapshot, reserved).available),
@@ -855,28 +1149,29 @@ function send(active: PaymentRecord | undefined, feedback = "") {
       : selectablePaymentCoins(snapshot, reserved).length === 0,
     feeHint: feePolicyHint(),
     quotes: feeQuoteOptions(),
-    quoteStatus:
-      sourceMode === "public" && ["mainnet", "testnet2"].includes(network)
-        ? feeQuoteStatus
-        : "",
-    quotesSupported:
-      sourceMode === "public" && ["mainnet", "testnet2"].includes(network),
+    quotesSupported: ["mainnet", "testnet2"].includes(network),
+    feeMode: feeLabel(),
+    feeTime: feeTime(),
+    feeLoading: feeLoad !== null,
+    feeOptionsOpen,
     accountName: `Pearl ${accountIndex + 1}`,
     network,
     busy,
-    advanced: `<details id="coin-control" class="card advanced" ${coinControlOpen ? "open" : ""}><summary>Coin control</summary><div class="advanced-body"><button id="check-node" class="secondary" ${disabled(busy)}>Refresh balance</button>${
-      snapshot.coins.length
-        ? snapshot.coins
-            .map((c) => {
-              const key = outpoint(c),
-                status = reserved.has(key)
-                  ? "reserved"
-                  : coinEligibility(c, snapshot!.tip);
-              return `<label class="coin"><input type="checkbox" data-coin="${e(key)}" ${selected.has(key) ? "checked" : ""} ${disabled(busy || status !== "eligible")}><span class="coin-info"><span class="mono">${e(key)}</span><span class="muted">${c.coinbase ? "Mining reward" : "Transfer"} · ${confirmations(c, snapshot!.tip)} confirmations · ${status === "reserved" ? "pending payment" : status === "eligible" ? "available" : status}</span></span><span class="coin-value">${e(formatPrl(c.amount))}<br><span class="muted">PRL</span></span></label>`;
-            })
-            .join("")
-        : '<p class="hint">No available funds.</p>'
-    }<p class="hint">${manualSelection ? countLabel(selected.size, "input") + " selected manually." : "Automatic selection"}</p><button id="auto-inputs" class="secondary" ${disabled(busy)}>Use automatic selection</button></div></details>`,
+    advanced: coinControlOpen
+      ? `<section id="coin-control" class="ledger-coin-control"><div class="row"><h3>Coin control</h3><button id="coin-control-close" class="ghost">Done</button></div>${
+          snapshot.coins.length
+            ? snapshot.coins
+                .map((c) => {
+                  const key = outpoint(c),
+                    status = reserved.has(key)
+                      ? "reserved"
+                      : coinEligibility(c, snapshot!.tip);
+                  return `<label class="coin"><input type="checkbox" data-coin="${e(key)}" ${selected.has(key) ? "checked" : ""} ${disabled(busy || status !== "eligible")}><span class="coin-info"><span class="mono">${e(key)}</span><span class="muted">${c.coinbase ? "Mining reward" : "Transfer"} · ${confirmations(c, snapshot!.tip)} confirmations · ${status === "reserved" ? "pending payment" : status === "eligible" ? "available" : status}</span></span><span class="coin-value">${e(formatPrl(c.amount))}<br><span class="muted">PRL</span></span></label>`;
+                })
+                .join("")
+            : '<p class="hint">No available funds.</p>'
+        }<p class="hint">${manualSelection ? countLabel(selected.size, "input") + " selected manually." : "Automatic selection"}</p><button id="auto-inputs" class="secondary" ${disabled(busy)}>Use automatic selection</button></section>`
+      : "",
   });
 }
 function review(payment: PaymentRecord, feedback = "") {
@@ -977,6 +1272,7 @@ function bind() {
           activePayment = null;
           if (notificationType === "success") notification = "";
           render();
+          if (page === "send") void refreshFeeQuotes();
         }
       }),
   );
@@ -992,10 +1288,15 @@ function bind() {
     .getElementById("privacy-consent")
     ?.addEventListener("change", (event) => {
       privacyConsent = (event.target as HTMLInputElement).checked;
+      if (account && hostedMode)
+        void rememberLocalAccount(account).catch(() => {});
       render();
     });
   click("sync-public", () => void run("Syncing account…", syncPublic));
   click("sync-local", startLocalSync);
+  click("check-services", () => {
+    if (!busy) void refreshFeeQuotes(true);
+  });
   document.getElementById("public-file")?.addEventListener(
     "change",
     (event) =>
@@ -1174,6 +1475,64 @@ function bind() {
     }
   };
   click("flow-close", closeFlow);
+  const acceptQr = async (
+    read: (signal: AbortSignal) => Promise<string>,
+    camera: boolean,
+  ) => {
+    if (busy || page !== "send" || sendStep !== 0) return;
+    const owner = account,
+      selectedNetwork = network;
+    qrScanning = camera;
+    try {
+      await run(
+        camera ? "Scan the recipient QR code" : "Reading QR image…",
+        async (signal) => {
+          const { parsePaymentQr } = await import("./qr-reader.js");
+          const code = await read(signal);
+          signal.throwIfAborted();
+          assert(
+            account === owner &&
+              network === selectedNetwork &&
+              page === "send" &&
+              sendStep === 0,
+            "Account changed while scanning",
+          );
+          const payment = parsePaymentQr(code, selectedNetwork);
+          form.recipient = payment.address;
+          if (payment.amount !== undefined) {
+            maxAmount = false;
+            form.amount = payment.amount;
+          }
+          notification = "Address scanned. Review it before continuing.";
+        },
+      );
+    } finally {
+      qrScanning = false;
+      render();
+    }
+  };
+  click(
+    "scan-qr",
+    () =>
+      void acceptQr(async (signal) => {
+        const { scanCamera } = await import("./qr-reader.js");
+        const video = document.getElementById(
+          "recipient-camera",
+        ) as HTMLVideoElement | null;
+        assert(video, "Camera preview is unavailable");
+        return scanCamera(video, signal);
+      }, true),
+  );
+  document
+    .getElementById("recipient-qr-file")
+    ?.addEventListener("change", (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file)
+        void acceptQr(async (signal) => {
+          const { readQrImage } = await import("./qr-reader.js");
+          return readQrImage(file, signal);
+        }, false);
+    });
   click("recipient-continue", () => {
     if (busy) return;
     try {
@@ -1182,6 +1541,7 @@ function bind() {
       sendStep = 1;
       notification = "";
       render();
+      void refreshFeeQuotes();
     } catch (error) {
       notify(
         error instanceof Error ? error.message : "Check the recipient address",
@@ -1230,6 +1590,7 @@ function bind() {
           account.account === 0
         )
           await store.save("last-account", null);
+        if (hostedMode) await store.save("last-public-account", null);
         clearPaymentForm();
         await transport?.close();
         transport = null;
@@ -1411,17 +1772,12 @@ function bind() {
   ] as const)
     document.getElementById(id)?.addEventListener("input", (event) => {
       form[key] = (event.target as HTMLInputElement).value;
-      const hint = document.getElementById("fee-policy");
-      if (hint) hint.textContent = feePolicyHint();
-      for (const option of feeQuoteOptions()) {
-        const button = document.getElementById(
-          `fee-target-${option.blocks}`,
-        ) as HTMLButtonElement | null;
-        if (button) {
-          button.textContent = option.label;
-          button.disabled = busy || option.disabled;
-        }
+      if (key === "amount") {
+        maxAmount = false;
+        void refreshFeeQuotes();
       }
+      if (key === "fee") feeSelection = "custom";
+      updateFeeFields();
     });
   document.querySelectorAll<HTMLInputElement>("[data-coin]").forEach(
     (el) =>
@@ -1434,85 +1790,48 @@ function bind() {
       }),
   );
   document
-    .getElementById("coin-control")
+    .getElementById("fee-options")
     ?.addEventListener("toggle", (event) => {
-      coinControlOpen = (event.target as HTMLDetailsElement).open;
+      feeOptionsOpen = (event.target as HTMLDetailsElement).open;
+      if (feeOptionsOpen) void refreshFeeQuotes();
     });
-  click(
-    "refresh-fees",
-    () =>
-      void run("Getting network fee estimates…", async (signal) => {
-        assert(
-          sourceMode === "public" && ["mainnet", "testnet2"].includes(network),
-          "Use a manual fee on this network",
-        );
-        const requestedNetwork = network;
-        let quotes: FeeQuote[] = [];
-        try {
-          quotes = await loadFeeQuotes(
-            browserPublicSource(
-              requestedNetwork,
-              true,
-              AbortSignal.any([signal, AbortSignal.timeout(15_000)]),
-            ),
-          );
-        } catch {
-          signal.throwIfAborted();
-        }
-        signal.throwIfAborted();
-        assert(
-          network === requestedNetwork && sourceMode === "public",
-          "Network changed; request new estimates",
-        );
-        feeQuotes = quotes;
-        feeQuoteNetwork = requestedNetwork;
-        feeQuoteStatus = quotes.length
-          ? "Block targets are estimates, not guarantees. Choose a total fee to apply it."
-          : "Estimates unavailable. Enter a manual fee; the relay minimum is shown above.";
-      }),
-  );
+  click("coin-control-open", () => {
+    if (!busy) {
+      coinControlOpen = true;
+      render();
+    }
+  });
+  click("coin-control-close", () => {
+    coinControlOpen = false;
+    render();
+  });
+  click("fee-custom", () => {
+    if (!busy) {
+      feeSelection = "custom";
+      feeOptionsOpen = true;
+      render();
+    }
+  });
+  click("fee-standard", () => {
+    if (!busy) {
+      feeSelection = "standard";
+      render();
+    }
+  });
+  click("refresh-fees", () => {
+    if (!busy) void refreshFeeQuotes(true);
+  });
   for (const blocks of FEE_TARGETS)
-    click(
-      `fee-target-${blocks}`,
-      () =>
-        void run("Applying fee estimate…", async (signal) => {
-          assert(
-            snapshot &&
-              account &&
-              sourceMode === "public" &&
-              feeQuoteNetwork === network,
-            "Request estimates for this network first",
-          );
-          const owner = account,
-            watch = snapshot,
-            quote = feeQuotes.find((item) => item.blocks === blocks);
-          const displayed = feeQuoteOptions().find(
-            (item) => item.blocks === blocks,
-          )?.feePrl;
-          assert(
-            quote && displayed,
-            "Fee estimate unavailable or expired; refresh estimates",
-          );
-          await refreshJournal();
-          signal.throwIfAborted();
-          assert(
-            account === owner && snapshot === watch,
-            "Account changed; review the fee again",
-          );
-          const next = quotedPayment(
-            watch,
-            currentFeeRequest(),
-            reservedOutpoints(journal),
-            quote,
-            manualSelection,
-          );
-          assert(
-            next.feePrl === displayed,
-            "Available inputs changed; review the refreshed estimate",
-          );
-          form.fee = next.feePrl;
-        }),
-    );
+    click(`fee-target-${blocks}`, () => {
+      if (busy) return;
+      const choice = feeQuoteOptions().find((item) => item.blocks === blocks);
+      if (!choice || choice.disabled) {
+        void refreshFeeQuotes();
+        return;
+      }
+      feeSelection = blocks;
+      render();
+    });
   click(
     "send-max",
     () =>
@@ -1526,17 +1845,31 @@ function bind() {
           snapshot === watch && account === owner,
           "Account changed; review the amount again",
         );
-        const maximum = maximumPayment(
-          watch,
-          {
-            recipient: form.recipient.trim(),
-            feePrl: form.fee,
-            changeIndex: Number(form.changeIndex),
-          },
-          reservedOutpoints(journal),
-          manualSelection ? [...selected] : undefined,
-        );
+        const maximum =
+          feeSelection !== "custom"
+            ? maximumPaymentAtRate(
+                watch,
+                {
+                  recipient: form.recipient.trim(),
+                  changeIndex: Number(form.changeIndex),
+                },
+                reservedOutpoints(journal),
+                currentFeeRate(),
+                manualSelection ? [...selected] : undefined,
+              )
+            : maximumPayment(
+                watch,
+                {
+                  recipient: form.recipient.trim(),
+                  feePrl: form.fee,
+                  changeIndex: Number(form.changeIndex),
+                },
+                reservedOutpoints(journal),
+                manualSelection ? [...selected] : undefined,
+              );
+        maxAmount = true;
         form.amount = maximum.amountPrl;
+        form.fee = maximum.feePrl;
         selected.clear();
         for (const id of maximum.selected) selected.add(id);
         manualSelection = true;
@@ -1544,6 +1877,7 @@ function bind() {
   );
   click("auto-inputs", () => {
     manualSelection = false;
+    maxAmount = false;
     selected.clear();
     render();
   });
@@ -1552,10 +1886,15 @@ function bind() {
     () =>
       void run("Preparing payment…", async (signal) => {
         assert(snapshot && account, "Load account");
+        assert(
+          !feeLoad || feeSelection === "custom",
+          "Wait for the fee estimate to finish.",
+        );
         const owner = account,
           watch = snapshot,
           source = sourceMode,
           useManualSelection = manualSelection,
+          automaticRate = feeSelection !== "custom" ? currentFeeRate() : null,
           request = {
             selected: [...selected],
             recipient: form.recipient.trim(),
@@ -1583,7 +1922,24 @@ function bind() {
         await store.mutate(accountId(owner), (j) => {
           requireCurrent();
           const reserved = reservedOutpoints(j);
-          if (!useManualSelection)
+          if (automaticRate !== null) {
+            assert(
+              currentFeeRate() === automaticRate,
+              "Fee estimate changed. Review it before continuing.",
+            );
+            const recalculated = paymentAtRate(
+              watch,
+              request,
+              reserved,
+              automaticRate,
+              useManualSelection,
+            );
+            assert(
+              recalculated.feePrl === request.feePrl,
+              "Fee changed. Review the updated fee before continuing.",
+            );
+            request.selected = recalculated.selected;
+          } else if (!useManualSelection)
             request.selected = selectPaymentInputs(
               watch,
               request.amountPrl,
@@ -2502,10 +2858,60 @@ window.addEventListener("beforeunload", (event) => {
   currentAbort?.abort();
   void transport?.close();
 });
+document.addEventListener?.("visibilitychange", () => {
+  if (
+    document.visibilityState === "visible" &&
+    page === "send" &&
+    sendStep === 1 &&
+    !activePayment &&
+    !busy
+  )
+    void refreshFeeQuotes();
+});
 render();
 // Remembering a public account never restores a device session or address approval.
 export async function restoreSavedAccount() {
-  if (hostedMode) return;
+  if (hostedMode) {
+    const initialNetwork = network;
+    try {
+      const saved = await store.load<unknown>("last-public-account");
+      if (!saved || account || busy || network !== initialNetwork) return;
+      const value = record(saved, "saved account"),
+        restored = accountFromJson(value.account);
+      assert(
+        typeof value.consent === "boolean",
+        "Invalid saved network preference",
+      );
+      if (!["mainnet", "testnet2"].includes(restored.network)) return;
+      account = restored;
+      network = restored.network;
+      accountIndex = restored.account;
+      privacyConsent = value.consent;
+      sourceMode = "public";
+      await refreshJournal();
+      const savedView = await store.load<unknown>(
+        `account-view:${accountId(restored)}`,
+      );
+      if (account !== restored) return;
+      if (savedView) {
+        try {
+          const cached = parseAccountCache(savedView, restored);
+          snapshot = cached.snapshot;
+          history = cached.history;
+        } catch {
+          /* Discard optional cache; sync and reservations remain authoritative. */
+        }
+      }
+      syncComplete = false;
+      validation = null;
+      verifiedReceive = null;
+      render();
+      if (privacyConsent && !busy) void run("Syncing account…", syncPublic);
+    } catch {
+      if (!account) notify("Reconnect your Ledger to open the account.", true);
+    }
+    return;
+  }
   const initialNetwork = network;
   await store
     .load<unknown>("last-account")

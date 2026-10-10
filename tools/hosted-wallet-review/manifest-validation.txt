@@ -1,0 +1,36 @@
+{
+  "hostVersion": "4.23.0",
+  "rendererSha256": "936ae9c4eaf9c38bbb58bd1337cab3cffbbd5bf658769938b371a49124f6ff02",
+  "schemaModule": 502606,
+  "zodModule": 378008,
+  "pureModulesExecuted": [
+    502606,
+    378008,
+    678646,
+    67814,
+    21504,
+    244578,
+    794537,
+    946614,
+    546358,
+    636870,
+    96009,
+    768795,
+    423291
+  ],
+  "tests": {
+    "localManifest": true,
+    "hostedManifest": true,
+    "exactOrigin": true,
+    "exactFourPermissions": true,
+    "desktopAndAndroid": true,
+    "rejectSingularPlatform": true,
+    "rejectMobilePlatform": true,
+    "localManifestUnchanged": true
+  },
+  "hostedManifestSha256": "2039310ea841ad6055755bf9736c6b0781836fb72cd2032e9b2e3331b21cfb46",
+  "localManifestSha256": "2475823a5663e19cb27061b3432d542a33a756c5aa9dcf831478274d0dd11b9b",
+  "importedIntoLedger": false,
+  "catalogPublished": false,
+  "physicalAndroidQualified": false
+}

@@ -1,0 +1,100 @@
+PUBLIC_FIXTURE_EVIDENCE /var/folders/ym/10885q1n18n38bv878bs72fc0000gn/T/pearl-c-node-roundtrip-97LrdC
+RUN current C app capabilities and explicit public-account/address approval
+PASS current C app capabilities and explicit public-account/address approval
+UI nanosp account: Confirm public key
+UI nanosp account: Network | Regtest
+UI nanosp account: Path | 86'/1'/0'
+UI nanosp account: Public key (1/3) | tpubDDXRVY4eRY4p | 4iqLUQNQokx89YLZE | pTyA8UdLVYRMV8Ha
+UI nanosp account: Public key (2/3) | cVdwHRi1TWKMSY3k | h8WpNBA4kB4Xet3h | CxxVvSw83DZ5fhqiSy
+UI nanosp account: Public key (3/3) | sSsYCWJ7k79E
+UI nanosp account: Approve public key
+UI nanosp receive: Public key | approved
+UI nanosp receive: Verify Pearl | address
+UI nanosp receive: Address (1/2) | rprl1pzh75rtx74l85v2 | xqfr5uln7mhy40vyqz | m68ml4yngcqy9v085t
+UI nanosp receive: Address (2/2) | qqjd9fxm
+UI nanosp receive: Network | Regtest
+UI nanosp receive: Path | m/86'/1'/0'/0/0
+UI nanosp receive: Confirm
+RUN isolated real Pearl regtest genesis, no peers, and mature mined fixture coins
+MINED 5/101 public regtest blocks
+MINED 10/101 public regtest blocks
+MINED 15/101 public regtest blocks
+MINED 20/101 public regtest blocks
+MINED 25/101 public regtest blocks
+MINED 30/101 public regtest blocks
+MINED 35/101 public regtest blocks
+MINED 40/101 public regtest blocks
+MINED 45/101 public regtest blocks
+MINED 50/101 public regtest blocks
+MINED 55/101 public regtest blocks
+MINED 60/101 public regtest blocks
+MINED 65/101 public regtest blocks
+MINED 70/101 public regtest blocks
+MINED 75/101 public regtest blocks
+MINED 80/101 public regtest blocks
+MINED 85/101 public regtest blocks
+MINED 90/101 public regtest blocks
+MINED 95/101 public regtest blocks
+MINED 100/101 public regtest blocks
+MINED 101/101 public regtest blocks
+PASS isolated real Pearl regtest genesis, no peers, and mature mined fixture coins
+RUN p2tr: actual address/history discovery and spendable inputs
+PASS p2tr: actual address/history discovery and spendable inputs
+RUN p2tr: current UI fee calculation and fresh production input preflight
+PASS p2tr: current UI fee calculation and fresh production input preflight
+RUN p2tr: explicit C-firmware review/sign and verified-byte persistence
+UI nanosp p2tr-sign: Pearl Reg | app is ready
+UI nanosp p2tr-sign: Loading transaction
+UI nanosp p2tr-sign: Review transaction | to send PRL
+UI nanosp p2tr-sign: Network | Regtest
+UI nanosp p2tr-sign: From account | m/86'/1'/0'
+UI nanosp p2tr-sign: Amount | 1.23456789 PRL
+UI nanosp p2tr-sign: To (1/2) | rprl1pyz8vmclll4w4z3 | 6wzs20l5lfy3sfvt870r5 | mpd985d7trgew9lpq3
+UI nanosp p2tr-sign: To (2/2) | 9euzh
+UI nanosp p2tr-sign: Change amount | 3228.40676966 PRL
+UI nanosp p2tr-sign: Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7
+UI nanosp p2tr-sign: Change...ss (2/2) | smy9l6m
+UI nanosp p2tr-sign: Change path | m/86'/1'/0'/1/0
+UI nanosp p2tr-sign: Fees | 0.00000308 PRL
+UI nanosp p2tr-sign: Sign transaction
+UI nanosp p2tr-sign: Signing transaction
+PASS p2tr: explicit C-firmware review/sign and verified-byte persistence
+RUN p2tr: real node rejects mutated signature
+PASS p2tr: real node rejects mutated signature
+RUN p2tr: explicit verified regtest submission and mempool acceptance
+PASS p2tr: explicit verified regtest submission and mempool acceptance
+RUN p2tr: mine exact bytes and confirm spent inputs/output amounts
+PASS p2tr: mine exact bytes and confirm spent inputs/output amounts
+RUN p2tr: post-confirmation wallet refresh discovers change
+PASS p2tr: post-confirmation wallet refresh discovers change
+RUN p2mr: actual address/history discovery and spendable inputs
+PASS p2mr: actual address/history discovery and spendable inputs
+RUN p2mr: current UI fee calculation and fresh production input preflight
+PASS p2mr: current UI fee calculation and fresh production input preflight
+RUN p2mr: explicit C-firmware review/sign and verified-byte persistence
+UI nanosp p2mr-sign: Pearl Reg | app is ready
+UI nanosp p2mr-sign: Loading transaction
+UI nanosp p2mr-sign: Review transaction | to send PRL
+UI nanosp p2mr-sign: Network | Regtest
+UI nanosp p2mr-sign: Recipient type | P2MR
+UI nanosp p2mr-sign: From account | m/86'/1'/0'
+UI nanosp p2mr-sign: Amount | 1.23456789 PRL
+UI nanosp p2mr-sign: To (1/2) | rprl1zgfpyysjzgfpyysj | zgfpyysjzgfpyysjzgfp | yysjzgfpyysjzgfpqjkn
+UI nanosp p2mr-sign: To (2/2) | nxw
+UI nanosp p2mr-sign: Change amount | 3228.39683579 PRL
+UI nanosp p2mr-sign: Change...ess (1/2) | rprl1pj3g8qmqef88lla | skqma35lt8xhyqkfun | uh6rz2j9c6fvhkvvscjq
+UI nanosp p2mr-sign: Change...ss (2/2) | yxd8ku
+UI nanosp p2mr-sign: Change path | m/86'/1'/0'/1/1
+UI nanosp p2mr-sign: Fees | 0.00000308 PRL
+UI nanosp p2mr-sign: Sign transaction
+UI nanosp p2mr-sign: Signing transaction
+PASS p2mr: explicit C-firmware review/sign and verified-byte persistence
+RUN p2mr: real node rejects mutated signature
+PASS p2mr: real node rejects mutated signature
+RUN p2mr: explicit verified regtest submission and mempool acceptance
+PASS p2mr: explicit verified regtest submission and mempool acceptance
+RUN p2mr: mine exact bytes and confirm spent inputs/output amounts
+PASS p2mr: mine exact bytes and confirm spent inputs/output amounts
+RUN p2mr: post-confirmation wallet refresh discovers change
+PASS p2mr: post-confirmation wallet refresh discovers change
+RESULT /var/folders/ym/10885q1n18n38bv878bs72fc0000gn/T/pearl-c-node-roundtrip-97LrdC/result.json

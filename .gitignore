@@ -52,3 +52,7 @@ apps/light-client/bin/
 !tools/cli-durability-review/*.log
 !tools/connection-cleanup-review/*.log
 !tools/final-local-audit/*.log
+!tools/hosted-wallet-review/*.log
+
+# Local Vercel project settings and environment pulls.
+.vercel/

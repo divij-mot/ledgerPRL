@@ -44,14 +44,14 @@
       "original": "original/modals/Send/steps/StepAmount.tsx",
       "sha256": "a96089224eed2a690097bc8c8a440bcbea0851f6614be7b113bc431616731e9e",
       "adapted": "src/ledger-ui/StepAmount.tsx",
-      "adaptedSha256": "d9a65957b0f12f8637ba5d75d2f26ae59c3a23e45445b0329a74fb0078252608"
+      "adaptedSha256": "490be6d3b1c6ded5c09a4f6d81228557b9fd0d2dc8bfbb2aa53d2ea360b3f44a"
     },
     {
       "path": "apps/ledger-live-desktop/src/renderer/modals/Send/steps/StepRecipient.tsx",
       "original": "original/modals/Send/steps/StepRecipient.tsx",
       "sha256": "76481debeab8cba69cdae57ad89c1b4c50165db2d303b31c780574c2db5da56d",
       "adapted": "src/ledger-ui/StepRecipient.tsx",
-      "adaptedSha256": "190b295ef1eff21c43aaed5f823bba69762d67bca5d5c860ad92f35b57a5c455"
+      "adaptedSha256": "8c973c77ec550dfc1e866bbf6ba5a88522272c1dfab172645c1e4d47621f0970"
     },
     {
       "path": "apps/ledger-live-desktop/src/renderer/modals/Send/steps/StepSummary.tsx",
@@ -59,6 +59,13 @@
       "sha256": "b6e851c1f39a31ea8215dec7931ad3fa3e0cb89d224ecf5bc8a4acaeddf25a4d",
       "adapted": "src/ledger-ui/StepSummary.tsx",
       "adaptedSha256": "47f6c590b73b419338f2911c503fdf3c152659dcf9488de4a493a60ce2ad4472"
+    },
+    {
+      "path": "apps/ledger-live-desktop/src/mvvm/features/Send/screens/Recipient/hooks/useQrCodeScanner.ts",
+      "original": "original/mvvm/features/Send/screens/Recipient/hooks/useQrCodeScanner.ts",
+      "sha256": "a6042389d2d5fb6018e6b860b204de0bb923105f5fae718c8550277551b7b3e1",
+      "adapted": "src/qr-reader.ts",
+      "adaptedSha256": "e7ea26c85f3a8def3090a2394f25aed0ae83e4ae57bb3ed466e12acfc3531781"
     }
   ],
   "supportingSources": [
@@ -91,15 +98,15 @@
   "derivedFiles": [
     {
       "path": "src/ledger-ui/index.tsx",
-      "sha256": "035247ef4160890a5a72a2378d24eb7711a67e6dad802056dc02ca59d3050594",
+      "sha256": "e2191f13e5281cac8574559b13d322b4e4a4433e7226cee6f696de5c5e27bf61",
       "kind": "PRL render adapter"
     },
     {
       "path": "src/ledger-ui/styles.css",
-      "sha256": "3c0e1de9b807c31d9a8565f14c4cae71d2ad0a0053957f6a0c9492a270ed3c01",
+      "sha256": "ff45851de0a432ac7f7c79cebd92b3ea50060c0ef70f91a719ece7ddf226ea86",
       "kind": "static extraction of upstream styled-components"
     }
   ],
-  "patchSha256": "92d14dec5bb0a775b811e6b2d2a3aa0e9b4509947c2152f9df5326000dcb3e89",
+  "patchSha256": "b73348ebad3a7e676022b3f8c14413fc8bb13cd128583c5fe0ff76ab4307dc05",
   "licenseSha256": "c43174d759c87c3e8a423cb0cb6ee914feddc4eac5176350fd24674857a8ef5f"
 }

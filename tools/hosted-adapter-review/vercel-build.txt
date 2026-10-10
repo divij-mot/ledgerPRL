@@ -1,0 +1,15 @@
+{
+  "status": "error",
+  "reason": "project_settings_required",
+  "message": "No project settings found locally. Run pull to retrieve them, or re-run with --yes to pull automatically.",
+  "next": [
+    {
+      "command": "vercel pull --yes --environment preview --non-interactive",
+      "when": "retrieve project settings"
+    },
+    {
+      "command": "vercel build --yes --non-interactive",
+      "when": "re-run build after pull"
+    }
+  ]
+}

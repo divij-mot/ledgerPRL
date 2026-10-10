@@ -23,6 +23,7 @@
     "@pearl-ledger/sdk": "0.1.0",
     "@pearl-ledger/wallet": "0.1.0",
     "buffer": "6.0.3",
+    "jsqr": "1.4.0",
     "qrcode.react": "4.2.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",

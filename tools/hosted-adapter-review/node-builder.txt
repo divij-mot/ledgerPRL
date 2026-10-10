@@ -1,0 +1,24 @@
+Using TypeScript 5.9.3 (local user-provided)
+Using TypeScript 5.9.3 (local user-provided)
+[
+  {
+    "entrypoint": "api/indexer/read.ts",
+    "runtime": "nodejs24.x",
+    "handler": "api/indexer/read.js",
+    "shouldAddHelpers": false,
+    "shouldDisableAutomaticFetchInstrumentation": true,
+    "fileCount": 4,
+    "forbiddenFiles": [],
+    "compiledHandlerFixture": "passed"
+  },
+  {
+    "entrypoint": "api/indexer/broadcast.ts",
+    "runtime": "nodejs24.x",
+    "handler": "api/indexer/broadcast.js",
+    "shouldAddHelpers": false,
+    "shouldDisableAutomaticFetchInstrumentation": true,
+    "fileCount": 4,
+    "forbiddenFiles": [],
+    "compiledHandlerFixture": "passed"
+  }
+]

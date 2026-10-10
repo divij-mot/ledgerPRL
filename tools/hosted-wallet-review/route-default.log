@@ -1,0 +1,23 @@
+✔ QR parser accepts only exact same-network Pearl requests and bounded positive decimal amounts (4.799ms)
+✔ camera permission resolving after cancellation stops every acquired track (38.2475ms)
+✔ cancelled image decode closes the late bitmap without reading pixels (0.539833ms)
+✔ cached view binds account and validates raw owned outputs/history without restoring authority fields (63.676208ms)
+✔ standalone and Discover entry routes default to mainnet without starting wallet operations (1736.551541ms)
+✔ default applies live Medium, exposes Fast/Slow with automatic inputs, and labels fallback honestly (747.611458ms)
+✔ Max reprices recipient for a higher live rate and an exact custom total (1001.733666ms)
+✔ new reservation and dust cannot silently reprice or reserve a draft (669.547208ms)
+✔ explicit quote expiring while the journal queues cannot create a draft (680.640791ms)
+✔ late quotes leave a prepared payment and its signed authorization fields unchanged (382.199791ms)
+✔ late fee response for a replaced account cannot install rates or rewrite form (352.096208ms)
+✔ QR amount supersedes earlier Max and never prepares or signs (732.940708ms)
+✔ cancelled late QR result cannot replace recipient or create a payment (599.1655ms)
+✔ hosted cached view restores no validation or device approval and cannot sign without a fresh source (277.374625ms)
+✔ a delayed cached view cannot reopen an account after its actual Close handler completes (174.169875ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7840.977833

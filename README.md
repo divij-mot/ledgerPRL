@@ -1,8 +1,22 @@
 # Pearl Ledger
 
-A local Pearl (PRL) wallet in Ledger Wallet Discover, with a narrowly adapted Ledger Bitcoin device app, exact-integer host adapter and native watch-only light client.
+A Pearl (PRL) wallet with one interface for local SPV use and hosted Ledger Wallet Discover, backed by a narrowly adapted Ledger Bitcoin device app and exact-integer host adapter.
 
-**Development software. Do not use with valuable funds.** Limited emulator and Nano S Plus physical tests have passed. The [local mainnet checkpoint](tools/local-mainnet-review/README.md) observed a real incoming payment and confirmations; outgoing hardware signing, broadcast and destination confirmation remain unverified. These tests do not establish Ledger approval, a human security audit or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
+**Development software. Do not use with valuable funds.** Limited emulator and Nano S Plus physical tests have passed. The [local mainnet checkpoint](tools/local-mainnet-review/README.md) observed a real incoming payment and confirmations; outgoing mainnet hardware signing, broadcast and destination confirmation remain unverified. These tests do not establish Ledger approval, a human security audit or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
+
+## Two ways to use the same wallet
+
+| Mode | Open | Chain data and connection |
+| --- | --- | --- |
+| Local | `python3 scripts/run-local.py` opens `http://127.0.0.1:5188/` | Native Pearl SPV on this computer; direct Ledger WebHID in desktop Chrome/Edge |
+| Hosted | Planned `https://pearl-ledger-wallet.vercel.app/live.html` inside Ledger Wallet Discover | Fixed Pearl public-indexer service; Ledger Wallet API on desktop/Android |
+| Hosted browser | Planned `https://pearl-ledger-wallet.vercel.app/` | Same public-indexer flow; direct WebHID in desktop Chrome/Edge |
+
+**Hosted deployment is pending verification.** The Vercel Hobby project exists, but the planned URLs are not yet claimed as deployed or tested. Hosted clients need no running Mac or native helper. Android is a source-supported target: responsive browser and simulated Wallet API checks do not qualify the real Android app, camera permissions, USB/BLE or device flows. Native Android SDK testing was explicitly declined. Public Discover listing and device-app distribution still require Ledger's separate approval.
+
+The UI is shared: Send/Receive, verified receive QR, camera/image payment-QR input, Max, fee choices, transaction history and recovery. Fast/Medium/Slow retain equal-priced options and show brief block-target time estimates; active Amount screens refresh anonymous fee quotes before their 120-second expiry. Hosted functions are stateless: no application database, account profile or server wallet cache. Public account metadata, cached display data and payment journals stay in the client browser. Cached balances never restore spend validation or a device approval.
+
+Local mode validates chain data with the pinned official Pearl wallet/Neutrino implementation; hosted mode trusts the selected indexer's chain/history answers while checking genesis, raw transactions, ownership and consistency. These are different trust models. Both keep signing keys on Ledger. Fee estimates in either mode use address-free requests to the fixed public service; a fee-service outage does not invalidate the local SPV account.
 
 ## What is implemented
 
@@ -10,7 +24,7 @@ A local Pearl (PRL) wallet in Ledger Wallet Discover, with a narrowly adapted Le
 - Exact bigint PRL host adapter, independently verified signatures, transaction finalization and CLI
 - Direct Ledger DMK/WebHID website; no MetaMask, seed entry or software signing required
 - Local mainnet account discovery through pinned official Pearl wallet/Neutrino code, with native XMSS/ZK verification libraries
-- Durable local payment recovery, optional watch cache and optional local-only authenticated node bridge
+- Durable browser payment recovery/display cache, automatic Medium fees with Fast/Slow/Custom/Max, local QR decoding and an optional authenticated local-node bridge
 - Public deterministic cross-language vectors, actual Pearl script-engine oracle, adversarial tests and ongoing security review
 
 Only ordinary no-script BIP86 P2TR owned inputs/change, one P2TR or P2MR recipient, at most one change, at most 16 inputs and SIGHASH_DEFAULT are supported. The input cap still needs physical-device measurement. P2MR recipients do not imply P2MR/XMSS custody. No arbitrary hash/message signing, seed entry, hot-wallet fallback, XMSS, script-path signing, RBF or automated consolidation.
@@ -19,19 +33,17 @@ Only ordinary no-script BIP86 P2TR owned inputs/change, one P2TR or P2MR recipie
 
 Requirements: Node.js 24.19 or a newer compatible 24.x release, npm and Python 3. Building the native light client also requires Go (the build selects 1.26.6), Rust/Cargo with the 1.90.0 toolchain, a C compiler and make. The build downloads pinned upstream source and dependencies. Hardware connection requires the matching app already running on Ledger; installing it remains a separate user-approved step.
 
-Intended build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. The current C source passed bounded mainnet/regtest Nano S Plus emulator tests, including P2MR recipients and 75 hostile-request rejections. One physical Nano S Plus on OS 1.7.0 passed Live App account/receive verification and a separate synthetic HID signing pilot. Other models, physical P2MR review, restore, fault and maximum-input matrices remain unqualified. See the [native evidence](tools/live-app-native-review/README.md), [physical evidence](tools/live-app-physical-review/README.md) and [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate). Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround.
+Intended build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. The current C source passed bounded mainnet/regtest Nano S Plus emulator tests, including P2MR recipients and 75 hostile-request rejections. The current Pearl 0.1.0 app was installed with owner approval on one Nano S Plus, OS 1.7.0; account and Receive verification passed in actual Ledger Discover, and existing funds were unchanged. The earlier synthetic HID signing pilot remains separate evidence for its recorded artifact. Current C firmware also passed the [16-check real regtest roundtrip](tools/hosted-wallet-review/simulator/README.md), including P2TR/P2MR signing, node acceptance and mined confirmation. Other models, physical P2MR review, restore, fault and maximum-input matrices remain unqualified. See the [native evidence](tools/live-app-native-review/README.md), [physical evidence](tools/live-app-physical-review/README.md) and [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate). Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround.
 
-The current app and companion are **USB-only**: Bluetooth is disabled in the C app and the website uses WebHID. Desktop Chrome/Edge on HTTPS or loopback are intended test targets; mobile, Safari and Firefox are not qualified. The website does not install the Ledger app or update Ledger OS.
+The current firmware has Bluetooth disabled. Standalone browser connection uses USB WebHID in desktop Chrome/Edge; Safari, Firefox and standalone mobile browsers are not qualified. Android Discover uses the host Wallet API and remains unqualified on an actual Android device. The website does not install the Ledger app or update Ledger OS.
 
 **Publication route unresolved:** Ledger's [current policy](https://developers.ledger.com/docs/device-app/getting-started) requires Rust for new device apps. Its [Bitcoin clone guidance](https://developers.ledger.com/docs/device-app/integration/how-to/clone) describes Layer-2 extensions, which does not establish an exception for this separate-chain C fork. Ledger must confirm the accepted route. My Ledger app listing requires its review/audit process and does not itself provide Pearl asset management inside Ledger Wallet. See the [distribution review](tools/ledger-distribution-review/README.md).
 
 ```sh
-npm ci --ignore-scripts
-npm run setup:light
-npm start
+python3 scripts/run-local.py
 ```
 
-Keep the terminal running and open Pearl in Ledger Wallet → Discover using the [local manifest setup](docs/live-app.md). The app is served only at **http://127.0.0.1:5188/live.html**. `npm start` builds the frontend and starts its local server; `setup:light` builds the native helper once, and must be repeated after helper source changes. The helper communicates over private standard I/O and runs no wallet RPC listener. No cloud deployment or separate wallet GUI is needed.
+Keep the terminal running. After its server starts, the launcher opens **http://127.0.0.1:5188/** for a direct Ledger WebHID connection; use desktop Chrome or Edge. The separate **`/live.html`** entry is for Ledger Wallet Discover. Hosted Discover can run independently of this computer; [local manifest setup](docs/live-app.md) is a development option. The launcher checks Node, installs the exact npm lockfile with lifecycle scripts disabled, and rebuilds the native helper only when its manifest/source set/source hashes or executable identity are missing or stale. It then uses the existing `npm start` frontend build and foreground server. Stop an older local server before rerunning it; Ctrl-C stops the foreground app. No global tools or shell-profile configuration are installed. The explicit `npm run setup:light` and `npm start` commands remain available. The helper communicates over private standard I/O and runs no wallet RPC listener. No cloud deployment or separate wallet GUI is needed.
 
 The default local flow supports **mainnet account 0**. After account approval it remembers the public account, starts synchronization, and resumes on reopening. Initial header/filter synchronization can take substantial time; an incomplete account shows unavailable balance instead of a synthetic zero. Blockchain peers are still required: local means processing and storage on this computer, not offline operation. Optional public-indexer and configured-node paths remain advanced compatibility options, not dependencies of local synchronization. See [companion instructions](docs/companion.md) and [mainnet testing](docs/mainnet-testing.md) for the bounded scope and remaining funded-transfer gates.
 
@@ -73,4 +85,4 @@ This provides conventional secure-element custody. It does not claim quantum res
 
 ## Ledger Wallet integration
 
-The primary local interface is the developer-loaded Live App using Ledger Wallet API and adapted Ledger Bitcoin views with Lumen UI. See [setup and verification](docs/live-app.md). The same PRL wallet and Bitcoin-derived signing checks back both interfaces.
+The Discover entry uses Ledger Wallet API and adapted Ledger Bitcoin views with Lumen UI; the local launcher opens the direct WebHID entry. See [setup and verification](docs/live-app.md). The same PRL wallet and Bitcoin-derived signing checks back both interfaces.

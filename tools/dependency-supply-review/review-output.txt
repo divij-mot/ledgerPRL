@@ -1,14 +1,14 @@
 {
-  "pass": 757,
+  "pass": 762,
   "counts": {
-    "registryRecords": 345,
-    "installedRegistryRecords": 249,
+    "registryRecords": 346,
+    "installedRegistryRecords": 250,
     "missingOptionalPlatformPackages": 96,
-    "browserMainModules": 768,
+    "browserMainModules": 773,
     "browserWorkerModules": 27,
     "browserCssInputs": 50,
-    "browserUnionModules": 819,
-    "browserPackages": 48
+    "browserUnionModules": 824,
+    "browserPackages": 49
   },
   "installLifecycle": [
     {
@@ -36,19 +36,19 @@
   ],
   "noticeObservations": [
     {
-      "file": "assets/index-DsituAXt.js",
+      "file": "assets/index-B33raa-Q.js",
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/live-C2LD5aR2.js",
+      "file": "assets/live-BoDMryH_.js",
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/pearl-apdu-t5BlA35d.js",
+      "file": "assets/pearl-apdu-DTLxDe13.js",
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/main-4gM_CD52.js",
+      "file": "assets/main-CxG4wHQb.js",
       "presentLicenseMarkers": []
     },
     {
@@ -56,7 +56,15 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/pearl-apdu-B31ybitv.css",
+      "file": "assets/qr-reader-XSzcwxEi.js",
+      "presentLicenseMarkers": []
+    },
+    {
+      "file": "assets/jsQR-Dk72IcmC.js",
+      "presentLicenseMarkers": []
+    },
+    {
+      "file": "assets/pearl-apdu-CnYMOtYj.css",
       "presentLicenseMarkers": []
     },
     {
@@ -74,10 +82,10 @@
   ],
   "chunks": [
     {
-      "file": "assets/index-DsituAXt.js",
+      "file": "assets/index-B33raa-Q.js",
       "type": "chunk",
-      "bytes": 269833,
-      "sha256": "9db5a68f0512426919cb0a3b23304a9edbc6c02f13c8a8b0e0ee2c964ee4b6eb",
+      "bytes": 269846,
+      "sha256": "ad842fc64e2c1c5306db166c542da0226f2b1427988c8b424ec17e76ac66b109",
       "modules": [
         "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-exports",
         "node_modules/reflect-metadata/Reflect.js",
@@ -372,10 +380,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/live-C2LD5aR2.js",
+      "file": "assets/live-BoDMryH_.js",
       "type": "chunk",
-      "bytes": 445657,
-      "sha256": "b4770931f74812d79c4f54751fd84d4af1d35f16db36b5e4727cfbd738859c29",
+      "bytes": 445670,
+      "sha256": "c783dab01c7f3cf57e36ee8de829578fa931999aa5ac20d3bded6448dd02e239",
       "modules": [
         "apps/companion/src/wallet-buffer.ts",
         "node_modules/bignumber.js/bignumber.mjs",
@@ -742,7 +750,7 @@
       "cssModules": []
     },
     {
-      "file": "assets/pearl-apdu-t5BlA35d.js",
+      "file": "assets/pearl-apdu-DTLxDe13.js",
       "type": "chunk",
       "bytes": 5651,
       "sha256": "59bad00dc662a14465fbe60b947ec41c93b5b9e2c3f40fe4acef4bfbaaebf621",
@@ -758,10 +766,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/main-4gM_CD52.js",
+      "file": "assets/main-CxG4wHQb.js",
       "type": "chunk",
-      "bytes": 478705,
-      "sha256": "77439568269b33cdf5eb79a10b5c34c5c7ee2f43c4cbf2adae71f046ea60aa69",
+      "bytes": 489180,
+      "sha256": "357e1ab77b78203b3de68d6ab9c48f9fc971819d0f36bb667b41dbe3cf5f0c11",
       "modules": [
         "node_modules/@noble/hashes/esm/_u64.js",
         "node_modules/@noble/hashes/esm/crypto.js",
@@ -801,6 +809,7 @@
         "packages/wallet/src/recovery.ts",
         "apps/companion/src/blockbook-source.ts",
         "apps/companion/src/public-source.ts",
+        "apps/companion/src/account-cache.ts",
         "apps/companion/src/storage.ts",
         "apps/companion/src/signed-recovery.ts",
         "apps/companion/src/backup-import.ts",
@@ -887,18 +896,32 @@
       "cssModules": []
     },
     {
+      "file": "assets/qr-reader-XSzcwxEi.js",
+      "type": "chunk",
+      "bytes": 3269,
+      "sha256": "8dfa5cd3679b2c8fa2f41a098b1e409053e7870f6a37ddf504b9152f714c582b",
+      "modules": [
+        "apps/companion/src/qr-reader.ts"
+      ],
+      "cssModules": []
+    },
+    {
+      "file": "assets/jsQR-Dk72IcmC.js",
+      "type": "chunk",
+      "bytes": 130721,
+      "sha256": "c49ea57b007c745bc790dae9c4027ddf5dd77f337f10d5d223951f55174cc20d",
+      "modules": [
+        "\u0000node_modules/jsqr/dist/jsQR.js?commonjs-module",
+        "node_modules/jsqr/dist/jsQR.js",
+        "\u0000node_modules/jsqr/dist/jsQR.js?commonjs-es-import"
+      ],
+      "cssModules": []
+    },
+    {
       "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "type": "asset",
       "bytes": 89212,
       "sha256": "77ca56870309a85759fb7116aef2119a26e358145e808868543ca1fe16c27720",
-      "modules": [],
-      "cssModules": []
-    },
-    {
-      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
-      "type": "asset",
-      "bytes": 95224,
-      "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
       "modules": [],
       "cssModules": []
     },
@@ -911,10 +934,18 @@
       "cssModules": []
     },
     {
-      "file": "assets/pearl-apdu-B31ybitv.css",
+      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
       "type": "asset",
-      "bytes": 194080,
-      "sha256": "4f183cb2436b045b5fb60f72034acec31a9294f744cdbab55edd6fff106f89ef",
+      "bytes": 95224,
+      "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
+      "modules": [],
+      "cssModules": []
+    },
+    {
+      "file": "assets/pearl-apdu-CnYMOtYj.css",
+      "type": "asset",
+      "bytes": 196825,
+      "sha256": "491336585e237e97e220ca6925d3b20b5c1320b81f955c663e62d776e05a20da",
       "modules": [],
       "cssModules": [
         "apps/companion/src/ledger-ui/styles.css",
@@ -1009,7 +1040,7 @@
       "file": "live.html",
       "type": "asset",
       "bytes": 885,
-      "sha256": "3639070bca19a5332646a9adcd0c588bf4503c7061b85eabc42c5e0dd4a627e5",
+      "sha256": "628eed4df079af5327c1bf813447244084889104ad6039070a9687a92b8724ef",
       "modules": [],
       "cssModules": []
     },
@@ -1017,7 +1048,7 @@
       "file": "index.html",
       "type": "asset",
       "bytes": 813,
-      "sha256": "3791badf3f5fa1efd792a12d1eef01ab29120f3327d9a6ffc43144290f7917e5",
+      "sha256": "849bb76a253a70ea52c2dbebf714f9de3a3d8904025ed38728c623f75e362f72",
       "modules": [],
       "cssModules": []
     }

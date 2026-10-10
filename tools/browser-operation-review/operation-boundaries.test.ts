@@ -27,6 +27,7 @@ const source =
 const testContext = globalThis.operationReview;
 export function auditState(){return {account,network,sourceMode,privacyConsent,activePayment,busy,notification,client,transport,emergency:emergencySignedRecovery,journal,verifiedReceive,form:{...form}};}
 export async function auditMount(a,b,id,options={}){
+  feeSelection='custom';manualSelection=true;maxAmount=false;
   account=a;network=a.network;sourceMode=options.source??'node';privacyConsent=options.consent??true;activePayment=id;page=options.page??'send';
   snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:b.inputs.map(i=>({...i,rawTransaction:'',coinbase:false,block:{height:1,hash:'bb'.repeat(32)}}))};
   selected.clear();for(const i of b.inputs)selected.add(outpoint(i));

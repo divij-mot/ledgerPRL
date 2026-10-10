@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-10",
+  "scope": "Read-only official package/repository attribution check, not a legal opinion or blanket reuse audit.",
+  "package": "@ledgerhq/wallet-api-core",
+  "version": "2.1.0",
+  "npmLicenseDeclaration": "MIT",
+  "registryUrl": "https://registry.npmjs.org/@ledgerhq%2Fwallet-api-core/2.1.0",
+  "exactRepository": "LedgerHQ/wallet-api",
+  "exactCommit": "41635e5543772af043ef0f1b7e725fa7a733dd93",
+  "treeUrl": "https://api.github.com/repos/LedgerHQ/wallet-api/git/trees/41635e5543772af043ef0f1b7e725fa7a733dd93?recursive=1",
+  "treeTruncated": false,
+  "licensePaths": [
+    "packages/client-react/LICENSE",
+    "packages/client/LICENSE",
+    "packages/manifest-validator-cli/LICENSE",
+    "packages/manifest-validator/LICENSE"
+  ],
+  "coreOrRootLicenseBody": false,
+  "rootReadme": "MIT badge/link present; no applicable copyright body identified.",
+  "currentRepositoryApiLicense": null,
+  "separateLedgerLiveRootLicense": {
+    "url": "https://raw.githubusercontent.com/LedgerHQ/ledger-live/abed962b08ca4b746f20192b28ce5b6c06a6c6a4/LICENSE.txt",
+    "license": "MIT",
+    "copyright": "2017-present Ledger",
+    "corePackagePresentInThatPinnedTree": false,
+    "appliedToCore": false
+  },
+  "result": "Core MIT declaration retained; missing applicable copyright/license body remains unresolved. No client Apache or unrelated monorepo MIT license assigned to core."
+}
