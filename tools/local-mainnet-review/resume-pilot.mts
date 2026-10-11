@@ -1,10 +1,11 @@
+import {fileURLToPath} from 'node:url';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import {createLightRuntime} from '/Users/divijmotwani/Projects/pearlLedger/apps/companion/src/light-runtime.ts';
-import {publicAccount} from '/Users/divijmotwani/Projects/pearlLedger/packages/wallet/test/fixtures.ts';
-import {LocalWatchSource,localStatus} from '/Users/divijmotwani/Projects/pearlLedger/apps/companion/src/local-source.ts';
-import {discoverAccount} from '/Users/divijmotwani/Projects/pearlLedger/packages/wallet/src/index.ts';
-const root='/Users/divijmotwani/Projects/pearlLedger';
+import {createLightRuntime} from '../../apps/companion/src/light-runtime.ts';
+import {publicAccount} from '../../packages/wallet/test/fixtures.ts';
+import {LocalWatchSource,localStatus} from '../../apps/companion/src/local-source.ts';
+import {discoverAccount} from '../../packages/wallet/src/index.ts';
+const root=fileURLToPath(new URL('../../',import.meta.url));
 const manifest=JSON.parse(await fs.readFile(root+'/.tools/light-client/manifest.json','utf8'));
 const runtime=createLightRuntime({dataRoot:'/private/tmp/pearl-full-sync-Goqeij/state',executable:manifest.executable,executableSha256:manifest.executableSha256});
 const account={...publicAccount,network:'mainnet' as const};

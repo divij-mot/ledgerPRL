@@ -78,10 +78,19 @@ class LauncherTests(unittest.TestCase):
             execute.assert_called_once_with("/fake/npm", ["/fake/npm", "start"])
 
     def test_first_run_builds_then_uses_existing_foreground_start(self):
-        self.launch()
+        self.assertFalse((self.root / ".git").exists())
+        self.launch(missing="git")
         self.assertEqual(self.calls[-2:], [["/fake/npm", "ci", "--ignore-scripts", "--include=dev"],
                                           ["/fake/npm", "run", "setup:light"]])
         self.assertTrue(current(self.root, builder))
+
+    def test_missing_native_c_cpp_or_archiver_fails_before_dependency_install(self):
+        for command in ("ar", "/usr/bin/gcc", "/usr/bin/g++"):
+            with self.subTest(command=command):
+                with self.assertRaises(RuntimeError) as failure:
+                    self.launch(missing=command)
+                self.assertIn(f"Missing {command};", str(failure.exception))
+        self.assertFalse(any("ci" in args for args in self.calls))
 
     def test_current_helper_skips_build_and_native_prerequisites(self):
         self.artifact()

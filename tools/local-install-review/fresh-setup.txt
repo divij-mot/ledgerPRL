@@ -1,0 +1,536 @@
+Installing locked local dependencies…
+
+added 256 packages, and audited 263 packages in 3s
+
+38 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+Building the native light client; first setup can take several minutes…
+
+> pearl-ledger@0.1.0 setup:light
+> python3 scripts/build-light-client.py
+
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded ansi_term v0.12.1
+  Downloaded proc-macro-error-attr v1.0.4
+  Downloaded const-random v0.1.18
+  Downloaded ident_case v1.0.1
+  Downloaded atty v0.2.14
+  Downloaded rustc-hex v2.1.0
+  Downloaded fixed-hash v0.7.0
+  Downloaded radium v0.7.0
+  Downloaded equivalent v1.0.2
+  Downloaded crunchy v0.2.4
+  Downloaded powerfmt v0.2.0
+  Downloaded ref-cast-impl v1.0.25
+  Downloaded keccak-hash v0.8.0
+  Downloaded arrayref v0.3.9
+  Downloaded darling_macro v0.23.0
+  Downloaded impl-codec v0.6.0
+  Downloaded strsim v0.11.1
+  Downloaded proc-macro-crate v3.5.0
+  Downloaded tap v1.0.1
+  Downloaded heck v0.3.3
+  Downloaded strsim v0.8.0
+  Downloaded dyn-clone v1.0.20
+  Downloaded num v0.4.3
+  Downloaded primitive-types v0.10.1
+  Downloaded parity-scale-codec-derive v3.7.5
+  Downloaded const-random-macro v0.1.16
+  Downloaded hex v0.4.3
+  Downloaded rand_chacha v0.3.1
+  Downloaded primitive-types v0.12.2
+  Downloaded ref-cast v1.0.25
+  Downloaded num-iter v0.1.45
+  Downloaded num-conv v0.2.1
+  Downloaded konst_macro_rules v0.2.19
+  Downloaded tikv-jemallocator v0.6.1
+  Downloaded proc-macro-error v1.0.4
+  Downloaded num-complex v0.4.6
+  Downloaded rand_chacha v0.9.0
+  Downloaded version_check v0.9.5
+  Downloaded time-core v0.1.8
+  Downloaded rand_core v0.9.5
+  Downloaded crossbeam-deque v0.8.6
+  Downloaded constant_time_eq v0.4.2
+  Downloaded bincode v1.3.3
+  Downloaded vec_map v0.8.2
+  Downloaded crossbeam-epoch v0.9.18
+  Downloaded once_cell v1.21.4
+  Downloaded getrandom v0.2.17
+  Downloaded env_logger v0.10.2
+  Downloaded web-time v1.1.0
+  Downloaded zmij v1.0.21
+  Downloaded unicode-xid v0.2.6
+  Downloaded tiny-keccak v2.0.2
+  Downloaded konst v0.2.20
+  Downloaded wyz v0.5.1
+  Downloaded hashbrown v0.12.3
+  Downloaded itertools v0.11.0
+  Downloaded toml_datetime v1.1.1+spec-1.1.0
+  Downloaded itertools v0.14.0
+  Downloaded rayon v1.12.0
+  Downloaded clap v2.34.0
+  Downloaded blake3 v1.8.4
+  Downloaded toml_parser v1.1.2+spec-1.1.0
+  Downloaded unicode-ident v1.0.24
+  Downloaded serde v1.0.228
+  Downloaded unicode-segmentation v1.13.2
+  Downloaded schemars v1.2.1
+  Downloaded toml_edit v0.25.11+spec-1.1.0
+  Downloaded structopt v0.3.26
+  Downloaded winnow v1.0.1
+  Downloaded serde_with v3.18.0
+  Downloaded serde_json v1.0.149
+  Downloaded time v0.3.47
+  Downloaded syn v1.0.109
+  Downloaded unicode-width v0.1.14
+  Downloaded zerocopy v0.8.48
+  Downloaded regex v1.12.3
+  Downloaded syn v2.0.117
+  Downloaded regex-syntax v0.8.10
+  Downloaded serde_derive v1.0.228
+  Downloaded serde_core v1.0.228
+  Downloaded schemars v0.9.0
+  Downloaded time-macros v0.2.27
+  Downloaded chrono v0.4.44
+  Downloaded bitvec v1.0.1
+  Downloaded aho-corasick v1.1.4
+  Downloaded hashbrown v0.17.0
+  Downloaded hashbrown v0.14.5
+  Downloaded regex-automata v0.4.14
+  Downloaded thiserror v1.0.69
+  Downloaded base64 v0.21.7
+  Downloaded serde_with_macros v3.18.0
+  Downloaded rand v0.9.4
+  Downloaded proc-macro2 v1.0.106
+  Downloaded libc v0.2.185
+  Downloaded num-bigint v0.4.6
+  Downloaded memchr v2.8.0
+  Downloaded indexmap v2.14.0
+  Downloaded cc v1.2.60
+  Downloaded thiserror-impl v1.0.69
+  Downloaded rand v0.8.6
+  Downloaded env_logger v0.9.3
+  Downloaded darling_core v0.23.0
+  Downloaded const_format v0.2.36
+  Downloaded unroll v0.1.5
+  Downloaded rustversion v1.0.22
+  Downloaded rayon-core v1.13.0
+  Downloaded parity-scale-codec v3.7.5
+  Downloaded impl-serde v0.4.0
+  Downloaded getrandom v0.3.4
+  Downloaded crossbeam-utils v0.8.21
+  Downloaded base64 v0.22.1
+  Downloaded uint v0.9.5
+  Downloaded tikv-jemalloc-sys v0.6.1+5.3.0-1-ge13ca993e8ccb9ba9847cc330696e02839f328f7
+  Downloaded textwrap v0.11.0
+  Downloaded termcolor v1.4.1
+  Downloaded structopt-derive v0.4.18
+  Downloaded static_assertions v1.1.0
+  Downloaded sorted-vec v0.8.10
+  Downloaded shlex v1.3.0
+  Downloaded num-traits v0.2.19
+  Downloaded log v0.4.29
+  Downloaded lazy_static v1.5.0
+  Downloaded indexmap v1.9.3
+  Downloaded anyhow v1.0.102
+  Downloaded either v1.15.0
+  Downloaded darling v0.23.0
+  Downloaded iana-time-zone v0.1.65
+  Downloaded core-foundation-sys v0.8.7
+  Downloaded arrayvec v0.7.6
+  Downloaded ahash v0.8.12
+  Downloaded rand_core v0.6.4
+  Downloaded quote v1.0.45
+  Downloaded ppv-lite86 v0.2.21
+  Downloaded num-rational v0.4.2
+  Downloaded num-integer v0.1.46
+  Downloaded itoa v1.0.18
+  Downloaded humantime v2.3.0
+  Downloaded find-msvc-tools v0.1.9
+  Downloaded deranged v0.5.8
+  Downloaded const_format_proc_macros v0.2.34
+  Downloaded impl-trait-for-tuples v0.2.3
+  Downloaded cfg-if v1.0.4
+  Downloaded byteorder v1.5.0
+  Downloaded bitflags v1.3.2
+  Downloaded autocfg v1.5.0
+  Downloaded is-terminal v0.4.17
+  Downloaded funty v2.0.0
+  Downloaded fixed-hash v0.8.0
+  Downloaded byte-slice-cast v1.2.3
+   Compiling proc-macro2 v1.0.106
+   Compiling libc v0.2.185
+   Compiling quote v1.0.45
+   Compiling unicode-ident v1.0.24
+   Compiling cfg-if v1.0.4
+   Compiling zerocopy v0.8.48
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.228
+   Compiling crossbeam-utils v0.8.21
+   Compiling autocfg v1.5.0
+   Compiling find-msvc-tools v0.1.9
+   Compiling shlex v1.3.0
+   Compiling num-traits v0.2.19
+   Compiling cc v1.2.60
+   Compiling getrandom v0.2.17
+   Compiling syn v2.0.117
+   Compiling rand_core v0.6.4
+   Compiling serde v1.0.228
+   Compiling rayon-core v1.13.0
+   Compiling crossbeam-epoch v0.9.18
+   Compiling crunchy v0.2.4
+   Compiling either v1.15.0
+   Compiling static_assertions v1.1.0
+   Compiling syn v1.0.109
+   Compiling crossbeam-deque v0.8.6
+   Compiling tiny-keccak v2.0.2
+   Compiling num-integer v0.1.46
+   Compiling byteorder v1.5.0
+   Compiling memchr v2.8.0
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling hex v0.4.3
+   Compiling ppv-lite86 v0.2.21
+   Compiling ident_case v1.0.1
+   Compiling anyhow v1.0.102
+   Compiling once_cell v1.21.4
+   Compiling rand_chacha v0.3.1
+   Compiling strsim v0.11.1
+   Compiling rand v0.8.6
+   Compiling darling_core v0.23.0
+   Compiling const-random-macro v0.1.16
+   Compiling num-bigint v0.4.6
+   Compiling uint v0.9.5
+   Compiling aho-corasick v1.1.4
+   Compiling serde_derive v1.0.228
+   Compiling rayon v1.12.0
+   Compiling blake3 v1.8.4
+   Compiling proc-macro-error v1.0.4
+   Compiling ahash v0.8.12
+   Compiling regex-syntax v0.8.10
+   Compiling getrandom v0.3.4
+   Compiling darling_macro v0.23.0
+   Compiling regex-automata v0.4.14
+   Compiling num-rational v0.4.2
+   Compiling const-random v0.1.18
+   Compiling num-complex v0.4.6
+   Compiling num-iter v0.1.45
+   Compiling fixed-hash v0.7.0
+   Compiling atty v0.2.14
+   Compiling arrayref v0.3.9
+   Compiling unicode-width v0.1.14
+   Compiling arrayvec v0.7.6
+   Compiling log v0.4.29
+   Compiling constant_time_eq v0.4.2
+   Compiling unicode-segmentation v1.13.2
+   Compiling textwrap v0.11.0
+   Compiling heck v0.3.3
+   Compiling regex v1.12.3
+   Compiling primitive-types v0.10.1
+   Compiling num v0.4.3
+   Compiling darling v0.23.0
+   Compiling unroll v0.1.5
+   Compiling itertools v0.11.0
+   Compiling tikv-jemalloc-sys v0.6.1+5.3.0-1-ge13ca993e8ccb9ba9847cc330696e02839f328f7
+   Compiling humantime v2.3.0
+   Compiling ansi_term v0.12.1
+   Compiling termcolor v1.4.1
+   Compiling zmij v1.0.21
+   Compiling vec_map v0.8.2
+   Compiling strsim v0.8.0
+   Compiling bitflags v1.3.2
+   Compiling plonky2_util v1.0.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/util)
+   Compiling clap v2.34.0
+   Compiling plonky2_field v1.0.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/field)
+   Compiling keccak-hash v0.8.0
+   Compiling rand_core v0.9.5
+   Compiling serde_with_macros v3.18.0
+   Compiling structopt-derive v0.4.18
+   Compiling hashbrown v0.14.5
+   Compiling plonky2_maybe_rayon v1.0.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/maybe_rayon)
+   Compiling rustc-hex v2.1.0
+   Compiling web-time v1.1.0
+   Compiling thiserror v1.0.69
+   Compiling lazy_static v1.5.0
+   Compiling serde_json v1.0.149
+   Compiling structopt v0.3.26
+   Compiling plonky2 v1.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/plonky2)
+   Compiling fixed-hash v0.8.0
+   Compiling serde_with v3.18.0
+   Compiling rand_chacha v0.9.0
+   Compiling env_logger v0.9.3
+   Compiling impl-serde v0.4.0
+   Compiling bincode v1.3.3
+   Compiling thiserror-impl v1.0.69
+   Compiling is-terminal v0.4.17
+   Compiling itoa v1.0.18
+   Compiling sorted-vec v0.8.10
+   Compiling env_logger v0.10.2
+   Compiling starky v1.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/starky)
+   Compiling primitive-types v0.12.2
+   Compiling pearl-blake3 v0.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/pearl-blake3)
+   Compiling rand v0.9.4
+   Compiling layout-macro v0.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/zk-pow/src/circuit/layout_macro)
+   Compiling itertools v0.14.0
+   Compiling base64 v0.21.7
+   Compiling tikv-jemallocator v0.6.1
+   Compiling zk-pow v0.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/zk-pow)
+    Finished `release` profile [optimized] target(s) in 48.89s
+     Running `target/release/build_cache src/circuit/v2_cache.bin src/v1/v1_cache.bin`
+Generating main verifier cache...
+Main cache: 13 first circuits, 2 second circuits
+Writing 2491523 bytes to "src/circuit/v2_cache.bin"
+
+Generating V1 verifier cache...
+V1 cache: 13 first circuits, 2 second circuits
+Writing 2491523 bytes to "src/v1/v1_cache.bin"
+
+Cache generation complete!
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded errno v0.3.14
+  Downloaded fastrand v2.4.1
+  Downloaded clap_lex v0.2.4
+  Downloaded strsim v0.10.0
+  Downloaded heck v0.4.1
+  Downloaded os_str_bytes v6.6.1
+  Downloaded tempfile v3.27.0
+  Downloaded textwrap v0.16.2
+  Downloaded toml v0.5.11
+  Downloaded bitflags v2.11.1
+  Downloaded getrandom v0.4.2
+  Downloaded clap v3.2.25
+  Downloaded cbindgen v0.26.0
+  Downloaded rustix v1.1.4
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling libc v0.2.185
+   Compiling cfg-if v1.0.4
+   Compiling autocfg v1.5.0
+   Compiling zerocopy v0.8.48
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.228
+   Compiling crossbeam-utils v0.8.21
+   Compiling syn v1.0.109
+   Compiling getrandom v0.2.17
+   Compiling num-traits v0.2.19
+   Compiling syn v2.0.117
+   Compiling rand_core v0.6.4
+   Compiling shlex v1.3.0
+   Compiling find-msvc-tools v0.1.9
+   Compiling cc v1.2.60
+   Compiling serde v1.0.228
+   Compiling rayon-core v1.13.0
+   Compiling once_cell v1.21.4
+   Compiling crossbeam-epoch v0.9.18
+   Compiling crunchy v0.2.4
+   Compiling either v1.15.0
+   Compiling zmij v1.0.21
+   Compiling static_assertions v1.1.0
+   Compiling crossbeam-deque v0.8.6
+   Compiling tiny-keccak v2.0.2
+   Compiling num-integer v0.1.46
+   Compiling memchr v2.8.0
+   Compiling serde_json v1.0.149
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_chacha v0.3.1
+   Compiling byteorder v1.5.0
+   Compiling rand v0.8.6
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling anyhow v1.0.102
+   Compiling strsim v0.11.1
+   Compiling serde_derive v1.0.228
+   Compiling ident_case v1.0.1
+   Compiling hex v0.4.3
+   Compiling darling_core v0.23.0
+   Compiling uint v0.9.5
+   Compiling num-bigint v0.4.6
+   Compiling const-random-macro v0.1.16
+   Compiling rayon v1.12.0
+   Compiling aho-corasick v1.1.4
+   Compiling blake3 v1.8.4
+   Compiling proc-macro-error v1.0.4
+   Compiling ahash v0.8.12
+   Compiling indexmap v1.9.3
+   Compiling getrandom v0.4.2
+   Compiling rustix v1.1.4
+   Compiling getrandom v0.3.4
+   Compiling regex-syntax v0.8.10
+   Compiling darling_macro v0.23.0
+   Compiling num-rational v0.4.2
+   Compiling const-random v0.1.18
+   Compiling num-complex v0.4.6
+   Compiling regex-automata v0.4.14
+   Compiling num-iter v0.1.45
+   Compiling fixed-hash v0.7.0
+   Compiling errno v0.3.14
+   Compiling atty v0.2.14
+   Compiling os_str_bytes v6.6.1
+   Compiling unicode-width v0.1.14
+   Compiling arrayref v0.3.9
+   Compiling unicode-segmentation v1.13.2
+   Compiling log v0.4.29
+   Compiling constant_time_eq v0.4.2
+   Compiling hashbrown v0.12.3
+   Compiling bitflags v2.11.1
+   Compiling arrayvec v0.7.6
+   Compiling heck v0.3.3
+   Compiling textwrap v0.11.0
+   Compiling clap_lex v0.2.4
+   Compiling primitive-types v0.10.1
+   Compiling num v0.4.3
+   Compiling regex v1.12.3
+   Compiling darling v0.23.0
+   Compiling unroll v0.1.5
+   Compiling itertools v0.11.0
+   Compiling tikv-jemalloc-sys v0.6.1+5.3.0-1-ge13ca993e8ccb9ba9847cc330696e02839f328f7
+   Compiling textwrap v0.16.2
+   Compiling fastrand v2.4.1
+   Compiling plonky2_util v1.0.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/util)
+   Compiling termcolor v1.4.1
+   Compiling strsim v0.10.0
+   Compiling strsim v0.8.0
+   Compiling cbindgen v0.26.0
+   Compiling vec_map v0.8.2
+   Compiling itoa v1.0.18
+   Compiling humantime v2.3.0
+   Compiling ansi_term v0.12.1
+   Compiling bitflags v1.3.2
+   Compiling clap v2.34.0
+   Compiling clap v3.2.25
+   Compiling plonky2_field v1.0.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/field)
+   Compiling tempfile v3.27.0
+   Compiling toml v0.5.11
+   Compiling keccak-hash v0.8.0
+   Compiling rand_core v0.9.5
+   Compiling structopt-derive v0.4.18
+   Compiling serde_with_macros v3.18.0
+   Compiling hashbrown v0.14.5
+   Compiling plonky2_maybe_rayon v1.0.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/maybe_rayon)
+   Compiling thiserror v1.0.69
+   Compiling rustc-hex v2.1.0
+   Compiling heck v0.4.1
+   Compiling lazy_static v1.5.0
+   Compiling web-time v1.1.0
+   Compiling structopt v0.3.26
+   Compiling fixed-hash v0.8.0
+   Compiling serde_with v3.18.0
+   Compiling plonky2 v1.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/plonky2)
+   Compiling rand_chacha v0.9.0
+   Compiling env_logger v0.9.3
+   Compiling bincode v1.3.3
+   Compiling impl-serde v0.4.0
+   Compiling thiserror-impl v1.0.69
+   Compiling is-terminal v0.4.17
+   Compiling sorted-vec v0.8.10
+   Compiling starky v1.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/plonky2/starky)
+   Compiling env_logger v0.10.2
+   Compiling primitive-types v0.12.2
+   Compiling zk-pow-go v0.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/zk-pow/bindings/go)
+   Compiling rand v0.9.4
+   Compiling pearl-blake3 v0.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/pearl-blake3)
+   Compiling layout-macro v0.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/zk-pow/src/circuit/layout_macro)
+   Compiling itertools v0.14.0
+   Compiling base64 v0.21.7
+   Compiling tikv-jemallocator v0.6.1
+   Compiling zk-pow v0.1.0 (<native-build>/pearl-2f8b770cac8f8b74be05c1fc51c2baeb76ce0701/zk-pow)
+    Finished `release` profile [optimized] target(s) in 48.11s
+go: downloading go1.26.6 (darwin/arm64)
+go: downloading github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.1
+go: downloading go.etcd.io/bbolt v1.5.0
+go: downloading github.com/btcsuite/btclog v1.0.0
+go: downloading github.com/lightningnetwork/lnd/tlv v1.4.0
+go: downloading golang.org/x/crypto v0.57.0
+go: downloading github.com/lightningnetwork/lnd/ticker v1.1.1
+go: downloading github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
+go: downloading github.com/lightningnetwork/lnd/fn/v2 v2.0.9
+go: downloading github.com/aead/siphash v1.0.1
+go: downloading github.com/kkdai/bstream v1.0.0
+go: downloading github.com/btcsuite/go-socks v0.0.0-20170105172521-4720035b7bfd
+go: downloading github.com/decred/dcrd/lru v1.1.3
+go: downloading github.com/stretchr/testify v1.12.1
+go: downloading github.com/btcsuite/websocket v0.0.0-20150119174127-31079b680792
+go: downloading github.com/lightningnetwork/lnd/clock v1.1.1
+go: downloading github.com/lightningnetwork/lnd/queue v1.2.0
+go: downloading golang.org/x/time v0.16.0
+go: downloading github.com/tyler-smith/go-bip39 v1.1.0
+go: downloading golang.org/x/term v0.46.0
+go: downloading github.com/btcsuite/btcd/btcec/v2 v2.5.0
+go: downloading github.com/btcsuite/btcd/wire/v2 v2.0.0
+go: downloading golang.org/x/exp v0.0.0-20260209203927-2842357ff358
+go: downloading golang.org/x/sync v0.23.0
+go: downloading github.com/decred/dcrd/crypto/blake256 v1.1.0
+go: downloading golang.org/x/sys v0.48.0
+go: downloading github.com/stretchr/objx v0.5.3
+go: downloading go.yaml.in/yaml/v3 v3.0.5
+go: downloading github.com/btcsuite/btcd/chainhash/v2 v2.0.0
+ok  	pearl-ledger/light-client/cmd/pearl-watch	8.712s
+Local light client built: <download>/.tools/light-client/pearl-watch
+Starting local Pearl. Keep this terminal open; Ctrl-C stops it. Initial chain sync can take time.
+
+> pearl-ledger@0.1.0 start
+> npm run build && npm run local --workspace @pearl-ledger/companion
+
+
+> pearl-ledger@0.1.0 build
+> npm run build --workspace @pearl-ledger/companion
+
+
+> @pearl-ledger/companion@0.1.0 build
+> node --import tsx ../../node_modules/vite/bin/vite.js build
+
+vite v7.3.7 building client environment for production...
+transforming...
+../../node_modules/@radix-ui/react-dialog/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-dialog/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-checkbox/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-checkbox/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-switch/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-switch/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-tooltip/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-tooltip/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-portal/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-portal/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-primitive/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-primitive/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-dismissable-layer/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-dismissable-layer/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-focus-guards/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-focus-guards/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-presence/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-presence/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-focus-scope/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-focus-scope/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-visually-hidden/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-visually-hidden/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-popper/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-popper/dist/index.mjs" was ignored.
+../../node_modules/@radix-ui/react-arrow/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../../node_modules/@radix-ui/react-arrow/dist/index.mjs" was ignored.
+../../node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "../../node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "../../node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 1563 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                 0.81 kB │ gzip:   0.44 kB
+dist/live.html                                  0.89 kB │ gzip:   0.46 kB
+dist/assets/backup-import.worker-Dtrkqa4Y.js   72.73 kB
+dist/assets/Inter-Regular-BHP6tI7_.woff2       89.21 kB
+dist/assets/Inter-Medium-DLI8xdiI.woff2        95.22 kB
+dist/assets/Inter-SemiBold-CudmWj5i.woff2      95.65 kB
+dist/assets/pearl-apdu-CnYMOtYj.css           196.83 kB │ gzip:  26.76 kB
+dist/assets/qr-reader-BRNRvs-M.js               3.27 kB │ gzip:   1.57 kB
+dist/assets/pearl-apdu-DTLxDe13.js              5.65 kB │ gzip:   2.48 kB
+dist/assets/index-D2rIokL7.js                  27.56 kB │ gzip:   8.38 kB
+dist/assets/jsQR-Dk72IcmC.js                  130.72 kB │ gzip:  47.46 kB
+dist/assets/index-ByVGc--d.js                 269.85 kB │ gzip:  74.45 kB
+dist/assets/live-VcgfFvtq.js                  445.67 kB │ gzip: 137.30 kB
+dist/assets/main-BmAxsC9p.js                  493.81 kB │ gzip: 160.94 kB
+✓ built in 2.88s
+
+> @pearl-ledger/companion@0.1.0 local
+> node --import tsx src/local-main.ts
+
+Pearl browser wallet: http://127.0.0.1:5188/
+Ledger Discover entry: http://127.0.0.1:5188/live.html

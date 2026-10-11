@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "sourceHead": "fca78a828362ea2d65cfe10872ca57626c52b866",
+  "sourceHead": "c6cd6e802bdc2efa1e9fb0fe5f91545b91e399b1",
   "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
   "scope": "Actual Rollup entry/shared-chunk and worker graph plus watched CSS/preset build inputs, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
   "bundles": [

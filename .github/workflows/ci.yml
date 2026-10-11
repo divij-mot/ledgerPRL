@@ -23,6 +23,7 @@ jobs:
           node-version: '24.19.0'
       - run: npm ci --ignore-scripts
       - run: npm run check
+      - run: python3 scripts/test-run-local.py
       - run: node --import tsx tools/dependency-supply-review/review.mjs && node tools/dependency-supply-review/generate-notices.mjs --check apps/companion/public/third-party-notices.txt
       - run: npm audit --audit-level=moderate
   rust-core:

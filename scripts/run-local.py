@@ -79,7 +79,9 @@ def run(root):
     build = runpy.run_path(str(root / "scripts/build-light-client.py"))
     rebuild = not helper_current(root, build)
     if rebuild:
-        for command in ("go", "cargo", "rustup", "make", "cc"):
+        # Upstream XMSS uses these absolute C/C++ compiler paths and `ar`.
+        for command in ("go", "cargo", "rustup", "make", "cc", "ar",
+                        "/usr/bin/gcc", "/usr/bin/g++"):
             require_command(command)
         toolchains = subprocess.run(["rustup", "toolchain", "list"], check=True,
                                    text=True, capture_output=True).stdout

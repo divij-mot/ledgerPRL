@@ -14,13 +14,22 @@ Pinned Android source exposes a Developer custom-manifest screen that accepts th
 
 ## Local setup
 
-Use the repository's Node requirement, then run from the repository root:
+Install the prerequisites once:
+
+- [Node.js](https://nodejs.org/en/download): use 24.19 or a newer 24.x release; npm is included.
+- [Go](https://go.dev/doc/install): the build selects its pinned Go 1.26.6 toolchain.
+- [Rust/Cargo](https://rust-lang.org/tools/install/): after installing rustup, run `rustup toolchain install 1.90.0 --profile minimal`.
+- Python 3 and C/C++ build tools. On macOS, install Command Line Tools with `xcode-select --install` if they are absent. On Linux, install your distribution’s compiler/make/archiver packages so `/usr/bin/gcc`, `/usr/bin/g++`, `cc`, `ar`, and `make` exist.
+
+The launcher checks these requirements and stops with an explanation if something is missing; it does not silently install global software or accept installer terms.
+
+Download and extract the source using the [ZIP instructions](../README.md#3-or-run-it-locally), or use a checkout. The repository is currently private, so GitHub download access requires a signed-in collaborator. Git and `.git` are not required for the local build. On macOS or Linux, run from the extracted repository root:
 
 ```sh
 python3 scripts/run-local.py
 ```
 
-The launcher requires Python 3, Node 24.19 or newer 24.x, and npm. It installs the locked dependencies with `npm ci --ignore-scripts --include=dev`. When the native helper is absent or stale, it checks for Go, Cargo, rustup with Rust 1.90.0 already installed, a C compiler (`cc`) and make before calling the existing `setup:light` build (which selects Go 1.26.6). It downloads the checksum-pinned official Pearl source, builds its native XMSS/ZK libraries, tests and builds the watch-only helper, and records its executable/source identity under `.tools/light-client`. The launcher compares the complete Go/module source set, its SHA-256 hashes, upstream identity, private artifact paths and executable SHA-256; a matching helper is reused. Failed installation/build/verification stops startup. It does not install global toolchains, change shell profiles or install anything on Ledger. Direct `npm run setup:light` remains available for a deliberate rebuild.
+The launcher requires Python 3, Node 24.19 or newer 24.x, and npm. It installs the locked dependencies with `npm ci --ignore-scripts --include=dev`. When the native helper is absent or stale, it checks for Go, Cargo, rustup with Rust 1.90.0 already installed, `cc`, `ar`, make and the C/C++ compiler paths `/usr/bin/gcc` and `/usr/bin/g++` required by upstream XMSS before calling the existing `setup:light` build (which selects Go 1.26.6). It downloads the checksum-pinned official Pearl source, builds its native XMSS/ZK libraries, tests and builds the watch-only helper, and records its executable/source identity under `.tools/light-client`. The launcher compares the complete Go/module source set, its SHA-256 hashes, upstream identity, private artifact paths and executable SHA-256; a matching helper is reused. Failed installation/build/verification stops startup. It does not install global toolchains, change shell profiles or install anything on Ledger. Direct `npm run setup:light` remains available for a deliberate rebuild. The first native build and initial chain synchronization can take substantial time. Later starts still run the locked npm install and frontend build. Keep the same folder to reuse `.tools/light-client` and local chain/watch state; moving it can invalidate the native manifest’s absolute executable path. The launcher never chooses another port when 5188 is occupied.
 
 After preparation, the launcher replaces itself with the existing `npm start`, which builds the frontend, then serves the app and native sync middleware at `http://127.0.0.1:5188/live.html`. The one-command launcher opens `http://127.0.0.1:5188/` after successful listening for standalone WebHID use in Chrome/Edge. That browser entry is distinct from `/live.html`, the Ledger Discover entry. Ordinary `npm start` prints both addresses and does not open a browser. Keep the terminal running; Ctrl-C stops the foreground process. No background daemon is installed. The process starts the helper only when an account needs local synchronization. No full-node credentials, separate wallet window or cloud service are required. `npm run dev` and `npm run preview` are development alternatives with the same local middleware; a static file server alone is insufficient. Stop the existing server before starting another on port 5188.
 

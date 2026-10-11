@@ -254,4 +254,4 @@ test at test/recovery-ui.test.ts:1:1348
 npm ERR! Lifecycle script `test` failed with error:
 npm ERR! Error: command failed
 npm ERR!   in workspace: @pearl-ledger/companion@0.1.0
-npm ERR!   at location: /Users/divijmotwani/Projects/pearlLedger/apps/companion
+npm ERR!   at location: <workspace>/apps/companion

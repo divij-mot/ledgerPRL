@@ -1,0 +1,53 @@
+{
+  "sourceCommit": "c6cd6e802bdc2efa1e9fb0fe5f91545b91e399b1",
+  "repositoryVisibility": "private",
+  "downloadMethod": "authenticated GitHub zipball; no credentials retained in evidence",
+  "archiveSha256": "6b842a0fbc63d7fbcca5c00be8e8511a2128dd24fd75f875e34a87411d47c8d3",
+  "downloadBytes": 5485490,
+  "verifiedTrackedBlobs": 2095,
+  "safeInternalSymlinks": 1,
+  "initialProjectState": {
+    "gitMetadata": false,
+    "nodeModules": false,
+    "nativeBuildCache": false
+  },
+  "platform": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "python": "3.11.5"
+  },
+  "launchCommand": "python3 scripts/run-local.py",
+  "nodeRequirement": "24.19 or newer compatible 24.x; prerequisites installed beforehand",
+  "nativeSourceCommit": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+  "nativeArchiveSha256": "26dec47642a249fa1728f2520670d4d3b2788696207a3c074e0382cc63237396",
+  "nativeExecutableSha256": "377db80892fea7f0227f779f7996b5616899cefeae6a9b40a3818c294f3ff5fe",
+  "nativeHelperSources": {
+    "apps/light-client/cmd/pearl-watch/main.go": "42bd97ec6e6ced674d48c9c0ebe5b47e8ce52b3a4cab455da6cf06bb374ff279",
+    "apps/light-client/cmd/pearl-watch/main_test.go": "c57638cf38ce82948ef4c7c37737ee4a2c7b6ed1e13fc877c103599d639e4b02",
+    "apps/light-client/cmd/pearl-watch/serve_native.go": "2bdedcc8b3e44d04c09d06312e0593cd1a88e2ba4c44ab48e68223d50e5e2122",
+    "apps/light-client/cmd/pearl-watch/serve_native_test.go": "1308a40799be267bafb388c8c3f3e495f972108909a4c19a0f9e6c9d6524d6b3",
+    "apps/light-client/cmd/pearl-watch/serve_stub.go": "eecdda011c5a93bd07c07490a5665eb6fca98e63a030a9581037f273ac01b954",
+    "apps/light-client/go.mod": "c31eb750846dd531bd668d7353c4d6a93da49a0de5ca7ce7fbc44ec4878dc22c",
+    "apps/light-client/go.sum": "c1c3dd0c8e764f51b73b39b5ee55e2eabcadef87f0cc8eac6ae8b34207f4519d"
+  },
+  "archiveLauncherSha256": "5df2dc6a9bc40095758fd0f10bbf36a039216c425d10d41638e187d451c422bc",
+  "finalLauncherSha256": "e8ba84e0840d5241c0b561422b503e077c352fffa055142fae4046ffb2881c16",
+  "finalLauncherDifference": "Additional early ar and absolute C/C++ compiler checks; nine isolated prerequisite/cache tests cover the final launcher.",
+  "finalLauncherRecognizesBuiltHelper": true,
+  "browserObserved": {
+    "url": "http://127.0.0.1:5188/",
+    "heading": "Add your Pearl account",
+    "openedAutomatically": true
+  },
+  "nativeProbe": {
+    "peers": 8,
+    "verifiedHeaderProgressObserved": 100,
+    "closed": true,
+    "publicFixture": true
+  },
+  "fullColdChainResyncRepeated": false,
+  "hardwareUsed": false,
+  "broadcast": false,
+  "userProfileChanged": false,
+  "productionLocalServerRestored": true
+}
