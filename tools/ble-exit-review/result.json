@@ -1,0 +1,129 @@
+{
+  "checkedAt": "2026-10-11T02:05:19.503271+00:00",
+  "version": "0.1.2",
+  "candidateSourceSetSha256": "5870a589b33a2f6cb2ffb6004dbf53775cc6d1623da7c6e0594982439cab218e",
+  "baselineGuard011Sha256": "d47489cb0aab657e1291c71728c2c734792c82a4b7ac758af8f6416e87c197b2",
+  "finalGuardSha256": "b847a1ddc730dc64474391533286481df84c50679b53841fe6e74a87b80788ba",
+  "builds": [
+    {
+      "target": "nanos2",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "nanox",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "stax",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "flex",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "apex_p",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "nanos2",
+      "network": "regtest",
+      "exitCode": 0
+    }
+  ],
+  "nativePilots": [
+    {
+      "target": "nanos2",
+      "network": "mainnet",
+      "label": "nanos2",
+      "exitCode": 0
+    },
+    {
+      "target": "nanox",
+      "network": "mainnet",
+      "label": "nanox",
+      "exitCode": 0
+    },
+    {
+      "target": "stax",
+      "network": "mainnet",
+      "label": "stax",
+      "exitCode": 0
+    },
+    {
+      "target": "flex",
+      "network": "mainnet",
+      "label": "flex",
+      "exitCode": 0
+    },
+    {
+      "target": "apex_p",
+      "network": "mainnet",
+      "label": "apex_p",
+      "exitCode": 0
+    },
+    {
+      "target": "nanos2",
+      "network": "regtest",
+      "label": "adversarial",
+      "exitCode": 0
+    },
+    {
+      "target": "nanos2",
+      "network": "regtest",
+      "label": "review-faults",
+      "exitCode": 0
+    }
+  ],
+  "hostileRequestsRejected": 75,
+  "nativeLifecycleCases": 5,
+  "beforeExpectedFailures": [
+    "OS-owned-stack shutdown contract",
+    "BLE status without undocumented radio bit",
+    "BLE pairing completion notification"
+  ],
+  "afterGuardCases": {
+    "BLE_OS_STACK": 85759,
+    "USB_OS_STACK": 85750,
+    "BLE_LEGACY_STACK": 85759
+  },
+  "SDKCommit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "SDKSourceHashes": {
+    "lib_standard_app/main.c": "d203009d677cd80a472359078b6c103c4b626eae376ff2e8bb52862c545bc9ec",
+    "io/src/os_io.c": "2e0667ebf0c0cb10bf9f4e7ca6f27ac1e0b2c3383e9edbffe3e83fc9d6fe79f0",
+    "io/src/os_io_seph_cmd.c": "cdfd9d28878a312d14a8f04c485f501fa97b7464ccc986df2c2a20ac7cba1273",
+    "io/src/os_io_seph_ux.c": "c8f2de9e546e347b4cbc2db1c10faf13b58e8cb704477efc89c2aee4041ee251",
+    "io_legacy/src/os_io_legacy.c": "77493d18d5e391b27a75503b03776fc8ac40234290e5166c9f61a3852c58e973",
+    "io_legacy/include/os_io_legacy_types.h": "f2ad2bcfead476d815e9b52b3cf8dbccb44e8c5021f5a6a2a5340c39d47b8ffc",
+    "include/os_ux.h": "d568ca71d9672cf4abc9c6540a1d79d9c2c23cb02433672cc8ee5fdb8fab1254",
+    "include/os_ux_id.h": "615d660e33473c05e5f29bb54ca5fffe699eadfc0a8aae7de4ab567dae4bb2f8",
+    "include/seproxyhal_protocol.h": "6cb2bbeb22d3b55b2ef0a61b6061701981fdcc79e03117d1d9e8774dd40824a3",
+    "lib_blewbxx/src/ble_ledger_profile_apdu.c": "7d7769a738c316b34bc10f87b08b8c822098f0d185f359b933aec392f0005420",
+    "protocol/src/ledger_protocol.c": "026d2d0f4cdff0d72a057396cc5ba5b3b8a4eadac68913758aec1269ece9cfac"
+  },
+  "emulatorTransport": "HID; Speculos 0.27.1 has no BLE radio simulation",
+  "physicalOperations": 0,
+  "radioTests": 0,
+  "fundedTransactions": 0,
+  "actualDeviceRootCauseConfirmed": false,
+  "limits": [
+    "User-reported Gen5 0.1.1 failure; no physical event trace captured",
+    "Corrections address demonstrated differences from the SDK contract, not a proven cause of the reported persistent OS freeze",
+    "BLE status does not prove live phone connection; reject stale review after phone cancellation/link loss",
+    "Syscall/UX stubs exercise exact extracted SDK handlers and Pearl latch, not closed device OS behavior"
+  ],
+  "installerBuildOnly": "passed for final Gen5 image; no --install or --replace used",
+  "allModelInstallerImageChecks": [
+    "nano-s-plus",
+    "nano-x",
+    "stax",
+    "flex",
+    "gen5"
+  ],
+  "loaderExecuted": false
+}

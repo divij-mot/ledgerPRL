@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "sourceHead": "8362bc52bc9e82b40a8558f91af64ffb0f9fe32f",
+  "sourceHead": "ccf077223141299e14b71fdb0e7cb77d74a76140",
   "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
   "scope": "Actual Rollup entry/shared-chunk and worker graph plus watched CSS/preset build inputs, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
   "bundles": [
@@ -32,10 +32,10 @@
       ]
     },
     {
-      "file": "assets/live-VcgfFvtq.js",
+      "file": "assets/live-BeAn2FxY.js",
       "type": "chunk",
-      "bytes": 445670,
-      "sha256": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
+      "bytes": 446435,
+      "sha256": "b91b37fca3d198ffd8e1c1aea7f281517d95e21baf87e9983768d94f2e77f12b",
       "components": [
         "node_modules/@ledgerhq/hw-transport@6.36.0",
         "node_modules/@ledgerhq/logs@6.19.0",
@@ -114,15 +114,6 @@
       ]
     },
     {
-      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
-      "type": "asset",
-      "bytes": 89212,
-      "sha256": "77ca56870309a85759fb7116aef2119a26e358145e808868543ca1fe16c27720",
-      "components": [
-        "font:Inter:LedgerWallet-4.23.0"
-      ]
-    },
-    {
       "file": "assets/Inter-Medium-DLI8xdiI.woff2",
       "type": "asset",
       "bytes": 95224,
@@ -136,6 +127,15 @@
       "type": "asset",
       "bytes": 95652,
       "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
+      "components": [
+        "font:Inter:LedgerWallet-4.23.0"
+      ]
+    },
+    {
+      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
+      "type": "asset",
+      "bytes": 89212,
+      "sha256": "77ca56870309a85759fb7116aef2119a26e358145e808868543ca1fe16c27720",
       "components": [
         "font:Inter:LedgerWallet-4.23.0"
       ]
@@ -165,17 +165,17 @@
       ]
     },
     {
-      "file": "live.html",
-      "type": "asset",
-      "bytes": 885,
-      "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
-      "components": []
-    },
-    {
       "file": "index.html",
       "type": "asset",
       "bytes": 813,
       "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
+      "components": []
+    },
+    {
+      "file": "live.html",
+      "type": "asset",
+      "bytes": 885,
+      "sha256": "850e66ecb0a0499d0edc89c556c67595a1b76cca031265fec190c89d98acf122",
       "components": []
     }
   ],
@@ -465,7 +465,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/hw-transport",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -495,7 +495,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/logs",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -639,7 +639,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/wallet-api-client",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -673,7 +673,7 @@
       "license": "MIT",
       "directory": "node_modules/@ledgerhq/wallet-api-core",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -1062,7 +1062,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/core",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -1254,7 +1254,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/crypto",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -1309,7 +1309,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/crypto-primitives",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -1369,7 +1369,7 @@
       "license": "MIT",
       "directory": "node_modules/bignumber.js",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -1467,7 +1467,7 @@
       "license": "MIT",
       "directory": "node_modules/events",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -1568,7 +1568,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/jssha",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -2013,7 +2013,7 @@
       "license": "Unlicense",
       "directory": "node_modules/tweetnacl",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -2092,7 +2092,7 @@
       "license": "MIT",
       "directory": "node_modules/zod",
       "bundles": [
-        "assets/live-VcgfFvtq.js"
+        "assets/live-BeAn2FxY.js"
       ],
       "sourceModules": {
         "main": [
@@ -2132,7 +2132,7 @@
       "kind": "bundler-generated-runtime",
       "license": "MIT",
       "bundles": [
-        "assets/live-VcgfFvtq.js",
+        "assets/live-BeAn2FxY.js",
         "assets/pearl-apdu-DTLxDe13.js"
       ],
       "sourceModules": {

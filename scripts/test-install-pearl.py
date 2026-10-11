@@ -101,6 +101,20 @@ class InstallerTests(unittest.TestCase):
                 with self.assertRaises((ValueError, RuntimeError)):
                     app.check_image(folder, release, model)
 
+    def test_replace_is_explicit_and_targets_only_pearl(self):
+        _, model = app.release_for("gen5")
+        args = app.loader_arguments(Path("/loader/python"), Path("/verified"), model, replace=True)
+        self.assertEqual(args.count("--delete"), 1)
+        self.assertEqual(args[args.index("--appName") + 1], "Pearl")
+        self.assertNotIn("--delete", app.loader_arguments(Path("/loader/python"), Path("/verified"), model))
+
+    def test_replace_without_install_fails_before_any_process(self):
+        with patch.object(app, "call") as calls, patch.object(app.subprocess, "run") as processes:
+            with self.assertRaisesRegex(RuntimeError, "requires --install"):
+                app.run("gen5", replace=True)
+            calls.assert_not_called()
+            processes.assert_not_called()
+
     def test_binary_tampering_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             folder = Path(directory)
@@ -142,7 +156,7 @@ class InstallerTests(unittest.TestCase):
                  patch.object(app.subprocess, "run") as cached:
                 cached.return_value.returncode = 0
                 with self.assertRaisesRegex(RuntimeError, "Image changed"):
-                    app.run("gen5", install=True, sdk=Path("/clean-sdk"))
+                    app.run("gen5", install=True, sdk=Path("/clean-sdk"), replace=True)
                 self.assertFalse(any("ledgerblue.loadApp" in [str(a) for a in c.args[0]]
                                      for c in calls.call_args_list))
 

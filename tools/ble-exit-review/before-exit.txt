@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "returnCode": -6,
+  "stderr": "test: /workspace/tools/ble-exit-review/review-heartbeat.c:47: os_sched_exit: Assertion `++exits == 1 && stops == EXPECTED_STOPS' failed.\n"
+}

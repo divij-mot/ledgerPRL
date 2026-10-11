@@ -12,7 +12,7 @@ On desktop Ledger Wallet, enable Developer settings from Settings → About, ena
 
 ### iPhone with Nano Gen5 or Flex over Bluetooth
 
-1. Install **Pearl 0.1.1** for your exact device using the [installation guide](install-pearl.md). Version 0.1.0 is USB-only.
+1. Install **Pearl 0.1.2** for your exact device using the [installation guide](install-pearl.md). Version 0.1.0 is USB-only; update 0.1.1 before testing Gen5 Bluetooth.
 2. Pair your Ledger in the iPhone **Ledger Wallet** app, then open Pearl on the device.
 3. Open the [hosted manifest](https://pearl-ledger-wallet.vercel.app/ledger-live.hosted.manifest.json) and copy its complete JSON contents.
 4. In Ledger Wallet, open **Settings → Developer**, enable **Allow debug apps**, then open **Load Platform Manifest** (the next screen is titled **Load Manifest**).

@@ -1,8 +1,8 @@
 # Install Pearl on your Ledger
 
-Current firmware: **Pearl 0.1.1, mainnet, API 27**. Gen5, Flex, Stax and Nano X now enable the official Ledger SDK Bluetooth transport. Nano S Plus stays USB-only.
+Current firmware: **Pearl 0.1.2, mainnet, API 27**. Gen5, Flex, Stax and Nano X now enable the official Ledger SDK Bluetooth transport. Nano S Plus stays USB-only.
 
-| Model | SDK-mapped Ledger OS | Build / USB emulator | Bluetooth in 0.1.1 | Physical testing |
+| Model | SDK-mapped Ledger OS | Build / USB emulator | Bluetooth in 0.1.2 | Physical testing |
 | --- | --- | --- | --- | --- |
 | Nano S Plus | 1.7.0 | Passed | No radio | Earlier 0.1.0 tested on OS 1.7.0 |
 | Nano X | 2.8.0 | Passed | Enabled | Not tested; retail sideloading unavailable |
@@ -32,11 +32,21 @@ python3 scripts/install-pearl.py flex --install
 
 The command downloads the pinned SDK and builder if needed, builds in a separate temporary folder, verifies the source and image hashes, and prepares its own Python loader environment. It does not install global packages or modify wallet data. Initial downloads/building can take several minutes.
 
-Before the loader step, **close Ledger Wallet**, connect the matching device by **USB**, unlock it and leave it on its dashboard. Approve installation on the Ledger screen. Installation uses USB even when you plan to use Bluetooth afterward. Check that the installed app says **Pearl 0.1.1**.
+Before the loader step, **close Ledger Wallet**, connect the matching device by **USB**, unlock it and leave it on its dashboard. Approve installation on the Ledger screen. Installation uses USB even when you plan to use Bluetooth afterward. Check that the installed app says **Pearl 0.1.2**.
 
-No recovery phrase, reset, OS update or automatic app deletion is part of this command. If an existing Pearl app, insufficient space, or incompatible OS/API prevents installation, stop and resolve that separately. Do not substitute another model's image or loader flags.
+No recovery phrase, reset, OS update or automatic app deletion is part of the default install command. If an existing Pearl app, insufficient space, or incompatible OS/API prevents installation, stop and resolve that separately. Do not substitute another model's image or loader flags.
 
 For Stax use `stax`; for Nano S Plus use `nano-s-plus`. **Nano X cannot use this installer’s `--install` route**: ordinary retail sideloading is unavailable according to [Ledger's guide](https://developers.ledger.com/docs/device-app/beginner/vscode-extension). Its build target remains available for development.
+
+## Update an existing Pearl installation
+
+Version 0.1.2 corrects Bluetooth review-event and exit handling after a reported Gen5 failure in 0.1.1. To replace only the old **Pearl** app:
+
+```sh
+python3 scripts/install-pearl.py gen5 --install --replace
+```
+
+Use `flex`, `stax` or `nano-s-plus` for those devices. Close the Pearl view on your phone and Ledger Wallet on the Mac first; leave the USB-connected Ledger unlocked on its dashboard. The explicit `--replace` option removes only Pearl after the new image passes verification, then loads the new version. It does not reset the device or change its recovery phrase. If loading fails afterward, Pearl may need reinstalling. Plain `--install` never deletes an existing app.
 
 ## Use the wallet
 
@@ -62,4 +72,4 @@ The installer reuses the existing `tools/bitcoin-prl-port/build.sh` and provenan
 
 Bluetooth-capable models use flags **0x240**: the existing **0x40** plus the SDK-required **0x200 settings-write permission**, following the official Bitcoin Bluetooth setup. Nano S Plus remains **0x40**. No master-seed or library permission is added.
 
-[0.1.1 evidence and test limits](../tools/ble-review/README.md) records all five builds, emulator checks, synthetic event tests, and the installer replay. No physical 0.1.1 installation or radio test was performed by the agent. The earlier [0.1.0 build/installation checkpoint](../tools/install-guide-review/README.md) remains historical; its files and previously installed Nano S Plus image were preserved. Do not use that USB-only version to test the new Bluetooth route.
+[0.1.2 evidence and test limits](../tools/ble-exit-review/README.md) records all five builds, emulator checks, synthetic event tests, and the installer replay. No physical 0.1.2 installation or radio test was performed by the agent. The owner reported that 0.1.1 exited during Gen5 Bluetooth account review, so its earlier software results do not qualify that physical flow. The earlier [0.1.0 build/installation checkpoint](../tools/install-guide-review/README.md) remains historical; its files and previously installed Nano S Plus image were preserved. Do not use that USB-only version to test the new Bluetooth route.

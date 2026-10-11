@@ -32,6 +32,35 @@ const REOPEN =
 const CANCELLED =
   "Device operation cancelled; any signed payment stays reserved";
 
+/** Native DMK failures may be plain objects; never expose their payloads. */
+function nativeConnectionError(error: unknown): Error {
+  if (error instanceof Error) return error;
+  const tag =
+    error && typeof error === "object"
+      ? (Object.getOwnPropertyDescriptor(error, "_tag")?.value ??
+        Object.getOwnPropertyDescriptor(error, "name")?.value)
+      : undefined;
+  switch (tag) {
+    case "DeviceDisconnectedWhileSendingError":
+    case "DeviceDisconnectedBeforeSendingApdu":
+    case "DisconnectedDeviceDuringOperation":
+    case "DisconnectedDevice":
+      return new Error("Ledger disconnected. Reopen Pearl and reconnect.");
+    case "SendApduTimeoutError":
+    case "SendCommandTimeoutError":
+      return new Error(
+        "Ledger response timed out. Reopen Pearl and reconnect.",
+      );
+    case "ActionRefusedError":
+    case "UserRefusedOnDevice":
+      return new Error(
+        "Request declined on your Ledger. Reopen Pearl and reconnect.",
+      );
+    default:
+      return new Error("Ledger connection failed. Reopen Pearl and reconnect.");
+  }
+}
+
 interface RawTransport {
   exchange(apdu: Buffer): Promise<Uint8Array>;
   close(): Promise<void>;
@@ -119,7 +148,7 @@ export class WalletPearlTransport implements ApduTransport {
       return Uint8Array.from(response);
     } catch (error) {
       await this.close();
-      throw error;
+      throw nativeConnectionError(error);
     } finally {
       if (abort) combined.removeEventListener("abort", abort);
       this.busy = false;
@@ -165,7 +194,7 @@ export function createWalletConnector(
       connection = createConnection();
     } catch (error) {
       occupied = false;
-      throw error;
+      throw nativeConnectionError(error);
     }
     let opening: Promise<RawTransport> | undefined;
     let cleanup: Promise<void> | undefined;
@@ -216,7 +245,7 @@ export function createWalletConnector(
       return new WalletPearlTransport(raw, finish, protocol, timeouts.exchange);
     } catch (error) {
       await finish();
-      throw error;
+      throw nativeConnectionError(error);
     }
   };
 }

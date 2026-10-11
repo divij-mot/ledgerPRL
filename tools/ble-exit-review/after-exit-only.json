@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "osStack": true,
+  "sdkExitSha256": "12a6916c37566f575050682efe0ba1718dd0e7d963a515fd3bef5e1b3c7bda29",
+  "compiledWithBle": true,
+  "source": "apps/ledger-bitcoin-prl/src/boilerplate/prl_review_io.c",
+  "sha256": "077f2964c805cf30ac630d5644ba5fa2deb109453acbf08b4a558e47a2e596c5",
+  "result": "PASS 83446 independent heartbeat syscall-stub cases under ASan/UBSan",
+  "dispatcher_sha256": "82d0b0cb3ab3b5de2fccb2d6dffdf84d16628eb036d03b98244265b60006329e",
+  "deadline_function_sha256": "0aabd6a9a7566f87e8a5f5008ea655a012ae94e1124726da9959f032b1569704",
+  "limits": "Syscall/UI stubs plus verbatim extracted dispatcher deadline helper; no full dispatcher/SDK event processing, physical hardware, or browser-close cancellation proof"
+}

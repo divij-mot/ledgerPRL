@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "network": "mainnet",
+  "recipientType": "p2tr",
+  "firmware": {
+    "model": "stax",
+    "sourceElf": "/firmware/app.elf",
+    "testedSnapshot": "/workspace/evidence/stax/tested-firmware.elf",
+    "sha256": "ade1e4c69782da68853023628867c7eec34c7a6f1dc7b3610a33155ba5081543",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "publicAccount": {
+    "network": "mainnet",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "025853bc37661e09494f793fd80758080ef0ba283faa07e360419ab62afe667f8a",
+    "chainCode": "e970e99470cb3b9ce5271c3afe740870751661cb52db46f92020d509bb161f8e"
+  },
+  "bundle": {
+    "network": "mainnet",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "vout": 1,
+        "amount": "9007199254740993",
+        "scriptPubKey": "51206ec0d5384d8e55c98ecc01cef5aabdc406938929102401c69a0eda58e1992e41",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "txid": "2222222222222222222222222222222222222222222222222222222222222222",
+        "vout": 3,
+        "amount": "1000000000",
+        "scriptPubKey": "51209a28fef1d2b5d0c69edc23be17e8174050c17818e9cdfee3e2c1763e88f635e2",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 7
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "9007199254740000",
+        "scriptPubKey": "51205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "amount": "999999993",
+        "scriptPubKey": "5120f67a38cc32f0fe69343b19ec691b336a1c5b0812561e968428442a23db9b341f",
+        "role": "change",
+        "branch": 1,
+        "index": 0
+      }
+    ]
+  },
+  "txid": "55a8c074e59dd3aca9ff80ccc8c3da8b8209dfefe77ca7e6883f7e1610b218ef",
+  "rawTx": "0100000000010211111111111111111111111111111111111111111111111111111111111111110100000000ffffffff22222222222222222222222222222222222222222222222222222222222222220300000000ffffffff0220fcffffffff1f002251205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4ff9c99a3b00000000225120f67a38cc32f0fe69343b19ec691b336a1c5b0812561e968428442a23db9b341f014054b93ffd81cc218174795f6eea0943503e1214eda6ee45fc0505ac8778387f9c722c3bbad1c8dab8956ed584c7b301c3335dccd9823c6c1879e13ea0165295fb0140bbb50f09a0439007114e9fb3a1e13344e6a664282f524ceab670ed6cbc268e3cbfffa84777fc6cd55ed4291136c7bd9d01587a6da2e4aa6634169b4861834beb00000000"
+}

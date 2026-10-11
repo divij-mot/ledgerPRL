@@ -25,10 +25,10 @@
     "apps/ledger-live-mobile/src/components/Web3AppWebview/WalletAPIWebview.tsx": "db3e0685d4fab89ca0e0195e5180367fc4bf49b9830a0b9bda3422e5bc8d36d9"
   },
   "reviewedLocalFiles": {
-    "apps/companion/src/wallet-api.ts": "d3c2901f3b30a0c77d14b2104c2129da3d6b40cfe1af79f56bd043ba2f3497c0",
+    "apps/companion/src/wallet-api.ts": "2c906312e01bc22749e615bde616a03fba2574e6f236aed591026adc0c431273",
     "apps/companion/src/device.ts": "c98c9a7441dcc5a8c28535a235a3f6031ad8c4f2715536c9e7bf1a98728be08d",
     "apps/companion/src/live-entry.ts": "f75d6061a4f2a77e996d43f6e099b41bdfa13ce3fe600d8842ef1077752db8d8",
-    "apps/companion/test/wallet-api.test.ts": "6d1fd1577ad1edf24e549beec718e86596a152345b5f0e5adf4b853cf26fffd7",
+    "apps/companion/test/wallet-api.test.ts": "cad7ae231ff8cce4c1a69e93376251e59c4b429af66d62eac8b0a0e858dbb7eb",
     "node_modules/@ledgerhq/wallet-api-core/lib-es/transports/WindowMessageTransport.js": "f7fca1c87373b136a004268246b836c00144dc44728b9f30554922f7f217c99d",
     "node_modules/@ledgerhq/wallet-api-client/lib/TransportWalletAPI.js": "8803f5f23d547fd9460c896cfe65f147c59f67ed5ad3a6d87b84b18a9f6af7dd"
   }
