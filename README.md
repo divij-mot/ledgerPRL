@@ -1,5 +1,7 @@
 # Pearl for Ledger
 
+**Hardware use and installation paused.** Do not install or use Pearl on hardware while a reported Gen5 freeze/reset is being investigated. See the [incident and release hold](https://github.com/divij-mot/ledgerPRL/pull/5).
+
 Send and receive Pearl (PRL) with your Ledger. Use the hosted wallet, or run the same interface locally with Pearl’s native light client.
 
 **Trial software. Use small amounts until independent security review is complete.**
