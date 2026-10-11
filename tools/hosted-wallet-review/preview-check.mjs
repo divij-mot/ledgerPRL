@@ -45,6 +45,11 @@ try {
   assert(cached.headers['cache-control']?.includes('immutable'), 'Hashed asset cache missing');
   const notices = await check('Shipped jsQR attribution', '/third-party-notices.txt');
   assert(notices.body.includes('jsqr 1.4.0') && notices.body.includes('Apache License'), 'jsQR licence missing');
+  const manifest = await check('Mobile import manifest', '/ledger-live.hosted.manifest.json');
+  const config = JSON.parse(manifest.body);
+  assert.deepEqual(config.platforms, ['desktop', 'android', 'ios']);
+  assert.equal(config.url, 'https://pearl-ledger-wallet.vercel.app/live.html');
+  assert.deepEqual(config.permissions, ['wallet.capabilities', 'device.transport', 'device.exchange', 'device.close']);
   for (const target of ['/.env', '/.local-light/.owner.json', '/apps/light-client/bin/pearl-watch', '/api/local/status', '/api/check']) {
     await check('Private/native path absent', target, {}, [404]);
   }

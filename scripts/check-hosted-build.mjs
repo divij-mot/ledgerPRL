@@ -21,6 +21,7 @@ const root = fileURLToPath(new URL("../apps/companion/dist/", import.meta.url));
 const topLevel = [
   "assets",
   "index.html",
+  "ledger-live.hosted.manifest.json",
   "live.html",
   "third-party-notices.txt",
 ];
@@ -59,6 +60,11 @@ for (const relative of [
   total += stat.size;
 }
 assert(total <= 32 * 1024 * 1024, "Hosted static output exceeds its bound");
+assert.deepEqual(
+  await readFile(path.join(root, "ledger-live.hosted.manifest.json")),
+  await readFile(new URL("../apps/companion/ledger-live.hosted.manifest.json", import.meta.url)),
+  "Hosted manifest differs from the reviewed source",
+);
 for (const entry of ["index.html", "live.html"]) {
   const html = await readFile(path.join(root, entry), "utf8");
   const links = [...html.matchAll(/(?:src|href)="(\/[^"\s]+)"/g)].map(

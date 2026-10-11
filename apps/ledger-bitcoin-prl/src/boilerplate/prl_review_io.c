@@ -60,14 +60,27 @@ void prl_review_heartbeat(uint16_t start_tick) {
         case SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT:
             if (length != 0) prl_session_abort();
             break;
-        case SEPROXYHAL_TAG_STATUS_EVENT:
-            if (length != 4 ||
-                (read_u32_be(payload, 0) & SEPROXYHAL_TAG_STATUS_EVENT_FLAG_USB_POWERED) == 0) {
+        case SEPROXYHAL_TAG_STATUS_EVENT: {
+            if (length != 4) prl_session_abort();
+            uint32_t flags = read_u32_be(payload, 0);
+#ifdef HAVE_BLE
+            /* The SDK records the media of the APDU that opened this review.
+             * A battery-powered BLE review must not require a USB cable. USB
+             * reviews still abort on USB loss, even while the radio is on. */
+            if (G_io_app.apdu_media == IO_APDU_MEDIA_BLE) {
+                if ((flags & SEPROXYHAL_TAG_STATUS_EVENT_FLAG_BLE_ON) == 0) {
+                    prl_session_abort();
+                }
+            } else
+#endif
+            if ((flags & SEPROXYHAL_TAG_STATUS_EVENT_FLAG_USB_POWERED) == 0) {
                 prl_session_abort();
             }
             break;
+        }
         case SEPROXYHAL_TAG_ITC_EVENT:
-            /* BLE is disabled. Only the benign UI-redisplay event is needed. */
+            /* Pairing is handled by the SDK before commands. Changing pairing
+             * during review must abort it; only benign redisplay is allowed. */
             if (length != 1 || payload[0] != ITC_UX_REDISPLAY) prl_session_abort();
             break;
         default:

@@ -61,11 +61,17 @@ def run(root):
     root = root.resolve()
     if os.name != "posix":
         raise RuntimeError("This local launcher currently supports macOS and Linux.")
-    node, npm = require_command("node"), require_command("npm")
+    node, npm = shutil.which("node"), shutil.which("npm")
+    node_setup = ("Install Node 24.19 or newer 24.x with npm from https://nodejs.org/en/download "
+                  "using your normal installer, open a new terminal, then rerun "
+                  "python3 scripts/run-local.py.")
+    if not node or not npm:
+        missing = ", ".join(name for name, path in (("node", node), ("npm", npm)) if not path)
+        raise RuntimeError(f"Missing {missing}. {node_setup}")
     version = subprocess.run([node, "--version"], check=True, text=True, capture_output=True).stdout.strip()
     parts = re.fullmatch(r"v(\d+)\.(\d+)\.(\d+)", version)
     if not parts or int(parts[1]) != 24 or int(parts[2]) < 19:
-        raise RuntimeError(f"Node 24.19 or newer 24.x is required; found {version}.")
+        raise RuntimeError(f"Unsupported Node version {version}. {node_setup}")
     # The builder writes this cache. Never rebuild through an alias or hard link.
     for relative in (".tools", ".tools/light-client", ".tools/light-client/manifest.json",
                      ".tools/light-client/pearl-watch"):

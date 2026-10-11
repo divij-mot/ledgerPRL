@@ -1,6 +1,6 @@
 {
   "origin": "https://pearl-ledger-wallet.vercel.app",
-  "checkedAt": "2026-10-10T23:04:21.184Z",
+  "checkedAt": "2026-10-11T01:19:16.300Z",
   "outcome": "passed",
   "realBroadcasts": 0,
   "walletAddresses": 0,
@@ -54,11 +54,27 @@
       }
     },
     {
+      "label": "Mobile import manifest",
+      "target": "/ledger-live.hosted.manifest.json",
+      "status": 200,
+      "bytes": 937,
+      "bodySha256": "b45de0a52990d6c7caf84127a91e346351a314b3e52d7a70a88a1caa4746bb6d",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
       "label": "Private/native path absent",
       "target": "/.env",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "838e9773345475feb52f00ad863bf98912afff4498b94378937f154368cbe3da",
+      "bodySha256": "4e49a8502f229354fab2f8e5fb84a6e9565fa8f5b6f790773fe3a0382b6a4041",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -74,7 +90,7 @@
       "target": "/.local-light/.owner.json",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "d87eca8b0aa862dc36b8d55ddd35ef02a25eeaaf70da69388d6c2f32f5ceaa6e",
+      "bodySha256": "35fa1842275a207ccc411bddc490fd33c53766cb453b9b4af87d0860ca9d9a08",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -90,7 +106,7 @@
       "target": "/apps/light-client/bin/pearl-watch",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "1389a2edb652e0cc2211faf9bfe346e7c4082bc3e755070099f04b45d46bc4b0",
+      "bodySha256": "3eaced4e1db20fcbc6e4f1bad65a343164d47a9a5f4f5475649320b717afcd59",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -106,7 +122,7 @@
       "target": "/api/local/status",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "4e8d727738bf7f71f75454ba45d7b2dc20fb1122ce253a894fb30e914138aadd",
+      "bodySha256": "b282fee44343b343b8fc3305bf4a8bb299c97ec759e9facee760d5b077e5fa21",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -122,7 +138,7 @@
       "target": "/api/check",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "0be1defea28fc9ca63db86594e80db4dad1e417e0caea18e3d1196fdf6041b32",
+      "bodySha256": "d2a931a3fe45d5a2844757106c1c050557aa193245f12818a5164445f698443f",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -154,7 +170,7 @@
       "target": "/api/indexer/read",
       "status": 200,
       "bytes": 779,
-      "bodySha256": "beec14543a55fce4a3a7841b01a51dd765e3292880f8b91aa1a351180e2868a3",
+      "bodySha256": "c3d10bd45e3ce34c4b6f4a0f5370712cd6fe32a2e430ebcd97c8ccb1bd293a93",
       "headers": {
         "content-type": "application/json",
         "cache-control": "no-store",
@@ -277,13 +293,5 @@
         "x-content-type-options": "nosniff"
       }
     }
-  ],
-  "deployment": {
-    "origin": "https://pearl-ledger-wallet.vercel.app",
-    "id": "dpl_FDmzyLPoeqC3DyQYyucY1bs72fUp",
-    "sourceCommit": "fca78a828362ea2d65cfe10872ca57626c52b866",
-    "checksPassed": 17,
-    "matchingPublicFiles": 15,
-    "matchingPublicBytes": 2227051
-  }
+  ]
 }

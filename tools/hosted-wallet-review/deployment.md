@@ -1,5 +1,7 @@
 # Hosted deployment, privacy and resource review
 
+The newer [iPhone preparation release](../mobile-transport-review/release.md) records the current deployment. The narrative below retains this earlier checkpoint; shared live-result JSON files contain the latest verification.
+
 Review date: 2026-10-10. Scope: the new stateless Vercel adapter, static publication boundary, origin/body validation, request and concurrency budgets, browser account cache, QR camera/image boundary, jsQR provenance and shipping notices. This report distinguishes source/unit verification from actual hosted preview and native-phone qualification.
 
 ## Findings

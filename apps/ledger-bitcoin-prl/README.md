@@ -57,10 +57,15 @@ upstream's security/distribution claims.
   High fees receive an explicit warning.
 
 Legacy/P2WPKH, multisig, OP_RETURN, arbitrary PSBT signing, message signing,
-registration, swaps/library signing, Bluetooth, and auto-approval are disabled.
+registration, swaps/library signing, and auto-approval are disabled.
 This subset cannot spend every possible Pearl output or construct every valid
 Pearl transaction. Unsupported UTXOs and transactions must be explained by the
 host, never silently converted into a different policy.
+
+Pearl 0.1.1 uses the standard Ledger SDK Bluetooth transport on Nano X, Stax,
+Flex and Nano Gen5; Nano S Plus remains USB-only. The SDK's settings permission
+is enabled only on Bluetooth models. See the [BLE qualification](../../tools/ble-review/README.md)
+for build/guard tests and the remaining physical pairing/disconnect checks.
 
 ## Network and protocol binding
 

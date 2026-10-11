@@ -9,7 +9,8 @@ import sys
 EXPECTED = {"mainnet": "Pearl", "regtest": "Pearl Reg"}
 
 
-def inspect(path: Path, network: str) -> dict:
+def inspect(path: Path, network: str, *, version: str = "0.1.0",
+            target: str = "nanos2", flags: str = "0x40") -> dict:
     data = path.read_bytes()
     if any(value in data for value in (b"prl-dev", b"Pearl Dev", b"Pearl Reg Dev", b"Development app.")):
         raise ValueError("Development identity remains in compiled artifact")
@@ -37,10 +38,10 @@ def inspect(path: Path, network: str) -> dict:
             metadata[name] = section_bytes(section).decode("ascii")
     for name, expected in {
         "ledger.app_name": EXPECTED[network],
-        "ledger.app_version": "0.1.0",
+        "ledger.app_version": version,
         "ledger.api_level": "27",
-        "ledger.target": "nanos2",
-        "ledger.app_flags": "0x40",
+        "ledger.target": target,
+        "ledger.app_flags": flags,
         "ledger.sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
     }.items():
         if metadata.get(name) != expected:

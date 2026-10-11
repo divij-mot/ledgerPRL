@@ -1,0 +1,11 @@
+# iPhone Bluetooth preparation release
+
+Source commit: `07a6f2a1baa8b23558c1de39450c998f0aa6bdf8`. Production deployment: `dpl_Hz9REzWZSscVNNtg2M2RdwU8z8Xq`, ready at [pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/). The canonical [hosted manifest](https://pearl-ledger-wallet.vercel.app/ledger-live.hosted.manifest.json) now declares desktop, Android and iOS with the existing four Wallet API permissions.
+
+All 18 read-only live boundary checks passed. All 16 public files exactly match the reviewed prebuilt bytes, totaling 2,227,988 bytes with 12 immutable assets. The actual server bundles still have five files each, Node 24, a 35-second bound, raw helpers and automatic outgoing-fetch instrumentation disabled, and no embedded environment values or private/native files. A post-deployment 15-minute error-log query returned zero error records. This update adds a static import manifest; it adds no per-wallet database, telemetry, background scan or server process.
+
+Current external verification is retained in `../hosted-wallet-review/preview-results.json`, `deployed-byte-comparison.json` and `prebuilt-validation.json`. The older release narrative there describes its own earlier deployment. `deployment-source.json` binds this release's source bytes; function bytes are verified in the prebuilt output, not downloaded from production.
+
+Full host verification passed 589 tests, TypeScript and production builds. The local launcher and device installer each passed 10 tests. The current Wallet API bridge suite passed 19 tests including the iOS native-message shape; firmware/build and independent review results are linked from the [mobile report](README.md) and [BLE review](../ble-review/README.md).
+
+No physical 0.1.1 installation, iPhone radio pairing, real-phone transaction or broadcast was performed for this release. Install 0.1.1 on a matching device by USB before testing mobile Bluetooth. Stock iPhone Safari cannot provide the direct BLE route; the phone uses Ledger Wallet's native bridge. Disconnect detection and the remaining physical tests are explicit in the install guide. This is trial software, not Ledger approval or a professional security audit.

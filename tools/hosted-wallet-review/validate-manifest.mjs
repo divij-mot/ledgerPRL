@@ -85,7 +85,7 @@ assert.equal(
 );
 const result = schema.safeParse(hosted);
 assert.equal(result.success, true, JSON.stringify(result.error));
-assert.deepEqual(hosted.platforms, ["desktop", "android"]);
+assert.deepEqual(hosted.platforms, ["desktop", "android", "ios"]);
 assert.equal(hosted.url, "https://pearl-ledger-wallet.vercel.app/live.html");
 assert.equal(hosted.homepageUrl, hosted.url);
 assert.deepEqual(hosted.domains, ["https://pearl-ledger-wallet.vercel.app"]);
@@ -126,7 +126,7 @@ const report = {
     hostedManifest: true,
     exactOrigin: true,
     exactFourPermissions: true,
-    desktopAndAndroid: true,
+    desktopAndroidAndIos: true,
     rejectSingularPlatform: true,
     rejectMobilePlatform: true,
     localManifestUnchanged: true,
@@ -136,6 +136,7 @@ const report = {
   importedIntoLedger: false,
   catalogPublished: false,
   physicalAndroidQualified: false,
+  physicalIosQualified: false,
 };
 await writeFile(
   new URL("./manifest-validation.json", import.meta.url),

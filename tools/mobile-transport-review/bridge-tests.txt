@@ -1,0 +1,27 @@
+✔ Wallet API preserves raw continuation/rejection statuses and uses Buffer exchange (1.743666ms)
+✔ unsupported commands and pre-abort send no APDU and end the session (2.549334ms)
+✔ concurrent exchange/open cannot reach the shared host transport (0.349ms)
+✔ valid final response wins synchronous abort while subsequent ACK is prohibited (0.292625ms)
+✔ abort winning exchange forbids late signature delivery or continuation (0.249708ms)
+✔ capability failure closes listeners without opening hardware (0.157333ms)
+✔ malformed response closes transport (0.181917ms)
+✔ close waits for hardware acknowledgement before permitting reconnect (0.207792ms)
+✔ unresolved close is bounded and permanently requires reopening even after late cleanup (17.01575ms)
+✔ late device open is closed before listener removal and cannot race a new open (20.255333ms)
+✔ unresolved open or exchange cannot be reused after bounded timeout (61.962334ms)
+✔ native connector refuses ordinary browser without falling back to WebHID (0.378ms)
+✔ official client desktop native bridge preserves raw replies and rejects web peers (17.385166ms)
+✔ official client ios native bridge preserves raw replies and rejects web peers (0.693125ms)
+✔ official client android native bridge preserves raw replies and rejects web peers (0.490833ms)
+✔ failed hardware close poisons reconnect, while a rejected open can be retried (0.204208ms)
+✔ real PSBT client persists verified bytes through Wallet API before abort suppresses final ACK (158.062375ms)
+✔ browser bundle initializes the official SDK without a preexisting Buffer global (94.222917ms)
+✔ selected network requests its exact Pearl device app with no dashboard default (0.418084ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 752.205583

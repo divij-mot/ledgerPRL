@@ -1,0 +1,35 @@
+{
+  "ledgerLiveCommit": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+  "ledgerLiveMobileTag": "live-mobile@4.23.0",
+  "reactNativeWebViewTag": "v13.16.0",
+  "upstreamFiles": {
+    "RNCWebViewImpl.m": "c9ad96bbc176e0d8fa46f8ccaa8037b520da62522fb8e692be51ed1603107ad1",
+    "patches/react-native-webview@13.16.0.patch": "d6fc65af8843b53a07ea09153f9789ae0e615b957fc57a921f62f87f7dd59506",
+    "libs/ledger-live-common/src/hw/openTransportAsSubject.ts": "cf7d7f3bc3c0f643644809e6bf9c1acca3e1d85d12d993e0b126c7a8c9dd5306",
+    "libs/ledger-live-common/src/wallet-api/types.ts": "6e4657965c2fd4a3f57b4f62a9a3f795c88e42ef51e15b332faca3d667f11dc5",
+    "libs/ledger-live-common/src/wallet-api/react.ts": "9df5290ceac62262193bc285e8145d1622381e553f2e62892d658301ff26a338",
+    "libs/ledger-live-common/src/wallet-api/LocalLiveAppProvider/index.tsx": "8d4071f801801760aca585d46725025fafb23524058588ded7bb0a9ad49abaa0",
+    "apps/ledger-live-mobile/src/experimental.ts": "f7a5913bec17caef4b96dc44c6054cebc1b07c7bf91602278cf13746dc4c92b2",
+    "apps/ledger-live-mobile/src/locales/en/common.json": "7ce9d6838c0c10bb65057f3370451785050f118129286d0c602736b8afc6cebf",
+    "apps/ledger-live-mobile/src/screens/Settings/index.tsx": "d275214e3997b06194c54e8a769c54259df2107d3e00d4bd1d2dab120d20a459",
+    "apps/ledger-live-mobile/src/screens/Settings/Developer/index.tsx": "a5f79609f3e8655e5a701dfd8ae2c6074dde3bf25c17eafac642c12b9f72cc1b",
+    "apps/ledger-live-mobile/src/screens/Settings/Developer/CustomManifest.tsx": "af8af2f8d0bba72f51b196d7144c64f36cece2a6c02ecbc39faeb283b7d4e2cd",
+    "apps/ledger-live-mobile/src/screens/Settings/About/index.tsx": "bc9354f531980449f53ce46001de0f6385a80fa2f9b2341f15f96fe160910235",
+    "apps/ledger-live-mobile/src/screens/Settings/About/AppVersionRow.tsx": "9ccd50d023faa001845f033408492969df7d0461f832ec7286da8a6cbcad6faf",
+    "apps/ledger-live-mobile/src/screens/DeviceConnect/index.tsx": "bf40521804b63413866d6ef39d0db4589dc235f93b58d102c6ef9c6bb6508ab8",
+    "apps/ledger-live-mobile/src/screens/Platform/v2/Catalog/LocalLiveApp.tsx": "344fc31782943ee08b51cf0160dd71c3c6bc96eaca3e1d9ef7bced1373ddc34b",
+    "apps/ledger-live-mobile/src/components/WebPlatformPlayer/index.tsx": "d2366cd73dfc91019b3ef9732a353f022b73f58cbebbb6ba2cdc6da39c3c6b0a",
+    "apps/ledger-live-mobile/src/components/Web3AppWebview/index.tsx": "def25c19bc45776d6e67359ab680bbe91325ab216f9a0bf7e6a0df58f238e8f5",
+    "apps/ledger-live-mobile/src/components/Web3AppWebview/helpers.ts": "3759939f86bf263efb4f95fde956e680933f0c5eafc1e728f11ec5b41fc29851",
+    "apps/ledger-live-mobile/src/components/Web3AppWebview/dappInject.ts": "a63ee07f9839904a593dd5a3335089e28f318c5dc05355845d3cc8210845005b",
+    "apps/ledger-live-mobile/src/components/Web3AppWebview/WalletAPIWebview.tsx": "db3e0685d4fab89ca0e0195e5180367fc4bf49b9830a0b9bda3422e5bc8d36d9"
+  },
+  "reviewedLocalFiles": {
+    "apps/companion/src/wallet-api.ts": "d3c2901f3b30a0c77d14b2104c2129da3d6b40cfe1af79f56bd043ba2f3497c0",
+    "apps/companion/src/device.ts": "c98c9a7441dcc5a8c28535a235a3f6031ad8c4f2715536c9e7bf1a98728be08d",
+    "apps/companion/src/live-entry.ts": "f75d6061a4f2a77e996d43f6e099b41bdfa13ce3fe600d8842ef1077752db8d8",
+    "apps/companion/test/wallet-api.test.ts": "6d1fd1577ad1edf24e549beec718e86596a152345b5f0e5adf4b853cf26fffd7",
+    "node_modules/@ledgerhq/wallet-api-core/lib-es/transports/WindowMessageTransport.js": "f7fca1c87373b136a004268246b836c00144dc44728b9f30554922f7f217c99d",
+    "node_modules/@ledgerhq/wallet-api-client/lib/TransportWalletAPI.js": "8803f5f23d547fd9460c896cfe65f147c59f67ed5ad3a6d87b84b18a9f6af7dd"
+  }
+}

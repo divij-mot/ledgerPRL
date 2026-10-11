@@ -1,0 +1,13 @@
+{
+  "ledger.target": "nanox",
+  "ledger.target_name": "TARGET_NANOX",
+  "ledger.target_id": "0x33000004",
+  "ledger.app_name": "Pearl",
+  "ledger.app_version": "0.1.1",
+  "ledger.api_level": "27",
+  "ledger.sdk_name": "ledger-secure-sdk",
+  "ledger.sdk_version": "v27.1.2",
+  "ledger.sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "ledger.sdk_graphics": "nbgl",
+  "ledger.app_flags": "0x240"
+}

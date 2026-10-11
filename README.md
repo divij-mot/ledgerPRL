@@ -6,13 +6,13 @@ Send and receive Pearl (PRL) with your Ledger. Use the hosted wallet, or run the
 
 ## 1. Install Pearl on your Ledger
 
-Pearl builds for **Nano S Plus, Nano X, Stax, Flex and Nano Gen5**, with button or touchscreen layouts for each model. Account export, Receive and signing pass in the emulator on all five. **Nano S Plus is also verified on physical hardware**; the other models still need physical-device qualification. See the [model support and installation guide](docs/install-pearl.md).
+Pearl builds for **Nano S Plus, Nano X, Stax, Flex and Nano Gen5**, with button or touchscreen layouts for each model. Account export, Receive and signing pass in the emulator on all five. Physical testing is recorded for Nano S Plus with version 0.1.0; the new 0.1.1 Bluetooth builds still need physical-device qualification. See the [model support and installation guide](docs/install-pearl.md).
 
-Pearl is not yet available in the My Ledger app catalog. The step-by-step installation guide currently covers **Nano S Plus, Ledger OS 1.7.0 / API 27**. Each model needs its own build; retail Nano X installation requires Ledger’s distribution process.
+Pearl is not yet available in the My Ledger app catalog. The [installer](scripts/install-pearl.py) builds and verifies the image for your exact model before loading it. For Gen5, run `python3 scripts/install-pearl.py gen5 --install` after the guide’s prerequisites. Each model needs compatible Ledger OS/API; retail Nano X installation requires Ledger’s distribution process.
 
 1. Follow the [build and installation guide](docs/install-pearl.md).
 2. Unlock your Ledger, leave it on the dashboard, and approve the installation prompts.
-3. Open **Pearl** on the device. If it is already installed, skip installation.
+3. Open **Pearl** on the device. Version 0.1.1 is required for Bluetooth; existing 0.1.0 USB installations can keep using USB.
 
 Never enter your recovery phrase into this wallet or reset your Ledger to install it. Original Nano S is not supported.
 
@@ -25,7 +25,7 @@ Open **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)
 3. Use **Receive** to verify an address on the device, or **Send** to enter a recipient and amount.
 4. Review the address, amount and fee on your Ledger. After approving, choose **Send payment** in the wallet.
 
-For Ledger Wallet’s Discover interface, follow the [Discover setup instructions](docs/live-app.md#load-the-hosted-entry-in-discover). This currently uses a locally imported app, not a public catalog listing. Android uses the Discover route; physical Android testing remains outstanding.
+For Ledger Wallet’s Discover interface, follow the [Discover setup instructions](docs/live-app.md#load-the-hosted-entry-in-discover). This currently uses a locally imported app, not a public catalog listing. iPhone and Android use the Discover route; [iPhone Bluetooth setup](docs/live-app.md#iphone-with-nano-gen5-or-flex-over-bluetooth) requires Pearl 0.1.1. Physical mobile testing remains outstanding.
 
 Keys stay on Ledger. The hosted service has no wallet database; account caches and payment records stay in your browser.
 
@@ -33,7 +33,7 @@ Keys stay on Ledger. The hosted service has no wallet database; account caches a
 
 The repository is currently **private**. Sign in to GitHub with an account that has access, then [download the latest source ZIP](https://github.com/divij-mot/ledgerPRL/archive/refs/heads/main.zip) and extract it.
 
-Install these prerequisites first: **Python 3, Node.js 24.19+ within 24.x, npm, Go, Rust/Cargo with Rust 1.90.0, and C/C++ build tools**. See the [platform setup details](docs/live-app.md#local-setup).
+Install these prerequisites first: **Python 3, Node.js 24.19+ within 24.x, npm, Go, Rust/Cargo with Rust 1.90.0, and C/C++ build tools**. Install Node using its [normal installer](https://nodejs.org/en/download), then open a new terminal. See the [platform setup details](docs/live-app.md#local-setup).
 
 In Terminal, enter the extracted folder and run:
 
@@ -50,7 +50,7 @@ First build and blockchain synchronization take time. Later runs reuse the verif
 
 - [Local setup and Discover configuration](docs/live-app.md)
 - [Supported features and limits](docs/prl-feature-coverage.md)
-- [Security model](SECURITY.md) and [release/test evidence](tools/hosted-wallet-review/release.md)
+- [Security model](SECURITY.md) and [release/test evidence](tools/mobile-transport-review/release.md)
 - [How to request a public Discover listing](docs/ledger-discover-submission.md)
 - [Licensing and third-party notices](docs/licensing.md)
 
