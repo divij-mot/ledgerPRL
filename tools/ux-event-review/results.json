@@ -1,0 +1,83 @@
+{
+  "version": "0.1.4",
+  "checkedAt": "2026-10-11T05:44:12.810517+00:00",
+  "sourceSetSha256": "014b17721ce964d6254d8904768f0dfed3b1a693dbf1e13cff7e8ca69d775029",
+  "releaseMetadata": "apps/ledger-bitcoin-prl/release.json",
+  "models": {
+    "nano-s-plus": {
+      "build": "passed",
+      "installerImageCheck": "passed",
+      "elfSha256": "2798c85e7edf5ebcafadf89bbf4d783fc215cb5e6b29070247e436bbadf0ddd3",
+      "pilot": "passed",
+      "verifiedInputSignatures": 2,
+      "resultSha256": "d302b8682c642b8db8d17b73211ddc191e9539f65712d0487a3f88ce0eb5f62f"
+    },
+    "nano-x": {
+      "build": "passed",
+      "installerImageCheck": "passed",
+      "elfSha256": "d58190ce6837c179327b10694de7f76d1a176e3e17e9637ba3b8895b29710146",
+      "pilot": "passed",
+      "verifiedInputSignatures": 2,
+      "resultSha256": "909060fbc4550cdad1ed013f410eb72cfbaa6fc8c8d7b0e9f9ad7048dda4e373"
+    },
+    "stax": {
+      "build": "passed",
+      "installerImageCheck": "passed",
+      "elfSha256": "8bbb8acc6f197d99ba1788a435f39a2878849dfa6a2f1af951c008b5958e5e51",
+      "pilot": "passed",
+      "verifiedInputSignatures": 2,
+      "resultSha256": "df9e6751e84a394382de731a25f57cfea153c0ef520133334a5b30e577b7405c"
+    },
+    "flex": {
+      "build": "passed",
+      "installerImageCheck": "passed",
+      "elfSha256": "573d630880604a80c395b1b58001a6b72292f60b484e52c9b295d1af4c254fea",
+      "pilot": "passed",
+      "verifiedInputSignatures": 2,
+      "resultSha256": "77044486d7dc4d21db92051e14f2babfac2596c7feb77a0747f6b4fc8f15cbd5"
+    },
+    "gen5": {
+      "build": "passed",
+      "installerImageCheck": "passed",
+      "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+      "pilot": "passed",
+      "verifiedInputSignatures": 2,
+      "resultSha256": "f4cf7c3bd30925b9adf51a532c31fbac09381bcb180495651aee2a45188f68c6"
+    }
+  },
+  "adversarial": {
+    "status": "passed",
+    "cases": 75,
+    "elfSha256": "10261b51cc58d0f2d34da550b7097b97a2e9b335c17c496a5dc4cd4784bb29ae",
+    "resultSha256": "d384cd75fac185b6f8a5b8faf1800e5faa0a988b2aa7b311a16dec0bf7f1f34b"
+  },
+  "installerTests": {
+    "status": "passed",
+    "cases": 12
+  },
+  "physicalDeviceQualification": false,
+  "bleRadioQualification": false,
+  "hardwareOperations": 0,
+  "actualSdkGen5": {
+    "status": "passed",
+    "cases": 17,
+    "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+    "resultSha256": "20fa5ac1575783d9540a80f3ee5b782334e66ec9d0fdf0273038e9f00dc05872",
+    "physicalPayloadCaptured": false,
+    "syntheticStatusPayloads": [
+      "zero",
+      "high",
+      "mixed"
+    ],
+    "approvalRequired": true
+  },
+  "actualSdkRegtest": {
+    "status": "passed",
+    "cases": 13,
+    "elfSha256": "10261b51cc58d0f2d34da550b7097b97a2e9b335c17c496a5dc4cd4784bb29ae",
+    "resultSha256": "b75f4b390dbc2f29a274649750b8c69401bcee7022367fb012055e42fc8f39fe",
+    "reviewDeadlineTicks": 1200,
+    "wholeCommandDeadlineTicks": 3000,
+    "denyThenFreshSigning": "passed"
+  }
+}

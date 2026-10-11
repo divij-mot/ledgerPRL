@@ -2,7 +2,8 @@
  * Narrow adaptation of SDK v27.1.2 io_seproxyhal_io_heartbeat.
  * (c) Ledger SAS, with Pearl review-session validation changes.
  * The SDK's UI handlers are retained. A fault exits the app on nested requests,
- * reported disconnect, lock or expiry. Browser-only abort is not a device event.
+ * receive failure, lock or expiry. Transport disconnect is not guaranteed to
+ * reach the app; browser-only abort is not a device event.
  */
 #include <stdbool.h>
 #include <string.h>
@@ -59,35 +60,26 @@ void prl_review_heartbeat(uint16_t start_tick) {
 #endif
     switch (event[0]) {
         case SEPROXYHAL_TAG_BUTTON_PUSH_EVENT:
-            if (length != 1 || (payload[0] & ~6U) != 0) prl_session_abort();
+            if (length < 1 || (payload[0] & ~6U) != 0) prl_session_abort();
             break;
         case SEPROXYHAL_TAG_FINGER_EVENT:
-            if (length != 5 || (payload[0] != 1 && payload[0] != 2)) prl_session_abort();
+            /* Only enforce the fields read by the pinned SDK. OS events may
+             * carry additional data which the application does not consume. */
+#ifdef HAVE_HW_TOUCH_SWIPE
+            if (length < 8) prl_session_abort();
+#else
+            if (length < 5) prl_session_abort();
+#endif
+            if (payload[0] != 1 && payload[0] != 2) prl_session_abort();
             break;
         case SEPROXYHAL_TAG_TICKER_EVENT:
-            /* Gen5/API27 also sends a four-byte ticker payload. The SDK's
-             * UX_TICKER_EVENT ignores its contents and advances one tick. */
-            if (length != 0 && length != 4) prl_session_abort();
-            break;
         case SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT:
-            if (length != 0) prl_session_abort();
+        case SEPROXYHAL_TAG_STATUS_EVENT:
+            /* SDK handlers do not read these payloads. Forward bounded,
+             * complete OS events unchanged; neither a status prefix nor its
+             * length is an app-visible transport-liveness contract. Ticker
+             * processing advances one SDK tick, independent of its payload. */
             break;
-        case SEPROXYHAL_TAG_STATUS_EVENT: {
-            if (length != 4) prl_session_abort();
-            uint32_t flags = read_u32_be(payload, 0);
-            bool usb_power_required = true;
-#ifdef HAVE_BLE
-            /* SDK status events are UX snapshots, not BLE link-liveness proof.
-             * The standard BLE path does not require the legacy BLE_ON bit.
-             * Keep the existing USB power-loss check for non-BLE reviews. */
-            usb_power_required = G_io_app.apdu_media != IO_APDU_MEDIA_BLE;
-#endif
-            if (usb_power_required &&
-                (flags & SEPROXYHAL_TAG_STATUS_EVENT_FLAG_USB_POWERED) == 0) {
-                prl_session_abort();
-            }
-            break;
-        }
         case SEPROXYHAL_TAG_ITC_EVENT:
             if (length == 1 && payload[0] == ITC_UX_REDISPLAY) break;
 #ifdef HAVE_BLE

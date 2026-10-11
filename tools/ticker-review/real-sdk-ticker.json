@@ -1,0 +1,74 @@
+{
+  "firmwareSha256": "21b1d901912e636439315316308de4558ddd59b972abc6bf4a70839d160ebc13",
+  "speculos": "0.27.1",
+  "actualTickerPayloadKnown": false,
+  "physicalOperations": 0,
+  "signaturesRequested": 0,
+  "broadcasts": 0,
+  "records": [
+    {
+      "name": "empty-ticker",
+      "syntheticFrameHex": "524157210e",
+      "expected": "review persists until explicit approval",
+      "status": "passed",
+      "reviewSurvived": true,
+      "responseBeforeTouch": false,
+      "explicitApprovalCompleted": true,
+      "accountApproved": true
+    },
+    {
+      "name": "four-zero",
+      "syntheticFrameHex": "524157210e00000000",
+      "expected": "review persists until explicit approval",
+      "status": "passed",
+      "reviewSurvived": true,
+      "responseBeforeTouch": false,
+      "explicitApprovalCompleted": true,
+      "accountApproved": true
+    },
+    {
+      "name": "four-high",
+      "syntheticFrameHex": "524157210effffffff",
+      "expected": "review persists until explicit approval",
+      "status": "passed",
+      "reviewSurvived": true,
+      "responseBeforeTouch": false,
+      "explicitApprovalCompleted": true,
+      "accountApproved": true
+    },
+    {
+      "name": "four-mixed",
+      "syntheticFrameHex": "524157210e01020304",
+      "expected": "review persists until explicit approval",
+      "status": "passed",
+      "reviewSurvived": true,
+      "responseBeforeTouch": false,
+      "explicitApprovalCompleted": true,
+      "accountApproved": true
+    },
+    {
+      "name": "invalid-ticker-one",
+      "syntheticFrameHex": "524157210e00",
+      "expected": "native review abort",
+      "status": "passed",
+      "exitCode": 255,
+      "successAfterFault": false
+    },
+    {
+      "name": "invalid-display-four",
+      "syntheticFrameHex": "524157210d00000000",
+      "expected": "native review abort",
+      "status": "passed",
+      "exitCode": 255,
+      "successAfterFault": false
+    },
+    {
+      "name": "nested-capabilities",
+      "syntheticFrameHex": "e106000100",
+      "expected": "native review abort",
+      "status": "passed",
+      "exitCode": 255,
+      "successAfterFault": false
+    }
+  ]
+}

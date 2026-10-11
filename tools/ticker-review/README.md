@@ -22,3 +22,11 @@ The existing shared harness at `tools/ble-exit-review/review-heartbeat.{c,py}` w
 All five mainnet builds passed, with actual ELF metadata and installer hash/size checks. All five Speculos account/Receive/two-input-signature replays passed, along with75 hostile requests and five review lifecycle cases. `results.json` records compact per-model metadata, hashes and replay evidence fingerprints; full deterministic fixture outputs remain in the isolated test workspace. No new binaries are published here.
 
 The source set is `0fcf78a0f97be7c3a63e2c1040c974d12b899c62b830d44e9356fac637c34e75`; `release.json` binds the model-specific images. This agent performed no physical installation or funded broadcast. Corrected physical approval and BLE behavior remain for the owner’s retest; software/emulator success does not establish them.
+
+## Physical 0.1.3 retest
+
+The root agent subsequently installed the exact qualified Gen5 image and verified its full hash by reading the device inventory. Identity, capabilities and fingerprint requests succeeded over isolated USB, but the owner reported that public-key review still flashed and exited before touch. No account approval completed and no payment was requested. The ticker guard defect is reproduced and corrected, but it was not the complete incident cause. See [physical-013.json](physical-013.json). This release remains under diagnosis and must not be presented as a qualified Gen5 fix.
+
+## Real SDK/UI ticker replay
+
+A separate reviewer replayed the four-byte event shape through the actual Gen5 SDK/NBGL code in Speculos, using the exact qualified 0.1.3 ELF and synthetic zero, high and mixed payloads. All four valid cases (including the empty format) kept the review open, returned no account before touch, and completed only after explicit approval. Invalid ticker/display lengths and a nested APDU aborted the review. All seven checks passed; see [real-sdk-ticker.json](real-sdk-ticker.json). The actual physical ticker payload was never captured. These tests did not reproduce the remaining physical exit, so further diagnostic evidence is required. No hardware, funded signing or network broadcast was used.

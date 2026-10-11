@@ -96,6 +96,14 @@ static void check(uint16_t start, int should_exit, int expected_calls) {
     assert(exits == should_exit && stops == should_exit * EXPECTED_STOPS && calls == expected_calls);
 }
 int main(void) {
+#ifdef TEST_STATUS_ONLY
+    /* Captured framing, synthetic zero payload; no actual flags were logged. */
+    reset(); packet[0] = OS_IO_PACKET_TYPE_SEPH;
+    envelope(SEPROXYHAL_TAG_STATUS_EVENT, 10);
+    check(0, 0, 1); assert(!test_flow_ended());
+    puts("PASS captured status framing preserves pending review");
+    return 0;
+#endif
 #ifdef TEST_PAIRING_ONLY
     reset(); G_io_app.apdu_media = IO_APDU_MEDIA_BLE;
     envelope(SEPROXYHAL_TAG_ITC_EVENT, 2); packet[4] = ITC_UX_BLE_PAIRING_STATUS;
@@ -117,11 +125,11 @@ int main(void) {
     for (unsigned len = 0; len < 17; len++) {
         reset(); count_ticker = 1;
         envelope(SEPROXYHAL_TAG_TICKER_EVENT, len);
-        int accepted = len == 0 || len == 4;
+        int accepted = 1;
         check(0, !accepted, accepted); assert(G_ticks == accepted);
         assert(!test_flow_ended());
         reset(); envelope(SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT, len);
-        check(0, len != 0, len == 0); assert(G_ticks == 0);
+        check(0, 0, 1); assert(G_ticks == 0); assert(!test_flow_ended());
     }
     for (int approve = 0; approve < 2; approve++) {
         reset(); count_ticker = 1;
@@ -138,6 +146,51 @@ int main(void) {
     }
     reset(); count_ticker = 1; envelope(SEPROXYHAL_TAG_TICKER_EVENT, 4);
     G_ticks = 65535; check(65535, 0, 1); assert(G_ticks == 0);
+    /* Second captured Gen5 framing: M1 P01 T15 N14 L10. Payload/flags
+     * were NOT captured. Exercise synthetic bytes across every bounded size. */
+    const unsigned char opaque_tags[] = {SEPROXYHAL_TAG_TICKER_EVENT,
+        SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT, SEPROXYHAL_TAG_STATUS_EVENT};
+    for (unsigned tag = 0; tag < sizeof(opaque_tags); tag++) {
+        for (unsigned len = 0; len <= sizeof(G_io_seproxyhal_spi_buffer)-3; len++) {
+            for (unsigned pattern = 0; pattern < 3; pattern++) {
+                reset(); count_ticker = 1; packet[0] = OS_IO_PACKET_TYPE_SEPH;
+                envelope(opaque_tags[tag], len);
+                for (unsigned b = 0; b < len; b++) packet[4+b] = pattern == 0 ? 0 : pattern == 1 ? 255 : b;
+                check(0, 0, 1); assert(!test_flow_ended());
+                assert(G_ticks == (opaque_tags[tag] == SEPROXYHAL_TAG_TICKER_EVENT));
+            }
+        }
+        reset(); envelope(opaque_tags[tag], sizeof(G_io_seproxyhal_spi_buffer)-2);
+        check(0, 1, 0);
+        reset(); envelope(opaque_tags[tag], 10); fail_after_ui = 1; check(0, 1, 1);
+        for (int whole = 0; whole < 2; whole++) {
+            reset(); envelope(opaque_tags[tag], 10); tick_after_ui = 1;
+            if (whole) command_age = 2999; else G_ticks = 1199;
+            check(0, 1, 1);
+        }
+        for (int approve = 0; approve < 2; approve++) {
+            reset(); envelope(opaque_tags[tag], 10); memset(packet+4,255,10);
+            check(0, 0, 1); assert(!test_flow_ended());
+            envelope(SEPROXYHAL_TAG_BUTTON_PUSH_EVENT, 9); packet[4] = 6;
+            review_gesture = approve; check(0, 0, 2);
+            assert(test_flow_ended() && test_flow_response() == (approve != 0));
+        }
+    }
+    /* Only bytes actually read by SDK gesture handlers are mandatory.
+     * Additional bytes do not create approval; malformed prefixes still exit. */
+    for (unsigned len = 0; len < 18; len++) {
+        reset(); envelope(SEPROXYHAL_TAG_BUTTON_PUSH_EVENT, len);
+        memset(packet+4,255,len); packet[4] = 6;
+        check(0, len < 1, len >= 1); assert(!test_flow_ended());
+        reset(); envelope(SEPROXYHAL_TAG_FINGER_EVENT, len);
+        memset(packet+4,255,len); packet[4] = 1;
+#ifdef HAVE_HW_TOUCH_SWIPE
+        int valid = len >= 8;
+#else
+        int valid = len >= 5;
+#endif
+        check(0, !valid, valid); assert(!test_flow_ended());
+    }
     /* All packet/media types: only two well-formed event classes may reach UX. */
     for (int media = 0; media < 256; media++) {
         reset(); envelope(SEPROXYHAL_TAG_TICKER_EVENT, 0); packet[0] = media;
@@ -151,31 +204,25 @@ int main(void) {
         check(0, !allowed, allowed);
     }
     for (int kind = 0; kind < 256; kind++) {
-        reset(); envelope(SEPROXYHAL_TAG_FINGER_EVENT, 5); packet[4] = kind;
+        reset(); envelope(SEPROXYHAL_TAG_FINGER_EVENT, 8); packet[4] = kind;
         int allowed = kind == 1 || kind == 2;
         check(0, !allowed, allowed);
     }
     for (int tag = 0; tag < 256; tag++) {
         reset(); envelope(tag, 0);
-        int allowed = tag == SEPROXYHAL_TAG_TICKER_EVENT || tag == SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT;
+        int allowed = tag == SEPROXYHAL_TAG_TICKER_EVENT || tag == SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT || tag == SEPROXYHAL_TAG_STATUS_EVENT;
         check(0, !allowed, allowed);
     }
     for (int kind = 0; kind < 256; kind++) {
         reset(); envelope(SEPROXYHAL_TAG_ITC_EVENT, 1); packet[4] = kind;
         check(0, kind != ITC_UX_REDISPLAY, kind == ITC_UX_REDISPLAY);
     }
-    /* All SDK media values and status flag combinations: BLE-on cannot
-     * preserve a USB review, and USB power cannot preserve a BLE review. */
+    /* Status bytes are opaque OS UX data, never app-visible link proof. */
     for (int media = 0; media <= IO_APDU_MEDIA_CDC; media++) {
         for (int flags = 0; flags < 256; flags++) {
             reset(); G_io_app.apdu_media = media;
             envelope(SEPROXYHAL_TAG_STATUS_EVENT, 4); packet[7] = flags;
-            unsigned required = SEPROXYHAL_TAG_STATUS_EVENT_FLAG_USB_POWERED;
-#ifdef HAVE_BLE
-            if (media == IO_APDU_MEDIA_BLE) required = 0;
-#endif
-            int allowed = required == 0 || !!(flags & required);
-            check(0, !allowed, allowed);
+            check(0, 0, 1); assert(!test_flow_ended());
         }
     }
     /* No nested APDU or pairing mutation is accepted during BLE review. */
@@ -226,12 +273,12 @@ int main(void) {
         tick_after_ui = 1; check(0, 1, 0); assert(pairing_calls == 1);
     }
 #endif
-    /* SDK receive failure and malformed status still exit. */
+    /* SDK receive failure still exits; bounded status suffixes are opaque. */
     reset(); G_io_app.apdu_media = IO_APDU_MEDIA_BLE; packet_size = -1; check(0, 1, 0);
     for (unsigned length = 0; length < 16; length++) {
         reset(); G_io_app.apdu_media = IO_APDU_MEDIA_BLE;
         envelope(SEPROXYHAL_TAG_STATUS_EVENT, length); packet[7] = 12;
-        check(0, length != 4, length == 4);
+        check(0, 0, 1); assert(!test_flow_ended());
     }
     /* Negative, short, oversize and mismatched envelope lengths. */
     for (int size = -2; size <= 1100; size++) {

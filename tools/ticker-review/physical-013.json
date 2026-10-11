@@ -1,0 +1,18 @@
+{
+  "version": "0.1.3",
+  "sourceCommit": "a393ea03278f31b8cf8d547f7a1ca03c055b3758",
+  "model": "gen5",
+  "installedHash": "152adc297f89a710bac1e75af9480b0277ff80656d00e8d80355bd0c7fff7554",
+  "installedHashReadbackMatched": true,
+  "transport": "USB",
+  "appIdentity": "passed",
+  "networkCapabilities": "passed",
+  "fingerprintRequest": "passed",
+  "accountExportCompleted": false,
+  "ownerObservation": "Public-key review still exited before touch",
+  "publicKeyOrAddressRetained": false,
+  "signingRequests": 0,
+  "broadcasts": 0,
+  "status": "failed; further diagnosis required",
+  "osVersion": "1.2.0"
+}

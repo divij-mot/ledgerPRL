@@ -78,14 +78,16 @@ with tempfile.TemporaryDirectory(prefix="prl-heartbeat-review-") as temp:
             str(SOURCE), str(p/"deadline.c"), str(p/"sdk-exit.c"), str(p/"sdk-pairing.c"), str(p/"review-latch.c"), str(HERE/"review-heartbeat.c"), "-o", str(p/"test")]
     if os.environ.get("PEARL_TEST_OS_STACK", "1") == "1": args.insert(1, "-DUSE_OS_IO_STACK")
     if os.environ.get("PEARL_TEST_BLE") == "1": args.insert(1, "-DHAVE_BLE")
+    if os.environ.get("PEARL_TEST_HW_SWIPE") == "1": args.insert(1, "-DHAVE_HW_TOUCH_SWIPE")
     if os.environ.get("PEARL_TEST_OLD_EXIT") == "1": args.insert(1, "-DTEST_OLD_EXIT")
     if os.environ.get("PEARL_TEST_PAIRING_ONLY") == "1": args.insert(1, "-DTEST_PAIRING_ONLY")
+    if os.environ.get("PEARL_TEST_STATUS_ONLY") == "1": args.insert(1, "-DTEST_STATUS_ONLY")
     subprocess.run(args, check=True)
     result = subprocess.run([str(p/"test")], env={**os.environ,"ASAN_OPTIONS":"detect_leaks=0"},
                             check=False, text=True, capture_output=True)
     if result.returncode:
         raise SystemExit(json.dumps({"status":"failed", "returnCode":result.returncode, "stderr":result.stderr}, indent=2))
-    print(json.dumps({"status":"passed", "osStack":os.environ.get("PEARL_TEST_OS_STACK", "1") == "1", "sdkExitSha256":hashlib.sha256(sdk_exit.encode()).hexdigest(), "sdkPairingHandlerSha256":hashlib.sha256(ux_handler.encode()).hexdigest(), "reviewLatchSha256":hashlib.sha256(flow.encode()).hexdigest(), "compiledWithBle":os.environ.get("PEARL_TEST_BLE") == "1", "source":str(SOURCE.relative_to(ROOT)),
+    print(json.dumps({"status":"passed", "osStack":os.environ.get("PEARL_TEST_OS_STACK", "1") == "1", "sdkExitSha256":hashlib.sha256(sdk_exit.encode()).hexdigest(), "sdkPairingHandlerSha256":hashlib.sha256(ux_handler.encode()).hexdigest(), "reviewLatchSha256":hashlib.sha256(flow.encode()).hexdigest(), "compiledWithBle":os.environ.get("PEARL_TEST_BLE") == "1", "compiledWithHwSwipe":os.environ.get("PEARL_TEST_HW_SWIPE") == "1", "source":str(SOURCE.relative_to(ROOT)),
         "sha256":hashlib.sha256(SOURCE.read_bytes()).hexdigest(), "result":result.stdout.strip(),
         "dispatcher_sha256":hashlib.sha256(DISPATCHER.read_bytes()).hexdigest(),
         "deadline_function_sha256":hashlib.sha256(deadline.encode()).hexdigest(),

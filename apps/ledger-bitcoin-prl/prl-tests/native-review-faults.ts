@@ -5,19 +5,28 @@ import { readFile, writeFile, mkdtemp, mkdir } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { Emulator, pause, type Model } from "./emulator.ts";
 import {
+  accountToJson,
   bundleFromJson,
+  deriveAddress,
+  NETWORKS,
+  type NetworkName,
   type SpeculosTransport,
 } from "../../../packages/sdk/src/index.ts";
-import { buildPrlPsbt } from "../../../packages/bitcoin-prl-adapter/src/index.ts";
+import {
+  buildPrlPsbt,
+  LedgerBitcoinPrlClient,
+} from "../../../packages/bitcoin-prl-adapter/src/index.ts";
 import { apdu, response, publicAccount, rawSign } from "./raw-protocol.ts";
 const root = resolve(import.meta.dirname, "../../..");
+const network = (process.env.SPECULOS_NETWORK ?? "regtest") as NetworkName;
+assert(Object.hasOwn(NETWORKS, network), "Unsupported test network");
 const model = (process.env.SPECULOS_MODEL ?? "nanosp") as Model;
 const target = model === "nanosp" ? "nanos2" : model;
 const elf =
   process.env.PEARL_APP_ELF ??
   join(
     root,
-    `apps/ledger-bitcoin-prl/build-artifacts/${target}-regtest/app.elf`,
+    `apps/ledger-bitcoin-prl/build-artifacts/${target}-${network}/app.elf`,
   );
 const output =
   process.env.PEARL_EVIDENCE ??
@@ -116,7 +125,7 @@ async function test(name: string, fn: (e: Emulator, w: Wire) => Promise<void>) {
     w = new Wire(port + 1);
     await w.ready();
     if (!identity)
-      identity = await publicAccount(w.transport, "regtest", (op) =>
+      identity = await publicAccount(w.transport, network, (op) =>
         e.approve(op, "Approve public key", "account"),
       );
     await fn(e, w);
@@ -132,16 +141,41 @@ async function test(name: string, fn: (e: Emulator, w: Wire) => Promise<void>) {
     await mkdir(output, { recursive: true });
     await writeFile(
       join(output, "result.json"),
-      JSON.stringify({ results }, null, 2),
+      JSON.stringify(
+        {
+          network,
+          actualTickerPayloadKnown: false,
+          actualStatusPayloadKnown: false,
+          results,
+        },
+        null,
+        2,
+      ),
     );
     await pause(200);
   }
 }
+function paymentPsbt() {
+  const bundle = bundleFromJson({ ...fixture.bundle, network });
+  if (network === "mainnet") {
+    for (const input of bundle.inputs)
+      input.scriptPubKey = deriveAddress(
+        identity!.account,
+        input.branch,
+        input.index,
+      ).scriptPubKey;
+    for (const output of bundle.outputs)
+      if (output.role === "change")
+        output.scriptPubKey = deriveAddress(
+          identity!.account,
+          1,
+          output.index,
+        ).scriptPubKey;
+  }
+  return buildPrlPsbt(bundle, identity!.account);
+}
 async function reachFinal(e: Emulator, w: Wire) {
-  const psbt = buildPrlPsbt(
-    bundleFromJson({ ...fixture.bundle, network: "regtest" }),
-    identity!.account,
-  );
+  const psbt = paymentPsbt();
   const pending = rawSign(w.transport, psbt, identity!.policy);
   pending.catch(() => {});
   for (let i = 0; i < 150; i++) {
@@ -197,12 +231,87 @@ async function stopped(e: Emulator, w: Wire, start: number) {
     "Emulator failure is not native rejection evidence",
   );
 }
+// Replay captured ticker/STATUS framing through the actual SDK/NBGL review loop.
+// Neither physical payload was recorded: all test payloads are synthetic.
+for (const [name, bytes, accepted] of [
+  ["account-empty-ticker", "524157210e", true],
+  ["account-four-byte-ticker-zero", "524157210e00000000", true],
+  ["account-four-byte-ticker-high", "524157210effffffff", true],
+  ["account-four-byte-ticker-mixed", "524157210e01020304", true],
+  ["account-one-byte-ticker", "524157210e00", true],
+  ["account-four-byte-display", "524157210d00000000", true],
+  ["account-four-byte-status", "524157211500000000", true],
+  ["account-ten-byte-status-zero", "5241572115" + "00".repeat(10), true],
+  ["account-ten-byte-status-high", "5241572115" + "ff".repeat(10), true],
+  ["account-ten-byte-status-mixed", "524157211500010203040506070809", true],
+  ["account-button-suffix", "524157210500ff", true],
+  ["account-finger-suffix", "524157210c0200000000000000", true],
+  ["account-empty-button", "5241572105", false],
+  ["account-short-finger", "524157210c02000000", false],
+  ["account-unknown-event", "52415721ff", false],
+  ["account-malformed-apdu", "e1040001", false],
+  ["account-nested-capabilities", "e106000100", false],
+] as const) {
+  await test(name, async (e, w) => {
+    await e.json("/ticker/", { action: "pause" });
+    const client = new LedgerBitcoinPrlClient(w.transport, network, {
+      timeoutMs: 20000,
+    });
+    let done = false;
+    const pending = client.exportAccount(0).finally(() => {
+      done = true;
+    });
+    pending.catch(() => {});
+    let reviewing = false;
+    for (let i = 0; i < 60; i++) {
+      await pause(80);
+      assert.equal(e.child!.exitCode, null, "Exited before injected event");
+      const events = await e.events();
+      if (events.some((x) => /public\s*key/i.test(x.text))) {
+        await e.capture("account-before-event", events);
+        reviewing = true;
+        break;
+      }
+    }
+    assert(reviewing && !done, "Pending account review not reached");
+    const start = w.responses.length;
+    w.send(Buffer.from(bytes, "hex"));
+    if (!accepted) {
+      await stopped(e, w, start);
+      await assert.rejects(pending);
+      return;
+    }
+    await pause(500);
+    assert.equal(
+      e.child!.exitCode,
+      null,
+      "Valid SDK UX event terminated review",
+    );
+    assert.equal(
+      done,
+      false,
+      "SDK UX event completed account export without approval",
+    );
+    assert.equal(
+      w.responses.length,
+      start,
+      "SDK UX event released an APDU response",
+    );
+    await e.capture("account-after-event", await e.events());
+    await e.json("/ticker/", { action: "resume" });
+    const account = await e.approve(
+      () => pending,
+      "Approve public key",
+      "account-after-ux-event",
+    );
+    assert.deepEqual(accountToJson(account), accountToJson(identity!.account));
+  });
+}
 for (const [name, bytes] of [
   ["nested-capabilities-apdu", apdu(6)],
   ["nested-sign-apdu", apdu(4)],
   ["bolos-version-apdu", Buffer.from("b001000000", "hex")],
   ["malformed-apdu", Buffer.from("e1040001", "hex")],
-  ["usb-power-loss", Buffer.from("524157211500000000", "hex")],
   ["empty-button-event", Buffer.from("5241572105", "hex")],
   ["invalid-button-mask", Buffer.from("524157210501", "hex")],
   ["short-finger-event", Buffer.from("524157210c010000", "hex")],
@@ -239,10 +348,7 @@ await test("absolute-command-deadline", async (e, w) => {
   const start = w.responses.length;
   let ticks = 0,
     commands = 0;
-  const psbt = buildPrlPsbt(
-    bundleFromJson({ ...fixture.bundle, network: "regtest" }),
-    identity!.account,
-  );
+  const psbt = paymentPsbt();
   const pending = rawSign(w.transport, psbt, identity!.policy, {
     respond: async (_req, standard) => {
       ++commands;
@@ -287,10 +393,7 @@ await test("deny-and-restart-cleanly", async (e, w) => {
   assert.equal(denied.status, 0x6985);
   assert.equal(denied.yields.length, 0);
   assert.equal(response(await w.exchange(apdu(6))).status, 0x9000);
-  const psbt = buildPrlPsbt(
-    bundleFromJson({ ...fixture.bundle, network: "regtest" }),
-    identity!.account,
-  );
+  const psbt = paymentPsbt();
   const signed = await e.approve(
     () => rawSign(w.transport, psbt, identity!.policy),
     "Sign transaction",

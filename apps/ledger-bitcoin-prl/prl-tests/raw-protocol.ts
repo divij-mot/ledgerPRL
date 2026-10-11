@@ -5,6 +5,7 @@ import { Buffer } from "buffer";
 import {
   compactSize,
   concat,
+  NETWORKS,
   SpeculosTransport,
   type AccountPublicKey,
   type NetworkName,
@@ -54,7 +55,7 @@ export async function publicAccount(
           concat(
             Uint8Array.of(1, 3),
             u32be(0x80000056),
-            u32be(0x80000001),
+            u32be(0x80000000 + NETWORKS[name].coinType),
             u32be(0x80000000),
           ),
         ),

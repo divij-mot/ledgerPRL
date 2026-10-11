@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.1.3",
+  "version": "0.1.4",
   "network": "mainnet",
   "sdkCommit": "6709cd2bdfebb224ee070f7c1211b54254262579",
   "sdkTag": "v27.1.2",
@@ -15,8 +15,8 @@
       "bluetooth": false,
       "dataSize": 512,
       "installparamsSize": 61,
-      "elfSha256": "6a58d4734394ebc466d08c9256abd3e6d13d3da76534235f14a51da93dd92cfd",
-      "hexSha256": "98ac4b240182bf059efe55df2e96fc6862d1460e503b08830f276e3b712218ad",
+      "elfSha256": "2798c85e7edf5ebcafadf89bbf4d783fc215cb5e6b29070247e436bbadf0ddd3",
+      "hexSha256": "c4e235657b8cbe54b1c7fa72a3456457be4eb7547c959ee97aa656b35f4085da",
       "elfBytes": 236376,
       "flashBytes": 67645
     },
@@ -28,8 +28,8 @@
       "bluetooth": true,
       "dataSize": 512,
       "installparamsSize": 61,
-      "elfSha256": "1703a0a516bb798da3296ac7b7634fd832f8cb870fe7278b9b4a8269e599db26",
-      "hexSha256": "8a1f4024370d4b574de60d5c0422aa3e5070a64d87179adfe2a7a4db17209f83",
+      "elfSha256": "d58190ce6837c179327b10694de7f76d1a176e3e17e9637ba3b8895b29710146",
+      "hexSha256": "7f840630c5e5b6b5b070f3e81f2a0e0733c8e48920983ebf2e87b5065e128602",
       "elfBytes": 236600,
       "flashBytes": 67901
     },
@@ -41,8 +41,8 @@
       "bluetooth": true,
       "dataSize": 512,
       "installparamsSize": 106,
-      "elfSha256": "862abd6d2b402117f6bad730784047b10a99d7d68258790c07aa35ef257c165c",
-      "hexSha256": "1cd127eeca4c6c2a23ae2ad5993b8df72f6bb401cf7b5ace7c711ff01da8ff47",
+      "elfSha256": "8bbb8acc6f197d99ba1788a435f39a2878849dfa6a2f1af951c008b5958e5e51",
+      "hexSha256": "c5204242ce168110b3515c52e2381ba27e046b65ddd7a1f5868469cc0b4323e1",
       "elfBytes": 242996,
       "flashBytes": 91242
     },
@@ -54,8 +54,8 @@
       "bluetooth": true,
       "dataSize": 512,
       "installparamsSize": 137,
-      "elfSha256": "439f01e591f216bd3e607f1d995b0a46bb1a0cc27bb4c049fd1ff3362e0c7e69",
-      "hexSha256": "7b0acd947cc2190ee6e61a8fda0592f012ef55d6f0350a1414d6576e539903fb",
+      "elfSha256": "573d630880604a80c395b1b58001a6b72292f60b484e52c9b295d1af4c254fea",
+      "hexSha256": "fb684c53a5ee09b65b5cb2a0d762e3edba6e7b77c536879d60ea8c701e29b4e1",
       "elfBytes": 242512,
       "flashBytes": 91273
     },
@@ -67,14 +67,14 @@
       "bluetooth": true,
       "dataSize": 512,
       "installparamsSize": 106,
-      "elfSha256": "21b1d901912e636439315316308de4558ddd59b972abc6bf4a70839d160ebc13",
-      "hexSha256": "b9d0cf33676268a6deb55caa3f802b90def52dd5923f303d20f220b71f808a40",
+      "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+      "hexSha256": "8a710183dfab14034e0e239d90f0c5fd37fa61558d8ebf338ac1f6b959ce125c",
       "elfBytes": 242780,
       "flashBytes": 88170
     }
   },
   "sourceFiles": {
-    "Makefile": "183318a9715ed938eea0baabb0c1bd0e0b74f1fa326eeb7a86c8a612a0c74abd",
+    "Makefile": "6791c05dc1d7700a0218c397747b1148dabf018beef3b41e9e81f842eb909816",
     "glyphs/Bitcoin_48px.png": "1995c7458397c16ad92c9b0228eadc87408507b34b4bccd5947e33681485fbca",
     "glyphs/Bitcoin_64px.bmp": "5fa7ad1d2e163dc175d74ced2c5c3ca21afc5f812383fe59d366b5339d99ad3c",
     "glyphs/bitcoin_logo.gif": "1f2f34a82e73051613ba6fe13ee4fd1079a0e26ada6de31e06a0bd6fa807a13b",
@@ -115,7 +115,7 @@
     "src/boilerplate/dispatcher.h": "dbd7fc94e642926a436aa73e2c52ccaefc45c6ac7b9458f33386dbf88e0c45ab",
     "src/boilerplate/io_ext.c": "13af055f993017f94a1272bf9f0730e71eddc33e8cfab40008ae6bf0d3577439",
     "src/boilerplate/io_ext.h": "9044ae73dd98a2515ccbfb59f6f0ea42a7bee0d8fa8612c52daf26c17a8b09cc",
-    "src/boilerplate/prl_review_io.c": "b437b6d3c991d09a639418259bab2ac17bc8732073dc99cb6777212ef77dd517",
+    "src/boilerplate/prl_review_io.c": "aaee596683296b4c4b19c6a0c240929c79e137008d4a02a0d9e72e25be8b518d",
     "src/boilerplate/prl_review_io.h": "7dc22a5bfe854ae2477003402b8478a8bffa094a6d8ada03389cf3b3db4972d1",
     "src/boilerplate/sw.h": "66238c59d9e20d9ba063f6dd1242a5527730d041cdb8e3f52807cb0ec6d176e7",
     "src/commands.h": "a902acfefd26e2baad8c2ac86acd2a0c8c88d53ef626a03b242e551a6f623e8d",
@@ -242,5 +242,5 @@
     "src/ui/menu.h": "bbaf2451338e0b536d83e26f24f096341a2a6a2089ad37e068e83f3a0e04c535",
     "src/ui/menu_nbgl.c": "7294db3657adf22d33d354a5a003a394edcff8123a844d3d4a2d26c25d95a379"
   },
-  "sourceSetSha256": "0fcf78a0f97be7c3a63e2c1040c974d12b899c62b830d44e9356fac637c34e75"
+  "sourceSetSha256": "014b17721ce964d6254d8904768f0dfed3b1a693dbf1e13cff7e8ca69d775029"
 }

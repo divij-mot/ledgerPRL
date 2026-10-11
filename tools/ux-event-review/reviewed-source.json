@@ -1,0 +1,27 @@
+{
+  "version": "0.1.4",
+  "sourceSetSha256": "014b17721ce964d6254d8904768f0dfed3b1a693dbf1e13cff7e8ca69d775029",
+  "files": {
+    "apps/ledger/tests/speculos-injector.py": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+    "apps/ledger-bitcoin-prl/Makefile": "6791c05dc1d7700a0218c397747b1148dabf018beef3b41e9e81f842eb909816",
+    "apps/ledger-bitcoin-prl/prl-tests/native-review-faults.ts": "56745322b9c95b4170b7c745afb78cd6549f380066ba4f1bf6fa9295fbb472e2",
+    "apps/ledger-bitcoin-prl/prl-tests/raw-protocol.ts": "28402ec3f0b52a5fe2ce37f0e1f2cb62c0817b052862bb0fefb37b5e3ba6ddbe",
+    "apps/ledger-bitcoin-prl/release.json": "f3cc4ad53db1e2d3eee7be321bf260d00a391edd1aa2c91a40c4fd576633a603",
+    "apps/ledger-bitcoin-prl/src/boilerplate/prl_review_io.c": "aaee596683296b4c4b19c6a0c240929c79e137008d4a02a0d9e72e25be8b518d",
+    "scripts/install-pearl.py": "209500719b8574035d61be80d913f8c84baba9c89c519ab04ba557defe0b4b0d",
+    "scripts/test-install-pearl.py": "383ef385ac6bb1bad510badecdce65cce5a76d527e3485345a6d8b0a9e3443ea",
+    "tools/ble-exit-review/review-heartbeat.c": "2762f363eb89d770aa655b63ca7107b0f8089bfd521be9ca835efcf6658f98bc",
+    "tools/ble-exit-review/review-heartbeat.py": "41b4b7360fafd19f71781f07ff8b3ea92b46da1039fef43bc4c3ba9963929bbe",
+    "tools/ux-event-review/README.md": "696c60553312f6c81f227de0b9e2145aa0f418259b68fce6a3ed18b838c1fc37",
+    "tools/ux-event-review/after-ble.json": "bba28449118827ef95fbf5e987204e4fb2e6e5d0b4b37d272985aa33f6bff167",
+    "tools/ux-event-review/after-legacy.json": "38ded9ad368a33c200584612c7663ccdd3a59dd967b8cb9fbdb273fd9982bded",
+    "tools/ux-event-review/after-status.json": "9a38b3fe984851414173d2e5757f56b00ce017fe6f3507c9a0db7f85b323ac1c",
+    "tools/ux-event-review/after-swipe.json": "a80ed12ba5f2f6134ce9c513231333bd1ed1b90f1b7f91d44d37be538a423b3c",
+    "tools/ux-event-review/after-usb.json": "69f6b0cb0d77da10ac7a42f9a02c7d75326ca8d37f910553cc0e18a5a7c070ae",
+    "tools/ux-event-review/before-status.json": "da30cc4091286df9f9d43aead3020f10ae877272c45d4df299680cacb327d607",
+    "tools/ux-event-review/independent-review.md": "030841b370e4693d4f6602795bceee2ec877d3ff0feaacacc53b6c0af6c0c49c",
+    "tools/ux-event-review/installer-tests.txt": "98497912b5a2efd2914e8ebb841b5420bfcfe126a5e57c4ec9cadebca7a1315b",
+    "tools/ux-event-review/status-analysis.json": "c56344c724dc26dddc7fee9bdbca51682b04780be0ece17fde7310805f8dcfde",
+    "tools/ux-event-review/results.json": "f7c0a4ef286948bd74f6cd154c6daa5b3d0d8a827c1570fd8423f62ea9f93193"
+  }
+}

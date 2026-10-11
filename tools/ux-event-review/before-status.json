@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "returnCode": -6,
+  "stderr": "Unexpected exit: media=1 event=21 length=10 payload0=0 payload1=0\ntest: /workspace/tools/ble-exit-review/review-heartbeat.c:94: check: Assertion `should_exit' failed.\n"
+}
