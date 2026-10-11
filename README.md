@@ -50,7 +50,7 @@ First build and blockchain synchronization take time. Later runs reuse the verif
 
 - [Local setup and Discover configuration](docs/live-app.md)
 - [Supported features and limits](docs/prl-feature-coverage.md)
-- [Security model](SECURITY.md) and [release/test evidence](tools/hosted-wallet-review/release.md)
+- [Security model](SECURITY.md) and [release/test evidence](tools/mobile-transport-review/release.md)
 - [How to request a public Discover listing](docs/ledger-discover-submission.md)
 - [Licensing and third-party notices](docs/licensing.md)
 

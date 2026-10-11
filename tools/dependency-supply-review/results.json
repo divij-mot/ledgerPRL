@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "head": "8362bc52bc9e82b40a8558f91af64ffb0f9fe32f",
+  "head": "07a6f2a1baa8b23558c1de39450c998f0aa6bdf8",
   "nodeVersion": "v24.19.0",
   "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
   "checks": [
@@ -5928,14 +5928,6 @@
       "cssModules": []
     },
     {
-      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
-      "type": "asset",
-      "bytes": 95652,
-      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
-      "modules": [],
-      "cssModules": []
-    },
-    {
       "file": "assets/Inter-Regular-BHP6tI7_.woff2",
       "type": "asset",
       "bytes": 89212,
@@ -5948,6 +5940,14 @@
       "type": "asset",
       "bytes": 95224,
       "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
+      "modules": [],
+      "cssModules": []
+    },
+    {
+      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
+      "type": "asset",
+      "bytes": 95652,
+      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
       "modules": [],
       "cssModules": []
     },
@@ -9726,7 +9726,7 @@
   "sourceHashes": {
     ".github/workflows/ci.yml": "b054e5f04a8e685cea14fd76fedfc0f1f4282cdf71bd77777501682f5ac4030d",
     ".github/workflows/ledger-review.yml": "a56bcac50ce8dc5342e5df530b561ae67de15a7f7d6aaabb7f86ea825da30fa4",
-    "README.md": "f07a1cc31b755dd9f506d2d42342d46e20218b62039a19336fb8de982c3db7dc",
+    "README.md": "659e447235001f1019c8461a5a4d24e81cf72dd42e74acdabec0c029b7016a7a",
     "SECURITY.md": "b0f3e53457d2cd6c57af4ce7776bb414b5b0e4976edf191b816691ef6136baf8",
     "apps/cli/package.json": "23fd6bc66bc6d89d622ad3f2d7bdeb4fb9de5a26deb99315e155b19f8c99dad5",
     "apps/companion/index.html": "0eb3a7706eba0260630874f37b0880f8353dee7c2a4a02f2e40ce3c46a6c67d1",
@@ -9799,7 +9799,7 @@
     "apps/ledger/packaging-requirements.txt": "af04b740c42c3e42ddcb673471deaab3c3b67f7c3a0b1622b5c464ccd982fee9",
     "docs/implementation-status.md": "e7ec8f183f2bf3e57183ce4ba32fa9d58605916369847b3855fd0d7451168409",
     "docs/licensing.md": "0145fe001e68952f2d6d02c4edcc956ba17003149a8363390944503904f18a5b",
-    "docs/live-app.md": "a9e6bb248e9943795b05965fcb00c612239a6bccb20c3f741fb0aa8c8b9ebfd9",
+    "docs/live-app.md": "c58cb85fa19a6e15ec172acf30599d7799b8c16bf6f046a9c16f5a4bb2d215a3",
     "docs/test-evidence.md": "8a09f1641edf9c0dc5799a66b4ba259f80e27d7c9d39568c691f4ced0a1560be",
     "node_modules/@inversifyjs/common/lib/esm/index.js": "96cf7f4bdbd75fa6b10472bb534562056d7892d9fa980dbc0dcc5f3adb7863a8",
     "node_modules/@inversifyjs/container/lib/esm/index.js": "6daf96b7e0314c428b94a3263a168996d3b5f239e59ec8450df7a6d904820762",

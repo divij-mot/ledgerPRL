@@ -1,5 +1,7 @@
 # Production release — 10 October 2026
 
+The newer [iPhone preparation release](../mobile-transport-review/release.md) records the current deployment. The narrative below retains this earlier checkpoint; shared live-result JSON files contain the latest verification.
+
 - [Desktop WebHID wallet](https://pearl-ledger-wallet.vercel.app/)
 - [Ledger Discover entry](https://pearl-ledger-wallet.vercel.app/live.html)
 - Source: [`fca78a828362ea2d65cfe10872ca57626c52b866`](https://github.com/divij-mot/ledgerPRL/commit/fca78a828362ea2d65cfe10872ca57626c52b866)
