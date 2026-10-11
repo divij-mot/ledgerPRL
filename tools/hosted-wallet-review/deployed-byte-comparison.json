@@ -1,10 +1,10 @@
 {
   "origin": "https://pearl-ledger-wallet.vercel.app",
-  "checkedAt": "2026-10-11T01:19:17.399Z",
+  "checkedAt": "2026-10-11T02:12:35.644Z",
   "outcome": "passed",
   "comparedFiles": 16,
   "newRequests": 13,
-  "totalMatchedBytes": 2227988,
+  "totalMatchedBytes": 2228753,
   "results": [
     {
       "file": "assets/backup-import.worker-Dtrkqa4Y.js",
@@ -77,10 +77,10 @@
       "contentEncoding": "br"
     },
     {
-      "file": "assets/live-VcgfFvtq.js",
-      "target": "/assets/live-VcgfFvtq.js",
-      "sha256": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
-      "bytes": 445670,
+      "file": "assets/live-BeAn2FxY.js",
+      "target": "/assets/live-BeAn2FxY.js",
+      "sha256": "b91b37fca3d198ffd8e1c1aea7f281517d95e21baf87e9983768d94f2e77f12b",
+      "bytes": 446435,
       "match": true,
       "reusedImmediateLiveCheck": false,
       "cacheControl": "public, max-age=31536000, immutable",
@@ -148,7 +148,7 @@
     {
       "file": "live.html",
       "target": "/live.html",
-      "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
+      "sha256": "850e66ecb0a0499d0edc89c556c67595a1b76cca031265fec190c89d98acf122",
       "bytes": 885,
       "match": true,
       "reusedImmediateLiveCheck": true,

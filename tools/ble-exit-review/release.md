@@ -1,0 +1,11 @@
+# Pearl 0.1.2 Gen5 review compatibility release
+
+Firmware/host source commit: `3a4d1cca2f4a14c9f2410236dc028699be6220a1`. Hosted deployment: `dpl_2VMTeaLRAhbu9szmGZsqoN3FaUWq`, ready at [pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/).
+
+All 18 live boundary checks passed. All 16 public files exactly match the reviewed prebuilt bytes: 2,228,753 bytes and 12 immutable assets. The functions retain Node 24, their 35-second bound, five-file output, disabled raw helpers/outgoing-fetch instrumentation, and no embedded secrets/native state. The post-deployment 15-minute error query returned zero error records. No wallet address or valid broadcast payload was used by these probes. Shared current results are in `../hosted-wallet-review/preview-results.json`, `deployed-byte-comparison.json` and `prebuilt-validation.json`.
+
+The native correction and before/after evidence are in [README.md](README.md), with [independent review](independent-review.md). Full host verification passed 594 tests, TypeScript and production builds. The Wallet API suite passed 24 tests; explicit installer replacement passed the 12-case boundary suite. Native build-only image checks and all five model signing replays passed. The web change maps known native error objects to fixed user-facing messages while keeping arbitrary payloads private; it does not itself repair old installed firmware.
+
+The default installer retains its no-deletion behavior. Updating an existing mainnet Pearl app requires the explicit command `python3 scripts/install-pearl.py gen5 --install --replace` (choose the correct model). After verifying the new image, this passes the standard loader's delete option for the fixed name Pearl, then loads 0.1.2. No reset or OS update is performed. The command was tested with a mocked USB loader; no physical app was removed or installed here.
+
+The reported Gen5 0.1.1 incident was not captured as a physical event trace. Source-contract corrections and software regressions do not prove the complete incident cause or physical resolution. A Gen5/iPhone retry with installed 0.1.2 remains necessary. No signing policy or permission change, real account access, payment, or broadcast occurred during this work.

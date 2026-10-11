@@ -1,5 +1,7 @@
 # iPhone Bluetooth preparation release
 
+The [0.1.2 compatibility release](../ble-exit-review/release.md) supersedes this deployment. Shared live-result JSON files contain the newest verification.
+
 Source commit: `07a6f2a1baa8b23558c1de39450c998f0aa6bdf8`. Production deployment: `dpl_Hz9REzWZSscVNNtg2M2RdwU8z8Xq`, ready at [pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/). The canonical [hosted manifest](https://pearl-ledger-wallet.vercel.app/ledger-live.hosted.manifest.json) now declares desktop, Android and iOS with the existing four Wallet API permissions.
 
 All 18 read-only live boundary checks passed. All 16 public files exactly match the reviewed prebuilt bytes, totaling 2,227,988 bytes with 12 immutable assets. The actual server bundles still have five files each, Node 24, a 35-second bound, raw helpers and automatic outgoing-fetch instrumentation disabled, and no embedded environment values or private/native files. A post-deployment 15-minute error-log query returned zero error records. This update adds a static import manifest; it adds no per-wallet database, telemetry, background scan or server process.

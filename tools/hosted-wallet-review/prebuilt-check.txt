@@ -1,7 +1,7 @@
 {
   "outcome": "passed",
   "assetCount": 12,
-  "totalStaticBytes": 2227988,
+  "totalStaticBytes": 2228753,
   "functions": [
     {
       "name": "read",
