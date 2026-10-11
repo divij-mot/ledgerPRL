@@ -1,0 +1,21 @@
+{
+  "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+  "harnessSha256": "d16009557dc30679181e767750f75242c049fb1f876be1aac8531ac5414a534e",
+  "firstHarnessSha256": "2c7e991ae96858fc9cb005c6e5fe0c612899d4417af855ccf1acded134410097",
+  "firstRunInterpretation": "Harness expected wrong status text; QR Close restored pixels, Cancel returned6985 and reached home. Original failed result retained.",
+  "finalResultSha256": "9f60bf9b2b46cf146d501c79bd1a48fc6aec379123cac7842ad072fa8f195281",
+  "syntheticPowerEvent": "RAW! +tag0x1B+empty body; retail event payload unknown",
+  "observed": "QR Close and explicit Cancel work normally, after host-only timeout, and after virtual TCP close. Synthetic power tag causes normal logged app exit255.",
+  "notEstablished": [
+    "Physical BLE disconnect behavior",
+    "Retail side-button/OS power flow",
+    "Freeze or factory-reset cause",
+    "Device protection mode",
+    "Physical safety qualification"
+  ],
+  "firmwareChanges": false,
+  "builds": false,
+  "hardwareAccess": false,
+  "signing": false,
+  "broadcast": false
+}

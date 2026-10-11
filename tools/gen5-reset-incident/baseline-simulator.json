@@ -1,0 +1,99 @@
+{
+  "scope": "Offline emulator only; not BLE, retail power-button, protection-mode or reset equivalence",
+  "results": [
+    {
+      "mode": "qr-close",
+      "status": "observed",
+      "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+      "signing": false,
+      "broadcast": false,
+      "physicalDevice": false,
+      "qrText": [
+        "prl1pdmqd2wzd3e2unrkvq880",
+        "t24acsrf8zffzqjqr356pmd93cv",
+        "e9eqs4u7tjx",
+        "Close"
+      ],
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "deviceDenialStatus": "6985",
+      "afterCancelText": [
+        "Address verification",
+        "cancelled"
+      ],
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error"
+    },
+    {
+      "mode": "host-timeout",
+      "status": "observed",
+      "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+      "signing": false,
+      "broadcast": false,
+      "physicalDevice": false,
+      "qrText": [
+        "prl1pdmqd2wzd3e2unrkvq880",
+        "t24acsrf8zffzqjqr356pmd93cv",
+        "e9eqs4u7tjx",
+        "Close"
+      ],
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "afterCancelText": [
+        "Address verification",
+        "cancelled"
+      ],
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error"
+    },
+    {
+      "mode": "tcp-close",
+      "status": "observed",
+      "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+      "signing": false,
+      "broadcast": false,
+      "physicalDevice": false,
+      "qrText": [
+        "prl1pdmqd2wzd3e2unrkvq880",
+        "t24acsrf8zffzqjqr356pmd93cv",
+        "e9eqs4u7tjx",
+        "Close"
+      ],
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "afterCancelText": [
+        "Address verification",
+        "cancelled"
+      ],
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error"
+    },
+    {
+      "mode": "synthetic-power-tag",
+      "status": "observed",
+      "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+      "signing": false,
+      "broadcast": false,
+      "physicalDevice": false,
+      "qrText": [
+        "prl1pdmqd2wzd3e2unrkvq880",
+        "t24acsrf8zffzqjqr356pmd93cv",
+        "e9eqs4u7tjx",
+        "Close"
+      ],
+      "qrOpen": true,
+      "syntheticInjectionHex": "524157211b",
+      "retailPayloadKnown": false,
+      "emulatorExitCode": 255,
+      "emulatorSignal": null,
+      "sdkExitLogObserved": true,
+      "approvalObserved": false
+    }
+  ]
+}

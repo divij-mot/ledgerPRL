@@ -4,19 +4,15 @@
 
 Send and receive Pearl (PRL) with your Ledger. Use the hosted wallet, or run the same interface locally with Pearl’s native light client.
 
-**Trial software. Use small amounts until independent security review is complete.**
+**Trial software. Hardware use remains paused regardless of balance.**
 
-## 1. Install Pearl on your Ledger
+## 1. Hardware installation is paused
 
-Pearl builds for **Nano S Plus, Nano X, Stax, Flex and Nano Gen5**, with button or touchscreen layouts for each model. Account export, Receive and signing pass in the emulator on all five. Gen5 0.1.4 account approval works over USB and iPhone Bluetooth; on-device Receive verification and normal app exit also passed. Nano S Plus 0.1.4 installation and public-account approval also passed. See the [model support and installation guide](docs/install-pearl.md).
+Pearl builds for **Nano S Plus, Nano X, Stax, Flex and Nano Gen5**, with button or touchscreen layouts for each model. Earlier emulator and bounded physical checks did not cover the later reported Gen5 freeze/reset. No version is currently recommended for hardware use.
 
-Pearl is not yet available in the My Ledger app catalog. The [installer](scripts/install-pearl.py) builds and verifies the image for your exact model before loading it. For Gen5, run `python3 scripts/install-pearl.py gen5 --install` after the guide’s prerequisites. Each model needs compatible Ledger OS/API; retail Nano X installation requires Ledger’s distribution process.
+The [model support and installation guide](docs/install-pearl.md) is retained as reference. Pearl is not in the My Ledger app catalog. Never enter your recovery phrase into this wallet or reset your Ledger to install it. Original Nano S is unsupported.
 
-1. Follow the [build and installation guide](docs/install-pearl.md).
-2. Unlock your Ledger, leave it on the dashboard, and approve the installation prompts.
-3. Open **Pearl** on the device. Use version 0.1.4 for the corrected Gen5 review flow; existing 0.1.0 USB installations can keep using USB.
-
-Never enter your recovery phrase into this wallet or reset your Ledger to install it. Original Nano S is not supported.
+The wallet setup below is reference for after the hardware hold is resolved.
 
 ## 2. Use the hosted wallet
 
@@ -27,7 +23,7 @@ Open **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)
 3. Use **Receive** to verify an address on the device, or **Send** to enter a recipient and amount.
 4. Review the address, amount and fee on your Ledger. After approving, choose **Send payment** in the wallet.
 
-For Ledger Wallet’s Discover interface, follow the [Discover setup instructions](docs/live-app.md#load-the-hosted-entry-in-discover). This currently uses a locally imported app, not a public catalog listing. iPhone and Android use the Discover route; [iPhone Bluetooth setup](docs/live-app.md#iphone-with-nano-gen5-or-flex-over-bluetooth) requires Pearl 0.1.4. Gen5/iPhone account approval is verified; other mobile/device combinations still need hardware testing.
+For Ledger Wallet’s Discover interface, follow the [Discover setup instructions](docs/live-app.md#load-the-hosted-entry-in-discover). This currently uses a locally imported app, not a public catalog listing. iPhone and Android use the Discover route; [iPhone Bluetooth setup](docs/live-app.md#iphone-with-nano-gen5-or-flex-over-bluetooth) requires Pearl 0.1.4. Earlier Gen5/iPhone account approval passed; it does not resolve the later hardware incident.
 
 Keys stay on Ledger. The hosted service has no wallet database; account caches and payment records stay in your browser.
 

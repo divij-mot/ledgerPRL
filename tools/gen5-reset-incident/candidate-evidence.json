@@ -1,0 +1,262 @@
+{
+  "heldCandidate": true,
+  "releaseManifestUpdated": false,
+  "candidateVersionLabelUnchanged": "0.1.4",
+  "guardSha256": "d66940dbbc97dfd90ef63417756968620fbb5df01e16ce814f560c0b58ba10db",
+  "models": {
+    "apex_p": {
+      "build": "passed",
+      "elfSha256": "3580dfbd6871b77d3d5dacbb162ccd7c885503affd835b0176bdf708922b346c",
+      "manifestSha256": "eaff2ab21fa886a4e26ae46b421248290e597b5c2ead2db6439ab6b3e323d40e",
+      "publicFixturePilot": "passed",
+      "verifiedInputSignatures": 2,
+      "pilotResultSha256": "2b33e2559c4ccbb5a1f6606439e3dd29f30ecdd26288ba81857599a94a34acff"
+    },
+    "flex": {
+      "build": "passed",
+      "elfSha256": "cf51c7ec7fe338bf2434acc1916b0aa3b48b3f39cb257fea4e27c65625cd18ba",
+      "manifestSha256": "cfb6b232ab53d76c12e14a0ad3e80ba1d99c263f59dceff302c1777439044879",
+      "publicFixturePilot": "passed",
+      "verifiedInputSignatures": 2,
+      "pilotResultSha256": "ac673a1e8e9a5b3f1c431f7347a72b69cdf54fddfeda6dc2aa8ae81ff656d7b4"
+    },
+    "stax": {
+      "build": "passed",
+      "elfSha256": "6406e6cd2b3ccd6ccea76b6718d3327639c9b4801c35aa03be5160aef2c5a41d",
+      "manifestSha256": "c8dd2e7fa3ded0e6f465688db069b65040baebe1f44045f9346f35f87b0de826",
+      "publicFixturePilot": "passed",
+      "verifiedInputSignatures": 2,
+      "pilotResultSha256": "ff891844397e0737249278f2ac8472d744233cb951ed0d81d0bfa78c69e369ea"
+    },
+    "nanox": {
+      "build": "passed",
+      "elfSha256": "794a48a99388f597803a89d9c1d29cf93f99f411173be2c0d80e6e760a2aea91",
+      "manifestSha256": "59684bb667defc224141001e3aa5312b7504e5c483b8d2fe99db397be74bf93b",
+      "publicFixturePilot": "passed",
+      "verifiedInputSignatures": 2,
+      "pilotResultSha256": "4d58361f5e706c8c1c0dc1b3fde3cd5f4c2d991a342cb5c53b7bba2ec8615c10"
+    },
+    "nanos2": {
+      "build": "passed",
+      "elfSha256": "ca8ce4ea6c5923cca9951a203bc3128624b681db0d1046db4d72dbb6952d41c6",
+      "manifestSha256": "d0da8ae7d7e8e3964e2c708b8852064ed21ef332fe55b3c847008d393b4782b3",
+      "publicFixturePilot": "passed",
+      "verifiedInputSignatures": 2,
+      "pilotResultSha256": "f6a1ef41015f5b0b5e357183712dd8be73b8a3019e932ebdd8f8284227aeb867"
+    }
+  },
+  "guardConfigurations": {
+    "guard-legacy": {
+      "result": "PASS 91992 independent heartbeat syscall-stub cases under ASan/UBSan",
+      "sourceSha256": "d66940dbbc97dfd90ef63417756968620fbb5df01e16ce814f560c0b58ba10db",
+      "rawResultSha256": "2eed56150f7d6291bf49a8f6a4c237ea225b73179315940dea3f87fd8d253bbc"
+    },
+    "guard-swipe": {
+      "result": "PASS 91992 independent heartbeat syscall-stub cases under ASan/UBSan",
+      "sourceSha256": "d66940dbbc97dfd90ef63417756968620fbb5df01e16ce814f560c0b58ba10db",
+      "rawResultSha256": "b809e36313588bbddfb0abe4f1759c58398cc7290d79a82adea7984d58398035"
+    },
+    "guard-usb": {
+      "result": "PASS 91983 independent heartbeat syscall-stub cases under ASan/UBSan",
+      "sourceSha256": "d66940dbbc97dfd90ef63417756968620fbb5df01e16ce814f560c0b58ba10db",
+      "rawResultSha256": "1767f91f7f083709465f2d452514445d1a00461552be3c5aad3f1668b6376bfa"
+    },
+    "guard-ble": {
+      "result": "PASS 91992 independent heartbeat syscall-stub cases under ASan/UBSan",
+      "sourceSha256": "d66940dbbc97dfd90ef63417756968620fbb5df01e16ce814f560c0b58ba10db",
+      "rawResultSha256": "03443a1a1811c2cbefa14f486cd41804bb6b7a77a78d740cd87936e850c259f2"
+    }
+  },
+  "sdk": {
+    "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+    "version": "v27.1.2",
+    "api": 27,
+    "sourceFiles": {
+      "include/seproxyhal_protocol.h": "6cb2bbeb22d3b55b2ef0a61b6061701981fdcc79e03117d1d9e8774dd40824a3",
+      "io/src/os_io_seph_ux.c": "c8f2de9e546e347b4cbc2db1c10faf13b58e8cb704477efc89c2aee4041ee251",
+      "lib_standard_app/io.c": "46b2ec7dc1a5350752234bf9a52837bc0c87778ee8e913ac42de1343b30f17df",
+      "lib_ux_nbgl/ux.c": "ded0496e7f6833fdc36703a37df8fc072149ba0efbc1e3c95313055b0a4310cc",
+      "io_legacy/src/os_io_legacy.c": "77493d18d5e391b27a75503b03776fc8ac40234290e5166c9f61a3852c58e973"
+    },
+    "references": [
+      "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/include/seproxyhal_protocol.h#L160",
+      "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/io/src/os_io_seph_ux.c#L184",
+      "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/lib_standard_app/io.c#L63"
+    ],
+    "upstreamBitcoinDeploymentSdk": "v26.6.2 /22d1131a03fcd89c5d2e660de886c8b0417b0789",
+    "limits": "Pearl API27 retarget and modifications are not covered by upstream Bitcoin audit or distribution."
+  },
+  "scope": {
+    "qrHarnessSigning": false,
+    "separateModelPilotSigning": "Synthetic public fixture only",
+    "broadcast": false,
+    "physicalHardware": false,
+    "radioOrProtectionModeSimulation": false
+  },
+  "harnesses": {
+    "primary8": {
+      "sha256": "30fd27e6c230f2130b72b0b1cda66b9e4a070eecf416a1e290d7f057a0108d53",
+      "resultsSha256": "606a23b0b8e00fbd0d787b58ab6304098c6f67d122dc9c0c17df47fc75e9a821",
+      "scope": "Original assertions; no post-host-timeout raw-success guard"
+    },
+    "retest2": {
+      "sha256": "9627a3b3a4e6d6416c75a5f2e02965dedc9960d43f082808b454b51e71763e47",
+      "scope": "Additional post-QR status-word guard; targeted host-timeout cases completed",
+      "resultsSha256": "9af7ba1bbd44c91bd02a68dc2146b670db57afa5f66285bca3c3b41b1498b3ae"
+    }
+  },
+  "primary8": [
+    {
+      "mode": "qr-close",
+      "status": "observed",
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "deviceDenialStatus": "6985",
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error"
+    },
+    {
+      "mode": "host-timeout",
+      "status": "observed",
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error"
+    },
+    {
+      "mode": "tcp-close",
+      "status": "observed",
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error"
+    },
+    {
+      "mode": "synthetic-power-tag",
+      "status": "observed",
+      "qrOpen": true,
+      "syntheticInjectionHex": "524157211b",
+      "retailPayloadKnown": false,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "deviceDenialStatus": "6985",
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error"
+    },
+    {
+      "mode": "qr-review-expiry",
+      "status": "observed",
+      "qrOpen": true,
+      "observedWaitMs": 125042,
+      "emulatorExitCode": 255,
+      "emulatorSignal": null,
+      "sdkExitLogObserved": true,
+      "approvalObserved": false
+    },
+    {
+      "mode": "qr-close-near-expiry",
+      "status": "observed",
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "closeAtMs": 105437,
+      "observedWaitMs": 126202,
+      "emulatorExitCode": 255,
+      "emulatorSignal": null,
+      "sdkExitLogObserved": true,
+      "approvalObserved": false
+    },
+    {
+      "mode": "host-timeout-near-expiry",
+      "status": "observed",
+      "qrOpen": true,
+      "hostTimeoutAtMs": 105125,
+      "observedWaitMs": 126106,
+      "emulatorExitCode": 255,
+      "emulatorSignal": null,
+      "sdkExitLogObserved": true,
+      "approvalObserved": false
+    },
+    {
+      "mode": "fresh-emulator-after-expiry",
+      "status": "observed",
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "deviceDenialStatus": "6985",
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error"
+    }
+  ],
+  "primary8FreshEmulatorPerCase": true,
+  "baselineComparison": {
+    "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+    "trackedHarnessSha256": "30fd27e6c230f2130b72b0b1cda66b9e4a070eecf416a1e290d7f057a0108d53",
+    "resultSha256": "0db21651bd285c6760a842bdc3c5b0619307a3103c75abb87c8cc9f6ba1ae477",
+    "syntheticBytes": "524157211b",
+    "appExitCode": 255,
+    "normalSdkExitLog": true,
+    "retailPayloadKnown": false
+  },
+  "installerSourceCheck": "Rejected against unchanged published manifest, as intended",
+  "limitations": [
+    "No physical BLE, side-button, protection-mode or reset simulation",
+    "No established cause of reported freeze/reset",
+    "Candidate is unreleased; no hardware or installation qualification",
+    "Fresh-emulator case is a new process, not in-process or physical recovery"
+  ],
+  "sourceFiles": {
+    "apps/ledger-bitcoin-prl/Makefile": "6791c05dc1d7700a0218c397747b1148dabf018beef3b41e9e81f842eb909816",
+    "apps/ledger-bitcoin-prl/src/boilerplate/prl_review_io.c": "d66940dbbc97dfd90ef63417756968620fbb5df01e16ce814f560c0b58ba10db",
+    "apps/ledger-bitcoin-prl/release.json": "f3cc4ad53db1e2d3eee7be321bf260d00a391edd1aa2c91a40c4fd576633a603",
+    "tools/ble-exit-review/review-heartbeat.c": "be86439631e405699da4057819943e2b16824893fc1a4c23bc6fc511762a8255",
+    "tools/ble-exit-review/review-heartbeat.py": "41b4b7360fafd19f71781f07ff8b3ea92b46da1039fef43bc4c3ba9963929bbe",
+    "tools/gen5-reset-incident/qr-modal.ts": "9627a3b3a4e6d6416c75a5f2e02965dedc9960d43f082808b454b51e71763e47",
+    "apps/ledger/tests/speculos-injector.py": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8"
+  },
+  "builder": "ghcr.io/ledgerhq/ledger-app-builder/ledger-app-dev-tools@sha256:8d3da9179dd1b241883c769c521ee9403352b60091c80405b5bef5801a003ba2",
+  "platform": "linux/arm64",
+  "retest2": [
+    {
+      "mode": "host-timeout",
+      "status": "observed",
+      "qrOpen": true,
+      "qrCloseResponsive": true,
+      "originalPixelsRestored": true,
+      "explicitCancelledScreen": true,
+      "explicitHomeScreen": false,
+      "operationOutcome": "rejected-or-transport-error",
+      "deviceDenialStatus": "6985",
+      "postQrResponses": [
+        {
+          "status": "6985",
+          "length": 2
+        }
+      ],
+      "responseObservation": "Connected until explicit device denial or device process exit"
+    },
+    {
+      "mode": "host-timeout-near-expiry",
+      "status": "observed",
+      "qrOpen": true,
+      "hostTimeoutAtMs": 105107,
+      "observedWaitMs": 124928,
+      "emulatorExitCode": 255,
+      "emulatorSignal": null,
+      "sdkExitLogObserved": true,
+      "approvalObserved": false,
+      "postQrResponses": [],
+      "responseObservation": "Connected until explicit device denial or device process exit"
+    }
+  ],
+  "completedAt": "2026-10-11T07:52:09.125862+00:00",
+  "completed": true
+}

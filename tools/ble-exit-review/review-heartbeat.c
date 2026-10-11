@@ -149,7 +149,8 @@ int main(void) {
     /* Second captured Gen5 framing: M1 P01 T15 N14 L10. Payload/flags
      * were NOT captured. Exercise synthetic bytes across every bounded size. */
     const unsigned char opaque_tags[] = {SEPROXYHAL_TAG_TICKER_EVENT,
-        SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT, SEPROXYHAL_TAG_STATUS_EVENT};
+        SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT, SEPROXYHAL_TAG_STATUS_EVENT,
+        SEPROXYHAL_TAG_POWER_BUTTON_EVENT};
     for (unsigned tag = 0; tag < sizeof(opaque_tags); tag++) {
         for (unsigned len = 0; len <= sizeof(G_io_seproxyhal_spi_buffer)-3; len++) {
             for (unsigned pattern = 0; pattern < 3; pattern++) {
@@ -210,7 +211,7 @@ int main(void) {
     }
     for (int tag = 0; tag < 256; tag++) {
         reset(); envelope(tag, 0);
-        int allowed = tag == SEPROXYHAL_TAG_TICKER_EVENT || tag == SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT || tag == SEPROXYHAL_TAG_STATUS_EVENT;
+        int allowed = tag == SEPROXYHAL_TAG_TICKER_EVENT || tag == SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT || tag == SEPROXYHAL_TAG_STATUS_EVENT || tag == SEPROXYHAL_TAG_POWER_BUTTON_EVENT;
         check(0, !allowed, allowed);
     }
     for (int kind = 0; kind < 256; kind++) {

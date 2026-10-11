@@ -75,6 +75,7 @@ void prl_review_heartbeat(uint16_t start_tick) {
         case SEPROXYHAL_TAG_TICKER_EVENT:
         case SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT:
         case SEPROXYHAL_TAG_STATUS_EVENT:
+        case SEPROXYHAL_TAG_POWER_BUTTON_EVENT:
             /* SDK handlers do not read these payloads. Forward bounded,
              * complete OS events unchanged; neither a status prefix nor its
              * length is an app-visible transport-liveness contract. Ticker

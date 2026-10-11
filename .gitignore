@@ -56,3 +56,4 @@ apps/light-client/bin/
 
 # Local Vercel project settings and environment pulls.
 .vercel/
+.incident-evidence/

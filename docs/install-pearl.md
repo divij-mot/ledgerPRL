@@ -2,7 +2,7 @@
 
 **Hardware use and installation paused.** A reported Gen5 freeze/reset is unresolved. Do not install or test Pearl on hardware. See the [incident record](../tools/gen5-reset-incident/README.md).
 
-Current firmware: **Pearl 0.1.4, mainnet, API 27**. Gen5, Flex, Stax and Nano X now enable the official Ledger SDK Bluetooth transport. Nano S Plus stays USB-only.
+Last investigated release image: **Pearl 0.1.4, mainnet, API 27**. The procedures below are retained as reference; do not follow them on hardware while the incident remains unresolved. The investigation candidate deliberately does not update `release.json`, so the installer rejects its changed source. Gen5, Flex, Stax and Nano X now enable the official Ledger SDK Bluetooth transport. Nano S Plus stays USB-only.
 
 | Model | SDK-mapped Ledger OS | Build / USB emulator | Bluetooth in 0.1.4 | Physical testing |
 | --- | --- | --- | --- | --- |
@@ -10,7 +10,7 @@ Current firmware: **Pearl 0.1.4, mainnet, API 27**. Gen5, Flex, Stax and Nano X 
 | Nano X | 2.8.0 | Passed | Enabled | Not tested; retail sideloading unavailable |
 | Stax | 1.11.0 | Passed | Enabled | Not tested |
 | Flex | 1.7.0 | Passed | Enabled | Not tested |
-| Nano Gen5 | 1.2.0 | Passed | Enabled | 0.1.4 USB/iPhone BLE account approval, Receive verification and normal exit passed |
+| Nano Gen5 | 1.2.0 | Passed | Enabled | Earlier account/Receive/exit checks passed; subsequent freeze/reset report unresolved |
 
 Compare your device’s **Settings → About** version with the table. These are the [official SDK API-27 mappings](https://github.com/LedgerHQ/ledger-secure-sdk#about-api_level-branches), checked on 10 October 2026, not a latest-OS or retail-rollout guarantee. The installer does not update Ledger OS.
 

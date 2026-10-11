@@ -1,12 +1,12 @@
 {
   "status": "unresolved; release blocked; no further hardware testing",
   "reportedSequence": [
-    "Gen5 displaying Pearl Receive QR screen",
-    "iPhone connection disconnected",
-    "Gen5 became unresponsive",
+    "Gen5 QR or similar Receive screen visible while owner was using Pearl",
+    "Pearl app displayed disconnected",
+    "Owner found Close control unresponsive",
     "Owner held side button to restart",
     "Device showed welcome/new-device screen",
-    "Owner reports wallet restored from existing backup; installed apps absent"
+    "Owner reports restoring wallet from existing backup; apps absent"
   ],
   "sourceCommit": "aa2da1c3ee4c5b84490ebfc8bbb2d4742086fb56",
   "firmwareSourceCommit": "328bae042af6c91a42647d8ad34953280ba6a7a2",
@@ -23,12 +23,14 @@
     "Automatic merge process stopped with exit130 before merge",
     "PR5 confirmed open/unmerged and returned to draft",
     "Further device commands, installs and hardware reproduction stopped",
-    "Existing artifacts preserved for read-only review"
+    "Existing artifacts preserved for read-only review",
+    "Unreleased candidate fails existing installer source verification against unchanged release.json; checked without any device operation"
   ],
   "openQuestions": [
     "Whether any reset/erase confirmation or other intermediate screen appeared",
     "Exact QR-modal and side-button event sequence inside SDK/OS",
-    "Whether an app/SDK/OS fault or protective mechanism caused state loss"
+    "Whether an app/SDK/OS fault or protective mechanism caused state loss",
+    "Whether app Disconnected represented link loss, timeout, normal transport cleanup, or a consequence of the device freeze"
   ],
   "readOnlyLeads": [
     "PRL63-character addresses select SDK larger QR encoding/layout branch; prior tests did not qualify QR close/disconnect/restart",
@@ -47,5 +49,35 @@
     "interpretation": "Official behavior is background only; neither this mode nor the reset trigger is established.",
     "ownerClarification": "Owner subsequently confirmed that the device did not actually display Protection mode",
     "status": "not observed; do not classify this incident as Protection mode"
+  },
+  "connectionEventQualification": "Disconnected was observed in the app UI; a preceding physical BLE link loss and causal ordering are not established.",
+  "offlineInvestigation": {
+    "baselineEvidence": "baseline-simulator.json",
+    "firmware": "exact preserved 0.1.4 ELF; hash matches incident image",
+    "fixture": "public deterministic emulator seed; no owner wallet material",
+    "ordinaryQr": "QR opened; Close restored original screen pixels; Cancel returned 6985",
+    "hostTimeout": "Synthetic host waiter timeout left QR Close responsive; not a native Wallet API timeout reproduction",
+    "tcpClose": "Emulator transport socket close left QR Close responsive; not BLE-radio equivalence",
+    "powerEvent": "Synthetic tag 0x1B with empty payload caused normal SDK app_exit; actual retail payload/event delivery unknown",
+    "physicalFreezeReproduced": false,
+    "factoryResetReproduced": false,
+    "resetCauseEstablished": false
+  },
+  "candidate": {
+    "status": "unreleased investigation build; hardware release remains blocked",
+    "change": "Delegate known SDK power-button event to existing bounded OS-UX path",
+    "productionLinesAdded": 1,
+    "guardSha256": "d66940dbbc97dfd90ef63417756968620fbb5df01e16ce814f560c0b58ba10db",
+    "elfSha256": "3580dfbd6871b77d3d5dacbb162ccd7c885503affd835b0176bdf708922b346c",
+    "evidence": "candidate-evidence.json",
+    "primaryQrScenariosPassed": 8,
+    "strengthenedRawResponseRetestsPassed": 2,
+    "modelBuildsAndPublicFixturePilotsPassed": 5,
+    "sanitizerGuardConfigurationsPassed": 4,
+    "installerUnitTestsPassed": 12,
+    "releaseManifestUpdated": false,
+    "physicalDeviceAccess": false,
+    "broadcast": false,
+    "reportedResetCauseEstablished": false
   }
 }
