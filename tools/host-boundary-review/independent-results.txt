@@ -1,0 +1,22 @@
+✔ supported Node rejects late trust headers beyond its count and byte limits (31.367324ms)
+✔ ambiguous HTTP framing never reaches the injected upstream (7.789881ms)
+✔ 128 KiB is accepted exactly and oversized declared bodies reject without waiting (19.857992ms)
+✔ all read operations stay on one selected host and mutating/private paths fail before fetch (25.394345ms)
+✔ read failures never reflect private input or upstream exception bodies and never retry (6.583226ms)
+✔ upstream decoded byte limits cancel an oversized chunked response (5.97379ms)
+✔ sixteen in-flight reads impose a real global cap and disconnect releases every slot (22.071218ms)
+✔ overall operation timeout aborts upstream and permits a subsequent fresh request (85.822444ms)
+✔ broadcast shape/txid/extra-field rejection occurs before even a chain request (13.711632ms)
+✔ broadcast verifies genesis before relaying and leaves upstream acceptance ambiguous on mismatch (7.694226ms)
+✔ the relay rejects nonempty scriptSig before any upstream request (4.579395ms)
+✔ characterization: the relay checks key-path structure, not cryptographic validity (4.909851ms)
+✔ address tokens reject xpub-like, arbitrary, wrong-network and bad-checksum values before fetch (0.820464ms)
+✔ static snapshot rejects index and asset-directory symlinks (11.371314ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 531.178838

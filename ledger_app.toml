@@ -1,4 +1,6 @@
-# Official Ledger metadata discovery starts at the repository root.
+# HISTORICAL RUST APP ONLY. Not the current apps/ledger-bitcoin-prl C signer.
+# Retained for archived tooling/evidence; do not use this manifest to install Pearl.
+# Current C build and installation instructions: apps/ledger-bitcoin-prl/README.md.
 # Device support here means build/test targets, not retail sideload permission.
 [app]
 build_directory = "./apps/ledger"

@@ -1,0 +1,24 @@
+✔ fee estimates require exact positive PRL/kvB strings and never float-convert (0.845958ms)
+✔ quote rate validation is independent of selected inputs and enforces network, target, time and rate bounds (0.267666ms)
+✔ explicit quote uses upward whole-grain rounding and recalculates added input size without mutating amount or fee (86.717291ms)
+✔ expired, future, wrong-network or newly reserved quote application fails without changing input (5.670167ms)
+✔ automatic rate ignores an obsolete total fee and recomputes extra input size without changing amount (42.021916ms)
+✔ automatic rate recognizes exact no-change fee without a change/no-change oscillation (16.833583ms)
+✔ dust change requires another input or explicit Max, never silent dust-to-fee absorption (46.384959ms)
+✔ manual input order is retained and returned selection never aliases caller state (21.613417ms)
+✔ Max at rate uses exact no-change size, preserves manual input constraints and never mutates request (36.439167ms)
+✔ rates above Number precision retain exact grain ceilings for payment and Max (20.417375ms)
+✔ automatic Max omits an uneconomic extra input while manual Max honors it (29.267459ms)
+✔ a valid maximum-rate no-change payment does not evaluate an overflowing change fee (393.15675ms)
+✔ current reservations and immature coins are excluded automatically and rejected when selected manually (23.021792ms)
+✔ invalid rates, dust recipients, insufficient Max and input limits fail closed (659.448167ms)
+✔ fee loading checks pinned chain before exact targets and treats malformed/failed targets as unavailable (14.170041ms)
+✔ public quote paths remain exact, read-only and bounded to 1 KiB through the actual browser proxy boundary (0.795209ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1580.055708

@@ -14,13 +14,15 @@
   "scripts": {
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace @pearl-ledger/companion",
     "dev": "npm run dev --workspace @pearl-ledger/companion",
     "cli": "node --import tsx apps/cli/src/index.ts",
-    "check": "npm run typecheck && npm test && npm run build && python3 scripts/secret_scan.py",
-    "start": "npm run dev",
+    "check": "npm run typecheck && npm test && npm run build:all && python3 scripts/secret_scan.py",
+    "start": "npm run build && npm run local --workspace @pearl-ledger/companion",
+    "setup:light": "python3 scripts/build-light-client.py",
     "preview": "npm run preview --workspace @pearl-ledger/companion",
-    "test:oracle": "cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json"
+    "test:oracle": "cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json",
+    "build:all": "npm run build --workspaces --if-present"
   },
   "dependencies": {
     "@ledgerhq/device-management-kit": "1.11.0",
@@ -29,7 +31,8 @@
     "@noble/hashes": "1.8.0",
     "@scure/base": "1.2.6",
     "@scure/bip32": "1.7.0",
-    "uuid": "11.1.1"
+    "uuid": "11.1.1",
+    "@metamask/snaps-sdk": "12.0.1"
   },
   "devDependencies": {
     "@types/node": "24.10.0",
@@ -45,6 +48,9 @@
       "uuid": "$uuid"
     },
     "@ledgerhq/device-transport-kit-web-hid": {
+      "uuid": "$uuid"
+    },
+    "@metamask/utils": {
       "uuid": "$uuid"
     }
   }

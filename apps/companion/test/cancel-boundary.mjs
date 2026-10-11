@@ -4,6 +4,7 @@
  * No browser upload, hardware, private key, live network, or broadcast is used.
  */
 import fs from "node:fs";
+import { createPsbtEndpoint, P } from "./psbt-endpoint.mjs";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -27,6 +28,7 @@ const source =
   `
 export { connect };
 export function cancel() { currentAbort?.abort(); }
+export function oldTransport(t) {transport=t;}
 export function state() { return { busy, account, notification }; }
 export async function prepareAudit(a,b) {
  account=a; network=a.network;
@@ -53,13 +55,13 @@ const built = await build({
       name: "cancel-test-boundaries",
       setup(build) {
         build.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "test-boundary" }),
         );
         build.onLoad({ filter: /.*/, namespace: "test-boundary" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
-            ? `export async function connectLedger() { return globalThis.connectGate; }`
+          contents: a.path.includes("device")
+            ? `export async function connectLedger() { globalThis.connectCalls++; return globalThis.connectGate; }`
             : a.path.includes("storage")
               ? `export class WatchStorage {
         constructor() { this.rows = new Map(); }
@@ -96,59 +98,15 @@ const moduleURL =
   Buffer.from(built.outputFiles[0].text).toString("base64");
 let serial = 0;
 function gate() {
-  let release;
-  const pending = new Promise((resolve) => {
+  let release, reject;
+  const pending = new Promise((resolve, fail) => {
     release = resolve;
+    reject = fail;
   });
-  return { pending, release };
+  return { pending, release, reject };
 }
 function device() {
-  const commands = [];
-  let digest,
-    closes = 0;
-  const transport = {
-    async close() {
-      closes++;
-    },
-    async exchange(apdu, signal) {
-      assert(
-        !signal?.aborted,
-        "Canceled signal must not reach an APDU endpoint",
-      );
-      commands.push(apdu[1]);
-      const data = apdu.slice(5);
-      let response = new Uint8Array();
-      switch (apdu[1]) {
-        case sdk.INS.CAPABILITIES:
-          response = Uint8Array.of(1, 0, 1, 0, 3, 16, 0xe3, 5);
-          break;
-        case sdk.INS.EXPORT_ACCOUNT:
-          response = sdk.concat(
-            account.masterFingerprint,
-            account.publicKey,
-            account.chainCode,
-            Uint8Array.of(3),
-            sdk.u32(0),
-          );
-          break;
-        case sdk.INS.BEGIN:
-          digest = data.slice(2);
-          break;
-        case sdk.INS.APPEND:
-          break;
-        case sdk.INS.REVIEW:
-          response = sdk.concat(Uint8Array.of(bundle.inputs.length), digest);
-          break;
-        case sdk.INS.SIGNATURE:
-          response = sdk.fromHex(fixture.signatures[data[0]]);
-          break;
-        default:
-          throw new Error("Unexpected test command");
-      }
-      return sdk.concat(response, Uint8Array.of(0x90, 0));
-    },
-  };
-  return { transport, commands, closes: () => closes };
+  return createPsbtEndpoint();
 }
 let backendCalls = 0;
 async function backend(route) {
@@ -173,6 +131,8 @@ async function backend(route) {
   );
 }
 async function fresh() {
+  globalThis.window.location = undefined;
+  globalThis.connectCalls = 0;
   globalThis.pauseBoundary = undefined;
   globalThis.fetch = backend;
   const app = await import(`${moduleURL}#${serial++}`);
@@ -218,13 +178,72 @@ function pauseAt(phase, state) {
     "PASS: canceled pending connection closes its late transport without exporting an account",
   );
 }
+{
+  const { app } = await fresh(),
+    closing = gate();
+  app.oldTransport({ close: () => closing.pending });
+  const unhandled = [];
+  const observe = (error) => unhandled.push(error);
+  process.on("unhandledRejection", observe);
+  globalThis.connectGate = Promise.reject(new Error("Picker rejected"));
+  const operation = app.connect();
+  await new Promise(setImmediate);
+  closing.release();
+  await operation;
+  process.removeListener("unhandledRejection", observe);
+  assert.deepEqual(unhandled, []);
+  assert.match(app.state().notification, /Picker rejected/);
+  console.log(
+    "PASS: early picker rejection is owned while previous session cleanup waits",
+  );
+}
+{
+  const { app, d } = await fresh(),
+    connecting = gate();
+  app.oldTransport({
+    close: async () => {
+      throw new Error("Old cleanup failed");
+    },
+  });
+  globalThis.connectGate = connecting.pending;
+  const operation = app.connect();
+  await new Promise(setImmediate);
+  assert.equal(app.state().busy, true);
+  connecting.release(d.transport);
+  await operation;
+  assert.equal(d.closes(), 1);
+  assert.deepEqual(d.commands, []);
+  assert.match(app.state().notification, /Old cleanup failed/);
+  console.log(
+    "PASS: failed prior cleanup closes a late picker result without using it",
+  );
+}
+for (const cancel of [false, true]) {
+  const { app, d } = await fresh(),
+    closing = gate();
+  globalThis.window.location = { pathname: "/live.html" };
+  app.oldTransport({ close: () => closing.pending });
+  const operation = app.connect();
+  assert.equal(globalThis.connectCalls, 0);
+  if (cancel) app.cancel();
+  closing.release();
+  await operation;
+  assert.equal(globalThis.connectCalls, cancel ? 0 : 1);
+  assert.equal(app.state().account === null, cancel);
+  if (cancel) assert.deepEqual(d.commands, []);
+  console.log(
+    `PASS: Ledger Wallet reconnect ${cancel ? "cancellation prevents" : "waits for prior cleanup before"} new host transport`,
+  );
+}
+
 for (const [phase, state, expected] of [
   ["journal", "draft", "draft"],
   ["before-update", "draft", "draft"],
-  ["after-commit", "signing", "signing"],
-  ["journal", "signing", "signing"],
+  ["after-commit", "signing", null],
+  ["journal", "signing", null],
 ]) {
   const { app, d } = await prepared(),
+    before = await app.saved(),
     boundary = pauseAt(phase, state);
   const operation = app.startSign();
   await boundary.reached;
@@ -233,12 +252,19 @@ for (const [phase, state, expected] of [
   await operation;
   const journal = await app.saved();
   assert.deepEqual(d.commands, []);
-  assert.equal(journal.payments[0].state, expected);
-  assert.equal(journal.payments[0].rawTx, undefined);
-  assert.equal(wallet.reservedOutpoints(journal).size, 2);
+  if (expected === null) {
+    assert.deepEqual(journal.payments, []);
+    assert.equal(wallet.reservedOutpoints(journal).size, 0);
+  } else {
+    assert.equal(journal.payments[0].state, expected);
+    assert.equal(journal.payments[0].rawTx, undefined);
+    assert.equal(wallet.reservedOutpoints(journal).size, 2);
+  }
+  assert.equal(journal.nextChangeIndex, before.nextChangeIndex);
+  assert.equal(journal.issuedReceiveThrough, before.issuedReceiveThrough);
   if (phase === "journal" && state === "draft") assert.equal(backendCalls, 0);
   console.log(
-    `PASS: cancellation at ${phase}/${state} sends no signing commands and preserves ${expected} reservations`,
+    `PASS: cancellation at ${phase}/${state} sends no signing commands and ${expected === null ? "discards the owned unsigned attempt without reusing change" : "preserves draft reservations"}`,
   );
 }
 {
@@ -266,7 +292,7 @@ for (const [phase, state, expected] of [
     boundary = pauseAt("before-commit", "signed");
   const operation = app.startSign();
   await boundary.reached;
-  assert.equal(d.commands.filter((ins) => ins === sdk.INS.SIGNATURE).length, 2);
+  assert.equal(d.yields(), 2);
   const commandCount = d.commands.length;
   app.cancel();
   boundary.release();

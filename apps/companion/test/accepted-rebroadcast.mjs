@@ -29,9 +29,12 @@ const contents =
   `
 export async function auditSeed(a,j) {account=a;network=a.network;sourceMode='node';await store.mutate(accountId(a),saved=>Object.assign(saved,structuredClone(j)));activePayment=j.payments[0].id;page='send';await refreshJournal();render();}
 export async function auditReconcile(){await reconcileNodePayments(new AbortController().signal);await refreshJournal();render();}
-export async function auditBroadcast(){await broadcast();await refreshJournal();render();}
+// Test-only explicit approval, captured before the actual async broadcast flow.
+// The real checkbox/dispatch guard is exercised separately in direct-wallet-ui.mjs.
+function auditApproval(){const p=getPayment();return Object.freeze({ownerId:accountId(account),paymentId:p.id,network,source:sourceMode,rawTx:p.rawTx,txid:p.txid});}
+export async function auditBroadcast(){await broadcast(undefined,auditApproval());await refreshJournal();render();}
 export async function auditSaved(){return store.journal(accountId(account));}
-export async function auditRunBroadcast(){await run('Explicit retry',broadcast);return notification;}
+export async function auditRunBroadcast(){const approval=auditApproval();await run('Explicit retry',signal=>broadcast(signal,approval));return notification;}
 export function auditCancel(){currentAbort?.abort();}
 `;
 const output = await build({
@@ -50,12 +53,12 @@ const output = await build({
       name: "boundaries",
       setup(build) {
         build.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "probe" }),
         );
         build.onLoad({ filter: /.*/, namespace: "probe" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("No device allowed in this probe")}'
             : a.path.includes("storage")
               ? `export class WatchStorage{constructor(){this.rows=new Map()} async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],issuedReceiveThrough:-1,nextChangeIndex:0})} async mutate(k,fn){const j=await this.journal(k);const result=fn(j);await globalThis.auditBeforeCommit?.(j);this.rows.set(k,structuredClone(j));return result}}`
@@ -268,7 +271,7 @@ if (fixed) {
     await app.auditSeed(a, saved);
     assert.match(
       dom.innerHTML,
-      /A confirmed receipt is archived/,
+      /Payment confirmed\. Refresh its status before any retry/,
       "every archived signed state must show the archive notice",
     );
     assert.doesNotMatch(

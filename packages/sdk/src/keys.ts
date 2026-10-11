@@ -102,10 +102,24 @@ export function validateP2trScript(script: Uint8Array): void {
     concat(Uint8Array.of(2), script.slice(2)),
   ).assertValidity();
 }
+/** Ordinary external payments may target P2TR or Pearl P2MR. Ownership stays BIP86/P2TR. */
+export function validateRecipientScript(script: Uint8Array): void {
+  assert(
+    script instanceof Uint8Array && script.length === 34 && script[1] === 0x20,
+    "Only 32-byte P2TR/P2MR recipients are supported",
+  );
+  if (script[0] === 0x51) validateP2trScript(script);
+  else
+    assert(
+      script[0] === 0x52,
+      "Only witness v1 P2TR or v2 P2MR recipients are supported",
+    );
+  // A P2MR program is a Merkle root, not an elliptic-curve public key.
+}
 export function scriptToAddress(script: Uint8Array, name: NetworkName): string {
-  validateP2trScript(script);
+  validateRecipientScript(script);
   return bech32m.encode(network(name).hrp, [
-    1,
+    script[0]! - 0x50,
     ...bech32m.toWords(script.slice(2)),
   ]);
 }
@@ -119,10 +133,14 @@ export function addressToScript(
   );
   const decoded = bech32m.decode(address as `${string}1${string}`, 90);
   assert(decoded.prefix === network(name).hrp, "Wrong address network");
-  assert(decoded.words[0] === 1, "Only witness v1 recipients supported");
+  const version = decoded.words[0];
+  assert(
+    version === 1 || version === 2,
+    "Only witness v1 P2TR or v2 P2MR recipients supported",
+  );
   const program = bech32m.fromWords(decoded.words.slice(1));
-  const script = concat(Uint8Array.of(0x51, 0x20), program);
-  validateP2trScript(script);
+  const script = concat(Uint8Array.of(0x50 + version, 0x20), program);
+  validateRecipientScript(script);
   return script;
 }
 export function deriveAddress(

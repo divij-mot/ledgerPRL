@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "tip": {
+    "height": 125835,
+    "hash": "2b9191c4401ce7d40ed0a34410d91eae69a73803b0bc9831f4f5ea5528b88f4e"
+  },
+  "coins": 0,
+  "history": 0,
+  "coverage": {
+    "externalScannedThrough": 19,
+    "changeScannedThrough": 19,
+    "gapLimit": 20
+  },
+  "executableSha256": "bc10831e9c02dfe19d0ffbbc470b454baf048842e18a4660f2fb44800ea5b5f9",
+  "broadcast": false
+}

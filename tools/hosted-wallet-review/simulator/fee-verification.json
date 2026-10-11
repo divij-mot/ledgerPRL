@@ -1,0 +1,24 @@
+[
+  {
+    "recipientType": "p2tr",
+    "inputCount": 1,
+    "outputCount": 2,
+    "vsize": 154,
+    "feeGrains": "308",
+    "feeRateGrainsPerKvB": "2000",
+    "signatureAndExactByteVerification": true,
+    "exactRateCheck": true,
+    "confirmations": 1
+  },
+  {
+    "recipientType": "p2mr",
+    "inputCount": 1,
+    "outputCount": 2,
+    "vsize": 154,
+    "feeGrains": "308",
+    "feeRateGrainsPerKvB": "2000",
+    "signatureAndExactByteVerification": true,
+    "exactRateCheck": true,
+    "confirmations": 1
+  }
+]

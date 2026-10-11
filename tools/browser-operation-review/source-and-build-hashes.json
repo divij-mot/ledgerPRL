@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-10-09T23:23:54.894917+00:00",
+  "head": "b908b15be8ca95a850c551d138ce646475517621",
+  "scope": "Pure host fixtures and mocked I/O only; build is local, not deployed. Browser durability/hardware unverified.",
+  "workspaceTestCounts": [
+    27,
+    64,
+    103,
+    86,
+    6,
+    135
+  ],
+  "workspaceTestTotal": 421,
+  "sha256": {
+    "apps/companion/src/main.ts": "a1bfd6960626b1d397ffa4db5366da7633af6a47f656392319da650823bf12b7",
+    "apps/companion/test/browser-operation-boundaries.test.ts": "94ba0429e57d7a607eafb3a69722eb6a91d28111f6ec56c38b83cc5603cd75b7",
+    "apps/companion/test/README.md": "b37be38f996fdbfcee7f8abe86c59aec3ec65483f2821959c789e593c23a11eb",
+    "tools/browser-operation-review/operation-boundaries.test.ts": "2777c14726ed716e34ae39d74deb965f89efd39edb53ba8f929cc54347793d2c",
+    "tools/browser-operation-review/storage-serialization.test.ts": "b13f270d45f253090ce18d0b097989c6164d25bddca633819d32054436039e56",
+    "tools/browser-operation-review/REPORT.md": "65a59ff7d186532cab14baf2de7ac40874f7f6ac01387e42a0437943049ab554",
+    "apps/companion/dist/assets/backup-import.worker-Dtrkqa4Y.js": "574f3999066984fc8b2d8674bc790097bd8b8ec54bf2b184664c5f5e94d42f4b",
+    "apps/companion/dist/assets/index-CpBl0wyO.js": "84e04058b1565b0fa73d84360ada84868c32b2e7e5637e6b2dcca4a8131236d3",
+    "apps/companion/dist/assets/index-DK-3_Qur.css": "c27f84cbb4fd6700195c4d74f962fe6c3904456c1e48db88ab4cd68c0b705546",
+    "apps/companion/dist/example-watch.json": "cc8948926914db72ace789ccae84ae75ca24154faec5cef341fc2e9858a2ef5d",
+    "apps/companion/dist/index.html": "27801f0f14d54db2a43c8a8c4599d0567a69a343bb545ee34ef189cb1c9c1042",
+    "apps/companion/dist/third-party-notices.txt": "ccea80c549383223e6cf762fa9fabb3648379b61763ab2222570e90e670a3808"
+  }
+}

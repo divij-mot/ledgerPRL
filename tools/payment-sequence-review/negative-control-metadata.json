@@ -1,0 +1,6 @@
+{
+  "harnessSha256": "8f1c261d19135fbd96af8b20011f97d07a1b13ebde9df22999531f393d0391c4",
+  "productionMainSha256": "454f6aa2fcd11adfaa9590bd840723f6962ffac74cfd25bbbe836e32e6fe91b7",
+  "mutation": "Temporary bundled-source-only replacement of click(\"cancel-device\", () => currentAbort?.abort()); with click(\"cancel-device\", () => {});",
+  "productionEdited": false
+}

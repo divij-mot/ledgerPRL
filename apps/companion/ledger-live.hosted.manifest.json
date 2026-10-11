@@ -1,0 +1,30 @@
+{
+  "id": "pearl-hosted",
+  "name": "Pearl",
+  "private": true,
+  "url": "https://pearl-ledger-wallet.vercel.app/live.html",
+  "homepageUrl": "https://pearl-ledger-wallet.vercel.app/live.html",
+  "platforms": ["desktop", "android"],
+  "apiVersion": "^2.0.0",
+  "manifestVersion": "2",
+  "branch": "debug",
+  "categories": ["wallet"],
+  "currencies": "*",
+  "visibility": "complete",
+  "cacheBustingId": 1,
+  "domains": ["https://pearl-ledger-wallet.vercel.app"],
+  "permissions": [
+    "wallet.capabilities",
+    "device.transport",
+    "device.exchange",
+    "device.close"
+  ],
+  "content": {
+    "shortDescription": {
+      "en": "Pearl wallet for Ledger Discover."
+    },
+    "description": {
+      "en": "Signing stays on your Ledger. Public network data is read through Pearl's service; wallet history is stored on this device. Developer-loaded app; no public Discover listing or Ledger endorsement is implied."
+    }
+  }
+}

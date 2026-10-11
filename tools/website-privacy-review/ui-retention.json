@@ -1,0 +1,16 @@
+{
+  "scope": "Actual main.ts handlers with modelled DOM/storage; no browser or device",
+  "closeAccountClearsAccount": true,
+  "retainedAfterClose": {
+    "recipient": "",
+    "amount": "",
+    "fee": "0.00001000",
+    "changeIndex": "0"
+  },
+  "displayedAfterReopen": false,
+  "differentSnapshotResetsForm": true,
+  "publicAccountImportResetsForm": true,
+  "networkChangeResetsForm": true,
+  "optionalClearLeavesJournalUntouched": true,
+  "note": "Original low-severity form-retention finding is resolved in this source. Closing or changing account clears active form values without deleting journals. JavaScript assignment is not a secure-memory-erasure guarantee."
+}

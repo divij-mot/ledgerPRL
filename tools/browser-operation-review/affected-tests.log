@@ -1,0 +1,33 @@
+▶ actual backup handler cancels safely, rejects stale work and atomically merges current storage
+  ✔ busy prevents repeat imports; cancellation terminates and ignores late replies after an account switch (46.273144ms)
+  ✔ account changes during validation reject before any merge (4.140645ms)
+  ✔ cancel while storage is queued prevents its atomic update (10.220966ms)
+  ✔ an interleaved latest journal is merged without downgrading state or losing bounds (19.556019ms)
+  ✔ conflicting payment leaves the atomic journal and current account unchanged (1.796511ms)
+  ✔ cancel after durable merge reports saved reservations and does not switch accounts (2.855463ms)
+  ✔ cancel during device closure cannot apply a stale account completion (3.481815ms)
+✔ actual backup handler cancels safely, rejects stale work and atomically merges current storage (329.016502ms)
+✔ actual worker validates exact signed bytes and rejects the same malformed backups (1778.610347ms)
+▶ bounded one-shot worker preserves validation results and releases every resource
+  ✔ successful response, immutable Blob, fixed local module URL and listener cleanup (1.598143ms)
+  ✔ pre-abort and oversize inputs never start a worker (10.50374ms)
+  ✔ abort terminates immediately and stale completion cannot settle another operation (0.422024ms)
+  ✔ validation failure rejects without a fallback and terminates (0.329305ms)
+  ✔ runtime failure rejects without a fallback and terminates (0.224307ms)
+  ✔ message failure rejects without a fallback and terminates (0.174383ms)
+  ✔ malformed failure rejects without a fallback and terminates (0.184818ms)
+  ✔ post failure rejects without a fallback and terminates (0.145609ms)
+  ✔ worker construction error stays an error (0.242094ms)
+✔ bounded one-shot worker preserves validation results and releases every resource (21.519741ms)
+✔ pure-host UI authority, pending signed recovery and modeled two-tab storage boundaries (3759.180586ms)
+✔ mocked DOM/storage/source/device: direct website receive/send, consent and durable session boundaries (3032.394892ms)
+✔ mocked DOM/storage/source/device: actual main.ts PSBT persistence, interruption, and emergency recovery (4013.730922ms)
+✔ late journal reads cannot restore a closed or superseded account view (676.296166ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4339.658249

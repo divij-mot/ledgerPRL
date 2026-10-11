@@ -206,7 +206,7 @@ const built = await build({
         b.onResolve(
           {
             filter:
-              /^\.\/(ledger\.js|storage\.js|styles\.css|backup-import\.js)$/,
+              /^\.\/(device\.js|storage\.js|styles\.css|backup-import\.js)$/,
           },
           (a) => ({ path: a.path, namespace: "audit" }),
         );
@@ -217,7 +217,7 @@ const built = await build({
           // validator still runs. Dedicated worker tests cover its real entry.
           contents: a.path.includes("backup-import")
             ? 'import { importWalletBackup } from "@pearl-ledger/wallet"; export async function importWalletBackupFile(file, signal) { signal.throwIfAborted(); return importWalletBackup(await file.text()); }'
-            : a.path.includes("ledger")
+            : a.path.includes("device")
               ? 'export async function connectLedger(){throw Error("No device permitted");}'
               : a.path.includes("storage")
                 ? `export class WatchStorage {constructor(){this.rows=new Map();} async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],nextChangeIndex:0,issuedReceiveThrough:-1});}async mutate(k,fn){const j=await this.journal(k);const r=fn(j);this.rows.set(k,structuredClone(j));return r;}}`

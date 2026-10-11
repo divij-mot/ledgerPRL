@@ -1,0 +1,3295 @@
+--- a/src/ledger-ui/ModalBody.tsx
++++ b/src/ledger-ui/ModalBody.tsx
+@@ -1,69 +1,74 @@
+-import React, { PureComponent } from "react";
+-import ModalContent from "./ModalContent";
+-import ModalHeader from "./ModalHeader";
+-import ModalFooter from "./ModalFooter";
+-import { RenderProps } from ".";
+-import { ModalData } from "~/renderer/modals/types";
+-
+-type Props<Name extends keyof ModalData> = {
+-  title?: React.ReactNode;
+-  subTitle?: React.ReactNode;
+-  headerStyle?: React.CSSProperties;
+-  onBack?: (() => void) | undefined;
+-  onClose?: (() => void) | undefined;
+-  render?: (a?: RenderProps<Name> | null) => React.ReactNode;
+-  renderFooter?: (a?: RenderProps<Name> | null) => React.ReactNode;
+-  modalFooterStyle?: React.CSSProperties;
+-  renderProps?: RenderProps<Name>;
+-  noScroll?: boolean;
+-  refocusWhenChange?: unknown;
+-  backButtonComponent?: React.ReactNode;
+-  pt?: number;
+-};
+-class ModalBody<Name extends keyof ModalData> extends PureComponent<Props<Name>> {
+-  componentDidUpdate(prevProps: Props<Name>) {
+-    const shouldFocus = prevProps.refocusWhenChange !== this.props.refocusWhenChange;
+-    if (shouldFocus && this._content.current) {
+-      this._content.current?.focus();
+-    }
+-  }
+-
+-  _content = React.createRef<HTMLDivElement>();
+-  render() {
+-    const {
+-      onBack,
+-      backButtonComponent,
+-      onClose,
+-      title,
+-      subTitle,
+-      headerStyle,
+-      render,
+-      renderFooter,
+-      renderProps,
+-      noScroll,
+-      modalFooterStyle,
+-      pt,
+-    } = this.props;
+-
+-    // For `renderFooter` returning falsy values, we need to resolve first.
+-    const renderedFooter = renderFooter && renderFooter(renderProps);
+-    return (
+-      <>
+-        <ModalHeader
+-          subTitle={subTitle}
+-          onBack={onBack}
+-          onClose={onClose}
+-          style={headerStyle}
+-          backButtonComponent={backButtonComponent}
++// Adapted from renderer/components/Modal/ModalBody.tsx (Ledger Wallet 4.23.0).
++import React from "react";
++import { Button } from "@ledgerhq/lumen-ui-react";
++import Breadcrumb from "./Stepper/Breadcrumb.js";
++export function Action({
++  id,
++  children,
++  disabled = false,
++}: {
++  id: string;
++  children: React.ReactNode;
++  disabled?: boolean;
++}) {
++  return (
++    <Button
++      id={id}
++      data-slot="lumen-button"
++      className="ledger-button"
++      appearance="accent"
++      disabled={disabled}
++    >
++      {children}
++    </Button>
++  );
++}
++export default function ModalBody({
++  title,
++  steps,
++  step,
++  busy,
++  children,
++  footer,
++  feedback,
++}: {
++  title: string;
++  steps: string[];
++  step: number;
++  busy: boolean;
++  children: React.ReactNode;
++  footer?: React.ReactNode;
++  feedback: string;
++}) {
++  return (
++    <dialog
++      id="ledger-flow"
++      className="ledger-modal"
++      aria-labelledby="ledger-flow-title"
++    >
++      <header className="ledger-modal-header">
++        <h2 id="ledger-flow-title">{title}</h2>
++        <button
++          id="flow-close"
++          className="ghost"
++          disabled={busy}
++          aria-label="Close"
+         >
+-          {title || null}
+-        </ModalHeader>
+-        <ModalContent pt={pt} ref={this._content} noScroll={noScroll}>
+-          {render && render(renderProps)}
+-        </ModalContent>
+-        {renderedFooter && <ModalFooter style={modalFooterStyle}>{renderedFooter}</ModalFooter>}
+-      </>
+-    );
+-  }
++          Close
++        </button>
++      </header>
++      <div className="ledger-modal-content">
++        <Html text={feedback} />
++        <Breadcrumb
++          items={steps.map((label) => ({ label }))}
++          currentStep={step}
++        />
++        {children}
++      </div>
++      {footer && <footer className="ledger-modal-footer">{footer}</footer>}
++    </dialog>
++  );
+ }
+-export default ModalBody;
++export function Html({ text }: { text: string }) {
++  return <div dangerouslySetInnerHTML={{ __html: text }} />;
++}
+--- a/src/ledger-ui/ReadOnlyAddressField.tsx
++++ b/src/ledger-ui/ReadOnlyAddressField.tsx
+@@ -1,133 +1,32 @@
+-import React, { useRef, useState, useEffect, useCallback } from "react";
+-import { Trans } from "react-i18next";
+-import { clipboard } from "electron";
+-import styled from "styled-components";
+-import Box from "~/renderer/components/Box";
+-import IconCopy from "~/renderer/icons/Copy";
+-const LINE_MINLENGTH = 5; // Minimum of chars for the last line (if multiline)
+-
+-const Address = styled(Box).attrs(() => ({
+-  bg: "background.default",
+-  borderRadius: 1,
+-  color: "neutral.c100",
+-  ff: "Inter",
+-  fontSize: 4,
+-  px: 4,
+-  py: 3,
+-  relative: true,
+-}))<{
+-  allowCopy: boolean;
+-}>`
+-  border: ${p => `1px solid ${p.theme.colors.neutral.c40}`};
+-  ${p =>
+-    p.allowCopy
+-      ? `border-right: none;
+-  border-top-right-radius: 0;
+-  border-bottom-right-radius: 0;
+-`
+-      : ""}
+-
+-  text-align: center;
+-  flex: 1;
+-`;
+-const AddressWrapper = styled.span`
+-  cursor: text;
+-  user-select: text;
+-  word-break: break-all;
+-
+-  span:last-child {
+-    word-break: keep-all;
+-  }
+-`;
+-const CopyFeedback = styled(Box).attrs(() => ({
+-  sticky: true,
+-  bg: "background.default",
+-  alignItems: "center",
+-  justifyContent: "center",
+-}))`
+-  border-left: 1px solid ${p => p.theme.colors.neutral.c40};
+-`;
+-const ClipboardSuspicious = styled.div`
+-  font-family: Inter;
+-  font-weight: 400;
+-  font-style: normal;
+-  font-size: 12px;
+-  align-self: center;
+-  color: ${p => p.theme.colors.alertRed};
+-`;
+-const CopyBtn = styled(Box).attrs(() => ({
+-  bg: "background.card",
+-  color: "neutral.c100",
+-  alignItems: "center",
+-  justifyContent: "center",
+-  borderRadius: 1,
+-  px: 2,
+-}))`
+-  border-top-left-radius: 0;
+-  border-bottom-left-radius: 0;
+-  border: ${p => `1px solid ${p.theme.colors.neutral.c40}`};
+-
+-  &:hover {
+-    opacity: 0.8;
+-  }
+-`;
+-type Props = {
++// Adapted from Ledger Wallet 4.23.0. Browser clipboard authority stays in main.ts.
++import React from "react";
++const LINE_MINLENGTH = 5;
++export default function ReadOnlyAddressField({
++  address,
++  allowCopy = true,
++  busy = false,
++}: {
+   address: string;
+   allowCopy?: boolean;
+-};
+-function ReadOnlyAddressField({ address, allowCopy = true }: Props) {
+-  const [copyFeedback, setCopyFeedback] = useState(false);
+-  const [clibboardChanged, setClipboardChanged] = useState(false);
+-  const copyTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
+-  const onCopy = useCallback(() => {
+-    clipboard.writeText(address);
+-    setCopyFeedback(true);
+-    clearTimeout(copyTimeout.current);
+-    setTimeout(() => {
+-      const copiedAddress = clipboard.readText();
+-      if (copiedAddress !== address) {
+-        setClipboardChanged(true);
+-      }
+-    }, 300);
+-    copyTimeout.current = setTimeout(() => setCopyFeedback(false), 1e3);
+-  }, [address]);
+-  useEffect(() => {
+-    return () => {
+-      clearTimeout(copyTimeout.current);
+-    };
+-  }, []);
+-
+-  // Split address into multiple segments - last can't breakline.
++  busy?: boolean;
++}) {
+   const addressSegments = [
+     address.slice(0, address.length - LINE_MINLENGTH),
+     address.slice(-LINE_MINLENGTH),
+   ];
+   return (
+-    <Box>
+-      {clibboardChanged ? (
+-        <ClipboardSuspicious>
+-          <Trans i18nKey="common.addressCopiedSuspicious" />
+-        </ClipboardSuspicious>
+-      ) : null}
+-      <Box horizontal alignItems="stretch">
+-        <Address allowCopy={allowCopy} id="address-field">
+-          {!copyFeedback ? null : (
+-            <CopyFeedback>
+-              <Trans i18nKey="common.addressCopied" />
+-            </CopyFeedback>
+-          )}
+-          <AddressWrapper>
+-            <span>{addressSegments[0]}</span>
+-            <span>{addressSegments[1]}</span>
+-          </AddressWrapper>
+-        </Address>
+-        {allowCopy ? (
+-          <CopyBtn onClick={onCopy}>
+-            <IconCopy size={16} />
+-          </CopyBtn>
+-        ) : null}
+-      </Box>
+-    </Box>
++    <div className="ledger-address-row">
++      <div className="ledger-address" id="address-field">
++        <span>{addressSegments[0]}</span>
++        <span>{addressSegments[1]}</span>
++      </div>
++      <button
++        id="copy-address"
++        className="ledger-copy secondary"
++        disabled={busy || !allowCopy}
++      >
++        Copy
++      </button>
++    </div>
+   );
+ }
+-export default ReadOnlyAddressField;
+--- a/src/ledger-ui/Stepper/Breadcrumb.tsx
++++ b/src/ledger-ui/Stepper/Breadcrumb.tsx
+@@ -1,142 +1,34 @@
+-/* eslint-disable react/no-array-index-key */
+-
+-import React, { PureComponent } from "react";
+-import styled from "styled-components";
+-import Box from "~/renderer/components/Box";
+-import Step, { Status } from "./Step";
+-
+-const Container = styled(Box)`
+-  position: sticky;
+-  top: -20px;
+-  z-index: 2;
+-`;
+-
+-const Wrapper = styled(Box).attrs(() => ({
+-  horizontal: true,
+-  alignItems: "center",
+-  justifyContent: "center",
+-  relative: true,
+-}))`
+-  margin-bottom: 25px;
+-  z-index: 2;
+-`;
+-
+-const Bar = styled.div<{
+-  start: number;
+-  end: number;
+-  current: number;
+-  disabled: Array<number> | undefined | null;
+-}>`
+-  background: ${p => p.theme.colors.neutral.c40};
+-  flex-grow: 1;
+-  height: 1px;
+-  left: ${p => p.start}%;
+-  position: absolute;
+-  overflow: hidden;
+-  right: ${p => p.end}%;
+-  top: 8px;
+-  z-index: 1;
+-
+-  &:after,
+-  &:before {
+-    bottom: 0;
+-    content: "";
+-    display: block;
+-    left: 0;
+-    position: absolute;
+-    right: auto;
+-    top: 0;
+-    transition: right ease-in-out 0.4s;
+-  }
+-
+-  &:after {
+-    background: ${p => p.theme.colors.wallet};
+-    right: ${p => (p.current === 0 ? 0 : `${p.current}%`)};
+-    z-index: 1;
+-  }
+-
+-  &:before {
+-    background: ${p => p.theme.colors.neutral.c40};
+-    left: ${p => (p.disabled ? `${p.disabled[0]}%` : 0)};
+-    right: ${p => (p.disabled ? `${p.disabled[1]}%` : "auto")};
+-    z-index: 2;
+-  }
+-`;
+-
+-const indexToPercent = (index: number, itemsLength: number): number =>
+-  100 - (100 / (itemsLength - 1)) * index;
+-
+-type ItemBase = {
+-  label?: React.ReactNode;
+-  excludeFromBreadcrumb?: boolean;
+-};
+-
+-type Props<Item extends ItemBase> = {
++// Adapted from Ledger Wallet 4.23.0; status precedence is retained verbatim.
++import React from "react";
++import Step, { type Status } from "./Step.js";
++type Item = { label?: React.ReactNode; excludeFromBreadcrumb?: boolean };
++export default function Breadcrumb({
++  items,
++  currentStep,
++  stepsDisabled = [],
++  stepsErrors = [],
++}: {
++  items: Item[];
+   currentStep: number;
+-  items: Array<Item>;
+-  stepsDisabled: Array<number>;
+-  stepsErrors: Array<number>;
+-  mb?: number;
+-};
+-
+-class Breadcrumb<Item extends ItemBase> extends PureComponent<Props<Item>> {
+-  static defaultProps = {
+-    stepsDisabled: [],
+-    stepsErrors: [],
+-  };
+-
+-  render() {
+-    const { items, stepsDisabled, stepsErrors, currentStep, mb } = this.props;
+-    const itemsLength = items.length;
+-    const start = 100 / itemsLength / 2;
+-    const currentStepInteger =
+-      // FIXME deprecated the implicit accept of string values
+-      typeof currentStep === "string" ? parseInt(currentStep, 10) : currentStep;
+-
+-    return (
+-      <Container>
+-        <Box mb={mb} bg="background.card" relative>
+-          <Wrapper>
+-            {items
+-              .filter(i => !i.excludeFromBreadcrumb)
+-              .map((item, i) => {
+-                let status: Status = "next";
+-                const stepIndex = currentStepInteger;
+-                if (i === stepIndex) {
+-                  status = "active";
+-                }
+-                if (i < stepIndex) {
+-                  status = "valid";
+-                }
+-                if (stepsErrors.includes(i)) {
+-                  status = "error";
+-                }
+-                if (stepsDisabled.includes(i)) {
+-                  status = "disable";
+-                }
+-                return (
+-                  <Step key={i} status={status} number={i + 1}>
+-                    {item.label}
+-                  </Step>
+-                );
+-              })}
+-          </Wrapper>
+-          <Bar
+-            end={start}
+-            start={start}
+-            disabled={
+-              stepsDisabled.length > 0
+-                ? [
+-                    stepsDisabled[0] === 0 ? 0 : indexToPercent(stepsDisabled[0] + 1, itemsLength),
+-                    indexToPercent(stepsDisabled[stepsDisabled.length - 1], itemsLength),
+-                  ]
+-                : null
+-            }
+-            current={!currentStep ? 100 : indexToPercent(currentStepInteger, itemsLength)}
+-          />
+-        </Box>
+-      </Container>
+-    );
+-  }
++  stepsDisabled?: number[];
++  stepsErrors?: number[];
++}) {
++  return (
++    <div className="ledger-breadcrumb" aria-label="Progress">
++      {items
++        .filter((i) => !i.excludeFromBreadcrumb)
++        .map((item, i) => {
++          let status: Status = "next";
++          if (i === currentStep) status = "active";
++          if (i < currentStep) status = "valid";
++          if (stepsErrors.includes(i)) status = "error";
++          if (stepsDisabled.includes(i)) status = "disable";
++          return (
++            <Step key={i} status={status} number={i + 1}>
++              {item.label}
++            </Step>
++          );
++        })}
++    </div>
++  );
+ }
+-export default Breadcrumb;
+--- a/src/ledger-ui/Stepper/Step.tsx
++++ b/src/ledger-ui/Stepper/Step.tsx
+@@ -1,101 +1,29 @@
++// Adapted from Ledger Wallet 4.23.0; see vendor/ledger-live-4.23.0.
+ import React from "react";
+-import styled from "styled-components";
+-import Box from "~/renderer/components/Box";
+-import IconCheck from "~/renderer/icons/Check";
+-import IconCross from "~/renderer/icons/Cross";
+-
+ export type Status = "next" | "active" | "valid" | "error" | "disable";
+-const RADIUS = 18;
+-
+-const Wrapper = styled(Box).attrs<{
+-  status: Status;
+-}>((p: { status: Status }) => ({
+-  alignItems: "center",
+-  color: ["active", "valid"].includes(p.status)
+-    ? "primary.c80"
+-    : p.status === "error"
+-      ? "alertRed"
+-      : "neutral.c60",
+-  grow: true,
+-  justifyContent: "center",
+-  relative: true,
+-}))<{
+-  status: Status;
+-}>`
+-  width: ${RADIUS}px;
+-  flex-shrink: 0;
+-  text-align: center;
+-  font-size: 9px;
+-`;
+-
+-const StepNumber = styled(Box).attrs<{
+-  status: Status;
+-}>(p => ({
+-  color: ["active", "valid", "error"].includes(p.status) ? "neutral.c00" : "neutral.c60",
+-  bg: ["active", "valid"].includes(p.status)
+-    ? "primary.c80"
+-    : p.status === "error"
+-      ? "alertRed"
+-      : "background.card",
+-  ff: p.status === "active" ? "Inter|Bold" : "Inter|SemiBold",
+-}))<{
+-  status: Status;
+-}>`
+-  display: flex;
+-  text-align: center;
+-  justify-content: center;
+-  align-items: center;
+-  border-radius: 50%;
+-  border: 1px solid
+-    ${p =>
+-      ["active", "valid"].includes(p.status)
+-        ? p.theme.colors.primary.c80
+-        : p.status === "error"
+-          ? p.theme.colors.alertRed
+-          : p.theme.colors.neutral.c40};
+-  font-size: 10px;
+-  height: ${RADIUS}px;
+-  line-height: ${RADIUS}px;
+-  box-sizing: content-box;
+-  transition: all ease-in-out 0.1s ${p => (["active", "valid"].includes(p.status) ? 0.4 : 0)}s;
+-  width: ${RADIUS}px;
+-`;
+-
+-const Label = styled(Box).attrs<{
+-  status: Status;
+-}>(p => ({
+-  fontSize: 3,
+-  ff: p.status === "active" ? "Inter|SemiBold" : "Inter|Medium",
+-  px: 2,
+-}))<{
+-  status: Status;
+-}>`
+-  line-height: 1.2;
+-  position: absolute;
+-  top: 25px;
+-  transition: color ease-in-out 0.1s ${p => (["active", "valid"].includes(p.status) ? 0.4 : 0)}s;
+-`;
+-
+-type Props = {
++export default function Step({
++  number,
++  status,
++  children,
++}: {
+   number: number;
+   status: Status;
+   children: React.ReactNode;
+-};
+-
+-const Step = ({ number, status, children }: Props) => {
++}) {
+   return (
+-    <Wrapper status={status}>
+-      <StepNumber status={status}>
+-        {status === "active" || status === "next" ? (
+-          number
+-        ) : status === "valid" ? (
+-          <IconCheck size={10} />
+-        ) : (
+-          <IconCross size={10} />
+-        )}
+-      </StepNumber>
+-      <Label status={status}>{children}</Label>
+-    </Wrapper>
++    <div
++      className="ledger-step"
++      data-status={status}
++      aria-current={status === "active" ? "step" : undefined}
++    >
++      <span className="ledger-step-number">
++        {status === "active" || status === "next"
++          ? number
++          : status === "valid"
++            ? "✓"
++            : "×"}
++      </span>
++      <span className="ledger-step-label">{children}</span>
++    </div>
+   );
+-};
+-export default Step;
++}
+--- a/src/ledger-ui/StepReceiveFunds.tsx
++++ b/src/ledger-ui/StepReceiveFunds.tsx
+@@ -1,449 +1,108 @@
+-import invariant from "invariant";
+-import React, { useEffect, useCallback, useRef, useState } from "react";
+-import { getCryptoCurrencyById } from "@domain/entity-currency-crypto";
+-import { getAccountBridge } from "@ledgerhq/live-common/bridge/index";
+-import { getMainAccount } from "@ledgerhq/live-common/account/index";
+-import TrackPage from "~/renderer/analytics/TrackPage";
+-import ErrorDisplay from "~/renderer/components/ErrorDisplay";
+-import { DisconnectedDevice } from "@ledgerhq/hw-transport/errors";
+-import { Trans } from "react-i18next";
+-import styled from "styled-components";
+-import useTheme from "~/renderer/hooks/useTheme";
+-import { urls } from "~/config/urls";
+-import { openURL } from "~/renderer/linking";
+-import Box from "~/renderer/components/Box";
+-import Button from "~/renderer/components/Button";
+-import Text from "~/renderer/components/Text";
+-import Ellipsis from "~/renderer/components/Ellipsis";
+-import ReadOnlyAddressField from "~/renderer/components/ReadOnlyAddressField";
+-import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
+-import LinkShowQRCode from "~/renderer/components/LinkShowQRCode";
+-import SuccessDisplay from "~/renderer/components/SuccessDisplay";
+-import Receive2NoDevice from "~/renderer/components/Receive2NoDevice";
+-import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
+-import { StepProps } from "../Body";
+-import { Account } from "@ledgerhq/types-live";
+-import { track } from "~/renderer/analytics/segment";
+-import Modal from "~/renderer/components/Modal";
+-import Alert from "~/renderer/components/Alert";
+-import ModalBody from "~/renderer/components/Modal/ModalBody";
+-import QRCode from "~/renderer/components/QRCode";
+-import { getEnv } from "@shared/env";
+-import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
+-import { FeatureToggle, useFeature, useFeatureFlags } from "@features/platform-feature-flags";
+-import { LOCAL_STORAGE_KEY_PREFIX } from "./StepReceiveStakingFlow";
+-import { useDispatch, useSelector } from "LLD/hooks/redux";
+-
+-import { openModal } from "~/renderer/actions/modals";
+-import { Device } from "@ledgerhq/live-common/hw/actions/types";
+-import { useLLDCoinFamily } from "~/renderer/families";
+-import { firstValueFrom } from "rxjs";
+-import { getDefaultAccountName } from "@domain/entity-account-name";
+-import { useMaybeAccountName } from "~/renderer/reducers/wallet";
+-import { UTXOAddressAlert } from "~/renderer/components/UTXOAddressAlert";
+-import { isUTXOCompliant } from "@ledgerhq/live-common/currencies/helpers";
+-import MemoTagInfo from "LLD/features/MemoTag/components/MemoTagInfo";
+-import { MEMO_TAG_COINS } from "LLD/features/MemoTag/constants";
+-import { onboardingReceiveFlowSelector } from "~/renderer/reducers/onboarding";
+-import { useVersionedStakePrograms } from "LLD/hooks/useVersionedStakePrograms";
+-
+-const Separator = styled.div`
+-  border-top: 1px solid #99999933;
+-  margin: 50px 0;
+-`;
+-const Separator2 = styled.div`
+-  border-top: 1px solid #99999933;
+-  margin-top: 50px;
+-`;
+-const QRCodeWrapper = styled.div`
+-  border: 24px solid white;
+-  height: 208px;
+-  width: 208px;
+-  background: white;
+-`;
+-
+-const Receive1ShareAddress = ({
+-  account,
+-  name,
++// Adapted from StepReceiveFunds' Receive1ShareAddress/Receive2Device subtrees.
++import React from "react";
++import { QRCodeSVG } from "qrcode.react";
++import ReadOnlyAddressField from "./ReadOnlyAddressField.js";
++import { Action } from "./ModalBody.js";
++export default function StepReceiveFunds({
++  accountName,
+   address,
+-  showQRCodeModal,
+-  suppressUTXOAlert,
++  network,
++  verified,
++  connected,
++  busy,
++  stage,
++  rangeError,
++  canNewAddress,
+ }: {
+-  account: Account;
+-  name: string;
++  accountName: string;
+   address: string;
+-  showQRCodeModal: () => void;
+-  suppressUTXOAlert?: boolean;
+-}) => {
+-  const { currency } = account;
+-
+-  const isUTXOCompliantCurrency = isUTXOCompliant(currency.family);
+-  const shouldRenderMemoTagInfo = currency.family && MEMO_TAG_COINS.includes(currency.family);
+-
+-  return (
+-    <Box data-testid="receive-public-address-block" style={{ display: "contents" }}>
+-      <Box horizontal alignItems="center" flow={2} mb={4}>
+-        <Text
+-          style={{
+-            flex: 1,
+-          }}
+-          ff="Inter|SemiBold"
+-          color="neutral.c100"
+-          fontSize={4}
+-        >
+-          {name ? (
+-            <Box horizontal alignItems="center" flexWrap="wrap">
+-              <Ellipsis>
+-                <Trans i18nKey="currentAddress.for">
+-                  {"Address for "}
+-                  <strong>{name}</strong>
+-                </Trans>
+-              </Ellipsis>
+-              <AccountTagDerivationMode account={account} />
+-            </Box>
+-          ) : (
+-            <Trans i18nKey="currentAddress.title" />
+-          )}
+-        </Text>
+-        <LinkShowQRCode onClick={showQRCodeModal} address={address} />
+-      </Box>
+-      <ReadOnlyAddressField address={address} />
+-
+-      {isUTXOCompliantCurrency && !suppressUTXOAlert && (
+-        <Box mt={3}>
+-          <UTXOAddressAlert />
+-        </Box>
+-      )}
+-      <FeatureToggle featureId="lldMemoTag">
+-        {shouldRenderMemoTagInfo && (
+-          <Box mt={3}>
+-            <MemoTagInfo />
+-          </Box>
+-        )}
+-      </FeatureToggle>
+-    </Box>
+-  );
+-};
+-const Receive2Device = ({ name, device }: { name: string; device: Device }) => {
+-  const type = useTheme().theme;
++  network: string;
++  verified: boolean;
++  connected: boolean;
++  busy: boolean;
++  stage: number;
++  rangeError: boolean;
++  canNewAddress: boolean;
++}) {
+   return (
+     <>
+-      <Box horizontal alignItems="center" flow={2} data-testid="receive-device-animation">
+-        <Text
+-          style={{
+-            flexShrink: "unset",
+-          }}
+-          ff="Inter|SemiBold"
+-          color="neutral.c100"
+-          fontSize={4}
+-        >
+-          <span
+-            style={{
+-              marginRight: 10,
+-            }}
++      <section hidden={stage !== 0}>
++        <div className="ledger-fields">
++          <label>Account to credit</label>
++          <div className="ledger-account-row">
++            {accountName}
++            <span>{network}</span>
++          </div>
++        </div>
++        <div className="ledger-step-footer">
++          <Action id="receive-continue" disabled={busy}>
++            Continue
++          </Action>
++        </div>
++      </section>
++      <section hidden={stage !== 1}>
++        <div className="ledger-device">
++          <h3>Verify address on device</h3>
++          <p>Compare the address on your Ledger before approving.</p>
++          <p className="ledger-recipient">{address}</p>
++          {!connected && (
++            <Action id="connect-inline" disabled={busy}>
++              Connect Ledger
++            </Action>
++          )}
++        </div>
++        <div className="ledger-step-footer">
++          <button id="receive-back" className="ghost" disabled={busy}>
++            Back
++          </button>
++          <Action
++            id="verify-receive"
++            disabled={busy || !connected || rangeError}
+           >
+-            <Trans
+-              i18nKey="currentAddress.messageIfUnverified"
+-              value={{
+-                name,
+-              }}
+-            />
+-          </span>
+-          <LinkWithExternalIcon
+-            style={{
+-              display: "inline-flex",
+-            }}
+-            onClick={() => openURL(urls.recipientAddressInfo)}
+-            label={<Trans i18nKey="common.learnMore" />}
++            Verify on Ledger
++          </Action>
++        </div>
++      </section>
++      <section hidden={stage !== 2}>
++        <div className="ledger-fields">
++          <h3>Address for {accountName}</h3>
++          {verified && (
++            <div className="ledger-receive-qr">
++              <QRCodeSVG
++                value={address}
++                size={160}
++                level="M"
++                marginSize={0}
++                title="Verified receive address"
++                data-qrcode-address={address}
++              />
++            </div>
++          )}
++          <ReadOnlyAddressField
++            address={address}
++            allowCopy={verified}
++            busy={busy}
+           />
+-        </Text>
+-      </Box>
+-
+-      {renderVerifyUnwrapped({
+-        modelId: device.modelId,
+-        type,
+-      })}
++          <p className="hint">
++            {verified
++              ? "Address verified on your Ledger."
++              : "Verify the address on your Ledger before using it."}
++          </p>
++          <button
++            id="new-receive"
++            className="ghost"
++            disabled={busy || !verified || !canNewAddress}
++          >
++            New address
++          </button>
++        </div>
++      </section>
++      {rangeError && (
++        <div className="notice error">
++          This address index is outside the supported range. Check Settings →
++          Advanced.
++        </div>
++      )}
+     </>
+   );
+-};
+-
+-const StepReceiveFunds = (props: StepProps) => {
+-  const {
+-    isAddressVerified,
+-    account,
+-    parentAccount,
+-    device,
+-    onChangeAddressVerified,
+-    transitionTo,
+-    onResetSkip,
+-    verifyAddressError,
+-    token,
+-    onClose,
+-    eventType,
+-    currencyName,
+-    receiveTokenMode,
+-    isFromPostOnboardingEntryPoint,
+-  } = props;
+-  const dispatch = useDispatch();
+-  const isOnboardingReceiveFlow = useSelector(onboardingReceiveFlowSelector);
+-  const specific = useLLDCoinFamily(
+-    account ? getMainAccount(account, parentAccount)?.currency.family : undefined,
+-  );
+-  const featureFlags = useFeatureFlags();
+-
+-  const receiveStakingFlowConfig = useFeature("receiveStakingFlowConfigDesktop");
+-  const stakePrograms = useVersionedStakePrograms();
+-  const receivedCurrencyId: string | undefined =
+-    account && account.type !== "TokenAccount" ? account?.currency?.id : undefined;
+-  // Check if the received currency has a redirect configured in stakePrograms
+-  // If so, the user should use the Earn live app instead of the old staking modal
+-  const hasStakeProgramsRedirect =
+-    !!receivedCurrencyId && !!stakePrograms?.params?.redirects?.[receivedCurrencyId];
+-  const isStakingEnabledForAccount =
+-    !!receivedCurrencyId &&
+-    receiveStakingFlowConfig?.enabled &&
+-    receiveStakingFlowConfig?.params?.[receivedCurrencyId]?.enabled;
+-  const isDirectStakingEnabledForAccount =
+-    !!receivedCurrencyId && receiveStakingFlowConfig?.params?.[receivedCurrencyId]?.direct;
+-  const isSPLToken =
+-    account &&
+-    account.type === "TokenAccount" &&
+-    getCryptoCurrencyById(account.token.parentCurrencyId).family === "solana";
+-
+-  const mainAccount = account ? getMainAccount(account, parentAccount) : null;
+-  invariant(account && mainAccount, "No account given");
+-  const maybeAccountName = useMaybeAccountName(account);
+-  const name = token ? token.name : maybeAccountName || getDefaultAccountName(account);
+-  const address = mainAccount.freshAddress;
+-  const [modalVisible, setModalVisible] = useState(false);
+-  const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
+-  const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
+-  // `isAddressVerified` stays `null` for the whole device confirmation, so without this latch a
+-  // re-render would start a concurrent verification and break the ongoing one.
+-  const isConfirmingRef = useRef(false);
+-
+-  const confirmAddress = useCallback(async () => {
+-    if (isConfirmingRef.current) return;
+-    isConfirmingRef.current = true;
+-    try {
+-      if (getEnv("MOCK")) {
+-        await new Promise(resolve => setTimeout(resolve, 3000));
+-        onChangeAddressVerified(true);
+-        transitionTo("receive");
+-      } else {
+-        if (!device) {
+-          throw new DisconnectedDevice();
+-        }
+-        const bridge = await getAccountBridge(mainAccount);
+-        await firstValueFrom(
+-          bridge.receive(mainAccount, {
+-            deviceId: device.deviceId,
+-            verify: true,
+-          }),
+-        );
+-        onChangeAddressVerified(true);
+-        hideQRCodeModal();
+-        transitionTo("receive");
+-      }
+-    } catch (err) {
+-      onChangeAddressVerified(false, err as Error);
+-      hideQRCodeModal();
+-    } finally {
+-      isConfirmingRef.current = false;
+-    }
+-  }, [device, mainAccount, transitionTo, onChangeAddressVerified, hideQRCodeModal]);
+-
+-  const onVerify = useCallback(() => {
+-    onChangeAddressVerified(null);
+-    onResetSkip();
+-    transitionTo("device");
+-  }, [onChangeAddressVerified, onResetSkip, transitionTo]);
+-
+-  const onFinishReceiveFlow = useCallback(() => {
+-    const dismissModal =
+-      global.localStorage.getItem(`${LOCAL_STORAGE_KEY_PREFIX}${receivedCurrencyId}`) === "true";
+-    if (
+-      !dismissModal &&
+-      !receiveTokenMode &&
+-      isStakingEnabledForAccount &&
+-      !isFromPostOnboardingEntryPoint &&
+-      !isSPLToken &&
+-      !isOnboardingReceiveFlow &&
+-      !hasStakeProgramsRedirect
+-    ) {
+-      track("button_clicked2", {
+-        button: "continue",
+-        page: window.location.hash
+-          .split("/")
+-          .filter(e => e !== "#")
+-          .join("/"),
+-        currency: currencyName,
+-        modal: "receive",
+-        account: name,
+-      });
+-      // Only open EVM staking modal if the user received ETH or an EVM currency supported by the providers
+-      if (isDirectStakingEnabledForAccount) {
+-        dispatch(
+-          openModal("MODAL_EVM_STAKE", {
+-            account: mainAccount,
+-            hasCheckbox: true,
+-            singleProviderRedirectMode: false,
+-            source: "receive",
+-          }),
+-        );
+-        onClose();
+-      } else {
+-        transitionTo("stakingFlow");
+-      }
+-    } else {
+-      onClose();
+-    }
+-  }, [
+-    receivedCurrencyId,
+-    isFromPostOnboardingEntryPoint,
+-    receiveTokenMode,
+-    isStakingEnabledForAccount,
+-    isDirectStakingEnabledForAccount,
+-    currencyName,
+-    name,
+-    dispatch,
+-    mainAccount,
+-    onClose,
+-    transitionTo,
+-    isSPLToken,
+-    isOnboardingReceiveFlow,
+-    hasStakeProgramsRedirect,
+-  ]);
+-
+-  // custom family UI for StepReceiveFunds
+-  const CustomStepReceiveFunds = specific?.StepReceiveFunds;
+-
+-  // Evaluated during render, so it must stay hook-free: the resolved family
+-  // changes when the user switches account.
+-  const customConfirmAddress = specific?.useCustomConfirmAddress;
+-  const usesCustomConfirm =
+-    typeof customConfirmAddress === "function"
+-      ? customConfirmAddress(mainAccount, featureFlags)
+-      : (customConfirmAddress ?? false);
+-
+-  useEffect(() => {
+-    if (usesCustomConfirm) return;
+-    if (isAddressVerified === null) {
+-      confirmAddress();
+-    }
+-  }, [usesCustomConfirm, isAddressVerified, confirmAddress]);
+-
+-  if (CustomStepReceiveFunds) {
+-    return <CustomStepReceiveFunds {...props} />;
+-  }
+-
+-  const DeviceAnimationSlot = specific?.StepReceiveFundsDeviceAnimation;
+-
+-  const CustomPostAlertReceiveFunds = specific?.StepReceiveFundsPostAlert;
+-
+-  return (
+-    <>
+-      <Box px={2}>
+-        <TrackPage
+-          category={`Receive Flow${eventType ? ` (${eventType})` : ""}`}
+-          name="Step 3"
+-          currencyName={currencyName}
+-        />
+-        {
+-          verifyAddressError ? (
+-            <ErrorDisplay error={verifyAddressError} onRetry={onVerify} />
+-          ) : isAddressVerified === true ? (
+-            // Address was confirmed on device! we display a success screen!
+-
+-            <Box alignItems="center">
+-              <SuccessDisplay
+-                title={<Trans i18nKey="receive.successTitle" />}
+-                description={
+-                  <LinkWithExternalIcon
+-                    style={{
+-                      display: "inline-flex",
+-                      marginLeft: "10px",
+-                    }}
+-                    onClick={() => openURL(urls.recipientAddressInfo)}
+-                    label={<Trans i18nKey="common.learnMore" />}
+-                  />
+-                }
+-              >
+-                <Box flow={4} pt={4} horizontal justifyContent="center">
+-                  <Button event="Page Receive Step 3 re-verify" outlineGrey onClick={onVerify}>
+-                    <Trans i18nKey="common.reverify" />
+-                  </Button>
+-                  <Button data-testid="modal-continue-button" primary onClick={onFinishReceiveFlow}>
+-                    <Trans i18nKey="common.done" />
+-                  </Button>
+-                </Box>
+-              </SuccessDisplay>
+-            </Box>
+-          ) : isAddressVerified === false ? (
+-            // User explicitly bypass device verification (no device)
+-            <>
+-              <Receive1ShareAddress
+-                account={mainAccount}
+-                name={name}
+-                address={address}
+-                showQRCodeModal={showQRCodeModal}
+-                suppressUTXOAlert={usesCustomConfirm}
+-              />
+-              {CustomPostAlertReceiveFunds && <CustomPostAlertReceiveFunds {...props} />}
+-              <Alert type="security" learnMoreUrl={urls.recipientAddressInfo} mt={4}>
+-                <Trans
+-                  i18nKey="currentAddress.messageIfSkipped"
+-                  values={{
+-                    name,
+-                  }}
+-                />
+-              </Alert>
+-              <Separator2 />
+-              <Receive2NoDevice onVerify={onVerify} onContinue={onFinishReceiveFlow} />
+-            </>
+-          ) : device ? (
+-            // verification with device
+-            <>
+-              <Receive1ShareAddress
+-                account={mainAccount}
+-                name={name}
+-                address={address}
+-                showQRCodeModal={showQRCodeModal}
+-                suppressUTXOAlert={usesCustomConfirm}
+-              />
+-              {CustomPostAlertReceiveFunds && <CustomPostAlertReceiveFunds {...props} />}
+-              <>
+-                <Separator />
+-                {DeviceAnimationSlot ? (
+-                  <DeviceAnimationSlot
+-                    {...props}
+-                    device={device}
+-                    fallback={<Receive2Device device={device} name={name} />}
+-                  />
+-                ) : (
+-                  <Receive2Device device={device} name={name} />
+-                )}
+-              </>
+-            </>
+-          ) : null // should not happen
+-        }
+-      </Box>
+-      <Modal isOpened={modalVisible} onClose={hideQRCodeModal} centered width={460}>
+-        <ModalBody
+-          onClose={hideQRCodeModal}
+-          render={() => (
+-            <Box alignItems="center">
+-              <QRCodeWrapper>
+-                <QRCode size={160} data={address} />
+-              </QRCodeWrapper>
+-              <Box mt={6}>
+-                <ReadOnlyAddressField address={address} />
+-              </Box>
+-            </Box>
+-          )}
+-        />
+-      </Modal>
+-    </>
+-  );
+-};
+-export default StepReceiveFunds;
++}
+--- a/src/ledger-ui/StepAmount.tsx
++++ b/src/ledger-ui/StepAmount.tsx
+@@ -1,143 +1,164 @@
+-import React, { Fragment, PureComponent } from "react";
+-import invariant from "invariant";
+-import { Trans } from "react-i18next";
+-import { getMainAccount } from "@ledgerhq/live-common/account/index";
+-import TrackPage from "~/renderer/analytics/TrackPage";
+-import Box from "~/renderer/components/Box";
+-import Button from "~/renderer/components/Button";
+-import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
+-import ErrorBanner from "~/renderer/components/ErrorBanner";
+-import SpendableBanner from "~/renderer/components/SpendableBanner";
+-
+-import AccountFooter from "../AccountFooter";
+-import SendAmountFields from "../SendAmountFields";
+-import AmountField from "../fields/AmountField";
+-import { StepProps } from "../types";
+-import { closeAllModal } from "~/renderer/actions/modals";
+-import { useDispatch } from "LLD/hooks/redux";
+-import LowGasAlertBuyMore from "~/renderer/components/LowGasAlertBuyMore";
+-import { useLLDCoinFamily } from "~/renderer/families";
+-
+-export const DefaultStepAmount = (props: StepProps) => {
+-  const dispatch = useDispatch();
+-  const {
+-    t,
+-    account,
+-    parentAccount,
+-    transaction,
+-    onChangeTransaction,
+-    error,
+-    status,
+-    bridgePending,
+-    maybeAmount,
+-    onResetMaybeAmount,
+-    updateTransaction,
+-    currencyName,
+-    walletConnectProxy,
+-  } = props;
+-  invariant(transaction, "transaction required");
+-  invariant(account, "account required");
+-
+-  const mainAccount = getMainAccount(account, parentAccount);
+-  invariant(mainAccount, "main account required");
+-
+-  if (!status) return null;
+-  const { errors } = status;
+-  const { gasPrice } = errors;
+-
++// Adapted from Ledger Wallet's amount step and Bitcoin fee-selection pattern.
++import React from "react";
++import { Action, Html } from "./ModalBody.js";
++export default function StepAmount({
++  amount,
++  fee,
++  available,
++  maxLabel,
++  maxDisabled,
++  feeHint,
++  quotes,
++  quotesSupported,
++  feeMode,
++  feeTime,
++  feeLoading,
++  feeOptionsOpen,
++  advanced,
++  busy,
++  active,
++}: {
++  amount: string;
++  fee: string;
++  available: string;
++  maxLabel: string;
++  maxDisabled: boolean;
++  feeHint: string;
++  quotes: {
++    blocks: number;
++    label: string;
++    disabled: boolean;
++    selected?: boolean;
++    time?: string;
++  }[];
++  quotesSupported: boolean;
++  feeMode: string;
++  feeTime: string;
++  feeLoading: boolean;
++  feeOptionsOpen: boolean;
++  advanced: string;
++  busy: boolean;
++  active: boolean;
++}) {
+   return (
+-    <Box flow={4}>
+-      <TrackPage
+-        category="Send Flow"
+-        name="Step Amount"
+-        currencyName={currencyName}
+-        walletConnectSend={walletConnectProxy}
+-      />
+-      <CurrencyDownStatusAlert currencies={[mainAccount.currency]} />
+-      {error ? <ErrorBanner error={error} /> : null}
+-      <Fragment key={account.id}>
+-        <SpendableBanner
+-          account={account}
+-          parentAccount={parentAccount}
+-          transaction={transaction}
+-        />
+-
+-        <AmountField
+-          status={status}
+-          account={account}
+-          parentAccount={parentAccount}
+-          transaction={transaction}
+-          onChangeTransaction={onChangeTransaction}
+-          bridgePending={bridgePending}
+-          walletConnectProxy={walletConnectProxy}
+-          t={t}
+-          initValue={maybeAmount}
+-          resetInitValue={onResetMaybeAmount}
+-        />
+-
+-        <SendAmountFields
+-          account={mainAccount}
+-          parentAccount={parentAccount}
+-          status={status}
+-          transaction={transaction}
+-          onChange={onChangeTransaction}
+-          bridgePending={bridgePending}
+-          updateTransaction={updateTransaction}
+-        />
+-        <LowGasAlertBuyMore
+-          account={mainAccount}
+-          handleRequestClose={() => dispatch(closeAllModal())}
+-          gasPriceError={gasPrice}
+-          trackingSource={"send flow"}
+-        />
+-      </Fragment>
+-    </Box>
++    <section hidden={!active}>
++      <div className="ledger-fields">
++        <div className="field">
++          <div className="ledger-field-label">
++            <label htmlFor="amount">Amount</label>
++            <button
++              id="send-max"
++              className="ghost"
++              disabled={busy || maxDisabled}
++            >
++              {maxLabel}
++            </button>
++          </div>
++          <div className="ledger-currency-input">
++            <input
++              id="amount"
++              autoFocus={active}
++              defaultValue={amount}
++              readOnly={busy}
++              inputMode="decimal"
++              placeholder="0.00"
++            />
++            <span>PRL</span>
++          </div>
++          <p className="hint">Available: {available}</p>
++        </div>
++        <details id="fee-options" className="ledger-fees" open={feeOptionsOpen}>
++          <summary>
++            <span>
++              Network fees{" "}
++              <small>
++                <span id="fee-mode-label">{feeMode}</span>
++                <span id="fee-time">{feeTime ? ` · ${feeTime}` : ""}</span>
++              </small>
++            </span>
++            <span>
++              <strong id="fee-total">
++                {amount.trim() ? `${fee} PRL` : "—"}
++              </strong>
++              <span aria-hidden="true">⌄</span>
++            </span>
++          </summary>
++          <div className="ledger-fee-options">
++            <div className="ledger-fee-presets" aria-label="Fee options">
++              <button
++                id="fee-standard"
++                className="secondary"
++                aria-pressed={feeMode === "Standard"}
++                disabled={busy}
++              >
++                Standard
++              </button>
++              {quotes.map((quote) => (
++                <button
++                  key={quote.blocks}
++                  id={`fee-target-${quote.blocks}`}
++                  className="secondary"
++                  aria-pressed={quote.selected}
++                  title={`Target: about ${quote.blocks} blocks`}
++                  disabled={busy || quote.disabled}
++                >
++                  <span id={`fee-target-label-${quote.blocks}`}>
++                    {quote.label}
++                  </span>
++                  <small id={`fee-target-time-${quote.blocks}`}>
++                    {quote.time}
++                  </small>
++                </button>
++              ))}
++              <button
++                id="fee-custom"
++                className="secondary"
++                aria-pressed={feeMode === "Custom"}
++                disabled={busy}
++              >
++                Custom
++              </button>
++            </div>
++            <div className="field" hidden={feeMode !== "Custom"}>
++              <label htmlFor="fee">Custom total fee</label>
++              <div className="ledger-currency-input">
++                <input
++                  id="fee"
++                  defaultValue={fee}
++                  readOnly={busy || feeMode !== "Custom"}
++                  inputMode="decimal"
++                />
++                <span>PRL</span>
++              </div>
++            </div>
++            <p id="fee-policy" className="hint" aria-live="polite">
++              {feeHint}
++            </p>
++            <div className="ledger-fee-tools">
++              {quotesSupported && (
++                <button id="refresh-fees" className="ghost" disabled={busy}>
++                  Refresh estimates
++                </button>
++              )}
++              <button id="coin-control-open" className="ghost" disabled={busy}>
++                Coin control
++              </button>
++            </div>
++          </div>
++        </details>
++        <Html text={advanced} />
++      </div>
++      <div className="ledger-step-footer">
++        <button id="send-back-recipient" className="ghost" disabled={busy}>
++          Back
++        </button>
++        <Action
++          id="prepare"
++          disabled={busy || (feeLoading && feeMode !== "Custom")}
++        >
++          Continue
++        </Action>
++      </div>
++    </section>
+   );
+-};
+-
+-const StepAmount = (props: StepProps) => {
+-  const { account, parentAccount } = props;
+-  const mainAccount = account ? getMainAccount(account, parentAccount) : null;
+-  const specific = useLLDCoinFamily(mainAccount?.currency.family);
+-
+-  if (!account) {
+-    return null;
+-  }
+-
+-  const Component = specific?.SendStepAmount ?? DefaultStepAmount;
+-
+-  return <Component {...props} />;
+-};
+-
+-export class StepAmountFooter extends PureComponent<StepProps> {
+-  onNext = async () => {
+-    const { transitionTo } = this.props;
+-    transitionTo("summary");
+-  };
+-
+-  render() {
+-    const { account, parentAccount, status, bridgePending } = this.props;
+-    const { errors } = status;
+-    if (!account) return null;
+-    const hasErrors = Object.keys(errors).length;
+-    const canNext = !bridgePending && !hasErrors;
+-
+-    return (
+-      <>
+-        <AccountFooter parentAccount={parentAccount} account={account} status={status} />
+-
+-        <Button
+-          id={"send-amount-continue-button"}
+-          isLoading={bridgePending}
+-          primary
+-          disabled={!canNext}
+-          onClick={this.onNext}
+-        >
+-          <Trans i18nKey="common.continue" />
+-        </Button>
+-      </>
+-    );
+-  }
+ }
+-
+-export default StepAmount;
+--- a/src/ledger-ui/StepRecipient.tsx
++++ b/src/ledger-ui/StepRecipient.tsx
+@@ -1,410 +1,73 @@
+-import React, { useMemo } from "react";
+-import { useAccountBridgeOrNull } from "@ledgerhq/live-common/bridge/useAccountBridge";
+-import { Trans } from "react-i18next";
+-import { getMainAccount, isSendDisabledForFamily } from "@ledgerhq/live-common/account/index";
+-import TrackPage from "~/renderer/analytics/TrackPage";
+-import Box from "~/renderer/components/Box";
+-import Button from "~/renderer/components/Button";
+-import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
+-import ErrorBanner from "~/renderer/components/ErrorBanner";
+-import Label from "~/renderer/components/Label";
+-import SelectAccount from "~/renderer/components/SelectAccount";
+-import SendRecipientFields, { getFields } from "../SendRecipientFields";
+-import RecipientField from "../fields/RecipientField";
+-import { StepProps } from "../types";
+-import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator";
+-import EditOperationPanel from "~/renderer/components/OperationsList/EditOperationPanel";
+-import { MEMO_TAG_COINS } from "LLD/features/MemoTag/constants";
+-import { useDispatch, useSelector } from "LLD/hooks/redux";
+-import { setMemoTagInfoBoxDisplay } from "~/renderer/actions/UI";
+-import {
+-  forceAutoFocusOnMemoFieldSelector,
+-  memoTagBoxVisibilitySelector,
+-} from "~/renderer/reducers/UI";
+-import MemoTagSendInfo from "LLD/features/MemoTag/components/MemoTagSendInfo";
+-import { Flex, Link, Text } from "@ledgerhq/react-ui";
+-import CheckBox from "~/renderer/components/CheckBox";
+-import { alwaysShowMemoTagInfoSelector } from "~/renderer/reducers/settings";
+-import { toggleShouldDisplayMemoTagInfo } from "~/renderer/actions/settings";
+-import { useFeature } from "@features/platform-feature-flags";
+-import { getMemoTagValueByTransactionFamily } from "LLD/features/MemoTag/utils";
+-import {
+-  getTokenExtensions,
+-  hasProblematicExtension,
+-} from "@ledgerhq/live-common/families/solana/token";
+-import Alert from "~/renderer/components/Alert";
+-import { openURL } from "~/renderer/linking";
+-import { urls } from "~/config/urls";
+-import { useLLDCoinFamily } from "~/renderer/families";
+-import { useNewSendFlowFeature } from "LLD/features/Send/hooks/useNewSendFlowFeature";
+-import { Account, AccountLike, Operation } from "@ledgerhq/types-live";
+-import { Transaction, TransactionStatus } from "@ledgerhq/live-common/generated/types";
+-
+-const openSplTokenExtensionsArticle = () => openURL(urls.solana.splTokenExtensions);
+-
+-type StuckAccountAndOperation = {
+-  account: AccountLike;
+-  parentAccount: Account | undefined;
+-  operation: Operation;
+-};
+-
+-type SendStepRecipientFromSelectorComponent = React.ComponentType<{
+-  account: Account;
+-  transaction: Transaction;
+-  onChange: (t: Transaction) => void;
+-}>;
+-
+-type SendStepAboveRecipientInputComponent = React.ComponentType<{
+-  account: Account;
+-  transaction: Transaction;
+-  onChange: (t: Transaction) => void;
+-}>;
+-
+-const SenderErrorBanner = ({ error }: { error: Error }) => (
+-  <div data-testid="sender-error-container">
+-    <ErrorBanner dataTestId="sender-error" error={error} />
+-  </div>
+-);
+-
+-const SplProblematicExtensionWarning = ({ account }: { account: AccountLike }) => {
+-  const extensions = getTokenExtensions(account);
+-  if (!extensions || !hasProblematicExtension(extensions)) return null;
+-
++// Adapted from modals/Send/steps/StepRecipient.tsx; one PRL account replaces SelectAccount.
++import React from "react";
++import { Action } from "./ModalBody.js";
++export default function StepRecipient({
++  recipient,
++  accountName,
++  network,
++  scanning,
++  busy,
++  active,
++}: {
++  recipient: string;
++  accountName: string;
++  network: string;
++  scanning: boolean;
++  busy: boolean;
++  active: boolean;
++}) {
+   return (
+-    <Alert data-testid="spl-2022-problematic-extension" type="warning" small={true}>
+-      <Trans i18nKey="send.steps.details.splExtensionsWarning">
+-        <Link type="color" onClick={openSplTokenExtensionsArticle} />
+-      </Trans>
+-    </Alert>
++    <section hidden={!active}>
++      <div className="ledger-fields">
++        <div className="field">
++          <label>Account to debit</label>
++          <div className="ledger-account-row">
++            {accountName}
++            <span>{network}</span>
++          </div>
++        </div>
++        <div className="field">
++          <label htmlFor="recipient">Recipient address</label>
++          <input
++            id="recipient"
++            autoFocus={active}
++            defaultValue={recipient}
++            readOnly={busy}
++            autoComplete="off"
++            spellCheck={false}
++            placeholder="Enter a Pearl address"
++          />
++          <div className="ledger-recipient-tools">
++            <button id="scan-qr" className="ghost" disabled={busy}>
++              Scan QR code
++            </button>
++            <label className="ledger-file-button">
++              Choose QR image
++              <input
++                id="recipient-qr-file"
++                type="file"
++                accept="image/png,image/jpeg,image/webp"
++                disabled={busy}
++              />
++            </label>
++          </div>
++          {scanning && (
++            <video
++              id="recipient-camera"
++              className="ledger-qr-camera"
++              autoPlay
++              playsInline
++              muted
++              aria-label="QR camera preview"
++            />
++          )}
++        </div>
++      </div>
++      <div className="ledger-step-footer">
++        <Action id="recipient-continue" disabled={busy}>
++          Continue
++        </Action>
++      </div>
++    </section>
+   );
+-};
+-
+-type RecipientFormFieldsProps = {
+-  t: StepProps["t"];
+-  mainAccount: Account;
+-  parentAccount: StepProps["parentAccount"];
+-  transaction: Transaction;
+-  status: TransactionStatus;
+-  openedFromAccount: boolean;
+-  forceAutoFocusOnMemoField: boolean;
+-  onChangeTransaction: StepProps["onChangeTransaction"];
+-  maybeRecipient?: string;
+-  onResetMaybeRecipient: () => void;
+-  SendStepAboveRecipientInput?: SendStepAboveRecipientInputComponent;
+-};
+-
+-const RecipientFormFields = ({
+-  t,
+-  mainAccount,
+-  parentAccount,
+-  transaction,
+-  status,
+-  openedFromAccount,
+-  forceAutoFocusOnMemoField,
+-  onChangeTransaction,
+-  maybeRecipient,
+-  onResetMaybeRecipient,
+-  SendStepAboveRecipientInput,
+-}: RecipientFormFieldsProps) => (
+-  <>
+-    {SendStepAboveRecipientInput ? (
+-      <SendStepAboveRecipientInput
+-        account={mainAccount}
+-        transaction={transaction}
+-        onChange={onChangeTransaction}
+-      />
+-    ) : null}
+-    <RecipientField
+-      status={status}
+-      autoFocus={openedFromAccount && !forceAutoFocusOnMemoField}
+-      account={mainAccount}
+-      transaction={transaction}
+-      onChangeTransaction={onChangeTransaction}
+-      t={t}
+-      initValue={maybeRecipient}
+-      resetInitValue={onResetMaybeRecipient}
+-    />
+-    <SendRecipientFields
+-      account={mainAccount}
+-      parentAccount={parentAccount}
+-      status={status}
+-      transaction={transaction}
+-      onChange={onChangeTransaction}
+-      autoFocus={forceAutoFocusOnMemoField}
+-    />
+-  </>
+-);
+-
+-type RecipientStepContentProps = {
+-  t: StepProps["t"];
+-  account: AccountLike;
+-  mainAccount: Account;
+-  parentAccount: StepProps["parentAccount"];
+-  transaction: StepProps["transaction"];
+-  status: TransactionStatus;
+-  error: StepProps["error"];
+-  openedFromAccount: boolean;
+-  forceAutoFocusOnMemoField: boolean;
+-  accountFilter: (acc: Account) => boolean;
+-  stuckAccountAndOperation: StuckAccountAndOperation | undefined;
+-  SendStepRecipientFromSelector?: SendStepRecipientFromSelectorComponent;
+-  SendStepAboveRecipientInput?: SendStepAboveRecipientInputComponent;
+-  onChangeAccount: StepProps["onChangeAccount"];
+-  onChangeTransaction: StepProps["onChangeTransaction"];
+-  maybeRecipient?: string;
+-  onResetMaybeRecipient: () => void;
+-};
+-
+-const RecipientStepContent = ({
+-  t,
+-  account,
+-  mainAccount,
+-  parentAccount,
+-  transaction,
+-  status,
+-  error,
+-  openedFromAccount,
+-  forceAutoFocusOnMemoField,
+-  accountFilter,
+-  stuckAccountAndOperation,
+-  SendStepRecipientFromSelector,
+-  SendStepAboveRecipientInput,
+-  onChangeAccount,
+-  onChangeTransaction,
+-  maybeRecipient,
+-  onResetMaybeRecipient,
+-}: RecipientStepContentProps) => (
+-  <>
+-    <CurrencyDownStatusAlert currencies={[mainAccount.currency]} />
+-    {error ? <ErrorBanner error={error} /> : null}
+-    {status.errors?.sender ? <SenderErrorBanner error={status.errors.sender} /> : null}
+-
+-    <Box flow={1}>
+-      <Label>{t("send.steps.details.selectAccountDebit")}</Label>
+-      <SelectAccount
+-        id="account-debit-placeholder"
+-        withSubAccounts
+-        enforceHideEmptySubAccounts
+-        autoFocus={!openedFromAccount && !forceAutoFocusOnMemoField}
+-        onChange={onChangeAccount}
+-        value={account}
+-        filter={accountFilter}
+-      />
+-    </Box>
+-
+-    {SendStepRecipientFromSelector && transaction ? (
+-      <SendStepRecipientFromSelector
+-        account={mainAccount}
+-        transaction={transaction}
+-        onChange={onChangeTransaction}
+-      />
+-    ) : null}
+-
+-    <SplProblematicExtensionWarning account={account} />
+-    {stuckAccountAndOperation ? (
+-      <EditOperationPanel
+-        operation={stuckAccountAndOperation.operation}
+-        account={stuckAccountAndOperation.account}
+-        parentAccount={stuckAccountAndOperation.parentAccount}
+-      />
+-    ) : null}
+-    <StepRecipientSeparator />
+-    {transaction ? (
+-      <RecipientFormFields
+-        t={t}
+-        mainAccount={mainAccount}
+-        parentAccount={parentAccount}
+-        transaction={transaction}
+-        status={status}
+-        openedFromAccount={openedFromAccount}
+-        forceAutoFocusOnMemoField={forceAutoFocusOnMemoField}
+-        onChangeTransaction={onChangeTransaction}
+-        maybeRecipient={maybeRecipient}
+-        onResetMaybeRecipient={onResetMaybeRecipient}
+-        SendStepAboveRecipientInput={SendStepAboveRecipientInput}
+-      />
+-    ) : null}
+-  </>
+-);
+-
+-export const DefaultStepRecipient = ({
+-  t,
+-  account,
+-  parentAccount,
+-  openedFromAccount,
+-  transaction,
+-  onChangeAccount,
+-  onChangeTransaction,
+-  error,
+-  status,
+-  maybeRecipient,
+-  onResetMaybeRecipient,
+-  currencyName,
+-}: StepProps) => {
+-  const isMemoTagBoxVisibile = useSelector(memoTagBoxVisibilitySelector);
+-  const forceAutoFocusOnMemoField = useSelector(forceAutoFocusOnMemoFieldSelector);
+-  const lldMemoTag = useFeature("lldMemoTag");
+-  const { isEnabledForFamily } = useNewSendFlowFeature();
+-  const bridge = useAccountBridgeOrNull(account ?? null, parentAccount);
+-  const mainAccount = account ? getMainAccount(account, parentAccount) : null;
+-  const specific = useLLDCoinFamily<Account, Transaction, TransactionStatus, Operation>(
+-    mainAccount?.currency.family,
+-  );
+-
+-  const accountFilter = useMemo(
+-    () => (acc: Account) => {
+-      const family = acc.currency.family;
+-      return !isSendDisabledForFamily(family) && !isEnabledForFamily(family, acc.currency.id);
+-    },
+-    [isEnabledForFamily],
+-  );
+-
+-  if (!status || !account || !mainAccount) return null;
+-
+-  // check if there is a stuck transaction. If so, display a warning panel with "speed up or cancel" button
+-  const stuckAccountAndOperation = bridge?.getStuckAccountAndOperation(account, parentAccount);
+-
+-  return (
+-    <Box flow={4}>
+-      <TrackPage category="Send Flow" name="Step Recipient" currencyName={currencyName} />
+-      {isMemoTagBoxVisibile && lldMemoTag?.enabled ? (
+-        <MemoTagSendInfo />
+-      ) : (
+-        <RecipientStepContent
+-          t={t}
+-          account={account}
+-          mainAccount={mainAccount}
+-          parentAccount={parentAccount}
+-          transaction={transaction}
+-          status={status}
+-          error={error}
+-          openedFromAccount={openedFromAccount}
+-          forceAutoFocusOnMemoField={forceAutoFocusOnMemoField}
+-          accountFilter={accountFilter}
+-          stuckAccountAndOperation={stuckAccountAndOperation}
+-          SendStepRecipientFromSelector={specific?.SendStepRecipientFromSelector}
+-          SendStepAboveRecipientInput={specific?.SendStepAboveRecipientInput}
+-          onChangeAccount={onChangeAccount}
+-          onChangeTransaction={onChangeTransaction}
+-          maybeRecipient={maybeRecipient}
+-          onResetMaybeRecipient={onResetMaybeRecipient}
+-        />
+-      )}
+-    </Box>
+-  );
+-};
+-
+-const StepRecipient = (props: StepProps) => {
+-  const { account, parentAccount } = props;
+-  const mainAccount = account ? getMainAccount(account, parentAccount) : null;
+-  const specific = useLLDCoinFamily(mainAccount?.currency.family);
+-
+-  if (!account) {
+-    return null;
+-  }
+-
+-  const Component = specific?.SendStepRecipient ?? DefaultStepRecipient;
+-
+-  return <Component {...props} />;
+-};
+-
+-export const StepRecipientFooter = ({
+-  t,
+-  account,
+-  parentAccount,
+-  status,
+-  bridgePending,
+-  transitionTo,
+-  transaction,
+-}: StepProps) => {
+-  const dispatch = useDispatch();
+-  const lldMemoTag = useFeature("lldMemoTag");
+-  const { errors } = status;
+-  const mainAccount = account ? getMainAccount(account, parentAccount) : null;
+-  const specific = useLLDCoinFamily(mainAccount?.currency.family);
+-  const fields = ["recipient"].concat(
+-    mainAccount ? getFields(mainAccount, lldMemoTag?.enabled, specific?.sendRecipientFields) : [],
+-  );
+-  const hasFieldError = Object.keys(errors).some(name => fields.includes(name));
+-  const customValidationSuccess = specific?.sendRecipientCanNext?.(status) ?? true;
+-  const canNext =
+-    !bridgePending && !hasFieldError && customValidationSuccess && !status.errors.sender;
+-  const isMemoTagBoxVisibile = useSelector(memoTagBoxVisibilitySelector);
+-  const alwaysShowMemoTagInfo = useSelector(alwaysShowMemoTagInfoSelector);
+-
+-  const handleOnNext = async () => {
+-    if (
+-      transaction &&
+-      lldMemoTag?.enabled &&
+-      typeof transaction.family === "string" &&
+-      MEMO_TAG_COINS.includes(transaction.family) &&
+-      alwaysShowMemoTagInfo
+-    ) {
+-      const memoTagValue = getMemoTagValueByTransactionFamily(transaction);
+-      if (!memoTagValue) {
+-        dispatch(
+-          setMemoTagInfoBoxDisplay({
+-            isMemoTagBoxVisible: true,
+-          }),
+-        );
+-        return;
+-      }
+-    }
+-    transitionTo("amount");
+-  };
+-
+-  const handleOnRefuseAddTag = () => {
+-    dispatch(setMemoTagInfoBoxDisplay({ isMemoTagBoxVisible: false }));
+-    transitionTo("amount");
+-  };
+-
+-  const handleOnAddTag = () => {
+-    dispatch(
+-      setMemoTagInfoBoxDisplay({
+-        isMemoTagBoxVisible: false,
+-        forceAutoFocusOnMemoField: true,
+-      }),
+-    );
+-  };
+-
+-  const handleOnCheckboxChange = () => {
+-    dispatch(toggleShouldDisplayMemoTagInfo(!alwaysShowMemoTagInfo));
+-  };
+-
+-  return isMemoTagBoxVisibile && lldMemoTag?.enabled ? (
+-    <Flex justifyContent="space-between" width="100%">
+-      <Flex alignItems="center">
+-        <CheckBox isChecked={!alwaysShowMemoTagInfo} onChange={handleOnCheckboxChange} />
+-        <Text
+-          ff="Inter|SemiBold"
+-          fontSize={4}
+-          style={{
+-            marginLeft: 8,
+-            overflowWrap: "break-word",
+-            flex: 1,
+-          }}
+-        >
+-          {t("send.info.needMemoTag.checkbox.label")}
+-        </Text>
+-      </Flex>
+-      <Flex columnGap={2}>
+-        <Button onClick={handleOnRefuseAddTag}>{t("send.info.needMemoTag.cta.not.addTag")}</Button>
+-        <Button primary onClick={handleOnAddTag}>
+-          {t("send.info.needMemoTag.cta.addTag")}
+-        </Button>
+-      </Flex>
+-    </Flex>
+-  ) : (
+-    <Button
+-      id={"send-recipient-continue-button"}
+-      isLoading={bridgePending}
+-      primary
+-      disabled={!canNext}
+-      onClick={handleOnNext}
+-    >
+-      {t("common.continue")}
+-    </Button>
+-  );
+-};
+-
+-export default StepRecipient;
++}
+--- a/src/ledger-ui/StepSummary.tsx
++++ b/src/ledger-ui/StepSummary.tsx
+@@ -1,416 +1,59 @@
+-import React, { useMemo } from "react";
+-import { Trans } from "react-i18next";
+-import styled from "styled-components";
+-import {
+-  getAccountCurrency,
+-  getFeesCurrency,
+-  getFeesUnit,
+-  getMainAccount,
+-  findSubAccountById,
+-} from "@ledgerhq/live-common/account/index";
+-import TrackPage from "~/renderer/analytics/TrackPage";
+-import Box from "~/renderer/components/Box";
+-import Button from "~/renderer/components/Button";
+-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+-import Ellipsis from "~/renderer/components/Ellipsis";
+-import FormattedVal from "~/renderer/components/FormattedVal";
+-import Text from "~/renderer/components/Text";
+-import TranslatedError from "~/renderer/components/TranslatedError";
+-import IconExclamationCircle from "~/renderer/icons/ExclamationCircle";
+-import IconQrCode from "~/renderer/icons/QrCode";
+-import IconWallet from "~/renderer/icons/Wallet";
+-import { rgba } from "~/renderer/styles/helpers";
+-import CounterValue from "~/renderer/components/CounterValue";
+-import Alert from "~/renderer/components/Alert";
+-import { StepProps } from "../types";
+-import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
+-import { useLLDCoinFamily } from "~/renderer/families";
+-import { useMaybeAccountUnit } from "~/renderer/hooks/useAccountUnit";
+-import { useMaybeAccountName } from "~/renderer/reducers/wallet";
+-import MemoIcon from "~/renderer/icons/MemoIcon";
+-import { Flex } from "@ledgerhq/react-ui";
+-import { useFeature } from "@features/platform-feature-flags";
+-import { getMemoTagValueByTransactionFamily } from "LLD/features/MemoTag/utils";
+-
+-const FromToWrapper = styled.div``;
+-const Circle = styled.div`
+-  height: 32px;
+-  width: 32px;
+-  border-radius: 32px;
+-  background-color: ${p => rgba(p.theme.colors.primary.c80, 0.1)};
+-  color: ${p => p.theme.colors.primary.c80};
+-  align-items: center;
+-  display: flex;
+-  justify-content: center;
+-  margin-right: 12px;
+-`;
+-const VerticalSeparator = styled.div`
+-  height: 18px;
+-  background: ${p => p.theme.colors.neutral.c40};
+-  width: 1px;
+-  margin: 1px 0px 0px 15px;
+-`;
+-const Separator = styled.div`
+-  height: 1px;
+-  background: ${p => p.theme.colors.neutral.c40};
+-  width: 100%;
+-  margin: 15px 0;
+-`;
+-
+-const WARN_FROM_UTXO_COUNT = 50;
+-
+-const StepSummary = (props: StepProps) => {
+-  const { account, parentAccount, transaction, status, currencyName, transitionTo } = props;
+-  const mainAccount = account && getMainAccount(account, parentAccount);
+-  const unit = useMaybeAccountUnit(account);
+-  const accountName = useMaybeAccountName(account);
+-  const lldMemoTag = useFeature("lldMemoTag");
+-  const specific = useLLDCoinFamily(
+-    transaction && mainAccount ? mainAccount.currency.family : undefined,
++// Adapted from Ledger Wallet 4.23.0 StepSummary's From/To and amount/fees/total rows.
++import React from "react";
++import { Html } from "./ModalBody.js";
++export default function StepSummary({
++  accountName,
++  recipient,
++  amount,
++  fee,
++  total,
++  network,
++  details,
++  warning,
++}: {
++  accountName: string;
++  recipient: string;
++  amount: string;
++  fee: string;
++  total: string;
++  network: string;
++  details: string;
++  warning: string;
++}) {
++  return (
++    <div className="ledger-summary">
++      {warning && <div className="notice error">{warning}</div>}
++      <div className="ledger-from-to">
++        <div>
++          <span className="ledger-label">From</span>
++          <p>{accountName}</p>
++        </div>
++        <div>
++          <span className="ledger-label">To</span>
++          <p className="ledger-recipient" data-testid="recipient-address">
++            {recipient}
++          </p>
++        </div>
++      </div>
++      <div className="ledger-separator" />
++      <div className="ledger-summary-row">
++        <span className="ledger-label">Amount</span>
++        <span data-testid="transaction-amount">{amount}</span>
++      </div>
++      <div className="ledger-summary-row">
++        <span className="ledger-label">Network fees</span>
++        <span>{fee}</span>
++      </div>
++      <div className="ledger-separator" />
++      <div className="ledger-summary-row">
++        <span className="ledger-label">Total to debit</span>
++        <span>{total}</span>
++      </div>
++      <div className="ledger-summary-row">
++        <span className="ledger-label">Network</span>
++        <span>{network}</span>
++      </div>
++      <Html text={details} />
++    </div>
+   );
+-  const feeCurrencyAccount = useMemo(() => {
+-    if (!mainAccount || !status.feeCurrencyAccountId) return null;
+-    return findSubAccountById(mainAccount, status.feeCurrencyAccountId) ?? null;
+-  }, [mainAccount, status.feeCurrencyAccountId]);
+-
+-  if (!account || !mainAccount || !transaction) {
+-    return null;
+-  }
+-
+-  const { estimatedFees, amount, totalSpent, warnings } = status;
+-  const txInputs = "txInputs" in status ? status.txInputs : undefined;
+-  const { feeTooHigh, tooManyUtxos } = warnings;
+-  const currency = getAccountCurrency(account);
+-
+-  const feesCurrency = getFeesCurrency(feeCurrencyAccount ?? mainAccount);
+-  const feesUnit = getFeesUnit(feesCurrency);
+-  const utxoLag = txInputs ? txInputs.length >= WARN_FROM_UTXO_COUNT : null;
+-  const hasNonEmptySubAccounts =
+-    account.type === "Account" &&
+-    (account.subAccounts || []).some(subAccount => subAccount.balance.gt(0));
+-  const SpecificSummaryNetworkFeesRow = specific?.StepSummaryNetworkFeesRow;
+-  const SpecificSummaryFromAddress = specific?.StepSummaryFromAddress;
+-  const SpecificSummaryRecipientValue = specific?.StepSummaryRecipientValue;
+-  const SpecificSummaryAdditionalRows = specific?.StepSummaryAdditionalRows;
+-  const SpecificSummaryPostAlert = specific?.StepSummaryPostAlert;
+-
+-  const memo = lldMemoTag?.enabled
+-    ? getMemoTagValueByTransactionFamily(transaction)
+-    : (
+-        transaction as Transaction & {
+-          memo: string;
+-        }
+-      )?.memo;
+-  const handleOnEditMemo = () => {
+-    transitionTo("recipient");
+-  };
+-
+-  return (
+-    <Box flow={4} mx={40}>
+-      <TrackPage category="Send Flow" name="Step Summary" currencyName={currencyName} />
+-      {utxoLag ? (
+-        <Alert type="warning">
+-          <Trans i18nKey="send.steps.details.utxoLag" />
+-        </Alert>
+-      ) : null}
+-      {tooManyUtxos ? (
+-        <Alert type="warning">
+-          <Trans i18nKey={tooManyUtxos.message} />
+-        </Alert>
+-      ) : null}
+-      {transaction.useAllAmount && hasNonEmptySubAccounts ? (
+-        <Alert type="primary">
+-          <Trans
+-            i18nKey="send.steps.details.subaccountsWarning"
+-            values={{
+-              currency: currency.name,
+-            }}
+-          />
+-        </Alert>
+-      ) : null}
+-      <FromToWrapper>
+-        <Box>
+-          <Box horizontal alignItems="center">
+-            <Circle>
+-              <IconWallet size={14} />
+-            </Circle>
+-            <Box flex="1">
+-              <Text ff="Inter|Medium" color="neutral.c60" fontSize={4}>
+-                <Trans i18nKey="send.steps.details.from" />
+-              </Text>
+-              <Box horizontal alignItems="center">
+-                <div
+-                  style={{
+-                    marginRight: 7,
+-                  }}
+-                >
+-                  <CryptoCurrencyIcon size={22} currency={currency} />
+-                </div>
+-                {SpecificSummaryFromAddress ? (
+-                  <SpecificSummaryFromAddress
+-                    account={account}
+-                    parentAccount={parentAccount}
+-                    transaction={transaction}
+-                  />
+-                ) : (
+-                  <Text
+-                    ff="Inter"
+-                    color="neutral.c100"
+-                    fontSize={4}
+-                    style={{
+-                      flex: 1,
+-                    }}
+-                  >
+-                    {accountName}
+-                  </Text>
+-                )}
+-                <AccountTagDerivationMode account={account} />
+-              </Box>
+-            </Box>
+-          </Box>
+-          <VerticalSeparator />
+-          <Box horizontal alignItems="center">
+-            <Circle>
+-              <IconQrCode size={14} />
+-            </Circle>
+-            <Box flex={1}>
+-              <Text ff="Inter|Medium" color="neutral.c60" fontSize={4}>
+-                <Trans i18nKey="send.steps.details.to" />
+-              </Text>
+-              {transaction.recipientDomain && (
+-                <Text
+-                  data-testid="transaction-recipient-ens"
+-                  ff="Inter|Bold"
+-                  color="neutral.c100"
+-                  fontSize={4}
+-                >
+-                  {transaction.recipientDomain.domain}
+-                </Text>
+-              )}
+-              {SpecificSummaryRecipientValue ? (
+-                <SpecificSummaryRecipientValue
+-                  account={account}
+-                  parentAccount={parentAccount}
+-                  transaction={transaction}
+-                />
+-              ) : (
+-                <Ellipsis>
+-                  <Text
+-                    ff="Inter"
+-                    color={transaction.recipientDomain ? "neutral.c80" : "neutral.c100"}
+-                    fontSize={4}
+-                    data-testid="recipient-address"
+-                  >
+-                    {transaction.recipient}
+-                  </Text>
+-                </Ellipsis>
+-              )}
+-            </Box>
+-          </Box>
+-          {lldMemoTag?.enabled
+-            ? memo && (
+-                <>
+-                  <VerticalSeparator />
+-                  <Flex justifyContent="space-between">
+-                    <Box horizontal alignItems="center">
+-                      <Circle>
+-                        <MemoIcon size={14} />
+-                      </Circle>
+-                      <Box flex={1}>
+-                        <Text ff="Inter|Medium" color="neutral.c60" fontSize={4}>
+-                          <Trans i18nKey="operationDetails.extra.memo" />
+-                        </Text>
+-                        <Ellipsis>
+-                          <Text
+-                            ff="Inter"
+-                            color={transaction.recipientDomain ? "neutral.c80" : "neutral.c100"}
+-                            fontSize={4}
+-                            data-testid="recipient-address"
+-                          >
+-                            {memo}
+-                          </Text>
+-                        </Ellipsis>
+-                      </Box>
+-                    </Box>
+-                    <Button
+-                      lighterPrimary
+-                      style={{
+-                        backgroundColor: "transparent",
+-                      }}
+-                      onClick={handleOnEditMemo}
+-                    >
+-                      Edit
+-                    </Button>
+-                  </Flex>
+-                </>
+-              )
+-            : memo && (
+-                <Box horizontal justifyContent="space-between" alignItems="center" mb={2}>
+-                  <Text ff="Inter|Medium" color="neutral.c60" fontSize={4}>
+-                    <Trans i18nKey="operationDetails.extra.memo" />
+-                  </Text>
+-                  <Ellipsis ml={2}>
+-                    <Text ff="Inter|Medium" fontSize={4}>
+-                      {memo}
+-                    </Text>
+-                  </Ellipsis>
+-                </Box>
+-              )}
+-        </Box>
+-        <Separator />
+-        <Box horizontal justifyContent="space-between" mb={2}>
+-          <Text ff="Inter|Medium" color="neutral.c60" fontSize={4}>
+-            <Trans i18nKey="send.steps.details.amount" />
+-          </Text>
+-          <Box>
+-            <FormattedVal
+-              color={"neutral.c80"}
+-              disableRounding
+-              unit={unit}
+-              val={amount}
+-              fontSize={4}
+-              inline
+-              showCode
+-              alwaysShowValue
+-              data-testid="transaction-amount"
+-            />
+-            <Box textAlign="right">
+-              <CounterValue
+-                color="neutral.c70"
+-                fontSize={3}
+-                currency={currency}
+-                value={amount}
+-                alwaysShowSign={false}
+-                alwaysShowValue
+-              />
+-            </Box>
+-          </Box>
+-        </Box>
+-
+-        {SpecificSummaryNetworkFeesRow ? (
+-          <SpecificSummaryNetworkFeesRow
+-            feeTooHigh={feeTooHigh}
+-            feesUnit={feesUnit}
+-            estimatedFees={estimatedFees}
+-            feesCurrency={feesCurrency}
+-            transaction={transaction}
+-          />
+-        ) : (
+-          <>
+-            <Box horizontal justifyContent="space-between">
+-              <Text ff="Inter|Medium" color="neutral.c60" fontSize={4}>
+-                <Trans i18nKey="send.steps.details.fees" />
+-              </Text>
+-              <Box>
+-                <FormattedVal
+-                  color={feeTooHigh ? "legacyWarning" : "neutral.c80"}
+-                  disableRounding
+-                  unit={feesUnit}
+-                  alwaysShowValue
+-                  val={estimatedFees}
+-                  fontSize={4}
+-                  inline
+-                  showCode
+-                />
+-                <Box textAlign="right">
+-                  <CounterValue
+-                    color={feeTooHigh ? "legacyWarning" : "neutral.c70"}
+-                    fontSize={3}
+-                    currency={feesCurrency}
+-                    value={estimatedFees}
+-                    alwaysShowSign={false}
+-                    alwaysShowValue
+-                  />
+-                </Box>
+-              </Box>
+-            </Box>
+-            {feeTooHigh ? (
+-              <Box horizontal justifyContent="flex-end" alignItems="center" color="legacyWarning">
+-                <IconExclamationCircle size={10} />
+-                <Text
+-                  ff="Inter|Medium"
+-                  fontSize={2}
+-                  style={{
+-                    marginLeft: "5px",
+-                  }}
+-                >
+-                  <TranslatedError error={feeTooHigh} />
+-                </Text>
+-              </Box>
+-            ) : null}
+-          </>
+-        )}
+-
+-        {!!SpecificSummaryAdditionalRows && (
+-          <SpecificSummaryAdditionalRows
+-            account={account}
+-            parentAccount={parentAccount}
+-            transaction={transaction}
+-            status={status}
+-          />
+-        )}
+-
+-        {feesCurrency.id === currency.id && !totalSpent.eq(amount) ? (
+-          <>
+-            <Separator />
+-            <Box horizontal justifyContent="space-between">
+-              <Text ff="Inter|Medium" color="neutral.c60" fontSize={4}>
+-                <Trans i18nKey="send.totalSpent" />
+-              </Text>
+-
+-              <Box>
+-                <FormattedVal
+-                  color={"neutral.c80"}
+-                  disableRounding
+-                  unit={estimatedFees.eq(totalSpent) ? feesUnit : unit}
+-                  val={totalSpent}
+-                  fontSize={4}
+-                  inline
+-                  showCode
+-                  alwaysShowValue
+-                />
+-                <Box textAlign="right">
+-                  <CounterValue
+-                    color="neutral.c70"
+-                    fontSize={3}
+-                    currency={currency}
+-                    value={totalSpent}
+-                    alwaysShowSign={false}
+-                    alwaysShowValue
+-                  />
+-                </Box>
+-              </Box>
+-            </Box>
+-          </>
+-        ) : null}
+-
+-        {SpecificSummaryPostAlert && <SpecificSummaryPostAlert />}
+-      </FromToWrapper>
+-    </Box>
+-  );
+-};
+-
+-export const StepSummaryFooter = (props: StepProps) => {
+-  const { account, status, bridgePending, transitionTo } = props;
+-
+-  const onNext = async () => {
+-    transitionTo("device");
+-  };
+-
+-  if (!account) {
+-    return null;
+-  }
+-
+-  const { errors } = status;
+-  const canNext = !bridgePending && !Object.keys(errors).length;
+-
+-  return (
+-    <>
+-      <Button id={"send-summary-continue-button"} primary disabled={!canNext} onClick={onNext}>
+-        <Trans i18nKey="common.continue" />
+-      </Button>
+-    </>
+-  );
+-};
+-
+-export default StepSummary;
++}
+--- a/src/qr-reader.ts
++++ b/src/qr-reader.ts
+@@ -1,4 +1,7 @@
+-import { useCallback, useEffect, useRef, useState } from "react";
+-import jsQR from "jsqr";
+-import { NoAccessToCamera } from "@ledgerhq/live-common/errors";
+-import logger from "~/renderer/logger";
++/** QR decoding follows Ledger Wallet 4.23.0's jsQR camera loop; see vendor provenance. */
++import {
++  addressToScript,
++  assert,
++  parsePrl,
++  type NetworkName,
++} from "@pearl-ledger/sdk";
+@@ -6,5 +9,30 @@
+-const DECODE_INTERVAL_MS = 400;
+-const CAMERA_TIMEOUT_MS = 20000;
+-// Decoding cost is per pixel, and a QR code needs far less than a camera's native resolution
+-const DECODE_MAX_WIDTH = 640;
+-const DECODE_IDEAL_HEIGHT = 480;
++export function parsePaymentQr(text: string, network: NetworkName) {
++  assert(
++    typeof text === "string" && text.length > 0 && text.length <= 2048,
++    "Invalid payment QR code",
++  );
++  let address = text.trim(),
++    amount: string | undefined;
++  if (/^pearl:/i.test(address)) {
++    const uri = new URL(address);
++    assert(
++      uri.protocol.toLowerCase() === "pearl:" && !uri.host && !uri.hash,
++      "Invalid Pearl payment request",
++    );
++    address = uri.pathname;
++    const seen = new Set<string>();
++    for (const [key, value] of uri.searchParams) {
++      assert(
++        !seen.has(key) && ["amount", "label", "message"].includes(key),
++        "Unsupported payment request field",
++      );
++      seen.add(key);
++      if (key === "amount") {
++        assert(parsePrl(value) > 0n, "Payment request amount must be positive");
++        amount = value;
++      }
++    }
++  }
++  addressToScript(address, network);
++  return { address, amount };
++}
+@@ -12,3 +40,47 @@
+-type UseQrCodeScannerParams = Readonly<{
+-  onPick: (code: string) => void;
+-}>;
++async function decoder() {
++  const { default: decode } = await import("jsqr");
++  return decode;
++}
++export async function readQrImage(
++  file: File,
++  signal: AbortSignal,
++): Promise<string> {
++  assert(
++    file.size > 0 &&
++      file.size <= 8 * 1024 * 1024 &&
++      ["image/png", "image/jpeg", "image/webp"].includes(file.type),
++    "Choose a PNG, JPEG or WebP QR image under 8 MB",
++  );
++  signal.throwIfAborted();
++  const bitmap = await createImageBitmap(file, {
++    resizeWidth: 1024,
++    resizeHeight: 1024,
++    resizeQuality: "high",
++  });
++  try {
++    signal.throwIfAborted();
++    assert(
++      bitmap.width > 0 &&
++        bitmap.height > 0 &&
++        bitmap.width * bitmap.height <= 4_000_000,
++      "QR image is too large",
++    );
++    const canvas = document.createElement("canvas");
++    canvas.width = bitmap.width;
++    canvas.height = bitmap.height;
++    const context = canvas.getContext("2d", { willReadFrequently: true });
++    assert(context, "Image scanning is unavailable here");
++    context.drawImage(bitmap, 0, 0);
++    const decode = await decoder();
++    signal.throwIfAborted();
++    const code = decode(
++      context.getImageData(0, 0, canvas.width, canvas.height).data,
++      canvas.width,
++      canvas.height,
++    );
++    assert(code?.data, "No readable QR code found in this image");
++    return code.data;
++  } finally {
++    bitmap.close();
++  }
++}
+@@ -16,23 +88,46 @@
+-type UseQrCodeScannerResult = Readonly<{
+-  videoRef: React.RefObject<HTMLVideoElement | null>;
+-  error: Error | null;
+-  isLoading: boolean;
+-}>;
+-
+-export function useQrCodeScanner({ onPick }: UseQrCodeScannerParams): UseQrCodeScannerResult {
+-  const videoRef = useRef<HTMLVideoElement | null>(null);
+-  const [error, setError] = useState<Error | null>(null);
+-  const [isLoading, setIsLoading] = useState(true);
+-
+-  // Keeps the decode loop stable while still calling the latest handler
+-  const onPickRef = useRef(onPick);
+-  useEffect(() => {
+-    onPickRef.current = onPick;
+-  }, [onPick]);
+-
+-  const requestStream = useCallback(async (): Promise<MediaStream> => {
+-    if (!navigator.mediaDevices) throw new NoAccessToCamera();
+-
+-    // getUserMedia never settles when the OS prompt is left unanswered
+-    return Promise.race([
+-      navigator.mediaDevices.getUserMedia({
++export async function scanCamera(
++  video: HTMLVideoElement,
++  signal: AbortSignal,
++): Promise<string> {
++  assert(
++    navigator.mediaDevices?.getUserMedia,
++    "Camera unavailable. Choose a QR image or paste the address.",
++  );
++  const decode = await decoder();
++  signal.throwIfAborted();
++  return new Promise((resolve, reject) => {
++    let stream: MediaStream | undefined,
++      timer: ReturnType<typeof setInterval> | undefined,
++      settled = false;
++    const canvas = document.createElement("canvas"),
++      context = canvas.getContext("2d", { willReadFrequently: true });
++    const finish = (error?: Error, value?: string) => {
++      if (settled) return;
++      settled = true;
++      clearTimeout(timeout);
++      clearInterval(timer);
++      signal.removeEventListener("abort", abort);
++      stream?.getTracks().forEach((track) => track.stop());
++      video.pause();
++      video.srcObject = null;
++      if (error) reject(error);
++      else resolve(value!);
++    };
++    const abort = () => finish(new Error("QR scan cancelled"));
++    const timeout = setTimeout(
++      () =>
++        finish(new Error("Camera timed out. Choose a QR image or try again.")),
++      30_000,
++    );
++    signal.addEventListener("abort", abort, { once: true });
++    if (signal.aborted) {
++      abort();
++      return;
++    }
++    if (!context) {
++      finish(new Error("Camera scanning is unavailable here"));
++      return;
++    }
++    void navigator.mediaDevices
++      .getUserMedia({
++        audio: false,
+@@ -41,2 +136,2 @@
+-          width: { ideal: DECODE_MAX_WIDTH },
+-          height: { ideal: DECODE_IDEAL_HEIGHT },
++          width: { ideal: 640 },
++          height: { ideal: 480 },
+@@ -44,55 +139,8 @@
+-      }),
+-      new Promise<MediaStream>((_, reject) => {
+-        setTimeout(() => reject(new NoAccessToCamera()), CAMERA_TIMEOUT_MS);
+-      }),
+-    ]);
+-  }, []);
+-
+-  useEffect(() => {
+-    const video = videoRef.current;
+-    if (!video) return;
+-
+-    let cancelled = false;
+-    let stream: MediaStream | null = null;
+-    let intervalId: ReturnType<typeof setInterval> | undefined;
+-
+-    const canvas = document.createElement("canvas");
+-    const context = canvas.getContext("2d");
+-
+-    const decodeFrame = () => {
+-      if (!context || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
+-      if (!video.videoWidth || !video.videoHeight) return;
+-
+-      const scale = Math.min(1, DECODE_MAX_WIDTH / video.videoWidth);
+-      const width = Math.round(video.videoWidth * scale);
+-      const height = Math.round(video.videoHeight * scale);
+-
+-      if (canvas.width !== width || canvas.height !== height) {
+-        canvas.width = width;
+-        canvas.height = height;
+-      }
+-
+-      context.drawImage(video, 0, 0, width, height);
+-
+-      const { data } = context.getImageData(0, 0, width, height);
+-      const code = jsQR(data, width, height);
+-      if (code?.data) onPickRef.current(code.data);
+-    };
+-
+-    const start = async () => {
+-      try {
+-        stream = await requestStream();
+-      } catch (e) {
+-        if (cancelled) return;
+-        setError(new NoAccessToCamera(e instanceof Error ? e.message : undefined));
+-        setIsLoading(false);
+-        return;
+-      }
+-
+-      if (cancelled) {
+-        stream.getTracks().forEach(track => track.stop());
+-        return;
+-      }
+-
+-      video.srcObject = stream;
+-      try {
++      })
++      .then(async (acquired) => {
++        if (settled) {
++          acquired.getTracks().forEach((track) => track.stop());
++          return;
++        }
++        stream = acquired;
++        video.srcObject = stream;
+@@ -100,26 +148,35 @@
+-      } catch (e) {
+-        if (cancelled) return;
+-        logger.error(e);
+-        setError(new NoAccessToCamera(e instanceof Error ? e.message : undefined));
+-        setIsLoading(false);
+-        return;
+-      }
+-
+-      if (cancelled) return;
+-      setError(null);
+-      setIsLoading(false);
+-      intervalId = setInterval(decodeFrame, DECODE_INTERVAL_MS);
+-    };
+-
+-    start();
+-
+-    return () => {
+-      cancelled = true;
+-      if (intervalId !== undefined) clearInterval(intervalId);
+-      video.pause();
+-      video.srcObject = null;
+-      stream?.getTracks().forEach(track => track.stop());
+-    };
+-  }, [requestStream]);
+-
+-  return { videoRef, error, isLoading };
++        if (settled) return;
++        timer = setInterval(() => {
++          if (video.readyState < 2 || !video.videoWidth || !video.videoHeight)
++            return;
++          try {
++            const scale = Math.min(
++              1,
++              640 / Math.max(video.videoWidth, video.videoHeight),
++            );
++            canvas.width = Math.max(1, Math.round(video.videoWidth * scale));
++            canvas.height = Math.max(1, Math.round(video.videoHeight * scale));
++            context.drawImage(video, 0, 0, canvas.width, canvas.height);
++            const code = decode(
++              context.getImageData(0, 0, canvas.width, canvas.height).data,
++              canvas.width,
++              canvas.height,
++            );
++            if (code?.data) finish(undefined, code.data);
++          } catch {
++            finish(
++              new Error(
++                "Could not read the camera. Choose a QR image instead.",
++              ),
++            );
++          }
++        }, 400);
++      })
++      .catch(() =>
++        finish(
++          new Error(
++            "Camera access unavailable. Choose a QR image or paste the address.",
++          ),
++        ),
++      );
++  });
+--- /dev/null
++++ b/src/ledger-ui/index.tsx
+@@ -0,0 +1,130 @@
++import React from "react";
++import { renderToStaticMarkup } from "react-dom/server.edge";
++import ModalBody, { Html } from "./ModalBody.js";
++import StepRecipient from "./StepRecipient.js";
++import StepAmount from "./StepAmount.js";
++import StepSummary from "./StepSummary.js";
++import StepReceiveFunds from "./StepReceiveFunds.js";
++const sendSteps = ["Recipient", "Amount", "Summary", "Device", "Confirmation"];
++const markup = (view: React.ReactNode) =>
++  renderToStaticMarkup(view).replaceAll('disabled=""', "disabled");
++export function sendForm(props: {
++  feedback: string;
++  step: number;
++  recipient: string;
++  scanning: boolean;
++  amount: string;
++  fee: string;
++  available: string;
++  maxLabel: string;
++  maxDisabled: boolean;
++  feeHint: string;
++  quotes: {
++    blocks: number;
++    label: string;
++    disabled: boolean;
++    selected?: boolean;
++    time?: string;
++  }[];
++  quotesSupported: boolean;
++  feeMode: string;
++  feeTime: string;
++  feeLoading: boolean;
++  feeOptionsOpen: boolean;
++  accountName: string;
++  network: string;
++  advanced: string;
++  busy: boolean;
++}) {
++  return markup(
++    <ModalBody
++      title="Send"
++      steps={sendSteps}
++      step={props.step}
++      busy={props.busy}
++      feedback={props.feedback}
++    >
++      <StepRecipient
++        recipient={props.recipient}
++        scanning={props.scanning}
++        accountName={props.accountName}
++        network={props.network}
++        busy={props.busy}
++        active={props.step === 0}
++      />
++      <StepAmount
++        amount={props.amount}
++        fee={props.fee}
++        available={props.available}
++        maxLabel={props.maxLabel}
++        maxDisabled={props.maxDisabled}
++        feeHint={props.feeHint}
++        quotes={props.quotes}
++        quotesSupported={props.quotesSupported}
++        feeMode={props.feeMode}
++        feeTime={props.feeTime}
++        feeLoading={props.feeLoading}
++        feeOptionsOpen={props.feeOptionsOpen}
++        advanced={props.advanced}
++        busy={props.busy}
++        active={props.step === 1}
++      />
++    </ModalBody>,
++  );
++}
++export function reviewFlow(
++  props: React.ComponentProps<typeof StepSummary> & {
++    feedback: string;
++    stage: number;
++    busy: boolean;
++    actions: string;
++    status: string;
++  },
++) {
++  return markup(
++    <ModalBody
++      title="Send"
++      steps={sendSteps}
++      step={props.stage}
++      busy={props.busy}
++      feedback={props.feedback}
++      footer={
++        props.stage === 3 && props.busy ? undefined : (
++          <>
++            <Html text={props.actions} />
++            <button id="back-payments" className="ghost" disabled={props.busy}>
++              Back to activity
++            </button>
++          </>
++        )
++      }
++    >
++      {props.stage === 3 && (
++        <div className="ledger-device">
++          <h3>Verify transaction on device</h3>
++        </div>
++      )}
++      {props.stage === 4 && (
++        <h3 className="ledger-confirmation-title">{props.status}</h3>
++      )}
++      <div hidden={props.stage === 3}>
++        <StepSummary {...props} />
++      </div>
++    </ModalBody>,
++  );
++}
++export function receiveFlow(
++  props: React.ComponentProps<typeof StepReceiveFunds> & { feedback: string },
++) {
++  return markup(
++    <ModalBody
++      title="Receive"
++      steps={["Account", "Device", "Receive"]}
++      step={props.stage}
++      busy={props.busy}
++      feedback={props.feedback}
++    >
++      <StepReceiveFunds {...props} />
++    </ModalBody>,
++  );
++}
+--- /dev/null
++++ b/src/ledger-ui/styles.css
+@@ -0,0 +1,432 @@
++/* Ledger Wallet 4.23.0 Modal/Header/Content/Footer and Stepper styles,
++   adapted from styled-components to static CSS. See vendor provenance. */
++.ledger-modal {
++  width: 500px;
++  max-width: calc(100vw - 32px);
++  max-height: calc(100dvh - 32px);
++  padding: 0;
++  border: 0;
++  border-radius: 4px;
++  margin: auto;
++  color: var(--text-base);
++  background: #1c1d1f;
++  font: inherit;
++  overflow: auto;
++}
++.ledger-modal::backdrop {
++  background: rgba(0, 0, 0, 0.7);
++}
++.ledger-modal-header {
++  min-height: 66px;
++  padding: 8px 20px;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  position: relative;
++}
++.ledger-modal-header h2 {
++  margin: 0;
++  font-size: 18px;
++  line-height: 1;
++  font-weight: 500;
++}
++.ledger-modal-header button {
++  position: absolute;
++  right: 20px;
++}
++.ledger-modal-content {
++  padding: 20px 20px 40px;
++}
++.ledger-modal-footer {
++  border-top: 1px solid #3c3c3c;
++  padding: 20px;
++}
++.ledger-modal-footer > div > .ghost {
++  margin-left: 12px;
++}
++.ledger-step-footer {
++  display: flex;
++  justify-content: space-between;
++  align-items: center;
++  margin-top: 32px;
++  padding-top: 20px;
++  border-top: 1px solid #3c3c3c;
++}
++.ledger-step-footer > :last-child {
++  margin-left: auto;
++}
++.ledger-button {
++  font-size: 12px;
++  height: 40px;
++  line-height: 40px;
++  padding: 0 24px;
++  border-radius: 4px;
++}
++.ledger-breadcrumb {
++  display: flex;
++  align-items: flex-start;
++  margin: 0 0 55px;
++  padding-top: 2px;
++}
++.ledger-step {
++  flex: 1;
++  position: relative;
++  text-align: center;
++  font-size: 9px;
++  color: #717070;
++}
++.ledger-step::before {
++  content: "";
++  position: absolute;
++  top: 9px;
++  left: -50%;
++  width: 100%;
++  height: 1px;
++  background: #3c3c3c;
++}
++.ledger-step:first-child::before {
++  display: none;
++}
++.ledger-step-number {
++  display: flex;
++  position: relative;
++  margin: 0 auto;
++  justify-content: center;
++  align-items: center;
++  border-radius: 50%;
++  border: 1px solid #3c3c3c;
++  font-size: 10px;
++  height: 18px;
++  line-height: 18px;
++  width: 18px;
++  box-sizing: content-box;
++  background: #1c1d1f;
++}
++.ledger-step-label {
++  position: absolute;
++  top: 25px;
++  left: 0;
++  right: 0;
++  font-size: 13px;
++  line-height: 1.2;
++  padding: 0 4px;
++  font-weight: 500;
++}
++.ledger-step[data-status="active"],
++.ledger-step[data-status="valid"] {
++  color: #bbb0ff;
++}
++.ledger-step[data-status="active"] .ledger-step-number,
++.ledger-step[data-status="valid"] .ledger-step-number {
++  color: #000;
++  background: #bbb0ff;
++  border-color: #bbb0ff;
++}
++.ledger-step[data-status="active"] .ledger-step-label {
++  font-weight: 600;
++}
++.ledger-step[data-status="valid"]::before,
++.ledger-step[data-status="active"]::before {
++  background: #bbb0ff;
++}
++.ledger-step[data-status="error"] {
++  color: #ff6868;
++}
++.ledger-step[data-status="error"] .ledger-step-number {
++  background: #ff6868;
++  color: #000;
++}
++.ledger-fields {
++  display: flex;
++  flex-direction: column;
++  gap: 16px;
++}
++.ledger-fields .field {
++  margin: 0;
++}
++.ledger-account-row {
++  display: flex;
++  justify-content: space-between;
++  padding: 12px;
++  border: 1px solid #3c3c3c;
++  border-radius: 4px;
++  font-size: 14px;
++}
++.ledger-account-row span {
++  color: #949494;
++}
++.ledger-currency-input {
++  display: flex;
++  align-items: center;
++  border: 1px solid #3c3c3c;
++  border-radius: 4px;
++  background: #131214;
++}
++.ledger-currency-input input {
++  border: 0;
++  background: transparent;
++}
++.ledger-currency-input > span {
++  padding: 0 12px;
++  color: #949494;
++  font-size: 14px;
++}
++.ledger-summary {
++  margin: 0 20px;
++  font-size: 14px;
++}
++.ledger-from-to {
++  display: grid;
++  gap: 20px;
++}
++.ledger-from-to p {
++  margin: 4px 0 0;
++}
++.ledger-label {
++  color: #949494;
++  font-weight: 500;
++}
++.ledger-recipient {
++  word-break: break-all;
++}
++.ledger-separator {
++  height: 1px;
++  background: #3c3c3c;
++  width: 100%;
++  margin: 15px 0;
++}
++.ledger-summary-row {
++  display: flex;
++  justify-content: space-between;
++  gap: 16px;
++  margin-bottom: 8px;
++}
++.ledger-summary-row > :last-child {
++  text-align: right;
++  overflow-wrap: anywhere;
++}
++.ledger-summary .transaction-details {
++  margin: 24px 0 0;
++}
++.ledger-address-row {
++  display: flex;
++  align-items: stretch;
++}
++.ledger-address {
++  flex: 1;
++  padding: 12px 16px;
++  border: 1px solid #3c3c3c;
++  border-radius: 4px 0 0 4px;
++  background: #131214;
++  text-align: center;
++  font-size: 14px;
++  user-select: text;
++  word-break: break-all;
++}
++.ledger-address span:last-child {
++  word-break: keep-all;
++}
++.ledger-copy {
++  border-radius: 0 4px 4px 0;
++  border-left: 0;
++}
++.ledger-device {
++  text-align: center;
++  padding: 20px 0;
++}
++.ledger-device h3 {
++  margin-top: 0;
++  font-size: 18px;
++  font-weight: 500;
++}
++.ledger-device p {
++  color: #949494;
++  font-size: 14px;
++  margin: 12px 0;
++}
++.ledger-confirmation-title {
++  text-align: center;
++  font-size: 18px;
++  margin: 0 0 24px;
++}
++.ledger-modal .advanced {
++  margin-top: 24px;
++}
++@media (max-width: 500px) {
++  .ledger-step-label {
++    font-size: 11px;
++  }
++  .ledger-summary {
++    margin: 0;
++  }
++  .ledger-modal-content {
++    padding-right: 16px;
++    padding-left: 16px;
++  }
++}
++.ledger-receive-qr {
++  width: 208px;
++  height: 208px;
++  border: 24px solid white;
++  background: white;
++  margin: 0 auto 12px;
++}
++.ledger-field-label {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 12px;
++}
++.ledger-field-label > button.ghost {
++  padding: 0;
++  margin: 0;
++  font-size: 12px;
++}
++
++/* The normal amount step shows a compact fee row; advanced controls are opt-in. */
++.ledger-fees {
++  border-top: 1px solid #3c3c3c;
++  border-bottom: 1px solid #3c3c3c;
++}
++.ledger-fees > summary {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 16px;
++  padding: 18px 0;
++  list-style: none;
++  cursor: pointer;
++  font-size: 14px;
++}
++.ledger-fees > summary::-webkit-details-marker {
++  display: none;
++}
++.ledger-fees > summary > span:last-child {
++  display: flex;
++  align-items: center;
++  gap: 12px;
++  text-align: right;
++}
++.ledger-fees small {
++  display: block;
++  margin-top: 4px;
++  color: #949494;
++  font-weight: 400;
++  font-size: 12px;
++}
++.ledger-fee-options {
++  padding: 0 0 16px;
++}
++.ledger-fee-presets {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: 8px;
++  margin-bottom: 16px;
++}
++.ledger-fee-presets button {
++  padding: 10px;
++  font-size: 12px;
++  min-height: 44px;
++}
++.ledger-fee-presets button[aria-pressed="true"] {
++  border-color: #bbb0ff;
++  color: #bbb0ff;
++}
++.ledger-fee-tools,
++.ledger-recipient-tools {
++  display: flex;
++  flex-wrap: wrap;
++  align-items: center;
++  gap: 12px;
++  margin-top: 8px;
++}
++.ledger-fee-tools .ghost,
++.ledger-recipient-tools .ghost {
++  padding: 8px 0;
++  font-size: 13px;
++}
++.ledger-file-button {
++  cursor: pointer;
++  color: #bbb0ff;
++  font-size: 13px;
++  margin: 0;
++  padding: 8px 0;
++}
++.ledger-file-button input {
++  position: absolute;
++  width: 1px;
++  height: 1px;
++  opacity: 0;
++}
++.ledger-file-button:focus-within {
++  outline: 2px solid #bbb0ff;
++  outline-offset: 3px;
++}
++.ledger-qr-camera {
++  width: 100%;
++  max-height: 280px;
++  object-fit: contain;
++  border-radius: 4px;
++  background: #000;
++}
++.ledger-coin-control {
++  padding: 16px 0;
++}
++.ledger-coin-control h3 {
++  font-size: 14px;
++  margin: 0;
++}
++.ledger-coin-control .coin {
++  padding: 14px 0;
++  gap: 12px;
++  font-size: 12px;
++}
++.ledger-coin-control .coin input {
++  width: 18px;
++  height: 18px;
++  min-width: 18px;
++}
++.ledger-coin-control .coin-info {
++  min-width: 0;
++}
++.ledger-coin-control .coin-info .mono {
++  max-width: 190px;
++}
++.ledger-coin-control .coin-value {
++  font-size: 13px;
++  white-space: nowrap;
++}
++@media (max-width: 500px) {
++  .ledger-modal {
++    width: 100%;
++    max-width: 100vw;
++    max-height: 100dvh;
++    min-height: 100dvh;
++    border-radius: 0;
++  }
++  .ledger-modal-header {
++    position: sticky;
++    top: 0;
++    z-index: 1;
++    background: #1c1d1f;
++  }
++  .ledger-step-footer {
++    padding-bottom: env(safe-area-inset-bottom);
++  }
++  .ledger-address-row {
++    min-width: 0;
++  }
++  .ledger-address {
++    min-width: 0;
++    padding: 12px;
++  }
++  .ledger-copy {
++    padding: 0 12px;
++  }
++  .ledger-coin-control .coin-info .mono {
++    max-width: 110px;
++  }
++  .ledger-fees > summary {
++    gap: 8px;
++  }
++}

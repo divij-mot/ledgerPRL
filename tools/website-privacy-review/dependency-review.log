@@ -1,0 +1,8 @@
+{
+  "scope": "Real pinned DMK/WebHID code; browser HID surface mocked to reject",
+  "discoveryPickerCalls": 1,
+  "outboundFetchWebSocketBeaconCalls": 0,
+  "defaultSentryClientPresent": false,
+  "captureHookInvoked": true,
+  "limitation": "One default error path in an isolated Node process; not a complete live-browser/extension audit or guarantee against a separately initialized same-origin Sentry client."
+}

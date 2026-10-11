@@ -1,0 +1,702 @@
+[
+  {
+    "label": "account",
+    "text": "Pearl | Send and receive Pearl. | Quit app",
+    "events": [
+      {
+        "text": "Pearl",
+        "x": 195,
+        "y": 258,
+        "w": 89,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Send and receive Pearl.",
+        "x": 84,
+        "y": 314,
+        "w": 312,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Quit app",
+        "x": 183,
+        "y": 534,
+        "w": 114,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Network | Mainnet | Path | 86'/808276'/0' | Reject | 2 of 4",
+    "events": [
+      {
+        "text": "Network",
+        "x": 32,
+        "y": 40,
+        "w": 112,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Mainnet",
+        "x": 32,
+        "y": 80,
+        "w": 140,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Path",
+        "x": 32,
+        "y": 144,
+        "w": 61,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "86'/808276'/0'",
+        "x": 32,
+        "y": 184,
+        "w": 254,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 53,
+        "y": 534,
+        "w": 86,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "2 of 4",
+        "x": 297,
+        "y": 534,
+        "w": 78,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Public key | xpub6CmLJcTUDaYDW | TB7Qf8HgVhHB28ZErt | Qv1vZF84Ef91odKrnaD | 2jtCr4xSe5VJPRfzPJ8m | Twt3uaMZ59hjH9SZpz | sactK6tSXSmvqcbXjbA | Reject | 3 of 4",
+    "events": [
+      {
+        "text": "Public key",
+        "x": 32,
+        "y": 40,
+        "w": 136,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "xpub6CmLJcTUDaYDW",
+        "x": 32,
+        "y": 80,
+        "w": 410,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "TB7Qf8HgVhHB28ZErt",
+        "x": 32,
+        "y": 120,
+        "w": 396,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Qv1vZF84Ef91odKrnaD",
+        "x": 32,
+        "y": 160,
+        "w": 403,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "2jtCr4xSe5VJPRfzPJ8m",
+        "x": 32,
+        "y": 200,
+        "w": 416,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Twt3uaMZ59hjH9SZpz",
+        "x": 32,
+        "y": 240,
+        "w": 400,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "sactK6tSXSmvqcbXjbA",
+        "x": 32,
+        "y": 280,
+        "w": 401,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 53,
+        "y": 534,
+        "w": 86,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "3 of 4",
+        "x": 296,
+        "y": 534,
+        "w": 79,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Approve public key | Reject | 4 of 4 | Approve",
+    "events": [
+      {
+        "text": "Approve public key",
+        "x": 74,
+        "y": 196,
+        "w": 332,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 53,
+        "y": 534,
+        "w": 86,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "4 of 4",
+        "x": 296,
+        "y": 534,
+        "w": 79,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Approve",
+        "x": 182,
+        "y": 418,
+        "w": 416,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Public key | approved",
+    "events": [
+      {
+        "text": "Public key",
+        "x": 151,
+        "y": 304,
+        "w": 177,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "approved",
+        "x": 157,
+        "y": 344,
+        "w": 165,
+        "h": 44,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Address | prl1pdmqd2wzd3e2unr | kvq880t24acsrf8zffzqj | qr356pmd93cve9eqs4 | u7tjx | Show as QR | Cancel | 2 of 3",
+    "events": [
+      {
+        "text": "Address",
+        "x": 32,
+        "y": 40,
+        "w": 109,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "prl1pdmqd2wzd3e2unr",
+        "x": 32,
+        "y": 80,
+        "w": 403,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "kvq880t24acsrf8zffzqj",
+        "x": 32,
+        "y": 120,
+        "w": 397,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "qr356pmd93cve9eqs4",
+        "x": 32,
+        "y": 160,
+        "w": 397,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "u7tjx",
+        "x": 32,
+        "y": 200,
+        "w": 84,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Show as QR",
+        "x": 186,
+        "y": 266,
+        "w": 224,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Cancel",
+        "x": 48,
+        "y": 534,
+        "w": 95,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "2 of 3",
+        "x": 297,
+        "y": 534,
+        "w": 78,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Network | Mainnet | Path | m/86'/808276'/0'/0/0 | Cancel | 3 of 3 | Confirm",
+    "events": [
+      {
+        "text": "Network",
+        "x": 32,
+        "y": 40,
+        "w": 112,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Mainnet",
+        "x": 32,
+        "y": 80,
+        "w": 140,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Path",
+        "x": 32,
+        "y": 144,
+        "w": 61,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "m/86'/808276'/0'/0/0",
+        "x": 32,
+        "y": 184,
+        "w": 371,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Cancel",
+        "x": 48,
+        "y": 534,
+        "w": 95,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "3 of 3",
+        "x": 296,
+        "y": 534,
+        "w": 79,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Confirm",
+        "x": 185,
+        "y": 418,
+        "w": 416,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Address verified",
+    "events": [
+      {
+        "text": "Address verified",
+        "x": 98,
+        "y": 324,
+        "w": 284,
+        "h": 44,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Pearl | Send and receive Pearl. | Quit app",
+    "events": [
+      {
+        "text": "Pearl",
+        "x": 195,
+        "y": 258,
+        "w": 89,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Send and receive Pearl.",
+        "x": 84,
+        "y": 314,
+        "w": 312,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Quit app",
+        "x": 183,
+        "y": 534,
+        "w": 114,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Loading transaction",
+    "events": [
+      {
+        "text": "Loading transaction",
+        "x": 108,
+        "y": 318,
+        "w": 263,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Network | Mainnet | From default account | m/86'/808276'/0' | Amount | 90071992.5474 PRL | Reject | 2 of 5",
+    "events": [
+      {
+        "text": "Network",
+        "x": 32,
+        "y": 40,
+        "w": 112,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Mainnet",
+        "x": 32,
+        "y": 80,
+        "w": 140,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "From default account",
+        "x": 32,
+        "y": 144,
+        "w": 282,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "m/86'/808276'/0'",
+        "x": 32,
+        "y": 184,
+        "w": 299,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Amount",
+        "x": 32,
+        "y": 248,
+        "w": 102,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "90071992.5474 PRL",
+        "x": 32,
+        "y": 288,
+        "w": 352,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 53,
+        "y": 534,
+        "w": 86,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "2 of 5",
+        "x": 297,
+        "y": 534,
+        "w": 77,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "To | prl1ptkfg5hcsgxwuu5qf | 3j9q2uk9cmyc8n0u29d | 3eyhf8q069j924e8sfm | 7dk5 | Change amount | 9.99999993 PRL | Reject | 3 of 5",
+    "events": [
+      {
+        "text": "To",
+        "x": 32,
+        "y": 40,
+        "w": 35,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "prl1ptkfg5hcsgxwuu5qf",
+        "x": 32,
+        "y": 80,
+        "w": 407,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "3j9q2uk9cmyc8n0u29d",
+        "x": 32,
+        "y": 120,
+        "w": 412,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "3eyhf8q069j924e8sfm",
+        "x": 32,
+        "y": 160,
+        "w": 399,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "7dk5",
+        "x": 32,
+        "y": 200,
+        "w": 86,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Change amount",
+        "x": 32,
+        "y": 264,
+        "w": 209,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "9.99999993 PRL",
+        "x": 32,
+        "y": 304,
+        "w": 293,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 53,
+        "y": 534,
+        "w": 86,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "3 of 5",
+        "x": 297,
+        "y": 534,
+        "w": 78,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Change address | prl1p7ear3npj7rlxjdpmr | 8kxjxendgw9kzqj2c0fd | ppggs4z8kumxs0sw26 | w9t | Change path | m/86'/808276'/0'/1/0 | Fees | 0.00001 PRL | Reject | 4 of 5",
+    "events": [
+      {
+        "text": "Change address",
+        "x": 32,
+        "y": 40,
+        "w": 216,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "prl1p7ear3npj7rlxjdpmr",
+        "x": 32,
+        "y": 80,
+        "w": 403,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "8kxjxendgw9kzqj2c0fd",
+        "x": 32,
+        "y": 120,
+        "w": 405,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "ppggs4z8kumxs0sw26",
+        "x": 32,
+        "y": 160,
+        "w": 403,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "w9t",
+        "x": 32,
+        "y": 200,
+        "w": 66,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Change path",
+        "x": 32,
+        "y": 264,
+        "w": 170,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "m/86'/808276'/0'/1/0",
+        "x": 32,
+        "y": 304,
+        "w": 365,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Fees",
+        "x": 32,
+        "y": 368,
+        "w": 63,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "0.00001 PRL",
+        "x": 32,
+        "y": 408,
+        "w": 218,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 53,
+        "y": 534,
+        "w": 86,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "4 of 5",
+        "x": 297,
+        "y": 534,
+        "w": 78,
+        "h": 36,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Sign transaction | to send PRL? | Reject | 5 of 5 | Hold to sign",
+    "events": [
+      {
+        "text": "Sign transaction",
+        "x": 99,
+        "y": 168,
+        "w": 282,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "to send PRL?",
+        "x": 127,
+        "y": 208,
+        "w": 225,
+        "h": 44,
+        "clear": false
+      },
+      {
+        "text": "Reject",
+        "x": 53,
+        "y": 534,
+        "w": 86,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "5 of 5",
+        "x": 297,
+        "y": 534,
+        "w": 77,
+        "h": 36,
+        "clear": false
+      },
+      {
+        "text": "Hold to sign",
+        "x": 32,
+        "y": 408,
+        "w": 209,
+        "h": 44,
+        "clear": false
+      }
+    ]
+  }
+]

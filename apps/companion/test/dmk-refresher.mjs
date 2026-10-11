@@ -1,6 +1,8 @@
 // Real installed DeviceSession, intent queue, pinger/refresher and transport
 // connection state machine. Endpoint native policy is a model, not a device.
 import fs from "node:fs";
+import { createPsbtEndpoint, P } from "./psbt-endpoint.mjs";
+import { LedgerBitcoinPrlClient } from "../../../packages/bitcoin-prl-adapter/src/index.ts";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -68,7 +70,7 @@ assert.deepEqual(parsedInfo.data, {
   flags: Uint8Array.of(0),
 });
 console.log(
-  "PASS native capture: installed DMK parser accepts the recorded Nano S Plus idle app-info response",
+  "PASS historical PRL1 native capture: installed DMK parser accepts the recorded Nano S Plus idle app-info response",
 );
 assert.equal(receiving.intruder, idle.command);
 assert.equal(receiving.begin.slice(0, 10), "e010000022");
@@ -87,7 +89,7 @@ assert(
   ),
 );
 console.log(
-  "PASS native capture: recorded Nano S Plus BEGIN then B0 ping faults and exits; no firmware is rerun by this host test",
+  "PASS historical PRL1 native capture: recorded Nano S Plus BEGIN then B0 ping faults and exits; no firmware is rerun by this host test",
 );
 
 const built = await build({
@@ -129,12 +131,24 @@ const logger = new Proxy({}, { get: () => () => {} });
 async function scenario(
   model,
   disabled,
-  { slowReview = false, gapInstruction = sdk.INS.BEGIN } = {},
+  { slowReview = false, gapInstruction = P.SIGN_PSBT } = {},
 ) {
   const sent = [];
   let nativeState = "idle",
-    faulted = false,
-    digest;
+    faulted = false;
+  // A deliberately strict interrupted-session MODEL tests DMK serialization.
+  // The old PRL1 native capture above does not prove this PSBT model behavior.
+  const psbt = createPsbtEndpoint({
+    onStage: async (stage) => {
+      if (stage === "review") {
+        nativeState = "review";
+        if (slowReview) await pause(2200);
+        nativeState = "interrupted";
+      }
+      if (stage === "signature") nativeState = "signatures";
+      if (stage === "ack") nativeState = "idle";
+    },
+  });
   const endpoint = {
     async sendApdu(apdu) {
       const cla = apdu[0],
@@ -162,45 +176,11 @@ async function scenario(
           statusCode: Uint8Array.of(0x90, 0),
         });
       }
-      let response = new Uint8Array();
-      switch (ins) {
-        case sdk.INS.CAPABILITIES:
-          response = Uint8Array.of(1, 0, 1, 0, 3, 16, 0xe3, 5);
-          break;
-        case sdk.INS.EXPORT_ACCOUNT:
-          response = sdk.concat(
-            account.masterFingerprint,
-            account.publicKey,
-            account.chainCode,
-            Uint8Array.of(3),
-            sdk.u32(0),
-          );
-          break;
-        case sdk.INS.BEGIN:
-          nativeState = "receiving";
-          digest = data.slice(2);
-          break;
-        case sdk.INS.APPEND:
-          assert.equal(nativeState, "receiving");
-          break;
-        case sdk.INS.REVIEW:
-          assert.equal(nativeState, "receiving");
-          if (slowReview) await pause(2200);
-          nativeState = "signatures";
-          response = sdk.concat(Uint8Array.of(2), digest);
-          break;
-        case sdk.INS.SIGNATURE:
-          assert.equal(nativeState, "signatures");
-          response = sdk.fromHex(f.signatures[data[0]]);
-          if (data[0] === 1) nativeState = "idle";
-          break;
-        case sdk.INS.ABORT:
-          nativeState = "idle";
-          break;
-        default:
-          throw Error("Unexpected command " + ins);
-      }
-      return Right({ data: response, statusCode: Uint8Array.of(0x90, 0) });
+      const response = await psbt.transport.exchange(apdu);
+      return Right({
+        data: response.slice(0, -2),
+        statusCode: response.slice(-2),
+      });
     },
     async setupConnection() {},
     closeConnection() {},
@@ -263,7 +243,7 @@ async function scenario(
     },
   };
   connectFacade = facade;
-  const transport = await connectLedger();
+  const transport = await connectLedger(undefined, "bitcoin-prl");
   await pause(30);
   const initial = sent.map((x) => [x.cla, x.ins]);
   assert.deepEqual(
@@ -271,7 +251,7 @@ async function scenario(
     [[0xb0, 1]],
     "initial app-info ping occurs exactly once before any Pearl command",
   );
-  const client = new sdk.LedgerPearlClient(transport, "regtest", {
+  const client = new LedgerBitcoinPrlClient(transport, "regtest", {
     timeoutMs: 7000,
   });
   try {
@@ -317,16 +297,16 @@ for (const model of [
 await scenario(dmk.DeviceModelId.NANO_SP, false);
 const reviewed = await scenario(dmk.DeviceModelId.NANO_SP, false, {
   slowReview: true,
-  gapInstruction: sdk.INS.REVIEW,
+  gapInstruction: P.SIGN_PSBT,
 });
 assert(
   !reviewed.some(
     (x) =>
       x.cla === 0xb0 &&
-      x.state === "receiving" &&
-      x.time > reviewed.find((x) => x.ins === sdk.INS.REVIEW).time,
+      x.state === "review" &&
+      x.time > reviewed.find((x) => x.ins === P.SIGN_PSBT).time,
   ),
-  "busy REVIEW suppresses polls until completion",
+  "busy SIGN_PSBT suppresses polls until the interrupted response returns",
 );
 console.log(
   "PASS queue boundary: polling is blocked during a command, not across the whole multi-command signing flow",

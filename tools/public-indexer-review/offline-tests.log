@@ -1,0 +1,26 @@
+✔ read-only source rejects all broadcast/proxy paths before issuing fetch (1.896381ms)
+✔ empty address requires no UTXO request and correctly counts unused gap (10.191212ms)
+✔ spent address remains used even when UTXO list is empty (1.031941ms)
+✔ rejects truncated and contradictory history before final-balance claim (1.203029ms)
+✔ confirmed and unconfirmed counts are both included in completeness (0.729176ms)
+✔ status authenticates full chain name, genesis and 8 decimal units (1.769781ms)
+✔ pending raw transaction is represented without fabricated block hash (0.484618ms)
+✔ light preflight accepts a stable confirmed unspent view (24.739003ms)
+✔ light preflight excludes a stable pending spend even if the UTXO endpoint is stale (16.208258ms)
+✔ light preflight builds the entire spent set before classifying either coin order (30.857111ms)
+✔ light preflight rejects new-pending at a stable chain tip (9.012279ms)
+✔ light preflight rejects equal-count-replacement at a stable chain tip (8.948193ms)
+✔ light preflight rejects utxo-disappears at a stable chain tip (8.051034ms)
+✔ public browser source requires consent and a fixed supported network before any disclosure (2.872909ms)
+✔ public browser source sends only approved address/txid/height paths with credentials/cache/redirect disabled (56.943536ms)
+✔ public browser source rejects arbitrary URL, RPC, xpub, traversal and send paths before fetch (0.887334ms)
+✔ public browser discovery derives account locally and proxy requests never contain account/xpub or recovery bounds (140.449239ms)
+✔ public browser source propagates cancellation without retry or alternate destination (1.203589ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 508.607955

@@ -1,0 +1,4 @@
+ce0b26e6520f210bf57f633469da5ab1821f18e423926422ffc5c4568cce3292  apps/companion/src/main.ts
+4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2  packages/wallet/src/discovery.ts
+42c346af81500c6e2bdc60783dac6be9b090cbe343306ddfe23af88fc6743f5b  apps/companion/test/device-identity-boundaries.test.ts
+a5b6442bdfdfb05a9344ba0c08a26bd9de7bab3b7e1cbe3119a788c290a82eca  packages/wallet/test/discovery-integrity.test.ts

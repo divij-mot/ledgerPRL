@@ -1,0 +1,176 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @pearl-ledger/companion@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ explicit accepted-record retry reuses exact bytes and preserves uncertain reservations (1077.99512ms)
+▶ actual backup handler cancels safely, rejects stale work and atomically merges current storage
+  ✔ busy prevents repeat imports; cancellation terminates and ignores late replies after an account switch (50.79596ms)
+  ✔ account changes during validation reject before any merge (4.241496ms)
+  ✔ cancel while storage is queued prevents its atomic update (7.633325ms)
+  ✔ an interleaved latest journal is merged without downgrading state or losing bounds (21.797979ms)
+  ✔ conflicting payment leaves the atomic journal and current account unchanged (2.510254ms)
+  ✔ cancel after durable merge reports saved reservations and does not switch accounts (6.186861ms)
+  ✔ cancel during device closure cannot apply a stale account completion (3.806442ms)
+✔ actual backup handler cancels safely, rejects stale work and atomically merges current storage (302.642272ms)
+✔ actual worker validates exact signed bytes and rejects the same malformed backups (5864.427881ms)
+▶ bounded one-shot worker preserves validation results and releases every resource
+  ✔ successful response, immutable Blob, fixed local module URL and listener cleanup (1.499123ms)
+  ✔ pre-abort and oversize inputs never start a worker (11.258385ms)
+  ✔ abort terminates immediately and stale completion cannot settle another operation (0.587473ms)
+  ✔ validation failure rejects without a fallback and terminates (0.424669ms)
+  ✔ runtime failure rejects without a fallback and terminates (0.351809ms)
+  ✔ message failure rejects without a fallback and terminates (0.237247ms)
+  ✔ malformed failure rejects without a fallback and terminates (0.23318ms)
+  ✔ post failure rejects without a fallback and terminates (0.31955ms)
+  ✔ worker construction error stays an error (0.342334ms)
+✔ bounded one-shot worker preserves validation results and releases every resource (25.066082ms)
+✔ address routes validate public address network and checksum before disclosure (16.315076ms)
+✔ read routes retain valid P2TR and P2MR addresses on both public networks (55.034803ms)
+✔ read-only source rejects all broadcast/proxy paths before issuing fetch (0.277867ms)
+✔ empty address requires no UTXO request and correctly counts unused gap (1.21752ms)
+✔ spent address remains used even when UTXO list is empty (0.883208ms)
+✔ rejects truncated and contradictory history before final-balance claim (0.752121ms)
+✔ confirmed and unconfirmed counts are both included in completeness (5.205826ms)
+✔ status authenticates full chain name, genesis and 8 decimal units (2.610495ms)
+✔ pending raw transaction is represented without fabricated block hash (1.101315ms)
+✔ light preflight accepts a stable confirmed unspent view (34.567545ms)
+✔ light preflight excludes a stable pending spend even if the UTXO endpoint is stale (41.716442ms)
+✔ light preflight builds the entire spent set before classifying either coin order (70.378429ms)
+✔ light preflight rejects new-pending at a stable chain tip (18.751419ms)
+✔ light preflight rejects equal-count-replacement at a stable chain tip (35.436891ms)
+✔ light preflight rejects utxo-disappears at a stable chain tip (19.991093ms)
+✔ node boundary rejects remote plaintext, URL credentials and query (1.121446ms)
+✔ checks exact raw amounts and ignores rounded JSON value fields (125.152275ms)
+✔ reorg removes detached outputs before consulting gettxout (22.335236ms)
+✔ HTTP boundary denies foreign Origin, generic RPC and broadcast by default (84.486167ms)
+✔ pure-host UI authority, pending signed recovery and modeled two-tab storage boundaries (8582.707576ms)
+✔ cancellation survives connection and storage boundaries without dropping signed bytes (2793.83102ms)
+✔ pure-host device identity gates and failed-session receive verification (10027.600107ms)
+✔ mocked DOM/storage/source/device: direct website receive/send, consent and durable session boundaries (7692.591381ms)
+✔ mock-boundary regression: real DMK/SDK disconnect and journal recovery stay fail-closed (6767.553198ms)
+✔ real DMK timing across five modeled device IDs and one native capture remain distinct (22902.145028ms)
+✔ UI keeps fees explicit and restored drafts must pass policy before signing (5080.14302ms)
+✔ public relay rejects nonempty scriptSig even when witness and txid shapes match (17.414569ms)
+✔ public relay forwards exact structural key-path bytes once after chain identity checks (41.287586ms)
+✔ DMK adapter encodes an exact custom command and preserves status words (2.686949ms)
+✔ physical HID disconnect between commands latches session closed and cannot resume after reconnect (1.639885ms)
+✔ physical disconnect rejects pending exchange rather than waiting for DMK reconnect grace (0.637008ms)
+✔ Bitcoin-based PRL DMK commands use a separate explicit allowlist (0.669837ms)
+✔ PSBT response winning a disconnect race remains available while transport stays terminal (0.669777ms)
+✔ terminal close destroys owned HID factory listeners exactly once, even if DMK cleanup fails (0.469756ms)
+✔ synchronous disconnect inside sendCommand cannot leave exchange pending (0.630959ms)
+✔ actual HTTP middleware scopes abort unfinished bodies and discovery siblings (2261.398062ms)
+✔ local-node archival UI preserves locks, handles reorgs and respects capacity/deadline limits (1945.78543ms)
+✔ multi-batch control flow honors a count-bounded network deadline and local cancellation (signature verification mocked) (6846.035101ms)
+✔ known local payment needs exact verified bytes and six active-chain confirmations (66.253167ms)
+✔ known local payment handles five confirmations conservatively (15.981945ms)
+✔ known local payment handles explicit pending conservatively (11.384574ms)
+✔ known local payment handles Pearl omitted pending fields conservatively (10.812133ms)
+✔ known local payment handles contradictory pending block conservatively (14.257713ms)
+✔ known local payment handles altered signed bytes conservatively (10.8428ms)
+✔ known local payment handles negative confirmations conservatively (12.753632ms)
+✔ known local payment handles impossible confirmations conservatively (10.232493ms)
+✔ missing and detached known payments cannot be archived (21.758809ms)
+✔ chain identity, genesis and final tip disagreement reject the whole pass (33.524567ms)
+✔ archived receipts sharing one height need only one active block lookup (5.525737ms)
+✔ too-shallow and future archived checkpoints cannot retain archival (0.286811ms)
+✔ oversized, duplicate and invalid signed requests exhaust no node budget (23.313466ms)
+✔ exact local reconcile route works while broadcasting is disabled (12.367552ms)
+✔ client cancellation aborts an in-flight local reconciliation without a partial success (8.926438ms)
+✔ disposing a request cancels pending siblings and removes lifecycle listeners (1.60974ms)
+✔ disposing a completed request preserves its result (0.236225ms)
+✔ disposal preserves an earlier disconnect reason (0.438389ms)
+✔ unfinished request bodies terminate when their operation is cancelled (6.452951ms)
+✔ bounded JSON body succeeds and completed input survives later disposal (2.245556ms)
+✔ body readers reject oversize, malformed and pre-cancelled input (10.798824ms)
+✔ navigation icons use decorative inline SVG rather than font glyphs (1.417632ms)
+✔ visible payment counts use singular only for one (0.230366ms)
+✔ recipient label names both supported output address types (5.722874ms)
+✔ mocked PSBT endpoint's frozen replies remain reproducible against the pinned official Python host oracle (684.352449ms)
+✔ mocked DOM/storage/source/device: actual main.ts PSBT persistence, interruption, and emergency recovery (4293.744352ms)
+✔ mocked source/storage scheduling: actual UI total budgets and cancellation reject stale public results (1131.978807ms)
+✔ public browser source requires consent and a fixed supported network before any disclosure (1.874689ms)
+✔ public browser source sends only approved address/txid/height paths with credentials/cache/redirect disabled (67.931195ms)
+✔ public browser source rejects arbitrary URL, RPC, xpub, traversal and send paths before fetch (0.827795ms)
+✔ public browser discovery derives account locally and proxy requests never contain account/xpub or recovery bounds (195.879419ms)
+✔ public browser source propagates cancellation without retry or alternate destination (1.867197ms)
+✔ actual snapshot import persists only owned paths and fresh exports preserve another tab's journal (3796.810977ms)
+✔ development and preview reject framing and retain the node bridge proxy (207.060278ms)
+✔ development serves the linked stylesheet as CSS under the strict CSP (226.261112ms)
+✖ test/serving-policy.test.ts (3447.81387ms)
+✔ storage-failure recovery uses the standard independently validated backup format (54.973164ms)
+✔ storage-failure export refuses altered bytes, transaction IDs and invalid signatures (31.319051ms)
+✔ interrupted signing recovers only the identical payment without rollback or replacement (4572.041576ms)
+✔ independent interrupted-signing review probes remain reproducible (3611.111034ms)
+✔ late journal reads cannot restore a closed or superseded account view (614.298984ms)
+✔ corrupt signed reservations abort before a mutation callback can reuse inputs (12.183976ms)
+▶ post-update integrity checks prevent malformed local changes from being written
+  ✔ invalid update (7.367896ms)
+  ✔ invalid update (2.531075ms)
+  ✔ invalid update (2.729884ms)
+  ✔ invalid update (2.551175ms)
+✔ post-update integrity checks prevent malformed local changes from being written (16.343319ms)
+✔ null persisted row rejects rather than creating empty reservations (0.790158ms)
+✔ removeSavedSnapshot deletes only its fixed optional key after transaction completion (18.93173ms)
+✔ removeSavedSnapshot also completes when no optional snapshot exists (3.274051ms)
+▶ removeSavedSnapshot request, transaction and abort failures settle without claiming deletion
+  ✔ request (6.008563ms)
+  ✔ transaction (2.755532ms)
+  ✔ abort (3.025919ms)
+  ✔ abort-with-error (1.670912ms)
+✔ removeSavedSnapshot request, transaction and abort failures settle without claiming deletion (14.271574ms)
+▶ removeSavedSnapshot synchronous delete and transaction-open failures reject
+  ✔ deleteFailure (1.384742ms)
+  ✔ transactionFailure (1.225883ms)
+✔ removeSavedSnapshot synchronous delete and transaction-open failures reject (2.846108ms)
+✔ public cache save resolves only after transaction completion (16.964573ms)
+✔ public cache save rejects an abort without an error event (2.063672ms)
+✔ readonly journal exports signing records with modeled writes denied (5.772718ms)
+✔ readonly journal exports signed records with modeled writes denied (4.547817ms)
+✔ readonly journal rejects an abort after successful get (1.344551ms)
+▶ readonly journal rejects request and transaction errors
+  ✔ request (2.777445ms)
+  ✔ transaction (1.048426ms)
+✔ readonly journal rejects request and transaction errors (4.613816ms)
+✔ readonly journal retains legacy default without creating a write (1.959917ms)
+✔ missing readonly journal returns an empty journal without a write (0.93118ms)
+✔ readonly journal aborts corrupt-row validation (0.950179ms)
+✔ journal mutation still uses a strict readwrite transaction (0.888867ms)
+✔ public cache save preserves the transaction error on abort (0.677959ms)
+✔ production requires an exact HTTPS origin and a complete compiled build (30.275282ms)
+✔ production HTTP serves external scripts/styles with real CSP and cache/security headers (31.310668ms)
+✔ only the bounded public notices file is served as plain text (11.646999ms)
+✔ HTTP cannot serve traversal, source, maps, fixtures, directories, arbitrary SPA paths or URL parameters (31.817721ms)
+✔ production never follows build asset symlinks or serves files added after startup (23.001427ms)
+✔ HTTP rejects forged/missing Host, non-HTTPS proxy and foreign Origin without CORS (32.891295ms)
+✔ HTTP exposes no uploads, form submission, OPTIONS, PUT, DELETE, or private-node API (36.927161ms)
+✔ only explicit same-origin consented fixed-indexer JSON reaches the backend; credentials never forwarded (47.142979ms)
+✔ API refuses streaming/oversized/compressed/form/Expect request bodies before any upstream call (12.703978ms)
+✔ raw HTTP duplicate Host and Origin headers are rejected rather than normalized into trust (8.627099ms)
+ℹ tests 139
+ℹ suites 0
+ℹ pass 138
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 24141.518774
+
+✖ failing tests:
+
+test at test/serving-policy.test.ts:1:1
+✖ test/serving-policy.test.ts (3447.81387ms)
+  'test failed'
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /workspace/scratch/5d237258d612/ledgerPRL/apps/companion
+npm error workspace @pearl-ledger/companion@0.1.0
+npm error location /workspace/scratch/5d237258d612/ledgerPRL/apps/companion
+npm error command failed
+npm error command sh -c node --import tsx --test test/*.test.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

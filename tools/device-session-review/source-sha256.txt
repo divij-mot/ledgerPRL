@@ -1,0 +1,4 @@
+ce0b26e6520f210bf57f633469da5ab1821f18e423926422ffc5c4568cce3292  apps/companion/src/main.ts
+cb4ffab4e23529c6fd657265565ac381b8470dce4b28044b843acd91d706f1db  packages/bitcoin-prl-adapter/src/client.ts
+e6f6599e650f0f61038319f582aa611bc4b3461315b9d3e26ca0c31da9df8207  apps/companion/src/ledger.ts
+31efa4284e5c1430686059627c4a32b6422309bd54c93e12872a6c144ce976e6  tools/device-session-review/session-cleanup.test.ts

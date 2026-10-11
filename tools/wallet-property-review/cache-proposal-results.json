@@ -1,0 +1,27 @@
+{
+  "productionChangeApplied": false,
+  "originalKeysHash": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+  "candidateKeysHash": "deedbbc96ed8324c69f02d39848a792d4351aa19c681c1739a00e8d4b7d34973",
+  "proposalPatchHash": "8c09fdffe79c265e09153fb924e7ae3655eb3140f298eef8422494cf14b0975a",
+  "results": [
+    "same exact bytes lift once across separate arrays",
+    "caller byte mutation and invalid x coordinates never reuse a positive cache entry",
+    "same mutable array with different valid bytes is independently checked",
+    "positive cache evicts within the fixed 256-entry bound",
+    "P2MR roots remain on the separate non-curve recipient path"
+  ],
+  "startedAt": "2026-10-09T22:16:11.108Z",
+  "bundleHash": "59cb829b1c98262b52f3e3c6d1b37b0885e809c488ec65d28fadaccbc27233ed",
+  "constructionMs": 7076,
+  "validationMs": [
+    1853,
+    1719,
+    1691
+  ],
+  "records": 2000,
+  "inputs": 32000,
+  "boundary": "Virtual unapplied point-cache candidate; synthetic canonical transactions with repeated public scripts and dummy witnesses. Performance and cache correctness only, no signature/hardware/browser qualification.",
+  "outcome": "pass",
+  "finishedAt": "2026-10-09T22:16:23.641Z",
+  "productionKeysUnchanged": true
+}

@@ -1,0 +1,634 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> pearl-ledger@0.1.0 check
+> npm run typecheck && npm test && npm run build && python3 scripts/secret_scan.py
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> pearl-ledger@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @pearl-ledger/bitcoin-prl-adapter@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/metamask-snap@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/sdk@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/wallet@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/cli@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/companion@0.1.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> pearl-ledger@0.1.0 test
+> npm run test --workspaces --if-present
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @pearl-ledger/bitcoin-prl-adapter@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ native signature set matches published txid/wtxid and rejects wrong index/key/length/digest (122.553176ms)
+✔ every network/genesis/amount/capability field and xpub account metadata is checked (14.551967ms)
+✔ standard APDU flow verifies and finalizes out-of-order yields, callback once before final ACK (132.743816ms)
+✔ valid P2MR payment uses identical BIP341 signing/finalization with capability flags3 (108.555592ms)
+✔ complete signed bytes survive missing/rejected final ACK, abort, and post-success cancellation (369.669501ms)
+✔ a failing final progress observer cannot discard complete verified signed bytes (91.055803ms)
+✔ cancellation triggered by final received yield still persists it without sending continuation (140.515405ms)
+✔ durability callback rejection carries verified bytes and prevents final ACK (92.638663ms)
+✔ pending durable callback is awaited, cannot mutate retained transaction, and blocks concurrent operations (91.030124ms)
+✔ duplicate/foreign/invalid/missing signatures close the session and never reach durability callback (203.021902ms)
+✔ caller mutations after signing starts cannot change approved account or transaction (68.875547ms)
+✔ network mismatch, unexpected interruption, malformed status and timeout are terminal (7.814898ms)
+✔ device receive address must match independently derived HRP/program and can use cached account policy (9.281674ms)
+✔ hung signed-byte storage is bounded and returns the complete recovery transaction (89.887507ms)
+✔ PSBTv2/BIP371 round trip preserves exact original canonical bundle (140.193682ms)
+✔ all values around 2^53 and PRL maximum stay bigint/exact LE u64 (60.454958ms)
+✔ P2MR external recipient is allowed with no curve interpretation; ownership stays P2TR (64.332468ms)
+✔ mandatory network and genesis binding rejects same-HRP and unsupported profile substitutions (265.866248ms)
+✔ strict maps reject duplicate, missing, unknown, signed, script-path and malformed fields (472.032503ms)
+✔ origin/ownership/change metadata is fully checked against the approved public account (270.841722ms)
+✔ amount zero, overflow, over-spend and aggregate overflow are rejected (142.517821ms)
+✔ raw previous transactions are byte-bounded and txid/vout/amount/script checked (26.760181ms)
+✔ canonical serializer is independent of source map insertion order (23.148185ms)
+✔ exact PSBT, policy, Merkle roots/proofs and full interruption transcript match official pinned Python client (217.229932ms)
+✔ retained varint and u64 helpers reject unsafe numbers/noncanonical values and preserve uint64 (0.949858ms)
+✔ interpreter rejects malformed/unknown requests, noncanonical proof counts and interleaved continuations (0.779612ms)
+✔ retained host source hashes, license and exact adaptation patch are reproducible (42.059743ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1865.137629
+
+> @pearl-ledger/metamask-snap@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ website broker full flow keeps xpub/session/signatures private and separates broadcast (124.960916ms)
+✔ actual RPC origin controls website versus companion capabilities regardless of known identifiers (8.26103ms)
+✔ site account request requires connected Ledger public account and exact full chain (6.349701ms)
+✔ consent and queue schema reject unknown fields, floats, unsupported addresses, and replay (10.564282ms)
+✔ claimed payment cannot substitute recipient, amount, or network (12.423307ms)
+✔ site cancellation before signing invalidates corresponding hardware approval (38.954294ms)
+✔ site cannot cancel or erase any signing/signed outcome and status does not imply broadcast (73.038585ms)
+✔ identical-account reconnect can recover completed signing but cannot reactivate unsigned request (59.831572ms)
+✔ completion recovery rejects another account and another companion origin (54.793957ms)
+✔ unsigned queue expires, status polling is bounded, and cancellation replay is terminal (7.911313ms)
+✔ queue is bounded and consumed request sequence survives rejection/restart (11.089692ms)
+✔ tampered saved immutable intent is rejected and no unreviewed raw transaction is accepted (49.337344ms)
+✔ accepted broadcast report is monotonic and never inferred from txid alone (78.018062ms)
+✔ legacy core migration discards old session and pending approval; new connection works (29.368492ms)
+✔ delayed begin persistence cannot authorize expired hardware signing (25.983484ms)
+✔ real provider classes exercise site queue, companion claim, durable signing, and reporting (124.629839ms)
+✔ clock rollback between grant/signing and completion never writes corrupt recovery state (62.125029ms)
+✔ delayed website signing claim cannot bypass expiry or stale live preflight (65.994626ms)
+✔ public-only connection and independently verified signed transaction (81.989042ms)
+✔ reject exact-origin lookalikes, other websites, schemes, ports and paths (0.974264ms)
+✔ session and account cannot cross the two allowlisted companion origins (4.171251ms)
+✔ every request binds full chain and network even same-genesis regtest/simnet (4.383671ms)
+✔ unknown methods, extra fields, numeric amounts, signing flags and oversized payloads fail (7.670563ms)
+✔ private or unknown account material rejected without a dialog (0.603877ms)
+✔ rejected connection invalidates old permission and writes no new account (6.123145ms)
+✔ session expires, rejects backwards clock, and reconnect creates a new id (6.603157ms)
+✔ reject transaction mutation, wrong account paths and change substitution (23.954613ms)
+✔ rejected review consumes sequence and does not create signing permission (13.358624ms)
+✔ only one pending request; cancellation invalidates submission and permits a new sequence (44.411438ms)
+✔ one-shot signatures reject replay even after Snap restart (29.941915ms)
+✔ tampered signatures, digest, and unsupported sighash are consumed and fail closed (114.293043ms)
+✔ expired and clock-reversed signature submissions cannot finalize (42.135642ms)
+✔ read-time persisted state validation detects account, request, digest, policy and version changes (117.81013ms)
+✔ concurrent RPC rejects instead of opening duplicate confirmation or overwriting state (2.830174ms)
+✔ storage failures before approval or finalization do not release an approval or transaction (30.564887ms)
+✔ restart during transaction review retains only consumed sequence, never unsigned authorization (11.694571ms)
+✔ an approval taking longer than the request window is rejected (10.414747ms)
+✔ delayed storage reads cannot bypass session or pending approval expiry (64.831557ms)
+✔ delayed consume writes cannot release signatures outside the approved window (43.737944ms)
+✔ delayed approval persistence cannot release an expired signing ticket (13.192294ms)
+✔ Snap offline address derivation stays within supported companion recovery coverage (4.984073ms)
+✔ supported provider flow exports/display-checks account and requires separate review/sign calls (122.573847ms)
+✔ wrong hardware network/account/display aborts before exposing anything to Snap (4.164281ms)
+✔ node policy callback rejects before Ledger signing and clears the Snap request (50.4989ms)
+✔ signatures fail independent verification before being forwarded to Snap (51.793136ms)
+✔ caller mutation after review cannot change transaction sent to device (63.419916ms)
+✔ validation callback mutation cannot change the hardware snapshot (60.623392ms)
+✔ mutated tickets are rejected before validation/device access (33.209907ms)
+✔ ticket mutation while awaiting validation does not change its immutable binding (64.85313ms)
+✔ disconnect during preflight makes further hardware signing impossible (42.366523ms)
+✔ abort during hardware review durably preserves valid signatures and cancels pending request (53.138418ms)
+✔ overlapping UI calls are rejected and do not open second device operation (7.032794ms)
+✔ Snap response tampering is caught independently without broadcasting (62.43891ms)
+✔ durable persistence precedes MetaMask signature verification and survives its network error (54.027355ms)
+✔ persistence error carries verified transaction and immutable recovery context (56.740874ms)
+✔ disconnect after hardware signs still preserves signed recovery data (51.78302ms)
+✔ same-genesis alternate network in Snap account status is rejected before hardware (14.742163ms)
+✔ same-genesis alternate network in signed Snap result is flagged with durable recovery (59.257337ms)
+✔ hardware address display occurs only after recovery metadata hook and rejects unscannable index (17.748072ms)
+✔ lower-layer complete-signature callback persists before final ACK and deduplicates return (80.100793ms)
+✔ lost final ACK after signature callback returns durable verified recovery (51.735148ms)
+✔ lower-layer wrapper cannot swallow a failed persistence recovery error (54.498273ms)
+✔ bad returned signature after complete callback cannot discard already verified bytes (52.148039ms)
+✔ unawaited transport callback still blocks submission/return until durable persistence finishes (148.897036ms)
+ℹ tests 64
+ℹ suites 0
+ℹ pass 64
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1573.29607
+
+> @pearl-ledger/sdk@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ account export and device-verified receive address (45.812395ms)
+✔ chunks are contiguous, bounded, reviewed then independently verified (29.991959ms)
+✔ sign request snapshots all caller-mutable values before first await (22.111553ms)
+✔ status 6700 is terminal; no automatic retry (10.583942ms)
+✔ status 6985 is terminal; no automatic retry (10.044872ms)
+✔ status 6986 is terminal; no automatic retry (9.258459ms)
+✔ status 6a80 is terminal; no automatic retry (9.554213ms)
+✔ status 6f00 is terminal; no automatic retry (7.784224ms)
+✔ fail closed on network (10.330341ms)
+✔ fail closed on limits (7.373045ms)
+✔ fail closed on review-hash (7.821359ms)
+✔ fail closed on signature (9.087612ms)
+✔ fail closed on short-response (8.750586ms)
+✔ fail closed on transport-error (8.262923ms)
+✔ cancel before transfer sends no APDUs and makes operation terminal (8.712799ms)
+✔ cancel while waiting for approval never fetches a signature (8.004324ms)
+✔ concurrent operations cannot interleave (25.151452ms)
+✔ failed client requires explicit transport recovery and reset (19.767819ms)
+✔ wrong input origin never begins a transfer (2.987652ms)
+✔ Speculos loopback boundary rejects remote, credential and redirect URLs (0.527763ms)
+✔ Speculos uses documented POST /apdu and verifies HTTP response (8.397294ms)
+✔ ignored abort and late review response cannot resume the signing session (22.853468ms)
+✔ an unresponsive transport is bounded and terminal (10.818414ms)
+✔ oversized transport responses fail before protocol parsing (0.336966ms)
+✔ verify-address account index is snapshotted before awaiting capabilities (4.665164ms)
+✔ only explicit review rejection carries the safe review instruction marker (23.103022ms)
+✔ reset exclusively owns asynchronous abort against signing and capabilities (8.270644ms)
+✔ close exclusively owns asynchronous abort against signing and capabilities (8.247399ms)
+✔ failed reset remains failed and a failed close remains terminal (0.208613ms)
+✔ unresponsive transport cleanup cannot hang an expired operation (15.859613ms)
+✔ bounded reader cancels oversized missing length (9.32252ms)
+✔ bounded reader cancels oversized false small length (0.845772ms)
+✔ bounded reader cancels oversized decoded compressed body (0.428855ms)
+✔ honest oversized declared length is cancelled before reading (0.358298ms)
+✔ exact-bound valid JSON succeeds and invalid UTF8 fails (2.240208ms)
+✔ invalid or unrepresentable length -1 is rejected (0.432401ms)
+✔ invalid or unrepresentable length 1.5 is rejected (0.289124ms)
+✔ invalid or unrepresentable length 1e3 is rejected (0.224177ms)
+✔ invalid or unrepresentable length 999999999999999999999 is rejected (0.332089ms)
+✔ Pearl P2MR recipient address vectors match the pinned node on every network (3.469365ms)
+✔ recipient codec rejects unsupported witness version, wrong root length/network and bad checksum (0.676878ms)
+✔ P2MR is external-recipient-only; old PRL1 device rejects before all APDUs (59.548921ms)
+✔ exact grains accept the Pearl maximum and >2^53 (1.506585ms)
+✔ reject invalid atomic string "-1" (0.322084ms)
+✔ reject invalid atomic string "+1" (0.103566ms)
+✔ reject invalid atomic string "01" (0.065759ms)
+✔ reject invalid atomic string " 1" (0.097847ms)
+✔ reject invalid atomic string "1 " (0.110977ms)
+✔ reject invalid atomic string "1e8" (0.070376ms)
+✔ reject invalid atomic string "1.0" (0.063555ms)
+✔ reject invalid atomic string "" (0.084477ms)
+✔ reject invalid atomic string "Infinity" (0.118198ms)
+✔ reject invalid atomic string "2100000000000000001" (0.066089ms)
+✔ reject invalid PRL string "-1" (0.099369ms)
+✔ reject invalid PRL string ".1" (0.089215ms)
+✔ reject invalid PRL string "1." (0.163917ms)
+✔ reject invalid PRL string "1.000000001" (0.050056ms)
+✔ reject invalid PRL string "01.0" (0.071167ms)
+✔ reject invalid PRL string "21000000000.00000001" (0.088984ms)
+✔ reject invalid PRL string "NaN" (0.051227ms)
+✔ reject floats and unsafe Number at parser boundary (0.237437ms)
+✔ all networks bind genesis and coin type (0.215003ms)
+✔ BIP86 public vector independently validates CKDpub + empty-tree tweak (40.411694ms)
+✔ public fixture addresses reproduce and validate (25.492686ms)
+✔ reject wrong HRP, checksum, v3, mixed case and non-curve program (2.477645ms)
+✔ canonical bundle matches frozen bytes and exact fee (11.485657ms)
+✔ all truncated bundles and trailing bytes fail (5.613169ms)
+✔ reject bundle version (0.715666ms)
+✔ reject bundle locktime (0.704338ms)
+✔ reject bundle sequence (0.769167ms)
+✔ reject bundle zero input (1.4695ms)
+✔ reject bundle oversize amount (1.646375ms)
+✔ reject bundle oversize aggregate (25.186857ms)
+✔ reject bundle outputs exceed inputs (7.342989ms)
+✔ reject bundle duplicate inputs (3.184387ms)
+✔ reject bundle negative vout (0.839212ms)
+✔ reject bundle invalid txid (0.636417ms)
+✔ reject bundle empty inputs (0.479831ms)
+✔ reject bundle too many inputs (0.523567ms)
+✔ reject bundle no recipient (6.800153ms)
+✔ reject bundle two recipients (4.550771ms)
+✔ reject bundle recipient origin (5.237504ms)
+✔ reject bundle change branch (5.171225ms)
+✔ reject bundle input hardening (0.841476ms)
+✔ reject bundle invalid script (0.659071ms)
+✔ reject bundle wrong account (0.675906ms)
+✔ reject bundle wrong input origin (2.677145ms)
+✔ reject bundle wrong change origin (7.676691ms)
+✔ sighash and signatures match frozen cross-language vectors (6.686022ms)
+✔ each signed field is bound by all default signatures (40.531625ms)
+✔ final witness serialization, independent parse, txid and vsize (6.415174ms)
+✔ signature count, 65-byte nondefault sigs and tampered signatures rejected (5.783916ms)
+✔ raw transaction parser rejects truncation, trailing and noncanonical count (10.136509ms)
+✔ raw previous transaction preserves maximum and identifies coinbase (2.104124ms)
+✔ Node Buffer views obey byteOffset and never alias decoded fields (1.434988ms)
+✔ unknown JSON field sighash is never silently discarded (0.559501ms)
+✔ unknown JSON field annex is never silently discarded (0.143866ms)
+✔ unknown JSON field tapMerkleRoot is never silently discarded (0.209695ms)
+✔ unknown JSON field privateKey is never silently discarded (0.13342ms)
+✔ unknown JSON field seed is never silently discarded (0.105008ms)
+✔ missing fields, oversized numeric strings and invalid JSON collections fail closed (0.216466ms)
+✔ maximum 16-input 2-output bundle is exactly 1507 bytes (10.300455ms)
+✔ internal key helper rejects malformed compressed prefixes (1.861299ms)
+ℹ tests 103
+ℹ suites 0
+ℹ pass 103
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 660.003166
+
+> @pearl-ledger/wallet@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ compact recovery export fits the full canonical 2000-record envelope (215.726844ms)
+✔ export removes diagnostics and local callback authority while old backups remain readable (73.686283ms)
+✔ discovery binds every history record to its queried address before returning recovery ranges (185.196583ms)
+✔ discovery rejects a UTXO whose funding ID is omitted from that address's full history (10.136994ms)
+✔ discovery rejects an omitted confirmed owned UTXO without any supplied spend (101.668713ms)
+✔ spent-only address history is proven by a known matching previous output (86.039035ms)
+✔ pending spends override omitted confirmed UTXOs (68.508564ms)
+✔ pending spends override stale confirmed UTXOs (106.108713ms)
+✔ a directly received output does not require fetching unrelated external input prevouts (81.454814ms)
+✔ receive and change may legitimately share a transaction without duplicate account history (109.820388ms)
+✔ zero-valued owned outputs preserve address usage when omitted as UTXOs (104.520539ms)
+✔ zero-valued owned outputs preserve address usage when listed as UTXOs (102.655344ms)
+✔ zero-valued remaining UTXO candidates still require exact output ownership and height (214.955905ms)
+✔ pending owned outputs are not inferred as selectable when omitted by the source (72.620155ms)
+✔ generic discovery sources cannot contradict used flags or repeat address history IDs (17.727767ms)
+✔ empty account scans both branches through 20 unused addresses (1927.18541ms)
+✔ spent/used addresses extend the gap even with zero balance; resumes past known indexes (1922.07444ms)
+✔ history raw transaction spends override stale indexer UTXO list, including pending spends (1661.040704ms)
+✔ reorg during discovery and forged raw prevout fail closed (3197.664644ms)
+✔ discovery never claims completion above its recovery bound (1513.15848ms)
+✔ detached transaction remains visible after a replacement chain view (1595.762893ms)
+✔ stored-row validation distinguishes absent storage from corrupt null and retains legacy rows (5.5204ms)
+✔ stored recovery bounds are bounded safe integers, with no null or unknown-field default (0.594504ms)
+✔ stored older input recovery ranges grow conservatively only after all records pass (5.758447ms)
+✔ stored canonical reservations reject missing, changed, duplicate, cross-payment and reordered inputs (6.898862ms)
+✔ stored local signing owner and archive survive checks without restoring or stripping authority (2.948943ms)
+✔ stored state and signed-byte identity cannot be made discardable or mismatch the bundle (7.209508ms)
+✔ stored signed bytes bind every unsigned field even with a matching recomputed transaction ID (28.197302ms)
+✔ local byte checks retain signature uncertainty; backup import still independently verifies signatures (76.466339ms)
+✔ stored payment schema, optional metadata and capacity remain strict on warm cache hits (24.469437ms)
+✔ immutable validation cache reuses bytes, rechecks mutable reservations and evicts at its bound (1801.319042ms)
+✔ failed late backup conflict is atomic for both target and source and retains object identity (27.774827ms)
+✔ late merge failure cannot revoke a live signing callback owner or upgrade a state (0.734372ms)
+✔ late conflict rolls back an earlier signed upgrade, callback revocation and high-water changes (25.290359ms)
+✔ successful atomic merge preserves existing payment identities and detaches additions from the source (1.348924ms)
+✔ merged capacity failure leaves all 2000 records and bounds unchanged (17.520797ms)
+✔ exact signed size and explicit relay floor for 1 inputs / 1 outputs (92.195462ms)
+✔ exact signed size and explicit relay floor for 1 inputs / 2 outputs (33.887277ms)
+✔ exact signed size and explicit relay floor for 2 inputs / 1 outputs (33.001785ms)
+✔ exact signed size and explicit relay floor for 2 inputs / 2 outputs (46.746038ms)
+✔ exact signed size and explicit relay floor for 3 inputs / 1 outputs (52.946599ms)
+✔ exact signed size and explicit relay floor for 3 inputs / 2 outputs (58.254378ms)
+✔ exact signed size and explicit relay floor for 4 inputs / 1 outputs (80.089635ms)
+✔ exact signed size and explicit relay floor for 4 inputs / 2 outputs (74.829115ms)
+✔ exact signed size and explicit relay floor for 5 inputs / 1 outputs (66.44066ms)
+✔ exact signed size and explicit relay floor for 5 inputs / 2 outputs (78.949795ms)
+✔ exact signed size and explicit relay floor for 6 inputs / 1 outputs (73.612354ms)
+✔ exact signed size and explicit relay floor for 6 inputs / 2 outputs (82.931822ms)
+✔ exact signed size and explicit relay floor for 7 inputs / 1 outputs (81.427463ms)
+✔ exact signed size and explicit relay floor for 7 inputs / 2 outputs (95.872183ms)
+✔ exact signed size and explicit relay floor for 8 inputs / 1 outputs (95.182458ms)
+✔ exact signed size and explicit relay floor for 8 inputs / 2 outputs (106.98009ms)
+✔ exact signed size and explicit relay floor for 9 inputs / 1 outputs (106.168598ms)
+✔ exact signed size and explicit relay floor for 9 inputs / 2 outputs (116.78395ms)
+✔ exact signed size and explicit relay floor for 10 inputs / 1 outputs (114.146361ms)
+✔ exact signed size and explicit relay floor for 10 inputs / 2 outputs (125.555074ms)
+✔ exact signed size and explicit relay floor for 11 inputs / 1 outputs (125.506601ms)
+✔ exact signed size and explicit relay floor for 11 inputs / 2 outputs (132.00818ms)
+✔ exact signed size and explicit relay floor for 12 inputs / 1 outputs (146.098137ms)
+✔ exact signed size and explicit relay floor for 12 inputs / 2 outputs (168.501542ms)
+✔ exact signed size and explicit relay floor for 13 inputs / 1 outputs (142.954338ms)
+✔ exact signed size and explicit relay floor for 13 inputs / 2 outputs (147.363596ms)
+✔ exact signed size and explicit relay floor for 14 inputs / 1 outputs (149.708661ms)
+✔ exact signed size and explicit relay floor for 14 inputs / 2 outputs (239.676528ms)
+✔ exact signed size and explicit relay floor for 15 inputs / 1 outputs (180.887654ms)
+✔ exact signed size and explicit relay floor for 15 inputs / 2 outputs (209.329187ms)
+✔ exact signed size and explicit relay floor for 16 inputs / 1 outputs (189.675313ms)
+✔ exact signed size and explicit relay floor for 16 inputs / 2 outputs (183.439689ms)
+✔ default1000 grains fails for16 inputs with change, while preview preserves it (251.336885ms)
+✔ genuine frozen signed fixture size agrees with the independent finalizer (6.679211ms)
+✔ configurable declared rates preserve upstream integer floor, fallback and cap (95.016956ms)
+✔ P2TR dust follows the pinned witness policy at default and configured rates (68.644208ms)
+✔ policy checks keep exact values above Number precision and do not mutate drafts (1.737202ms)
+✔ complete backup restores exact verified bytes, uncertain state and reservations in a new journal (83.953285ms)
+✔ backup restore independently rejects altered signatures, bundle reservations, account and state (51.016949ms)
+✔ old draft backup never downgrades a later uncertain/signature state (2.183573ms)
+✔ same-ID or duplicate outpoint conflicts fail without silently overriding a payment (1.013033ms)
+✔ confirmed archival retains locks and signed bytes, and reorg unarchives safely (17.492488ms)
+✔ consecutive receive issuance and public recovery ranges survive export (0.866432ms)
+✔ proven review rejection becomes discardable unsigned draft; generic signed state cannot reset (1.440225ms)
+✔ interrupted signing requires owned initial rejection; recovery and old records cannot reset (0.843628ms)
+✔ backup ownership is strictly validated then stripped; legacy signing ambiguity survives (18.093461ms)
+✔ equal-state ambiguous backup merge revokes rollback without importing ownership (2.497244ms)
+✔ no-change payment preserves branch 0 input recovery bounds on reservation and legacy restore (21.349808ms)
+✔ no-change payment preserves branch 1 input recovery bounds on reservation and legacy restore (19.317502ms)
+✔ recovery path bounds are monotonic and reject exhausted change atomically (0.375374ms)
+✔ known paths beyond the light discovery bound require an extended scan (0.887445ms)
+✔ accepted same-byte retry returns to uncertain state without releasing reservations (0.708455ms)
+✔ archival receipt must be reconciled before a same-byte retry transition (1.000915ms)
+✔ signed bytes and txid cannot be individually replaced or unset by a state transition (2.219637ms)
+✔ backup merging cannot clear retry uncertainty in either matching-byte direction (41.633178ms)
+✔ raw prevout amounts stay exact above Number precision (66.567147ms)
+✔ rejects txid substitution, path substitution, duplicate outputs and wrong genesis (39.320715ms)
+✔ coinbase maturity separates 99 and 100 confirmations exactly (14.570135ms)
+✔ coin selection excludes immature, reserved, duplicated and unknown inputs (80.027333ms)
+✔ builds exact recipient, fee and reproducible change; rejects dust and exponent numbers (115.76339ms)
+✔ reservations and change high-water survive draft cancellation; signed attempts stay locked (22.185158ms)
+✔ reorg validation removes detached coins and never releases journal reservations (18.17886ms)
+✔ signing gate rejects stale, missing, mismatched and immature node data (16.914286ms)
+ℹ tests 99
+ℹ suites 0
+ℹ pass 99
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12226.962545
+
+> @pearl-ledger/cli@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ CLI offline build/inspect/derive keep exact amounts and exclusive0600 files (1465.58306ms)
+✔ CLI capabilities use PRL Bitcoin protocol and stringify maximum grains exactly (268.435073ms)
+✔ CLI signs through native PSBT protocol and syncs exclusive output before final device ACK (412.55259ms)
+✔ CLI retains saved verified bytes and warns when final acknowledgement fails (870.891748ms)
+✔ CLI keeps signing uncertainty on a pre-sign rejection; no automatic retry (381.806762ms)
+✔ existing, symlinked and invalid output paths fail before any device command (759.227243ms)
+✔ signed success preserves immutable intent and syncs signed bytes before final ACK (195.539524ms)
+✔ initial-write: fail closed before any APDU (9.669274ms)
+✔ initial-sync: fail closed before any APDU (10.643808ms)
+✔ directory-sync: fail closed before any APDU (4.121365ms)
+✔ sidecar-directory-sync: fail closed before any APDU (15.376593ms)
+✔ initial-output-write: fail closed before any APDU (9.292026ms)
+✔ initial-output-sync: fail closed before any APDU (8.115788ms)
+✔ signed-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (109.051204ms)
+✔ signed-partial-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (140.472043ms)
+✔ signed-zero-write: preserve intent, expose exact typed recovery bytes and withhold final ACK (101.39071ms)
+✔ signed-sync: preserve intent, expose exact typed recovery bytes and withhold final ACK (94.002524ms)
+✔ short positive writes are completed and synced before final ACK (110.732226ms)
+✔ cancellation before signatures retains uncertainty and sends no continuation (63.284197ms)
+✔ cancel-after-sign: exact signed bytes stay durable and result reports unconfirmed acknowledgement (91.213053ms)
+✔ cancel-during-write: exact signed bytes stay durable and result reports unconfirmed acknowledgement (109.842193ms)
+✔ final-reject: exact signed bytes stay durable and result reports unconfirmed acknowledgement (102.842622ms)
+✔ final-lost: exact signed bytes stay durable and result reports unconfirmed acknowledgement (92.441228ms)
+✔ descriptor write never overwrites an unrelated replacement output path (97.023766ms)
+✔ existing output collision fails before any APDU without overwriting user data (6.365818ms)
+✔ symlink output collision fails before any APDU without overwriting user data (3.39341ms)
+✔ dangling-symlink output collision fails before any APDU without overwriting user data (2.890404ms)
+✔ directory output collision fails before any APDU without overwriting user data (3.027049ms)
+✔ existing intent-sidecar collision fails before any APDU without overwriting user data (6.071997ms)
+✔ symlink intent-sidecar collision fails before any APDU without overwriting user data (5.923034ms)
+✔ dangling-symlink intent-sidecar collision fails before any APDU without overwriting user data (5.103791ms)
+✔ directory intent-sidecar collision fails before any APDU without overwriting user data (8.554529ms)
+✔ control: real CLI and adapter save frozen signed bytes before final ACK (501.267853ms)
+✔ post-truncate write failure preserves immutable intent and exact stderr recovery (490.720189ms)
+✔ process interruption after real truncate retains canonical reconciliation intent (428.704973ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4442.280007
+
+> @pearl-ledger/companion@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ explicit accepted-record retry reuses exact bytes and preserves uncertain reservations (1062.172241ms)
+▶ actual backup handler cancels safely, rejects stale work and atomically merges current storage
+  ✔ busy prevents repeat imports; cancellation terminates and ignores late replies after an account switch (49.647921ms)
+  ✔ account changes during validation reject before any merge (7.597297ms)
+  ✔ cancel while storage is queued prevents its atomic update (10.283223ms)
+  ✔ an interleaved latest journal is merged without downgrading state or losing bounds (28.229915ms)
+  ✔ conflicting payment leaves the atomic journal and current account unchanged (2.527688ms)
+  ✔ cancel after durable merge reports saved reservations and does not switch accounts (4.243116ms)
+  ✔ cancel during device closure cannot apply a stale account completion (5.501047ms)
+✔ actual backup handler cancels safely, rejects stale work and atomically merges current storage (352.166116ms)
+✔ actual worker validates exact signed bytes and rejects the same malformed backups (2300.021368ms)
+▶ bounded one-shot worker preserves validation results and releases every resource
+  ✔ successful response, immutable Blob, fixed local module URL and listener cleanup (3.717817ms)
+  ✔ pre-abort and oversize inputs never start a worker (23.786527ms)
+  ✔ abort terminates immediately and stale completion cannot settle another operation (0.635095ms)
+  ✔ validation failure rejects without a fallback and terminates (0.464708ms)
+  ✔ runtime failure rejects without a fallback and terminates (6.992448ms)
+  ✔ message failure rejects without a fallback and terminates (0.378559ms)
+  ✔ malformed failure rejects without a fallback and terminates (0.3524ms)
+  ✔ post failure rejects without a fallback and terminates (0.301333ms)
+  ✔ worker construction error stays an error (0.341633ms)
+✔ bounded one-shot worker preserves validation results and releases every resource (43.202114ms)
+✔ address routes validate public address network and checksum before disclosure (13.100959ms)
+✔ read routes retain valid P2TR and P2MR addresses on both public networks (40.776118ms)
+✔ read-only source rejects all broadcast/proxy paths before issuing fetch (0.367433ms)
+✔ empty address requires no UTXO request and correctly counts unused gap (1.434626ms)
+✔ spent address remains used even when UTXO list is empty (0.923748ms)
+✔ rejects truncated and contradictory history before final-balance claim (0.955586ms)
+✔ confirmed and unconfirmed counts are both included in completeness (0.923628ms)
+✔ status authenticates full chain name, genesis and 8 decimal units (1.443359ms)
+✔ pending raw transaction is represented without fabricated block hash (1.427556ms)
+✔ light preflight accepts a stable confirmed unspent view (19.000344ms)
+✔ light preflight excludes a stable pending spend even if the UTXO endpoint is stale (25.53901ms)
+✔ light preflight builds the entire spent set before classifying either coin order (76.681157ms)
+✔ light preflight rejects new-pending at a stable chain tip (31.50148ms)
+✔ light preflight rejects equal-count-replacement at a stable chain tip (27.097553ms)
+✔ light preflight rejects utxo-disappears at a stable chain tip (12.624121ms)
+✔ node boundary rejects remote plaintext, URL credentials and query (1.428327ms)
+✔ checks exact raw amounts and ignores rounded JSON value fields (85.966751ms)
+✔ reorg removes detached outputs before consulting gettxout (13.676383ms)
+✔ HTTP boundary denies foreign Origin, generic RPC and broadcast by default (90.269417ms)
+✔ pure-host UI authority, pending signed recovery and modeled two-tab storage boundaries (5178.230779ms)
+✔ cancellation survives connection and storage boundaries without dropping signed bytes (2075.512169ms)
+✔ pure-host device identity gates and failed-session receive verification (6941.361983ms)
+✔ mocked DOM/storage/source/device: direct website receive/send, consent and durable session boundaries (4245.380809ms)
+✔ mock-boundary regression: real DMK/SDK disconnect and journal recovery stay fail-closed (2569.699129ms)
+✔ real DMK timing across five modeled device IDs and one native capture remain distinct (19387.27516ms)
+✔ UI keeps fees explicit and restored drafts must pass policy before signing (1902.683432ms)
+✔ public relay rejects nonempty scriptSig even when witness and txid shapes match (11.05294ms)
+✔ public relay forwards exact structural key-path bytes once after chain identity checks (18.974986ms)
+✔ DMK adapter encodes an exact custom command and preserves status words (2.444183ms)
+✔ physical HID disconnect between commands latches session closed and cannot resume after reconnect (1.845984ms)
+✔ physical disconnect rejects pending exchange rather than waiting for DMK reconnect grace (1.562318ms)
+✔ Bitcoin-based PRL DMK commands use a separate explicit allowlist (0.964199ms)
+✔ PSBT response winning a disconnect race remains available while transport stays terminal (0.713092ms)
+✔ terminal close destroys owned HID factory listeners exactly once, even if DMK cleanup fails (0.402995ms)
+✔ synchronous disconnect inside sendCommand cannot leave exchange pending (0.641945ms)
+✔ actual HTTP middleware scopes abort unfinished bodies and discovery siblings (1955.424957ms)
+✔ local-node archival UI preserves locks, handles reorgs and respects capacity/deadline limits (1472.323399ms)
+✔ multi-batch control flow honors a count-bounded network deadline and local cancellation (signature verification mocked) (6455.374459ms)
+✔ known local payment needs exact verified bytes and six active-chain confirmations (63.765096ms)
+✔ known local payment handles five confirmations conservatively (19.245092ms)
+✔ known local payment handles explicit pending conservatively (11.740303ms)
+✔ known local payment handles Pearl omitted pending fields conservatively (13.378665ms)
+✔ known local payment handles contradictory pending block conservatively (11.147313ms)
+✔ known local payment handles altered signed bytes conservatively (9.087626ms)
+✔ known local payment handles negative confirmations conservatively (9.458745ms)
+✔ known local payment handles impossible confirmations conservatively (11.157127ms)
+✔ missing and detached known payments cannot be archived (19.286409ms)
+✔ chain identity, genesis and final tip disagreement reject the whole pass (28.410195ms)
+✔ archived receipts sharing one height need only one active block lookup (4.508896ms)
+✔ too-shallow and future archived checkpoints cannot retain archival (0.359099ms)
+✔ oversized, duplicate and invalid signed requests exhaust no node budget (16.692144ms)
+✔ exact local reconcile route works while broadcasting is disabled (19.021656ms)
+✔ client cancellation aborts an in-flight local reconciliation without a partial success (13.724224ms)
+✔ disposing a request cancels pending siblings and removes lifecycle listeners (1.777691ms)
+✔ disposing a completed request preserves its result (0.392109ms)
+✔ disposal preserves an earlier disconnect reason (0.266371ms)
+✔ unfinished request bodies terminate when their operation is cancelled (6.097604ms)
+✔ bounded JSON body succeeds and completed input survives later disposal (2.316711ms)
+✔ body readers reject oversize, malformed and pre-cancelled input (9.426496ms)
+✔ mocked PSBT endpoint's frozen replies remain reproducible against the pinned official Python host oracle (623.077027ms)
+✔ mocked DOM/storage/source/device: actual main.ts PSBT persistence, interruption, and emergency recovery (4495.873018ms)
+✔ mocked source/storage scheduling: actual UI total budgets and cancellation reject stale public results (1168.83147ms)
+✔ public browser source requires consent and a fixed supported network before any disclosure (1.901158ms)
+✔ public browser source sends only approved address/txid/height paths with credentials/cache/redirect disabled (46.073852ms)
+✔ public browser source rejects arbitrary URL, RPC, xpub, traversal and send paths before fetch (0.669367ms)
+✔ public browser discovery derives account locally and proxy requests never contain account/xpub or recovery bounds (220.657864ms)
+✔ public browser source propagates cancellation without retry or alternate destination (0.892893ms)
+✔ actual snapshot import persists only owned paths and fresh exports preserve another tab's journal (3451.72982ms)
+✔ development and preview reject framing and retain the node bridge proxy (196.056724ms)
+✔ development serves the linked stylesheet as CSS under the strict CSP (222.875492ms)
+✔ production keeps the strict CSP and emits a linked CSS asset (3413.549313ms)
+✔ storage-failure recovery uses the standard independently validated backup format (64.706596ms)
+✔ storage-failure export refuses altered bytes, transaction IDs and invalid signatures (50.79245ms)
+✔ interrupted signing recovers only the identical payment without rollback or replacement (4301.114327ms)
+✔ independent interrupted-signing review probes remain reproducible (3493.424181ms)
+✔ late journal reads cannot restore a closed or superseded account view (856.213538ms)
+✔ corrupt signed reservations abort before a mutation callback can reuse inputs (9.315442ms)
+▶ post-update integrity checks prevent malformed local changes from being written
+  ✔ invalid update (17.027724ms)
+  ✔ invalid update (1.998925ms)
+  ✔ invalid update (3.987133ms)
+  ✔ invalid update (2.417974ms)
+✔ post-update integrity checks prevent malformed local changes from being written (26.494253ms)
+✔ null persisted row rejects rather than creating empty reservations (0.755425ms)
+✔ removeSavedSnapshot deletes only its fixed optional key after transaction completion (21.131031ms)
+✔ removeSavedSnapshot also completes when no optional snapshot exists (1.808218ms)
+▶ removeSavedSnapshot request, transaction and abort failures settle without claiming deletion
+  ✔ request (5.512585ms)
+  ✔ transaction (1.949049ms)
+  ✔ abort (1.558623ms)
+  ✔ abort-with-error (1.74341ms)
+✔ removeSavedSnapshot request, transaction and abort failures settle without claiming deletion (11.462188ms)
+▶ removeSavedSnapshot synchronous delete and transaction-open failures reject
+  ✔ deleteFailure (1.313725ms)
+  ✔ transactionFailure (1.577681ms)
+✔ removeSavedSnapshot synchronous delete and transaction-open failures reject (3.125408ms)
+✔ public cache save resolves only after transaction completion (13.471999ms)
+✔ public cache save rejects an abort without an error event (3.088983ms)
+✔ readonly journal exports signing records with modeled writes denied (5.650503ms)
+✔ readonly journal exports signed records with modeled writes denied (3.946252ms)
+✔ readonly journal rejects an abort after successful get (1.559614ms)
+▶ readonly journal rejects request and transaction errors
+  ✔ request (0.988146ms)
+  ✔ transaction (0.801835ms)
+✔ readonly journal rejects request and transaction errors (2.463042ms)
+✔ readonly journal retains legacy default without creating a write (0.879582ms)
+✔ missing readonly journal returns an empty journal without a write (0.856788ms)
+✔ readonly journal aborts corrupt-row validation (0.673492ms)
+✔ journal mutation still uses a strict readwrite transaction (0.947334ms)
+✔ public cache save preserves the transaction error on abort (0.905321ms)
+✔ production requires an exact HTTPS origin and a complete compiled build (30.825313ms)
+✔ production HTTP serves external scripts/styles with real CSP and cache/security headers (41.636363ms)
+✔ only the bounded public notices file is served as plain text (12.968823ms)
+✔ HTTP cannot serve traversal, source, maps, fixtures, directories, arbitrary SPA paths or URL parameters (27.241636ms)
+✔ production never follows build asset symlinks or serves files added after startup (12.858417ms)
+✔ HTTP rejects forged/missing Host, non-HTTPS proxy and foreign Origin without CORS (11.514918ms)
+✔ HTTP exposes no uploads, form submission, OPTIONS, PUT, DELETE, or private-node API (24.316169ms)
+✔ only explicit same-origin consented fixed-indexer JSON reaches the backend; credentials never forwarded (31.730643ms)
+✔ API refuses streaming/oversized/compressed/form/Expect request bodies before any upstream call (16.588103ms)
+✔ raw HTTP duplicate Host and Origin headers are rejected rather than normalized into trust (7.919153ms)
+ℹ tests 136
+ℹ suites 0
+ℹ pass 136
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20669.803187
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> pearl-ledger@0.1.0 build
+> npm run build --workspaces --if-present
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @pearl-ledger/metamask-snap@0.1.0 build
+> node scripts/build.mjs
+
+Built local-only PRL Snap: 178415 bytes; Snap checksum M2XVs5hC6/9vIV/s/htfkvzHF2vXGx+/jevm7xrpzOQ=
+
+> @pearl-ledger/companion@0.1.0 build
+> node --import tsx ../../node_modules/vite/bin/vite.js build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 615 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                 0.73 kB │ gzip:   0.42 kB
+dist/assets/backup-import.worker-Dtrkqa4Y.js   72.73 kB
+dist/assets/index-DK-3_Qur.css                  7.50 kB │ gzip:   2.48 kB
+dist/assets/index-d0S-5XX6.js                 475.84 kB │ gzip: 144.29 kB
+✓ built in 2.13s
+Secret-pattern scan passed for 1687 tracked files; manual review still required.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

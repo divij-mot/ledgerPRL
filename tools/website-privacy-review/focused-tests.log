@@ -1,0 +1,42 @@
+✔ public browser source requires consent and a fixed supported network before any disclosure (1.874438ms)
+✔ public browser source sends only approved address/txid/height paths with credentials/cache/redirect disabled (52.094133ms)
+✔ public browser source rejects arbitrary URL, RPC, xpub, traversal and send paths before fetch (0.794494ms)
+✔ public browser discovery derives account locally and proxy requests never contain account/xpub or recovery bounds (151.232806ms)
+✔ public browser source propagates cancellation without retry or alternate destination (1.275678ms)
+✔ corrupt signed reservations abort before a mutation callback can reuse inputs (7.019122ms)
+▶ post-update integrity checks prevent malformed local changes from being written
+  ✔ invalid update (5.330564ms)
+  ✔ invalid update (1.786556ms)
+  ✔ invalid update (1.723621ms)
+  ✔ invalid update (1.819506ms)
+✔ post-update integrity checks prevent malformed local changes from being written (11.441481ms)
+✔ null persisted row rejects rather than creating empty reservations (0.641174ms)
+✔ removeSavedSnapshot deletes only its fixed optional key after transaction completion (9.479291ms)
+✔ removeSavedSnapshot also completes when no optional snapshot exists (3.403116ms)
+▶ removeSavedSnapshot request, transaction and abort failures settle without claiming deletion
+  ✔ request (5.125551ms)
+  ✔ transaction (9.27594ms)
+  ✔ abort (4.903672ms)
+  ✔ abort-with-error (1.501798ms)
+✔ removeSavedSnapshot request, transaction and abort failures settle without claiming deletion (21.654585ms)
+▶ removeSavedSnapshot synchronous delete and transaction-open failures reject
+  ✔ deleteFailure (1.620115ms)
+  ✔ transactionFailure (1.285042ms)
+✔ removeSavedSnapshot synchronous delete and transaction-open failures reject (3.185339ms)
+✔ production requires an exact HTTPS origin and a complete compiled build (22.817178ms)
+✔ production HTTP serves external scripts/styles with real CSP and cache/security headers (27.769908ms)
+✔ HTTP cannot serve traversal, source, maps, fixtures, directories, arbitrary SPA paths or URL parameters (27.723069ms)
+✔ production never follows build asset symlinks or serves files added after startup (7.820767ms)
+✔ HTTP rejects forged/missing Host, non-HTTPS proxy and foreign Origin without CORS (10.563341ms)
+✔ HTTP exposes no uploads, form submission, OPTIONS, PUT, DELETE, or private-node API (14.283484ms)
+✔ only explicit same-origin consented fixed-indexer JSON reaches the backend; credentials never forwarded (22.699647ms)
+✔ API refuses streaming/oversized/compressed/form/Expect request bodies before any upstream call (8.526599ms)
+✔ raw HTTP duplicate Host and Origin headers are rejected rather than normalized into trust (8.291355ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 496.588626

@@ -1,0 +1,11 @@
+✔ control: real CLI and adapter save frozen signed bytes before final ACK (569.998149ms)
+✔ characterization: post-truncate write failure erases durable intent; stderr is the only recovery (401.561188ms)
+✔ characterization: process interruption after real truncate loses intent and signed recovery (419.820606ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1584.379122

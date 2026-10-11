@@ -1,0 +1,20 @@
+{
+  "testedAt": "2026-10-10T21:23:19.384132+00:00",
+  "browser": "Chrome via CUA",
+  "sourceSha256": "e7ea26c85f3a8def3090a2394f25aed0ae83e4ae57bb3ed466e12acfc3531781",
+  "cspSourceSha256": "1fbcfb31d4ec850cce86645ab1c5bfa337577be4bd0a080b149df1a301b5d804",
+  "observed": [
+    "PASS image 320x320",
+    "PASS image 640x320",
+    "PASS synthetic camera under production CSP; tracks stopped"
+  ],
+  "camera": "Synthetic canvas MediaStream, no physical camera or native permission prompt",
+  "boundaries": [
+    "Browser-native PNG encoding and ImageBitmap decoding",
+    "Actual lazy jsQR decode",
+    "Actual HTMLVideoElement MediaStream playback",
+    "Actual production CSP and camera Permissions-Policy",
+    "Stream cleanup verified"
+  ],
+  "firstAttempts": "Test SVG lacked standalone namespace, then static canvas supplied no fresh video frames; corrected test fixtures, no product relaxation."
+}

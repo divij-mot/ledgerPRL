@@ -1,0 +1,544 @@
+diff --git a/apps/companion/src/main.ts b/apps/companion/src/main.ts
+index a31e683..12e4ed8 100644
+--- a/apps/companion/src/main.ts
++++ b/apps/companion/src/main.ts
+@@ -93,7 +93,8 @@ let busy = false,
+ let receiveIndex = 0,
+   verifiedReceive: string | null = null;
+ let currentAbort: AbortController | null = null;
+-let emergencySignedRecovery: {
++type SignedRecovery = {
++  pending: boolean;
+   text: string;
+   txid: string;
+   ownerId: string;
+@@ -101,7 +102,8 @@ let emergencySignedRecovery: {
+   bundleHex: string;
+   createdAt: number;
+   outpoints: string;
+-} | null = null;
++};
++let emergencySignedRecovery: SignedRecovery | null = null;
+ let journalRefreshGeneration = 0;
+ const selected = new Set<string>();
+ const form = { recipient: "", amount: "", fee: "0.00001000", changeIndex: "0" };
+@@ -179,9 +181,10 @@ async function run(
+     render();
+   }
+ }
+-async function verifyRestoredEmergencyBackup() {
+-  const recovery = emergencySignedRecovery;
+-  if (!recovery) return;
++async function verifyRestoredEmergencyBackup(
++  recovery: SignedRecovery | null = emergencySignedRecovery,
++): Promise<boolean> {
++  if (!recovery) return true;
+   try {
+     const durable = await store.journal(recovery.ownerId);
+     const saved = durable.payments.find((p) => p.id === recovery.paymentId);
+@@ -193,7 +196,7 @@ async function verifyRestoredEmergencyBackup() {
+       JSON.stringify(saved.outpoints) !== recovery.outpoints ||
+       !["signed", "broadcast-unknown", "accepted"].includes(saved.state)
+     )
+-      return;
++      return false;
+     const bundle = paymentBundle(saved);
+     const checked = finalizeTransaction(
+       bundle,
+@@ -203,11 +206,20 @@ async function verifyRestoredEmergencyBackup() {
+       checked.rawTx === saved.rawTx &&
+       checked.txid === recovery.txid &&
+       emergencySignedRecovery === recovery
+-    )
++    ) {
+       emergencySignedRecovery = null;
++      return true;
++    }
+   } catch {
+     /* Keep the only available signed recovery copy until durable verification succeeds. */
+   }
++  return false;
++}
++function markPendingRecoveryFailed(recovery: SignedRecovery | null) {
++  if (recovery && emergencySignedRecovery === recovery) {
++    recovery.pending = false;
++    render();
++  }
+ }
+ function getPayment(): PaymentRecord | undefined {
+   return journal.payments.find((p) => p.id === activePayment);
+@@ -277,7 +289,7 @@ async function checkNode(signal?: AbortSignal) {
+ function render() {
+   const active = getPayment(),
+     b = snapshot ? balances(snapshot, reservedOutpoints(journal)) : null;
+-  app.innerHTML = `<div class="layout"><aside class="sidebar"><div><div class="brand"><span class="pearl" aria-hidden="true"></span>pearl</div><div class="subtitle">Ledger companion</div></div><nav class="nav" aria-label="Main navigation">${(["overview", "receive", "send", "activity"] as const).map((p, i) => `<button data-nav="${p}" class="${page === p ? "active" : ""}" ${disabled(busy)}><span aria-hidden="true">${["◫", "↙", "↗", "≋"][i]}</span>${p[0]!.toUpperCase() + p.slice(1)}</button>`).join("")}</nav><div class="sidebar-bottom"><span class="status-dot"></span>Watch-only by design<br>Your keys stay on your Ledger.<br><br>PSBT signer · Development build<br>No recovery phrase needed.</div></aside><main class="main"><header class="topbar"><div><p class="eyebrow">Your Pearl, under your control</p><h1>${{ overview: "Account overview", receive: "Receive Pearl", send: "Send with confidence", activity: "Payment activity" }[page]}</h1></div><div class="actions"><span class="tag ${network === "mainnet" ? "warn" : ""}">${e(network)}</span><button id="connect" ${disabled(busy)}>${client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger"}</button></div></header><div class="notice">Development prototype. Not audited, Ledger-approved or verified on physical hardware. Use disposable test funds only. Classical Taproot custody; no post-quantum claim.</div>${emergencySignedRecovery ? `<section class="notice error" role="alert"><strong>Signed payment needs a recovery backup</strong><p>Local storage failed after signing. Do not close or refresh this page. Download the signed-payment backup before continuing. Keep it private: anyone with these signed bytes can broadcast this exact payment. Inputs remain reserved; do not create a replacement payment.</p><p class="mono">${e(emergencySignedRecovery.txid)}</p><button id="download-signed-recovery">Download signed-payment backup</button></section>` : ""}${notification ? `<div role="status" class="notice ${notificationType}">${e(notification)} <button id="dismiss" class="ghost" aria-label="Dismiss notification">Dismiss</button></div>` : ""}${busy ? `<div role="status" class="notice busy">${e(busyText)}${currentAbort ? '<button id="cancel-device" class="ghost">Cancel operation</button>' : ""}</div>` : ""}${page === "overview" ? overview(b) : page === "receive" ? receive() : page === "send" ? send(active) : activity()}<footer class="footer"><span>Public data only. Never enter recovery words or private keys.</span><span>BIP86 accounts · PRL PSBT protocol · <a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></span></footer></main></div>`;
++  app.innerHTML = `<div class="layout"><aside class="sidebar"><div><div class="brand"><span class="pearl" aria-hidden="true"></span>pearl</div><div class="subtitle">Ledger companion</div></div><nav class="nav" aria-label="Main navigation">${(["overview", "receive", "send", "activity"] as const).map((p, i) => `<button data-nav="${p}" class="${page === p ? "active" : ""}" ${disabled(busy)}><span aria-hidden="true">${["◫", "↙", "↗", "≋"][i]}</span>${p[0]!.toUpperCase() + p.slice(1)}</button>`).join("")}</nav><div class="sidebar-bottom"><span class="status-dot"></span>Watch-only by design<br>Your keys stay on your Ledger.<br><br>PSBT signer · Development build<br>No recovery phrase needed.</div></aside><main class="main"><header class="topbar"><div><p class="eyebrow">Your Pearl, under your control</p><h1>${{ overview: "Account overview", receive: "Receive Pearl", send: "Send with confidence", activity: "Payment activity" }[page]}</h1></div><div class="actions"><span class="tag ${network === "mainnet" ? "warn" : ""}">${e(network)}</span><button id="connect" ${disabled(busy)}>${client?.sessionState === "ready" ? "Reconnect Ledger" : "Connect Ledger"}</button></div></header><div class="notice">Development prototype. Not audited, Ledger-approved or verified on physical hardware. Use disposable test funds only. Classical Taproot custody; no post-quantum claim.</div>${emergencySignedRecovery ? `<section class="notice ${emergencySignedRecovery.pending ? "busy" : "error"}" role="${emergencySignedRecovery.pending ? "status" : "alert"}"><strong>${emergencySignedRecovery.pending ? "Saving signed payment" : "Signed payment needs a recovery backup"}</strong><p>${emergencySignedRecovery.pending ? "Exact signed bytes are being saved. Keep this page open. If saving stalls, download the recovery copy below." : "Signed bytes have not been confirmed in local storage. Do not close or refresh this page. Download the signed-payment backup before continuing."} Keep it private: anyone with these signed bytes can broadcast this exact payment. Inputs remain reserved; do not create a replacement payment.</p><p class="mono">${e(emergencySignedRecovery.txid)}</p><button id="download-signed-recovery">Download signed-payment backup</button></section>` : ""}${notification ? `<div role="status" class="notice ${notificationType}">${e(notification)} <button id="dismiss" class="ghost" aria-label="Dismiss notification">Dismiss</button></div>` : ""}${busy ? `<div role="status" class="notice busy">${e(busyText)}${currentAbort ? '<button id="cancel-device" class="ghost">Cancel operation</button>' : ""}</div>` : ""}${page === "overview" ? overview(b) : page === "receive" ? receive() : page === "send" ? send(active) : activity()}<footer class="footer"><span>Public data only. Never enter recovery words or private keys.</span><span>BIP86 accounts · PRL PSBT protocol · <a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></span></footer></main></div>`;
+   bind();
+ }
+ function lightCard() {
+@@ -541,15 +553,45 @@ function bind() {
+   document.getElementById("public-file")?.addEventListener(
+     "change",
+     (event) =>
+-      void run("Loading public account only", async () => {
++      void run("Loading public account only", async (signal) => {
+         const file = (event.target as HTMLInputElement).files?.[0];
+         if (!file) return;
++        const owner = account;
++        const requireCurrent = () => {
++          signal.throwIfAborted();
++          assert(account === owner, "Account changed during public import");
++        };
+         assert(file.size < 4096, "Public account file too large");
+-        const recovery = importPublicRecovery(await file.text()),
++        const text = await file.text();
++        requireCurrent();
++        const recovery = importPublicRecovery(text),
+           a = recovery.account;
+-        await transport?.close();
+-        transport = null;
+-        client = null;
++        await store.mutate(accountId(a), (j) => {
++          requireCurrent();
++          j.issuedReceiveThrough = Math.max(
++            j.issuedReceiveThrough,
++            recovery.issuedReceiveThrough,
++          );
++          j.nextChangeIndex = Math.max(
++            j.nextChangeIndex,
++            recovery.nextChangeIndex,
++          );
++        });
++        channel.postMessage("journal");
++        const requireOpen = () =>
++          assert(
++            !signal.aborted && account === owner,
++            "Public recovery range saved; opening the account was cancelled. Saved ranges remain retained.",
++          );
++        requireOpen();
++        const previous = transport;
++        await previous?.close();
++        if (transport === previous) {
++          transport = null;
++          client = null;
++          verifiedReceive = null;
++        }
++        requireOpen();
+         clearPaymentForm();
+         account = a;
+         network = a.network;
+@@ -557,23 +599,13 @@ function bind() {
+         snapshot = null;
+         validation = null;
+         syncComplete = false;
++        sourceMode = "node";
+         history = [];
+         lastUsed = [-1, -1];
+         privacyConsent = false;
+         verifiedReceive = null;
+         activePayment = null;
+         selected.clear();
+-        await store.mutate(accountId(a), (j) => {
+-          j.issuedReceiveThrough = Math.max(
+-            j.issuedReceiveThrough,
+-            recovery.issuedReceiveThrough,
+-          );
+-          j.nextChangeIndex = Math.max(
+-            j.nextChangeIndex,
+-            recovery.nextChangeIndex,
+-          );
+-        });
+-        channel.postMessage("journal");
+         await refreshJournal();
+         notification =
+           "Public account loaded. Approve public address disclosure to discover balances, or connect the matching Ledger.";
+@@ -720,11 +752,12 @@ function bind() {
+     (event) =>
+       void run(
+         "Checking raw previous transactions and public ownership",
+-        async () => {
++        async (signal) => {
+           const file = (event.target as HTMLInputElement).files?.[0];
+           if (!file) return;
++          const owner = account;
+           assert(file.size <= 4 * 1024 * 1024, "Snapshot exceeds 4 MiB");
+-          await importSnapshot(await file.text());
++          await importSnapshot(await file.text(), signal, owner);
+           notification =
+             "Imported public outputs. Chain and completeness claims remain unverified until checked against your source.";
+         },
+@@ -733,10 +766,15 @@ function bind() {
+   click(
+     "load-demo",
+     () =>
+-      void run("Loading public example", async () => {
+-        const response = await fetch("/example-watch.json");
++      void run("Loading public example", async (signal) => {
++        const owner = account;
++        const response = await fetch("/example-watch.json", { signal });
+         assert(response.ok, "Example unavailable");
+-        await importSnapshot(await readBoundedText(response, 4 * 1024 * 1024));
++        await importSnapshot(
++          await readBoundedText(response, 4 * 1024 * 1024),
++          signal,
++          owner,
++        );
+         notification =
+           "Public synthetic example loaded. These outputs are not real funds and cannot pass a real node check.";
+       }),
+@@ -744,10 +782,11 @@ function bind() {
+   click(
+     "restore-cache",
+     () =>
+-      void run("Restoring public watch data", async () => {
++      void run("Restoring public watch data", async (signal) => {
++        const owner = account;
+         const text = await store.load<string>("last-snapshot");
+         assert(text, "No locally saved watch data");
+-        await importSnapshot(text);
++        await importSnapshot(text, signal, owner);
+         notification =
+           "Restored public watch data. Device verification and node freshness have been cleared.";
+       }),
+@@ -875,30 +914,50 @@ function bind() {
+   click(
+     "prepare",
+     () =>
+-      void run("Atomically reserving selected inputs", async () => {
++      void run("Atomically reserving selected inputs", async (signal) => {
+         assert(snapshot && account, "Load account");
+-        if (sourceMode === "public")
++        const owner = account,
++          watch = snapshot,
++          source = sourceMode,
++          request = {
++            selected: [...selected],
++            recipient: form.recipient.trim(),
++            amountPrl: form.amount,
++            feePrl: form.fee,
++            changeIndex: Number(form.changeIndex),
++          };
++        const requireCurrent = () => {
++          signal.throwIfAborted();
++          assert(
++            account === owner &&
++              snapshot === watch &&
++              sourceMode === source &&
++              network === owner.network,
++            "Payment context changed; review and prepare again",
++          );
++        };
++        requireCurrent();
++        if (source === "public")
+           assert(
+-            Number(form.changeIndex) < 980,
++            request.changeIndex < 980,
+             "Change index is outside light recovery bounds",
+           );
+         const id = crypto.randomUUID();
+-        await store.mutate(accountId(account), (j) => {
+-          const bundle = preparePayment(
+-            snapshot!,
+-            {
+-              selected: [...selected],
+-              recipient: form.recipient.trim(),
+-              amountPrl: form.amount,
+-              feePrl: form.fee,
+-              changeIndex: Number(form.changeIndex),
+-            },
+-            reservedOutpoints(j),
+-          );
++        await store.mutate(accountId(owner), (j) => {
++          requireCurrent();
++          const bundle = preparePayment(watch, request, reservedOutpoints(j));
+           reservePayment(j, bundle, id);
+         });
+-        activePayment = id;
+         channel.postMessage("journal");
++        assert(
++          !signal.aborted &&
++            account === owner &&
++            snapshot === watch &&
++            sourceMode === source &&
++            network === owner.network,
++          "Unsigned payment saved; opening the review was cancelled. Inputs remain reserved; review or discard the draft from activity.",
++        );
++        activePayment = id;
+         notification =
+           "Unsigned payment prepared. Inputs are reserved across this browser’s sessions.";
+       }),
+@@ -964,16 +1023,37 @@ function bind() {
+     render();
+   });
+ }
+-async function importSnapshot(text: string) {
++async function importSnapshot(
++  text: string,
++  signal?: AbortSignal,
++  owner: AccountPublicKey | null = account,
++) {
++  const requireCurrent = () => {
++    signal?.throwIfAborted();
++    assert(account === owner, "Account changed during snapshot import");
++  };
++  requireCurrent();
+   const imported = parseWatchSnapshot(text);
+-  await store.mutate(accountId(imported.account), (j) =>
+-    recordRecoveryPaths(j, imported.coins),
+-  );
++  await store.mutate(accountId(imported.account), (j) => {
++    requireCurrent();
++    recordRecoveryPaths(j, imported.coins);
++  });
+   channel.postMessage("journal");
++  const requireOpen = () =>
++    assert(
++      !signal?.aborted && account === owner,
++      "Snapshot recovery paths saved; opening the account was cancelled. Saved ranges remain retained.",
++    );
++  requireOpen();
+   if (account && accountId(account) !== accountId(imported.account)) {
+-    await transport?.close();
+-    transport = null;
+-    client = null;
++    const previous = transport;
++    await previous?.close();
++    if (transport === previous) {
++      transport = null;
++      client = null;
++      verifiedReceive = null;
++    }
++    requireOpen();
+   }
+   syncComplete = false;
+   sourceMode = "node";
+@@ -1154,6 +1234,7 @@ async function sign(signal: AbortSignal, recovery = false) {
+   busyText = "Check network, recipient, amount, fee and change on your Ledger";
+   render();
+   let persistedRawTx: string | null = null;
++  let stagedRecovery: SignedRecovery | null = null;
+   const persistVerifiedSigned = async (result: FinalizedTransaction) => {
+     const recoveryText = signedRecoveryBackup(
+       owner,
+@@ -1162,74 +1243,79 @@ async function sign(signal: AbortSignal, recovery = false) {
+       paymentId,
+       payment.createdAt,
+     );
+-    try {
+-      // Once signatures return, cancellation cannot discard independently verified
+-      // bytes. Concurrent completions may have a different valid witness, but must
+-      // describe exactly the same canonical payment and transaction ID.
+-      const checked = finalizeTransaction(bundle, result.signatures);
++    // Preserve a verified recovery copy before the first storage await. A
++    // navigation or stalled transaction must not precede the unload warning.
++    const recovery: SignedRecovery = {
++      pending: true,
++      text: recoveryText,
++      txid: result.txid,
++      ownerId,
++      paymentId,
++      bundleHex: payment.bundleHex,
++      createdAt: payment.createdAt,
++      outpoints: JSON.stringify(payment.outpoints),
++    };
++    stagedRecovery = recovery;
++    emergencySignedRecovery = recovery;
++    render();
++    // Once signatures return, cancellation cannot discard independently verified
++    // bytes. Concurrent completions may have a different valid witness, but must
++    // describe exactly the same canonical payment and transaction ID.
++    const checked = finalizeTransaction(bundle, result.signatures);
++    assert(
++      checked.rawTx === result.rawTx && checked.txid === result.txid,
++      "Final transaction mismatch",
++    );
++    const retained = await store.mutate(ownerId, (j) => {
++      const current = j.payments.find((p) => p.id === paymentId);
+       assert(
+-        checked.rawTx === result.rawTx && checked.txid === result.txid,
+-        "Final transaction mismatch",
++        current &&
++          current.bundleHex === payment.bundleHex &&
++          current.createdAt === payment.createdAt &&
++          JSON.stringify(current.outpoints) ===
++            JSON.stringify(payment.outpoints),
++        "Reserved payment changed before signed storage; existing record retained",
+       );
+-      const retained = await store.mutate(ownerId, (j) => {
+-        const current = j.payments.find((p) => p.id === paymentId);
++      if (current.rawTx !== undefined || current.txid !== undefined) {
+         assert(
+-          current &&
+-            current.bundleHex === payment.bundleHex &&
+-            current.createdAt === payment.createdAt &&
+-            JSON.stringify(current.outpoints) ===
+-              JSON.stringify(payment.outpoints),
+-          "Reserved payment changed before signed storage; existing record retained",
++          ["signed", "broadcast-unknown", "accepted"].includes(current.state) &&
++            current.rawTx &&
++            current.txid,
++          "Inconsistent saved signed payment; existing record retained",
++        );
++        const saved = finalizeTransaction(
++          bundle,
++          parseTransaction(current.rawTx).inputs.map((i) => i.witness[0]!),
+         );
+-        if (current.rawTx !== undefined || current.txid !== undefined) {
+-          assert(
+-            ["signed", "broadcast-unknown", "accepted"].includes(
+-              current.state,
+-            ) &&
+-              current.rawTx &&
+-              current.txid,
+-            "Inconsistent saved signed payment; existing record retained",
+-          );
+-          const saved = finalizeTransaction(
+-            bundle,
+-            parseTransaction(current.rawTx).inputs.map((i) => i.witness[0]!),
+-          );
+-          assert(
+-            saved.rawTx === current.rawTx &&
+-              saved.txid === current.txid &&
+-              saved.txid === checked.txid,
+-            "Concurrent signed payment failed verification; existing record retained",
+-          );
+-          return true;
+-        }
+         assert(
+-          current.state === "signing" && !current.archived,
+-          "Signing reservation changed; existing record retained",
++          saved.rawTx === current.rawTx &&
++            saved.txid === current.txid &&
++            saved.txid === checked.txid,
++          "Concurrent signed payment failed verification; existing record retained",
+         );
+-        transitionPayment(j, paymentId, "signed", {
+-          rawTx: checked.rawTx,
+-          txid: checked.txid,
+-        });
+-        return false;
++        return true;
++      }
++      assert(
++        current.state === "signing" && !current.archived,
++        "Signing reservation changed; existing record retained",
++      );
++      transitionPayment(j, paymentId, "signed", {
++        rawTx: checked.rawTx,
++        txid: checked.txid,
+       });
+-      channel.postMessage("journal");
+-      notification = retained
+-        ? "Another tab's independently verified signed bytes were preserved. Broadcast still requires separate explicit approval."
+-        : "Signatures independently verified and exact signed bytes saved. Broadcast requires a separate approval.";
+-      persistedRawTx = result.rawTx;
+-    } catch (error) {
+-      emergencySignedRecovery = {
+-        text: recoveryText,
+-        txid: result.txid,
+-        ownerId,
+-        paymentId,
+-        bundleHex: payment.bundleHex,
+-        createdAt: payment.createdAt,
+-        outpoints: JSON.stringify(payment.outpoints),
+-      };
+-      render();
+-      throw error;
+-    }
++      return false;
++    });
++    // A successful update acknowledgement alone does not clear the recovery
++    // copy. Read back and independently verify the complete saved payment.
++    assert(
++      await verifyRestoredEmergencyBackup(recovery),
++      "Signed storage read-back could not be verified; retain the signed-payment recovery backup",
++    );
++    channel.postMessage("journal");
++    notification = retained
++      ? "Another tab's independently verified signed bytes were preserved. Broadcast still requires separate explicit approval."
++      : "Signatures independently verified and exact signed bytes saved. Broadcast requires a separate approval.";
++    persistedRawTx = result.rawTx;
+   };
+   // Persist at the last independently verified signature yield, before the
+   // final device ACK. A missing ACK must not discard a spendable transaction.
+@@ -1240,11 +1326,13 @@ async function sign(signal: AbortSignal, recovery = false) {
+       onVerifiedSigned: persistVerifiedSigned,
+     });
+   } catch (error) {
+-    // A durability timeout can happen while IndexedDB never settles, before
+-    // the callback's own catch can run. Keep the verified bytes immediately.
+-    if (error instanceof VerifiedSigningResultError) {
++    markPendingRecoveryFailed(stagedRecovery);
++    // The callback normally stages recovery before touching storage. Preserve
++    // the adapter's verified result if failure preceded that staging boundary.
++    if (error instanceof VerifiedSigningResultError && !stagedRecovery) {
+       const signed = error.signedTransaction;
+       emergencySignedRecovery = {
++        pending: false,
+         text: signedRecoveryBackup(
+           owner,
+           bundle,
+@@ -1572,11 +1660,27 @@ async function broadcast(
+       approval.source === sourceMode,
+     "Broadcast context changed; review and approve again",
+   );
+-  signal?.throwIfAborted();
++  const requireApproval = () => {
++    signal?.throwIfAborted();
++    assert(
++      account === owner &&
++        accountId(owner) === approval.ownerId &&
++        activePayment === approval.paymentId &&
++        network === approval.network &&
++        network === owner.network &&
++        sourceMode === approval.source,
++      "Broadcast context changed; review and approve again",
++    );
++    assert(
++      approval.source !== "public" || privacyConsent,
++      "Public address disclosure approval required",
++    );
++  };
++  requireApproval();
+   const payment = (await store.journal(ownerId)).payments.find(
+     (p) => p.id === paymentId,
+   );
+-  signal?.throwIfAborted();
++  requireApproval();
+   assert(
+     payment &&
+       ["signed", "broadcast-unknown", "accepted"].includes(payment.state) &&
+@@ -1608,14 +1712,7 @@ async function broadcast(
+     "Persisted signed transaction failed verification",
+   );
+   await store.mutate(ownerId, (j) => {
+-    signal?.throwIfAborted();
+-    assert(
+-      account === owner &&
+-        activePayment === paymentId &&
+-        network === approval.network &&
+-        sourceMode === approval.source,
+-      "Broadcast context changed; review and approve again",
+-    );
++    requireApproval();
+     const current = j.payments.find((p) => p.id === paymentId);
+     assert(
+       current && !current.archived,
+@@ -1627,13 +1724,16 @@ async function broadcast(
+     );
+     transitionPayment(j, paymentId, "broadcast-unknown");
+   });
+-  signal?.throwIfAborted();
++  requireApproval();
+   channel.postMessage("journal");
+   const payload = {
+     bundleHex: payment.bundleHex,
+     rawTx: payment.rawTx,
+     expectedTxid: payment.txid,
+   };
++  // The transaction-completion await can dispatch queued UI events. Check
++  // authority again at the last synchronous boundary before sending bytes.
++  requireApproval();
+   const result = await post(
+     approval.source === "public" ? "/api/indexer/broadcast" : "/api/broadcast",
+     approval.source === "public"

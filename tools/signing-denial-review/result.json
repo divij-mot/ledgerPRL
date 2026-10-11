@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-10T22:28:31.145Z",
+  "network": "regtest",
+  "firmwareSha256": "77e2dc35fed3443440a1393c42ed6cf03fad13ecf5532a84dab7de014890ce14",
+  "dockerImage": "ghcr.io/ledgerhq/ledger-app-builder/ledger-app-dev-tools@sha256:8d3da9179dd1b241883c769c521ee9403352b60091c80405b5bef5801a003ba2",
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "sourceHashes": {
+    "src/handler/sign_psbt.c": "c4b1b12825683db34f44260fce74cecd3b730878041ace467b4a9bf8785c2c4a",
+    "src/handler/sign_psbt/transaction_display.c": "4fc03a890f4875189e8b7ce8c8b3e20f51cf4eccd7ed4870de0208173b46d7e7",
+    "src/handler/sign_psbt/sign_input.c": "cab97c361169298fe2f71b0033c555cb0580b66722bed1d8cf67fe40a64ddedf",
+    "src/ui/display.c": "d34126a4363530370800eeb45d3817e423c03a2253cccf1459edeff469796766",
+    "src/ui/display_nbgl.c": "1572dfed5ed372455bc45830ac5ca393c25c87b9d5f0d4bc4a9d3c3cd07cdc0d",
+    "src/boilerplate/dispatcher.c": "82d0b0cb3ab3b5de2fccb2d6dffdf84d16628eb036d03b98244265b60006329e",
+    "src/boilerplate/prl_review_io.c": "3ec5f9279c29a1d67d9afdd7fbd919520460aeddd0b7ced8395721cff1512363",
+    "src/boilerplate/sw.h": "66238c59d9e20d9ba063f6dd1242a5527730d041cdb8e3f52807cb0ec6d176e7"
+  },
+  "physicalOperations": 0,
+  "broadcasts": 0,
+  "output": "/var/folders/ym/10885q1n18n38bv878bs72fc0000gn/T/pearl-explicit-denial-tAi2Ht",
+  "speculos": "0.27.1",
+  "denial": {
+    "status": "0x6985",
+    "payloadBytes": 0,
+    "rawYields": 0,
+    "terminalFrame": "6985",
+    "merkleContinuations": 304,
+    "gesture": "both buttons on Reject transaction"
+  },
+  "cleanNextCommand": true,
+  "freshApproval": {
+    "status": "0x9000",
+    "signatures": 2,
+    "independentlyVerified": true,
+    "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f"
+  },
+  "partialThenBadAck": {
+    "status": "0x6a80",
+    "rawYields": 1,
+    "signatureIndependentlyValid": true
+  },
+  "recoveryDenial": {
+    "status": "0x6985",
+    "rawYieldsThisAttempt": 0,
+    "priorSignatureRemainsValid": true,
+    "priorCompleteTransactionRemainsValid": true
+  },
+  "outcome": "passed"
+}

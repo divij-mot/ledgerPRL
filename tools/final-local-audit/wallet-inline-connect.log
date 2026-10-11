@@ -1,0 +1,24 @@
+✔ a restored account can close its existing server profile before this page starts sync (1.622334ms)
+✔ close waits for an in-flight start and sends its exact owner (3.23075ms)
+✔ uncertain startup and failed close retain ownership; cancellation cannot silently switch profiles (1.736625ms)
+✔ actual snapshot import persists only owned paths and fresh exports preserve another tab's journal (2691.972666ms)
+✔ public import closes the tracked local owner before starting and remembering replacement (231.049792ms)
+✔ failed local shutdown retains the old account and owner for explicit retry (150.129625ms)
+✔ disconnected draft connects the matching Ledger and signs only after a separate explicit action (295.006583ms)
+✔ matching mainnet draft connection preserves review without starting another background scan (154.691041ms)
+✔ connecting a different Ledger clears the draft view and retains the old account reservations (155.55625ms)
+✔ nonzero mainnet account offers explicit public sync instead of unsupported local sync (137.594708ms)
+✔ fresh browser discovers native-known receive use beyond its first gap (608.959833ms)
+✔ background discovery does not replace review state during busy (363.155166ms)
+✔ background discovery does not replace review state during send (382.723041ms)
+✔ background discovery does not replace review state during receive (367.740042ms)
+✔ receive opened at discovery journal before-update prevents replacing its view (369.01375ms)
+✔ receive opened at discovery journal after-commit prevents replacing its view (358.193ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3929.318417

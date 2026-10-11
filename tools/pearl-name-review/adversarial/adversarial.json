@@ -1,0 +1,379 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "/workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-regtest/app.elf",
+    "testedSnapshot": "/workspace/evidence/adversarial/tested-firmware.elf",
+    "sha256": "77e2dc35fed3443440a1393c42ed6cf03fad13ecf5532a84dab7de014890ce14",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "cases": [
+    {
+      "case": "silent-export-forbidden",
+      "status": "0x6a80"
+    },
+    {
+      "case": "registration-disabled",
+      "status": "0x6d00"
+    },
+    {
+      "case": "message-signing-disabled",
+      "status": "0x6d00"
+    },
+    {
+      "case": "protocol-v0-disabled",
+      "status": "0x6a86"
+    },
+    {
+      "case": "reserved-p1-rejected",
+      "status": "0x6a86"
+    },
+    {
+      "case": "info-trailing-data",
+      "status": "0x6a80"
+    },
+    {
+      "case": "fingerprint-trailing-data",
+      "status": "0x6a87"
+    },
+    {
+      "case": "bitcoin-path-forbidden",
+      "status": "0x6a82"
+    },
+    {
+      "case": "legacy-path-forbidden",
+      "status": "0x6a82"
+    },
+    {
+      "case": "master-key-forbidden",
+      "status": "0x6a82"
+    },
+    {
+      "case": "zero-inputs",
+      "status": "0x6a82",
+      "commands": 0
+    },
+    {
+      "case": "zero-outputs",
+      "status": "0x6a82",
+      "commands": 0
+    },
+    {
+      "case": "oversized-input-map-uint64",
+      "status": "0x6a80",
+      "commands": 50
+    },
+    {
+      "case": "trailing-input-map-commitment",
+      "status": "0x6a80",
+      "commands": 50
+    },
+    {
+      "case": "oversized-output-map",
+      "status": "0x6a80",
+      "commands": 138
+    },
+    {
+      "case": "trailing-output-map-commitment",
+      "status": "0x6a80",
+      "commands": 138
+    },
+    {
+      "case": "zero-progress-policy",
+      "status": "0x6a80",
+      "commands": 44
+    },
+    {
+      "case": "zero-progress-merkle-leaf",
+      "status": "0x6a80",
+      "commands": 3
+    },
+    {
+      "case": "zero-progress-stream",
+      "status": "0x6a80",
+      "commands": 89
+    },
+    {
+      "case": "zero-progress-merkle-proof",
+      "status": "0x6a80",
+      "commands": 2
+    },
+    {
+      "case": "preimage-trailing-response",
+      "status": "0x6a80",
+      "commands": 2
+    },
+    {
+      "case": "merkle-proof-trailing-response",
+      "status": "0x6a80",
+      "commands": 1
+    },
+    {
+      "case": "previous-tx-over-65536-bytes",
+      "status": "0x6a80",
+      "commands": 88
+    },
+    {
+      "case": "missing-network",
+      "status": "0x6a80",
+      "commands": 12
+    },
+    {
+      "case": "wrong-network-id",
+      "status": "0x6a80",
+      "commands": 42
+    },
+    {
+      "case": "wrong-genesis",
+      "status": "0x6a80",
+      "commands": 42
+    },
+    {
+      "case": "wrong-binding-schema",
+      "status": "0x6a80",
+      "commands": 42
+    },
+    {
+      "case": "trailing-binding-byte",
+      "status": "0x6a80",
+      "commands": 42
+    },
+    {
+      "case": "wrong-psbt-version",
+      "status": "0x6a80",
+      "commands": 22
+    },
+    {
+      "case": "wrong-tx-version",
+      "status": "0x6a80",
+      "commands": 18
+    },
+    {
+      "case": "nonzero-locktime",
+      "status": "0x6a80",
+      "commands": 34
+    },
+    {
+      "case": "modifiable-transaction",
+      "status": "0x6a80",
+      "commands": 38
+    },
+    {
+      "case": "count-mismatch",
+      "status": "0x6a80",
+      "commands": 26
+    },
+    {
+      "case": "unknown-global",
+      "status": "0x6a80",
+      "commands": 14
+    },
+    {
+      "case": "nonzero-wallet-hmac",
+      "status": "0x6a82",
+      "commands": 42
+    },
+    {
+      "case": "trailing-apdu",
+      "status": "0x6a87",
+      "commands": 0
+    },
+    {
+      "case": "forbidden-input-11",
+      "status": "0x6a80",
+      "commands": 68
+    },
+    {
+      "case": "forbidden-input-12",
+      "status": "0x6a80",
+      "commands": 68
+    },
+    {
+      "case": "forbidden-input-15",
+      "status": "0x6a80",
+      "commands": 68
+    },
+    {
+      "case": "forbidden-input-18",
+      "status": "0x6a80",
+      "commands": 68
+    },
+    {
+      "case": "forbidden-input-1b",
+      "status": "0x6a80",
+      "commands": 68
+    },
+    {
+      "case": "forbidden-input-07",
+      "status": "0x6a80",
+      "commands": 68
+    },
+    {
+      "case": "forbidden-input-08",
+      "status": "0x6a80",
+      "commands": 68
+    },
+    {
+      "case": "sighash-all-forbidden",
+      "status": "0x6a82",
+      "commands": 92
+    },
+    {
+      "case": "sighash-anyonecanpay-forbidden",
+      "status": "0x6a82",
+      "commands": 92
+    },
+    {
+      "case": "rbf-sequence-forbidden",
+      "status": "0x6a80",
+      "commands": 88
+    },
+    {
+      "case": "missing-sequence",
+      "status": "0x6a80",
+      "commands": 83
+    },
+    {
+      "case": "missing-witness-utxo",
+      "status": "0x6a80",
+      "commands": 72
+    },
+    {
+      "case": "missing-internal-key",
+      "status": "0x6a80",
+      "commands": 78
+    },
+    {
+      "case": "wrong-internal-key",
+      "status": "0x6a80",
+      "commands": 84
+    },
+    {
+      "case": "wrong-derivation-key",
+      "status": "0x6a80",
+      "commands": 66
+    },
+    {
+      "case": "taproot-leafhash-forbidden",
+      "status": "0x6a80",
+      "commands": 66
+    },
+    {
+      "case": "wrong-coin-origin",
+      "status": "0x6a80",
+      "commands": 66
+    },
+    {
+      "case": "hardened-address-index",
+      "status": "0x6a80",
+      "commands": 66
+    },
+    {
+      "case": "duplicate-outpoint",
+      "status": "0x6a80",
+      "commands": 118
+    },
+    {
+      "case": "input-individual-max-plus-one",
+      "status": "0x6a80",
+      "commands": 78
+    },
+    {
+      "case": "input-sum-max-plus-one",
+      "status": "0x6a80",
+      "commands": 122
+    },
+    {
+      "case": "output-individual-max-plus-one",
+      "status": "0x6a80",
+      "commands": 146
+    },
+    {
+      "case": "output-sum-max-plus-one",
+      "status": "0x6a80",
+      "commands": 166
+    },
+    {
+      "case": "zero-recipient-amount",
+      "status": "0x6a80",
+      "commands": 146
+    },
+    {
+      "case": "zero-change-amount",
+      "status": "0x6a80",
+      "commands": 166
+    },
+    {
+      "case": "zero-input-amount",
+      "status": "0x6a80",
+      "commands": 80
+    },
+    {
+      "case": "negative-fee",
+      "status": "0x6a80",
+      "commands": 176
+    },
+    {
+      "case": "legacy-recipient-forbidden",
+      "status": "0x6a82",
+      "commands": 150
+    },
+    {
+      "case": "segwit0-recipient-forbidden",
+      "status": "0x6a82",
+      "commands": 150
+    },
+    {
+      "case": "segwit3-recipient-forbidden",
+      "status": "0x6a82",
+      "commands": 150
+    },
+    {
+      "case": "p2tr-zero-invalid-point",
+      "status": "0x6a80",
+      "commands": 150
+    },
+    {
+      "case": "p2tr-field-modulus",
+      "status": "0x6a80",
+      "commands": 150
+    },
+    {
+      "case": "p2tr-invalid-point",
+      "status": "0x6a80",
+      "commands": 150
+    },
+    {
+      "case": "p2mr-change-forbidden",
+      "status": "0x6a80",
+      "commands": 172
+    },
+    {
+      "case": "forged-change-script",
+      "status": "0x6a80",
+      "commands": 172
+    },
+    {
+      "case": "wrong-change-internal-key",
+      "status": "0x6a80",
+      "commands": 176
+    },
+    {
+      "case": "unmarked-second-recipient",
+      "status": "0x6a82",
+      "commands": 164
+    },
+    {
+      "case": "output-taptree-forbidden",
+      "status": "0x6a80",
+      "commands": 162
+    },
+    {
+      "case": "invalid-merkle-proof",
+      "status": "0x6a80",
+      "commands": 1
+    }
+  ]
+}

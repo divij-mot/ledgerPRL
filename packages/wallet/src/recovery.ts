@@ -306,8 +306,36 @@ export function importWalletBackup(text: string): WalletBackup {
     journal: validateRestoredJournal(v.journal, account),
   };
 }
-/** Atomic merge only: never replace a local journal or downgrade a known signed/uncertain state. */
+/**
+ * Merge already-validated local/restored journals atomically. Call the backup
+ * importer for untrusted input; this helper does not establish account ownership.
+ * Never replace a local journal or downgrade a known signed/uncertain state.
+ */
 export function mergeRestoredJournal(
+  existing: WalletJournal,
+  incoming: WalletJournal,
+): void {
+  assert(
+    existing.payments.length <= 2000 && incoming.payments.length <= 2000,
+    "Merged journal exceeds 2000 records; source data remains unchanged",
+  );
+  // Validate the entire merge against a private candidate. A caller may catch
+  // a later conflict outside an IndexedDB transaction; it must not retain an
+  // earlier partial addition, state upgrade or revoked callback owner.
+  const candidate = structuredClone(existing);
+  mergeIntoJournal(candidate, incoming);
+  const previousLength = existing.payments.length;
+  for (let i = 0; i < previousLength; i++) {
+    const current = existing.payments[i]!,
+      merged = candidate.payments[i]!;
+    if (!merged.signingAttempt) delete current.signingAttempt;
+    Object.assign(current, merged);
+  }
+  existing.payments.push(...candidate.payments.slice(previousLength));
+  existing.nextChangeIndex = candidate.nextChangeIndex;
+  existing.issuedReceiveThrough = candidate.issuedReceiveThrough;
+}
+function mergeIntoJournal(
   existing: WalletJournal,
   incoming: WalletJournal,
 ): void {
@@ -318,19 +346,25 @@ export function mergeRestoredJournal(
     "broadcast-unknown": 3,
     accepted: 4,
   };
+  const byId = new Map(existing.payments.map((p) => [p.id, p])),
+    reserved = new Set(existing.payments.flatMap((p) => p.outpoints));
   for (const restored of incoming.payments) {
     // Even direct merge callers cannot import local callback ownership.
     const restoredPayment = structuredClone(restored);
     delete restoredPayment.signingAttempt;
-    const current = existing.payments.find((p) => p.id === restored.id);
+    const current = byId.get(restored.id);
     if (!current) {
       assert(
-        !restored.outpoints.some((point) =>
-          existing.payments.some((p) => p.outpoints.includes(point)),
-        ),
+        !restored.outpoints.some((point) => reserved.has(point)),
         "Restored payment conflicts with an existing reservation; neither journal was replaced",
       );
+      assert(
+        existing.payments.length < 2000,
+        "Merged journal exceeds 2000 records; source data remains unchanged",
+      );
       existing.payments.push(restoredPayment);
+      byId.set(restoredPayment.id, restoredPayment);
+      restoredPayment.outpoints.forEach((point) => reserved.add(point));
       continue;
     }
     assert(

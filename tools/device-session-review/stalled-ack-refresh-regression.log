@@ -1,0 +1,34 @@
+✔ Successful signing preserves same-session receive verification and exact durable payment (255.769305ms)
+✔ Terminal final ACK lost clears verification while retaining exact signed bytes/reservations (290.139207ms)
+✔ Terminal final ACK rejected clears verification while retaining exact signed bytes/reservations (272.947944ms)
+✔ Terminal final ACK unexpected-payload clears verification while retaining exact signed bytes/reservations (289.31597ms)
+✔ Terminal final ACK cancelled clears verification while retaining exact signed bytes/reservations (294.103322ms)
+✔ Device rejection before signature leaves ambiguous signing reservation and clears old verification (219.439896ms)
+✔ Signed storage failure preserves exact emergency recovery and locks, clearing old verification (293.52367ms)
+✔ Unrelated host error does not discard valid ready-session verification (84.892304ms)
+✔ Storage failure followed by stalled journal refresh never renders stale device verification (256.753664ms)
+✖ Lost final ACK followed by stalled journal refresh removes the displayed verified label (227.517929ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2893.522097
+
+✖ failing tests:
+
+test at tools/device-session-review/session-cleanup.test.ts:19:9569
+✖ Lost final ACK followed by stalled journal refresh removes the displayed verified label (227.517929ms)
+  AssertionError [ERR_ASSERTION]: Displayed label must clear before any finalizer storage await
+      at TestContext.<anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/device-session-review/session-cleanup.test.ts:391:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '<div class="layout"><aside class="sidebar"><div><div class="brand"><span class="pearl" aria-hidden="true"></span>pearl</div><div class="subtitle">Ledger companion</div></div><nav class="nav" aria-label="Main navigation"><button data-nav="overview" class="" disabled><span aria-hidden="true">◫</span>Overview</button><button data-nav="receive" class="active" disabled><span aria-hidden="true">↙</span>Receive</button><button data-nav="send" class="" disabled><span aria-hidden="true">↗</span>Send</button><button data-nav="activity" class="" disabled><span aria-hidden="true">≋</span>Activity</button></nav><div class="sidebar-bottom"><span class="status-dot"></span>Watch-only by design<br>Your keys stay on your Ledger.<br><br>PSBT signer · Development build<br>No recovery phrase needed.</div></aside><main class="main"><header class="topbar"><div><p class="eyebrow">Your Pearl, under your control</p><h1>Receive Pearl</h1></div><div class="actions"><span class="tag ">regtest</span><button id="connect" disabled>Connect Ledger</button></div></header><div class="notice">Development prototype. Not audited, Ledger-approved or verified on physical hardware. Use disposable test funds only. Classical Taproot custody; no post-quantum claim.</div><section class="notice busy" role="status"><strong>Saving signed payment</strong><p>Exact signed bytes are being saved. Keep this page open. If saving stalls, download the recovery copy below. Keep it private: anyone with these signed bytes can broadcast this exact payment. Inputs remain reserved; do not create a replacement payment.</p><p class="mono">c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f</p><button id="download-signed-recovery">Download signed-payment backup</button></section><div role="status" class="notice success">Node checked 2 outputs at block 200. This trusts your configured node&#39;s chain view. <button id="dismiss" class="ghost" aria-label="Dismiss notification">Dismiss</button></div><div role="status" class="notice busy">Check network, recipient, amount, fee and change on your Ledger<button id="cancel-device" class="ghost">Cancel operation</button></div><div class="grid"><section class="card"><div class="section-head"><h2>Receive address</h2><span class="tag ok">Verified on device</span></div><div class="field"><label for="receive-index">Receive index</label><input id="receive-index" type="number" min="0" max="8" value="0" disabled></div><p class="mono muted">m/86&#39;/1&#39;/0&#39;/0/0</p><div class="address">rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm</div><div class="actions"><button id="verify-receive" disabled>Verify on Ledger</button><button id="copy-address" class="secondary" disabled>Copy verified address</button></div><p class="hint">Latest saved receive index: 7. Export your public recovery record after issuing addresses; it records skipped/unused ranges for a restored browser. Use consecutive receive indexes to preserve gap-limit recovery. Skipping 20 or more unused addresses requires an extended recovery scan. Verify the full address on the Ledger screen. This label is cleared when you change account, address index or device session.</p></section><section class="card"><h2>Mining payouts</h2><p class="hint">A verified public receive address can be used for compatible Pearl miner or pool payouts. Mining stays on your host. Ledger only derives addresses and signs spending transactions.</p><p class="hint">Coinbase rewards remain immature until 100 confirmations. Imported chain metadata alone cannot establish spendability.</p></section></div><footer class="footer"><span>Public data only. Never enter recovery words or private keys.</span><span>BIP86 accounts · PRL PSBT protocol · <a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></span></footer></main></div>',
+    expected: />Not device verified</,
+    operator: 'match',
+    diff: 'simple'
+  }

@@ -1,0 +1,362 @@
+/** Offline source-review probes. Public-only synthetic fixtures; never send funds here. */
+import test from "node:test";
+import assert from "node:assert/strict";
+import { base58check, bech32m } from "@scure/base";
+import { secp256k1 } from "@noble/curves/secp256k1";
+import { hmac } from "@noble/hashes/hmac";
+import { sha512 } from "@noble/hashes/sha512";
+import {
+  accountFromJson, accountToJson, deriveAddress, derivePublicKey, fromHex,
+  hex, concat, i32, u32, u64, compactSize, parseTransaction, NETWORKS, sha256,
+  type AccountPublicKey,
+} from "../../packages/sdk/src/index.js";
+import {
+  discoverAccount, parseWatchSnapshot, snapshotToJson, balances, outpoint,
+  emptyJournal, exportPublicRecovery, importPublicRecovery, recordRecoveryPaths,
+  preparePayment, reservePayment, requireFreshValidation, applyValidation,
+  type WatchSource, type AddressActivity,
+} from "../../packages/wallet/src/index.js";
+import {
+  parseAccountXpub, assertSameAccount,
+} from "../../packages/bitcoin-prl-adapter/src/policy.js";
+import {
+  BlockbookSource, checkLightSnapshot,
+} from "../../apps/companion/src/blockbook-source.js";
+
+const account: AccountPublicKey = {
+  network: "mainnet", account: 0,
+  masterFingerprint: fromHex("11223344"),
+  publicKey: fromHex("0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798"),
+  chainCode: new Uint8Array(32).fill(0x42),
+};
+const blockHash = (height: number) => height.toString(16).padStart(64, "0");
+const tip = { height: 200, hash: blockHash(200) };
+const base58 = base58check(sha256);
+function be32(n: number) {
+  const bytes = new Uint8Array(4);
+  new DataView(bytes.buffer).setUint32(0, n);
+  return bytes;
+}
+function xpubBytes(a = account) {
+  return concat(
+    be32(a.network === "mainnet" ? 0x0488b21e : 0x043587cf),
+    Uint8Array.of(3), fromHex("aabbccdd"), be32(0x80000000 + a.account),
+    a.chainCode, a.publicKey,
+  );
+}
+function transaction(branch: 0 | 1, index: number, amount = 100_000n,
+  previous = "11".repeat(32), a = account) {
+  const script = deriveAddress(a, branch, index).scriptPubKey;
+  const bytes = concat(
+    i32(1), Uint8Array.of(1), fromHex(previous).reverse(), u32(0),
+    Uint8Array.of(0), u32(0xffffffff), Uint8Array.of(1), u64(amount),
+    compactSize(script.length), script, u32(0),
+  );
+  return {
+    txid: parseTransaction(bytes).txid, vout: 0, rawTransaction: hex(bytes),
+    branch, index, block: { height: 1, hash: blockHash(1) }, amount,
+  };
+}
+type PublicTx = ReturnType<typeof transaction>;
+const funding = transaction(0, 0);
+const empty = (): AddressActivity => ({
+  used: false, confirmedTxCount: 0, pendingTxCount: 0, txids: [], utxos: [],
+});
+function directSource(coins: PublicTx[], options: {
+  omitUtxos?: boolean;
+  histories?: Map<string, PublicTx[]>;
+  pending?: Set<string>;
+} = {}): WatchSource & { addresses: string[] } {
+  const histories = options.histories ?? new Map(coins.map((c) => [
+    deriveAddress(account, c.branch, c.index).address, [c],
+  ]));
+  const records = new Map([...coins, ...[...histories.values()].flat()].map((c) => [c.txid, c]));
+  return {
+    network: account.network, addresses: [],
+    async tip() { return { tip, genesisHash: NETWORKS.mainnet.genesisHash }; },
+    async blockHash(height) { return blockHash(height); },
+    async address(address) {
+      this.addresses.push(address);
+      const rows = histories.get(address) ?? [];
+      const isPending = (txid: string) => options.pending?.has(txid) ?? false;
+      return {
+        used: rows.length > 0,
+        confirmedTxCount: rows.filter((c) => !isPending(c.txid)).length,
+        pendingTxCount: rows.filter((c) => isPending(c.txid)).length,
+        txids: rows.map((c) => c.txid),
+        utxos: options.omitUtxos ? [] : coins.filter((c) =>
+          deriveAddress(account, c.branch, c.index).address === address,
+        ).map((c) => ({ txid: c.txid, vout: 0, height: isPending(c.txid) ? null : 1 })),
+      };
+    },
+    async transaction(txid) {
+      const tx = records.get(txid);
+      assert(tx);
+      const pending = options.pending?.has(txid) ?? false;
+      return { rawTransaction: tx.rawTransaction, block: pending ? null : tx.block,
+        confirmations: pending ? 0 : 200 };
+    },
+  };
+}
+function httpSource(source: WatchSource): BlockbookSource {
+  // This function never invokes the global fetch implementation.
+  const fakeFetch: typeof fetch = async (input) => {
+    const url = new URL(String(input));
+    assert.equal(url.origin, "https://blockbook.pearlresearch.ai");
+    const path = url.pathname;
+    let value: unknown;
+    if (path === "/api/v2/") value = {
+      blockbook: { decimals: 8, inSync: true, initialSync: false,
+        inSyncMempool: true, bestHeight: tip.height },
+      backend: { chain: "mainnet", blocks: tip.height, bestBlockHash: tip.hash },
+    };
+    else if (path.startsWith("/api/v2/block-index/")) {
+      const height = Number(path.split("/").pop());
+      value = { blockHash: height === 0 ? NETWORKS.mainnet.genesisHash : await source.blockHash(height) };
+    } else if (path.startsWith("/api/v2/address/")) {
+      const address = path.split("/").pop()!;
+      const row = await source.address(address);
+      value = { address, txs: row.confirmedTxCount, unconfirmedTxs: row.pendingTxCount,
+        page: 1, totalPages: 1, itemsOnPage: 1000, txids: row.txids };
+    } else if (path.startsWith("/api/v2/utxo/")) {
+      value = (await source.address(path.split("/").pop()!)).utxos;
+    } else if (path.startsWith("/api/v2/tx/")) {
+      const txid = path.split("/").pop()!;
+      const tx = await source.transaction(txid);
+      value = { txid, hex: tx.rawTransaction, confirmations: tx.confirmations,
+        blockHeight: tx.block?.height ?? -1, blockHash: tx.block?.hash };
+    } else throw new Error(`Unexpected offline route: ${path}`);
+    return new Response(JSON.stringify(value), { status: 200 });
+  };
+  return new BlockbookSource("mainnet", fakeFetch);
+}
+
+test("CONTROL: account import rejects unexpected fields, invalid networks, indexes and public keys", () => {
+  const json = accountToJson(account);
+  for (const patch of [
+    { xpub: base58.encode(xpubBytes()) }, { privateKey: "rejected-placeholder" },
+    { network: "bitcoin" }, { account: -1 }, { account: 0x80000000 },
+    { account: 0.5 }, { masterFingerprint: "00" }, { chainCode: "00" },
+    { publicKey: "04" + "00".repeat(32) }, { publicKey: "02" + "ff".repeat(32) },
+  ]) assert.throws(() => accountFromJson({ ...json, ...patch }));
+  assert.deepEqual(accountFromJson(json), account);
+});
+
+test("CONTROL: Ledger policy xpub checks exact payload, checksum, network version, depth and child", () => {
+  const bytes = xpubBytes();
+  assert.deepEqual(parseAccountXpub(base58.encode(bytes), account.masterFingerprint,
+    "mainnet", 0).account, account);
+  const alterations = [
+    concat(bytes, Uint8Array.of(0)), bytes.slice(0, -1),
+    concat(be32(0x043587cf), bytes.slice(4)),
+    concat(bytes.slice(0, 4), Uint8Array.of(2), bytes.slice(5)),
+    concat(bytes.slice(0, 9), be32(0x80000001), bytes.slice(13)),
+    concat(bytes.slice(0, 45), Uint8Array.of(0), bytes.slice(46)),
+  ];
+  for (const changed of alterations)
+    assert.throws(() => parseAccountXpub(base58.encode(changed), account.masterFingerprint, "mainnet", 0));
+  const encoded = base58.encode(bytes);
+  assert.throws(() => parseAccountXpub(encoded.slice(0, -1) + (encoded.endsWith("1") ? "2" : "1"),
+    account.masterFingerprint, "mainnet", 0));
+});
+
+test("BOUNDARY: imported path/fingerprint labels do not authenticate hardened ancestry", () => {
+  const relabeled = accountFromJson({ ...accountToJson(account), account: 5, masterFingerprint: "aabbccdd" });
+  assert.equal(deriveAddress(relabeled, 0, 7).address, deriveAddress(account, 0, 7).address);
+  assert.match(deriveAddress(relabeled, 0, 7).path, /\/5'\/0\/7$/);
+  assert.throws(() => assertSameAccount(account, relabeled), /differs/);
+});
+
+test("CONTROL: receive/change derivation matches an independent public CKD and TapTweak calculation", () => {
+  function child(pub: Uint8Array, chain: Uint8Array, index: number) {
+    const digest = hmac(sha512, chain, concat(pub, be32(index)));
+    const tweak = BigInt("0x" + hex(digest.slice(0, 32)));
+    assert(tweak > 0n && tweak < secp256k1.CURVE.n);
+    return { pub: secp256k1.ProjectivePoint.fromHex(pub).add(
+      secp256k1.ProjectivePoint.BASE.multiply(tweak)).toRawBytes(true), chain: digest.slice(32) };
+  }
+  const tag = sha256(new TextEncoder().encode("TapTweak"));
+  for (const branch of [0, 1] as const) for (const index of [0, 19, 979, 0x7fffffff]) {
+    const b = child(account.publicKey, account.chainCode, branch);
+    const c = child(b.pub, b.chain, index);
+    assert.deepEqual(derivePublicKey(account, branch, index), c.pub);
+    const x = c.pub.slice(1);
+    const tweak = BigInt("0x" + hex(sha256(concat(tag, tag, x))));
+    const point = secp256k1.ProjectivePoint.fromHex(concat(Uint8Array.of(2), x));
+    const output = point.add(secp256k1.ProjectivePoint.BASE.multiply(tweak)).toRawBytes(true).slice(1);
+    const expected = bech32m.encode("prl", [1, ...bech32m.toWords(output)]);
+    assert.equal(deriveAddress(account, branch, index).address, expected);
+  }
+  assert.throws(() => deriveAddress(account, 2 as 0, 0), /branch/);
+  assert.throws(() => deriveAddress(account, 0, 0x80000000), /index/);
+});
+
+test("CONTROL: empty account scans exactly 20 indexes on both branches", async () => {
+  const source = directSource([]);
+  const result = await discoverAccount(source, account);
+  assert.equal(source.addresses.length, 40);
+  assert.deepEqual(result.lastUsed, [-1, -1]);
+  assert.deepEqual(result.snapshot.coverage, { externalScannedThrough: 19, changeScannedThrough: 19, gapLimit: 20 });
+});
+
+test("CONTROL: spent history extends the gap on both branches without current UTXOs", async () => {
+  const coins = [transaction(0, 19), transaction(0, 39), transaction(1, 19)];
+  const foreign = { ...account, chainCode: new Uint8Array(32).fill(0x43) };
+  const histories = new Map(coins.map((c) => [
+    deriveAddress(account, c.branch, c.index).address,
+    [c, transaction(0, 0, c.amount - 1000n, c.txid, foreign)],
+  ]));
+  const result = await discoverAccount(httpSource(directSource([], { histories })), account);
+  assert.deepEqual(result.lastUsed, [39, 19]);
+  assert.equal(result.snapshot.coverage.externalScannedThrough, 59);
+  assert.equal(result.snapshot.coverage.changeScannedThrough, 39);
+  assert.equal(result.history.reduce((sum, h) => sum + h.spent, 0n), 300_000n);
+});
+
+test("BOUNDARY: bare public import misses funds beyond a clean gap; saved ranges recover both branches", async () => {
+  const coins = [transaction(0, 20), transaction(1, 47)];
+  const missed = await discoverAccount(directSource(coins), account);
+  assert.equal(missed.complete, true);
+  assert.equal(missed.snapshot.coins.length, 0);
+  const journal = emptyJournal();
+  recordRecoveryPaths(journal, coins);
+  const restored = importPublicRecovery(exportPublicRecovery(account, journal));
+  const recovered = await discoverAccount(directSource(coins), restored.account,
+    { minimumIndex: [restored.issuedReceiveThrough, restored.nextChangeIndex - 1] });
+  assert.equal(recovered.snapshot.coins.length, 2);
+  assert.equal(recovered.snapshot.coverage.externalScannedThrough, 40);
+  assert.equal(recovered.snapshot.coverage.changeScannedThrough, 67);
+});
+
+test("CONTROL: index 980 recovery requirement rejects instead of returning a partial balance", async () => {
+  const source = directSource([]);
+  await assert.rejects(discoverAccount(source, account, { minimumIndex: [980, -1] }), /extended scan/);
+  assert.equal(source.addresses.length, 0);
+});
+
+test("CONTROL: wrong source network/genesis, outpoint txid and output ownership fail closed", async () => {
+  const wrongNetwork = directSource([]);
+  wrongNetwork.network = "testnet2";
+  await assert.rejects(discoverAccount(wrongNetwork, account), /network/);
+  const wrongGenesis = directSource([]);
+  wrongGenesis.tip = async () => ({ tip, genesisHash: NETWORKS.testnet2.genesisHash });
+  await assert.rejects(discoverAccount(wrongGenesis, account), /genesis/);
+  const wrongRaw = directSource([funding]);
+  wrongRaw.transaction = async () => ({ rawTransaction: transaction(0, 1).rawTransaction,
+    confirmations: 200, block: funding.block });
+  await assert.rejects(discoverAccount(wrongRaw, account), /transaction ID/);
+  const misbound = directSource([funding]);
+  const original = misbound.address.bind(misbound);
+  const wrongAddress = deriveAddress(account, 1, 0).address;
+  misbound.address = async (address) => address === wrongAddress ? {
+    used: true, confirmedTxCount: 1, pendingTxCount: 0, txids: [funding.txid],
+    utxos: [{ txid: funding.txid, vout: 0, height: 1 }],
+  } : address === deriveAddress(account, 0, 0).address ? empty() : original(address);
+  await assert.rejects(discoverAccount(misbound, account), /ownership/);
+});
+
+test("CONTROL: parsed pending spends remove stale confirmed UTXOs from balances and selection", async () => {
+  const spend = transaction(0, 1, 99_000n, funding.txid);
+  const histories = new Map([
+    [deriveAddress(account, 0, 0).address, [funding, spend]],
+    [deriveAddress(account, 0, 1).address, [spend]],
+  ]);
+  const result = await discoverAccount(httpSource(directSource([funding], { histories,
+    pending: new Set([spend.txid]) })), account);
+  assert.equal(result.snapshot.coins.length, 0);
+  assert.equal(balances(result.snapshot).available, 0n);
+  assert.throws(() => preparePayment(result.snapshot, {
+    selected: [outpoint(funding)], recipient: deriveAddress(account, 0, 2).address,
+    amountPrl: "0.00050000", feePrl: "0.00001000", changeIndex: 0,
+  }), /missing/);
+});
+
+test("GAP AD-01: history for receive /0/0 falsely marks change /1/19 as used", async () => {
+  const histories = new Map([
+    [deriveAddress(account, 0, 0).address, [funding]],
+    [deriveAddress(account, 1, 19).address, [funding]],
+  ]);
+  const result = await discoverAccount(httpSource(directSource([funding], { histories })), account);
+  assert.equal(result.complete, true);
+  assert.deepEqual(result.lastUsed, [0, 19]);
+  assert.equal(result.snapshot.coverage.changeScannedThrough, 39);
+  assert.equal(result.history.length, 1);
+  assert.equal(result.history[0]!.received, funding.amount);
+  const journal = emptyJournal();
+  // These are the production syncPublic() journal commit expressions.
+  journal.issuedReceiveThrough = Math.max(journal.issuedReceiveThrough, result.lastUsed[0]);
+  journal.nextChangeIndex = Math.max(journal.nextChangeIndex, result.lastUsed[1] + 1);
+  assert.equal(importPublicRecovery(exportPublicRecovery(account, journal)).nextChangeIndex, 20);
+});
+
+test("GAP AD-01: relabeling one real raw output can exhaust the saved light-mode change range", async () => {
+  const histories = new Map([[deriveAddress(account, 0, 0).address, [funding]]]);
+  for (let index = 19; index <= 979; index += 20)
+    histories.set(deriveAddress(account, 1, index).address, [funding]);
+  const result = await discoverAccount(httpSource(directSource([funding], { histories })), account);
+  assert.deepEqual(result.lastUsed, [0, 979]);
+  assert.equal(result.snapshot.coverage.changeScannedThrough, 999);
+  assert.equal(result.history.length, 1);
+  const journal = emptyJournal();
+  journal.issuedReceiveThrough = result.lastUsed[0];
+  journal.nextChangeIndex = result.lastUsed[1] + 1;
+  const restored = importPublicRecovery(exportPublicRecovery(account, journal));
+  assert.equal(restored.nextChangeIndex, 980);
+  const honest = await discoverAccount(directSource([funding]), account,
+    { minimumIndex: [restored.issuedReceiveThrough, restored.nextChangeIndex - 1] });
+  journal.nextChangeIndex = Math.max(journal.nextChangeIndex, honest.lastUsed[1] + 1);
+  assert.equal(journal.nextChangeIndex, 980, "later honest discovery does not lower the saved high-water mark");
+  assert(honest.lastUsed[1] < 0);
+  const bundle = preparePayment(honest.snapshot, {
+    selected: [outpoint(funding)], recipient: deriveAddress(account, 0, 2).address,
+    amountPrl: "0.00050000", feePrl: "0.00001000", changeIndex: 979,
+  });
+  assert.throws(() => reservePayment(journal, bundle, "exhausted-change-review"), /already allocated/);
+  // The browser's separate sourceMode=public guard permits only index < 980.
+});
+
+test("GAP AD-02: omitted UTXO contradicting supplied complete history returns final zero balance", async () => {
+  const result = await discoverAccount(httpSource(directSource([funding], { omitUtxos: true })), account);
+  assert.equal(result.complete, true);
+  assert.equal(result.history.length, 1);
+  assert.equal(result.history[0]!.received, funding.amount);
+  assert.equal(result.history[0]!.spent, 0n);
+  assert.equal(result.snapshot.coins.length, 0);
+  assert.equal(balances(result.snapshot).available, 0n);
+});
+
+test("GAP AD-02: extra UTXO absent from supposedly complete address history becomes selectable", async () => {
+  const extra = transaction(0, 0, 200_000n);
+  const histories = new Map([[deriveAddress(account, 0, 0).address, [funding]]]);
+  const result = await discoverAccount(httpSource(directSource([funding, extra], { histories })), account);
+  assert.equal(result.complete, true);
+  assert.equal(result.history.length, 2);
+  assert.equal(result.snapshot.coins.length, 2);
+  assert.equal(balances(result.snapshot).available, 300_000n);
+  const bundle = preparePayment(result.snapshot, {
+    selected: [outpoint(extra)], recipient: deriveAddress(account, 0, 2).address,
+    amountPrl: "0.00050000", feePrl: "0.00001000", changeIndex: 0,
+  });
+  assert.equal(bundle.inputs[0]!.txid, extra.txid);
+});
+
+test("BOUNDARY: consistently fabricated inclusion/unspent claims can pass selection and freshness", async () => {
+  // The raw transaction is synthetic and has never existed on a chain. The raw
+  // output binds amount and ownership, but no Merkle/header/consensus proof exists.
+  const source = httpSource(directSource([funding]));
+  const discovery = await discoverAccount(source, account);
+  const snapshot = parseWatchSnapshot(snapshotToJson(discovery.snapshot));
+  assert.equal(balances(snapshot).available, funding.amount);
+  const validation = await checkLightSnapshot(source, snapshot);
+  const checked = applyValidation(snapshot, validation);
+  const bundle = preparePayment(checked.snapshot, {
+    selected: [outpoint(funding)], recipient: deriveAddress(account, 0, 2).address,
+    amountPrl: "0.00050000", feePrl: "0.00001000", changeIndex: 0,
+  });
+  requireFreshValidation(checked.snapshot, checked.validation, bundle);
+  const journal = emptyJournal();
+  reservePayment(journal, bundle, "synthetic-review-only");
+  assert.equal(journal.payments[0]!.state, "draft");
+  assert.equal(bundle.inputs[0]!.amount, funding.amount);
+  assert.deepEqual(bundle.inputs[0]!.scriptPubKey, deriveAddress(account, 0, 0).scriptPubKey);
+});

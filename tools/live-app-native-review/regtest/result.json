@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "network": "regtest",
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "/workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-regtest/app.elf",
+    "testedSnapshot": "/workspace/evidence/regtest/tested-firmware.elf",
+    "sha256": "113a556b2c3708f3aa2edf04467bb204d4f9fd510c78c9f015ae50acd9d48446",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "publicAccount": {
+    "network": "regtest",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "bundle": {
+    "network": "regtest",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "vout": 1,
+        "amount": "9007199254740993",
+        "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "txid": "2222222222222222222222222222222222222222222222222222222222222222",
+        "vout": 3,
+        "amount": "1000000000",
+        "scriptPubKey": "51204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 7
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "9007199254740000",
+        "scriptPubKey": "51205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "amount": "999999993",
+        "scriptPubKey": "5120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d",
+        "role": "change",
+        "branch": 1,
+        "index": 0
+      }
+    ]
+  },
+  "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f",
+  "rawTx": "0100000000010211111111111111111111111111111111111111111111111111111111111111110100000000ffffffff22222222222222222222222222222222222222222222222222222222222222220300000000ffffffff0220fcffffffff1f002251205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4ff9c99a3b00000000225120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d01409e6ad1064827b21b7426c21240211202c971d49a12e6fd952f5016a89c92bb362236707ef0208ddbd80bcfc50a27ff2bbd669e228e85346f419a83d7488e1a270140810dec98038c54f020e9066bf1266b64aa8fb6d34563687f109eddc4e4523e8aa1476375229ba3e815b7e56d4ba820cdec42a8cd606480a97967330db281100c00000000"
+}

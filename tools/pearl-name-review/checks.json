@@ -1,0 +1,23 @@
+{
+  "firmwareChangedFiles": [
+    "Makefile",
+    "src/ui/menu_nbgl.c"
+  ],
+  "policySourceUnchanged": true,
+  "hostTests": 19,
+  "nativePilots": 4,
+  "hostileNativeCases": 75,
+  "explicitRejectionThenFreshApproval": "passed",
+  "historicalArtifactsPreserved": 6,
+  "physicalRename": "pending owner approval; currently installed app remains Pearl Dev",
+  "testSourceSha256": {
+    "apps/companion/src/wallet-api.ts": "d3c2901f3b30a0c77d14b2104c2129da3d6b40cfe1af79f56bd043ba2f3497c0",
+    "apps/companion/test/wallet-api.test.ts": "82a8f98058209a21a7ff94d1ce8d498a0a795a443bb56984117f5995b863545d",
+    "apps/companion/test/device-routing.test.ts": "514c7d61ee82c4d83bea2c2d21614e3967984ed4bc49f33af162787ade49e6e2",
+    "apps/ledger-bitcoin-prl/prl-tests/native-pilot.ts": "16e75b675f3ff7d5643f79a9747942968bd7eccf287729c52e91d8b6f551d864",
+    "apps/ledger-bitcoin-prl/prl-tests/native-adversarial.ts": "4d067f49c48ccdc2cfe10e260af9162f40a1ca376c7ff9f29f7c5e260b6f6267",
+    "apps/ledger-bitcoin-prl/prl-tests/native-review-faults.ts": "d1f04f47922ac18149ee09b61f7ff0d00e149469ab90396ba2cd42f8e1b315bb",
+    "tools/bitcoin-prl-port/build.sh": "782070fd3c64e2313c542a446954d03d4483857c79f518eedb02024b8fa379c0",
+    "tools/pearl-name-review/inspect-metadata.py": "ada4ed8eb2a5c8485f1c29ad147169e7c3a8ff96b41ece67cdf9b5b31c0ad926"
+  }
+}

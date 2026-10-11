@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "verifiedAt": "2026-10-09T20:33:00Z",
+  "verifiedAt": "2026-10-10T00:31:45Z",
   "repository": "https://github.com/divij-mot/ledgerPRL",
   "note": "Local test reports can identify a local commit. The corresponding published commit has different metadata but the exact same Git tree. Use publishedCommit when checking out from GitHub; native source and ELF hashes remain separate verification inputs.",
   "checkpoints": [
@@ -108,6 +108,51 @@
       "localCommit": "5a004df72dadb37c4e273745e9ed531b55a8c8ea",
       "publishedCommit": "d7621e68ca12f8ce0d617d4c87c6add801266ac0",
       "tree": "63bfc7f57ca3daf046ec42df24494fa4ccc644c2"
+    },
+    {
+      "localCommit": "3080142d6f6baf0084413925aba49ff82070108e",
+      "publishedCommit": "657d30338234ad37c2e2316c38379de01c75ecdf",
+      "tree": "c3de0d8adfdbbc1af0da5d15ded7bfde79c36340"
+    },
+    {
+      "localCommit": "bef09f0550eda47956e5862a984a8d584a86fd30",
+      "publishedCommit": "6e5c39c89b61c4242af1695df04072a04f732067",
+      "tree": "9ddf949f3fa5a7c187a70a4bd2a8490514465a9d"
+    },
+    {
+      "localCommit": "9a20a1b8dfce40870bc0def0ef0583ae0dc0ee69",
+      "publishedCommit": "5e7b68be4c0464685d2f1a43b9a0b7dfab50f39e",
+      "tree": "d2309835da0b71f92ba2279cacf2ddf2a2047173"
+    },
+    {
+      "localCommit": "03112c09890fb08c48a83e743d842fdbd791c29c",
+      "publishedCommit": "658057a7f65fac7fb01d3c7a67491ae425c02352",
+      "tree": "580fb092a33629d06cc1280eb4958d72543c8293"
+    },
+    {
+      "localCommit": "b908b15be8ca95a850c551d138ce646475517621",
+      "publishedCommit": "106616194c235bc149b01f92a226b2062a041e07",
+      "tree": "6fc92f176ecdbe8419e4833d3ae3e76df33fed21"
+    },
+    {
+      "localCommit": "83be58f9288e35022b5cc43eff8288983ced5bc3",
+      "publishedCommit": "b523f6292753e73cfe952b6d971438f0b6f52593",
+      "tree": "b40c41610b7a82232406829c00e1d5e68380aa90"
+    },
+    {
+      "localCommit": "ce97b530051179def6035a716afbaa076fb1d1b0",
+      "publishedCommit": "766a3f7ff1d61c7ff0e60d5484ef7c4250545aad",
+      "tree": "e8f86f749f78a31b86e64021c486b1ab1976a177"
+    },
+    {
+      "localCommit": "75a1c6026bd3c8e485c1ac6588d9d78eb656bcb2",
+      "publishedCommit": "a8de9658787c04b729c59a4ddbc2892923aacc7b",
+      "tree": "01ebfad9ecb4a851ae7ad8fb0da3794e8dc18776"
+    },
+    {
+      "localCommit": "a6260fa94599f4558c66e482ebeaf22e842ea76c",
+      "publishedCommit": "c85980bceacd6698c2af03a4e926cd7c6b3831ed",
+      "tree": "9bb8eb1203528a7f0f3a04f8e73f1f1e6b792a7f"
     }
   ]
 }

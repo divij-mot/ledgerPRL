@@ -1,0 +1,30 @@
+✔ independent exact digest/finalization: mainnet, 16 inputs, MAX_GRAINS, P2MR (567.840172ms)
+✔ independent exact digest/finalization: testnet, 16 inputs, MAX_GRAINS, P2MR (529.313772ms)
+✔ independent exact digest/finalization: testnet2, 16 inputs, MAX_GRAINS, P2MR (519.715584ms)
+✔ independent exact digest/finalization: regtest, 16 inputs, MAX_GRAINS, P2MR (499.08077ms)
+✔ independent exact digest/finalization: simnet, 16 inputs, MAX_GRAINS, P2MR (511.96025ms)
+✔ all signatures bind another input and output fields at >2^53 granularity, including input/output permutation (130.239388ms)
+✔ Merkle-served PSBT reconstructs exact input order, recipient/change and chunked previous transactions despite caller mutation (199.77065ms)
+✔ partial signature set followed by hostile duplicate is terminal and preserves only complete bytes (64.511706ms)
+✔ partial signature set followed by hostile unknown-root is terminal and preserves only complete bytes (75.306142ms)
+✔ partial signature set followed by hostile noncanonical-proof is terminal and preserves only complete bytes (71.252809ms)
+✔ partial signature set followed by hostile empty-more is terminal and preserves only complete bytes (63.014825ms)
+✔ partial signature set followed by hostile truncated-yield is terminal and preserves only complete bytes (65.10327ms)
+✔ partial signature set followed by hostile extra-yield-byte is terminal and preserves only complete bytes (66.771482ms)
+✔ partial signature set followed by hostile empty-interrupt is terminal and preserves only complete bytes (64.239416ms)
+✔ complete signature set followed by hostile duplicate is terminal and preserves only complete bytes (97.077179ms)
+✔ complete signature set followed by hostile unknown-root is terminal and preserves only complete bytes (93.724249ms)
+✔ complete signature set followed by hostile noncanonical-proof is terminal and preserves only complete bytes (94.055736ms)
+✔ complete signature set followed by hostile empty-more is terminal and preserves only complete bytes (100.389653ms)
+✔ complete signature set followed by hostile truncated-yield is terminal and preserves only complete bytes (105.962496ms)
+✔ complete signature set followed by hostile extra-yield-byte is terminal and preserves only complete bytes (96.860352ms)
+✔ complete signature set followed by hostile empty-interrupt is terminal and preserves only complete bytes (96.05351ms)
+✔ imported PSBT bytes/account cannot change during async signing, and storage failure yields an importable exact recovery backup (129.292856ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4569.56429

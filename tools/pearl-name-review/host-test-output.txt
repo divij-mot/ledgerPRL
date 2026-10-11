@@ -1,0 +1,27 @@
+✔ Live App route fails in ordinary browsers without falling back to WebHID (135.294708ms)
+✔ configured WebHID connector starts within the calling gesture and rejects a changed route (1.849625ms)
+✔ Wallet API preserves raw continuation/rejection statuses and uses Buffer exchange (1.645208ms)
+✔ unsupported commands and pre-abort send no APDU and end the session (2.676875ms)
+✔ concurrent exchange/open cannot reach the shared host transport (0.313541ms)
+✔ valid final response wins synchronous abort while subsequent ACK is prohibited (0.291083ms)
+✔ abort winning exchange forbids late signature delivery or continuation (0.252625ms)
+✔ capability failure closes listeners without opening hardware (0.143458ms)
+✔ malformed response closes transport (0.188875ms)
+✔ close waits for hardware acknowledgement before permitting reconnect (0.23625ms)
+✔ unresolved close is bounded and permanently requires reopening even after late cleanup (17.500208ms)
+✔ late device open is closed before listener removal and cannot race a new open (21.265333ms)
+✔ unresolved open or exchange cannot be reused after bounded timeout (63.451209ms)
+✔ native connector refuses ordinary browser without falling back to WebHID (0.302333ms)
+✔ official client exchanges through native messaging and ignores web-origin forged replies (13.807959ms)
+✔ failed hardware close poisons reconnect, while a rejected open can be retried (0.215041ms)
+✔ real PSBT client persists verified bytes through Wallet API before abort suppresses final ACK (164.022375ms)
+✔ browser bundle initializes the official SDK without a preexisting Buffer global (131.434417ms)
+✔ selected network requests its exact Pearl device app with no dashboard default (0.392625ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 767.021125

@@ -1,0 +1,11 @@
+fa034d48d9b2dabb2fdd09123ccd8576292536a089b1ce2c68db76f539ef1f72  ./README.md
+b2dedbe472bbd53a60dd9437891182ff269bef7d267e93a4dc49c3871d283eb0  ./evidence/firmware.json
+28ec340e74541dc9b8385126e2d966cf426ec091cbe882a76e97d1ef1bc1ddd5  ./evidence/max-amount.png
+d7c26dc6d1d86501d3b4c156d7a62192c51cdd26ef7f08abfc1e431df8d87735  ./evidence/observed-source-hashes.json
+ea53ee071cff3f9d3b6adacfcfe4bc5d1f36bd15692af4753a5f509727c895ca  ./evidence/p2mr-recipient.png
+091ce12fab5b32d51fb7e7dc7bb2ce5e3ead225de3933625fb8b420f438aaf9c  ./evidence/pearl-oracle.json
+8087026db4eccbdc00e0e16767cc7b94a873b66375796e052f2ebc1d66ec49e7  ./evidence/result.json
+a1e47c1b9d617c883950801c118b69cd085d269cca328c9abb1146dd718d9620  ./evidence/schnorr-disassembly.txt
+52879459b5056c42db1d73772e42b37be40cbbaa48fb8947b7ca378cfdf9a3b4  ./evidence/screens.json
+8be44116b48d2a6b6d08fe271cf4f4ca7bf7f46a6bafe021a74f30a5afbe6fa7  ./oracle.go
+de15814d3db40e1746f7ece64ccc8a4101ced6e43f9b3aad71c800536c4f04d8  ./review.mts

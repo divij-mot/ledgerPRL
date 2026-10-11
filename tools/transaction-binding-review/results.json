@@ -1,0 +1,58 @@
+{
+  "scope": "host-only public-fixture transaction binding",
+  "reviewed_head": "bef09f0550eda47956e5862a984a8d584a86fd30",
+  "branch": "ledger-bitcoin-prl",
+  "node": "v24.19.0",
+  "new_tests": {
+    "distinct": 35,
+    "runs": 3,
+    "passed_per_run": [
+      35,
+      35,
+      35
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  "existing_regressions": {
+    "passed": 148,
+    "failures": 0,
+    "skips": 0
+  },
+  "strict_typecheck": "passed",
+  "reviewed_source_changed_during_review": false,
+  "production_edits_by_this_review": false,
+  "new_exploitable_defects_reproduced": 0,
+  "not_run": [
+    "native",
+    "emulator",
+    "firmware",
+    "physical device",
+    "live indexer",
+    "live transaction",
+    "deployment"
+  ],
+  "initial_new_tests": {
+    "distinct": 24,
+    "runs": 3,
+    "passed_per_run": [
+      24,
+      24,
+      24
+    ],
+    "failures": 0,
+    "skips": 0
+  },
+  "device_error_defense": {
+    "targeted_cases": 11,
+    "passed": 11,
+    "wrong_path_cases": 8,
+    "sw_ok_incomplete_cases": 3,
+    "native_executed": false,
+    "threat_model_source": "Parent-provided independent native source reviews; mocked fault outputs only",
+    "wrong_signature_digest": "unchanged approved transaction",
+    "partial_signatures_create_complete_result": false,
+    "complete_durability_callbacks_on_fault": 0,
+    "production_fix_made": false
+  }
+}

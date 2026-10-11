@@ -1,0 +1,449 @@
+/* Modified for Pearl (PRL). Upstream provenance: UPSTREAM.json. */
+#pragma GCC diagnostic ignored "-Wformat-invalid-specifier"  // snprintf
+#pragma GCC diagnostic ignored "-Wformat-extra-args"         // snprintf
+
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "display.h"
+#include "prl_review_io.h"
+
+/* SDK headers */
+#include "os.h"
+#include "ux.h"
+
+// These globals are a workaround for a limitation of the UX library that
+// does not allow to pass proper callbacks and context.
+
+extern bool G_was_processing_screen_shown;
+
+static bool g_ux_flow_ended;
+static bool g_ux_flow_response;
+
+extern dispatcher_context_t G_dispatcher_context;
+
+ui_state_t g_ui_state;
+
+/*
+ * Pointer to the text to be shown when processing.
+ * If set to NULL, a default message is shown,
+ * otherwise it must be a pointer to a valid 0-terminated string.
+ */
+char const *G_processing_screen_text;
+
+/**
+ * Drop-in replacement for `strncpy(dst, src, dst_size)` for the strings displayed by this module.
+ *
+ * Copies the 0-terminated string `src` into the `dst_size`-byte buffer `dst`, terminator included.
+ * Unlike `strncpy`, the result is always 0-terminated, and the copy is never truncated: if `src`
+ * does not fit (or has no terminator within the first `dst_size` bytes), that is a programming
+ * error and the app is halted, rather than continuing with a possibly misrepresented UI flow.
+ */
+static void copy_ui_string(char *dst, const char *src, size_t dst_size) {
+    size_t len = strnlen(src, dst_size);
+    LEDGER_ASSERT(len < dst_size, "String does not fit in the UI buffer");
+    memcpy(dst, src, len + 1);
+}
+
+void send_deny_sw(dispatcher_context_t *dc) {
+    SEND_SW(dc, SW_DENY);
+}
+
+void set_ux_flow_response(bool approved) {
+    g_ux_flow_ended = true;
+    g_ux_flow_response = approved;
+}
+
+// Process UI events until the current flow terminates; does not handle any APDU exchange
+// Returns true/false depending if the user accepted in the corresponding UX flow.
+static bool io_ui_process(dispatcher_context_t *context) {
+    UNUSED(context);
+    G_was_processing_screen_shown = false;
+
+    // Setting `had_ux_flow` flag meaning that the UI interaction is launched
+    // This is now UI/NBGL that is responsible to return to Home screen
+    G_dispatcher_context.set_ui_dirty();
+
+    g_ux_flow_ended = false;
+
+    // We are not waiting for the client's input, nor we are doing computations on the device
+    ioe_clear_processing_timeout();
+
+    extern uint16_t G_ticks;
+    uint16_t review_start_tick = G_ticks;
+    do {
+        prl_review_heartbeat(review_start_tick);
+    } while (!g_ux_flow_ended);
+
+    // We're back at work, we want to show the "Processing..." screen when appropriate
+    ioe_start_processing_timeout();
+
+    return g_ux_flow_response;
+}
+
+bool ui_display_pubkey(dispatcher_context_t *context,
+                       const char *bip32_path_str,
+                       const char *pubkey) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    ui_path_and_pubkey_state_t *state = (ui_path_and_pubkey_state_t *) &g_ui_state;
+
+    copy_ui_string(state->bip32_path_str, bip32_path_str, sizeof(state->bip32_path_str));
+    copy_ui_string(state->pubkey, pubkey, sizeof(state->pubkey));
+
+    ui_display_pubkey_flow();
+
+    return io_ui_process(context);
+}
+
+bool ui_display_message_and_confirm(dispatcher_context_t *context,
+                                    const char *path_str,
+                                    const char *message,
+                                    bool is_hash) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    ui_path_and_message_state_t *state = (ui_path_and_message_state_t *) &g_ui_state;
+    copy_ui_string(state->bip32_path_str, path_str, sizeof(state->bip32_path_str));
+    copy_ui_string(state->message, message, sizeof(state->message));
+
+    ui_sign_message_and_confirm_flow(is_hash);
+
+    return io_ui_process(context);
+}
+
+bool ui_display_register_wallet_policy(
+    dispatcher_context_t *context,
+    const policy_map_wallet_header_t *wallet_header,
+    const char *descriptor_template,
+    const char (*cleartext_lines)[CT_MAX_LINES][CT_MAX_LINE_LEN + 1],
+    size_t n_cleartext_lines,
+    const char (*keys_info)[MAX_N_KEYS_IN_WALLET_POLICY][MAX_POLICY_KEY_INFO_LEN + 1],
+    const key_type_e (*keys_type)[MAX_N_KEYS_IN_WALLET_POLICY]) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    LEDGER_ASSERT(wallet_header->n_keys <= MAX_N_KEYS_IN_WALLET_POLICY, "Too many keys");
+
+    ui_register_wallet_policy_state_t *state = (ui_register_wallet_policy_state_t *) &g_ui_state;
+
+    memset(state, 0, sizeof(ui_register_wallet_policy_state_t));
+    state->n_keys = wallet_header->n_keys;
+    state->wallet_name = wallet_header->name;
+    state->descriptor_template = descriptor_template;
+
+    LEDGER_ASSERT(n_cleartext_lines <= CT_MAX_LINES, "Too many cleartext lines");
+    if (cleartext_lines == NULL || n_cleartext_lines == 0) {
+        state->cleartext_lines = NULL;
+        state->n_cleartext_lines = 0;
+    } else {
+        state->cleartext_lines = *cleartext_lines;
+        state->n_cleartext_lines = n_cleartext_lines;
+    }
+    for (size_t i = 0; i < wallet_header->n_keys; i++) {
+        state->keys_info[i] = (*keys_info)[i];
+#ifdef SCREEN_SIZE_WALLET
+        const char labels[3][20] = {"Internal", "External", "Unspendable"};
+#else
+        const char labels[3][20] = {"Our", "Their", "Dummy"};
+#endif
+        unsigned int num = 0;
+        switch ((*keys_type)[i]) {
+            case PUBKEY_TYPE_INTERNAL:
+                num = 0;
+                break;
+            case PUBKEY_TYPE_EXTERNAL:
+                num = 1;
+                break;
+            case PUBKEY_TYPE_UNSPENDABLE:
+                num = 2;
+                break;
+            default:
+                LEDGER_ASSERT(false, "Unreachable code");
+        }
+        snprintf(state->keys_label[i], sizeof(state->keys_label[i]), "%s key@%u", labels[num], i);
+    }
+
+    ui_display_register_wallet_policy_flow();
+
+    return io_ui_process(context);
+}
+
+bool ui_display_wallet_address(dispatcher_context_t *context,
+                               const char *wallet_name,
+                               const char *address) {
+    ui_wallet_state_t *state = (ui_wallet_state_t *) &g_ui_state;
+
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    memset(state, 0, sizeof(ui_wallet_state_t));
+
+    copy_ui_string(state->address, address, sizeof(state->address));
+
+    if (wallet_name == NULL) {
+        ui_display_default_wallet_address_flow();
+    } else {
+        copy_ui_string(state->wallet_name, wallet_name, sizeof(state->wallet_name));
+        ui_display_receive_in_wallet_flow();
+    }
+
+    return io_ui_process(context);
+}
+
+static void prepare_tx_summary(ui_validate_transaction_state_t *state, const tx_summary_t *summary);
+
+void ui_prepare_authorize_wallet_spend(const char *wallet_name,
+                                       account_role_t account_role,
+                                       bool account_is_default,
+                                       const tx_summary_t *summary) {
+    ui_validate_transaction_state_t *state = (ui_validate_transaction_state_t *) &g_ui_state;
+
+    // Make sure that the state is cleared before starting a streaming UI flow, preventing
+    // any possible bug caused by stale state.
+    memset(state, 0, sizeof(ui_validate_transaction_state_t));
+
+    state->account_role = account_role;
+    state->account_is_default = account_is_default;
+    if (wallet_name == NULL) {
+        state->has_wallet_policy = false;
+    } else {
+        copy_ui_string(state->wallet_policy_name, wallet_name, sizeof(state->wallet_policy_name));
+        state->has_wallet_policy = true;
+    }
+    prepare_tx_summary(state, summary);
+}
+
+bool ui_warn_external_inputs(dispatcher_context_t *context) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    ui_display_warning_external_inputs_flow();
+    return io_ui_process(context);
+}
+
+bool ui_warn_unverified_segwit_inputs(dispatcher_context_t *context) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    ui_display_unverified_segwit_inputs_flows();
+    return io_ui_process(context);
+}
+
+bool ui_warn_nondefault_sighash(dispatcher_context_t *context) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    ui_display_nondefault_sighash_flow();
+    return io_ui_process(context);
+}
+
+void ui_warn_nondefault_sighash_disabled(dispatcher_context_t *context) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return;
+#endif
+
+    UNUSED(context);
+    // Fire-and-forget terminal status
+    ui_display_nondefault_sighash_disabled_flow();
+}
+
+bool ui_transaction_streaming_prompt(dispatcher_context_t *context) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    ui_display_transaction_streaming_prompt();
+    return io_ui_process(context);
+}
+
+bool ui_transaction_streaming_validate_output(dispatcher_context_t *context,
+                                              int index,
+                                              int total_count,
+                                              const char *address_or_description,
+                                              uint64_t amount) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    ui_validate_transaction_state_t *state = (ui_validate_transaction_state_t *) &g_ui_state;
+
+    format_output_index(index, total_count, state->output_index_str[0]);
+
+    copy_ui_string(state->address_or_description[0],
+                   address_or_description,
+                   sizeof(state->address_or_description[0]));
+    format_sats_amount(COIN_COINID_SHORT, amount, state->amount[0]);
+
+    ui_display_transaction_streaming_output_address_amount();
+
+    return io_ui_process(context);
+}
+
+// Format the money value for the review: the network fee (FULL) or the net amount (NET_ONLY).
+// Shared by both flows.
+static void prepare_tx_summary(ui_validate_transaction_state_t *state,
+                               const tx_summary_t *summary) {
+    state->has_change = summary->has_change;
+    state->recipient_p2mr = summary->recipient_p2mr;
+    if (summary->has_change) {
+        format_sats_amount(COIN_COINID_SHORT, summary->change_amount, state->change_amount);
+        copy_ui_string(state->change_address, summary->change_address, sizeof(state->change_address));
+        snprintf(state->change_path, sizeof(state->change_path), "m/86'/%u'/%u'/1/%u",
+                 (unsigned int) PRL_COIN_TYPE, (unsigned int) summary->prl_account,
+                 (unsigned int) summary->change_index);
+    }
+    state->display_mode = summary->mode;
+    state->spent_is_receive = false;
+    state->seen_sighash = summary->seen_sighash;
+    state->sighash_mixed = summary->sighash_mixed;
+    state->has_external_inputs = summary->has_external_inputs;
+    state->show_external_inputs_amount = summary->show_external_inputs_amount;
+
+    // The "External inputs amount" row is shown in both FULL and NET_ONLY when the input set
+    // is closed, so format it up front (independently of the mode).
+    if (summary->show_external_inputs_amount) {
+        format_sats_amount(COIN_COINID_SHORT,
+                           summary->external_inputs_amount,
+                           state->unverified_inputs);
+    }
+
+    if (summary->mode == TX_DISPLAY_FULL) {
+        format_sats_amount(COIN_COINID_SHORT, summary->fee, state->fee);
+
+        if (summary->has_external_inputs) {
+            // Also show the net amount actually spent/received, so the outputs and fee alone don't
+            // mislead the user.
+            state->spent_is_receive = summary->total_spent < 0;
+            uint64_t magnitude = summary->total_spent < 0 ? (uint64_t) -summary->total_spent
+                                                          : (uint64_t) summary->total_spent;
+            format_sats_amount(COIN_COINID_SHORT, magnitude, state->net_amount);
+        }
+    } else if (summary->mode == TX_DISPLAY_NET_ONLY) {
+        state->spent_is_receive = summary->total_spent < 0;
+        uint64_t magnitude = summary->total_spent < 0 ? (uint64_t) -summary->total_spent
+                                                      : (uint64_t) summary->total_spent;
+        format_sats_amount(COIN_COINID_SHORT, magnitude, state->net_amount);
+    }
+    // TX_DISPLAY_UNAVAILABLE: nothing to format
+}
+
+bool ui_transaction_streaming_validate(dispatcher_context_t *context,
+                                       tx_ux_warning_t warnings,
+                                       bool is_self_transfer) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    ui_validate_transaction_state_t *state = (ui_validate_transaction_state_t *) &g_ui_state;
+
+    // the summary is applied earlier, in ui_prepare_authorize_wallet_spend
+    state->warnings = warnings;
+
+    ui_display_transaction_streaming_flow(is_self_transfer);
+
+    return io_ui_process(context);
+}
+
+void ui_transaction_simplified_init(const char *wallet_policy_name,
+                                    unsigned int outputs_num,
+                                    tx_ux_warning_t warnings,
+                                    account_role_t account_role,
+                                    bool account_is_default,
+                                    const tx_summary_t *summary) {
+    ui_validate_transaction_state_t *state = (ui_validate_transaction_state_t *) &g_ui_state;
+
+    memset(state, 0, sizeof(ui_validate_transaction_state_t));
+
+    LEDGER_ASSERT(outputs_num <= MAX_EXT_OUTPUT_SIMPLIFIED_NUMBER,
+                  "Too many outputs for the simplified review");
+
+    if (wallet_policy_name != NULL) {
+        copy_ui_string(state->wallet_policy_name,
+                       wallet_policy_name,
+                       sizeof(state->wallet_policy_name));
+        state->has_wallet_policy = true;
+    }
+    state->n_outputs = outputs_num;
+    state->warnings = warnings;
+    state->account_role = account_role;
+    state->account_is_default = account_is_default;
+
+    // Apply the summary up front so the context page and page breaks see the mode/sighash.
+    prepare_tx_summary(state, summary);
+
+    ui_display_transaction_simplified_flow_init();
+}
+
+void ui_transaction_simplified_add(uint64_t amount, const char *address_or_description) {
+    ui_validate_transaction_state_t *state = (ui_validate_transaction_state_t *) &g_ui_state;
+
+    LEDGER_ASSERT(state->output_index < state->n_outputs &&
+                      state->output_index < MAX_EXT_OUTPUT_SIMPLIFIED_NUMBER,
+                  "Too many outputs added to the simplified review");
+
+    format_sats_amount(COIN_COINID_SHORT, amount, state->amount[state->output_index]);
+    if (address_or_description == NULL) {
+        state->is_self_transfer = true;
+    } else {
+        copy_ui_string(state->address_or_description[state->output_index],
+                       address_or_description,
+                       sizeof(state->address_or_description[state->output_index]));
+    }
+    format_output_index(state->output_index + 1,
+                        state->n_outputs,
+                        state->output_index_str[state->output_index]);
+
+    ui_display_transaction_simplified_flow_add();
+    state->output_index++;
+}
+
+bool ui_transaction_simplified_show(dispatcher_context_t *context) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+    // the summary is applied earlier, in ui_transaction_simplified_init
+    ui_display_transaction_simplified_flow_show();
+
+    return io_ui_process(context);
+}
+
+bool ui_post_processing_confirm_transaction(dispatcher_context_t *context, bool success) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    UNUSED(context);
+    ui_display_post_processing_confirm_transaction(success);
+
+    return true;
+}
+
+bool ui_post_processing_confirm_message(dispatcher_context_t *context, bool success) {
+#ifdef HAVE_AUTOAPPROVE_FOR_PERF_TESTS
+    return true;
+#endif
+
+    UNUSED(context);
+    ui_display_post_processing_confirm_message(success);
+
+    return true;
+}
+
+char const *ui_get_processing_screen_text(void) {
+    return (G_processing_screen_text != NULL) ? G_processing_screen_text : "Loading";
+}
+
+void ui_set_processing_screen_text(const char *text) {
+    G_processing_screen_text = text;
+}

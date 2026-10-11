@@ -1,0 +1,47 @@
+✔ mocked DOM/storage/source/device: direct website receive/send, consent and durable session boundaries (4923.293959ms)
+✔ runtime verifies watch-only profile then starts only hash-pinned private stdio child; normal stop/restart preserves profile (30.004292ms)
+✔ existing unowned directories, symlinks and hash mismatch never launch a helper (5.13975ms)
+✔ failed watch-only, coverage or source verification prevents the serve child (19.738709ms)
+✔ existing symlinked database is rejected before even a verify command (13.211625ms)
+✔ startup binds the exact public account and genesis without claiming native sync readiness (13.815292ms)
+✔ request allowlist, bounds and pre-cancellation send no extra IPC (7.582584ms)
+✔ native error messages are redacted while broadcast ambiguity is retained (8.014917ms)
+✔ timeout invalidates the process, retains broadcast uncertainty and ignores stale child output after restart (112.35925ms)
+✔ range extension waits for old process exit and requires a verified restart before rescan (14.164167ms)
+✔ stuck owned child escalates only its signals; unresolved termination keeps the directory locked (75.888708ms)
+✔ a valid startup status followed by malformed data in the same chunk cannot revive a failed session (16.947208ms)
+✔ mutating abort invalidates in-flight work and oversized native frames fail closed (26.940875ms)
+✔ pipe errors terminate only the owned native process instead of escaping as unhandled stream errors (4.998125ms)
+✔ aborted read consumes only its exact late reply without stopping background sync or applying it to another request (4.361ms)
+✔ cancelled reads retain the four-slot bound and original deadline (126.636375ms)
+✔ local middleware accepts only an exact numeric loopback origin (0.731834ms)
+✔ close after an unsuccessful initialization is idempotent without loading a native profile (15.345458ms)
+✔ real HTTP rejects wrong Origin/Host, cross-site and missing trust headers before touching runtime (7.94ms)
+✔ raw duplicate Host, Origin, custom header, Content-Type and Content-Length fail closed (2.964875ms)
+✔ HTTP framing requires Content-Length, rejects transfer encoding and bounds bytes to 32 KiB (7.365292ms)
+✔ only exact local routes and method-shaped fields are accepted; no URLs, paths or runtime config (14.087417ms)
+✔ account binding prevents another public account or network from using an active profile (8.315458ms)
+✔ start after failure awaits only the owned runtime stop before start and status (4.394958ms)
+✔ native register restartRequired awaits stop and fresh start before returning new status (2.748875ms)
+✔ register without expansion does not restart; failed stop cannot launch a new child (3.31375ms)
+✔ invalid, changed, wrong-network and foreign-account signed payments never reach native broadcast (57.832ms)
+✔ valid public-vector signed bytes pass exact binding once and ambiguous native broadcast is not retried (28.192625ms)
+✔ disconnect during a partial body releases serialization without invoking the runtime (14.190917ms)
+✔ disconnected register request never starts a replacement process after old stop completes (26.888125ms)
+✔ explicit close requires the bound owner, awaits stop, then clears binding for a different account (15.184042ms)
+✔ actual public import and account-close handlers preserve local process ownership (3254.566ms)
+✔ a restored account can close its existing server profile before this page starts sync (1.903666ms)
+✔ close waits for an in-flight start and sends its exact owner (3.36125ms)
+✔ uncertain startup and failed close retain ownership; cancellation cannot silently switch profiles (1.674125ms)
+✔ local raw history flows through ordinary discovery and input preflight with exact grains (406.327375ms)
+✔ local snapshots reject account substitution, incomplete coverage, missing raw history and duplicates (20.971875ms)
+✔ same-tip changes in local spendability invalidate a discovery snapshot (204.282917ms)
+✔ sync progress is usable before readiness but cannot produce a spendable snapshot (2.7465ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5045.751333

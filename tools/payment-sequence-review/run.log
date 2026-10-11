@@ -1,0 +1,16 @@
+PASS receive rejection -> reload -> consecutive issuance -> prepare/discard preserves both high-water marks
+PASS review-rejected -> original signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS review-rejected -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS before-first-yield -> original signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS before-first-yield -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS after-first-yield -> original signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS after-first-yield -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS cancel-after-first-yield -> original signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS cancel-after-first-yield -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS ack-lost -> original signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS ack-lost -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS storage-failed -> original signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS storage-failed -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS ok -> original signed bytes -> timeout/retry -> reload -> archive/reorg
+PASS ok -> alternate signed bytes -> timeout/retry -> reload -> archive/reorg
+SUMMARY 15 passed; 0 failed; sources unchanged=true

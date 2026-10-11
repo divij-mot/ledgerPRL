@@ -22,6 +22,7 @@ import {
   scriptToAddress,
   validateAccount,
   validateP2trScript,
+  validateRecipientScript,
   type AccountPublicKey,
 } from "./keys.js";
 export const MAX_INPUTS = 16;
@@ -116,7 +117,9 @@ export function validateBundle(
       "output",
     );
     checkedGrains(output.amount, false);
-    validateP2trScript(output.scriptPubKey);
+    if (output.role === "recipient")
+      validateRecipientScript(output.scriptPubKey);
+    else validateP2trScript(output.scriptPubKey);
     checkedBranch(output.branch);
     checkedIndex(output.index);
     if (output.role === "recipient") {

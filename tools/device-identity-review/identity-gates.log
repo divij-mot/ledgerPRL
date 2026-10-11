@@ -1,0 +1,37 @@
+✔ export: every byte of live network/profile binding is enforced before export, display or sign (50.249141ms)
+✔ export: wrong app, legacy protocol, malformed response and rejected command cannot fall back (7.341926ms)
+✔ export: already-cancelled request sends no APDU (1.649109ms)
+✔ export: cached policy does not skip the next operation's live binding (2.681371ms)
+✔ receive: every byte of live network/profile binding is enforced before export, display or sign (170.840114ms)
+✔ receive: wrong app, legacy protocol, malformed response and rejected command cannot fall back (29.686312ms)
+✔ receive: already-cancelled request sends no APDU (2.845658ms)
+✔ receive: cached policy does not skip the next operation's live binding (4.322807ms)
+✔ signBundle: every byte of live network/profile binding is enforced before export, display or sign (2358.754807ms)
+✔ signBundle: wrong app, legacy protocol, malformed response and rejected command cannot fall back (426.727043ms)
+✔ signBundle: already-cancelled request sends no APDU (38.93227ms)
+✔ signBundle: cached policy does not skip the next operation's live binding (39.923039ms)
+✔ signPsbt: every byte of live network/profile binding is enforced before export, display or sign (675.43535ms)
+✔ signPsbt: wrong app, legacy protocol, malformed response and rejected command cannot fall back (133.96609ms)
+✔ signPsbt: already-cancelled request sends no APDU (11.196099ms)
+✔ signPsbt: cached policy does not skip the next operation's live binding (12.195282ms)
+✔ same-HRP testnets are still separately bound by network ID and genesis (1.479213ms)
+✔ uncached receive and signing compare the full approved public account, not only its fingerprint (128.07809ms)
+✔ cached policies still reject a changed device fingerprint before display or signing (44.67738ms)
+✔ export rejects malformed fingerprint and account xpub metadata (6.588314ms)
+✔ receive requires display and rejects a well-formed address for a different index (9.038416ms)
+✔ export: rejected device UI never releases an address or signed result (2.984106ms)
+✔ export: cancellation while waiting for UI ignores a late successful response (9.612599ms)
+✔ address: rejected device UI never releases an address or signed result (25.17261ms)
+✔ address: cancellation while waiting for UI ignores a late successful response (6.47235ms)
+✔ review: rejected device UI never releases an address or signed result (231.456494ms)
+✔ review: cancellation while waiting for UI ignores a late successful response (47.801296ms)
+✔ trust-boundary control: exact public device claims can pass without proving firmware identity or a human click (8.831695ms)
+✔ current companion and CLI instantiate only the PSBT client, with no legacy fallback (1.124811ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4927.94358

@@ -5,6 +5,8 @@
  * Never import this file from the production companion. See README.md.
  */
 import fs from "node:fs";
+import { createPsbtEndpoint, P } from "./psbt-endpoint.mjs";
+import { LedgerBitcoinPrlClient } from "../../../packages/bitcoin-prl-adapter/src/index.ts";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -47,51 +49,28 @@ const tick = () => new Promise((resolve) => setTimeout(resolve, 10));
 function device({ delaySignature = false, exportedAccount = account } = {}) {
   let release,
     signatureResolve,
-    digest,
     signatureCount = 0;
-  const sent = [],
-    events = new EventTarget();
+  const events = new EventTarget();
+  const endpoint = createPsbtEndpoint({
+    account: exportedAccount,
+    onStage: async (stage) => {
+      if (stage !== "signature") return;
+      signatureCount++;
+      if (delaySignature)
+        await new Promise((r) => {
+          release = r;
+          signatureResolve?.();
+        });
+    },
+  });
+  const sent = endpoint.commands;
   const sender = {
     async sendApdu(apdu) {
-      sent.push(apdu[1]);
-      const data = apdu.slice(5);
-      let response = new Uint8Array();
-      switch (apdu[1]) {
-        case sdk.INS.CAPABILITIES:
-          response = Uint8Array.of(1, 0, 1, 0, 3, 16, 0xe3, 5);
-          break;
-        case sdk.INS.EXPORT_ACCOUNT:
-          response = sdk.concat(
-            exportedAccount.masterFingerprint,
-            exportedAccount.publicKey,
-            exportedAccount.chainCode,
-            Uint8Array.of(3),
-            sdk.u32(0),
-          );
-          break;
-        case sdk.INS.BEGIN:
-          digest = data.slice(2);
-          break;
-        case sdk.INS.APPEND:
-          break;
-        case sdk.INS.REVIEW:
-          response = sdk.concat(Uint8Array.of(2), digest);
-          break;
-        case sdk.INS.SIGNATURE:
-          signatureCount++;
-          response = sdk.fromHex(fixture.signatures[data[0]]);
-          if (delaySignature)
-            await new Promise((r) => {
-              release = r;
-              signatureResolve?.();
-            });
-          break;
-        case sdk.INS.ABORT:
-          break;
-        default:
-          throw Error("unexpected fixture command");
-      }
-      return Right({ data: response, statusCode: Uint8Array.of(0x90, 0) });
+      const response = await endpoint.transport.exchange(apdu);
+      return Right({
+        data: response.slice(0, -2),
+        statusCode: response.slice(-2),
+      });
     },
     async setupConnection() {},
     closeConnection() {},
@@ -124,12 +103,19 @@ function device({ delaySignature = false, exportedAccount = account } = {}) {
       connection.closeConnection();
     },
   };
-  const adapter = new DmkPearlTransport(dmk, "public-fixture", events);
-  const client = new sdk.LedgerPearlClient(adapter, "regtest", {
+  const adapter = new DmkPearlTransport(
+    dmk,
+    "public-fixture",
+    events,
+    undefined,
+    "bitcoin-prl",
+  );
+  const client = new LedgerBitcoinPrlClient(adapter, "regtest", {
     timeoutMs: 500,
   });
   return {
     sent,
+    endpoint,
     events,
     connection,
     adapter,
@@ -159,7 +145,7 @@ function reserve() {
   d.events.dispatchEvent(new Event("disconnect"));
   d.connection.eventDeviceConnected();
   await assert.rejects(
-    d.adapter.exchange(sdk.command(sdk.INS.CAPABILITIES)),
+    d.adapter.exchange(Uint8Array.of(P.cla, P.GET_NETWORK_INFO, 0, 1, 0)),
     /closed/,
   );
   const restored = wallet.importWalletBackup(
@@ -200,7 +186,8 @@ function reserve() {
   await tick();
   assert.equal(d.sent.length, count);
   assert.equal(d.client.sessionState, "failed");
-  await assert.rejects(d.client.reset());
+  await assert.rejects(d.client.capabilities(), /failed/);
+  assert.equal(d.sent.length, count);
   const restored = wallet.importWalletBackup(
     wallet.exportWalletBackup(account, j),
   ).journal;
@@ -230,11 +217,11 @@ function reserve() {
       },
     }),
   );
-  assert.equal(d.sent.filter((i) => i === sdk.INS.SIGNATURE).length, 1);
+  assert.equal(d.endpoint.yields(), 1);
   assert.equal(j.payments[0].state, "signing");
   assert.equal(wallet.reservedOutpoints(j).size, 2);
   console.log(
-    "PASS: disconnect between signature APDUs sends only first signature request and leaves payment uncertain",
+    "PASS: disconnect between signature yields prevents the second signature continuation and leaves payment uncertain",
   );
   await d.adapter.close();
 }
@@ -246,7 +233,9 @@ const { verifyBroadcastPayload } = await import(
 const source =
   fs.readFileSync(path.join(root, "apps/companion/src/main.ts"), "utf8") +
   `
-export {connect,broadcast};
+export {connect};
+// Explicit test-only approval; the actual checkbox handler is tested separately.
+export async function approveAndBroadcast(){const p=getPayment();const approval=Object.freeze({ownerId:accountId(account),paymentId:p.id,network,source:sourceMode,rawTx:p.rawTx,txid:p.txid});await broadcast(undefined,approval);}
 export async function signForTest() { await run('Checking inputs', sign); }
 export async function auditPrepare(a,b){account=a;network=a.network;snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:b.inputs.map(i=>({...i,rawTransaction:'',coinbase:false,block:{height:1,hash:'bb'.repeat(32)}}))};validation=null;await store.mutate(accountId(a),j=>reservePayment(j,b,'audit-payment',1000));activePayment='audit-payment';await refreshJournal();}
 export async function auditJournal(){return store.journal(accountId(account));}
@@ -268,11 +257,11 @@ const built = await build({
       name: "isolated-state-stubs",
       setup(b) {
         b.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "audit" }),
         );
         b.onLoad({ filter: /.*/, namespace: "audit" }, (a) => ({
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? `export async function connectLedger(cb){globalThis.auditDisconnectCallback=cb;return globalThis.auditTransport;}`
             : a.path.includes("storage")
               ? `export class WatchStorage{constructor(){this.rows=new Map();}async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],nextChangeIndex:0,issuedReceiveThrough:-1});}async mutate(k,fn){const j=await this.journal(k);const result=fn(j);if(globalThis.auditDelaySigned&&j.payments.some(p=>p.state==='signed')){globalThis.auditDelaySigned=false;globalThis.auditSignedCommitReached();await globalThis.auditSignedCommitGate;}this.rows.set(k,structuredClone(j));return result;}}`
@@ -354,7 +343,7 @@ console.log(
   "PASS: real main.ts disconnect between signature return and simulated signed-storage commit keeps signed bytes/reservations and never automatically broadcasts",
 );
 const commands = d.sent.length;
-await app.broadcast();
+await app.approveAndBroadcast();
 assert.deepEqual(calls, ["/api/check", "/api/broadcast"]);
 assert.equal(d.sent.length, commands);
 assert.equal((await app.auditJournal()).payments[0].state, "accepted");

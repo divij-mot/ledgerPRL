@@ -1,0 +1,20 @@
+[
+  {
+    "label": "tracing enabled is rejected",
+    "exitCode": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "label": "body helpers enabled are rejected",
+    "exitCode": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "label": "private raw stateless configuration accepted",
+    "exitCode": 0,
+    "expected": 0,
+    "passed": true
+  }
+]

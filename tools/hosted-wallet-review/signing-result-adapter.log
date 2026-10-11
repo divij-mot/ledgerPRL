@@ -1,0 +1,45 @@
+
+> @pearl-ledger/bitcoin-prl-adapter@0.1.0 test
+> node --import tsx --test test/*.test.ts
+
+✔ initial and continuation denials produce no complete result and preserve their original cause (133.497292ms)
+✔ identity failures and arbitrary signing failures preserve their causes without a complete result (271.639292ms)
+✔ failure after a valid partial signature still has no complete result (47.535833ms)
+✔ malformed signature yield has no complete result and is not acknowledged (45.358208ms)
+✔ cancellation after a partial signature ignores a late final wire signature (51.595708ms)
+✔ signing timeout has no result while a completed transaction survives final ACK denial (223.287208ms)
+✔ native signature set matches published txid/wtxid and rejects wrong index/key/length/digest (49.883292ms)
+✔ every network/genesis/amount/capability field and xpub account metadata is checked (8.539041ms)
+✔ standard APDU flow verifies and finalizes out-of-order yields, callback once before final ACK (78.297375ms)
+✔ valid P2MR payment uses identical BIP341 signing/finalization with capability flags3 (73.6985ms)
+✔ complete signed bytes survive missing/rejected final ACK, abort, and post-success cancellation (316.817291ms)
+✔ a failing final progress observer cannot discard complete verified signed bytes (76.981208ms)
+✔ cancellation triggered by final received yield still persists it without sending continuation (123.613333ms)
+✔ durability callback rejection carries verified bytes and prevents final ACK (79.085625ms)
+✔ pending durable callback is awaited, cannot mutate retained transaction, and blocks concurrent operations (77.990875ms)
+✔ duplicate/foreign/invalid/missing signatures close the session and never reach durability callback (184.115709ms)
+✔ caller mutations after signing starts cannot change approved account or transaction (61.142792ms)
+✔ network mismatch, unexpected interruption, malformed status and timeout are terminal (6.104917ms)
+✔ device receive address must match independently derived HRP/program and can use cached account policy (6.1995ms)
+✔ hung signed-byte storage is bounded and returns the complete recovery transaction (79.21425ms)
+✔ PSBTv2/BIP371 round trip preserves exact original canonical bundle (61.554458ms)
+✔ all values around 2^53 and PRL maximum stay bigint/exact LE u64 (51.839875ms)
+✔ P2MR external recipient is allowed with no curve interpretation; ownership stays P2TR (57.876125ms)
+✔ mandatory network and genesis binding rejects same-HRP and unsupported profile substitutions (212.025083ms)
+✔ strict maps reject duplicate, missing, unknown, signed, script-path and malformed fields (402.24175ms)
+✔ origin/ownership/change metadata is fully checked against the approved public account (251.601541ms)
+✔ amount zero, overflow, over-spend and aggregate overflow are rejected (132.324166ms)
+✔ raw previous transactions are byte-bounded and txid/vout/amount/script checked (24.8715ms)
+✔ canonical serializer is independent of source map insertion order (21.947ms)
+✔ exact PSBT, policy, Merkle roots/proofs and full interruption transcript match official pinned Python client (139.075584ms)
+✔ retained varint and u64 helpers reject unsafe numbers/noncanonical values and preserve uint64 (0.422333ms)
+✔ interpreter rejects malformed/unknown requests, noncanonical proof counts and interleaved continuations (0.371583ms)
+✔ retained host source hashes, license and exact adaptation patch are reproducible (33.319208ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2168.628417

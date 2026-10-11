@@ -1,0 +1,19 @@
+Pearl browser wallet: http://127.0.0.1:5188/
+Ledger Discover entry: http://127.0.0.1:5188/live.html
+Open http://127.0.0.1:5188/ in a WebHID-capable browser to connect your Ledger.
+Pearl browser wallet: http://127.0.0.1:5188/
+Ledger Discover entry: http://127.0.0.1:5188/live.html
+Open http://127.0.0.1:5188/ in a WebHID-capable browser to connect your Ledger.
+✔ launcher flag opens only the fixed WebHID URL after successful server listen (16.663292ms)
+Pearl browser wallet: http://127.0.0.1:5188/
+Ledger Discover entry: http://127.0.0.1:5188/live.html
+Pearl wallet could not start; port 5188 may already be in use.
+✔ ordinary npm start and failed bind never open a browser; owned shutdown is retained (9.252875ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 135.135167

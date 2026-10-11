@@ -1,0 +1,166 @@
+{
+  "origin": "https://pearl-ledger-wallet.vercel.app",
+  "checkedAt": "2026-10-10T23:04:33.246Z",
+  "outcome": "passed",
+  "comparedFiles": 15,
+  "newRequests": 13,
+  "totalMatchedBytes": 2227051,
+  "results": [
+    {
+      "file": "assets/backup-import.worker-Dtrkqa4Y.js",
+      "target": "/assets/backup-import.worker-Dtrkqa4Y.js",
+      "sha256": "574f3999066984fc8b2d8674bc790097bd8b8ec54bf2b184664c5f5e94d42f4b",
+      "bytes": 72732,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "assets/index-ByVGc--d.js",
+      "target": "/assets/index-ByVGc--d.js",
+      "sha256": "2a9f3d2ad2069d9d0f6678d9788d273da097b117929b2ad3222a00968fac843c",
+      "bytes": 269846,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "assets/index-D2rIokL7.js",
+      "target": "/assets/index-D2rIokL7.js",
+      "sha256": "1f249402fcd873f8027991e01b1d3b1d5c2be10662d965ce0d783699de1df9b3",
+      "bytes": 27563,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "target": "/assets/Inter-Medium-DLI8xdiI.woff2",
+      "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
+      "bytes": 95224,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": null
+    },
+    {
+      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
+      "target": "/assets/Inter-Regular-BHP6tI7_.woff2",
+      "sha256": "77ca56870309a85759fb7116aef2119a26e358145e808868543ca1fe16c27720",
+      "bytes": 89212,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": null
+    },
+    {
+      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
+      "target": "/assets/Inter-SemiBold-CudmWj5i.woff2",
+      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
+      "bytes": 95652,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": null
+    },
+    {
+      "file": "assets/jsQR-Dk72IcmC.js",
+      "target": "/assets/jsQR-Dk72IcmC.js",
+      "sha256": "c49ea57b007c745bc790dae9c4027ddf5dd77f337f10d5d223951f55174cc20d",
+      "bytes": 130721,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "assets/live-VcgfFvtq.js",
+      "target": "/assets/live-VcgfFvtq.js",
+      "sha256": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
+      "bytes": 445670,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "assets/main-BmAxsC9p.js",
+      "target": "/assets/main-BmAxsC9p.js",
+      "sha256": "0aa70488611f5c9a84efe80ccf9e5c5e6203ecb1870d79819db5f8c894bd0053",
+      "bytes": 493807,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "assets/pearl-apdu-CnYMOtYj.css",
+      "target": "/assets/pearl-apdu-CnYMOtYj.css",
+      "sha256": "491336585e237e97e220ca6925d3b20b5c1320b81f955c663e62d776e05a20da",
+      "bytes": 196825,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "assets/pearl-apdu-DTLxDe13.js",
+      "target": "/assets/pearl-apdu-DTLxDe13.js",
+      "sha256": "59bad00dc662a14465fbe60b947ec41c93b5b9e2c3f40fe4acef4bfbaaebf621",
+      "bytes": 5651,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "assets/qr-reader-BRNRvs-M.js",
+      "target": "/assets/qr-reader-BRNRvs-M.js",
+      "sha256": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
+      "bytes": 3269,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentEncoding": "br"
+    },
+    {
+      "file": "index.html",
+      "target": "/",
+      "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
+      "bytes": 813,
+      "match": true,
+      "reusedImmediateLiveCheck": false,
+      "cacheControl": "no-store",
+      "contentEncoding": null
+    },
+    {
+      "file": "live.html",
+      "target": "/live.html",
+      "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
+      "bytes": 885,
+      "match": true,
+      "reusedImmediateLiveCheck": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "file": "third-party-notices.txt",
+      "target": "/third-party-notices.txt",
+      "sha256": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89",
+      "bytes": 299181,
+      "match": true,
+      "reusedImmediateLiveCheck": true,
+      "cacheControl": "no-store"
+    }
+  ],
+  "deployment": {
+    "origin": "https://pearl-ledger-wallet.vercel.app",
+    "id": "dpl_FDmzyLPoeqC3DyQYyucY1bs72fUp",
+    "sourceCommit": "fca78a828362ea2d65cfe10872ca57626c52b866",
+    "checksPassed": 17,
+    "matchingPublicFiles": 15,
+    "matchingPublicBytes": 2227051
+  }
+}

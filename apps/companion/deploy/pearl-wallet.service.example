@@ -1,0 +1,34 @@
+# Template only. Provision this unprivileged account/read-only release tree yourself.
+[Unit]
+Description=Pearl Ledger wallet HTTPS backend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pearl-wallet
+Group=pearl-wallet
+WorkingDirectory=/opt/pearl-wallet/current
+Environment=NODE_ENV=production
+Environment=PEARL_WEB_ORIGIN=https://wallet.example.com
+Environment=PEARL_WEB_PORT=8788
+# Confirm this path is the required supported Node 24.x runtime.
+ExecStart=/usr/bin/node --import tsx apps/companion/src/web-server.ts
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=35s
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+CapabilityBoundingSet=
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

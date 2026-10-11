@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "apps/ledger-bitcoin-prl/build-artifacts/nanos2-regtest/app.elf",
+    "testedSnapshot": "qualification-workspace/tested-firmware.elf",
+    "sha256": "811185a5132614f424207640c6fb308dbaaa4b9a85a796acc7c8fac81db5785a",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null,
+    "buildManifest": "build-manifest.json"
+  },
+  "results": [
+    {
+      "name": "p2mr-payment",
+      "txid": "ed478f01922427b982a5ecec7480af418e54aeb5b1043abee66ebc7bcacd0d29",
+      "wtxid": "1665672def12aa83ca17a6dbb568aa40dec2daf6c6dba746c1c3abc5dc0c5518",
+      "inputs": 2,
+      "amount": "9007199254740000",
+      "fee": "1000"
+    },
+    {
+      "name": "max-grains-payment",
+      "txid": "4db1dd1fa15ff07fbe274c9a7bce7fa8cf1bfbe03b0b5f3ad356b2782201f3f1",
+      "wtxid": "80d24cbb814bb9a6a94242546a5ea487fc22880919a73e87f56494df33a14f5f",
+      "inputs": 1,
+      "amount": "2099999999999999000",
+      "fee": "1000"
+    },
+    {
+      "name": "high-fee-payment",
+      "txid": "3a3fdd28e6f7a87142df61f905bb9c4ecdac47e5a505641ea0f8929bafeae393",
+      "wtxid": "18742974b65bc86a9b5bce0db052e3326e51e0df3b0aaa4566596c6806ad888e",
+      "inputs": 1,
+      "amount": "1000",
+      "fee": "99999000"
+    }
+  ]
+}

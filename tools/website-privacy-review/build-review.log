@@ -1,0 +1,40 @@
+{
+  "checks": 9,
+  "allPassed": true,
+  "modules": 342,
+  "mainModules": 341,
+  "workerModules": 27,
+  "dependencies": {
+    "generalPurposePrivateKeyCapabilitiesRemainBundled": {
+      "fromMasterSeed": true,
+      "privateExtendedKey": true,
+      "privateKeySignGuard": true
+    },
+    "vendorNetworkConstantsRemainBundled": [
+      "https://manager.api.live.ledger.com/api",
+      "wss://scriptrunner.api.live.ledger.com/update"
+    ],
+    "ledgerLoggerSubscribers": 0,
+    "note": "Presence of generic cryptographic/network implementation is not evidence that production flow uses a private key, calls software signing, or contacts these vendor endpoints."
+  },
+  "chunks": [
+    {
+      "file": "assets/index-DK-3_Qur.css",
+      "type": "asset",
+      "bytes": 7513,
+      "sha256": "1f78b183cca59efb05cd95835f210d0d06837de4ccd2726416d9228c179364cb"
+    },
+    {
+      "file": "assets/index-B9WJtHC4.js",
+      "type": "chunk",
+      "bytes": 473249,
+      "sha256": "4062ec6b173da7cb05dbc27a91928225571530a88171b47d2fbde8f1b4b671e0"
+    },
+    {
+      "file": "assets/backup-import.worker-Dtrkqa4Y.js",
+      "type": "asset",
+      "bytes": 72732,
+      "sha256": "574f3999066984fc8b2d8674bc790097bd8b8ec54bf2b184664c5f5e94d42f4b"
+    }
+  ]
+}

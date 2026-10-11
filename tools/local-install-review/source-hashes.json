@@ -1,0 +1,9 @@
+{
+  "README.md": "2648be8da34b92aa8bb99d0c394c0b0a72d3743d734537df75c30baa1277e0e5",
+  "docs/live-app.md": "2b2309f0f9389b6345203f92b842684ff2110cbbee80402dbeee777357b5bd8e",
+  "docs/install-pearl.md": "6643690140f6fbcecfb0373fe10f8cf0ca07620cc9420f2c4d6d121e05ab126b",
+  "docs/ledger-discover-submission.md": "7c261a03450c5882f3c854b29e3335800b26163680eb511aa10519c65823ad9f",
+  "scripts/run-local.py": "e8ba84e0840d5241c0b561422b503e077c352fffa055142fae4046ffb2881c16",
+  "scripts/test-run-local.py": "6b50dd7f9d6a2f75a3b64903abe01df863bfc8b1ea66f6ebd8a6040f2b297a4a",
+  ".github/workflows/ci.yml": "8ee8bbc431639c7c07cb5dcc152ba4ea06b6b6adbc98f1eeacd43354b74b76a8"
+}

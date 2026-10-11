@@ -12,3 +12,23 @@ tools/native-release-qualification/source-snapshot/apps/ledger/patches/strict-tr
 tools/native-final-memory/sources/memory-instrumentation.patch whitespace=-blank-at-eol,-blank-at-eof
 tools/native-final-memory/sources/strict-transport.patch whitespace=-blank-at-eol
 tools/wallet-recovery-review/independent/typecheck.log whitespace=-blank-at-eof
+# Preserve embedded upstream license bodies and their original line endings.
+apps/companion/public/third-party-notices.txt -text whitespace=-blank-at-eol,-blank-at-eof
+tools/dependency-supply-review/THIRD-PARTY-NOTICES.proposed.txt -text whitespace=-blank-at-eol,-blank-at-eof
+# Retained source diff context is intentionally byte-exact.
+tools/native-parser-review/source-only.patch whitespace=-blank-at-eol
+# Preserve bounded public-fixture test diagnostics verbatim.
+tools/browser-operation-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/browser-race-fix-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/device-identity-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/device-session-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/account-discovery-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/discovery-consistency-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/combined-host-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/host-gap-triage/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/cli-durability-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+tools/host-gap-triage/cli-intent-fix.diff whitespace=-blank-at-eol
+tools/connection-cleanup-review/*.log whitespace=-blank-at-eol,-blank-at-eof
+
+# Preserve raw visual-review command output.
+tools/wallet-visual-review/*.log -whitespace

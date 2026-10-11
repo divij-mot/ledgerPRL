@@ -1,0 +1,9 @@
+{
+  "model": "nanosp",
+  "sourceElf": "/workspace/scratch/5d237258d612/ledgerPRL/apps/ledger-bitcoin-prl/build/nanos2/bin/app.elf",
+  "testedSnapshot": "/workspace/shared/prl-bitcoin-independent-lCSE9F/tested-firmware.elf",
+  "sha256": "8e45823f822fbc675dcd2e2c0868667905e4e26e64a711dc62fec0392febf737",
+  "speculos": "0.27.1",
+  "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+  "injector": null
+}

@@ -88,7 +88,7 @@ test("development serves the linked stylesheet as CSS under the strict CSP", asy
   assert.equal(stylesheet.status, 200);
   assert.match(stylesheet.headers.get("content-type") ?? "", /^text\/css\b/);
   const css = await stylesheet.text();
-  assert.match(css, /\.footer\s*\{/);
+  assert.match(css, /\.main\s*\{/);
   assert.doesNotMatch(css, /__vite__updateStyle/);
   const source = await readFile(join(root, "src/main.ts"), "utf8");
   assert.doesNotMatch(source, /import\s*["'][^"']*\.css["']/);
@@ -124,25 +124,56 @@ test("production keeps the strict CSP and emits a linked CSS asset", async () =>
     build: { write: false },
   });
   assert.ok(!Array.isArray(result) && "output" in result);
-  const html = result.output.find((item) => item.fileName === "index.html");
+  const output = result.output;
+  const html = output.find((item) => item.fileName === "index.html");
   assert.ok(html && html.type === "asset");
   const href = stylesheetHref(String(html.source));
   assert.match(href, /^\/assets\/[^/]+\.css$/);
-  const css = result.output.find((item) => `/${item.fileName}` === href);
+  const css = output.find((item) => `/${item.fileName}` === href);
   assert.ok(css && css.type === "asset");
-  assert.match(String(css.source), /\.footer\{/);
-  const workers = result.output.filter((item) =>
+  assert.match(String(css.source), /\.main\{/);
+  const workers = output.filter((item) =>
     /^assets\/backup-import\.worker-[^/]+\.js$/.test(item.fileName),
   );
   assert.equal(workers.length, 1, "emit one external validation worker");
   const worker = workers[0]!;
   assert.equal(worker.type, "asset");
-  const entry = result.output.find(
-    (item) => item.type === "chunk" && item.isEntry,
-  );
-  assert.ok(entry && entry.type === "chunk");
-  assert.ok(entry.code.includes(`/${worker.fileName}`));
-  assert.match(entry.code, /type:"module"/);
+  for (const name of ["index.html", "live.html"]) {
+    const page = output.find((item) => item.fileName === name);
+    assert.ok(page && page.type === "asset");
+    stylesheetHref(String(page.source));
+    const script = String(page.source).match(
+      /src="(\/assets\/[^\"]+\.js)"/,
+    )?.[1];
+    assert.ok(script);
+    const reachable = new Set<string>();
+    const modules: string[] = [];
+    let code = "";
+    function visit(file: string): void {
+      if (reachable.has(file)) return;
+      reachable.add(file);
+      const chunk = output.find((item) => item.fileName === file);
+      if (!chunk || chunk.type !== "chunk") return;
+      code += chunk.code;
+      modules.push(...Object.keys(chunk.modules));
+      for (const dependency of [...chunk.imports, ...chunk.dynamicImports])
+        visit(dependency);
+    }
+    visit(script.slice(1));
+    assert.ok(code.includes(`/${worker.fileName}`));
+    assert.match(code, /type:"module"/);
+    const moduleNames = modules.join("\n");
+    if (name === "live.html") {
+      assert.match(moduleNames, /wallet-api-client/);
+      assert.doesNotMatch(
+        moduleNames,
+        /device-management-kit|device-transport-kit-web-hid|src\/ledger\.ts/,
+      );
+    } else {
+      assert.match(moduleNames, /device-transport-kit-web-hid/);
+      assert.doesNotMatch(moduleNames, /wallet-api-client|src\/wallet-api\.ts/);
+    }
+  }
   if (worker.type === "asset")
     assert.match(
       String(worker.source),

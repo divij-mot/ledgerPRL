@@ -1,0 +1,392 @@
+diff --git a/apps/ledger-bitcoin-prl/src/common/buffer_ext.c b/apps/ledger-bitcoin-prl/src/common/buffer_ext.c
+index 65ee2f1..e31d88d 100644
+--- a/apps/ledger-bitcoin-prl/src/common/buffer_ext.c
++++ b/apps/ledger-bitcoin-prl/src/common/buffer_ext.c
+@@ -27,6 +27,23 @@
+ #include "varint.h"
+ #include "write.h"
+ 
++bool buffer_read_varint_canonical(buffer_t *buffer, uint64_t *value) {
++    if (buffer->offset >= buffer->size) {
++        return false;
++    }
++
++    buffer_t cursor = *buffer;
++    uint64_t decoded;
++    if (!buffer_read_varint(&cursor, &decoded) ||
++        cursor.offset - buffer->offset != varint_size(decoded)) {
++        return false;
++    }
++
++    buffer->offset = cursor.offset;
++    *value = decoded;
++    return true;
++}
++
+ void *buffer_alloc(buffer_t *buffer, size_t size, bool aligned) {
+     size_t padding_size = 0;
+ 
+diff --git a/apps/ledger-bitcoin-prl/src/common/buffer_ext.h b/apps/ledger-bitcoin-prl/src/common/buffer_ext.h
+index 27d7a61..09f1d64 100644
+--- a/apps/ledger-bitcoin-prl/src/common/buffer_ext.h
++++ b/apps/ledger-bitcoin-prl/src/common/buffer_ext.h
+@@ -7,6 +7,12 @@
+ /* SDK headers */
+ #include "buffer.h"
+ 
++/**
++ * Read a minimally encoded CompactSize integer. On failure (truncation or
++ * nonminimal encoding), leave both the buffer offset and output unchanged.
++ */
++bool buffer_read_varint_canonical(buffer_t *buffer, uint64_t *value);
++
+ /**
+  * Returns a pointer to the current position in the buffer if at least `size` bytes are available in
+  * the buffer (possibly after skipping some bytes to guarantee alignment), or NULL otherwise. On
+diff --git a/apps/ledger-bitcoin-prl/src/common/parser_ext.c b/apps/ledger-bitcoin-prl/src/common/parser_ext.c
+index a6f83c5..a0c9277 100644
+--- a/apps/ledger-bitcoin-prl/src/common/parser_ext.c
++++ b/apps/ledger-bitcoin-prl/src/common/parser_ext.c
+@@ -4,6 +4,7 @@
+ 
+ /* SDK headers */
+ #include "read.h"
++#include "varint.h"
+ 
+ size_t dbuffer_get_length(buffer_t *buffers[2]) {
+     return (buffers[0]->size - buffers[0]->offset) + (buffers[1]->size - buffers[1]->offset);
+@@ -64,9 +65,9 @@ bool dbuffer_read_u32(buffer_t *buffers[2], uint32_t *out, endianness_t endianne
+     return true;
+ }
+ 
+-bool dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out) {
++int dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out) {
+     if (!dbuffer_can_read(buffers, 1)) {
+-        return false;
++        return 0;
+     }
+ 
+     // peek the first byte without changing the offsets
+@@ -89,22 +90,34 @@ bool dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out) {
+     }
+ 
+     if (!dbuffer_can_read(buffers, 1 + len)) {
+-        return false;
++        return 0;
++    }
++
++    buffer_t cursor0 = *buffers[0], cursor1 = *buffers[1];
++    buffer_t *cursors[2] = {&cursor0, &cursor1};
++    if (!dbuffer_read_u8(cursors, &first_byte)) {
++        return 0;
+     }
+ 
+-    dbuffer_read_u8(buffers, &first_byte);  // redundant, just to skip 1 byte
++    uint64_t decoded = first_byte;
++    if (len > 0) {
++        uint8_t data[8] = {0};
++        if (!dbuffer_read_bytes(cursors, data, len)) {
++            return 0;
++        }
+ 
+-    if (first_byte <= 0xfc) {
+-        *out = first_byte;
+-        return true;
++        // Zero extension allows one little-endian read for all payload widths.
++        decoded = read_u64_le(data, 0);
+     }
+ 
+-    uint8_t data[8] = {0};
+-    dbuffer_read_bytes(buffers, data, len);
++    if (1 + len != varint_size(decoded)) {
++        return -1;
++    }
+ 
+-    // Since data was zeroed, parsing the entire array as a little-endian works for any size
+-    *out = read_u64_le(data, 0);
+-    return true;
++    buffers[0]->offset = cursor0.offset;
++    buffers[1]->offset = cursor1.offset;
++    *out = decoded;
++    return 1;
+ }
+ 
+ bool parser_consolidate_buffers(buffer_t *buffers[2], size_t max_size) {
+diff --git a/apps/ledger-bitcoin-prl/src/common/parser_ext.h b/apps/ledger-bitcoin-prl/src/common/parser_ext.h
+index aa8314f..761fc55 100644
+--- a/apps/ledger-bitcoin-prl/src/common/parser_ext.h
++++ b/apps/ledger-bitcoin-prl/src/common/parser_ext.h
+@@ -89,15 +89,16 @@ bool dbuffer_read_u16(buffer_t *buffers[2], uint16_t *out, endianness_t endianne
+ bool dbuffer_read_u32(buffer_t *buffers[2], uint32_t *out, endianness_t endianness);
+ 
+ /**
+- * Read a Bitcoin-style variable-length integer from the concatenation of two buffers.
+- * The encoding uses 1, 3, 5, or 9 bytes depending on the value prefix.
++ * Read a minimally encoded CompactSize integer from the concatenation of two buffers.
++ * The encoding uses 1, 3, 5, or 9 bytes depending on the value prefix. On an
++ * incomplete or malformed read, both buffer offsets and the output are unchanged.
+  *
+  * @param[in]  buffers Array of two pointers to buffers.
+  * @param[out] out     Pointer to store the decoded value.
+  *
+- * @return true on success, false if there are not enough bytes available.
++ * @return 1 on canonical success, 0 if more bytes are needed, -1 for a nonminimal encoding.
+  */
+-bool dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out);
++int dbuffer_read_varint(buffer_t *buffers[2], uint64_t *out);
+ 
+ /**
+  * Initialize a parser context, resetting the step counter and setting the state pointer.
+diff --git a/apps/ledger-bitcoin-prl/src/common/wallet.c b/apps/ledger-bitcoin-prl/src/common/wallet.c
+index 4f707d3..51b5c14 100644
+--- a/apps/ledger-bitcoin-prl/src/common/wallet.c
++++ b/apps/ledger-bitcoin-prl/src/common/wallet.c
+@@ -117,7 +117,7 @@ int read_wallet_policy_header(buffer_t *buffer, policy_map_wallet_header_t *head
+     header->name[header->name_len] = '\0';
+ 
+     uint64_t descriptor_template_len;
+-    if (!buffer_read_varint(buffer, &descriptor_template_len)) {
++    if (!buffer_read_varint_canonical(buffer, &descriptor_template_len)) {
+         return WITH_ERROR(-1, "Invalid wallet policy header");
+     }
+ 
+@@ -143,7 +143,7 @@ int read_wallet_policy_header(buffer_t *buffer, policy_map_wallet_header_t *head
+     header->descriptor_template_len = (uint16_t) descriptor_template_len;
+ 
+     uint64_t n_keys;
+-    if (!buffer_read_varint(buffer, &n_keys) || n_keys > 252) {
++    if (!buffer_read_varint_canonical(buffer, &n_keys) || n_keys > 252) {
+         return WITH_ERROR(-1, "Invalid wallet policy header");
+     }
+     header->n_keys = (uint16_t) n_keys;
+@@ -370,11 +370,11 @@ int parse_policy_map_key_info(buffer_t *buffer, policy_map_key_info_t *out, int
+         return WITH_ERROR(-1, "Invalid extended pubkey length");
+     }
+ 
+-    serialized_extended_pubkey_check_t ext_pubkey_check;
++    serialized_extended_pubkey_check_t ext_pubkey_check = {0};
+     if (base58_decode(ext_pubkey_str,
+                       ext_pubkey_len,
+                       (uint8_t *) &ext_pubkey_check,
+-                      sizeof(ext_pubkey_check)) < 0) {
++                      sizeof(ext_pubkey_check)) != (int) sizeof(ext_pubkey_check)) {
+         return WITH_ERROR(-1, "Error decoding serialized extended pubkey");
+     }
+ 
+diff --git a/apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_index.c b/apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_index.c
+index 08a56d2..5485029 100644
+--- a/apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_index.c
++++ b/apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_leaf_index.c
+@@ -4,6 +4,7 @@
+ #include "get_merkle_leaf_index.h"
+ 
+ /* Local headers */
++#include "buffer_ext.h"
+ #include "client_commands.h"
+ #include "get_merkle_leaf_hash.h"
+ #include "sw.h"
+@@ -31,7 +32,7 @@ int call_get_merkle_leaf_index(dispatcher_context_t *dispatcher_context,
+     uint64_t index;
+ 
+     if (!buffer_read_u8(&dispatcher_context->read_buffer, &found) ||
+-        !buffer_read_varint(&dispatcher_context->read_buffer, &index) || index > INT_MAX ||
++        !buffer_read_varint_canonical(&dispatcher_context->read_buffer, &index) || index > INT_MAX ||
+         index >= (uint64_t) size ||
+         dispatcher_context->read_buffer.offset != dispatcher_context->read_buffer.size) {
+         PRINTF("Malformed response, or index out of range.\n");
+diff --git a/apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_preimage.c b/apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_preimage.c
+index 24a6e8c..18e6628 100644
+--- a/apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_preimage.c
++++ b/apps/ledger-bitcoin-prl/src/handler/lib/get_merkle_preimage.c
+@@ -6,6 +6,7 @@
+ #include "buffer.h"
+ 
+ /* Local headers */
++#include "buffer_ext.h"
+ #include "client_commands.h"
+ #include "crypto.h"
+ #include "debug.h"
+@@ -37,7 +38,7 @@ static int get_merkle_preimage(dispatcher_context_t *dispatcher_context,
+ 
+     uint8_t partial_data_len;
+ 
+-    if (!buffer_read_varint(&dispatcher_context->read_buffer, &preimage_len) ||
++    if (!buffer_read_varint_canonical(&dispatcher_context->read_buffer, &preimage_len) ||
+         !buffer_read_u8(&dispatcher_context->read_buffer, &partial_data_len) ||
+         !buffer_can_read(&dispatcher_context->read_buffer, partial_data_len) ||
+         dispatcher_context->read_buffer.size - dispatcher_context->read_buffer.offset != partial_data_len) {
+diff --git a/apps/ledger-bitcoin-prl/src/handler/lib/get_merkleized_map.c b/apps/ledger-bitcoin-prl/src/handler/lib/get_merkleized_map.c
+index 5d80c96..e2f300d 100644
+--- a/apps/ledger-bitcoin-prl/src/handler/lib/get_merkleized_map.c
++++ b/apps/ledger-bitcoin-prl/src/handler/lib/get_merkleized_map.c
+@@ -6,6 +6,7 @@
+ #include "buffer.h"
+ 
+ /* Local headers */
++#include "buffer_ext.h"
+ #include "check_merkle_tree_sorted.h"
+ #include "get_merkle_leaf_element.h"
+ #include "prl.h"
+@@ -36,7 +37,7 @@ int call_get_merkleized_map_with_callback(dispatcher_context_t *dispatcher_conte
+     }
+ 
+     buffer_t buf = buffer_create(raw_output, el_len);
+-    if (!buffer_read_varint(&buf, &out_ptr->size) ||
++    if (!buffer_read_varint_canonical(&buf, &out_ptr->size) ||
+         !buffer_read_bytes(&buf, out_ptr->keys_root, 32) ||
+         !buffer_read_bytes(&buf, out_ptr->values_root, 32) ||
+         buf.offset != buf.size || out_ptr->size == 0 ||
+diff --git a/apps/ledger-bitcoin-prl/src/handler/lib/get_preimage.c b/apps/ledger-bitcoin-prl/src/handler/lib/get_preimage.c
+index dd0e98d..1acb7c6 100644
+--- a/apps/ledger-bitcoin-prl/src/handler/lib/get_preimage.c
++++ b/apps/ledger-bitcoin-prl/src/handler/lib/get_preimage.c
+@@ -2,6 +2,7 @@
+ #include <limits.h>
+ 
+ /* Local headers */
++#include "buffer_ext.h"
+ #include "client_commands.h"
+ #include "crypto.h"
+ #include "stream_preimage.h"
+@@ -29,7 +30,7 @@ static int get_preimage(dispatcher_context_t *dispatcher_context,
+ 
+     uint8_t partial_data_len;
+ 
+-    if (!buffer_read_varint(&dispatcher_context->read_buffer, &preimage_len_u64) ||
++    if (!buffer_read_varint_canonical(&dispatcher_context->read_buffer, &preimage_len_u64) ||
+         !buffer_read_u8(&dispatcher_context->read_buffer, &partial_data_len) ||
+         !buffer_can_read(&dispatcher_context->read_buffer, partial_data_len) ||
+         dispatcher_context->read_buffer.size - dispatcher_context->read_buffer.offset != partial_data_len) {
+diff --git a/apps/ledger-bitcoin-prl/src/handler/lib/psbt_parse_rawtx.c b/apps/ledger-bitcoin-prl/src/handler/lib/psbt_parse_rawtx.c
+index cc9dd4f..ae604e9 100644
+--- a/apps/ledger-bitcoin-prl/src/handler/lib/psbt_parse_rawtx.c
++++ b/apps/ledger-bitcoin-prl/src/handler/lib/psbt_parse_rawtx.c
+@@ -102,9 +102,9 @@ static int parse_rawtxinput_vout(parse_rawtxinput_state_t *state, buffer_t *buff
+ 
+ static int parse_rawtxinput_scriptsig_size(parse_rawtxinput_state_t *state, buffer_t *buffers[2]) {
+     uint64_t scriptsig_size;
+-    bool result = dbuffer_read_varint(buffers, &scriptsig_size);
++    int result = dbuffer_read_varint(buffers, &scriptsig_size);
+ 
+-    if (result) {
++    if (result == 1) {
+         // The scriptSig is streamed and hashed, but never stored; still, the size must fit in the
+         // counters used to track the parsing progress.
+         if (scriptsig_size > UINT32_MAX) {
+@@ -197,8 +197,8 @@ static int parse_rawtxoutput_value(parse_rawtxoutput_state_t *state, buffer_t *b
+ static int parse_rawtxoutput_scriptpubkey_size(parse_rawtxoutput_state_t *state,
+                                                buffer_t *buffers[2]) {
+     uint64_t scriptpubkey_size;
+-    bool result = dbuffer_read_varint(buffers, &scriptpubkey_size);
+-    if (result) {
++    int result = dbuffer_read_varint(buffers, &scriptpubkey_size);
++    if (result == 1) {
+         // Every output is streamed and hashed here, since that is what the txid is computed from;
+         // therefore, we have to tolerate sizes larger than MAX_PREVOUT_SCRIPTPUBKEY_LEN
+         if (scriptpubkey_size > UINT32_MAX) {
+@@ -342,8 +342,8 @@ static int parse_rawtx_check_segwit(parse_rawtx_state_t *state, buffer_t *buffer
+ 
+ static int parse_rawtx_input_count(parse_rawtx_state_t *state, buffer_t *buffers[2]) {
+     uint64_t n_inputs;
+-    bool result = dbuffer_read_varint(buffers, &n_inputs);
+-    if (result) {
++    int result = dbuffer_read_varint(buffers, &n_inputs);
++    if (result == 1) {
+         if (n_inputs > UINT32_MAX) {
+             return -1;
+         }
+@@ -389,8 +389,8 @@ static int parse_rawtx_inputs(parse_rawtx_state_t *state, buffer_t *buffers[2])
+ 
+ static int parse_rawtx_output_count(parse_rawtx_state_t *state, buffer_t *buffers[2]) {
+     uint64_t n_outputs;
+-    bool result = dbuffer_read_varint(buffers, &n_outputs);
+-    if (result) {
++    int result = dbuffer_read_varint(buffers, &n_outputs);
++    if (result == 1) {
+         if (n_outputs > UINT32_MAX) {
+             return -1;
+         }
+@@ -455,8 +455,9 @@ static int parse_rawtx_witnesses(parse_rawtx_state_t *state, buffer_t *buffers[2
+         if (!state->is_cur_wit_stack_elements_read) {
+             // read the number of stack elements
+             uint64_t cur_wit_stack_elements;
+-            if (!dbuffer_read_varint(buffers, &cur_wit_stack_elements)) {
+-                return 0;  // incomplete, read more data
++            int result = dbuffer_read_varint(buffers, &cur_wit_stack_elements);
++            if (result != 1) {
++                return result;
+             }
+             if (cur_wit_stack_elements > UINT32_MAX) {
+                 return -1;
+@@ -473,8 +474,9 @@ static int parse_rawtx_witnesses(parse_rawtx_state_t *state, buffer_t *buffers[2
+             if (!state->is_cur_wit_elem_len_read) {
+                 // read the length of the next stack elements
+                 uint64_t cur_wit_elem_len;
+-                if (!dbuffer_read_varint(buffers, &cur_wit_elem_len)) {
+-                    return 0;  // incomplete, read more data
++                int result = dbuffer_read_varint(buffers, &cur_wit_elem_len);
++                if (result != 1) {
++                    return result;
+                 }
+                 if (cur_wit_elem_len > UINT32_MAX) {
+                     return -1;
+diff --git a/apps/ledger-bitcoin-prl/src/handler/lib/stream_preimage.c b/apps/ledger-bitcoin-prl/src/handler/lib/stream_preimage.c
+index 92865b0..32e141d 100644
+--- a/apps/ledger-bitcoin-prl/src/handler/lib/stream_preimage.c
++++ b/apps/ledger-bitcoin-prl/src/handler/lib/stream_preimage.c
+@@ -4,6 +4,7 @@
+ #include "stream_preimage.h"
+ 
+ /* Local headers */
++#include "buffer_ext.h"
+ #include "client_commands.h"
+ #include "crypto.h"
+ #include "sw.h"
+@@ -31,7 +32,7 @@ int call_stream_preimage(dispatcher_context_t *dispatcher_context,
+ 
+     uint8_t partial_data_len;
+ 
+-    if (!buffer_read_varint(&dispatcher_context->read_buffer, &preimage_len_u64) ||
++    if (!buffer_read_varint_canonical(&dispatcher_context->read_buffer, &preimage_len_u64) ||
+         !buffer_read_u8(&dispatcher_context->read_buffer, &partial_data_len) ||
+         !buffer_can_read(&dispatcher_context->read_buffer, partial_data_len) ||
+         dispatcher_context->read_buffer.size - dispatcher_context->read_buffer.offset != partial_data_len) {
+diff --git a/apps/ledger-bitcoin-prl/src/handler/sign_psbt/init_global_state.c b/apps/ledger-bitcoin-prl/src/handler/sign_psbt/init_global_state.c
+index a88c290..75076e7 100644
+--- a/apps/ledger-bitcoin-prl/src/handler/sign_psbt/init_global_state.c
++++ b/apps/ledger-bitcoin-prl/src/handler/sign_psbt/init_global_state.c
+@@ -29,6 +29,7 @@
+ /* Local headers */
+ #include "bitvector.h"
+ #include "buffer.h"
++#include "buffer_ext.h"
+ #include "check_merkle_tree_sorted.h"
+ #include "compare_wallet_script_at_path.h"
+ #include "constants.h"
+@@ -65,7 +66,7 @@ static bool __attribute__((noinline)) parse_sign_psbt_apdu(dispatcher_context_t
+                                                            sign_psbt_state_t *st,
+                                                            uint8_t wallet_id[static 32],
+                                                            uint8_t wallet_hmac[static 32]) {
+-    if (!buffer_read_varint(&dc->read_buffer, &st->global_map.size)) {
++    if (!buffer_read_varint_canonical(&dc->read_buffer, &st->global_map.size)) {
+         SEND_SW(dc, SW_WRONG_DATA_LENGTH);
+         return false;
+     }
+@@ -79,7 +80,7 @@ static bool __attribute__((noinline)) parse_sign_psbt_apdu(dispatcher_context_t
+     // we already know n_inputs and n_outputs, so we skip reading from the global map
+ 
+     uint64_t n_inputs_u64;
+-    if (!buffer_read_varint(&dc->read_buffer, &n_inputs_u64) ||
++    if (!buffer_read_varint_canonical(&dc->read_buffer, &n_inputs_u64) ||
+         !buffer_read_bytes(&dc->read_buffer, st->inputs_root, 32)) {
+         SEND_SW(dc, SW_WRONG_DATA_LENGTH);
+         return false;
+@@ -93,7 +94,7 @@ static bool __attribute__((noinline)) parse_sign_psbt_apdu(dispatcher_context_t
+     st->n_inputs = (unsigned int) n_inputs_u64;
+ 
+     uint64_t n_outputs_u64;
+-    if (!buffer_read_varint(&dc->read_buffer, &n_outputs_u64) ||
++    if (!buffer_read_varint_canonical(&dc->read_buffer, &n_outputs_u64) ||
+         !buffer_read_bytes(&dc->read_buffer, st->outputs_root, 32)) {
+         SEND_SW(dc, SW_WRONG_DATA_LENGTH);
+         return false;

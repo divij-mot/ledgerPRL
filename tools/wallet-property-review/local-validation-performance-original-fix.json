@@ -1,0 +1,9 @@
+{
+  "records": 2000,
+  "inputs": 32000,
+  "constructionMs": 6801,
+  "firstMs": 7709,
+  "secondMs": 7236,
+  "bytes": 15822960,
+  "boundary": "Synthetic canonical bytes and dummy witnesses, performance only, no signature-validity claim."
+}

@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "network": "mainnet",
+  "recipientType": "p2mr",
+  "reviewed": {
+    "recipient": "prl1zlllllllllllllllllllllllllllllllllllllllllllllllllllsns0kzn",
+    "amount": "90071992.5474 PRL",
+    "fee": "0.00001 PRL",
+    "recipientType": "P2MR"
+  },
+  "firmware": {
+    "model": "nanosp",
+    "sourceElf": "/workspace/apps/ledger-bitcoin-prl/build-artifacts/nanos2-mainnet/app.elf",
+    "testedSnapshot": "/workspace/evidence/mainnet-p2mr/tested-firmware.elf",
+    "sha256": "0f58a289227ccd78a6e66735cb3b7db95f849b9890d454299e83ef15edbd3271",
+    "speculos": "0.27.1",
+    "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+    "injector": null
+  },
+  "publicAccount": {
+    "network": "mainnet",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "025853bc37661e09494f793fd80758080ef0ba283faa07e360419ab62afe667f8a",
+    "chainCode": "e970e99470cb3b9ce5271c3afe740870751661cb52db46f92020d509bb161f8e"
+  },
+  "bundle": {
+    "network": "mainnet",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "vout": 1,
+        "amount": "9007199254740993",
+        "scriptPubKey": "51206ec0d5384d8e55c98ecc01cef5aabdc406938929102401c69a0eda58e1992e41",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "txid": "2222222222222222222222222222222222222222222222222222222222222222",
+        "vout": 3,
+        "amount": "1000000000",
+        "scriptPubKey": "51209a28fef1d2b5d0c69edc23be17e8174050c17818e9cdfee3e2c1763e88f635e2",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 7
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "9007199254740000",
+        "scriptPubKey": "5220ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "amount": "999999993",
+        "scriptPubKey": "5120f67a38cc32f0fe69343b19ec691b336a1c5b0812561e968428442a23db9b341f",
+        "role": "change",
+        "branch": 1,
+        "index": 0
+      }
+    ]
+  },
+  "txid": "460a88b750e602715eabb02797b4152717e7dc0dfb0f98d921ea3794419184c8",
+  "rawTx": "0100000000010211111111111111111111111111111111111111111111111111111111111111110100000000ffffffff22222222222222222222222222222222222222222222222222222222222222220300000000ffffffff0220fcffffffff1f00225220fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff9c99a3b00000000225120f67a38cc32f0fe69343b19ec691b336a1c5b0812561e968428442a23db9b341f0140dcf710ab24a0fac51c9b0020363fd2dc9ff4afa3ea809de8110215600df9398f7486a704ed83f040bc354f13c9aaba82df1d8dee9c3e6851cc4de057d646c99501401576dfeaa755a18330ae6abd758ddbd87c6b4e5b0ac3b5c8d1ec9982d0268f8699e4e7c85ede3d49055fa41208a0c33915180292273519b35c3baf1757c038a200000000"
+}

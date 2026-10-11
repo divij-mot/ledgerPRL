@@ -1,0 +1,642 @@
+[
+  {
+    "label": "account",
+    "text": "Confirm public key",
+    "events": [
+      {
+        "text": "Confirm public key",
+        "x": 14,
+        "y": 34,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Network | Mainnet",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Mainnet",
+        "x": 42,
+        "y": 33,
+        "w": 43,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Path | 86'/808276'/0'",
+    "events": [
+      {
+        "text": "Path",
+        "x": 51,
+        "y": 3,
+        "w": 26,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "86'/808276'/0'",
+        "x": 30,
+        "y": 33,
+        "w": 68,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Public key (1/3) | xpub6CmLJcTUDaYD | WTB7Qf8HgVhHB28Z | ErtQv1vZF84Ef91odK",
+    "events": [
+      {
+        "text": "Public key (1/3)",
+        "x": 20,
+        "y": 3,
+        "w": 88,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "xpub6CmLJcTUDaYD",
+        "x": 10,
+        "y": 19,
+        "w": 107,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "WTB7Qf8HgVhHB28Z",
+        "x": 8,
+        "y": 33,
+        "w": 111,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "ErtQv1vZF84Ef91odK",
+        "x": 8,
+        "y": 47,
+        "w": 111,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Public key (2/3) | rnaD2jtCr4xSe5VJPRf | zPJ8mTwt3uaMZ59hj | H9SZpzsactK6tSXSmv",
+    "events": [
+      {
+        "text": "Public key (2/3)",
+        "x": 19,
+        "y": 3,
+        "w": 89,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rnaD2jtCr4xSe5VJPRf",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "zPJ8mTwt3uaMZ59hj",
+        "x": 10,
+        "y": 33,
+        "w": 108,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "H9SZpzsactK6tSXSmv",
+        "x": 9,
+        "y": 47,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Public key (3/3) | qcbXjbA",
+    "events": [
+      {
+        "text": "Public key (3/3)",
+        "x": 19,
+        "y": 3,
+        "w": 89,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "qcbXjbA",
+        "x": 42,
+        "y": 33,
+        "w": 43,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Approve public key",
+    "events": [
+      {
+        "text": "Approve public key",
+        "x": 9,
+        "y": 34,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Public key | approved",
+    "events": [
+      {
+        "text": "Public key",
+        "x": 37,
+        "y": 18,
+        "w": 53,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "approved",
+        "x": 39,
+        "y": 32,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Verify Pearl | address",
+    "events": [
+      {
+        "text": "Verify Pearl",
+        "x": 34,
+        "y": 27,
+        "w": 60,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "address",
+        "x": 44,
+        "y": 41,
+        "w": 40,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Address (1/2) | prl1pdmqd2wzd3e2u | nrkvq880t24acsrf8zff | zqjqr356pmd93cve9e",
+    "events": [
+      {
+        "text": "Address (1/2)",
+        "x": 26,
+        "y": 3,
+        "w": 75,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "prl1pdmqd2wzd3e2u",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "nrkvq880t24acsrf8zff",
+        "x": 8,
+        "y": 33,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "zqjqr356pmd93cve9e",
+        "x": 9,
+        "y": 47,
+        "w": 109,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Address (2/2) | qs4u7tjx",
+    "events": [
+      {
+        "text": "Address (2/2)",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "qs4u7tjx",
+        "x": 41,
+        "y": 33,
+        "w": 46,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Network | Mainnet",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Mainnet",
+        "x": 42,
+        "y": 33,
+        "w": 43,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Path | m/86'/808276'/0'/0/0",
+    "events": [
+      {
+        "text": "Path",
+        "x": 51,
+        "y": 3,
+        "w": 26,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/808276'/0'/0/0",
+        "x": 13,
+        "y": 33,
+        "w": 102,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "address",
+    "text": "Confirm",
+    "events": [
+      {
+        "text": "Confirm",
+        "x": 41,
+        "y": 34,
+        "w": 46,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Address verified",
+    "events": [
+      {
+        "text": "Address verified",
+        "x": 22,
+        "y": 25,
+        "w": 84,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Loading transaction",
+    "events": [
+      {
+        "text": "Loading transaction",
+        "x": 12,
+        "y": 34,
+        "w": 103,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Network | Mainnet",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Mainnet",
+        "x": 42,
+        "y": 33,
+        "w": 43,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "From account | m/86'/808276'/0'",
+    "events": [
+      {
+        "text": "From account",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/808276'/0'",
+        "x": 23,
+        "y": 33,
+        "w": 82,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Amount | 90071992.5474 PRL",
+    "events": [
+      {
+        "text": "Amount",
+        "x": 42,
+        "y": 3,
+        "w": 44,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "90071992.5474 PRL",
+        "x": 13,
+        "y": 33,
+        "w": 102,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "To (1/2) | prl1ptkfg5hcsgxwuu5 | qf3j9q2uk9cmyc8n0u | 29d3eyhf8q069j924e",
+    "events": [
+      {
+        "text": "To (1/2)",
+        "x": 43,
+        "y": 3,
+        "w": 42,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "prl1ptkfg5hcsgxwuu5",
+        "x": 8,
+        "y": 19,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "qf3j9q2uk9cmyc8n0u",
+        "x": 8,
+        "y": 33,
+        "w": 111,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "29d3eyhf8q069j924e",
+        "x": 9,
+        "y": 47,
+        "w": 109,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "To (2/2) | 8sfm7dk5",
+    "events": [
+      {
+        "text": "To (2/2)",
+        "x": 42,
+        "y": 3,
+        "w": 43,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "8sfm7dk5",
+        "x": 38,
+        "y": 33,
+        "w": 51,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Change amount | 9.99999993 PRL",
+    "events": [
+      {
+        "text": "Change amount",
+        "x": 20,
+        "y": 3,
+        "w": 88,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "9.99999993 PRL",
+        "x": 24,
+        "y": 33,
+        "w": 80,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Change...ess (1/2) | prl1p7ear3npj7rlxjdp | mr8kxjxendgw9kzqj2c | 0fdppggs4z8kumxs0s",
+    "events": [
+      {
+        "text": "Change...ess (1/2)",
+        "x": 14,
+        "y": 3,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "prl1p7ear3npj7rlxjdp",
+        "x": 10,
+        "y": 19,
+        "w": 108,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "mr8kxjxendgw9kzqj2c",
+        "x": 7,
+        "y": 33,
+        "w": 114,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "0fdppggs4z8kumxs0s",
+        "x": 7,
+        "y": 47,
+        "w": 113,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Change...ss (2/2) | w26w9t",
+    "events": [
+      {
+        "text": "Change...ss (2/2)",
+        "x": 17,
+        "y": 3,
+        "w": 93,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "w26w9t",
+        "x": 44,
+        "y": 33,
+        "w": 40,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Change path | m/86'/808276'/0'/1/0",
+    "events": [
+      {
+        "text": "Change path",
+        "x": 28,
+        "y": 3,
+        "w": 71,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/808276'/0'/1/0",
+        "x": 13,
+        "y": 33,
+        "w": 102,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Fees | 0.00001 PRL",
+    "events": [
+      {
+        "text": "Fees",
+        "x": 51,
+        "y": 3,
+        "w": 26,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "0.00001 PRL",
+        "x": 33,
+        "y": 33,
+        "w": 62,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Sign transaction",
+    "events": [
+      {
+        "text": "Sign transaction",
+        "x": 17,
+        "y": 34,
+        "w": 93,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "sign",
+    "text": "Signing transaction",
+    "events": [
+      {
+        "text": "Signing transaction",
+        "x": 14,
+        "y": 34,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  }
+]

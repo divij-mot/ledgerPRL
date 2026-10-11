@@ -1,0 +1,15 @@
+✔ DMK adapter encodes an exact custom command and preserves status words (1.844133ms)
+✔ physical HID disconnect between commands latches session closed and cannot resume after reconnect (1.133735ms)
+✔ physical disconnect rejects pending exchange rather than waiting for DMK reconnect grace (0.486601ms)
+✔ Bitcoin-based PRL DMK commands use a separate explicit allowlist (0.398169ms)
+✔ PSBT response winning a disconnect race remains available while transport stays terminal (0.596507ms)
+✔ terminal close destroys owned HID factory listeners exactly once, even if DMK cleanup fails (0.347021ms)
+✔ synchronous disconnect inside sendCommand cannot leave exchange pending (0.404268ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 578.945549

@@ -1,0 +1,232 @@
+
+/workspace/shared/prl-bitcoin-independent-lCSE9F/tested-firmware.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+c0de8968 <sign_sighash_schnorr_and_yield>:
+c0de8968:	e92d 4df0 	stmdb	sp!, {r4, r5, r6, r7, r8, sl, fp, lr}
+c0de896c:	b0ce      	sub	sp, #312	@ 0x138
+c0de896e:	f8df 8214 	ldr.w	r8, [pc, #532]	@ c0de8b84 <sign_sighash_schnorr_and_yield+0x21c>
+c0de8972:	4604      	mov	r4, r0
+c0de8974:	f859 0008 	ldr.w	r0, [r9, r8]
+c0de8978:	904d      	str	r0, [sp, #308]	@ 0x134
+c0de897a:	f8d1 0dcc 	ldr.w	r0, [r1, #3532]	@ 0xdcc
+c0de897e:	7800      	ldrb	r0, [r0, #0]
+c0de8980:	2809      	cmp	r0, #9
+c0de8982:	d124      	bne.n	c0de89ce <sign_sighash_schnorr_and_yield+0x66>
+c0de8984:	460e      	mov	r6, r1
+c0de8986:	9f56      	ldr	r7, [sp, #344]	@ 0x158
+c0de8988:	a823      	add	r0, sp, #140	@ 0x8c
+c0de898a:	2141      	movs	r1, #65	@ 0x41
+c0de898c:	461d      	mov	r5, r3
+c0de898e:	4693      	mov	fp, r2
+c0de8990:	f7f7 ffc8 	bl	c0de0924 <__aeabi_memclr>
+c0de8994:	2040      	movs	r0, #64	@ 0x40
+c0de8996:	214c      	movs	r1, #76	@ 0x4c
+c0de8998:	9004      	str	r0, [sp, #16]
+c0de899a:	a810      	add	r0, sp, #64	@ 0x40
+c0de899c:	f7f7 ffc2 	bl	c0de0924 <__aeabi_memclr>
+c0de89a0:	f10d 0a18 	add.w	sl, sp, #24
+c0de89a4:	2128      	movs	r1, #40	@ 0x28
+c0de89a6:	4650      	mov	r0, sl
+c0de89a8:	f7f7 ffbc 	bl	c0de0924 <__aeabi_memclr>
+c0de89ac:	4628      	mov	r0, r5
+c0de89ae:	4639      	mov	r1, r7
+c0de89b0:	4652      	mov	r2, sl
+c0de89b2:	2300      	movs	r3, #0
+c0de89b4:	f005 fe66 	bl	c0dee684 <bip32_derive_with_seed_init_privkey_256>
+c0de89b8:	b1c8      	cbz	r0, c0de89ee <sign_sighash_schnorr_and_yield+0x86>
+c0de89ba:	a806      	add	r0, sp, #24
+c0de89bc:	f006 fe16 	bl	c0def5ec <OUTLINED_FUNCTION_58>
+c0de89c0:	a823      	add	r0, sp, #140	@ 0x8c
+c0de89c2:	f006 fe59 	bl	c0def678 <OUTLINED_FUNCTION_69>
+c0de89c6:	a810      	add	r0, sp, #64	@ 0x40
+c0de89c8:	214c      	movs	r1, #76	@ 0x4c
+c0de89ca:	f7f7 ff6e 	bl	c0de08aa <explicit_bzero>
+c0de89ce:	f006 fe16 	bl	c0def5fe <OUTLINED_FUNCTION_60>
+c0de89d2:	69a0      	ldr	r0, [r4, #24]
+c0de89d4:	4780      	blx	r0
+c0de89d6:	2400      	movs	r4, #0
+c0de89d8:	f859 0008 	ldr.w	r0, [r9, r8]
+c0de89dc:	994d      	ldr	r1, [sp, #308]	@ 0x134
+c0de89de:	4288      	cmp	r0, r1
+c0de89e0:	bf02      	ittt	eq
+c0de89e2:	4620      	moveq	r0, r4
+c0de89e4:	b04e      	addeq	sp, #312	@ 0x138
+c0de89e6:	e8bd 8df0 	ldmiaeq.w	sp!, {r4, r5, r6, r7, r8, sl, fp, pc}
+c0de89ea:	f006 fb93 	bl	c0def114 <__wrap___stack_chk_fail>
+c0de89ee:	2f05      	cmp	r7, #5
+c0de89f0:	d1e3      	bne.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de89f2:	9f57      	ldr	r7, [sp, #348]	@ 0x15c
+c0de89f4:	2f00      	cmp	r7, #0
+c0de89f6:	d0e0      	beq.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de89f8:	9858      	ldr	r0, [sp, #352]	@ 0x160
+c0de89fa:	2800      	cmp	r0, #0
+c0de89fc:	d1dd      	bne.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de89fe:	9859      	ldr	r0, [sp, #356]	@ 0x164
+c0de8a00:	2800      	cmp	r0, #0
+c0de8a02:	d1da      	bne.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8a04:	985a      	ldr	r0, [sp, #360]	@ 0x168
+c0de8a06:	2800      	cmp	r0, #0
+c0de8a08:	d1d7      	bne.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8a0a:	485f      	ldr	r0, [pc, #380]	@ (c0de8b88 <sign_sighash_schnorr_and_yield+0x220>)
+c0de8a0c:	682a      	ldr	r2, [r5, #0]
+c0de8a0e:	f100 0155 	add.w	r1, r0, #85	@ 0x55
+c0de8a12:	428a      	cmp	r2, r1
+c0de8a14:	d1d1      	bne.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8a16:	6869      	ldr	r1, [r5, #4]
+c0de8a18:	4281      	cmp	r1, r0
+c0de8a1a:	d1ce      	bne.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8a1c:	68a8      	ldr	r0, [r5, #8]
+c0de8a1e:	f1b0 3fff 	cmp.w	r0, #4294967295	@ 0xffffffff
+c0de8a22:	dcca      	bgt.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8a24:	68e8      	ldr	r0, [r5, #12]
+c0de8a26:	2801      	cmp	r0, #1
+c0de8a28:	d8c7      	bhi.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8a2a:	6928      	ldr	r0, [r5, #16]
+c0de8a2c:	2800      	cmp	r0, #0
+c0de8a2e:	d4c4      	bmi.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8a30:	f10a 0008 	add.w	r0, sl, #8
+c0de8a34:	2241      	movs	r2, #65	@ 0x41
+c0de8a36:	9003      	str	r0, [sp, #12]
+c0de8a38:	ad3c      	add	r5, sp, #240	@ 0xf0
+c0de8a3a:	4955      	ldr	r1, [pc, #340]	@ (c0de8b90 <sign_sighash_schnorr_and_yield+0x228>)
+c0de8a3c:	4628      	mov	r0, r5
+c0de8a3e:	4479      	add	r1, pc
+c0de8a40:	f7f7 ff5e 	bl	c0de0900 <__aeabi_memcpy>
+c0de8a44:	4629      	mov	r1, r5
+c0de8a46:	9d03      	ldr	r5, [sp, #12]
+c0de8a48:	2021      	movs	r0, #33	@ 0x21
+c0de8a4a:	2320      	movs	r3, #32
+c0de8a4c:	462a      	mov	r2, r5
+c0de8a4e:	f7f7 fb0b 	bl	c0de0068 <cx_ecfp_scalar_mult_no_throw>
+c0de8a52:	bb68      	cbnz	r0, c0de8ab0 <sign_sighash_schnorr_and_yield+0x148>
+c0de8a54:	f89d 0130 	ldrb.w	r0, [sp, #304]	@ 0x130
+c0de8a58:	07c0      	lsls	r0, r0, #31
+c0de8a5a:	d007      	beq.n	c0de8a6c <sign_sighash_schnorr_and_yield+0x104>
+c0de8a5c:	494d      	ldr	r1, [pc, #308]	@ (c0de8b94 <sign_sighash_schnorr_and_yield+0x22c>)
+c0de8a5e:	4628      	mov	r0, r5
+c0de8a60:	462a      	mov	r2, r5
+c0de8a62:	2320      	movs	r3, #32
+c0de8a64:	4479      	add	r1, pc
+c0de8a66:	f7f7 fb45 	bl	c0de00f4 <cx_math_sub_no_throw>
+c0de8a6a:	bb08      	cbnz	r0, c0de8ab0 <sign_sighash_schnorr_and_yield+0x148>
+c0de8a6c:	a934      	add	r1, sp, #208	@ 0xd0
+c0de8a6e:	2000      	movs	r0, #0
+c0de8a70:	463b      	mov	r3, r7
+c0de8a72:	e9cd 0100 	strd	r0, r1, [sp]
+c0de8a76:	a83c      	add	r0, sp, #240	@ 0xf0
+c0de8a78:	2108      	movs	r1, #8
+c0de8a7a:	1c42      	adds	r2, r0, #1
+c0de8a7c:	4846      	ldr	r0, [pc, #280]	@ (c0de8b98 <sign_sighash_schnorr_and_yield+0x230>)
+c0de8a7e:	4478      	add	r0, pc
+c0de8a80:	f7fa fb72 	bl	c0de3168 <crypto_tr_tagged_hash>
+c0de8a84:	4945      	ldr	r1, [pc, #276]	@ (c0de8b9c <sign_sighash_schnorr_and_yield+0x234>)
+c0de8a86:	ab05      	add	r3, sp, #20
+c0de8a88:	a834      	add	r0, sp, #208	@ 0xd0
+c0de8a8a:	2220      	movs	r2, #32
+c0de8a8c:	4479      	add	r1, pc
+c0de8a8e:	f7f7 fb1d 	bl	c0de00cc <cx_math_cmp_no_throw>
+c0de8a92:	b968      	cbnz	r0, c0de8ab0 <sign_sighash_schnorr_and_yield+0x148>
+c0de8a94:	9805      	ldr	r0, [sp, #20]
+c0de8a96:	f1b0 3fff 	cmp.w	r0, #4294967295	@ 0xffffffff
+c0de8a9a:	dc09      	bgt.n	c0de8ab0 <sign_sighash_schnorr_and_yield+0x148>
+c0de8a9c:	2020      	movs	r0, #32
+c0de8a9e:	4629      	mov	r1, r5
+c0de8aa0:	9000      	str	r0, [sp, #0]
+c0de8aa2:	aa34      	add	r2, sp, #208	@ 0xd0
+c0de8aa4:	4b3e      	ldr	r3, [pc, #248]	@ (c0de8ba0 <sign_sighash_schnorr_and_yield+0x238>)
+c0de8aa6:	4628      	mov	r0, r5
+c0de8aa8:	447b      	add	r3, pc
+c0de8aaa:	f7f7 fb0a 	bl	c0de00c2 <cx_math_addm_no_throw>
+c0de8aae:	b130      	cbz	r0, c0de8abe <sign_sighash_schnorr_and_yield+0x156>
+c0de8ab0:	4628      	mov	r0, r5
+c0de8ab2:	f006 fdea 	bl	c0def68a <OUTLINED_FUNCTION_72>
+c0de8ab6:	a83c      	add	r0, sp, #240	@ 0xf0
+c0de8ab8:	f006 fdde 	bl	c0def678 <OUTLINED_FUNCTION_69>
+c0de8abc:	e77d      	b.n	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8abe:	9d5b      	ldr	r5, [sp, #364]	@ 0x16c
+c0de8ac0:	a83c      	add	r0, sp, #240	@ 0xf0
+c0de8ac2:	f006 fdd9 	bl	c0def678 <OUTLINED_FUNCTION_69>
+c0de8ac6:	2000      	movs	r0, #0
+c0de8ac8:	2108      	movs	r1, #8
+c0de8aca:	2928      	cmp	r1, #40	@ 0x28
+c0de8acc:	d004      	beq.n	c0de8ad8 <sign_sighash_schnorr_and_yield+0x170>
+c0de8ace:	f81a 2001 	ldrb.w	r2, [sl, r1]
+c0de8ad2:	3101      	adds	r1, #1
+c0de8ad4:	4310      	orrs	r0, r2
+c0de8ad6:	e7f8      	b.n	c0de8aca <sign_sighash_schnorr_and_yield+0x162>
+c0de8ad8:	2800      	cmp	r0, #0
+c0de8ada:	f43f af6e 	beq.w	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8ade:	a910      	add	r1, sp, #64	@ 0x40
+c0de8ae0:	aa06      	add	r2, sp, #24
+c0de8ae2:	2021      	movs	r0, #33	@ 0x21
+c0de8ae4:	2301      	movs	r3, #1
+c0de8ae6:	f7f7 fab5 	bl	c0de0054 <cx_ecfp_generate_pair_no_throw>
+c0de8aea:	2800      	cmp	r0, #0
+c0de8aec:	f47f af65 	bne.w	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8af0:	2720      	movs	r7, #32
+c0de8af2:	973d      	str	r7, [sp, #244]	@ 0xf4
+c0de8af4:	a823      	add	r0, sp, #140	@ 0x8c
+c0de8af6:	903c      	str	r0, [sp, #240]	@ 0xf0
+c0de8af8:	4824      	ldr	r0, [pc, #144]	@ (c0de8b8c <sign_sighash_schnorr_and_yield+0x224>)
+c0de8afa:	a93c      	add	r1, sp, #240	@ 0xf0
+c0de8afc:	f7f7 fb7c 	bl	c0de01f8 <SVC_cx_call>
+c0de8b00:	2800      	cmp	r0, #0
+c0de8b02:	f47f af5a 	bne.w	c0de89ba <sign_sighash_schnorr_and_yield+0x52>
+c0de8b06:	a804      	add	r0, sp, #16
+c0de8b08:	9700      	str	r7, [sp, #0]
+c0de8b0a:	a923      	add	r1, sp, #140	@ 0x8c
+c0de8b0c:	f10d 0a18 	add.w	sl, sp, #24
+c0de8b10:	2203      	movs	r2, #3
+c0de8b12:	462b      	mov	r3, r5
+c0de8b14:	e9cd 1001 	strd	r1, r0, [sp, #4]
+c0de8b18:	4650      	mov	r0, sl
+c0de8b1a:	f44f 6100 	mov.w	r1, #2048	@ 0x800
+c0de8b1e:	f7f7 faa8 	bl	c0de0072 <cx_ecschnorr_sign_no_throw>
+c0de8b22:	4607      	mov	r7, r0
+c0de8b24:	4650      	mov	r0, sl
+c0de8b26:	f006 fd61 	bl	c0def5ec <OUTLINED_FUNCTION_58>
+c0de8b2a:	2f00      	cmp	r7, #0
+c0de8b2c:	f47f af48 	bne.w	c0de89c0 <sign_sighash_schnorr_and_yield+0x58>
+c0de8b30:	9804      	ldr	r0, [sp, #16]
+c0de8b32:	2840      	cmp	r0, #64	@ 0x40
+c0de8b34:	f47f af44 	bne.w	c0de89c0 <sign_sighash_schnorr_and_yield+0x58>
+c0de8b38:	2720      	movs	r7, #32
+c0de8b3a:	2040      	movs	r0, #64	@ 0x40
+c0de8b3c:	f10d 0a40 	add.w	sl, sp, #64	@ 0x40
+c0de8b40:	2203      	movs	r2, #3
+c0de8b42:	462b      	mov	r3, r5
+c0de8b44:	9700      	str	r7, [sp, #0]
+c0de8b46:	a923      	add	r1, sp, #140	@ 0x8c
+c0de8b48:	e9cd 1001 	strd	r1, r0, [sp, #4]
+c0de8b4c:	4650      	mov	r0, sl
+c0de8b4e:	2100      	movs	r1, #0
+c0de8b50:	f7f7 fa94 	bl	c0de007c <cx_ecschnorr_verify>
+c0de8b54:	2800      	cmp	r0, #0
+c0de8b56:	f43f af33 	beq.w	c0de89c0 <sign_sighash_schnorr_and_yield+0x58>
+c0de8b5a:	9804      	ldr	r0, [sp, #16]
+c0de8b5c:	9700      	str	r7, [sp, #0]
+c0de8b5e:	ad23      	add	r5, sp, #140	@ 0x8c
+c0de8b60:	f10a 0309 	add.w	r3, sl, #9
+c0de8b64:	4631      	mov	r1, r6
+c0de8b66:	465a      	mov	r2, fp
+c0de8b68:	e9cd 5001 	strd	r5, r0, [sp, #4]
+c0de8b6c:	4620      	mov	r0, r4
+c0de8b6e:	f7ff fe93 	bl	c0de8898 <yield_signature>
+c0de8b72:	4604      	mov	r4, r0
+c0de8b74:	4628      	mov	r0, r5
+c0de8b76:	f006 fd7f 	bl	c0def678 <OUTLINED_FUNCTION_69>
+c0de8b7a:	4650      	mov	r0, sl
+c0de8b7c:	214c      	movs	r1, #76	@ 0x4c
+c0de8b7e:	f7f7 fe94 	bl	c0de08aa <explicit_bzero>
+c0de8b82:	e729      	b.n	c0de89d8 <sign_sighash_schnorr_and_yield+0x70>
+c0de8b84:	00000000 	.word	0x00000000
+c0de8b88:	80000001 	.word	0x80000001
+c0de8b8c:	02000107 	.word	0x02000107
+c0de8b90:	0000770a 	.word	0x0000770a
+c0de8b94:	00007745 	.word	0x00007745
+c0de8b98:	00007642 	.word	0x00007642
+c0de8b9c:	0000771d 	.word	0x0000771d
+c0de8ba0:	00007701 	.word	0x00007701

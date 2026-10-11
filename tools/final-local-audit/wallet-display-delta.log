@@ -1,0 +1,21 @@
+✔ a restored account can close its existing server profile before this page starts sync (1.695292ms)
+✔ close waits for an in-flight start and sends its exact owner (3.04125ms)
+✔ uncertain startup and failed close retain ownership; cancellation cannot silently switch profiles (1.568292ms)
+✔ actual snapshot import persists only owned paths and fresh exports preserve another tab's journal (2761.250375ms)
+✔ public import closes the tracked local owner before starting and remembering replacement (250.902875ms)
+✔ failed local shutdown retains the old account and owner for explicit retry (154.634459ms)
+✔ nonzero mainnet account offers explicit public sync instead of unsupported local sync (134.301583ms)
+✔ fresh browser discovers native-known receive use beyond its first gap (603.224791ms)
+✔ background discovery does not replace review state during busy (355.228584ms)
+✔ background discovery does not replace review state during send (369.534334ms)
+✔ background discovery does not replace review state during receive (357.9395ms)
+✔ receive opened at discovery journal before-update prevents replacing its view (366.044958ms)
+✔ receive opened at discovery journal after-commit prevents replacing its view (370.359917ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3350.101667

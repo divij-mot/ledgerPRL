@@ -1,0 +1,16 @@
+✔ Successful signing preserves same-session receive verification and exact durable payment (328.923176ms)
+✔ Terminal final ACK lost clears verification while retaining exact signed bytes/reservations (288.066071ms)
+✔ Terminal final ACK rejected clears verification while retaining exact signed bytes/reservations (275.808844ms)
+✔ Terminal final ACK unexpected-payload clears verification while retaining exact signed bytes/reservations (278.248953ms)
+✔ Terminal final ACK cancelled clears verification while retaining exact signed bytes/reservations (267.404475ms)
+✔ Device rejection before signature leaves ambiguous signing reservation and clears old verification (197.873671ms)
+✔ Signed storage failure preserves exact emergency recovery and locks, clearing old verification (284.743698ms)
+✔ Unrelated host error does not discard valid ready-session verification (91.234909ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2463.857527

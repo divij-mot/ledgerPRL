@@ -1,0 +1,35 @@
+{
+  "baseCommit": "e6b0ff1",
+  "files": {
+    "apps/companion/src/main.ts": "971d2e33c75a2f44d56515c65d6ef5ad2670cfb73789cdd67dcb923d3804ad9f",
+    "apps/companion/src/pending-monitor.ts": "aa90b68a3f63a032f3b5c5436fc290159f16163d9d99373f98e64bd9f6b5df47",
+    "apps/companion/src/public-source.ts": "cd54d95cb849ce356223211bbbee20a23ef1a232cb3d1ab5f48b07ae9fc3ec84",
+    "apps/companion/src/blockbook-source.ts": "f646e176144a0eee45d334e606148d029c4f70d577076c2f93e83764a356506a",
+    "apps/companion/src/qr-reader.ts": "e7ea26c85f3a8def3090a2394f25aed0ae83e4ae57bb3ed466e12acfc3531781",
+    "packages/bitcoin-prl-adapter/src/client.ts": "453541a29ca90f42d87c7dd5a6ea6461f9de784710973ad6620eeb33f1ceefa7",
+    "packages/wallet/src/journal.ts": "011ceddddfa1729a2e11c91b74ea5ada6cfddb5191fd83c3b3795339279bd459",
+    "packages/wallet/src/watch.ts": "ce1e875944efb2a2b85aee0870cf7ade3dc3168123e0b27eb3bc090430eed8e0",
+    "packages/wallet/src/discovery.ts": "4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "apps/companion/test/pending-monitor.test.ts": "145ab4fc062b2eb547af3cd929211e689313e418a3da50021cf0f57bfd4839fc",
+    "apps/companion/test/payment-status-refresh.test.ts": "56d602e637fa8549dcdea72b4f1013f0b01d2b36706fc5d5168cef4c4a52859f",
+    "apps/companion/test/recipient-validation.test.ts": "b0c3503714ba1262d314ea035a14bf76c2289b56c384856cbde8827fa329ccbc",
+    "apps/companion/test/qr-reader.test.ts": "0ee7d484c1cda1c6de62d0a60e7f4aea38b5f3174231c6f81be9f5a0cc7ff4d1",
+    "packages/bitcoin-prl-adapter/test/client.test.ts": "b407f98fdef5f2ada7da3a6230b2cc40bfe38738b6d380a5b6205fdfd8286f9e",
+    "packages/wallet/test/recovery.test.ts": "3cf8b7b208014d441e16a7a20e56d1736c4614bb5912834eae20ea859dd91a83",
+    "tools/hosted-wallet-review/ui.test.ts": "0c18a321d94e6af8bc9512f035c511bef28414099320dc0c57c9ef186571625a",
+    "tools/hosted-wallet-review/explicit-rejection-ui.test.ts": "2daf1d8dc863731c33e70c1b5cd69484eabfdd1468cb8dc281e2d2065d1d053c",
+    "tools/pending-status-review/refresh.test.ts": "4827ffac6ac846afc9aa206f940b6bf9214cd3057a6e97198d51bc011a8c1460",
+    "apps/companion/test/cancel-boundary.mjs": "6625d635cf7b4b4928e5fd7e564018164f7fbe221ecab2cdd7583a4b80c04ab7",
+    "apps/companion/test/cancel-boundary.test.ts": "c818ba29cde281002fdc9133b595ac13a977ec92bd04f900842de16fe2f3a148",
+    "tools/device-identity-review/receive-session-regression.test.ts": "91ed225a4b65b44ea5f1a575c5a684c66f1583eee710659535268d61d0efc1af",
+    "apps/companion/test/device-identity-boundaries.test.ts": "42c346af81500c6e2bdc60783dac6be9b090cbe343306ddfe23af88fc6743f5b"
+  },
+  "frozenReplay": {
+    "tests": 119,
+    "passed": 119,
+    "sourceUnchangedDuringReplay": true,
+    "companionTypecheck": "passed",
+    "legacyWrappersPassed": 2
+  }
+}

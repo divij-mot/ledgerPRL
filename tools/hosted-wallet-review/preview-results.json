@@ -1,0 +1,289 @@
+{
+  "origin": "https://pearl-ledger-wallet.vercel.app",
+  "checkedAt": "2026-10-10T23:04:21.184Z",
+  "outcome": "passed",
+  "realBroadcasts": 0,
+  "walletAddresses": 0,
+  "results": [
+    {
+      "label": "Ledger Discover entry",
+      "target": "/live.html",
+      "status": 200,
+      "bytes": 885,
+      "bodySha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Immutable script cache",
+      "target": "/assets/live-VcgfFvtq.js",
+      "status": 200,
+      "bytes": 0,
+      "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8",
+        "cache-control": "public, max-age=31536000, immutable",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Shipped jsQR attribution",
+      "target": "/third-party-notices.txt",
+      "status": 200,
+      "bytes": 299181,
+      "bodySha256": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Private/native path absent",
+      "target": "/.env",
+      "status": 404,
+      "bytes": 79,
+      "bodySha256": "838e9773345475feb52f00ad863bf98912afff4498b94378937f154368cbe3da",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Private/native path absent",
+      "target": "/.local-light/.owner.json",
+      "status": 404,
+      "bytes": 79,
+      "bodySha256": "d87eca8b0aa862dc36b8d55ddd35ef02a25eeaaf70da69388d6c2f32f5ceaa6e",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Private/native path absent",
+      "target": "/apps/light-client/bin/pearl-watch",
+      "status": 404,
+      "bytes": 79,
+      "bodySha256": "1389a2edb652e0cc2211faf9bfe346e7c4082bc3e755070099f04b45d46bc4b0",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Private/native path absent",
+      "target": "/api/local/status",
+      "status": 404,
+      "bytes": 79,
+      "bodySha256": "4e8d727738bf7f71f75454ba45d7b2dc20fb1122ce253a894fb30e914138aadd",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Private/native path absent",
+      "target": "/api/check",
+      "status": 404,
+      "bytes": 79,
+      "bodySha256": "0be1defea28fc9ca63db86594e80db4dad1e417e0caea18e3d1196fdf6041b32",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "API rejects GET",
+      "target": "/api/indexer/read",
+      "status": 405,
+      "bytes": 25,
+      "bodySha256": "914f2c3b1181336ec91eed58ed147d4ef7046e66a133028baf7dd31cf7f7c7b6",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Public chain status via raw adapter",
+      "target": "/api/indexer/read",
+      "status": 200,
+      "bytes": 779,
+      "bodySha256": "beec14543a55fce4a3a7841b01a51dd765e3292880f8b91aa1a351180e2868a3",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Origin isolation",
+      "target": "/api/indexer/read",
+      "status": 403,
+      "bytes": 52,
+      "bodySha256": "853d1a41ec65cd79be861f193b9242454ab80c12067406c58a3bc66c672891b4",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Disclosure consent required",
+      "target": "/api/indexer/read",
+      "status": 400,
+      "bytes": 88,
+      "bodySha256": "7816e1de0c530f0cad1b4c2abc4a07028f487955195d30b708336d39f489fef4",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Arbitrary URL rejected",
+      "target": "/api/indexer/read",
+      "status": 400,
+      "bytes": 88,
+      "bodySha256": "7816e1de0c530f0cad1b4c2abc4a07028f487955195d30b708336d39f489fef4",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Compressed upload rejected",
+      "target": "/api/indexer/read",
+      "status": 415,
+      "bytes": 38,
+      "bodySha256": "ae35fbefa5098fb68f884b657807cac2b80a0c3cffbff2651e435483900ce154",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "128 KiB body bound",
+      "target": "/api/indexer/read",
+      "status": 413,
+      "bytes": 39,
+      "bodySha256": "9f9b874e72e92ec8c5dfaaa955badeb6ae448172483054b73b899f4747f25026",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Native network rejected",
+      "target": "/api/indexer/read",
+      "status": 400,
+      "bytes": 88,
+      "bodySha256": "7816e1de0c530f0cad1b4c2abc4a07028f487955195d30b708336d39f489fef4",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "label": "Broadcast consent rejection before submission",
+      "target": "/api/indexer/broadcast",
+      "status": 400,
+      "bytes": 97,
+      "bodySha256": "1d75d92a439cdf361d1edd401d6310c8d904d1426e118af5480fe7c362b3cdc1",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    }
+  ],
+  "deployment": {
+    "origin": "https://pearl-ledger-wallet.vercel.app",
+    "id": "dpl_FDmzyLPoeqC3DyQYyucY1bs72fUp",
+    "sourceCommit": "fca78a828362ea2d65cfe10872ca57626c52b866",
+    "checksPassed": 17,
+    "matchingPublicFiles": 15,
+    "matchingPublicBytes": 2227051
+  }
+}

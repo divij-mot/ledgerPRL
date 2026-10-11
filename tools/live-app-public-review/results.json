@@ -1,0 +1,106 @@
+{
+  "checkedAt": "2026-10-10T10:52:44.723Z",
+  "origin": "http://127.0.0.1:5188",
+  "fixture": "packages/wallet/test/fixtures.ts publicAccount",
+  "cases": [
+    {
+      "network": "mainnet",
+      "mode": "direct",
+      "expectedGenesis": "a18d3093b7ff618f0cdd073fa3d10374e2e0105fe7ef53ff48b55f41c58dadd7",
+      "tipValidated": false,
+      "tipError": {
+        "name": "TypeError",
+        "message": "fetch failed",
+        "causeCode": "UND_ERR_CONNECT_TIMEOUT"
+      },
+      "tipElapsedMs": 10512,
+      "genesisValidated": false,
+      "genesisError": {
+        "name": "TypeError",
+        "message": "fetch failed",
+        "causeCode": "UND_ERR_CONNECT_TIMEOUT"
+      },
+      "genesisElapsedMs": 10515
+    },
+    {
+      "network": "testnet2",
+      "mode": "direct",
+      "expectedGenesis": "b0c86d0cd8825f4d72260d2de46f470429eece413811d5d82b5f2e2ea0336f96",
+      "tipValidated": false,
+      "tipError": {
+        "name": "TypeError",
+        "message": "fetch failed",
+        "causeCode": "UND_ERR_CONNECT_TIMEOUT"
+      },
+      "tipElapsedMs": 10509,
+      "genesisValidated": false,
+      "genesisError": {
+        "name": "TypeError",
+        "message": "fetch failed",
+        "causeCode": "UND_ERR_CONNECT_TIMEOUT"
+      },
+      "genesisElapsedMs": 10513
+    },
+    {
+      "network": "mainnet",
+      "mode": "proxy",
+      "expectedGenesis": "a18d3093b7ff618f0cdd073fa3d10374e2e0105fe7ef53ff48b55f41c58dadd7",
+      "tipValidated": false,
+      "tipError": {
+        "name": "Error",
+        "message": "Public indexer unavailable (HTTP 400); no balance update was applied"
+      },
+      "tipElapsedMs": 10525,
+      "genesisValidated": false,
+      "genesisError": {
+        "name": "Error",
+        "message": "Public indexer unavailable (HTTP 400); no balance update was applied"
+      },
+      "genesisElapsedMs": 10520,
+      "discovery": {
+        "complete": false,
+        "skipped": "Pinned status/genesis verification did not complete; no fixture address query sent"
+      }
+    },
+    {
+      "network": "testnet2",
+      "mode": "proxy",
+      "expectedGenesis": "b0c86d0cd8825f4d72260d2de46f470429eece413811d5d82b5f2e2ea0336f96",
+      "tipValidated": false,
+      "tipError": {
+        "name": "Error",
+        "message": "Public indexer unavailable (HTTP 400); no balance update was applied"
+      },
+      "tipElapsedMs": 10525,
+      "genesisValidated": false,
+      "genesisError": {
+        "name": "Error",
+        "message": "Public indexer unavailable (HTTP 400); no balance update was applied"
+      },
+      "genesisElapsedMs": 10520,
+      "discovery": {
+        "complete": false,
+        "skipped": "Pinned status/genesis verification did not complete; no fixture address query sent"
+      }
+    }
+  ],
+  "proxyCalls": [
+    {
+      "network": "mainnet",
+      "kind": "/api/v2/"
+    },
+    {
+      "network": "testnet2",
+      "kind": "/api/v2/"
+    },
+    {
+      "network": "mainnet",
+      "kind": "/api/v2/block-index/0"
+    },
+    {
+      "network": "testnet2",
+      "kind": "/api/v2/block-index/0"
+    }
+  ],
+  "finishedAt": "2026-10-10T10:53:05.795Z"
+}

@@ -1,0 +1,41 @@
+{
+  "publicFixture": true,
+  "hardwareUsed": false,
+  "broadcast": false,
+  "status": [
+    {
+      "connections": 0,
+      "headerHeight": 0,
+      "filterHeight": 0,
+      "ready": false
+    },
+    {
+      "connections": 0,
+      "headerHeight": 0,
+      "filterHeight": 0,
+      "ready": false
+    },
+    {
+      "connections": 0,
+      "headerHeight": 0,
+      "filterHeight": 0,
+      "ready": false
+    },
+    {
+      "connections": 8,
+      "headerHeight": 0,
+      "filterHeight": 0,
+      "ready": false
+    },
+    {
+      "connections": 8,
+      "headerHeight": 100,
+      "filterHeight": 0,
+      "ready": false
+    }
+  ],
+  "ok": true,
+  "closed": {
+    "closed": true
+  }
+}

@@ -1,0 +1,1032 @@
+[
+  {
+    "label": "account",
+    "text": "Confirm public key",
+    "events": [
+      {
+        "text": "Confirm public key",
+        "x": 14,
+        "y": 34,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Network | Regtest",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Regtest",
+        "x": 45,
+        "y": 33,
+        "w": 38,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Path | 86'/1'/0'",
+    "events": [
+      {
+        "text": "Path",
+        "x": 51,
+        "y": 3,
+        "w": 26,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "86'/1'/0'",
+        "x": 45,
+        "y": 33,
+        "w": 38,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Public key (1/3) | tpubDDXRVY4eRY4p | 4iqLUQNQokx89YLZE | pTyA8UdLVYRMV8Ha",
+    "events": [
+      {
+        "text": "Public key (1/3)",
+        "x": 20,
+        "y": 3,
+        "w": 88,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "tpubDDXRVY4eRY4p",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "4iqLUQNQokx89YLZE",
+        "x": 7,
+        "y": 33,
+        "w": 113,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "pTyA8UdLVYRMV8Ha",
+        "x": 8,
+        "y": 47,
+        "w": 111,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Public key (2/3) | cVdwHRi1TWKMSY3k | h8WpNBA4kB4Xet3h | CxxVvSw83DZ5fhqiSy",
+    "events": [
+      {
+        "text": "Public key (2/3)",
+        "x": 19,
+        "y": 3,
+        "w": 89,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "cVdwHRi1TWKMSY3k",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "h8WpNBA4kB4Xet3h",
+        "x": 8,
+        "y": 33,
+        "w": 111,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "CxxVvSw83DZ5fhqiSy",
+        "x": 7,
+        "y": 47,
+        "w": 113,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Public key (3/3) | sSsYCWJ7k79E",
+    "events": [
+      {
+        "text": "Public key (3/3)",
+        "x": 19,
+        "y": 3,
+        "w": 89,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "sSsYCWJ7k79E",
+        "x": 28,
+        "y": 33,
+        "w": 72,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "account",
+    "text": "Approve public key",
+    "events": [
+      {
+        "text": "Approve public key",
+        "x": 9,
+        "y": 34,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "receive",
+    "text": "Public key | approved",
+    "events": [
+      {
+        "text": "Public key",
+        "x": 37,
+        "y": 18,
+        "w": 53,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "approved",
+        "x": 39,
+        "y": 32,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "receive",
+    "text": "Verify Pearl | address",
+    "events": [
+      {
+        "text": "Verify Pearl",
+        "x": 34,
+        "y": 27,
+        "w": 60,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "address",
+        "x": 44,
+        "y": 41,
+        "w": 40,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "receive",
+    "text": "Address (1/2) | rprl1pzh75rtx74l85v2 | xqfr5uln7mhy40vyqz | m68ml4yngcqy9v085t",
+    "events": [
+      {
+        "text": "Address (1/2)",
+        "x": 26,
+        "y": 3,
+        "w": 75,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1pzh75rtx74l85v2",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "xqfr5uln7mhy40vyqz",
+        "x": 8,
+        "y": 33,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m68ml4yngcqy9v085t",
+        "x": 7,
+        "y": 47,
+        "w": 114,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "receive",
+    "text": "Address (2/2) | qqjd9fxm",
+    "events": [
+      {
+        "text": "Address (2/2)",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "qqjd9fxm",
+        "x": 38,
+        "y": 33,
+        "w": 51,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "receive",
+    "text": "Network | Regtest",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Regtest",
+        "x": 45,
+        "y": 33,
+        "w": 38,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "receive",
+    "text": "Path | m/86'/1'/0'/0/0",
+    "events": [
+      {
+        "text": "Path",
+        "x": 51,
+        "y": 3,
+        "w": 26,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/0/0",
+        "x": 28,
+        "y": 33,
+        "w": 72,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "receive",
+    "text": "Confirm",
+    "events": [
+      {
+        "text": "Confirm",
+        "x": 41,
+        "y": 34,
+        "w": 46,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Pearl Reg | app is ready",
+    "events": [
+      {
+        "text": "Pearl Reg",
+        "x": 36,
+        "y": 26,
+        "w": 55,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "app is ready",
+        "x": 32,
+        "y": 42,
+        "w": 63,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Loading transaction",
+    "events": [
+      {
+        "text": "Loading transaction",
+        "x": 12,
+        "y": 34,
+        "w": 103,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Review transaction | to send PRL",
+    "events": [
+      {
+        "text": "Review transaction",
+        "x": 15,
+        "y": 27,
+        "w": 98,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "to send PRL",
+        "x": 33,
+        "y": 41,
+        "w": 62,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Network | Regtest",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Regtest",
+        "x": 45,
+        "y": 33,
+        "w": 38,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "From account | m/86'/1'/0'",
+    "events": [
+      {
+        "text": "From account",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'",
+        "x": 38,
+        "y": 33,
+        "w": 52,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Amount | 1.23456789 PRL",
+    "events": [
+      {
+        "text": "Amount",
+        "x": 42,
+        "y": 3,
+        "w": 44,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "1.23456789 PRL",
+        "x": 23,
+        "y": 33,
+        "w": 82,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "To (1/2) | rprl1pyz8vmclll4w4z3 | 6wzs20l5lfy3sfvt870r5 | mpd985d7trgew9lpq3",
+    "events": [
+      {
+        "text": "To (1/2)",
+        "x": 43,
+        "y": 3,
+        "w": 42,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1pyz8vmclll4w4z3",
+        "x": 7,
+        "y": 19,
+        "w": 114,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "6wzs20l5lfy3sfvt870r5",
+        "x": 7,
+        "y": 33,
+        "w": 114,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "mpd985d7trgew9lpq3",
+        "x": 7,
+        "y": 47,
+        "w": 113,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "To (2/2) | 9euzh",
+    "events": [
+      {
+        "text": "To (2/2)",
+        "x": 42,
+        "y": 3,
+        "w": 43,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "9euzh",
+        "x": 48,
+        "y": 33,
+        "w": 31,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Change amount | 3228.40676966 PRL",
+    "events": [
+      {
+        "text": "Change amount",
+        "x": 20,
+        "y": 3,
+        "w": 88,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "3228.40676966 PRL",
+        "x": 14,
+        "y": 33,
+        "w": 100,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Change...ess (1/2) | rprl1pe2avzwvk5fxva | nucwcwfkrklzajt6r82g | 2f9eqktmtuxtzmpkp7",
+    "events": [
+      {
+        "text": "Change...ess (1/2)",
+        "x": 14,
+        "y": 3,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1pe2avzwvk5fxva",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "nucwcwfkrklzajt6r82g",
+        "x": 8,
+        "y": 33,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "2f9eqktmtuxtzmpkp7",
+        "x": 8,
+        "y": 47,
+        "w": 112,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Change...ss (2/2) | smy9l6m",
+    "events": [
+      {
+        "text": "Change...ss (2/2)",
+        "x": 17,
+        "y": 3,
+        "w": 93,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "smy9l6m",
+        "x": 41,
+        "y": 33,
+        "w": 46,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Change path | m/86'/1'/0'/1/0",
+    "events": [
+      {
+        "text": "Change path",
+        "x": 28,
+        "y": 3,
+        "w": 71,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/1/0",
+        "x": 28,
+        "y": 33,
+        "w": 72,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Fees | 0.00000308 PRL",
+    "events": [
+      {
+        "text": "Fees",
+        "x": 51,
+        "y": 3,
+        "w": 26,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "0.00000308 PRL",
+        "x": 24,
+        "y": 33,
+        "w": 80,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Sign transaction",
+    "events": [
+      {
+        "text": "Sign transaction",
+        "x": 17,
+        "y": 34,
+        "w": 93,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2tr-sign",
+    "text": "Signing transaction",
+    "events": [
+      {
+        "text": "Signing transaction",
+        "x": 14,
+        "y": 34,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Pearl Reg | app is ready",
+    "events": [
+      {
+        "text": "Pearl Reg",
+        "x": 36,
+        "y": 26,
+        "w": 55,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "app is ready",
+        "x": 32,
+        "y": 42,
+        "w": 63,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Loading transaction",
+    "events": [
+      {
+        "text": "Loading transaction",
+        "x": 12,
+        "y": 34,
+        "w": 103,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Review transaction | to send PRL",
+    "events": [
+      {
+        "text": "Review transaction",
+        "x": 15,
+        "y": 27,
+        "w": 98,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "to send PRL",
+        "x": 33,
+        "y": 41,
+        "w": 62,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Network | Regtest",
+    "events": [
+      {
+        "text": "Network",
+        "x": 39,
+        "y": 3,
+        "w": 50,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "Regtest",
+        "x": 45,
+        "y": 33,
+        "w": 38,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Recipient type | P2MR",
+    "events": [
+      {
+        "text": "Recipient type",
+        "x": 22,
+        "y": 3,
+        "w": 84,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "P2MR",
+        "x": 49,
+        "y": 33,
+        "w": 30,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "From account | m/86'/1'/0'",
+    "events": [
+      {
+        "text": "From account",
+        "x": 26,
+        "y": 3,
+        "w": 76,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'",
+        "x": 38,
+        "y": 33,
+        "w": 52,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Amount | 1.23456789 PRL",
+    "events": [
+      {
+        "text": "Amount",
+        "x": 42,
+        "y": 3,
+        "w": 44,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "1.23456789 PRL",
+        "x": 23,
+        "y": 33,
+        "w": 82,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "To (1/2) | rprl1zgfpyysjzgfpyysj | zgfpyysjzgfpyysjzgfp | yysjzgfpyysjzgfpqjkn",
+    "events": [
+      {
+        "text": "To (1/2)",
+        "x": 43,
+        "y": 3,
+        "w": 42,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1zgfpyysjzgfpyysj",
+        "x": 9,
+        "y": 19,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "zgfpyysjzgfpyysjzgfp",
+        "x": 9,
+        "y": 33,
+        "w": 109,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "yysjzgfpyysjzgfpqjkn",
+        "x": 9,
+        "y": 47,
+        "w": 109,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "To (2/2) | nxw",
+    "events": [
+      {
+        "text": "To (2/2)",
+        "x": 42,
+        "y": 3,
+        "w": 43,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "nxw",
+        "x": 53,
+        "y": 33,
+        "w": 22,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Change amount | 3228.39683579 PRL",
+    "events": [
+      {
+        "text": "Change amount",
+        "x": 20,
+        "y": 3,
+        "w": 88,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "3228.39683579 PRL",
+        "x": 15,
+        "y": 33,
+        "w": 98,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Change...ess (1/2) | rprl1pj3g8qmqef88lla | skqma35lt8xhyqkfun | uh6rz2j9c6fvhkvvscjq",
+    "events": [
+      {
+        "text": "Change...ess (1/2)",
+        "x": 14,
+        "y": 3,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "rprl1pj3g8qmqef88lla",
+        "x": 8,
+        "y": 19,
+        "w": 111,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "skqma35lt8xhyqkfun",
+        "x": 9,
+        "y": 33,
+        "w": 110,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "uh6rz2j9c6fvhkvvscjq",
+        "x": 8,
+        "y": 47,
+        "w": 111,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Change...ss (2/2) | yxd8ku",
+    "events": [
+      {
+        "text": "Change...ss (2/2)",
+        "x": 17,
+        "y": 3,
+        "w": 93,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "yxd8ku",
+        "x": 45,
+        "y": 33,
+        "w": 38,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Change path | m/86'/1'/0'/1/1",
+    "events": [
+      {
+        "text": "Change path",
+        "x": 28,
+        "y": 3,
+        "w": 71,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "m/86'/1'/0'/1/1",
+        "x": 28,
+        "y": 33,
+        "w": 72,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Fees | 0.00000308 PRL",
+    "events": [
+      {
+        "text": "Fees",
+        "x": 51,
+        "y": 3,
+        "w": 26,
+        "h": 14,
+        "clear": false
+      },
+      {
+        "text": "0.00000308 PRL",
+        "x": 24,
+        "y": 33,
+        "w": 80,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Sign transaction",
+    "events": [
+      {
+        "text": "Sign transaction",
+        "x": 17,
+        "y": 34,
+        "w": 93,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  },
+  {
+    "label": "p2mr-sign",
+    "text": "Signing transaction",
+    "events": [
+      {
+        "text": "Signing transaction",
+        "x": 14,
+        "y": 34,
+        "w": 99,
+        "h": 14,
+        "clear": false
+      }
+    ]
+  }
+]

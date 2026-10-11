@@ -1,0 +1,30 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> pearl-ledger@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @pearl-ledger/bitcoin-prl-adapter@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/metamask-snap@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/sdk@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/wallet@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/cli@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @pearl-ledger/companion@0.1.0 typecheck
+> tsc --noEmit
+

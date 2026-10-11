@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-10T23:10:53.068855+00:00",
+  "scope": "Final 24-case app-result/portfolio review and 15 composed histories, plus two corrected legacy wrappers; public fixtures only. Current source matches the executed frozen histories.",
+  "sha256": {
+    "tools/hosted-wallet-review/explicit-rejection-ui.test.ts": "2daf1d8dc863731c33e70c1b5cd69484eabfdd1468cb8dc281e2d2065d1d053c",
+    "apps/companion/test/explicit-rejection-ui.test.ts": "07fdeae858027df5d8da182ae3cce53f158952014152474268c4c328880dfffa",
+    "tools/payment-sequence-review/sequences.mjs": "e141afe90d732a8fd091873cbb0fd2981a1a13c342d7caba72e2ec6208afed33",
+    "apps/companion/src/main.ts": "971d2e33c75a2f44d56515c65d6ef5ad2670cfb73789cdd67dcb923d3804ad9f",
+    "packages/bitcoin-prl-adapter/src/client.ts": "453541a29ca90f42d87c7dd5a6ea6461f9de784710973ad6620eeb33f1ceefa7",
+    "packages/bitcoin-prl-adapter/src/index.ts": "e564552f552f8f482a73b6197a8d090c1a074f187654e98aa843fade1388f4ae",
+    "packages/wallet/src/journal.ts": "011ceddddfa1729a2e11c91b74ea5ada6cfddb5191fd83c3b3795339279bd459",
+    "docs/recovery.md": "8d03d73d782ee6f805b90ec7cf6a2660285f38b54dbe218562803ede9c8e8ac8",
+    "docs/companion.md": "b87d887dabc0ccc5251eff20fff158c8428a857f9e1a16e03829b187dbedc6b7",
+    "docs/mainnet-testing.md": "780404fc36c6cc530de9a804e0106f20a6c061f21a9bf90308db1ce581ea28e1",
+    "docs/prl-feature-coverage.md": "c3bd77ebdc25a2a3b47cfa73952a94d64f828857362bb14586769e15c3ce3e68",
+    "tools/hosted-wallet-review/explicit-rejection-review.md": "4109d667efefcfefd41a6b29fb3346b781ba101f0f5e5ed26134f0de9df491a3",
+    "apps/companion/test/signing-recovery.mjs": "60036017b5324eca413bd9a16d16f12e144a32fc188c2bcf77b194d7c789d858",
+    "apps/companion/test/signing-recovery-independent.mjs": "b4b378a1326429862d96d24950c521a5020dbb1aaa0067ae0039374f0b300c33",
+    "apps/companion/src/pending-monitor.ts": "aa90b68a3f63a032f3b5c5436fc290159f16163d9d99373f98e64bd9f6b5df47"
+  },
+  "productionCommit": "fca78a828362ea2d65cfe10872ca57626c52b866"
+}

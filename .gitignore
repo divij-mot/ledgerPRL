@@ -10,6 +10,8 @@ dist/
 __pycache__/
 .venv/
 .tools/
+.local-light/
+apps/light-client/bin/
 *.log
 # Frozen public-fixture evidence; runtime replay output remains ignored.
 !tools/fp8-compatibility/results/*.log
@@ -21,3 +23,36 @@ __pycache__/
 !tools/native-release-qualification/packages/unit-tests.log
 !tools/native-final-memory/builds/*.log
 !tools/wallet-recovery-review/**/*.log
+
+# Bounded public-fixture review evidence; no runtime or personal wallet logs.
+!tools/wallet-property-review/campaign-51a9beef.log
+!tools/wallet-property-review/review-focused.log
+!tools/wallet-property-review/review-full-check.log
+!tools/public-indexer-review/offline-tests.log
+!tools/public-indexer-review/boundary-tests.log
+!tools/website-privacy-review/build-review.log
+!tools/website-privacy-review/dependency-review.log
+!tools/website-privacy-review/focused-tests.log
+!tools/website-privacy-review/ui-review.log
+!tools/host-checkpoint-review/check.log
+!tools/host-checkpoint-review/boundaries-check.log
+!tools/transaction-binding-review/*replay*.log
+!tools/transaction-binding-review/targeted-tests.log
+!tools/transaction-binding-review/existing-regressions.log
+!tools/transaction-binding-review/device-error-defense.log
+!tools/transaction-binding-review/typecheck.log
+!tools/browser-operation-review/*.log
+!tools/browser-race-fix-review/*.log
+!tools/device-identity-review/*.log
+!tools/device-session-review/*.log
+!tools/account-discovery-review/*.log
+!tools/discovery-consistency-review/*.log
+!tools/combined-host-review/*.log
+!tools/host-gap-triage/*.log
+!tools/cli-durability-review/*.log
+!tools/connection-cleanup-review/*.log
+!tools/final-local-audit/*.log
+!tools/hosted-wallet-review/*.log
+
+# Local Vercel project settings and environment pulls.
+.vercel/

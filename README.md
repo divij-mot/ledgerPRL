@@ -1,61 +1,57 @@
-# Pearl Ledger
+# Pearl for Ledger
 
-A native Rust Ledger signer and minimal watch-only companion for Pearl (PRL).
+Send and receive Pearl (PRL) with your Ledger. Use the hosted wallet, or run the same interface locally with Pearl’s native light client.
 
-**Development software. Do not use with valuable funds.** Software and emulator tests do not establish Ledger approval, physical-device validation, human audit, or security equivalence to Ledger's Bitcoin app. Existing Ledger seeds must never be reset or imported into the companion.
+**Trial software. Use small amounts until independent security review is complete.**
 
-## What is implemented
+## 1. Install Pearl on your Ledger
 
-- Bounded no_std transaction parser and APDU state machine with strict network/path/amount policy
-- Native Ledger SDK BIP32/BIP340 integration, independently derived ownership/change and trusted transaction review
-- Exact bigint TypeScript SDK, signature verification, transaction finalization and CLI
-- Local watch-only GUI, fixed-endpoint public indexing and optional authenticated local-node bridge
-- Public deterministic cross-language vectors, actual Pearl script-engine oracle, adversarial tests and ongoing security review
+Pearl builds for **Nano S Plus, Nano X, Stax, Flex and Nano Gen5**, with button or touchscreen layouts for each model. Account export, Receive and signing pass in the emulator on all five. **Nano S Plus is also verified on physical hardware**; the other models still need physical-device qualification. See the [model support and installation guide](docs/install-pearl.md).
 
-Only ordinary no-script BIP86 P2TR owned inputs/change, one recipient, at most one change, at most 16 inputs and SIGHASH_DEFAULT are supported. The input cap still needs physical-device measurement. No arbitrary hash/message signing, seed entry, hot-wallet fallback, XMSS, script-path signing, RBF or automated consolidation.
+Pearl is not yet available in the My Ledger app catalog. The step-by-step installation guide currently covers **Nano S Plus, Ledger OS 1.7.0 / API 27**. Each model needs its own build; retail Nano X installation requires Ledger’s distribution process.
 
-## Run the companion locally
+1. Follow the [build and installation guide](docs/install-pearl.md).
+2. Unlock your Ledger, leave it on the dashboard, and approve the installation prompts.
+3. Open **Pearl** on the device. If it is already installed, skip installation.
 
-Requirements: Node.js 24.19 or newer compatible 24.x release and npm. Use a WebHID-capable desktop browser such as current Chromium. Hardware connection requires a compatible app already running on the Ledger; development installation is a separate gated step.
+Never enter your recovery phrase into this wallet or reset your Ledger to install it. Original Nano S is not supported.
 
-Current build/test targets are Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The original Nano S is not implemented. Retail Nano X installation requires Ledger's distribution route; emulator support does not provide a sideloading workaround. See the [model-specific installation limits](docs/firmware.md#installation-is-a-separate-gate).
+## 2. Use the hosted wallet
+
+Open **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)** in desktop Chrome or Edge, with your Ledger connected by USB.
+
+1. Click **Add account** and approve the public account on your Ledger.
+2. Click **Sync**.
+3. Use **Receive** to verify an address on the device, or **Send** to enter a recipient and amount.
+4. Review the address, amount and fee on your Ledger. After approving, choose **Send payment** in the wallet.
+
+For Ledger Wallet’s Discover interface, follow the [Discover setup instructions](docs/live-app.md#load-the-hosted-entry-in-discover). This currently uses a locally imported app, not a public catalog listing. Android uses the Discover route; physical Android testing remains outstanding.
+
+Keys stay on Ledger. The hosted service has no wallet database; account caches and payment records stay in your browser.
+
+## 3. Or run it locally
+
+The repository is currently **private**. Sign in to GitHub with an account that has access, then [download the latest source ZIP](https://github.com/divij-mot/ledgerPRL/archive/refs/heads/main.zip) and extract it.
+
+Install these prerequisites first: **Python 3, Node.js 24.19+ within 24.x, npm, Go, Rust/Cargo with Rust 1.90.0, and C/C++ build tools**. See the [platform setup details](docs/live-app.md#local-setup).
+
+In Terminal, enter the extracted folder and run:
 
 ```sh
-npm ci --ignore-scripts
-npm run dev
+cd /path/to/extracted-folder
+python3 scripts/run-local.py
 ```
 
-Open http://127.0.0.1:5173. The public-indexer option requires an explicit privacy choice before derived addresses are queried. Mainnet and Testnet2 use distinct, genesis-checked backends. Original testnet, regtest and simnet require an appropriate node. Public account import/offline inspection does not prove spendability or sign anything.
+The launcher prepares the locked dependencies and native helper, then opens **http://127.0.0.1:5188/**. Use Chrome or Edge. Keep the terminal open; **Ctrl-C** stops the wallet.
 
-The frontend and narrow light-service proxy run locally together. No public web deployment is needed. See [companion instructions](docs/companion.md) for node-backed mode, recovery metadata and limitations.
+First build and blockchain synchronization take time. Later runs reuse the verified native helper and saved chain data in the same folder. Stop an older instance before starting another. Local sync currently supports mainnet account 0; fee estimates still use Pearl’s public service.
 
-## Verify source and fixtures
+## More information
 
-Host Rust tests use Rust 1.99.0 with Clippy and rustfmt, matching CI. The core library declares Rust 1.81, but its locked test dependencies need newer Rust; that library minimum is not a supported host-test toolchain. Native firmware uses its separate pinned nightly described below.
+- [Local setup and Discover configuration](docs/live-app.md)
+- [Supported features and limits](docs/prl-feature-coverage.md)
+- [Security model](SECURITY.md) and [release/test evidence](tools/hosted-wallet-review/release.md)
+- [How to request a public Discover listing](docs/ledger-discover-submission.md)
+- [Licensing and third-party notices](docs/licensing.md)
 
-```sh
-npm run check
-cargo +1.99.0 test --locked --workspace
-cargo +1.99.0 clippy --locked --workspace --all-targets -- -D warnings
-(cd tools/pearl-oracle && go run -mod=readonly . ../../fixtures/protocol-v1.json)
-```
-
-The oracle requires Go 1.26.6 and pins the upstream Pearl implementation. Runtime code has no software signer; deterministic test signing stays in test-only fixture generation. Never fund published test addresses.
-
-Native builds are separate from host tests. See [firmware build and verification](docs/firmware.md). No command in the default host test/build flow installs an app on a physical Ledger, updates firmware or broadcasts money.
-
-## Documentation
-
-- [Security model and boundaries](SECURITY.md)
-- [Canonical protocol](docs/protocol-v1.md)
-- [Recorded test evidence](docs/test-evidence.md)
-- [Final native software qualification](tools/native-release-qualification/README.md)
-- [Exact-build reproduction and limits](tools/build-reproducibility/README.md)
-- [Implementation and release gates](docs/implementation-status.md)
-- [Recovery and safe migration](docs/recovery.md)
-- [FP8 compatibility](docs/fp8-compatibility.md)
-- [Public backend evidence and limitations](docs/backend-evidence.md)
-- [Submission preparation](docs/submission-checklist.md)
-- [Licensing status](docs/licensing.md)
-
-This provides conventional secure-element custody. It does not claim quantum resistance. A project license has not yet been selected; preserve all third-party licenses and notices.
+This is a community project, not a Ledger-approved app. Automated tests and AI reviews do not replace an independent security audit.

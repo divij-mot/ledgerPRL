@@ -1,0 +1,18 @@
+✔ hosted wallet fees, Max, QR cancellation and cached-view authority (9783.823041ms)
+✔ manual payment refresh uses fresh public/local views and retains signed reservations (4427.659167ms)
+✔ absolute early deadline survives rendering; unchanged pending costs one read/minute (1.376333ms)
+✔ at most four reads per cycle rotate fairly through known payments (0.229ms)
+✔ multiple status changes request one full scan per cycle (0.695042ms)
+✔ hidden, busy, review, local and closed contexts cannot poll; returning resumes deadline (0.182292ms)
+✔ missing or unavailable transactions never refresh or retry inside a cycle (0.210958ms)
+✔ owner change aborts in-flight work and excludes late response (0.144125ms)
+✔ selection change aborts in-flight work and excludes late response (0.105959ms)
+✔ hidden change aborts in-flight work and excludes late response (0.141875ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9894.993916

@@ -1,0 +1,46 @@
+PASS all stale-state pairs preserve reservations, exact signed bytes and uncertainty (25)
+PASS seeded replay sequences are idempotent and retain irreversible signing ambiguity (1000)
+FAIL merge failure leaves its target unchanged after a later reservation conflict: AssertionError [ERR_ASSERTION]: Atomic-merge public API changed the target despite rejecting the merge
++ actual - expected
+... Skipped lines
+
+  {
+    issuedReceiveThrough: 7,
+    nextChangeIndex: 1,
+    payments: [
+      {
+...
+      },
++     {
++       bundleHex: '50524c310300000000010000000000000002022100000000000000000000000000000000000000000000000000000000000000010000000100000000002000512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0ffffffff000000000022000000000000000000000000000000000000000000000000000000000000000300000000ca9a3b0000000051204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045ffffffff000700000020fcffffffff1f0051205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f000000000000f9c99a3b000000005120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d010100000000',
++       createdAt: 1000,
++       id: 'unique-payment-2',
++       outpoints: [
++         '0000000000000000000000000000000000000000000000000000000000000021:1',
++         '0000000000000000000000000000000000000000000000000000000000000022:3'
++       ],
++       state: 'draft'
++     }
+    ],
+    schema: 1
+  }
+
+    at <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:127:10)
+    at check (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:44:11)
+    at <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:117:7)
+PASS amount oracle covers exact 64-bit bounds and 5000 seeded canonical round trips (5018)
+PASS amount parsers reject suffix/prefix Unicode, exponent, sign, precision and nonstring mutations (1200)
+PASS relay integer oracle matches floor, fallback, int64 overflow and monetary cap (4000)
+PASS seeded malformed backup schemas always reject before use (512)
+PASS signed witness and byte corruption cannot survive backup import (160)
+PASS signed emergency backup requires exact verified result and survives roundtrip (24)
+PASS invalid/replayed rejection ownership cannot release uncertainty (500)
+FAIL corrupt stored signed reservation list fails closed before input reuse: AssertionError [ERR_ASSERTION]: Missing expected exception: Corrupt signed record was trusted and the same two inputs were reserved for a second payment
+    at <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:273:10)
+    at async check (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:44:5)
+    at async <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:263:1)
+FAIL corrupt local high-water bounds fail closed: AssertionError [ERR_ASSERTION]: Missing expected rejection.
+    at async <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:287:5)
+    at async check (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:44:5)
+    at async <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/wallet-property-review/campaign.mts:277:1)
+{"output":"tools/wallet-property-review/results-51a9beef.json","seed":1370078959,"cases":12447,"failures":3,"sourceChangedDuringRun":[]}

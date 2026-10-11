@@ -1,0 +1,17 @@
+Inter fonts bundled unchanged from installed Ledger Wallet 4.23.0.
+Source archive: /Applications/Ledger Wallet.app/Contents/Resources/app.asar
+Upstream font project: https://github.com/rsms/inter
+License: SIL Open Font License 1.1; see OFL.txt.
+License retrieved from https://raw.githubusercontent.com/rsms/inter/master/LICENSE.txt
+
+Asset: Inter-Regular.woff2
+Archive path: .webpack/assets/Inter-Regular-a2b4ebbf631de99a.woff2
+SHA256: 77ca56870309a85759fb7116aef2119a26e358145e808868543ca1fe16c27720
+
+Asset: Inter-Medium.woff2
+Archive path: .webpack/assets/Inter-Medium-fadc0302c51b28ea.woff2
+SHA256: 6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05
+
+Asset: Inter-SemiBold.woff2
+Archive path: .webpack/assets/Inter-SemiBold-744070fd83c65a5e.woff2
+SHA256: 65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0

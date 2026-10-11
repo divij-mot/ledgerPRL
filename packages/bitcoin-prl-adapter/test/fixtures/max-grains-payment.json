@@ -1,0 +1,53 @@
+{
+  "description": "PUBLIC TEST VECTOR ONLY: published BIP32 vector 1. No real node, device, broadcast or funds.",
+  "pearlRevision": "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701",
+  "ledgerRevision": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+  "publicAccount": {
+    "network": "regtest",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "bundle": {
+    "network": "regtest",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "vout": 1,
+        "amount": "2100000000000000000",
+        "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "2099999999999999000",
+        "scriptPubKey": "51205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      }
+    ]
+  },
+  "psbtHex": "70736274ff010204010000000103040000000001040101010501010106010001fb040200000006fc0350524c0122010378d0ab27df6a51a8e9dbbdefffca1ebbbeb3818cb083ce2c2f43b047247e58320001012b000052acdfb2241d22512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c001030400000000010e201111111111111111111111111111111111111111111111111111111111111111010f0401000000011004ffffffff211683f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de15419003442193e560000800100008000000080000000000000000001172083f00c97a27a6015d53acd68686aeaef0f26756cd3b24fef767420566e3de1540001030818fc51acdfb2241d01042251205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f00",
+  "sighashes": [
+    "e432b11b1d85cfab19375cfcef9a09e1e40b6ec01dd4d112112b2f7f5bb50471"
+  ],
+  "signatures": [
+    "84d55bc13c252dfe20b20c1891dde99a9028561538d99df56bed8c50ed4650483463c1b0ac6bfd32a608db1e5e77bb9e6d13058cb129a98a67ea7997b95cdf38"
+  ],
+  "addresses": {
+    "input": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+    "recipient": "rprl1ptkfg5hcsgxwuu5qf3j9q2uk9cmyc8n0u29d3eyhf8q069j924e8scdxtvf"
+  },
+  "rawTx": "0100000000010111111111111111111111111111111111111111111111111111111111111111110100000000ffffffff0118fc51acdfb2241d2251205d928a5f10419dce50098c8a0572c5c6c983cdfc515b1c92e9381fa2c8aaae4f014084d55bc13c252dfe20b20c1891dde99a9028561538d99df56bed8c50ed4650483463c1b0ac6bfd32a608db1e5e77bb9e6d13058cb129a98a67ea7997b95cdf3800000000",
+  "txid": "4db1dd1fa15ff07fbe274c9a7bce7fa8cf1bfbe03b0b5f3ad356b2782201f3f1",
+  "wtxid": "8e0835a7548d893c56cb15d3930b1a3e70895aded3bd04abe6426a5d213ba381",
+  "vsize": 111
+}

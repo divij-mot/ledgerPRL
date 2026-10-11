@@ -20,6 +20,7 @@ import {
   deriveAddress,
   sha256,
   validateAccount,
+  validateP2trScript,
   type AccountPublicKey,
 } from "./keys.js";
 import {
@@ -280,6 +281,9 @@ export class LedgerPearlClient {
   ): Promise<FinalizedTransaction> {
     // Snapshot before any await: callers cannot mutate recipient/path/amount during approval.
     validateBundle(bundle, account);
+    // PRL1 prototype firmware supports P2TR recipients only. P2MR requires the
+    // versioned Ledger Bitcoin PRL adapter and its explicit capability binding.
+    bundle.outputs.forEach((output) => validateP2trScript(output.scriptPubKey));
     assert(bundle.network === this.network, "Wrong signing network");
     const bytes = encodeBundle(bundle),
       snapshot = decodeBundle(bytes),

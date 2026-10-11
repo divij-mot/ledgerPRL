@@ -45,12 +45,12 @@ export function state() { return {account,journal,busy,form}; }
       name: "local-fixtures",
       setup(b) {
         b.onResolve(
-          { filter: /^\.\/(ledger\.js|storage\.js|styles\.css)$/ },
+          { filter: /^\.\/(device\.js|storage\.js|styles\.css)$/ },
           (a) => ({ path: a.path, namespace: "fixture" }),
         );
         b.onLoad({ filter: /.*/, namespace: "fixture" }, (a) => ({
           loader: "js",
-          contents: a.path.includes("ledger")
+          contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("No device")}'
             : a.path.includes("storage")
               ? 'export class WatchStorage { async journal(k){ const q=globalThis.journalQueue.shift(); if (!q) throw Error("Missing fixture journal"); return q; } }'

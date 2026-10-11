@@ -19,10 +19,17 @@ test("cancellation survives connection and storage boundaries without dropping s
     },
   );
   assert.ifError(result.error);
-  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  assert.equal(
+    result.status,
+    0,
+    `${result.stdout}\n${result.stderr}`.replace(
+      /data:text\/javascript;base64,[A-Za-z0-9+/=]+(?:#\d+)?/g,
+      "[bundled main.ts]",
+    ),
+  );
   assert.equal(
     result.stdout.split("\n").filter((line) => line.startsWith("PASS:")).length,
-    7,
+    11,
     result.stdout,
   );
 });

@@ -16,9 +16,38 @@ A missing watch-only backup does not destroy conventional private keys, but inco
 
 ## Interrupted transfers
 
-Only a proven pre-signing REVIEW rejection belonging to the unchanged initial attempt can restore a discardable unsigned draft. If transport failed during/after signing, retain the reservation and transaction record. An interrupted `signing` record without saved signed bytes offers **Recover identical payment on Ledger**: connect a ready matching Ledger and load watch data, freshly verify the original inputs as unspent and mature, then approve the account export and complete payment review again. This signs the same canonical payment; it does not select replacement inputs, allocate new change or broadcast. Rejection or failure during recovery preserves the earlier ambiguity and locks. See the [exact recovery flow and freshness limits](companion.md#device-receive-and-payment-flow).
+For a current initial attempt, the companion releases its reservation only if it fails before adapter signing is invoked, or the adapter finishes unwinding and reports that no complete independently verified transaction was returned to the app, and the stored record/attempt still match exactly. This covers rejection, cancellation, transport failure or partial signature collection without a complete result; it is not proof that the device never calculated or emitted any partial signature. Complete results, including persistence/acknowledgement failures, remain recoverable and reserved. Historical/interrupted records and recovery attempts do not use this new-attempt cleanup policy. An interrupted `signing` record without saved signed bytes offers **Recover payment on Ledger**: connect a ready matching Ledger and load watch data, freshly verify the original inputs as unspent and mature, then approve the account export and complete payment review again. This signs the same canonical payment; it does not select replacement inputs, allocate new change or broadcast. Rejection or failure during recovery preserves the earlier ambiguity and locks. See the [exact recovery flow and freshness limits](companion.md#device-receive-and-payment-flow).
 
 If verified signed bytes are already saved, an explicit broadcast/rebroadcast uses those exact bytes without signing again. A timeout never proves the payment failed. Archiving a sufficiently confirmed payment retains its signed bytes and all input locks; it does not release uncertain or conflicted reservations. Do not clear browser storage to make inputs reusable. This version does not provide automatic missing-signature retrieval, RBF, automated consolidation or invisible fee upgrades. Browser/hardware recovery qualification remains open even though the host recovery regressions pass.
+
+## Development CLI recovery files
+
+The development CLI's `sign` command creates two private, exclusive files:
+the requested output and an adjacent `<output>.intent.json` sidecar. Both paths
+must be unused; existing files and symlinks are rejected before any device
+command. Keep them in a private directory controlled by you, with trusted
+parent directories. Exclusive file creation does not protect against another
+process that can rename or remove entries in those directories.
+
+The sidecar contains the exact canonical payment and a conservative
+`pearl-cli-signing-uncertain` warning. It is written and synced before signing,
+then never truncated, replaced or automatically deleted, including after
+success. This preserves reconciliation information if the separate signed
+output is interrupted during replacement. The signed output is synced before
+the final device acknowledgement. Account export still produces only its
+requested public-account file.
+
+Retain both files. An empty, partial or malformed signed output is not a usable
+signed transaction. The sidecar does not contain signatures and cannot prove
+whether signing succeeded, whether a transaction was broadcast, or whether
+its inputs are available. Reconcile the exact original payment before trying
+again; do not delete the sidecar to bypass the collision guard. If a signed
+write fails while the process remains alive, the CLI also prints independently
+verified exact signed bytes to standard error for recovery. A killed process
+cannot provide that fallback. The sidecar is not a wallet journal or a lock
+against signing through another output path, program or computer. Filesystem
+sync and the tested process-interruption boundary are not a claim of recovery
+from every storage-device, operating-system or power-loss failure.
 
 ## Moving funds from Oyster
 

@@ -1,0 +1,17 @@
+{
+  "upstream": "https://github.com/LedgerHQ/app-bitcoin",
+  "revision": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+  "files": {
+    "common.py": "1bb5e2079c8659f4702cd248d4878c984fdff7c24aeb5e022935eff2f3768ffd",
+    "merkle.py": "dd67d4a98e374a8094f1af38f446cbf67707112bfac430c78513daf966637be0",
+    "client_command.py": "da3978d4e483588d62780614940a7b995480447ea49beb302708f1b81e44f627",
+    "wallet.py": "67721f7bd9f1d3530574812d078a4a83d84027f224cde6bab238d1d26df0d236",
+    "psbt.py": "7ed77fb751509782ffe93eee1cfb7edd1a92667c9bf26df566ef22d462c144e4",
+    "key.py": "b552739cdb2ead03c6049dc0cde21b2def02262c9521223f770452e41ef735cb",
+    "errors.py": "1a68c2b272e8a3728baad6b88415ee719dbe1ab095f4a03ca510750f2dddbb75",
+    "tx.py": "42ee8983aa15cee6aedb976453e49e6da2cc80bb9ebcef24dcaa3ee3cf4e89f9",
+    "_serialize.py": "60a797cbcc60ce0dcb5457c97263db92f3758ee2917dcf33cc24555dadc205f7",
+    "_script.py": "e805da6ba77774a04e6c7875f6ca4634ee6c618b965d7546d37c1156ed0bc9ba",
+    "_base58.py": "592feb5cd585a1cab1c04aab332065edbc4fb608f6fba04e3eb047d248e90878"
+  }
+}

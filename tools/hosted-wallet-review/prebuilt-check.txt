@@ -1,0 +1,25 @@
+{
+  "outcome": "passed",
+  "assetCount": 12,
+  "totalStaticBytes": 2227051,
+  "functions": [
+    {
+      "name": "read",
+      "runtime": "nodejs24.x",
+      "helpers": false,
+      "automaticFetchInstrumentationDisabled": true,
+      "maxDuration": 35,
+      "compiledFixture": "passed",
+      "fileCount": 5
+    },
+    {
+      "name": "broadcast",
+      "runtime": "nodejs24.x",
+      "helpers": false,
+      "automaticFetchInstrumentationDisabled": true,
+      "maxDuration": 35,
+      "compiledFixture": "passed",
+      "fileCount": 5
+    }
+  ]
+}

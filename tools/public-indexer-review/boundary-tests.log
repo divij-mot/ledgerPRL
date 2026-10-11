@@ -1,0 +1,14 @@
+✔ independent identity matrix rejects each incompatible or unsynced claim (9.681094ms)
+✔ independent genesis mismatch rejects otherwise coherent mainnet claims (0.830669ms)
+✔ legacy deployed pending-prepend pagination skips one confirmed txid and fails closed (4.099793ms)
+✔ stable complete confirmed two-page history retains used status with zero UTXOs (2.664937ms)
+✔ truncated pending-only first page cannot become a complete address result (1.089738ms)
+✔ mutating GET and encoded paths are blocked without issuing fetch (0.388785ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 290.268042

@@ -1,0 +1,51 @@
+✖ independent: settled signed write with failed read-back must leave a recovery warning, not perpetual saving (231.980393ms)
+✔ independent: successful exact-match read-back clears recovery and unload warning (201.735512ms)
+✔ independent: read-back missing cannot clear the sole verified recovery copy (253.460222ms)
+✔ independent: read-back partial cannot clear the sole verified recovery copy (234.07567ms)
+✔ independent: read-back payment-id cannot clear the sole verified recovery copy (235.644173ms)
+✔ independent: read-back created-at cannot clear the sole verified recovery copy (234.161754ms)
+✔ independent: read-back outpoints cannot clear the sole verified recovery copy (244.47629ms)
+✔ independent: read-back bundle cannot clear the sole verified recovery copy (244.470267ms)
+✔ independent: read-back txid cannot clear the sole verified recovery copy (241.259139ms)
+✔ independent: read-back raw-signature cannot clear the sole verified recovery copy (254.202442ms)
+✔ independent: preparation owner replacement at before-update cannot open a stale review (97.169737ms)
+✔ independent: preparation network replacement at before-update cannot open a stale review (93.456875ms)
+✔ independent: preparation source replacement at before-update cannot open a stale review (90.053088ms)
+✔ independent: public import account replacement at before-update cannot open a stale account (69.940874ms)
+✔ independent: snapshot import account replacement at before-update cannot open a stale account (73.17842ms)
+✔ independent: preparation owner replacement at after-commit cannot open a stale review (104.895151ms)
+✔ independent: preparation network replacement at after-commit cannot open a stale review (112.460413ms)
+✔ independent: preparation source replacement at after-commit cannot open a stale review (107.820529ms)
+✔ independent: public import account replacement at after-commit cannot open a stale account (82.073533ms)
+✔ independent: snapshot import account replacement at after-commit cannot open a stale account (71.914991ms)
+✔ independent: public import clears a former public-source consent and device session (73.596439ms)
+✔ independent: public broadcast consent revoked at after-update cannot transmit bytes (100.7502ms)
+✔ independent: public broadcast consent revoked at after-commit cannot transmit bytes (79.974357ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 22
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3971.585863
+
+✖ failing tests:
+
+test at tools/browser-race-fix-review/independent-boundaries.test.ts:34:2998
+✖ independent: settled signed write with failed read-back must leave a recovery warning, not perpetual saving (231.980393ms)
+  AssertionError [ERR_ASSERTION]: read-back has failed and signing settled; no storage task remains pending
+  
+  true !== false
+  
+      at TestContext.<anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/browser-race-fix-review/independent-boundaries.test.ts:226:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

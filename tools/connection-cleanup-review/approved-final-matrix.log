@@ -1,0 +1,44 @@
+✔ real installed stack: chooser rejection closes DMK and destroys HID listeners (15.254795ms)
+✔ real installed stack: empty chooser selection rejects and cleans resources (3.361834ms)
+✔ real installed stack: vanished device between choice and connection rejects cleanly (3.362846ms)
+✔ real installed stack: HID open rejection removes global discovery listeners and sessions (6.631079ms)
+✔ injected defensive branch: start-sync leaves no session or global HID listeners (4.555518ms)
+✔ injected defensive branch: start-error leaves no session or global HID listeners (1.815068ms)
+✔ injected defensive branch: start-empty leaves no session or global HID listeners (3.766653ms)
+✔ injected defensive branch: stop-sync leaves no session or global HID listeners (3.588946ms)
+✔ injected defensive branch: stop-reject leaves no session or global HID listeners (3.304778ms)
+✔ injected defensive branch: connect-sync leaves no session or global HID listeners (2.297324ms)
+✔ injected defensive branch: connect-reject leaves no session or global HID listeners (2.196403ms)
+✔ injected defensive branch: connect-after-session leaves no session or global HID listeners (9.171709ms)
+✔ real installed stack: successful connection and idempotent close release sessions/listeners (4.688158ms)
+✔ cleanup throwing after actual cleanup still rejects and runs both owners' teardown (1.816871ms)
+✔ 30 repeated alternating chooser failures and successes do not accumulate global listeners or sessions (47.906604ms)
+✔ actual main.ts cancel during chooser: late completion closes session before application APDU (12.834025ms)
+✔ actual main.ts cancel during stop: late completion closes session before application APDU (11.99245ms)
+✔ actual main.ts cancel during open: late completion closes session before application APDU (4.591343ms)
+✔ actual main.ts unload during chooser: late completion closes session before application APDU (3.807454ms)
+✔ actual main.ts unload during stop: late completion closes session before application APDU (4.054116ms)
+✔ actual main.ts unload during open: late completion closes session before application APDU (8.376914ms)
+✔ real installed stack: denied getDevices produces no usable connection and no listener accumulation (2.313419ms)
+✔ real installed stack: unsupported model is rejected before HID open (1.25734ms)
+✔ real installed stack: first discovery result closes observable and opens just one session (2.428982ms)
+✔ discovery timeout destroys listeners and rejects late chooser result without opening a session (3.507103ms)
+✔ late result from timed-out chooser cannot affect a fresh successful connection (4.488989ms)
+✔ actual main.ts cancel during chooser timeout never opens session or sends any APDU (3.384388ms)
+✔ actual main.ts cancel during installed DMK ping: timeout completion is safely discarded (4.097029ms)
+✔ actual main.ts unload during installed DMK ping: timeout completion is safely discarded (4.63332ms)
+✔ supported DMK semantics: ping send failure is swallowed by DMK; connection still needs caller validation (3.375034ms)
+✔ real installed stack: physical disconnect after returned transport cannot resurrect via subsequent HID connect (3.449736ms)
+✔ pinned HID report-handler retention is one overwritten device property across failures and recovery (34.722564ms)
+✔ Cancel while HID open is unresolved sends no APDU and preserves intent until eventual rejection (4.709761ms)
+✔ installed SDK reconnect retention expires without reviving returned terminal transport (3.503117ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6836.728907
+
+Strengthened final-source matrix completed: exit 0

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PRL website integration proof</title>
+    <link rel="stylesheet" href="/demo.css" />
+    <script type="module" src="/demo.js"></script>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">PEARL · DEVELOPER PROOF</p>
+      <h1>A website request.<br />A Ledger decision.</h1>
+      <p>
+        This separate-origin demo uses the PRL MetaMask Snap API. It receives
+        one public address and payment status. The local companion keeps
+        hardware access, coin selection, fees, and broadcasting.
+      </p>
+      <p class="warning">
+        Development only. Never use valuable funds or published test addresses.
+        This page cannot prove that your physical Ledger app is safe or
+        vendor-approved.
+      </p>
+      <ol>
+        <li>
+          Start the companion at
+          <a
+            href="http://127.0.0.1:5173"
+            target="_blank"
+            rel="noopener noreferrer"
+            >127.0.0.1:5173</a
+          >. Connect the Ledger, select a test network, and connect the local
+          Snap.
+        </li>
+        <li>
+          Open this demo in MetaMask Flask. The unpublished local Snap must be
+          served at 127.0.0.1:8087.
+        </li>
+        <li>
+          Connect below, queue a payment, then claim and review it in the
+          companion. Signing and broadcasting are separate actions.
+        </li>
+      </ol>
+      <section>
+        <h2>1. Share one address</h2>
+        <label
+          >Network<select id="network">
+            <option value="regtest">Regtest</option>
+            <option value="testnet2">Testnet2</option>
+          </select></label
+        ><button id="connect">Connect PRL via MetaMask</button>
+        <p id="account">No address shared.</p>
+      </section>
+      <section>
+        <h2>2. Ask for payment review</h2>
+        <label
+          >Recipient PRL address<input
+            id="recipient"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Paste the intended test-network recipient" /></label
+        ><label
+          >Amount in PRL<input
+            id="amount"
+            inputmode="decimal"
+            autocomplete="off"
+            placeholder="0.01000000" /></label
+        ><button id="request" disabled>Queue payment request</button>
+      </section>
+      <section>
+        <h2>3. Check the result</h2>
+        <p>
+          “Signed” and a transaction id do not mean broadcast or confirmation.
+          Only the companion reports whether its separate broadcast was accepted
+          by its node.
+        </p>
+        <div class="buttons">
+          <button id="refresh" disabled>Check status</button
+          ><button id="cancel" disabled>Cancel before signing</button>
+        </div>
+        <pre id="status" role="status" aria-live="polite">
+No payment requested.</pre
+        >
+      </section>
+      <p id="error" role="alert"></p>
+      <footer>
+        Explicit PRL methods. No eth_* compatibility claim. No keys, xpubs,
+        signatures or signed transaction bytes are returned to this site.
+      </footer>
+    </main>
+  </body>
+</html>

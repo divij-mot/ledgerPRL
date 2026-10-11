@@ -1,0 +1,31 @@
+✔ independent: settled signed write with failed read-back must leave a recovery warning, not perpetual saving (282.070081ms)
+✔ independent: successful exact-match read-back clears recovery and unload warning (233.511593ms)
+✔ independent: read-back missing cannot clear the sole verified recovery copy (262.533912ms)
+✔ independent: read-back partial cannot clear the sole verified recovery copy (286.492577ms)
+✔ independent: read-back payment-id cannot clear the sole verified recovery copy (266.840312ms)
+✔ independent: read-back created-at cannot clear the sole verified recovery copy (253.008008ms)
+✔ independent: read-back outpoints cannot clear the sole verified recovery copy (253.958144ms)
+✔ independent: read-back bundle cannot clear the sole verified recovery copy (245.808083ms)
+✔ independent: read-back txid cannot clear the sole verified recovery copy (260.213343ms)
+✔ independent: read-back raw-signature cannot clear the sole verified recovery copy (244.08612ms)
+✔ independent: preparation owner replacement at before-update cannot open a stale review (98.356908ms)
+✔ independent: preparation network replacement at before-update cannot open a stale review (94.877909ms)
+✔ independent: preparation source replacement at before-update cannot open a stale review (90.609512ms)
+✔ independent: public import account replacement at before-update cannot open a stale account (67.260701ms)
+✔ independent: snapshot import account replacement at before-update cannot open a stale account (80.166482ms)
+✔ independent: preparation owner replacement at after-commit cannot open a stale review (108.154336ms)
+✔ independent: preparation network replacement at after-commit cannot open a stale review (93.094106ms)
+✔ independent: preparation source replacement at after-commit cannot open a stale review (103.063172ms)
+✔ independent: public import account replacement at after-commit cannot open a stale account (72.141248ms)
+✔ independent: snapshot import account replacement at after-commit cannot open a stale account (72.750073ms)
+✔ independent: public import clears a former public-source consent and device session (77.983871ms)
+✔ independent: public broadcast consent revoked at after-update cannot transmit bytes (94.530725ms)
+✔ independent: public broadcast consent revoked at after-commit cannot transmit bytes (83.659182ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4228.89938

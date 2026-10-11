@@ -1,0 +1,4 @@
+PASS: reversing only the two-line zero-valued-candidate comment clarification reproduces the previously reviewed SHA-256 exactly.
+Previously reviewed SHA-256: 4885d5376549fced73aa5cbf5ad2b81419ab34e11b3f6c4fa145fb3d1f4bbfaf
+Final source SHA-256: 4f003ef5792ef1088f5fcd60f895d0ae7c787e80e9276a1787dc194ba07df8a2
+Functional changes after independent review: none.

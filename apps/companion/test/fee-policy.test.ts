@@ -22,7 +22,7 @@ test("UI keeps fees explicit and restored drafts must pass policy before signing
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
   assert.equal(
     result.stdout.split("\n").filter((line) => line.startsWith("PASS:")).length,
-    7,
+    9,
     result.stdout,
   );
 });

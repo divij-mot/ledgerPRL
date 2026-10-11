@@ -1,0 +1,12 @@
+✔ pure-host UI authority, pending signed recovery and modeled two-tab storage boundaries (5428.966666ms)
+✔ UI keeps fees explicit and restored drafts must pass policy before signing (2550.635708ms)
+✔ actual public import and account-close handlers preserve local process ownership (4313.20225ms)
+✔ mocked source/storage scheduling: actual UI total budgets and cancellation reject stale public results (1359.484292ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5540.701291

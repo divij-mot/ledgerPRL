@@ -1,0 +1,155 @@
+diff --git a/apps/cli/README.md b/apps/cli/README.md
+index fc77219..8bc1132 100644
+--- a/apps/cli/README.md
++++ b/apps/cli/README.md
+@@ -18,7 +18,7 @@ The emulator must already run the matching Pearl network build. Account export,
+ 
+ `bundle.json` is the strict canonical object represented by the `bundle` member of `fixtures/protocol-v1.json`. All `amount` fields are exact integer **grain strings**, not floating PRL numbers. `account.json` follows its `publicAccount` member. The fixture uses public test keys and must never receive funds.
+ 
+-Output files are created exclusively with permissions `0600`; existing files are never overwritten. Signed output contains raw transaction hex, txid/wtxid, exact witnesses and vsize. These are sensitive transaction details even though no seed exists in the host.
++Output files are created exclusively with permissions `0600`; existing files are never overwritten. Signing also reserves an adjacent `<output>.intent.json` with the same private, no-overwrite semantics and keeps it after every outcome, including success. Signed output contains raw transaction hex, txid/wtxid, exact witnesses and vsize. These are sensitive transaction details even though no seed exists in the host.
+ 
+ The CLI intentionally has no broadcast operation. Review the exported transaction and independently confirm node/network before invoking your node's explicit `sendrawtransaction` action. The source-bound emulator/node integration matrix is recorded in [test evidence](../../docs/test-evidence.md). Valuable-funds use, physical-device approval/restore and vendor qualification remain release gates.
+ 
+@@ -26,10 +26,12 @@ The CLI intentionally has no broadcast operation. Review the exported transactio
+ 
+ Hardware commands now require the matching `apps/ledger-bitcoin-prl` app and use `@pearl-ledger/bitcoin-prl-adapter`. The CLI does not silently fall back to the old PRL1 prototype. Offline canonical bundle JSON/hex and public account files remain readable. `capabilities` reports the explicit network/genesis binding and exact decimal-string `maxMoney`.
+ 
+-Before account export/signing, the output path is opened exclusively (`wx`) with `0600` permissions. Existing paths, symlinks and missing parent directories fail before the first APDU. Signing writes and syncs a `pearl-cli-signing-uncertain` record containing the exact canonical intent before contacting the signer. This conservative record is retained on interruption/rejection; it is not proof that signing failed and is not a replacement for the companion's payment journal/reservations. Do not select new inputs or prepare a replacement payment merely because the CLI did not finish.
++Before account export/signing, the output path is opened exclusively (`wx`) with `0600` permissions. Signing additionally reserves `<output>.intent.json`. Existing files, final-component symlinks and missing parent directories fail before the first APDU. Keep both files in a private directory with trusted parent directories: exclusive creation does not protect against another process that can rename or remove directory entries. Account export continues to create only its requested public-account file.
+ 
+-The complete verified signed transaction replaces only the file descriptor created by this invocation. The file is written and synced in `onVerifiedSigned` **before** the final device continuation ACK. A lost final ACK returns a warning while retaining signed bytes; reconnect before later device operations and do not re-sign automatically. If disk/storage fails after valid signatures exist, stderr prints a clearly labeled recovery record containing the exact raw transaction and IDs, then exits unsuccessfully. Retain those bytes and reconcile before trying anything else. A failed write can leave a partial file; it must not be treated as a valid signed record without parsing/verification. Filesystem crash guarantees depend on the OS/storage; directory fsync is used on non-Windows platforms.
++Signing writes and syncs a `pearl-cli-signing-uncertain` record containing the exact canonical intent in the sidecar before contacting the signer, then writes the same initial record to the primary output. The sidecar is never truncated, replaced or automatically deleted, including after successful signing. It contains no signatures, cannot prove whether signing or broadcast occurred, and is not a replacement for the companion's payment journal/reservations. It does not prevent another payment through a different output path, program or computer. Retain it for reconciliation; do not remove it to bypass the collision guard or select new inputs merely because the CLI did not finish.
++
++The complete verified signed transaction replaces only the primary file descriptor created by this invocation. The file is written and synced in `onVerifiedSigned` **before** the final device continuation ACK. A lost final ACK returns a warning while retaining signed bytes; reconnect before later device operations and do not re-sign automatically. If disk/storage fails after valid signatures exist, stderr prints a clearly labeled recovery record containing the exact raw transaction and IDs, then exits unsuccessfully. Retain those bytes and reconcile before trying anything else. A failed or interrupted replacement can leave an empty or partial primary output; do not trust it without parsing/verification. The separate synced intent remains intact at the tested replacement boundary, but does not reconstruct lost signatures. A killed process cannot emit the stderr fallback. Filesystem crash guarantees depend on the OS/storage; directory fsync is used on non-Windows platforms, and these checks do not qualify every power-loss scenario.
+ 
+ External P2TR and P2MR recipients are supported by the new adapter; owned inputs/change remain ordinary BIP86 P2TR. The legacy SDK client still rejects P2MR before transmitting an APDU. There is no seed entry, private-key import, arbitrary-message signing, automatic approval, automatic retry or broadcast command.
+ 
+-Run the CLI boundary tests with `npm run test --workspace @pearl-ledger/cli`. They cover exact capabilities, frozen independent protocol commitments, private/exclusive file creation, no-overwrite/symlink/path failures before device contact, durable signed bytes before final ACK and retained bytes after acknowledgement failure. These are explicit transport mocks, not physical-device evidence.
++Run the CLI boundary tests with `npm run test --workspace @pearl-ledger/cli`. They cover exact capabilities, frozen independent protocol commitments, private/exclusive file creation, no-overwrite/symlink/path failures before device contact, durable signed bytes before final ACK and retained bytes after acknowledgement failure. The intent regressions additionally exercise a real temporary filesystem, injected signed-write failure, and process termination immediately after primary-output truncation. They verify preserved sidecar intent and no final ACK before successful signed persistence. These are public-fixture transport mocks, not physical-device or storage-hardware evidence.
+diff --git a/apps/cli/src/index.ts b/apps/cli/src/index.ts
+index 5a22b90..fe431c4 100644
+--- a/apps/cli/src/index.ts
++++ b/apps/cli/src/index.ts
+@@ -36,6 +36,8 @@ requires the matching ledger-bitcoin-prl app and approval in Speculos/the
+  device UI. It never clicks Approve. No legacy PRL1 downgrade is attempted.
+ Signing reserves the exclusive output path before any device command. If it
+ fails, retain its signing-uncertain record and reconcile before trying again.
++The immutable <output.json>.intent.json sidecar preserves that intent if writing
++the signed output is interrupted. Keep both files in a trusted private directory.
+ There is deliberately no broadcast command; review/export then use a trusted
+ node's explicit sendrawtransaction action. Do not use development apps with funds.`;
+ function integer(text: string | undefined): number {
+@@ -95,8 +97,12 @@ async function reserveOutput(path: string): Promise<FileHandle> {
+ }
+ /** Only the descriptor created exclusively by this invocation can be updated. */
+ async function writeReserved(file: FileHandle, value: unknown): Promise<void> {
+-  const bytes = Buffer.from(jsonText(value));
+   await file.truncate(0);
++  await writeNewReserved(file, value);
++}
++/** Write once through an exclusively created descriptor, without truncation or path replacement. */
++async function writeNewReserved(file: FileHandle, value: unknown): Promise<void> {
++  const bytes = Buffer.from(jsonText(value));
+   let offset = 0;
+   while (offset < bytes.length) {
+     const { bytesWritten } = await file.write(
+@@ -175,9 +181,12 @@ export async function main(args: string[]) {
+   const cancel = () => controller.abort();
+   process.once("SIGINT", cancel);
+   let output: FileHandle | undefined;
++  let intent: FileHandle | undefined;
+   try {
+     if (operation === "account" || operation === "sign")
+       output = await reserveOutput(rest[2]!);
++    if (operation === "sign")
++      intent = await reserveOutput(`${rest[2]!}.intent.json`);
+     if (operation === "capabilities")
+       print(await client.capabilities(controller.signal));
+     else if (operation === "account") {
+@@ -200,15 +209,18 @@ export async function main(args: string[]) {
+       const b = await bundle(rest[0]!),
+         a = accountFromJson(await json(rest[1]!));
+       print(inspectBundle(b));
+-      // This survives interruption. It is a conservative intent/reconciliation record,
+-      // not evidence that signatures do or do not exist, and is not a wallet journal.
+-      await writeReserved(output!, {
++      // The separate intent is written once and never truncated, replaced or
++      // removed. It survives a later interrupted signed-output replacement.
++      // Neither file proves signatures do or do not exist; this is not a wallet journal.
++      const uncertain = {
+         kind: "pearl-cli-signing-uncertain",
+         network: b.network,
+         bundle: bundleToJson(b),
+         warning:
+           "Signing may be incomplete or may already have succeeded. Do not create a replacement payment before reconciliation.",
+-      });
++      };
++      await writeNewReserved(intent!, uncertain);
++      await writeReserved(output!, uncertain);
+       let savedRawTx: string | undefined;
+       const result = await client.signBundle(b, a, {
+         signal: controller.signal,
+@@ -233,6 +245,7 @@ export async function main(args: string[]) {
+         txid: result.txid,
+         vsize: result.vsize,
+         saved: rest[2],
++        intent: `${rest[2]!}.intent.json`,
+         ...(result.completionWarning
+           ? { completionWarning: result.completionWarning }
+           : {}),
+@@ -259,8 +272,12 @@ export async function main(args: string[]) {
+     try {
+       await output?.close();
+     } finally {
+-      process.removeListener("SIGINT", cancel);
+-      await client.close().catch(() => transport.close());
++      try {
++        await intent?.close();
++      } finally {
++        process.removeListener("SIGINT", cancel);
++        await client.close().catch(() => transport.close());
++      }
+     }
+   }
+ }
+diff --git a/docs/recovery.md b/docs/recovery.md
+index d7766f7..dd726e2 100644
+--- a/docs/recovery.md
++++ b/docs/recovery.md
+@@ -20,6 +20,35 @@ Only a proven pre-signing REVIEW rejection belonging to the unchanged initial at
+ 
+ If verified signed bytes are already saved, an explicit broadcast/rebroadcast uses those exact bytes without signing again. A timeout never proves the payment failed. Archiving a sufficiently confirmed payment retains its signed bytes and all input locks; it does not release uncertain or conflicted reservations. Do not clear browser storage to make inputs reusable. This version does not provide automatic missing-signature retrieval, RBF, automated consolidation or invisible fee upgrades. Browser/hardware recovery qualification remains open even though the host recovery regressions pass.
+ 
++## Development CLI recovery files
++
++The development CLI's `sign` command creates two private, exclusive files:
++the requested output and an adjacent `<output>.intent.json` sidecar. Both paths
++must be unused; existing files and symlinks are rejected before any device
++command. Keep them in a private directory controlled by you, with trusted
++parent directories. Exclusive file creation does not protect against another
++process that can rename or remove entries in those directories.
++
++The sidecar contains the exact canonical payment and a conservative
++`pearl-cli-signing-uncertain` warning. It is written and synced before signing,
++then never truncated, replaced or automatically deleted, including after
++success. This preserves reconciliation information if the separate signed
++output is interrupted during replacement. The signed output is synced before
++the final device acknowledgement. Account export still produces only its
++requested public-account file.
++
++Retain both files. An empty, partial or malformed signed output is not a usable
++signed transaction. The sidecar does not contain signatures and cannot prove
++whether signing succeeded, whether a transaction was broadcast, or whether
++its inputs are available. Reconcile the exact original payment before trying
++again; do not delete the sidecar to bypass the collision guard. If a signed
++write fails while the process remains alive, the CLI also prints independently
++verified exact signed bytes to standard error for recovery. A killed process
++cannot provide that fallback. The sidecar is not a wallet journal or a lock
++against signing through another output path, program or computer. Filesystem
++sync and the tested process-interruption boundary are not a claim of recovery
++from every storage-device, operating-system or power-loss failure.
++
+ ## Moving funds from Oyster
+ 
+ After release gates pass, verify a new Ledger-derived address in full on the device. The existing Oyster wallet signs an ordinary transfer to it; receiving does not require the Ledger to sign. Confirm receipt before changing miner/pool payouts. Retain legacy recovery material until immature coinbases, late payouts and all remaining balances are resolved. No wallet deletion, mainnet transfer or payout change is performed by this repository's tests.

@@ -1,0 +1,13 @@
+✔ actual public import and account-close handlers preserve local process ownership (821.801791ms)
+✔ a restored account can close its existing server profile before this page starts sync (1.904542ms)
+✔ close waits for an in-flight start and sends its exact owner (3.878083ms)
+✔ uncertain startup and failed close retain ownership; cancellation cannot silently switch profiles (1.522541ms)
+✔ actual snapshot import persists only owned paths and fresh exports preserve another tab's journal (2869.618416ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3092.919208

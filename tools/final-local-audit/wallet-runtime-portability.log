@@ -1,0 +1,23 @@
+✔ runtime verifies watch-only profile then starts only hash-pinned private stdio child; normal stop/restart preserves profile (19.482833ms)
+✔ existing unowned directories, symlinks and hash mismatch never launch a helper (3.19725ms)
+✔ failed watch-only, coverage or source verification prevents the serve child (10.33725ms)
+✔ existing symlinked database is rejected before even a verify command (7.078292ms)
+✔ startup binds the exact public account and genesis without claiming native sync readiness (8.293542ms)
+✔ request allowlist, bounds and pre-cancellation send no extra IPC (4.944417ms)
+✔ native error messages are redacted while broadcast ambiguity is retained (5.583916ms)
+✔ timeout invalidates the process, retains broadcast uncertainty and ignores stale child output after restart (109.644667ms)
+✔ range extension waits for old process exit and requires a verified restart before rescan (9.666667ms)
+✔ stuck owned child escalates only its signals; unresolved termination keeps the directory locked (40.150375ms)
+✔ a valid startup status followed by malformed data in the same chunk cannot revive a failed session (5.140292ms)
+✔ mutating abort invalidates in-flight work and oversized native frames fail closed (8.395917ms)
+✔ pipe errors terminate only the owned native process instead of escaping as unhandled stream errors (4.920625ms)
+✔ aborted read consumes only its exact late reply without stopping background sync or applying it to another request (5.448209ms)
+✔ cancelled reads retain the four-slot bound and original deadline (126.183125ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 533.264708

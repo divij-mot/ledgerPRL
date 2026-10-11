@@ -1,0 +1,68 @@
+{
+  "description": "Native PRL app in Speculos with PUBLIC vector-one seed. Never fund. No broadcast.",
+  "publicAccount": {
+    "network": "regtest",
+    "account": 0,
+    "masterFingerprint": "3442193e",
+    "publicKey": "03ce3a35a807271b1d2fbbb442bbd4777987367e1a6a18e5a6e0eb22385cfda86c",
+    "chainCode": "1c4304310d93112c92580cd2bb783ab776e70da4f87e2e3758e86a9341c2eaf1"
+  },
+  "bundle": {
+    "network": "regtest",
+    "account": 0,
+    "version": 1,
+    "lockTime": 0,
+    "inputs": [
+      {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "vout": 1,
+        "amount": "9007199254740993",
+        "scriptPubKey": "512015fd41acdeafcf4628c048e9cfcfdbb92af61002de8fbfd493460042b1e7a2c0",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "txid": "2222222222222222222222222222222222222222222222222222222222222222",
+        "vout": 3,
+        "amount": "1000000000",
+        "scriptPubKey": "51204438386d4048b33c5155c0e3aaa04b3cb01a3a54c3b784eeda6360a0fbfdb045",
+        "sequence": 4294967295,
+        "branch": 0,
+        "index": 7
+      }
+    ],
+    "outputs": [
+      {
+        "amount": "9007199254740000",
+        "scriptPubKey": "52200000000000000000000000000000000000000000000000000000000000000000",
+        "role": "recipient",
+        "branch": 0,
+        "index": 0
+      },
+      {
+        "amount": "999999993",
+        "scriptPubKey": "5120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d",
+        "role": "change",
+        "branch": 1,
+        "index": 0
+      }
+    ]
+  },
+  "sighashes": [
+    "1cde4e305ee8dfa0c60e558916d71ab5da9439c1d75307634070df7493d5da7b",
+    "d6557844d5fa82912a6c951107cefc1bdd181d53cd50600a7d8a32bf6b8c8ac9"
+  ],
+  "signatures": [
+    "05b35d1f3c3ba484d8a3a9eb0e414502354d55584bcedbf371257beb1b30114f8b7239f5ce5687d11ada337ce47f0bebd0733a949aa44e14d134bc88130e6076",
+    "ef1738b1be6e12bdbcdbd4f85179125ed8fe8c99c7c4a1da448db3af50d44cfdc728fd380d83c0243f2338ed8b143de97dc91f30b1a8697d0be52796d2feb9ea"
+  ],
+  "addresses": {
+    "input": "rprl1pzh75rtx74l85v2xqfr5uln7mhy40vyqzm68ml4yngcqy9v085tqqjd9fxm",
+    "recipient": "rprl1zqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqc5p3e"
+  },
+  "rawTx": "0100000000010211111111111111111111111111111111111111111111111111111111111111110100000000ffffffff22222222222222222222222222222222222222222222222222222222222222220300000000ffffffff0220fcffffffff1f002252200000000000000000000000000000000000000000000000000000000000000000f9c99a3b00000000225120cabac13996a24ccecf98761c9b0edf1764bd0cea42925c82cbdaf8658b61b07d014005b35d1f3c3ba484d8a3a9eb0e414502354d55584bcedbf371257beb1b30114f8b7239f5ce5687d11ada337ce47f0bebd0733a949aa44e14d134bc88130e60760140ef1738b1be6e12bdbcdbd4f85179125ed8fe8c99c7c4a1da448db3af50d44cfdc728fd380d83c0243f2338ed8b143de97dc91f30b1a8697d0be52796d2feb9ea00000000",
+  "txid": "ed478f01922427b982a5ecec7480af418e54aeb5b1043abee66ebc7bcacd0d29",
+  "wtxid": "1665672def12aa83ca17a6dbb568aa40dec2daf6c6dba746c1c3abc5dc0c5518",
+  "vsize": 212
+}

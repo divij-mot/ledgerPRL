@@ -1,17 +1,17 @@
-import { assert } from "@pearl-ledger/sdk";
-import { emptyJournal, type WalletJournal } from "@pearl-ledger/wallet";
+import {
+  validateStoredJournal,
+  type WalletJournal,
+} from "@pearl-ledger/wallet";
 const DB = "pearl-ledger-watch-v1";
 function normalizeJournal(value: unknown): WalletJournal {
-  const journal = (value ?? emptyJournal()) as WalletJournal;
-  if (journal.issuedReceiveThrough === undefined)
-    journal.issuedReceiveThrough = -1;
-  assert(
-    journal.schema === 1 &&
-      Array.isArray(journal.payments) &&
-      Number.isInteger(journal.nextChangeIndex),
-    "Corrupt payment journal; do not clear storage or reuse inputs",
-  );
-  return journal;
+  try {
+    return validateStoredJournal(value);
+  } catch (cause) {
+    throw new Error(
+      "Corrupt payment journal; do not clear storage or reuse inputs",
+      { cause },
+    );
+  }
 }
 export class WatchStorage {
   private db: Promise<IDBDatabase>;
@@ -69,6 +69,7 @@ export class WatchStorage {
         try {
           const journal = normalizeJournal(request.result);
           result = update(journal);
+          normalizeJournal(journal);
           store.put(journal, account);
         } catch (error) {
           tx.abort();
@@ -106,6 +107,23 @@ export class WatchStorage {
         .get(key);
       request.onsuccess = () => resolve(request.result as T | undefined);
       request.onerror = () => reject(request.error);
+    });
+  }
+  /** Remove only the optional watch snapshot; payment recovery rows are never touched. */
+  async removeSavedSnapshot(): Promise<void> {
+    const db = await this.db;
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("public-cache", "readwrite", {
+        durability: "strict",
+      });
+      const request = tx.objectStore("public-cache").delete("last-snapshot");
+      request.onerror = () =>
+        reject(request.error ?? new Error("Failed to remove saved watch data"));
+      tx.oncomplete = () => resolve();
+      tx.onerror = () =>
+        reject(tx.error ?? new Error("Failed to remove saved watch data"));
+      tx.onabort = () =>
+        reject(tx.error ?? new Error("Watch data removal transaction aborted"));
     });
   }
 }

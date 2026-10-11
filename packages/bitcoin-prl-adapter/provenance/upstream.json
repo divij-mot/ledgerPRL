@@ -1,0 +1,35 @@
+{
+  "repository": "https://github.com/LedgerHQ/app-bitcoin",
+  "revision": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+  "tag": "2.5.1",
+  "upstreamPath": "bitcoin_client_js/src/lib",
+  "originals": "provenance/upstream-original",
+  "license": "Apache-2.0",
+  "licenseSha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+  "files": {
+    "buffertools.ts": {
+      "upstreamSha256": "0d48d8d7cd25c0fa365bb843004e0491b92a3fb519fc7590233418bd17c7fcfc",
+      "adaptedSha256": "c42f2af89bebd8abd77b23009cf089fb41aabf841ce1111dedb420dae31b99b3"
+    },
+    "clientCommands.ts": {
+      "upstreamSha256": "68f78206cd1f2d4f2f20da74b81b51deac56afd37d221fb7267f0cb37c863016",
+      "adaptedSha256": "3087e3e6c8e3e70138e8f9135e9f95b53586f965a9eddc139679385cf5a6114b"
+    },
+    "merkle.ts": {
+      "upstreamSha256": "b03c45d3f724a07bbb02b065fddacc899085436773764f351f0adf949563b828",
+      "adaptedSha256": "46845ef8d1ced9ed44aeb76ae62307b975ab5c80b96d86051a5c2d2ab7c7c7c3"
+    },
+    "merkleMap.ts": {
+      "upstreamSha256": "b428018da45824d9867ce2361a84dec17348f33639a2a508f25f96c6063678f5",
+      "adaptedSha256": "d6c02c5820d7e4b4650ce35a4b84e59ff86b5a33c2ccb7529ffa3739f130d969"
+    },
+    "policy.ts": {
+      "upstreamSha256": "d3b281fe4b60e3fad2157117ae09cdb727e5737e04263da72ba6b5fd93ee73fe",
+      "adaptedSha256": "894a7e1b8b0822f45da6233caff5c2b01cfd9d029a21d4e10e1e57c50dba46eb"
+    },
+    "varint.ts": {
+      "upstreamSha256": "c5636971b4a967435635c9108ae7cb43eb468a93481aa112f2f9932f73595519",
+      "adaptedSha256": "ad1c86d8591caa1ac1321b14765ac006ea997c8e69b2596ab25244fe82b8c112"
+    }
+  }
+}

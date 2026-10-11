@@ -18,7 +18,14 @@ test("interrupted signing recovers only the identical payment without rollback o
     },
   );
   assert.ifError(result.error);
-  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  assert.equal(
+    result.status,
+    0,
+    `${result.stdout}\n${result.stderr}`.replace(
+      /data:text\/javascript;base64,[A-Za-z0-9+/=]+(?:#\d+)?/g,
+      "[bundled main.ts]",
+    ),
+  );
   assert.equal(
     result.stdout.split("\n").filter((line) => line.startsWith("PASS:")).length,
     18,
@@ -43,7 +50,14 @@ test("independent interrupted-signing review probes remain reproducible", () => 
     },
   );
   assert.ifError(result.error);
-  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  assert.equal(
+    result.status,
+    0,
+    `${result.stdout}\n${result.stderr}`.replace(
+      /data:text\/javascript;base64,[A-Za-z0-9+/=]+(?:#\d+)?/g,
+      "[bundled main.ts]",
+    ),
+  );
   assert.equal(
     result.stdout.split("\n").filter((line) => line.startsWith("PASS ")).length,
     19,

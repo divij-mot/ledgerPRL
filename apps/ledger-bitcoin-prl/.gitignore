@@ -1,0 +1,51 @@
+# Compilation of Ledger's app
+src/glyphs.c
+src/glyphs.h
+bin/
+debug/
+dep/
+obj/
+build/
+
+# Unit tests and code coverage
+unit-tests/build/
+unit-tests/coverage/
+unit-tests/coverage.info
+
+# temporary folder used during tests
+tests/.test_bitcoin
+
+# Fuzzing
+fuzzing/build/
+.fuzz-artifacts/
+# Per-build Absolution invariant snapshot (machine-local; see the SDK fuzzing docs).
+fuzzing/invariants/fuzz_globals.zon
+
+# Build artefacts
+compile_commands.json
+*.profraw
+*.profdata
+
+# Editors
+.idea/
+.vscode/c_cpp_properties.json
+*.swp
+
+# Python
+*.pyc[cod]
+*.egg
+__pycache__/
+*.egg-info/
+.eggs/
+.python-version
+venv/
+
+# Doxygen
+doc/html
+doc/latex
+
+tests/snapshots-tmp
+
+# Pearl generated build artifacts and local SDK checkout
+build-artifacts/
+vendor/

@@ -1,0 +1,39 @@
+{
+  "startedAt": "2026-10-09T21:50:05.728Z",
+  "finishedAt": "2026-10-09T21:50:05.844Z",
+  "seed": 2366829735,
+  "seedHex": "0x8d12f4a7",
+  "browserVersion": "",
+  "initialHashes": {
+    "apps/companion/src/storage.ts": "3b84bd8013448c325ad7aad49d1f1f38ddbd6a2ee74eb6e8ef35435141648891",
+    "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
+    "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
+    "packages/wallet/src/journal.ts": "4e4fb50ec5058d25895bfde0a5459514792aa560d1d1a9d46444caeb5a000b4f",
+    "packages/wallet/src/recovery.ts": "9ab76005ef1d4793a8e8a501e265cdeba5c5a73fc3e8ca37180544c96f4b5cc4",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d"
+  },
+  "finalHashes": {
+    "apps/companion/src/storage.ts": "3b84bd8013448c325ad7aad49d1f1f38ddbd6a2ee74eb6e8ef35435141648891",
+    "apps/companion/src/backup-import.ts": "1fa67c458486dd22975a10d95af80ae9038009d9f04da1720dd6dc6c81833bb1",
+    "apps/companion/src/backup-import.worker.ts": "e24d5d643f10707788ba48c7419425a4d8bdae7877a42409f548abf4cf332ebf",
+    "packages/wallet/src/journal.ts": "4e4fb50ec5058d25895bfde0a5459514792aa560d1d1a9d46444caeb5a000b4f",
+    "packages/wallet/src/recovery.ts": "9ab76005ef1d4793a8e8a501e265cdeba5c5a73fc3e8ca37180544c96f4b5cc4",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d"
+  },
+  "sourceChangedDuringRun": [],
+  "results": [],
+  "unexpectedRequests": [],
+  "failures": 0,
+  "limitations": [
+    "Real disposable headless Chromium, actual IndexedDB transactions and module worker on loopback only.",
+    "Injected public malformed rows model corruption; no external corruption path established.",
+    "Tab close is not OS power loss. No persistence guarantee for abrupt host/device power failure.",
+    "Restrictive local test CSP is not verification of production hosting/CSP configuration.",
+    "No physical WebHID/device, user profile, user seed, real funds, remote service or transaction broadcast."
+  ],
+  "outcome": "blocked-before-browser-start",
+  "executedCases": 0,
+  "blocker": "Disposable Chromium failed before any test: process_singleton_posix socket() Operation not permitted; crash settings read-only. See browser-storage-original.log."
+}

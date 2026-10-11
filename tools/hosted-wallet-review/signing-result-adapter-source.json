@@ -1,0 +1,7 @@
+{
+  "scope": "Adapter app-result failure classification; does not supersede broader manifests",
+  "files": {
+    "packages/bitcoin-prl-adapter/src/client.ts": "453541a29ca90f42d87c7dd5a6ea6461f9de784710973ad6620eeb33f1ceefa7",
+    "packages/bitcoin-prl-adapter/test/client.test.ts": "b407f98fdef5f2ada7da3a6230b2cc40bfe38738b6d380a5b6205fdfd8286f9e"
+  }
+}

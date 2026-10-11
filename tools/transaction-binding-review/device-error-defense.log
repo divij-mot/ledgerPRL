@@ -1,0 +1,19 @@
+✔ device-error defense: approved /0/7, /0/0 signer, priorValid=false, key=fallback (123.508539ms)
+✔ device-error defense: approved /0/7, /0/0 signer, priorValid=false, key=approved (70.043037ms)
+✔ device-error defense: approved /0/7, /0/0 signer, priorValid=true, key=fallback (84.186654ms)
+✔ device-error defense: approved /0/7, /0/0 signer, priorValid=true, key=approved (82.395581ms)
+✔ device-error defense: approved /1/7, /0/0 signer, priorValid=false, key=fallback (57.823573ms)
+✔ device-error defense: approved /1/7, /0/0 signer, priorValid=false, key=approved (55.931088ms)
+✔ device-error defense: approved /1/7, /0/0 signer, priorValid=true, key=fallback (80.012679ms)
+✔ device-error defense: approved /1/7, /0/0 signer, priorValid=true, key=approved (81.70935ms)
+✔ device-error defense: SW_OK with zero signatures never completes payment (79.132407ms)
+✔ device-error defense: SW_OK with only signature 0 never completes payment (81.023958ms)
+✔ device-error defense: SW_OK with only signature 1 never completes payment (76.877316ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1188.806369

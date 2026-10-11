@@ -21,8 +21,8 @@ export async function auditSeed(a,j){account=a;network=a.network;sourceMode='nod
 export async function auditSaved(){return store.journal(accountId(account));}
 export {reconcileNodePayments};
 `,loader:'ts',resolveDir:root+'/apps/companion/src'},bundle:true,write:false,format:'esm',platform:'node',logLevel:'silent',plugins:[{name:'explicit-local-boundaries',setup(b){
- b.onResolve({filter:/^\.\/(ledger\.js|storage\.js)$/},a=>({path:a.path,namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},a=>({loader:'js',contents:a.path.includes('ledger')?'export async function connectLedger(){throw Error("No device permitted")}' : `export class WatchStorage {constructor(){this.rows=new Map();} async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],nextChangeIndex:0,issuedReceiveThrough:-1});}async mutate(k,fn){const j=await this.journal(k);const r=fn(j);this.rows.set(k,structuredClone(j));globalThis.mutations++;return r;}}`}));
+ b.onResolve({filter:/^\.\/(device\.js|storage\.js)$/},a=>({path:a.path,namespace:'fixture'}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},a=>({loader:'js',contents:a.path.includes('device')?'export async function connectLedger(){throw Error("No device permitted")}' : `export class WatchStorage {constructor(){this.rows=new Map();} async journal(k){return structuredClone(this.rows.get(k)??{schema:1,payments:[],nextChangeIndex:0,issuedReceiveThrough:-1});}async mutate(k,fn){const j=await this.journal(k);const r=fn(j);this.rows.set(k,structuredClone(j));globalThis.mutations++;return r;}}`}));
 }}]});
 globalThis.document={querySelector:()=>({innerHTML:''}),querySelectorAll:()=>[],getElementById:()=>null};
 globalThis.window={addEventListener(){}};

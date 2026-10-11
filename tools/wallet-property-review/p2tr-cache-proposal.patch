@@ -1,0 +1,39 @@
+--- a/packages/sdk/src/keys.ts
++++ b/packages/sdk/src/keys.ts
+@@ -90,17 +90,31 @@
+   assert(!output.equals(secp256k1.ProjectivePoint.ZERO), "Invalid tweaked key");
+   return output.toRawBytes(true).slice(1);
+ }
++// Public curve-point validity is immutable for an exact byte string. Keep only
++// successful validations, with a small fixed FIFO bound; never retain callers'
++// mutable byte arrays or treat this as account/signature verification.
++const validP2trScripts = new Set<string>();
++const MAX_VALID_P2TR_SCRIPTS = 256;
+ export function validateP2trScript(script: Uint8Array): void {
+   assert(
+-    script instanceof Uint8Array &&
+-      script.length === 34 &&
+-      script[0] === 0x51 &&
+-      script[1] === 0x20,
++    script instanceof Uint8Array && script.length === 34,
+     "Only witness v1 32-byte P2TR is supported",
+   );
++  // Snapshot before both the cache key and validation, including for callers
++  // backed by a shared/mutable buffer.
++  const bytes = new Uint8Array(script);
++  assert(
++    bytes.length === 34 && bytes[0] === 0x51 && bytes[1] === 0x20,
++    "Only witness v1 32-byte P2TR is supported",
++  );
++  const key = hex(bytes);
++  if (validP2trScripts.has(key)) return;
+   secp256k1.ProjectivePoint.fromHex(
+-    concat(Uint8Array.of(2), script.slice(2)),
++    concat(Uint8Array.of(2), bytes.slice(2)),
+   ).assertValidity();
++  if (validP2trScripts.size >= MAX_VALID_P2TR_SCRIPTS)
++    validP2trScripts.delete(validP2trScripts.values().next().value!);
++  validP2trScripts.add(key);
+ }
+ /** Ordinary external payments may target P2TR or Pearl P2MR. Ownership stays BIP86/P2TR. */
+ export function validateRecipientScript(script: Uint8Array): void {

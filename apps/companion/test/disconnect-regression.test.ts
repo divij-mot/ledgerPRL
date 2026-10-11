@@ -16,7 +16,14 @@ test("mock-boundary regression: real DMK/SDK disconnect and journal recovery sta
     maxBuffer: 1024 * 1024,
   });
   assert.ifError(result.error);
-  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  assert.equal(
+    result.status,
+    0,
+    `${result.stdout}\n${result.stderr}`.replace(
+      /data:text\/javascript;base64,[A-Za-z0-9+/=]+(?:#\d+)?/g,
+      "[bundled main.ts]",
+    ),
+  );
   assert.equal(
     result.stdout.split("\n").filter((line) => line.startsWith("PASS:")).length,
     5,

@@ -1,0 +1,18 @@
+{
+  "device": "Nano S Plus",
+  "observedOs": "1.7.0",
+  "api": 27,
+  "loader": "ledgerblue 0.1.58",
+  "result": "loader exit 0",
+  "appName": "Pearl Dev",
+  "version": "0.1.0-prl-dev",
+  "flags": "0x40",
+  "derivationPrefix": "86'/808276'",
+  "hexSha256": "a5b6afa5833f80dab93e404f0f5e7439f9e10c66614ae7434cde15682bcceacf",
+  "elfSha256": "729df866b5168192c50abf0904ee31db8f5b8edcf3cd30bd6056acb4bfacfb15",
+  "applicationFullHash": "2f902273ee3fde9d82bbd334f7349dbc86bc0af8ffc8be67a90d7cc58abb5635",
+  "existingAppDeletion": false,
+  "firmwareUpdate": false,
+  "seedInitializationOrReset": false,
+  "persistentCAEnrollment": false
+}

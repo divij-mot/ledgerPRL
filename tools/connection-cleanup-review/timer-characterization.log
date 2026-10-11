@@ -1,0 +1,24 @@
+After connection []
+After physical-disconnect event and cleanup [
+  {
+    ms: 6000,
+    stack: 'Error\n' +
+      '    at <anonymous> (/workspace/scratch/5d237258d612/ledgerPRL/tools/connection-cleanup-review/timer-characterization.ts:17:35)\n' +
+      '    at b.startReconnectionTimeout (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/@ledgerhq/device-management-kit/src/api/transport/model/DeviceConnectionStateMachine.ts:86:20)\n' +
+      '    at startReconnectionTimeout (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/@ledgerhq/device-management-kit/src/api/transport/model/DeviceConnectionStateMachine.ts:103:46)\n' +
+      '    at Object.startTimer (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/@ledgerhq/device-management-kit/src/api/transport/model/DeviceConnectionStateMachine.ts:256:7)\n' +
+      '    at exec (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/xstate/dist/raise-60cebf03.cjs.js:566:20)\n' +
+      '    at Object.actionExecutor (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/xstate/dist/raise-60cebf03.cjs.js:572:11)\n' +
+      '    at resolveAndExecuteActionsWithContext (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/xstate/dist/raise-60cebf03.cjs.js:2290:18)\n' +
+      '    at resolveActionsAndContext (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/xstate/dist/raise-60cebf03.cjs.js:2322:21)\n' +
+      '    at enterStates (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/xstate/dist/raise-60cebf03.cjs.js:2116:20)\n' +
+      '    at microstep (/workspace/scratch/5d237258d612/ledgerPRL/node_modules/xstate/dist/raise-60cebf03.cjs.js:2058:15)'
+  }
+]
+State {
+  events: [ 'start', 'stop', 'connect', 'disconnect', 'close', 'destroy' ],
+  closes: 1,
+  listeners: { connect: 0, disconnect: 0 },
+  callbacks: 'function'
+}
+After retention deadline { timers: [], sessions: [ 0 ], reports: 1, opens: 1, closes: 2 }

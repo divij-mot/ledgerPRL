@@ -1,0 +1,923 @@
+{
+  "commit": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+  "runsQuery": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/runs?head_sha=abed962b08ca4b746f20192b28ce5b6c06a6c6a4&per_page=100",
+  "runs": [
+    {
+      "name": "[Release] - Build Prerelease - Push",
+      "id": 37904804313,
+      "status": "completed",
+      "conclusion": "cancelled",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37904804313",
+      "artifacts": []
+    },
+    {
+      "name": "@Mobile E2E \u2022 Manual \u2022 iOS Only \u2022 main \u2022 valentinemace9",
+      "id": 37434608721,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37434608721",
+      "artifacts": [
+        {
+          "name": "allure-report-iOS",
+          "size": 1379461,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11399706089/zip"
+        },
+        {
+          "name": "e2e-test-results-ios-1",
+          "size": 718,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11399426415/zip"
+        },
+        {
+          "name": "ios-test-artifacts-1",
+          "size": 75771,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11399216688/zip"
+        },
+        {
+          "name": "e2e-test-results-ios",
+          "size": 24295,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11399073013/zip"
+        }
+      ]
+    },
+    {
+      "name": "@Mobile E2E \u2022 Manual \u2022 iOS & Android \u2022 main \u2022 valentinemace9",
+      "id": 37431203046,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37431203046",
+      "artifacts": [
+        {
+          "name": "e2e-test-results-android-1",
+          "size": 714,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397925368/zip"
+        },
+        {
+          "name": "e2e-test-results-android",
+          "size": 26452,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397905639/zip"
+        },
+        {
+          "name": "ios-test-artifacts-1",
+          "size": 1969,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397885700/zip"
+        },
+        {
+          "name": "allure-report-iOS",
+          "size": 1343168,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397845964/zip"
+        },
+        {
+          "name": "e2e-test-results-ios",
+          "size": 24304,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397800847/zip"
+        },
+        {
+          "name": "allure-report-android",
+          "size": 1384523,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397446825/zip"
+        },
+        {
+          "name": "e2e-test-results-ios-1",
+          "size": 722,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397431307/zip"
+        },
+        {
+          "name": "usage-metrics-android-1",
+          "size": 1343,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397119346/zip"
+        },
+        {
+          "name": "android-test-artifacts-1",
+          "size": 88506,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11397054542/zip"
+        }
+      ]
+    },
+    {
+      "name": "@Mobile E2E \u2022 Manual \u2022 Android Only \u2022 main \u2022 valentinemace9",
+      "id": 37331343163,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37331343163",
+      "artifacts": [
+        {
+          "name": "usage-metrics-android-1",
+          "size": 1850,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11355880387/zip"
+        },
+        {
+          "name": "e2e-test-results-android",
+          "size": 26288,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11355690866/zip"
+        },
+        {
+          "name": "allure-report-android",
+          "size": 3146525,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11355477643/zip"
+        },
+        {
+          "name": "e2e-test-results-android-1",
+          "size": 1189,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11355276466/zip"
+        },
+        {
+          "name": "android-test-artifacts-1",
+          "size": 2479814,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11354743828/zip"
+        }
+      ]
+    },
+    {
+      "name": "@Mobile E2E \u2022 Manual \u2022 iOS Only \u2022 main \u2022 gbecerra-ledger",
+      "id": 37321413045,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37321413045",
+      "artifacts": [
+        {
+          "name": "e2e-test-results-ios",
+          "size": 24841,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11356446747/zip"
+        }
+      ]
+    },
+    {
+      "name": "@Mobile E2E \u2022 Manual \u2022 iOS Only \u2022 main \u2022 gbecerra-ledger",
+      "id": 37308819091,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37308819091",
+      "artifacts": [
+        {
+          "name": "ios-test-artifacts-1",
+          "size": 43175818,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11349472012/zip"
+        },
+        {
+          "name": "e2e-test-results-ios-1",
+          "size": 7701,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11349397176/zip"
+        },
+        {
+          "name": "allure-report-iOS",
+          "size": 60781385,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11349257786/zip"
+        },
+        {
+          "name": "e2e-test-results-ios",
+          "size": 24754,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11348592844/zip"
+        },
+        {
+          "name": "e2e-test-results-ios-3",
+          "size": 9536,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11348143209/zip"
+        },
+        {
+          "name": "e2e-test-results-ios-2",
+          "size": 8519,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11348019041/zip"
+        },
+        {
+          "name": "ios-test-artifacts-2",
+          "size": 38012097,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11347959132/zip"
+        },
+        {
+          "name": "ios-test-artifacts-3",
+          "size": 32150068,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11347818958/zip"
+        }
+      ]
+    },
+    {
+      "name": "@Mobile E2E \u2022 Manual \u2022 Android Only \u2022 main \u2022 gbecerra-ledger",
+      "id": 37280979936,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37280979936",
+      "artifacts": [
+        {
+          "name": "android-test-artifacts-9",
+          "size": 6578732,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334430030/zip"
+        },
+        {
+          "name": "usage-metrics-android-9",
+          "size": 3877,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334405164/zip"
+        },
+        {
+          "name": "usage-metrics-android-1",
+          "size": 3469,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334275851/zip"
+        },
+        {
+          "name": "e2e-test-results-android-8",
+          "size": 2818,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334265282/zip"
+        },
+        {
+          "name": "android-test-artifacts-3",
+          "size": 1314578,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334225743/zip"
+        },
+        {
+          "name": "e2e-test-results-android-10",
+          "size": 3018,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334211802/zip"
+        },
+        {
+          "name": "e2e-test-results-android",
+          "size": 26437,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334187860/zip"
+        },
+        {
+          "name": "usage-metrics-android-8",
+          "size": 3299,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334171103/zip"
+        },
+        {
+          "name": "e2e-test-results-android-6",
+          "size": 3062,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334161550/zip"
+        },
+        {
+          "name": "android-test-artifacts-11",
+          "size": 1200691,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334145670/zip"
+        },
+        {
+          "name": "e2e-test-results-android-1",
+          "size": 3933,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334142206/zip"
+        },
+        {
+          "name": "android-test-artifacts-1",
+          "size": 2172567,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334142201/zip"
+        },
+        {
+          "name": "allure-report-android",
+          "size": 33173046,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334138528/zip"
+        },
+        {
+          "name": "android-test-artifacts-5",
+          "size": 2758342,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334062911/zip"
+        },
+        {
+          "name": "e2e-test-results-android-4",
+          "size": 2882,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11334047389/zip"
+        },
+        {
+          "name": "usage-metrics-android-3",
+          "size": 3211,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333996373/zip"
+        },
+        {
+          "name": "android-test-artifacts-4",
+          "size": 3733088,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333977593/zip"
+        },
+        {
+          "name": "e2e-test-results-android-11",
+          "size": 2903,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333956072/zip"
+        },
+        {
+          "name": "usage-metrics-android-6",
+          "size": 3580,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333946871/zip"
+        },
+        {
+          "name": "e2e-test-results-android-7",
+          "size": 3426,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333937756/zip"
+        },
+        {
+          "name": "usage-metrics-android-12",
+          "size": 3468,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333863340/zip"
+        },
+        {
+          "name": "e2e-test-results-android-12",
+          "size": 3854,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333823334/zip"
+        },
+        {
+          "name": "android-test-artifacts-6",
+          "size": 3918172,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333637542/zip"
+        },
+        {
+          "name": "android-test-artifacts-7",
+          "size": 4258681,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333623433/zip"
+        },
+        {
+          "name": "usage-metrics-android-4",
+          "size": 3352,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333623360/zip"
+        },
+        {
+          "name": "android-test-artifacts-10",
+          "size": 4727600,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333618355/zip"
+        },
+        {
+          "name": "usage-metrics-android-7",
+          "size": 3443,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333598358/zip"
+        },
+        {
+          "name": "usage-metrics-android-11",
+          "size": 2878,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333456807/zip"
+        },
+        {
+          "name": "e2e-test-results-android-5",
+          "size": 3589,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333403736/zip"
+        },
+        {
+          "name": "e2e-test-results-android-9",
+          "size": 3213,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333394699/zip"
+        },
+        {
+          "name": "e2e-test-results-android-3",
+          "size": 2828,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333327433/zip"
+        },
+        {
+          "name": "android-test-artifacts-12",
+          "size": 1812227,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333319426/zip"
+        },
+        {
+          "name": "android-test-artifacts-8",
+          "size": 4201709,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333287560/zip"
+        },
+        {
+          "name": "usage-metrics-android-5",
+          "size": 3338,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333234223/zip"
+        },
+        {
+          "name": "usage-metrics-android-10",
+          "size": 3347,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333224273/zip"
+        },
+        {
+          "name": "usage-metrics-android-2",
+          "size": 3308,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333224117/zip"
+        },
+        {
+          "name": "android-test-artifacts-2",
+          "size": 4639006,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333169004/zip"
+        },
+        {
+          "name": "e2e-test-results-android-2",
+          "size": 4764,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11333154555/zip"
+        }
+      ]
+    },
+    {
+      "id": 37904804954,
+      "name": "[All Platforms] - Build and Test - Push",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37904804954",
+      "artifactCount": 25,
+      "artifacts": [
+        {
+          "name": "4.23.0-sha.abed962b08ca4b746f20192b28ce5b6c06a6c6a4-win-x64.exe",
+          "size": 196182810,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604765304/zip"
+        },
+        {
+          "name": "playwright-results-linux",
+          "size": 5950505,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604745438/zip"
+        },
+        {
+          "name": "outputs-codecheck",
+          "size": 298,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604620236/zip"
+        },
+        {
+          "name": "images",
+          "size": 152,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604601001/zip"
+        },
+        {
+          "name": "coverage-domain",
+          "size": 46827,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604540354/zip"
+        },
+        {
+          "name": "4.23.0-sha.abed962b08ca4b746f20192b28ce5b6c06a6c6a4-mac.dmg",
+          "size": 322742375,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604535619/zip"
+        },
+        {
+          "name": "summary-test-desktop.json",
+          "size": 611,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604506282/zip"
+        },
+        {
+          "name": "wallet-cli-darwin-arm64",
+          "size": 32449579,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604440378/zip"
+        },
+        {
+          "name": "coverage-shared",
+          "size": 33217,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604300795/zip"
+        },
+        {
+          "name": "wallet-cli-linux-x64",
+          "size": 45415521,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604281035/zip"
+        },
+        {
+          "name": "coverage-wallet-cli",
+          "size": 104515,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604271021/zip"
+        },
+        {
+          "name": "coverage-features",
+          "size": 132212,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604186503/zip"
+        },
+        {
+          "name": "ios-ui-e2e-smoke-artifacts",
+          "size": 92899,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604114380/zip"
+        },
+        {
+          "name": "allure-results-speculos-smoke",
+          "size": 23165,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604097444/zip"
+        },
+        {
+          "name": "outputs-test-ui",
+          "size": 165,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604091820/zip"
+        },
+        {
+          "name": "wallet-cli-windows-x64",
+          "size": 47675278,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11604002239/zip"
+        },
+        {
+          "name": "coverage-devtools",
+          "size": 37639,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603867427/zip"
+        },
+        {
+          "name": "coverage-mobile",
+          "size": 14308944,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603828139/zip"
+        },
+        {
+          "name": "android-ui-e2e-smoke-artifacts",
+          "size": 547190,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603798774/zip"
+        },
+        {
+          "name": "coverage-desktop",
+          "size": 13932048,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603758440/zip"
+        },
+        {
+          "name": "4.23.0-sha.abed962b08ca4b746f20192b28ce5b6c06a6c6a4-linux-x86_64.AppImage",
+          "size": 234534685,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603747837/zip"
+        },
+        {
+          "name": "wallet-cli-linux-arm64",
+          "size": 45592827,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603707908/zip"
+        },
+        {
+          "name": "coverage-libs",
+          "size": 967410,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603664709/zip"
+        },
+        {
+          "name": "outputs-test-libraries",
+          "size": 157,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603604675/zip"
+        },
+        {
+          "name": "coverage-support",
+          "size": 290,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11603223533/zip"
+        }
+      ]
+    },
+    {
+      "id": 37904803987,
+      "name": "Push on hotfix",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37904803987",
+      "artifactCount": 0,
+      "artifacts": []
+    },
+    {
+      "id": 37278650508,
+      "name": "@Desktop E2E \u2022 triggered on main by gbecerra-ledger",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37278650508",
+      "artifactCount": 2,
+      "artifacts": [
+        {
+          "name": "allure-report-linux",
+          "size": 77294335,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11332550344/zip"
+        },
+        {
+          "name": "allure-results",
+          "size": 73584456,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11331569906/zip"
+        }
+      ]
+    },
+    {
+      "id": 37060710504,
+      "name": "[All Platforms] - Build and Test - Push",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37060710504",
+      "artifactCount": 26,
+      "artifacts": [
+        {
+          "name": "android-ui-e2e-smoke-artifacts",
+          "size": 1196068,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11252095555/zip"
+        },
+        {
+          "name": "ios-ui-e2e-smoke-artifacts",
+          "size": 94310,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11251881892/zip"
+        },
+        {
+          "name": "4.23.0-sha.abed962b08ca4b746f20192b28ce5b6c06a6c6a4-mac.dmg",
+          "size": 322773748,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11251455726/zip"
+        },
+        {
+          "name": "outputs-test-libraries",
+          "size": 157,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11251390495/zip"
+        },
+        {
+          "name": "coverage-domain",
+          "size": 46827,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11251010980/zip"
+        },
+        {
+          "name": "coverage-libs",
+          "size": 967410,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250975918/zip"
+        },
+        {
+          "name": "wallet-cli-darwin-arm64",
+          "size": 32449579,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250935963/zip"
+        },
+        {
+          "name": "coverage-mobile",
+          "size": 14309070,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250926876/zip"
+        },
+        {
+          "name": "summary-test-desktop.json",
+          "size": 611,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250882171/zip"
+        },
+        {
+          "name": "wallet-cli-linux-x64",
+          "size": 45415521,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250856054/zip"
+        },
+        {
+          "name": "coverage-shared",
+          "size": 33217,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250840631/zip"
+        },
+        {
+          "name": "coverage-features",
+          "size": 132212,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250816615/zip"
+        },
+        {
+          "name": "coverage-wallet-cli",
+          "size": 104515,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250641388/zip"
+        },
+        {
+          "name": "coverage-devtools",
+          "size": 37639,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250631483/zip"
+        },
+        {
+          "name": "outputs-test-ui",
+          "size": 165,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250591042/zip"
+        },
+        {
+          "name": "4.23.0-sha.abed962b08ca4b746f20192b28ce5b6c06a6c6a4-win-x64.exe",
+          "size": 196182829,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250566893/zip"
+        },
+        {
+          "name": "coverage-support",
+          "size": 290,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250556219/zip"
+        },
+        {
+          "name": "wallet-cli-windows-x64",
+          "size": 47675278,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250551651/zip"
+        },
+        {
+          "name": "outputs-codecheck",
+          "size": 298,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250546780/zip"
+        },
+        {
+          "name": "allure-results-speculos-smoke",
+          "size": 23142,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250487746/zip"
+        },
+        {
+          "name": "wallet-cli-linux-arm64",
+          "size": 45592827,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250446502/zip"
+        },
+        {
+          "name": "coverage-ui-react",
+          "size": 17953,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250446160/zip"
+        },
+        {
+          "name": "coverage-desktop",
+          "size": 13934528,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250372311/zip"
+        },
+        {
+          "name": "playwright-results-linux",
+          "size": 6778523,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250312759/zip"
+        },
+        {
+          "name": "images",
+          "size": 152,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11250278322/zip"
+        },
+        {
+          "name": "4.23.0-sha.abed962b08ca4b746f20192b28ce5b6c06a6c6a4-linux-x86_64.AppImage",
+          "size": 234534683,
+          "expired": false,
+          "url": "https://api.github.com/repos/LedgerHQ/ledger-live/actions/artifacts/11249649960/zip"
+        }
+      ]
+    },
+    {
+      "id": 37060679920,
+      "name": "Push on main",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/LedgerHQ/ledger-live/actions/runs/37060679920",
+      "artifactCount": 0,
+      "artifacts": []
+    }
+  ],
+  "totalRuns": 12,
+  "allRunSummaries": [
+    {
+      "id": 37904804954,
+      "name": "[All Platforms] - Build and Test - Push",
+      "path": ".github/workflows/build-and-test-push.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37904804313,
+      "name": "[Release] - Build Prerelease - Push",
+      "path": ".github/workflows/release-prerelease.yml",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37904803987,
+      "name": "Push on hotfix",
+      "path": "dynamic/github-code-scanning/codeql",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37434608721,
+      "name": "@Mobile E2E \u2022 Manual \u2022 iOS Only \u2022 main \u2022 valentinemace9",
+      "path": ".github/workflows/test-mobile-e2e-reusable.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37431203046,
+      "name": "@Mobile E2E \u2022 Manual \u2022 iOS & Android \u2022 main \u2022 valentinemace9",
+      "path": ".github/workflows/test-mobile-e2e-reusable.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37331343163,
+      "name": "@Mobile E2E \u2022 Manual \u2022 Android Only \u2022 main \u2022 valentinemace9",
+      "path": ".github/workflows/test-mobile-e2e-reusable.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37321413045,
+      "name": "@Mobile E2E \u2022 Manual \u2022 iOS Only \u2022 main \u2022 gbecerra-ledger",
+      "path": ".github/workflows/test-mobile-e2e-reusable.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37308819091,
+      "name": "@Mobile E2E \u2022 Manual \u2022 iOS Only \u2022 main \u2022 gbecerra-ledger",
+      "path": ".github/workflows/test-mobile-e2e-reusable.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37280979936,
+      "name": "@Mobile E2E \u2022 Manual \u2022 Android Only \u2022 main \u2022 gbecerra-ledger",
+      "path": ".github/workflows/test-mobile-e2e-reusable.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37278650508,
+      "name": "@Desktop E2E \u2022 triggered on main by gbecerra-ledger",
+      "path": ".github/workflows/test-ui-e2e-only-desktop.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37060710504,
+      "name": "[All Platforms] - Build and Test - Push",
+      "path": ".github/workflows/build-and-test-push.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    },
+    {
+      "id": 37060679920,
+      "name": "Push on main",
+      "path": "dynamic/github-code-scanning/codeql",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+    }
+  ]
+}

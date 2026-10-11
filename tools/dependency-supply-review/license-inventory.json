@@ -1,0 +1,2262 @@
+{
+  "schema": 2,
+  "reviewedOn": "2026-10-10",
+  "sourceHead": "c6cd6e802bdc2efa1e9fb0fe5f91545b91e399b1",
+  "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
+  "scope": "Actual Rollup entry/shared-chunk and worker graph plus watched CSS/preset build inputs, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
+  "bundles": [
+    {
+      "file": "assets/index-ByVGc--d.js",
+      "type": "chunk",
+      "bytes": 269846,
+      "sha256": "2a9f3d2ad2069d9d0f6678d9788d273da097b117929b2ad3222a00968fac843c",
+      "components": [
+        "node_modules/@inversifyjs/common@1.5.0",
+        "node_modules/@inversifyjs/container@1.9.1",
+        "node_modules/@inversifyjs/core@5.2.0",
+        "node_modules/@inversifyjs/reflect-metadata-utils@1.1.0",
+        "node_modules/@ledgerhq/device-management-kit@1.11.0",
+        "node_modules/@ledgerhq/device-transport-kit-web-hid@1.2.4",
+        "node_modules/@sentry/hub@6.19.7",
+        "node_modules/@sentry/minimal@6.19.7",
+        "node_modules/@sentry/utils@6.19.7",
+        "node_modules/isomorphic-ws@5.0.0",
+        "node_modules/purify-ts@2.1.0",
+        "node_modules/reflect-metadata@0.2.2",
+        "node_modules/rxjs@7.8.2",
+        "node_modules/rxjs/node_modules/tslib@2.8.1",
+        "node_modules/semver@7.7.2",
+        "node_modules/tslib@1.14.1",
+        "node_modules/uuid@11.1.1",
+        "node_modules/xstate@5.19.2"
+      ]
+    },
+    {
+      "file": "assets/live-VcgfFvtq.js",
+      "type": "chunk",
+      "bytes": 445670,
+      "sha256": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
+      "components": [
+        "node_modules/@ledgerhq/hw-transport@6.36.0",
+        "node_modules/@ledgerhq/logs@6.19.0",
+        "node_modules/@ledgerhq/wallet-api-client@1.16.0",
+        "node_modules/@ledgerhq/wallet-api-core@2.1.0",
+        "node_modules/@ton/core@0.62.1",
+        "node_modules/@ton/crypto@3.3.0",
+        "node_modules/@ton/crypto-primitives@2.1.0",
+        "node_modules/bignumber.js@9.3.1",
+        "node_modules/events@3.3.0",
+        "node_modules/jssha@3.2.0",
+        "node_modules/tweetnacl@1.0.3",
+        "node_modules/zod@4.6.5",
+        "generated-runtime:vite@7.3.7"
+      ]
+    },
+    {
+      "file": "assets/pearl-apdu-DTLxDe13.js",
+      "type": "chunk",
+      "bytes": 5651,
+      "sha256": "59bad00dc662a14465fbe60b947ec41c93b5b9e2c3f40fe4acef4bfbaaebf621",
+      "components": [
+        "generated-runtime:vite@7.3.7"
+      ]
+    },
+    {
+      "file": "assets/main-BmAxsC9p.js",
+      "type": "chunk",
+      "bytes": 493807,
+      "sha256": "0aa70488611f5c9a84efe80ccf9e5c5e6203ecb1870d79819db5f8c894bd0053",
+      "components": [
+        "node_modules/@ledgerhq/lumen-ui-react@0.1.65",
+        "node_modules/@noble/curves@1.9.7",
+        "node_modules/@noble/hashes@1.8.0",
+        "node_modules/@radix-ui/react-compose-refs@1.1.5",
+        "node_modules/@radix-ui/react-slot@1.4.0",
+        "node_modules/@scure/base@1.2.6",
+        "node_modules/@scure/bip32@1.7.0",
+        "node_modules/class-variance-authority@0.7.1",
+        "node_modules/clsx@2.1.1",
+        "node_modules/qrcode.react@4.2.0",
+        "node_modules/react@19.3.0",
+        "node_modules/react-dom@19.3.0",
+        "node_modules/tailwind-merge@2.6.1",
+        "source:LedgerHQ/app-bitcoin@44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+        "source:LedgerHQ/ledger-live@abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+      ]
+    },
+    {
+      "file": "assets/index-D2rIokL7.js",
+      "type": "chunk",
+      "bytes": 27563,
+      "sha256": "1f249402fcd873f8027991e01b1d3b1d5c2be10662d965ce0d783699de1df9b3",
+      "components": [
+        "node_modules/base64-js@1.5.1",
+        "node_modules/buffer@6.0.3",
+        "node_modules/ieee754@1.2.1"
+      ]
+    },
+    {
+      "file": "assets/qr-reader-BRNRvs-M.js",
+      "type": "chunk",
+      "bytes": 3269,
+      "sha256": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
+      "components": [
+        "source:LedgerHQ/ledger-live@abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+      ]
+    },
+    {
+      "file": "assets/jsQR-Dk72IcmC.js",
+      "type": "chunk",
+      "bytes": 130721,
+      "sha256": "c49ea57b007c745bc790dae9c4027ddf5dd77f337f10d5d223951f55174cc20d",
+      "components": [
+        "node_modules/jsqr@1.4.0"
+      ]
+    },
+    {
+      "file": "assets/Inter-Regular-BHP6tI7_.woff2",
+      "type": "asset",
+      "bytes": 89212,
+      "sha256": "77ca56870309a85759fb7116aef2119a26e358145e808868543ca1fe16c27720",
+      "components": [
+        "font:Inter:LedgerWallet-4.23.0"
+      ]
+    },
+    {
+      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "type": "asset",
+      "bytes": 95224,
+      "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
+      "components": [
+        "font:Inter:LedgerWallet-4.23.0"
+      ]
+    },
+    {
+      "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
+      "type": "asset",
+      "bytes": 95652,
+      "sha256": "65c5807ea1ddc17bf75d8e16d916b282792bb188ce9c8eb75898f0cf1cb999c0",
+      "components": [
+        "font:Inter:LedgerWallet-4.23.0"
+      ]
+    },
+    {
+      "file": "assets/pearl-apdu-CnYMOtYj.css",
+      "type": "asset",
+      "bytes": 196825,
+      "sha256": "491336585e237e97e220ca6925d3b20b5c1320b81f955c663e62d776e05a20da",
+      "components": [
+        "node_modules/@ledgerhq/lumen-design-core@0.1.33",
+        "node_modules/@ledgerhq/lumen-ui-react@0.1.65",
+        "node_modules/tailwindcss@4.3.3",
+        "source:LedgerHQ/ledger-live@abed962b08ca4b746f20192b28ce5b6c06a6c6a4"
+      ]
+    },
+    {
+      "file": "assets/backup-import.worker-Dtrkqa4Y.js",
+      "type": "asset",
+      "bytes": 72732,
+      "sha256": "574f3999066984fc8b2d8674bc790097bd8b8ec54bf2b184664c5f5e94d42f4b",
+      "components": [
+        "node_modules/@noble/curves@1.9.7",
+        "node_modules/@noble/hashes@1.8.0",
+        "node_modules/@scure/base@1.2.6",
+        "node_modules/@scure/bip32@1.7.0"
+      ]
+    },
+    {
+      "file": "index.html",
+      "type": "asset",
+      "bytes": 813,
+      "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
+      "components": []
+    },
+    {
+      "file": "live.html",
+      "type": "asset",
+      "bytes": 885,
+      "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
+      "components": []
+    }
+  ],
+  "counts": {
+    "npmPackageInstances": 49,
+    "npmUniqueNames": 48,
+    "generatedRuntimeGroups": 1,
+    "copiedSourceGroups": 2,
+    "fontGroups": 1,
+    "componentGroups": 53
+  },
+  "components": [
+    {
+      "id": "node_modules/@inversifyjs/common@1.5.0",
+      "name": "@inversifyjs/common",
+      "version": "1.5.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@inversifyjs/common",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@inversifyjs/common/lib/esm/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@inversifyjs/common/LICENSE",
+          "sha256": "e7f118bca6d3c2ea16a30302f1e0062b6c7ba63bb1718a0602f969062b67ecbd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@inversifyjs/container@1.9.1",
+      "name": "@inversifyjs/container",
+      "version": "1.9.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@inversifyjs/container",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@inversifyjs/container/lib/esm/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@inversifyjs/container/LICENSE",
+          "sha256": "e7f118bca6d3c2ea16a30302f1e0062b6c7ba63bb1718a0602f969062b67ecbd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@inversifyjs/core@5.2.0",
+      "name": "@inversifyjs/core",
+      "version": "5.2.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@inversifyjs/core",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@inversifyjs/core/lib/esm/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@inversifyjs/core/LICENSE",
+          "sha256": "e7f118bca6d3c2ea16a30302f1e0062b6c7ba63bb1718a0602f969062b67ecbd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@inversifyjs/reflect-metadata-utils@1.1.0",
+      "name": "@inversifyjs/reflect-metadata-utils",
+      "version": "1.1.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@inversifyjs/reflect-metadata-utils",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@inversifyjs/reflect-metadata-utils/lib/esm/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@inversifyjs/reflect-metadata-utils/LICENSE",
+          "sha256": "e7f118bca6d3c2ea16a30302f1e0062b6c7ba63bb1718a0602f969062b67ecbd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/device-management-kit@1.11.0",
+      "name": "@ledgerhq/device-management-kit",
+      "version": "1.11.0",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/device-management-kit",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/package.json",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/DeviceManagementKit.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/DeviceManagementKitBuilder.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/Error.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/model/Apdu.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/ApduBuilder.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/ApduParser.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/AppBuilderError.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/ByteArrayBuilder.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/apdu/utils/ByteArrayParser.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/di/commandModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/di/commandTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/model/CommandResult.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/os/GetAppAndVersionCommand.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/os/GetBatteryStatusCommand.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/os/GetOsVersionCommand.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/os/SecureElementFlagsParser.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/use-case/SendCommandUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/utils/CommandErrors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/utils/CommandUtils.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/command/utils/GlobalCommandError.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/di/deviceActionModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/di/deviceActionTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/model/DeviceActionState.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/model/UserInteractionRequired.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-action/use-case/ExecuteDeviceActionUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-model/data/StaticDeviceModelDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-model/model/BleDeviceInfos.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-model/model/DeviceModel.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/ApduResponse.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/DeviceSessionState.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/data/FramerConst.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/use-case/DisableDeviceSessionRefresher.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device-session/utils/FramerUtils.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device/DeviceModel.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device/DeviceStatus.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/device/SecureElementFlags.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/logger-subscriber/model/LogLevel.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/logger-subscriber/service/DefaultLogTagFormatter.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/model/DmkResult.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/network/DmkNetworkClient.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/network/DmkNetworkClientError.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/network/DmkNetworkClientHelpers.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/secure-channel/task/types.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/transport/model/ConnectedDevice.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/transport/model/DeviceConnectionStateMachine.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/transport/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/transport/model/TransportConnectedDevice.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/utils/HexaString.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/api/utils/apduLogs.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/di.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/di.stub.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/data/LocalConfigDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/data/LocalConfigDataSource.stub.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/data/RemoteConfigDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/data/RemoteConfigDataSource.stub.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/di/configModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/di/configTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/model/Config.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/service/DefaultConfigService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/config/use-case/GetDmkVersionUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-model/di/deviceModelModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-model/di/deviceModelTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/data/ApduResponseConst.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/data/DeviceSessionRefresherConst.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/di/deviceSessionModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/di/deviceSessionTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DevicePinger.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DeviceSession.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DeviceSessionEventDispatcher.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DeviceSessionRefresher.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/DeviceSessionStateHandler.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/Frame.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/model/FrameHeader.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/DefaultApduReceiverService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/DefaultApduSenderService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/DefaultDeviceSessionService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/IntentQueueService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/service/RefresherService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/use-case/CloseSessionsUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/use-case/GetDeviceSessionStateUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/device-session/use-case/UnsafeBypassIntentQueueUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/di/discoveryModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/di/discoveryTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ConnectUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/DisconnectUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/GetConnectedDeviceUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ListConnectedDevicesUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ListenToAvailableDevicesUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ListenToConnectedDeviceUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/ReconnectUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/StartDiscoveringUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/discovery/use-case/StopDiscoveringUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/logger-publisher/di/loggerModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/logger-publisher/di/loggerTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/logger-publisher/service/DefaultLoggerPublisherService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/logger-publisher/service/sanitiseData.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/data/HttpManagerApiDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/data/ManagerApiDto.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/di/managerApiModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/di/managerApiTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/model/Application.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/model/Const.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/service/DefaultManagerApiService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/use-case/SetFirmwareDistributionSaltUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/manager-api/use-case/SetProviderUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/data/DefaultSecureChannelDataSource.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/di/secureChannelModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/di/secureChannelTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/model/Const.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/model/Errors.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/service/DefaultSecureChannelService.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/secure-channel/use-case/SetWebSocketUrlUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/send/di/sendModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/send/di/sendTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/send/use-case/SendApduUseCase.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/transport/di/transportDiTypes.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/transport/di/transportModule.js",
+          "node_modules/@ledgerhq/device-management-kit/lib/esm/src/internal/transport/service/DefaultTransportService.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@ledgerhq/device-management-kit/LICENSE.MD",
+          "sha256": "3d5fd8df1ad22ad2ce6c9d1b96761647b30c6d0c06bf5b168972f0e247654730"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/device-transport-kit-web-hid@1.2.4",
+      "name": "@ledgerhq/device-transport-kit-web-hid",
+      "version": "1.2.4",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/device-transport-kit-web-hid",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/data/WebHidConfig.js",
+          "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/model/Errors.js",
+          "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/transport/WebHidApduSender.js",
+          "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/transport/WebHidTransport.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@ledgerhq/device-transport-kit-web-hid/LICENSE.MD",
+          "sha256": "3d5fd8df1ad22ad2ce6c9d1b96761647b30c6d0c06bf5b168972f0e247654730"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/hw-transport@6.36.0",
+      "name": "@ledgerhq/hw-transport",
+      "version": "6.36.0",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/hw-transport",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/hw-transport/lib-es/Transport.js",
+          "node_modules/@ledgerhq/hw-transport/lib-es/errors.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "scope": "The published package and exact official release tag declare Apache-2.0 but omit a license/NOTICE file. The original declaration and unmodified standard Apache 2.0 text from the Apache Software Foundation are retained; no package-specific copyright or NOTICE is invented.",
+      "notices": [
+        {
+          "path": "tools/dependency-supply-review/upstream-notices/hw-transport-package.json",
+          "sha256": "032c7a5e13fb416ee0625a4d3a0d547152b019d0bf6059dfb84be4862a78d54b"
+        },
+        {
+          "path": "tools/dependency-supply-review/upstream-notices/LICENSE.apache-2.0",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/logs@6.19.0",
+      "name": "@ledgerhq/logs",
+      "version": "6.19.0",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/logs",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/logs/lib-es/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "scope": "The published package and exact official release tag declare Apache-2.0 but omit a license/NOTICE file. The original declaration and unmodified standard Apache 2.0 text from the Apache Software Foundation are retained; no package-specific copyright or NOTICE is invented.",
+      "notices": [
+        {
+          "path": "tools/dependency-supply-review/upstream-notices/logs-package.json",
+          "sha256": "9e1e5368dc3d8ef42a31d80f5c86072f0c384251c2ca02d3ef0cd425ec4b08fb"
+        },
+        {
+          "path": "tools/dependency-supply-review/upstream-notices/LICENSE.apache-2.0",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/lumen-design-core@0.1.33",
+      "name": "@ledgerhq/lumen-design-core",
+      "version": "0.1.33",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/lumen-design-core",
+      "bundles": [
+        "assets/pearl-apdu-CnYMOtYj.css"
+      ],
+      "sourceModules": {
+        "main": [],
+        "worker": [],
+        "css": [
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/presets/allBrands.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/presets/enterprise.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/presets/ledger-live.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/presets/websites.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/enterprise/theme.dark-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/enterprise/theme.light-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/index.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/ledger-live/theme.dark-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/ledger-live/theme.light-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/primitives-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/typographies/typography.lg-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/typographies/typography.md-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/typographies/typography.sm-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/typographies/typography.xl-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/typographies/typography.xs-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/websites/theme.dark-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/css/websites/theme.light-css.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/enterprise/theme.dark.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/enterprise/theme.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/enterprise/theme.light.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/ledger-live/theme.dark.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/ledger-live/theme.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/ledger-live/theme.light.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/primitives/primitive.colors.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/primitives/primitive.gradients.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/primitives/primitive.typographies.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/primitives/primitives.motion.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/primitives/primitives.others.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/primitives/primitives.shadows.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/typographies/index.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/typographies/typography.lg.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/typographies/typography.md.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/typographies/typography.sm.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/typographies/typography.xl.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/typographies/typography.xs.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/utils/extractCryptoGradients.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/websites/theme.dark.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/websites/theme.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/themes/js/websites/theme.light.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/utils/createAnimationsPlugin.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/utils/createCustomPlugin.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/utils/createIconUtilities.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/utils/createMaskPlugin.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/utils/createPrimitivesPlugin.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/utils/createScreensPlugin.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/utils/createSpotUtilities.js",
+          "node_modules/@ledgerhq/lumen-design-core/dist/lib/utils/getThemeUtilsByPrefix.js"
+        ]
+      },
+      "scope": "The npm package omits a license file. This is the unchanged root Apache-2.0 license from the exact official package release tag; package metadata alone is not treated as the full notice.",
+      "notices": [
+        {
+          "path": "tools/dependency-supply-review/upstream-notices/LICENSE.lumen-ui-design",
+          "sha256": "81d29f0bcc4e026c913424a66bcdf3bd31e03ab58e1ac7c4be5f367414557d10"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/lumen-ui-react@0.1.65",
+      "name": "@ledgerhq/lumen-ui-react",
+      "version": "0.1.65",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/lumen-ui-react",
+      "bundles": [
+        "assets/main-BmAxsC9p.js",
+        "assets/pearl-apdu-CnYMOtYj.css"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/lumen-ui-react/dist/lib/Components/core/Button/Button.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/lib/Components/core/Spinner/Spinner.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/lib/Components/internal/BaseButton/BaseButton.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/libs/utils-shared/dist/index.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/languages.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/de.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/en.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/es.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/fr.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/ja.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/ko.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/pt.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/ru.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/th.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/tr.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/locales/zh.json.js",
+          "node_modules/@ledgerhq/lumen-ui-react/dist/translations/translations.js"
+        ],
+        "worker": [],
+        "css": [
+          "node_modules/@ledgerhq/lumen-ui-react/tailwind.css"
+        ]
+      },
+      "scope": "The npm package omits a license file. This is the unchanged root Apache-2.0 license from the exact official package release tag; package metadata alone is not treated as the full notice.",
+      "notices": [
+        {
+          "path": "tools/dependency-supply-review/upstream-notices/LICENSE.lumen-ui-design",
+          "sha256": "81d29f0bcc4e026c913424a66bcdf3bd31e03ab58e1ac7c4be5f367414557d10"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/wallet-api-client@1.16.0",
+      "name": "@ledgerhq/wallet-api-client",
+      "version": "1.16.0",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/@ledgerhq/wallet-api-client",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/TransportWalletAPI.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/WalletAPIClient.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Account.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Bitcoin.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Currency.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Device.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Exchange.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Message.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Storage.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Transaction.js",
+          "node_modules/@ledgerhq/wallet-api-client/lib-es/modules/Wallet.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@ledgerhq/wallet-api-client/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ledgerhq/wallet-api-core@2.1.0",
+      "name": "@ledgerhq/wallet-api-core",
+      "version": "2.1.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@ledgerhq/wallet-api-core",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/JSONRPC/RPCError.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/JSONRPC/RpcNode.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/JSONRPC/helpers.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/JSONRPC/types.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/JSONRPC/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/accounts/serializers.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/accounts/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/currencies/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/errors/ServerError.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/errors/creators.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/errors/serialization.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/errors/types.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/aleo/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/aleo/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/algorand/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/algorand/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/aptos/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/aptos/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/bitcoin/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/bitcoin/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/cardano/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/cardano/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/casper/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/casper/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/celo/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/celo/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/common.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/cosmos/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/cosmos/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/crypto_org/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/crypto_org/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/elrond/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/elrond/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/ethereum/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/ethereum/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/filecoin/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/filecoin/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/hedera/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/hedera/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/internet_computer/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/internet_computer/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/kaspa/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/kaspa/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/near/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/near/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/neo/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/neo/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/polkadot/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/polkadot/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/ripple/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/ripple/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/solana/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/solana/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/stacks/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/stacks/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/stellar/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/stellar/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/sui/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/sui/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/tezos/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/tezos/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/ton/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/ton/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/tron/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/tron/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/vechain/serializer.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/families/vechain/validation.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/logger/index.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/methods.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/AccountGetMaxSpendable.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/AccountGetPublicKey.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/AccountList.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/AccountReceive.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/AccountRequest.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/BitcoinGetAddress.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/BitcoinGetAddresses.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/BitcoinGetPublicKey.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/BitcoinGetXPub.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/BitcoinSignPsbt.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/CurrencyList.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/Device.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/DeviceClose.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/DeviceExchange.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/DeviceOpen.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/DeviceSelect.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/DeviceTransport.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/ExchangeComplete.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/ExchangeStart.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/MessageSign.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/StorageGet.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/StorageSet.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/TransactionSign.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/TransactionSignAndBroadcast.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/TransactionSignRaw.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/WalletCapabilities.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/WalletInfo.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/spec/types/WalletUserId.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/transports/WindowMessageTransport.js",
+          "node_modules/@ledgerhq/wallet-api-core/lib-es/types/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "scope": "Unresolved attribution gap: the published package and this exact official source tag declare MIT but contain no core or repository-wide license/copyright file. The original declaration is preserved below. The Apache license of the separate Wallet API client is not assigned to core. Full applicable notices and copyright attribution require upstream clarification before public distribution.",
+      "notices": [
+        {
+          "path": "tools/dependency-supply-review/upstream-notices/wallet-api-core-package.json",
+          "sha256": "e9eb6238bd79758cbe586fbb94a4668c5a30c23e370a0e3c3fd3ba5830ee5274"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@noble/curves@1.9.7",
+      "name": "@noble/curves",
+      "version": "1.9.7",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@noble/curves",
+      "bundles": [
+        "assets/main-BmAxsC9p.js",
+        "assets/backup-import.worker-Dtrkqa4Y.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@noble/curves/esm/_shortw_utils.js",
+          "node_modules/@noble/curves/esm/abstract/curve.js",
+          "node_modules/@noble/curves/esm/abstract/modular.js",
+          "node_modules/@noble/curves/esm/abstract/weierstrass.js",
+          "node_modules/@noble/curves/esm/secp256k1.js",
+          "node_modules/@noble/curves/esm/utils.js"
+        ],
+        "worker": [
+          "node_modules/@noble/curves/esm/_shortw_utils.js",
+          "node_modules/@noble/curves/esm/abstract/curve.js",
+          "node_modules/@noble/curves/esm/abstract/modular.js",
+          "node_modules/@noble/curves/esm/abstract/weierstrass.js",
+          "node_modules/@noble/curves/esm/secp256k1.js",
+          "node_modules/@noble/curves/esm/utils.js"
+        ],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@noble/curves/LICENSE",
+          "sha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@noble/hashes@1.8.0",
+      "name": "@noble/hashes",
+      "version": "1.8.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@noble/hashes",
+      "bundles": [
+        "assets/main-BmAxsC9p.js",
+        "assets/backup-import.worker-Dtrkqa4Y.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@noble/hashes/esm/_md.js",
+          "node_modules/@noble/hashes/esm/_u64.js",
+          "node_modules/@noble/hashes/esm/crypto.js",
+          "node_modules/@noble/hashes/esm/hmac.js",
+          "node_modules/@noble/hashes/esm/legacy.js",
+          "node_modules/@noble/hashes/esm/sha2.js",
+          "node_modules/@noble/hashes/esm/sha256.js",
+          "node_modules/@noble/hashes/esm/utils.js"
+        ],
+        "worker": [
+          "node_modules/@noble/hashes/esm/_md.js",
+          "node_modules/@noble/hashes/esm/_u64.js",
+          "node_modules/@noble/hashes/esm/crypto.js",
+          "node_modules/@noble/hashes/esm/hmac.js",
+          "node_modules/@noble/hashes/esm/legacy.js",
+          "node_modules/@noble/hashes/esm/sha2.js",
+          "node_modules/@noble/hashes/esm/sha256.js",
+          "node_modules/@noble/hashes/esm/utils.js"
+        ],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@noble/hashes/LICENSE",
+          "sha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@radix-ui/react-compose-refs@1.1.5",
+      "name": "@radix-ui/react-compose-refs",
+      "version": "1.1.5",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@radix-ui/react-compose-refs",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@radix-ui/react-compose-refs/dist/index.mjs"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@radix-ui/react-compose-refs/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@radix-ui/react-slot@1.4.0",
+      "name": "@radix-ui/react-slot",
+      "version": "1.4.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@radix-ui/react-slot",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@radix-ui/react-slot/dist/index.mjs"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@radix-ui/react-slot/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@scure/base@1.2.6",
+      "name": "@scure/base",
+      "version": "1.2.6",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@scure/base",
+      "bundles": [
+        "assets/main-BmAxsC9p.js",
+        "assets/backup-import.worker-Dtrkqa4Y.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@scure/base/lib/esm/index.js"
+        ],
+        "worker": [
+          "node_modules/@scure/base/lib/esm/index.js"
+        ],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@scure/base/LICENSE",
+          "sha256": "3239e134eb6e6d64538ca76498c7fcb08a395249dd9d4af9927bf6d0169ee429"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@scure/bip32@1.7.0",
+      "name": "@scure/bip32",
+      "version": "1.7.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@scure/bip32",
+      "bundles": [
+        "assets/main-BmAxsC9p.js",
+        "assets/backup-import.worker-Dtrkqa4Y.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@scure/bip32/lib/esm/index.js"
+        ],
+        "worker": [
+          "node_modules/@scure/bip32/lib/esm/index.js"
+        ],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@scure/bip32/LICENSE",
+          "sha256": "1565efd0ec4580bfaa96c7eeaaa9af3791baa1cc562c3bde62d0a055910b9ec7"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@sentry/hub@6.19.7",
+      "name": "@sentry/hub",
+      "version": "6.19.7",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/@sentry/hub",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@sentry/hub/esm/flags.js",
+          "node_modules/@sentry/hub/esm/hub.js",
+          "node_modules/@sentry/hub/esm/scope.js",
+          "node_modules/@sentry/hub/esm/session.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@sentry/hub/LICENSE",
+          "sha256": "dba8e6ce88f07f7a55f62bcbe01e436d6af3454e108825fa9d3a47e6e0c90197"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@sentry/minimal@6.19.7",
+      "name": "@sentry/minimal",
+      "version": "6.19.7",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/@sentry/minimal",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@sentry/minimal/esm/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@sentry/minimal/LICENSE",
+          "sha256": "dba8e6ce88f07f7a55f62bcbe01e436d6af3454e108825fa9d3a47e6e0c90197"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@sentry/utils@6.19.7",
+      "name": "@sentry/utils",
+      "version": "6.19.7",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/@sentry/utils",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/@sentry/utils/esm/env.js",
+          "node_modules/@sentry/utils/esm/flags.js",
+          "node_modules/@sentry/utils/esm/global.js",
+          "node_modules/@sentry/utils/esm/is.js",
+          "node_modules/@sentry/utils/esm/logger.js",
+          "node_modules/@sentry/utils/esm/misc.js",
+          "node_modules/@sentry/utils/esm/node.js",
+          "node_modules/@sentry/utils/esm/object.js",
+          "node_modules/@sentry/utils/esm/syncpromise.js",
+          "node_modules/@sentry/utils/esm/time.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@sentry/utils/LICENSE",
+          "sha256": "dba8e6ce88f07f7a55f62bcbe01e436d6af3454e108825fa9d3a47e6e0c90197"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ton/core@0.62.1",
+      "name": "@ton/core",
+      "version": "0.62.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@ton/core",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/@ton/core/dist/address/ADNLAddress.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/address/Address.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/address/ExternalAddress.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/address/contractAddress.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/BitBuilder.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/BitReader.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/BitString.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/Builder.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/Cell.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/CellType.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/Slice.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/LevelMask.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/descriptor.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/exoticLibrary.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/exoticMerkleProof.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/exoticMerkleUpdate.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/exoticPruned.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/resolveExotic.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/serialization.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/utils/topologicalSort.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/cell/wonderCalculator.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/utils/paddedBits.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/boc/utils/strings.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/contract/ComputeError.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/contract/openContract.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/crypto/safeSign.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/dict/Dictionary.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/dict/generateMerkleProof.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/dict/generateMerkleUpdate.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/dict/parseDict.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/dict/serializeDict.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/dict/utils/findCommonPrefix.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/dict/utils/internalKeySerializer.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/dict/utils/readUnaryLength.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/index.js?commonjs-es-import",
+          "\u0000node_modules/@ton/core/dist/index.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/inspect.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/tuple/builder.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/tuple/reader.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/tuple/tuple.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/Account.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/AccountState.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/AccountStatus.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/AccountStatusChange.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/AccountStorage.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/CommonMessageInfo.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/CommonMessageInfoRelaxed.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/ComputeSkipReason.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/CurrencyCollection.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/DepthBalanceInfo.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/ExtraCurrency.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/HashUpdate.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/LibRef.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/MasterchainStateExtra.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/Message.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/MessageRelaxed.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/OutList.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/ReserveMode.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/SendMode.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/ShardAccount.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/ShardAccounts.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/ShardIdent.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/ShardStateUnsplit.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/SimpleLibrary.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/SplitMergeInfo.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/StateInit.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/StorageExtraInfo.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/StorageInfo.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/StorageUsed.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/TickTock.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/Transaction.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/TransactionActionPhase.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/TransactionBouncePhase.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/TransactionComputePhase.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/TransactionCreditPhase.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/TransactionDescription.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/TransactionStoragePhase.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/_export.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/types/_helpers.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/utils/base32.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/utils/bitsForNumber.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/utils/convert.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/utils/crc16.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/utils/crc32c.js?commonjs-exports",
+          "\u0000node_modules/@ton/core/dist/utils/getMethodId.js?commonjs-exports",
+          "node_modules/@ton/core/dist/address/ADNLAddress.js",
+          "node_modules/@ton/core/dist/address/Address.js",
+          "node_modules/@ton/core/dist/address/ExternalAddress.js",
+          "node_modules/@ton/core/dist/address/contractAddress.js",
+          "node_modules/@ton/core/dist/boc/BitBuilder.js",
+          "node_modules/@ton/core/dist/boc/BitReader.js",
+          "node_modules/@ton/core/dist/boc/BitString.js",
+          "node_modules/@ton/core/dist/boc/Builder.js",
+          "node_modules/@ton/core/dist/boc/Cell.js",
+          "node_modules/@ton/core/dist/boc/CellType.js",
+          "node_modules/@ton/core/dist/boc/Slice.js",
+          "node_modules/@ton/core/dist/boc/cell/LevelMask.js",
+          "node_modules/@ton/core/dist/boc/cell/descriptor.js",
+          "node_modules/@ton/core/dist/boc/cell/exoticLibrary.js",
+          "node_modules/@ton/core/dist/boc/cell/exoticMerkleProof.js",
+          "node_modules/@ton/core/dist/boc/cell/exoticMerkleUpdate.js",
+          "node_modules/@ton/core/dist/boc/cell/exoticPruned.js",
+          "node_modules/@ton/core/dist/boc/cell/resolveExotic.js",
+          "node_modules/@ton/core/dist/boc/cell/serialization.js",
+          "node_modules/@ton/core/dist/boc/cell/utils/topologicalSort.js",
+          "node_modules/@ton/core/dist/boc/cell/wonderCalculator.js",
+          "node_modules/@ton/core/dist/boc/utils/paddedBits.js",
+          "node_modules/@ton/core/dist/boc/utils/strings.js",
+          "node_modules/@ton/core/dist/contract/ComputeError.js",
+          "node_modules/@ton/core/dist/contract/openContract.js",
+          "node_modules/@ton/core/dist/crypto/safeSign.js",
+          "node_modules/@ton/core/dist/dict/Dictionary.js",
+          "node_modules/@ton/core/dist/dict/generateMerkleProof.js",
+          "node_modules/@ton/core/dist/dict/generateMerkleUpdate.js",
+          "node_modules/@ton/core/dist/dict/parseDict.js",
+          "node_modules/@ton/core/dist/dict/serializeDict.js",
+          "node_modules/@ton/core/dist/dict/utils/findCommonPrefix.js",
+          "node_modules/@ton/core/dist/dict/utils/internalKeySerializer.js",
+          "node_modules/@ton/core/dist/dict/utils/readUnaryLength.js",
+          "node_modules/@ton/core/dist/index.js",
+          "node_modules/@ton/core/dist/inspect.js",
+          "node_modules/@ton/core/dist/tuple/builder.js",
+          "node_modules/@ton/core/dist/tuple/reader.js",
+          "node_modules/@ton/core/dist/tuple/tuple.js",
+          "node_modules/@ton/core/dist/types/Account.js",
+          "node_modules/@ton/core/dist/types/AccountState.js",
+          "node_modules/@ton/core/dist/types/AccountStatus.js",
+          "node_modules/@ton/core/dist/types/AccountStatusChange.js",
+          "node_modules/@ton/core/dist/types/AccountStorage.js",
+          "node_modules/@ton/core/dist/types/CommonMessageInfo.js",
+          "node_modules/@ton/core/dist/types/CommonMessageInfoRelaxed.js",
+          "node_modules/@ton/core/dist/types/ComputeSkipReason.js",
+          "node_modules/@ton/core/dist/types/CurrencyCollection.js",
+          "node_modules/@ton/core/dist/types/DepthBalanceInfo.js",
+          "node_modules/@ton/core/dist/types/ExtraCurrency.js",
+          "node_modules/@ton/core/dist/types/HashUpdate.js",
+          "node_modules/@ton/core/dist/types/LibRef.js",
+          "node_modules/@ton/core/dist/types/MasterchainStateExtra.js",
+          "node_modules/@ton/core/dist/types/Message.js",
+          "node_modules/@ton/core/dist/types/MessageRelaxed.js",
+          "node_modules/@ton/core/dist/types/OutList.js",
+          "node_modules/@ton/core/dist/types/ReserveMode.js",
+          "node_modules/@ton/core/dist/types/SendMode.js",
+          "node_modules/@ton/core/dist/types/ShardAccount.js",
+          "node_modules/@ton/core/dist/types/ShardAccounts.js",
+          "node_modules/@ton/core/dist/types/ShardIdent.js",
+          "node_modules/@ton/core/dist/types/ShardStateUnsplit.js",
+          "node_modules/@ton/core/dist/types/SimpleLibrary.js",
+          "node_modules/@ton/core/dist/types/SplitMergeInfo.js",
+          "node_modules/@ton/core/dist/types/StateInit.js",
+          "node_modules/@ton/core/dist/types/StorageExtraInfo.js",
+          "node_modules/@ton/core/dist/types/StorageInfo.js",
+          "node_modules/@ton/core/dist/types/StorageUsed.js",
+          "node_modules/@ton/core/dist/types/TickTock.js",
+          "node_modules/@ton/core/dist/types/Transaction.js",
+          "node_modules/@ton/core/dist/types/TransactionActionPhase.js",
+          "node_modules/@ton/core/dist/types/TransactionBouncePhase.js",
+          "node_modules/@ton/core/dist/types/TransactionComputePhase.js",
+          "node_modules/@ton/core/dist/types/TransactionCreditPhase.js",
+          "node_modules/@ton/core/dist/types/TransactionDescription.js",
+          "node_modules/@ton/core/dist/types/TransactionStoragePhase.js",
+          "node_modules/@ton/core/dist/types/_export.js",
+          "node_modules/@ton/core/dist/types/_helpers.js",
+          "node_modules/@ton/core/dist/utils/base32.js",
+          "node_modules/@ton/core/dist/utils/bitsForNumber.js",
+          "node_modules/@ton/core/dist/utils/convert.js",
+          "node_modules/@ton/core/dist/utils/crc16.js",
+          "node_modules/@ton/core/dist/utils/crc32c.js",
+          "node_modules/@ton/core/dist/utils/getMethodId.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@ton/core/LICENSE",
+          "sha256": "7645f50dd647e4d227971b525fff60e583605bb01bfa60bc87a3798ad4f8646d"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ton/crypto@3.3.0",
+      "name": "@ton/crypto",
+      "version": "3.3.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@ton/crypto",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/@ton/crypto/dist/hd/ed25519.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/hd/mnemonics.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/hd/symmetric.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/index.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/mnemonic/mnemonic.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/mnemonic/wordlist.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/passwords/newSecurePassphrase.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/passwords/newSecureWords.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/passwords/wordlist.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/primitives/getSecureRandom.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/primitives/hmac_sha512.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/primitives/nacl.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/primitives/pbkdf2_sha512.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/primitives/sha256.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/primitives/sha512.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto/dist/utils/binary.js?commonjs-exports",
+          "node_modules/@ton/crypto/dist/hd/ed25519.js",
+          "node_modules/@ton/crypto/dist/hd/mnemonics.js",
+          "node_modules/@ton/crypto/dist/hd/symmetric.js",
+          "node_modules/@ton/crypto/dist/index.js",
+          "node_modules/@ton/crypto/dist/mnemonic/mnemonic.js",
+          "node_modules/@ton/crypto/dist/mnemonic/wordlist.js",
+          "node_modules/@ton/crypto/dist/passwords/newSecurePassphrase.js",
+          "node_modules/@ton/crypto/dist/passwords/newSecureWords.js",
+          "node_modules/@ton/crypto/dist/passwords/wordlist.js",
+          "node_modules/@ton/crypto/dist/primitives/getSecureRandom.js",
+          "node_modules/@ton/crypto/dist/primitives/hmac_sha512.js",
+          "node_modules/@ton/crypto/dist/primitives/nacl.js",
+          "node_modules/@ton/crypto/dist/primitives/pbkdf2_sha512.js",
+          "node_modules/@ton/crypto/dist/primitives/sha256.js",
+          "node_modules/@ton/crypto/dist/primitives/sha512.js",
+          "node_modules/@ton/crypto/dist/utils/binary.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@ton/crypto/LICENSE",
+          "sha256": "33578b9ea1522de18164cf1d1ef8e52f50d748ae17c7d38b4fa5e6f50207f8eb"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/@ton/crypto-primitives@2.1.0",
+      "name": "@ton/crypto-primitives",
+      "version": "2.1.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/@ton/crypto-primitives",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/@ton/crypto-primitives/dist/browser.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto-primitives/dist/browser/getSecureRandom.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto-primitives/dist/browser/hmac_sha512.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto-primitives/dist/browser/pbkdf2_sha512.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto-primitives/dist/browser/sha256.js?commonjs-exports",
+          "\u0000node_modules/@ton/crypto-primitives/dist/browser/sha512.js?commonjs-exports",
+          "node_modules/@ton/crypto-primitives/dist/browser.js",
+          "node_modules/@ton/crypto-primitives/dist/browser/getSecureRandom.js",
+          "node_modules/@ton/crypto-primitives/dist/browser/hmac_sha512.js",
+          "node_modules/@ton/crypto-primitives/dist/browser/pbkdf2_sha512.js",
+          "node_modules/@ton/crypto-primitives/dist/browser/sha256.js",
+          "node_modules/@ton/crypto-primitives/dist/browser/sha512.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/@ton/crypto-primitives/LICENSE",
+          "sha256": "5164d637f4dc920fe3835ee8377fbe87c07b90151e4b880d53046e65a21b4601"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/base64-js@1.5.1",
+      "name": "base64-js",
+      "version": "1.5.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/base64-js",
+      "bundles": [
+        "assets/index-D2rIokL7.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/base64-js/index.js?commonjs-exports",
+          "node_modules/base64-js/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/base64-js/LICENSE",
+          "sha256": "5b37224c080cdcc97c871ada971c224e9926370fe74f11b539aa1cf9f3b1aca1"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/bignumber.js@9.3.1",
+      "name": "bignumber.js",
+      "version": "9.3.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/bignumber.js",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/bignumber.js/bignumber.mjs"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/bignumber.js/LICENCE.md",
+          "sha256": "def75ba75d6426f1c3f02addf8e175fbe6e0d8a82e541cbdffc16d2bd8fd7d6a"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/buffer@6.0.3",
+      "name": "buffer",
+      "version": "6.0.3",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/buffer",
+      "bundles": [
+        "assets/index-D2rIokL7.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/buffer/index.js?commonjs-es-import",
+          "\u0000node_modules/buffer/index.js?commonjs-exports",
+          "node_modules/buffer/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/buffer/LICENSE",
+          "sha256": "06bafa45fdad2579ba0e43b0c9b2c6290287c99c4203c300254a462b38a307f6"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/class-variance-authority@0.7.1",
+      "name": "class-variance-authority",
+      "version": "0.7.1",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/class-variance-authority",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/class-variance-authority/dist/index.mjs"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/class-variance-authority/LICENSE",
+          "sha256": "0ccbf956cffc8dcf515809433cb5242ee67c94513d46e48c261d68d0880de406"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/clsx@2.1.1",
+      "name": "clsx",
+      "version": "2.1.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/clsx",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/clsx/dist/clsx.mjs"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/clsx/license",
+          "sha256": "9a9edad7baae52622bddf3c15b2ef8a33d2c89f2d25408ad13e8a7481c6b0c97"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/events@3.3.0",
+      "name": "events",
+      "version": "3.3.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/events",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/events/events.js?commonjs-es-import",
+          "\u0000node_modules/events/events.js?commonjs-module",
+          "node_modules/events/events.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/events/LICENSE",
+          "sha256": "631987b7616a325a5b97566c232418481ddf7dbb5ecadefb991e791876cc2599"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/ieee754@1.2.1",
+      "name": "ieee754",
+      "version": "1.2.1",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/ieee754",
+      "bundles": [
+        "assets/index-D2rIokL7.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/ieee754/index.js?commonjs-exports",
+          "node_modules/ieee754/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/ieee754/LICENSE",
+          "sha256": "18d45466ba3253deae04667e267a91ea8de8548f18c1125264d1c9db28194cc1"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/isomorphic-ws@5.0.0",
+      "name": "isomorphic-ws",
+      "version": "5.0.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/isomorphic-ws",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/isomorphic-ws/browser.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/isomorphic-ws/LICENSE",
+          "sha256": "12a66fee27259312cf2101ac5a17f009da37dffdfcd051f821116a74ae9bf841"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/jsqr@1.4.0",
+      "name": "jsqr",
+      "version": "1.4.0",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/jsqr",
+      "bundles": [
+        "assets/jsQR-Dk72IcmC.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/jsqr/dist/jsQR.js?commonjs-es-import",
+          "\u0000node_modules/jsqr/dist/jsQR.js?commonjs-module",
+          "node_modules/jsqr/dist/jsQR.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/jsqr/LICENSE",
+          "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/jssha@3.2.0",
+      "name": "jssha",
+      "version": "3.2.0",
+      "kind": "npm-reachable",
+      "license": "BSD-3-Clause",
+      "directory": "node_modules/jssha",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/jssha/dist/sha.js?commonjs-module",
+          "node_modules/jssha/dist/sha.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/jssha/LICENSE",
+          "sha256": "4485630ad13541c3c5df50437fd4a95971d8d7da9fd28b16fec63fdf7ae92e26"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/purify-ts@2.1.0",
+      "name": "purify-ts",
+      "version": "2.1.0",
+      "kind": "npm-reachable",
+      "license": "ISC",
+      "directory": "node_modules/purify-ts",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/purify-ts/esm/Either.js",
+          "node_modules/purify-ts/esm/EitherAsync.js",
+          "node_modules/purify-ts/esm/Maybe.js",
+          "node_modules/purify-ts/esm/MaybeAsync.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/purify-ts/LICENSE",
+          "sha256": "6a28424f4a02b7e13fa9809671c17d0b4912258f6fa0de29820b4a5ff40023b8"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/qrcode.react@4.2.0",
+      "name": "qrcode.react",
+      "version": "4.2.0",
+      "kind": "npm-reachable",
+      "license": "ISC",
+      "directory": "node_modules/qrcode.react",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/qrcode.react/lib/esm/index.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/qrcode.react/LICENSE",
+          "sha256": "908a4454d01d77cd6a0ae1eea0bafaa74a2e3befdbc4b7b714de2499a22351ce"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/react@19.3.0",
+      "name": "react",
+      "version": "19.3.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/react",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/react/cjs/react-jsx-runtime.production.js?commonjs-exports",
+          "\u0000node_modules/react/cjs/react.production.js?commonjs-exports",
+          "\u0000node_modules/react/index.js?commonjs-es-import",
+          "\u0000node_modules/react/index.js?commonjs-module",
+          "\u0000node_modules/react/jsx-runtime.js?commonjs-es-import",
+          "\u0000node_modules/react/jsx-runtime.js?commonjs-module",
+          "node_modules/react/cjs/react-jsx-runtime.production.js",
+          "node_modules/react/cjs/react.production.js",
+          "node_modules/react/index.js",
+          "node_modules/react/jsx-runtime.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/react/LICENSE",
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/react-dom@19.3.0",
+      "name": "react-dom",
+      "version": "19.3.0",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/react-dom",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js?commonjs-exports",
+          "\u0000node_modules/react-dom/cjs/react-dom-server.edge.production.js?commonjs-exports",
+          "\u0000node_modules/react-dom/cjs/react-dom.production.js?commonjs-exports",
+          "\u0000node_modules/react-dom/index.js?commonjs-module",
+          "\u0000node_modules/react-dom/server.edge.js?commonjs-es-import",
+          "\u0000node_modules/react-dom/server.edge.js?commonjs-exports",
+          "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js",
+          "node_modules/react-dom/cjs/react-dom-server.edge.production.js",
+          "node_modules/react-dom/cjs/react-dom.production.js",
+          "node_modules/react-dom/index.js",
+          "node_modules/react-dom/server.edge.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/react-dom/LICENSE",
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/reflect-metadata@0.2.2",
+      "name": "reflect-metadata",
+      "version": "0.2.2",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/reflect-metadata",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-es-import",
+          "\u0000node_modules/reflect-metadata/Reflect.js?commonjs-exports",
+          "node_modules/reflect-metadata/Reflect.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/reflect-metadata/CopyrightNotice.txt",
+          "sha256": "19246466cb51e46c12b22e43b4d2703ac981cb4295d061d6e20609bd5845510b"
+        },
+        {
+          "path": "node_modules/reflect-metadata/LICENSE",
+          "sha256": "c5217b0544ea9c91d010863582d6f6b35ec50e4146c34dee085ddcec5dd92def"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/rxjs@7.8.2",
+      "name": "rxjs",
+      "version": "7.8.2",
+      "kind": "npm-reachable",
+      "license": "Apache-2.0",
+      "directory": "node_modules/rxjs",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/rxjs/dist/esm5/internal/BehaviorSubject.js",
+          "node_modules/rxjs/dist/esm5/internal/Observable.js",
+          "node_modules/rxjs/dist/esm5/internal/ReplaySubject.js",
+          "node_modules/rxjs/dist/esm5/internal/Scheduler.js",
+          "node_modules/rxjs/dist/esm5/internal/Subject.js",
+          "node_modules/rxjs/dist/esm5/internal/Subscriber.js",
+          "node_modules/rxjs/dist/esm5/internal/Subscription.js",
+          "node_modules/rxjs/dist/esm5/internal/config.js",
+          "node_modules/rxjs/dist/esm5/internal/firstValueFrom.js",
+          "node_modules/rxjs/dist/esm5/internal/lastValueFrom.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/concat.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/empty.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/from.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/innerFrom.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/merge.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/of.js",
+          "node_modules/rxjs/dist/esm5/internal/observable/timer.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/OperatorSubscriber.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/concatAll.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/distinctUntilChanged.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/filter.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/finalize.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/map.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/mergeAll.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/mergeInternals.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/mergeMap.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/observeOn.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/scan.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/scanInternals.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/startWith.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/subscribeOn.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/switchMap.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/take.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/tap.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/timeout.js",
+          "node_modules/rxjs/dist/esm5/internal/operators/withLatestFrom.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleArray.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleAsyncIterable.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleIterable.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleObservable.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/schedulePromise.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduleReadableStreamLike.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduled/scheduled.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/Action.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/AsyncAction.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/AsyncScheduler.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/async.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/dateTimestampProvider.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/intervalProvider.js",
+          "node_modules/rxjs/dist/esm5/internal/scheduler/timeoutProvider.js",
+          "node_modules/rxjs/dist/esm5/internal/symbol/iterator.js",
+          "node_modules/rxjs/dist/esm5/internal/symbol/observable.js",
+          "node_modules/rxjs/dist/esm5/internal/util/EmptyError.js",
+          "node_modules/rxjs/dist/esm5/internal/util/ObjectUnsubscribedError.js",
+          "node_modules/rxjs/dist/esm5/internal/util/UnsubscriptionError.js",
+          "node_modules/rxjs/dist/esm5/internal/util/args.js",
+          "node_modules/rxjs/dist/esm5/internal/util/arrRemove.js",
+          "node_modules/rxjs/dist/esm5/internal/util/createErrorClass.js",
+          "node_modules/rxjs/dist/esm5/internal/util/errorContext.js",
+          "node_modules/rxjs/dist/esm5/internal/util/executeSchedule.js",
+          "node_modules/rxjs/dist/esm5/internal/util/identity.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isArrayLike.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isAsyncIterable.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isDate.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isFunction.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isInteropObservable.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isIterable.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isPromise.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isReadableStreamLike.js",
+          "node_modules/rxjs/dist/esm5/internal/util/isScheduler.js",
+          "node_modules/rxjs/dist/esm5/internal/util/lift.js",
+          "node_modules/rxjs/dist/esm5/internal/util/noop.js",
+          "node_modules/rxjs/dist/esm5/internal/util/pipe.js",
+          "node_modules/rxjs/dist/esm5/internal/util/reportUnhandledError.js",
+          "node_modules/rxjs/dist/esm5/internal/util/throwUnobservableError.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/rxjs/LICENSE.txt",
+          "sha256": "81c407ac717813b0e3795402960e04003c7bba8ba59b621624707028531c9ade"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/rxjs/node_modules/tslib@2.8.1",
+      "name": "tslib",
+      "version": "2.8.1",
+      "kind": "npm-reachable",
+      "license": "0BSD",
+      "directory": "node_modules/rxjs/node_modules/tslib",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/rxjs/node_modules/tslib/tslib.es6.mjs"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/rxjs/node_modules/tslib/CopyrightNotice.txt",
+          "sha256": "da16ddb65f8ca390998fb99223d0112498b56b45784d00afd77ff8ce1ac4de8b"
+        },
+        {
+          "path": "node_modules/rxjs/node_modules/tslib/LICENSE.txt",
+          "sha256": "210b19e543130388c68654b7497e967119ce17145f66ab7d85688fbd70f08751"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/semver@7.7.2",
+      "name": "semver",
+      "version": "7.7.2",
+      "kind": "npm-reachable",
+      "license": "ISC",
+      "directory": "node_modules/semver",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/semver/index.js?commonjs-es-import",
+          "\u0000node_modules/semver/internal/re.js?commonjs-module",
+          "node_modules/semver/classes/comparator.js",
+          "node_modules/semver/classes/range.js",
+          "node_modules/semver/classes/semver.js",
+          "node_modules/semver/functions/clean.js",
+          "node_modules/semver/functions/cmp.js",
+          "node_modules/semver/functions/coerce.js",
+          "node_modules/semver/functions/compare-build.js",
+          "node_modules/semver/functions/compare-loose.js",
+          "node_modules/semver/functions/compare.js",
+          "node_modules/semver/functions/diff.js",
+          "node_modules/semver/functions/eq.js",
+          "node_modules/semver/functions/gt.js",
+          "node_modules/semver/functions/gte.js",
+          "node_modules/semver/functions/inc.js",
+          "node_modules/semver/functions/lt.js",
+          "node_modules/semver/functions/lte.js",
+          "node_modules/semver/functions/major.js",
+          "node_modules/semver/functions/minor.js",
+          "node_modules/semver/functions/neq.js",
+          "node_modules/semver/functions/parse.js",
+          "node_modules/semver/functions/patch.js",
+          "node_modules/semver/functions/prerelease.js",
+          "node_modules/semver/functions/rcompare.js",
+          "node_modules/semver/functions/rsort.js",
+          "node_modules/semver/functions/satisfies.js",
+          "node_modules/semver/functions/sort.js",
+          "node_modules/semver/functions/valid.js",
+          "node_modules/semver/index.js",
+          "node_modules/semver/internal/constants.js",
+          "node_modules/semver/internal/debug.js",
+          "node_modules/semver/internal/identifiers.js",
+          "node_modules/semver/internal/lrucache.js",
+          "node_modules/semver/internal/parse-options.js",
+          "node_modules/semver/internal/re.js",
+          "node_modules/semver/ranges/gtr.js",
+          "node_modules/semver/ranges/intersects.js",
+          "node_modules/semver/ranges/ltr.js",
+          "node_modules/semver/ranges/max-satisfying.js",
+          "node_modules/semver/ranges/min-satisfying.js",
+          "node_modules/semver/ranges/min-version.js",
+          "node_modules/semver/ranges/outside.js",
+          "node_modules/semver/ranges/simplify.js",
+          "node_modules/semver/ranges/subset.js",
+          "node_modules/semver/ranges/to-comparators.js",
+          "node_modules/semver/ranges/valid.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/semver/LICENSE",
+          "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/tailwind-merge@2.6.1",
+      "name": "tailwind-merge",
+      "version": "2.6.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/tailwind-merge",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/tailwind-merge/dist/bundle-mjs.mjs"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/tailwind-merge/LICENSE.md",
+          "sha256": "d4c70c7ce38cea8778f0aed3fc0bef0a9dbd27f13bd8b6773cbd6d37941971e5"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/tailwindcss@4.3.3",
+      "name": "tailwindcss",
+      "version": "4.3.3",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/tailwindcss",
+      "bundles": [
+        "assets/pearl-apdu-CnYMOtYj.css"
+      ],
+      "sourceModules": {
+        "main": [],
+        "worker": [],
+        "css": [
+          "node_modules/tailwindcss/index.css"
+        ]
+      },
+      "notices": [
+        {
+          "path": "node_modules/tailwindcss/LICENSE",
+          "sha256": "60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/tslib@1.14.1",
+      "name": "tslib",
+      "version": "1.14.1",
+      "kind": "npm-reachable",
+      "license": "0BSD",
+      "directory": "node_modules/tslib",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/tslib/tslib.es6.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/tslib/CopyrightNotice.txt",
+          "sha256": "dd835e67a9a297da32f9467d7677a5d02c8e50e10f15da43b810147c79c04b9b"
+        },
+        {
+          "path": "node_modules/tslib/LICENSE.txt",
+          "sha256": "210b19e543130388c68654b7497e967119ce17145f66ab7d85688fbd70f08751"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/tweetnacl@1.0.3",
+      "name": "tweetnacl",
+      "version": "1.0.3",
+      "kind": "npm-reachable",
+      "license": "Unlicense",
+      "directory": "node_modules/tweetnacl",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000node_modules/tweetnacl/nacl-fast.js?commonjs-module",
+          "node_modules/tweetnacl/nacl-fast.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/tweetnacl/LICENSE",
+          "sha256": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/uuid@11.1.1",
+      "name": "uuid",
+      "version": "11.1.1",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/uuid",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/uuid/dist/esm-browser/native.js",
+          "node_modules/uuid/dist/esm-browser/rng.js",
+          "node_modules/uuid/dist/esm-browser/stringify.js",
+          "node_modules/uuid/dist/esm-browser/v4.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/uuid/LICENSE.md",
+          "sha256": "beaa6b04fb82e41dd2ad679e19e27953afb5999b1abbb455b6564e78ebfeb332"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/xstate@5.19.2",
+      "name": "xstate",
+      "version": "5.19.2",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/xstate",
+      "bundles": [
+        "assets/index-ByVGc--d.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/xstate/dev/dist/xstate-dev.esm.js",
+          "node_modules/xstate/dist/log-3d9d72a9.esm.js",
+          "node_modules/xstate/dist/raise-c17ec2bc.esm.js",
+          "node_modules/xstate/dist/xstate.esm.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/xstate/LICENSE",
+          "sha256": "542d926d7bbb099785e322d1d5574c539d51942e52ec8adce2be4629ba81fc7f"
+        }
+      ]
+    },
+    {
+      "id": "node_modules/zod@4.6.5",
+      "name": "zod",
+      "version": "4.6.5",
+      "kind": "npm-reachable",
+      "license": "MIT",
+      "directory": "node_modules/zod",
+      "bundles": [
+        "assets/live-VcgfFvtq.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "node_modules/zod/v4/classic/errors.js",
+          "node_modules/zod/v4/classic/parse.js",
+          "node_modules/zod/v4/classic/schemas.js",
+          "node_modules/zod/v4/core/api.js",
+          "node_modules/zod/v4/core/checks.js",
+          "node_modules/zod/v4/core/core.js",
+          "node_modules/zod/v4/core/doc.js",
+          "node_modules/zod/v4/core/errors.js",
+          "node_modules/zod/v4/core/json-schema-processors.js",
+          "node_modules/zod/v4/core/memoizer.js",
+          "node_modules/zod/v4/core/parse.js",
+          "node_modules/zod/v4/core/regexes.js",
+          "node_modules/zod/v4/core/registries.js",
+          "node_modules/zod/v4/core/schemas.js",
+          "node_modules/zod/v4/core/to-json-schema.js",
+          "node_modules/zod/v4/core/util.js",
+          "node_modules/zod/v4/core/versions.js",
+          "node_modules/zod/v4/locales/en.js"
+        ],
+        "worker": [],
+        "css": []
+      },
+      "notices": [
+        {
+          "path": "node_modules/zod/LICENSE",
+          "sha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8"
+        }
+      ]
+    },
+    {
+      "id": "generated-runtime:vite@7.3.7",
+      "name": "Vite-generated runtime helpers",
+      "version": "7.3.7",
+      "kind": "bundler-generated-runtime",
+      "license": "MIT",
+      "bundles": [
+        "assets/live-VcgfFvtq.js",
+        "assets/pearl-apdu-DTLxDe13.js"
+      ],
+      "sourceModules": {
+        "main": [
+          "\u0000__vite-browser-external?commonjs-proxy",
+          "\u0000commonjs-dynamic-modules",
+          "\u0000commonjsHelpers.js",
+          "\u0000vite/modulepreload-polyfill.js",
+          "\u0000vite/preload-helper.js",
+          "__vite-browser-external"
+        ],
+        "worker": []
+      },
+      "scope": "Vite preload/browser-external stubs and bundled @rollup/plugin-commonjs interop helpers. The complete installed Vite license file is retained conservatively; its additional build-tool notices do not imply those packages execute in the wallet.",
+      "notices": [
+        {
+          "path": "node_modules/vite/LICENSE.md",
+          "sha256": "a77a1c089806b39ad339535bdf3677f636c91d96693e8ad7b11fe733f650ea64"
+        }
+      ]
+    },
+    {
+      "id": "source:LedgerHQ/app-bitcoin@44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+      "name": "Adapted Ledger Bitcoin host modules",
+      "version": "2.5.1",
+      "kind": "copied-source",
+      "license": "Apache-2.0",
+      "bundles": [
+        "assets/main-BmAxsC9p.js"
+      ],
+      "repository": "https://github.com/LedgerHQ/app-bitcoin",
+      "revision": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+      "sourceModules": {
+        "main": [
+          "packages/bitcoin-prl-adapter/src/upstream/buffertools.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/clientCommands.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/merkle.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/merkleMap.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/policy.ts",
+          "packages/bitcoin-prl-adapter/src/upstream/varint.ts"
+        ],
+        "worker": []
+      },
+      "modificationNotice": "Six host protocol modules were adapted from LedgerHQ/app-bitcoin 2.5.1, commit 44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a. Pearl modifications add explicit browser Buffer imports, pinned noble hashing, strict TypeScript/ESM support, bigint-only uint64 handling, canonical varints, and bounded/copying Merkle-interpreter inputs. Original sources and the complete local patch are retained in packages/bitcoin-prl-adapter/provenance. Ledger approval or endorsement is not implied.",
+      "notices": [
+        {
+          "path": "packages/bitcoin-prl-adapter/provenance/LICENSE.app-bitcoin",
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+        }
+      ]
+    },
+    {
+      "id": "font:Inter:LedgerWallet-4.23.0",
+      "name": "Inter",
+      "version": "Ledger Wallet 4.23.0 distribution",
+      "kind": "copied-font",
+      "license": "OFL-1.1",
+      "bundles": [
+        "assets/Inter-Regular-BHP6tI7_.woff2",
+        "assets/Inter-Medium-DLI8xdiI.woff2",
+        "assets/Inter-SemiBold-CudmWj5i.woff2"
+      ],
+      "repository": "https://github.com/rsms/inter",
+      "sourceModules": {
+        "fonts": [
+          "apps/companion/src/fonts/Inter-Regular.woff2",
+          "apps/companion/src/fonts/Inter-Medium.woff2",
+          "apps/companion/src/fonts/Inter-SemiBold.woff2"
+        ]
+      },
+      "scope": "Unmodified Inter font files from the installed Ledger Wallet 4.23.0 distribution. This identifies the distribution, not an upstream font release number. Exact archive asset names and SHA-256 hashes are retained in apps/companion/src/fonts/PROVENANCE.txt. The fonts remain under SIL Open Font License 1.1; use of these fonts does not imply Ledger endorsement.",
+      "notices": [
+        {
+          "path": "apps/companion/src/fonts/OFL.txt",
+          "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a"
+        }
+      ]
+    },
+    {
+      "id": "source:LedgerHQ/ledger-live@abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+      "name": "Adapted Ledger Wallet send/receive views",
+      "version": "4.23.0",
+      "kind": "copied-source",
+      "license": "MIT",
+      "bundles": [
+        "assets/main-BmAxsC9p.js",
+        "assets/qr-reader-BRNRvs-M.js",
+        "assets/pearl-apdu-CnYMOtYj.css"
+      ],
+      "repository": "https://github.com/LedgerHQ/ledger-live",
+      "revision": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+      "sourceModules": {
+        "main": [
+          "apps/companion/src/ledger-ui/ModalBody.tsx",
+          "apps/companion/src/ledger-ui/ReadOnlyAddressField.tsx",
+          "apps/companion/src/ledger-ui/StepAmount.tsx",
+          "apps/companion/src/ledger-ui/StepReceiveFunds.tsx",
+          "apps/companion/src/ledger-ui/StepRecipient.tsx",
+          "apps/companion/src/ledger-ui/StepSummary.tsx",
+          "apps/companion/src/ledger-ui/Stepper/Breadcrumb.tsx",
+          "apps/companion/src/ledger-ui/Stepper/Step.tsx",
+          "apps/companion/src/ledger-ui/index.tsx",
+          "apps/companion/src/ledger-ui/styles.css",
+          "apps/companion/src/qr-reader.ts"
+        ],
+        "worker": []
+      },
+      "modificationNotice": "Presentation components and the QR camera loop were adapted from the pinned Ledger Wallet 4.23.0 desktop send/receive views, breadcrumb/stepper, modal layout, read-only address field and recipient QR scanner. Pearl modifications replace desktop account/store dependencies with explicit inputs to the existing Pearl wallet, reuse Lumen controls, bound image/camera scanning and retain Pearl verification, reservation, recovery and explicit broadcast boundaries. Unmodified upstream files, exact adapted-source hashes and the complete patch are retained in apps/companion/vendor/ledger-live-4.23.0. Newly written integration glue is included in this component's output mapping; it is not claimed to be original Ledger code. Ledger approval or endorsement is not implied.",
+      "notices": [
+        {
+          "path": "apps/companion/vendor/ledger-live-4.23.0/LICENSE.txt",
+          "sha256": "c43174d759c87c3e8a423cb0cb6ee914feddc4eac5176350fd24674857a8ef5f"
+        }
+      ]
+    }
+  ],
+  "proposedNotices": {
+    "file": "THIRD-PARTY-NOTICES.proposed.txt",
+    "bytes": 299181,
+    "sha256": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89"
+  },
+  "limitations": [
+    "This is a technical notices artifact, not a legal opinion. Wallet API core declares MIT but omits license/copyright text in its package and exact upstream tag; that attribution gap remains unresolved.",
+    "Serve a reviewed version through the dedicated host's narrow asset policy and link it visibly; leaving it only in this report does not deliver it to website users.",
+    "Regenerate and verify against each changed browser dependency graph. Source-level redistribution may require additional source-specific notices beyond this browser artifact."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "pearl-local",
+  "name": "Pearl",
+  "private": true,
+  "url": "http://127.0.0.1:5188/live.html",
+  "homepageUrl": "http://127.0.0.1:5188/live.html",
+  "platforms": ["desktop"],
+  "apiVersion": "^2.0.0",
+  "manifestVersion": "2",
+  "branch": "debug",
+  "categories": ["wallet"],
+  "currencies": "*",
+  "visibility": "complete",
+  "cacheBustingId": 1,
+  "domains": ["http://127.0.0.1:5188"],
+  "permissions": [
+    "wallet.capabilities",
+    "device.transport",
+    "device.exchange",
+    "device.close"
+  ],
+  "content": {
+    "shortDescription": {
+      "en": "Local Pearl wallet development app."
+    },
+    "description": {
+      "en": "Manage Pearl through the Ledger Wallet connection dialog. Development software; device qualification remains incomplete."
+    }
+  }
+}

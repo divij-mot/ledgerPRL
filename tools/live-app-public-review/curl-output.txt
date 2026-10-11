@@ -1,0 +1,6 @@
+Normal TLS, fixed HTTPS /api/v2/ endpoint, --max-time 12; no redirects or TLS bypass.
+mainnet http=000 dns_s=0.001948 tcp_s=0.000000 tls_s=0.000000
+curl: (28) Connection timed out after 12005 milliseconds
+
+testnet2 http=000 dns_s=0.003555 tcp_s=0.000000 tls_s=0.000000
+curl: (28) Connection timed out after 12004 milliseconds
