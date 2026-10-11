@@ -1,12 +1,12 @@
 # Current app status and historical Rust evidence
 
-## Current C app: Pearl 0.1.2
+## Current C app: Pearl 0.1.4
 
-The Bitcoin-derived C app targets Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The current version enables the standard Ledger SDK Bluetooth transport on Bluetooth-capable models; Nano S Plus remains USB-only. The SDK adds its settings permission on Bluetooth models. Review, derivation and signing policies are unchanged. See the [installation guide](install-pearl.md), [BLE build/guard evidence](../tools/ble-review/README.md) and [independent review](../tools/mobile-transport-review/native-review.md).
+The Bitcoin-derived C app targets Nano S Plus, Nano X, Stax, Flex and Nano Gen5. The current version enables the standard Ledger SDK Bluetooth transport on Bluetooth-capable models; Nano S Plus remains USB-only. The SDK adds its settings permission on Bluetooth models. Review, derivation and signing policies are unchanged. See the [installation guide](install-pearl.md), [current native review](../tools/ux-event-review/README.md) and [physical verification](../tools/ux-event-review/physical-verification.json).
 
-The recorded physical Nano S Plus installation/account/Receive tests used version 0.1.0. They are separate from 0.1.2's build, emulated display/signing and synthetic transport-guard tests. Actual iPhone Bluetooth pairing and disconnect behavior remain to be tested. A dropped BLE link can leave the existing review visible until rejection, lock or expiry; radio power is not a per-connection signal. Reject any old review before starting a fresh attempt.
+Version 0.1.4 passed Gen5 USB public-account approval, owner-confirmed iPhone BLE Add account and matching Receive verification, and normal Close. Nano S Plus installation/hash readback and USB public-account approval also passed. Older 0.1.0 account/Receive/signing evidence remains separate. No funded 0.1.4 payment was requested in these checks; other physical models and disconnect/fault matrices remain unqualified. A dropped BLE link can leave the existing review visible until rejection, lock or expiry; radio power is not a per-connection signal. Reject any old review before starting a fresh attempt.
 
-Version 0.1.2 corrects SDK-incompatible review event checks and uses the SDK exit routine instead of stopping OS-owned I/O. This follows an owner-reported 0.1.1 Gen5 account-review exit and later freeze cleared by power cycling. Source and replay evidence establish the corrected contracts; a physical 0.1.2 retest is still required. See the [current fix review](../tools/ble-exit-review/README.md).
+Earlier 0.1.2 exit and 0.1.3 ticker corrections did not fully resolve the retail-event mismatch. Version 0.1.4 forwards bounded known OS UX events through the pinned SDK without interpreting status as connection liveness, while retaining nested-APDU, PIN, deadline and approval guards. The [current review](../tools/ux-event-review/README.md) links those historical findings and the successful bounded physical retest.
 
 ### Earlier Pearl Dev checkpoint
 

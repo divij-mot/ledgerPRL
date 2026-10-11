@@ -4,7 +4,7 @@ The companion can be hosted as a standalone website that connects directly to a 
 
 **Development software, not a production security certification.** Physical devices/OS combinations, independent human review and Ledger approval remain release gates. Do not use valuable funds. HTTPS and successful tests do not make a compromised frontend, dishonest indexer or unreviewed firmware safe.
 
-Device connection is **USB-only**. The current C app disables Bluetooth, and this website registers only WebHID. Desktop Chrome/Edge on HTTPS or loopback are intended test targets; mobile, Safari and Firefox are not qualified. A compatible PRL app must already be installed and open. The website does not install apps or update Ledger OS. See the [separate distribution and model gates](../tools/ledger-distribution-review/README.md).
+The standalone `/` entry uses **USB WebHID** in desktop Chrome/Edge on HTTPS or loopback. The separate `/live.html` Discover entry uses Ledger Wallet’s native transport, including Bluetooth on supported models. Pearl 0.1.4 has bounded owner-confirmed Gen5/iPhone BLE account and Receive checks; standalone mobile Safari/Firefox and Android hardware remain unqualified. See the [current physical verification](../tools/ux-event-review/physical-verification.json). A compatible PRL app must already be installed and open. The website does not install apps or update Ledger OS. See the [separate distribution and model gates](../tools/ledger-distribution-review/README.md).
 
 ## Hosting model
 

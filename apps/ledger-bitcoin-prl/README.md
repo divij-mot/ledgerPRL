@@ -1,8 +1,8 @@
 # Experimental Pearl native signer
 
 This is a restricted PRL adaptation of Ledger's deployed Bitcoin 2.5.1 source,
-not a Ledger-approved application. Use public test seeds and emulator-only funds.
-No physical-device qualification or independent professional audit is claimed.
+not a Ledger-approved application. Use public test seeds only in isolated emulators.
+Bounded Gen5 and Nano S Plus physical operations are recorded in the [0.1.4 verification](../../tools/ux-event-review/physical-verification.json); broader hardware qualification and independent professional audit remain open.
 The previous Rust prototype remains at `../ledger` for reference.
 
 ## Provenance and retained machinery
@@ -62,10 +62,10 @@ This subset cannot spend every possible Pearl output or construct every valid
 Pearl transaction. Unsupported UTXOs and transactions must be explained by the
 host, never silently converted into a different policy.
 
-Pearl 0.1.2 uses the standard Ledger SDK Bluetooth transport on Nano X, Stax,
+Pearl 0.1.4 uses the standard Ledger SDK Bluetooth transport on Nano X, Stax,
 Flex and Nano Gen5; Nano S Plus remains USB-only. The SDK's settings permission
 is enabled only on Bluetooth models. See the [BLE qualification](../../tools/ble-review/README.md)
-for the original Bluetooth build/guard tests and [0.1.2 review](../../tools/ble-exit-review/README.md) for the Gen5 event/exit corrections and remaining physical checks.
+for the original Bluetooth build/guard tests, and the [0.1.4 review](../../tools/ux-event-review/README.md) and [installation guide](../../docs/install-pearl.md) for current artifact and physical scope.
 
 ## Network and protocol binding
 
@@ -97,10 +97,10 @@ parsing requires the exact decoded length before checksum access. See the
 [parser findings and patch](../../tools/native-parser-review/PATCH.md) and
 [independent static review](../../tools/canonical-parser-review/REPORT.md).
 
-The owner resumed isolated emulator testing on 10 October 2026. Current-source
+At the earlier 10 October 2026 checkpoint, the owner resumed isolated emulator testing. Those
 Nano S Plus mainnet/regtest account, Receive and signing pilots passed, together
 with 75 regtest hostile cases and explicit rejection. See the [exact checkpoint](../../tools/live-app-native-review/README.md).
-Full device/matrix qualification and physical installation remain open.
+Later 0.1.4 Gen5 USB account approval, iPhone BLE account/Receive checks and normal Close, plus Nano S Plus USB account approval are recorded separately above. Full physical signing/restore/fault/model qualification remains open.
 
 Custom GET_NETWORK_INFO (`e1 06 00 01 00`) returns 58 bytes:
 
@@ -130,12 +130,14 @@ data on another compatible chain can still create replay risk.
 
 ## Review cancellation and transport limits
 
-An unexpected APDU during trusted review, reported USB power loss, PIN lock,
-malformed/unexpected review event, or 1200 SDK ticker events causes fail-closed
+An unexpected APDU during trusted review, receive failure, PIN lock,
+a malformed envelope or disallowed event, or 1200 SDK ticker events causes fail-closed
 application exit. A final approval callback is checked again against expiry and
 PIN state. No private scalar is live across review.
 An additional immutable 3000-tick whole-command deadline is checked at public
 I/O/UI boundaries; each Merkle continuation cannot restart that budget.
+
+Known ticker, display and status payloads are forwarded opaquely through the SDK after bounded framing checks. Status is not an app-visible USB/BLE liveness contract; physical disconnect need not produce an abort notification.
 
 Closing a browser WebHID handle or aborting JavaScript is **not necessarily a
 device event**. It does not prove that an already displayed review was cancelled.

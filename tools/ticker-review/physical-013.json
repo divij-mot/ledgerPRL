@@ -14,5 +14,13 @@
   "signingRequests": 0,
   "broadcasts": 0,
   "status": "failed; further diagnosis required",
-  "osVersion": "1.2.0"
+  "osVersion": "1.2.0",
+  "subsequentDiagnosticObservation": {
+    "version": "0.1.3-trace",
+    "ownerObservation": "Close app button did not respond",
+    "causeConfirmed": false,
+    "sourceFinding": "Diagnostic terminal still drops extended status and touch events; this may impair its UI",
+    "recoveryRequired": "Power cycle and confirm dashboard responsiveness before replacement",
+    "production014ContainsDiagnosticCode": false
+  }
 }

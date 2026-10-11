@@ -6,7 +6,7 @@ Send and receive Pearl (PRL) with your Ledger. Use the hosted wallet, or run the
 
 ## 1. Install Pearl on your Ledger
 
-Pearl builds for **Nano S Plus, Nano X, Stax, Flex and Nano Gen5**, with button or touchscreen layouts for each model. Account export, Receive and signing pass in the emulator on all five. Physical testing is recorded for Nano S Plus with version 0.1.0; the 0.1.4 builds still need physical-device qualification. See the [model support and installation guide](docs/install-pearl.md).
+Pearl builds for **Nano S Plus, Nano X, Stax, Flex and Nano Gen5**, with button or touchscreen layouts for each model. Account export, Receive and signing pass in the emulator on all five. Gen5 0.1.4 account approval works over USB and iPhone Bluetooth; on-device Receive verification and normal app exit also passed. Nano S Plus 0.1.4 installation and public-account approval also passed. See the [model support and installation guide](docs/install-pearl.md).
 
 Pearl is not yet available in the My Ledger app catalog. The [installer](scripts/install-pearl.py) builds and verifies the image for your exact model before loading it. For Gen5, run `python3 scripts/install-pearl.py gen5 --install` after the guide’s prerequisites. Each model needs compatible Ledger OS/API; retail Nano X installation requires Ledger’s distribution process.
 
@@ -25,7 +25,7 @@ Open **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)
 3. Use **Receive** to verify an address on the device, or **Send** to enter a recipient and amount.
 4. Review the address, amount and fee on your Ledger. After approving, choose **Send payment** in the wallet.
 
-For Ledger Wallet’s Discover interface, follow the [Discover setup instructions](docs/live-app.md#load-the-hosted-entry-in-discover). This currently uses a locally imported app, not a public catalog listing. iPhone and Android use the Discover route; [iPhone Bluetooth setup](docs/live-app.md#iphone-with-nano-gen5-or-flex-over-bluetooth) requires Pearl 0.1.4. Physical mobile testing remains outstanding.
+For Ledger Wallet’s Discover interface, follow the [Discover setup instructions](docs/live-app.md#load-the-hosted-entry-in-discover). This currently uses a locally imported app, not a public catalog listing. iPhone and Android use the Discover route; [iPhone Bluetooth setup](docs/live-app.md#iphone-with-nano-gen5-or-flex-over-bluetooth) requires Pearl 0.1.4. Gen5/iPhone account approval is verified; other mobile/device combinations still need hardware testing.
 
 Keys stay on Ledger. The hosted service has no wallet database; account caches and payment records stay in your browser.
 

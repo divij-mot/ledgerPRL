@@ -9,3 +9,5 @@ Validation passed the exact installed Ledger 4.23.0 schema, the manifest regress
 The [source replay](persistence-timeout-review.md) demonstrates a native storage load race; physical phone restart persistence remains to be checked. This manifest update does not fix the separate device review exit. Physical Gen5 testing of Pearl 0.1.2 still reproduced that exit on both BLE and isolated USB. A temporary read-only diagnostic subsequently captured stop 0C, USB medium 1, packet 01, event tag 0E, phase 2, received length 8, declared payload length 4. That native event validation is being corrected separately; no payment was signed during diagnosis.
 
 The post-deployment 15-minute error-log query returned no error records. This is a bounded observation, not a guarantee about future traffic.
+
+After reimporting the mobile manifest, the owner opened Pearl, fully closed and reopened Ledger Wallet on iPhone, and confirmed that Pearl remained under Loaded Manifests. The separate device-review issue was subsequently fixed and physically checked in firmware 0.1.4; see [hardware verification](../ux-event-review/physical-verification.json).

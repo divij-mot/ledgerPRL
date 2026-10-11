@@ -4,11 +4,11 @@ Current firmware: **Pearl 0.1.4, mainnet, API 27**. Gen5, Flex, Stax and Nano X 
 
 | Model | SDK-mapped Ledger OS | Build / USB emulator | Bluetooth in 0.1.4 | Physical testing |
 | --- | --- | --- | --- | --- |
-| Nano S Plus | 1.7.0 | Passed | No radio | Earlier 0.1.0 tested on OS 1.7.0 |
+| Nano S Plus | 1.7.0 | Passed | No radio | 0.1.4 installed/hash-verified; USB account approval passed |
 | Nano X | 2.8.0 | Passed | Enabled | Not tested; retail sideloading unavailable |
 | Stax | 1.11.0 | Passed | Enabled | Not tested |
 | Flex | 1.7.0 | Passed | Enabled | Not tested |
-| Nano Gen5 | 1.2.0 | Passed | Enabled | 0.1.4 physical approval pending |
+| Nano Gen5 | 1.2.0 | Passed | Enabled | 0.1.4 USB/iPhone BLE account approval, Receive verification and normal exit passed |
 
 Compare your device’s **Settings → About** version with the table. These are the [official SDK API-27 mappings](https://github.com/LedgerHQ/ledger-secure-sdk#about-api_level-branches), checked on 10 October 2026, not a latest-OS or retail-rollout guarantee. The installer does not update Ledger OS.
 
@@ -72,4 +72,4 @@ The installer reuses the existing `tools/bitcoin-prl-port/build.sh` and provenan
 
 Bluetooth-capable models use flags **0x240**: the existing **0x40** plus the SDK-required **0x200 settings-write permission**, following the official Bitcoin Bluetooth setup. Nano S Plus remains **0x40**. No master-seed or library permission is added.
 
-[0.1.4 evidence and test limits](../tools/ux-event-review/README.md) records the two captured Gen5 event formats, all five builds, emulator signing checks, and actual SDK/UI event replays. Corrected physical account approval and iPhone Bluetooth still need confirmation. The earlier [0.1.3 failed hardware retest](../tools/ticker-review/physical-013.json) and [0.1.0 Nano S Plus installation checkpoint](../tools/install-guide-review/README.md) remain historical; they do not qualify the new release.
+[0.1.4 evidence and test limits](../tools/ux-event-review/README.md) records the two captured Gen5 event formats, all five builds, emulator signing checks, and actual SDK/UI event replays. Gen5 0.1.4 account approval passed over USB and iPhone Bluetooth; Receive verification matched the complete address on phone/device, and normal app exit also passed. Nano S Plus 0.1.4 installation and USB account approval also passed. The [recorded physical checks](../tools/ux-event-review/physical-verification.json) do not establish a funded 0.1.4 signing/broadcast test. The earlier [0.1.3 failed hardware retest](../tools/ticker-review/physical-013.json) and [0.1.0 Nano S Plus installation checkpoint](../tools/install-guide-review/README.md) remain historical; they do not qualify the new release.

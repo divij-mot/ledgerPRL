@@ -1,0 +1,45 @@
+{
+  "version": "0.1.4",
+  "sourceCommit": "328bae042af6c91a42647d8ad34953280ba6a7a2",
+  "gen5": {
+    "osVersion": "1.2.0",
+    "installedHash": "a84be6263f82c81ceb6cf4afbdee4131f6438fe6529a89b6e848c9b67198812d",
+    "installedHashReadbackMatched": true,
+    "usbPublicAccount": {
+      "status": "passed",
+      "ownerConfirmedReviewStayedVisible": true,
+      "responseLength": 111,
+      "exchangeSeconds": 71.27
+    },
+    "normalAppExit": "passed; owner confirmed normal return to dashboard",
+    "iphoneBleAccount": "passed; owner confirmed Add account completed after approval",
+    "iphoneBleReceive": "passed; owner confirmed complete on-device address matched phone and approved"
+  },
+  "signingRequests": 0,
+  "broadcasts": 0,
+  "limits": "Physical checks cover only the operations explicitly recorded; emulator signing does not qualify a funded hardware payment.",
+  "nanoSPlus": {
+    "installedHash": "4cc5e2d87ebfeab6ee088c62bf83c1d90b2282575055ece472140bef0208bce0",
+    "installedHashReadbackMatched": true,
+    "pearlDevInstalled": false,
+    "usbPublicAccount": {
+      "status": "passed",
+      "ownerConfirmedApproval": true,
+      "responseLength": 111,
+      "exchangeSeconds": 26.97
+    }
+  },
+  "rawAccountDataStoredInTestEvidence": false,
+  "mobileManifestPersistence": {
+    "status": "passed",
+    "method": "owner reimported mobile manifest, opened Pearl, fully closed and reopened Ledger Wallet",
+    "loadedManifestRemained": true
+  },
+  "hostedWallet": {
+    "publicMainnetStatus": "passed",
+    "feeService": "passed",
+    "browserAutoSync": "passed",
+    "networkIndicator": "available",
+    "accountAmountsOrTransactionIdsRecorded": false
+  }
+}

@@ -2,11 +2,13 @@
 
 Development checkpoint, updated 2026-10-10. Passing software tests are not physical Ledger proof, a human security audit, or mainnet readiness.
 
-## Current C-port and direct-website checkpoint
+Current **0.1.4** native software and bounded Gen5/Nano S Plus physical scope are recorded in the [current review](../tools/ux-event-review/README.md) and [physical verification](../tools/ux-event-review/physical-verification.json). The checkpoints below retain their historical source/artifact identities and do not automatically qualify later builds.
+
+## Earlier C-port and direct-website checkpoint
 
 The current signer is `apps/ledger-bitcoin-prl`, a restricted Ledger Bitcoin-based C application. The previous Rust signer at `apps/ledger` and its custom canonical-bundle protocol are a different implementation. Its retained native results below do not qualify the C application or its PSBT protocol.
 
-- [Latest aggregate host checkpoint](../tools/host-checkpoint-review/README.md), approximately 22:42 UTC: workspace typechecks, 415 tests (27 adapter, 64 optional Snap, 103 SDK, 86 wallet, 6 CLI, 129 companion), production builds and tracked-file secret-pattern scan passed. The optional Snap tests do not establish MetaMask integration. These are working-source results; final published-commit CI for the new changes remains a separate gate.
+- [Aggregate host checkpoint at that stage](../tools/host-checkpoint-review/README.md), approximately 22:42 UTC: workspace typechecks, 415 tests (27 adapter, 64 optional Snap, 103 SDK, 86 wallet, 6 CLI, 129 companion), production builds and tracked-file secret-pattern scan passed. The optional Snap tests do not establish MetaMask integration. These are working-source results; final published-commit CI for the new changes remains a separate gate.
 - [Wallet integrity/property review](../tools/wallet-property-review/REPORT.md): reproduced malformed persisted reservations and partial mutation on rejected direct merges, then checked the fixes. One campaign passed 12,447 cases with unchanged observed source hashes; the second passing 12,447-case campaign records a concurrent UI edit. Maximum-shape structural timing uses synthetic witnesses and is not browser/device/signature-validity evidence. The separate direct Chromium storage harness executed zero cases after its launch was blocked.
 - [Website custody/privacy review](../tools/website-privacy-review/REPORT.md): nine deterministic checks, modeled UI context/cache controls, a bounded dependency error-path check and 31 focused tests passed. Source/build hashes are retained. No production private-key input or software-signing workflow/fallback was found; the bundle still includes generic cryptographic signing APIs. This is not a human audit, hostile-host privacy guarantee or universal telemetry/XSS proof.
 - [Real-browser public-fixture review](../apps/companion/test/evidence/website-qa/astra-real-browser-2026-10-09.md): 12 bounded cases passed on `index-B9WJtHC4.js`, SHA-256 `4062ec6b173da7cb05dbc27a91928225571530a88171b47d2fbde8f1b4b671e0`. Explicit restore, close/form reset, narrow optional-cache removal and preservation of an existing unsigned draft/receive range across reload were observed through the actual UI. File imports, crash/eviction/cross-tab races, actual Ledger signing, live chain and public TLS were not exercised.
@@ -65,13 +67,13 @@ Reports apply to their recorded source/tool/artifact hashes, not automatically t
 - The companion now validates full backups in a one-shot same-origin worker using the unchanged validator. Worker cancellation, late replies and queued/committed merge boundaries have regressions. Actual Node worker and Vite asset checks are separate from browser Worker/CSP/IndexedDB qualification. The maximum-history atomic merge still takes roughly 2.5–2.6 seconds synchronously on the measured host.
 - That checkpoint's combined host checks passed 100 SDK, 71 wallet and 88 companion tests, workspace typechecks and production build. The newer aggregate is recorded above. [Dependency advisory snapshots](../tools/dependency-review/README.md) returned zero known npm advisories for the recorded lockfile; that is not a vulnerability-free guarantee.
 
-## Not established
+## Outstanding gates at the earlier checkpoints
 
 The complete physical fault/display/restore matrix, physical app/OS memory and latency, the final C-port source-linked native/model/network matrix, full browser import/cross-tab/crash/interrupted-signing workflows, public TLS deployment, current live-indexer availability, final published-commit CI for the new changes, third-party human audit and Ledger functional/release approval remain gates. The bounded public-fixture UI checks above do not establish these broader flows. The original Nano S is unsupported; retail Nano X requires a vendor-controlled distribution route. No passing software result authorizes valuable-funds use, hardware changes, submission or publication.
 
-## Current physical checkpoint
+## Earlier Pearl Dev physical checkpoint
 
-The [Nano S Plus checkpoint](../tools/live-app-physical-review/README.md) records approved installation of the exact emulator-tested Pearl Dev mainnet build, real Ledger Wallet account export and verified Receive, and independently checked direct-HID synthetic signing. No payment was broadcast. This does not qualify full Wallet API signing/cancellation/reconnect or funded-chain acceptance. [Public source checks](../tools/live-app-public-review/README.md) currently fail before any address query due to TCP timeouts.
+The [Nano S Plus checkpoint](../tools/live-app-physical-review/README.md) records approved installation of the exact emulator-tested Pearl Dev mainnet build, real Ledger Wallet account export and verified Receive, and independently checked direct-HID synthetic signing. No payment was broadcast. This does not qualify full Wallet API signing/cancellation/reconnect or funded-chain acceptance. [Public source checks](../tools/live-app-public-review/README.md) at that checkpoint failed before any address query due to TCP timeouts.
 
 ## Live App delivery checkpoint (10 October 2026)
 
