@@ -1,0 +1,5 @@
+PASS: disconnect after signed persistence retains exact independently verified bytes and both reservations; no automatic broadcast
+PASS: pending signature disconnect stays uncertain/reserved across recovery; late old response and new account connection cannot resume old command
+PASS: disconnect between signature yields prevents the second signature continuation and leaves payment uncertain
+PASS: real main.ts disconnect between signature return and simulated signed-storage commit keeps signed bytes/reservations and never automatically broadcasts
+PASS: only explicit broadcast call submits exact verified bytes to isolated fake backend after disconnect; no device command or real network transaction

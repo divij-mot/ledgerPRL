@@ -1,0 +1,27 @@
+{
+  "command": "npm run check",
+  "nodeVersion": "24.21.0",
+  "exitCode": 0,
+  "testCountsByWorkspaceInOutputOrder": [
+    33,
+    64,
+    103,
+    99,
+    35,
+    275
+  ],
+  "totalTests": 609,
+  "failures": 0,
+  "typechecks": "passed",
+  "workspaceBuilds": "passed",
+  "trackedSecretPatternScan": "passed",
+  "logSha256": "a6b6b61390f48e403c5a73629efffb59cc2c041874f231af7f720de0fc768be5",
+  "attempts": [
+    "Initial restricted execution could not bind localhost mock servers (EPERM).",
+    "Permitted execution identified an obsolete synthetic DMK refresher fixture missing the public lifecycle hook/exact handle; fixture corrected without changing production or weakening assertions.",
+    "Final complete permitted run passed."
+  ],
+  "hardwareAccess": false,
+  "realBroadcast": false,
+  "deployment": false
+}

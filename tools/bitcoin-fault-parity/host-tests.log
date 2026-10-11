@@ -1,0 +1,29 @@
+✔ DMK adapter encodes an exact custom command and preserves status words (1.289709ms)
+✔ physical HID disconnect between commands latches session closed and cannot resume after reconnect (0.871084ms)
+✔ physical disconnect rejects pending exchange rather than waiting for DMK reconnect grace (0.372917ms)
+✔ Bitcoin-based PRL DMK commands use a separate explicit allowlist (0.243541ms)
+✔ PSBT response winning a disconnect race remains available while transport stays terminal (0.252125ms)
+✔ terminal close destroys owned HID factory listeners exactly once, even if DMK cleanup fails (0.169458ms)
+✔ synchronous disconnect inside sendCommand cannot leave exchange pending (0.217542ms)
+✔ all close callers wait for the same pending cleanup (2.079791ms)
+✔ unrelated HID disconnect leaves the selected session active (0.613834ms)
+✔ pinned WebHID sender close does not acknowledge completion of HIDDevice.close (13.877916ms)
+✔ exchange abort waits for in-progress shared cleanup before rejecting (0.528042ms)
+✔ actual SDK connector preserves picker activation but waits for raw close before reopening the same handle (19.286541ms)
+✔ actual SDK unrelated disconnect quarantines only that handle, not the selected Ledger (5.091917ms)
+✔ actual SDK selected disconnect blocks same-handle reopen and does not auto-open on immediate connect event (3.8945ms)
+✔ actual SDK failed physical close stays quarantined (2.469708ms)
+✔ actual SDK close timeout blocks reopening even after the late close eventually resolves (2004.475042ms)
+✔ actual SDK disconnect during initial open cannot return a usable transport or reopen that handle (3.939042ms)
+✔ actual SDK failed open waits for its owned cleanup before another attempt can open (4.383584ms)
+✔ missing selected identity never treats an arbitrary HID event as the selected device (0.336541ms)
+✔ SDK destroy failure still awaits raw close and quarantines later connections (3.421ms)
+✔ failed connect still awaits raw close when DMK close itself throws (4.613334ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2649.631834

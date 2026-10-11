@@ -1,0 +1,178 @@
+{
+  "bitcoinCommit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+  "upstreamSdkCommit": "22d1131a03fcd89c5d2e660de886c8b0417b0789",
+  "pearlSdkCommit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "sources": [
+    {
+      "source": "bitcoin",
+      "commit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+      "path": "src/main.c",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/app-bitcoin/44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a/src/main.c",
+      "sha256": "d60408f0d39258733a1199111f9b242e23c00a9807446e077af0d1338a688d36"
+    },
+    {
+      "source": "bitcoin",
+      "commit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+      "path": "src/ui/display.c",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/app-bitcoin/44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a/src/ui/display.c",
+      "sha256": "43a06c74cf17034575081518b18d093f99c132acace530e9932b4fed77c56ffa"
+    },
+    {
+      "source": "bitcoin",
+      "commit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+      "path": "src/boilerplate/io_ext.c",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/app-bitcoin/44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a/src/boilerplate/io_ext.c",
+      "sha256": "13af055f993017f94a1272bf9f0730e71eddc33e8cfab40008ae6bf0d3577439"
+    },
+    {
+      "source": "bitcoin",
+      "commit": "44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a",
+      "path": "src/boilerplate/dispatcher.c",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/app-bitcoin/44ecd0410dcd6ca2f4728cf3c1b49800c30ca74a/src/boilerplate/dispatcher.c",
+      "sha256": "effb58bdc94ae26c3cf3d7c462f7e9bd759426937646fb5cd9cce943e5cba68c"
+    },
+    {
+      "source": "sdk26",
+      "commit": "22d1131a03fcd89c5d2e660de886c8b0417b0789",
+      "path": "lib_standard_app/main.c",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/ledger-secure-sdk/22d1131a03fcd89c5d2e660de886c8b0417b0789/lib_standard_app/main.c",
+      "sha256": "d203009d677cd80a472359078b6c103c4b626eae376ff2e8bb52862c545bc9ec"
+    },
+    {
+      "source": "sdk26",
+      "commit": "22d1131a03fcd89c5d2e660de886c8b0417b0789",
+      "path": "lib_standard_app/io.c",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/ledger-secure-sdk/22d1131a03fcd89c5d2e660de886c8b0417b0789/lib_standard_app/io.c",
+      "sha256": "46b2ec7dc1a5350752234bf9a52837bc0c87778ee8e913ac42de1343b30f17df"
+    },
+    {
+      "source": "sdk26",
+      "commit": "22d1131a03fcd89c5d2e660de886c8b0417b0789",
+      "path": "io_legacy/src/os_io_legacy.c",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/ledger-secure-sdk/22d1131a03fcd89c5d2e660de886c8b0417b0789/io_legacy/src/os_io_legacy.c",
+      "sha256": "f4f5cfcd3bc1d2c4a355b82268cac79e7c6faefac434cd2043eae606ba4a0649"
+    },
+    {
+      "source": "sdk26",
+      "commit": "22d1131a03fcd89c5d2e660de886c8b0417b0789",
+      "path": "io/src/os_io.c",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/ledger-secure-sdk/22d1131a03fcd89c5d2e660de886c8b0417b0789/io/src/os_io.c",
+      "sha256": "2e0667ebf0c0cb10bf9f4e7ca6f27ac1e0b2c3383e9edbffe3e83fc9d6fe79f0"
+    },
+    {
+      "source": "sdk27",
+      "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+      "path": "io_legacy/src/os_io_legacy.c",
+      "url": "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/io_legacy/src/os_io_legacy.c",
+      "sha256": "77493d18d5e391b27a75503b03776fc8ac40234290e5166c9f61a3852c58e973"
+    },
+    {
+      "source": "sdk27",
+      "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+      "path": "io/src/os_io.c",
+      "url": "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/io/src/os_io.c",
+      "sha256": "2e0667ebf0c0cb10bf9f4e7ca6f27ac1e0b2c3383e9edbffe3e83fc9d6fe79f0"
+    },
+    {
+      "source": "sdk27",
+      "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+      "path": "lib_standard_app/main.c",
+      "url": "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/lib_standard_app/main.c",
+      "sha256": "d203009d677cd80a472359078b6c103c4b626eae376ff2e8bb52862c545bc9ec"
+    },
+    {
+      "source": "sdk27",
+      "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+      "path": "lib_standard_app/io.c",
+      "url": "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/lib_standard_app/io.c",
+      "sha256": "46b2ec7dc1a5350752234bf9a52837bc0c87778ee8e913ac42de1343b30f17df"
+    },
+    {
+      "source": "sdk26",
+      "commit": "22d1131a03fcd89c5d2e660de886c8b0417b0789",
+      "path": "include/status_words.h",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/ledger-secure-sdk/22d1131a03fcd89c5d2e660de886c8b0417b0789/include/status_words.h",
+      "sha256": "9247622dc8774245994a500f786d6efd61c6be3228994ac4183c077ca756e473"
+    },
+    {
+      "source": "sdk26",
+      "commit": "22d1131a03fcd89c5d2e660de886c8b0417b0789",
+      "path": "io/include/os_io.h",
+      "url": "https://raw.githubusercontent.com/LedgerHQ/ledger-secure-sdk/22d1131a03fcd89c5d2e660de886c8b0417b0789/io/include/os_io.h",
+      "sha256": "f9a24f3daaf60e948fef0cfa74b6b5fab62faf8a4abdaf9fdae6874bc2b576a0"
+    },
+    {
+      "source": "sdk27",
+      "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+      "path": "include/status_words.h",
+      "url": "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/include/status_words.h",
+      "sha256": "9247622dc8774245994a500f786d6efd61c6be3228994ac4183c077ca756e473"
+    },
+    {
+      "source": "sdk27",
+      "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+      "path": "io/include/os_io.h",
+      "url": "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/io/include/os_io.h",
+      "sha256": "f9a24f3daaf60e948fef0cfa74b6b5fab62faf8a4abdaf9fdae6874bc2b576a0"
+    },
+    {
+      "source": "sdk27",
+      "commit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+      "path": "Makefile.standard_app",
+      "url": "https://github.com/LedgerHQ/ledger-secure-sdk/blob/6709cd2bdfebb224ee070f7c1211b54254262579/Makefile.standard_app",
+      "sha256": "a5840599d363612e41f66f66b00dc66190d0e0056d373fd65f834777baa88cd3"
+    }
+  ],
+  "matchingFunctionBodies": {
+    "void io_seproxyhal_io_heartbeat(void)": {
+      "sdk26EqualsSdk27": true,
+      "bodySha256": "abebb2b66c511f7e22ce5f2cdf01d2d2b25ec61891cd35786abb26a6998ed2d8"
+    },
+    "int io_legacy_apdu_tx(": {
+      "sdk26EqualsSdk27": true,
+      "bodySha256": "0a7277dfa2d67321e2387867d9acf170018db3b18152571b081cf322476dffd7"
+    },
+    "int os_io_rx_evt(": {
+      "sdk26EqualsSdk27": true,
+      "bodySha256": "52122741363907586831f191d858e9bfbbdf32e339a57e8be04901049afd09b2"
+    },
+    "int os_io_tx_cmd(": {
+      "sdk26EqualsSdk27": true,
+      "bodySha256": "f7a4cca97ea012291bebe61087ff913e7bbcea6f462c27873e0a7652da135050"
+    },
+    "WEAK NORETURN void app_exit(void)": {
+      "sdk26EqualsSdk27": true,
+      "bodySha256": "dc7da8837f23ad43d7b3c3ab6dde94a332154d66b4e8ce01774b5a81ee22a430"
+    },
+    "WEAK void standalone_app_main(void)": {
+      "sdk26EqualsSdk27": true,
+      "bodySha256": "cc35ed5ba4d6372e5dd43e13c498602bfbe5b51ed657f2a7dd8170e3987a8a5b"
+    },
+    "WEAK unsigned char io_event(": {
+      "sdk26EqualsSdk27": true,
+      "bodySha256": "b93154fccad9030e287ec41c5de91eb40ee08bde2a82253c905170d351c840db"
+    },
+    "WEAK int io_recv_command(": {
+      "sdk26EqualsSdk27": true,
+      "bodySha256": "c18fcff5c6db198f283d3f07e73fa2d4a3dbb87f167ea96d20d7f147487c2aa7"
+    }
+  },
+  "appMain": {
+    "bitcoinEqualsPearl": true,
+    "bodySha256": "5a61128dc606983a683d3db975c7aa9044ca8f1145a8b8597213a6759fa61f1d"
+  },
+  "limits": "These selected bodies match; this does not equate whole SDKs or imply upstream approval of the Pearl/API27 adaptation.",
+  "matchingStatusConstants": {
+    "SWO_COMMAND_NOT_ACCEPTED": "0x6901",
+    "SWO_SEC_PIN_15": "0x5515"
+  },
+  "matchingBusyPacketTypes": {
+    "RAW_APDU": "0x10",
+    "USB_HID_APDU": "0x20",
+    "USB_CCID_APDU": "0x22",
+    "USB_WEBUSB_APDU": "0x21",
+    "USB_U2F_HID_APDU": "0x23",
+    "BLE_APDU": "0x30",
+    "NFC_APDU": "0x40"
+  }
+}

@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0
  * Narrow adaptation of SDK v27.1.2 io_seproxyhal_io_heartbeat.
  * (c) Ledger SAS, with Pearl review-session validation changes.
- * The SDK's UI handlers are retained. A fault exits the app on nested requests,
- * receive failure, lock or expiry. Transport disconnect is not guaranteed to
+ * The SDK's UI handlers and nested-command busy reply are retained. A fault
+ * exits the app on receive/transmit failure, lock or expiry. Disconnect may not
  * reach the app; browser-only abort is not a device event.
  */
 #include <stdbool.h>
@@ -18,6 +18,7 @@
 #include "os_ux.h"
 #include "read.h"
 #include "seproxyhal_protocol.h"
+#include "status_words.h"
 
 extern uint16_t G_ticks;
 
@@ -46,8 +47,31 @@ void prl_review_heartbeat(uint16_t start_tick) {
     check_review_state(start_tick);
     if (size < 0 || size > (int) sizeof(G_io_rx_buffer)) prl_session_abort();
     if (size == 0) return;
-    if (G_io_rx_buffer[0] != OS_IO_PACKET_TYPE_SE_EVT &&
-        G_io_rx_buffer[0] != OS_IO_PACKET_TYPE_SEPH) prl_session_abort();
+    switch (G_io_rx_buffer[0]) {
+        case OS_IO_PACKET_TYPE_RAW_APDU:
+        case OS_IO_PACKET_TYPE_USB_HID_APDU:
+        case OS_IO_PACKET_TYPE_USB_CCID_APDU:
+        case OS_IO_PACKET_TYPE_USB_WEBUSB_APDU:
+        case OS_IO_PACKET_TYPE_USB_U2F_HID_APDU:
+        case OS_IO_PACKET_TYPE_BLE_APDU:
+        case OS_IO_PACKET_TYPE_NFC_APDU: {
+            /* Match the SDK heartbeat: reject the new command without
+             * replacing the command under review. Do not use io_exchange or
+             * io_legacy_apdu_tx, which release the original reply ownership. */
+            const uint8_t busy[2] = {SWO_COMMAND_NOT_ACCEPTED >> 8,
+                                     SWO_COMMAND_NOT_ACCEPTED & 0xff};
+            if (os_io_tx_cmd(G_io_rx_buffer[0], busy, sizeof(busy), NULL) < 0) {
+                prl_session_abort();
+            }
+            check_review_state(start_tick);
+            return;
+        }
+        case OS_IO_PACKET_TYPE_SE_EVT:
+        case OS_IO_PACKET_TYPE_SEPH:
+            break;
+        default:
+            prl_session_abort();
+    }
 
     /* Type byte followed by one complete tag/BE16-length/payload envelope. */
     if (size < 4 || size - 1 > (int) sizeof(G_io_seproxyhal_spi_buffer)) prl_session_abort();

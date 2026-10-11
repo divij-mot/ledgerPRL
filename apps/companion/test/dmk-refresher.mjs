@@ -98,14 +98,33 @@ const built = await build({
   write: false,
   platform: "node",
   format: "cjs",
-  external: ["@ledgerhq/device-management-kit", "rxjs"],
+  external: [
+    "@ledgerhq/device-management-kit",
+    "@ledgerhq/device-transport-kit-web-hid",
+    "rxjs",
+  ],
   logLevel: "silent",
 });
-let connectFacade;
+let connectFacade, fixtureHidTransport;
+// Only the WebHID boundary is synthetic. Invoke the production connector's
+// public state-machine factory so identity and close ownership are exercised;
+// the DeviceSession, intent queue and connection state machine remain real.
+const testWebHid = {
+  WebHidTransport: class {
+    constructor(_models, _logger, _sender, _receiver, createConnection) {
+      this.createConnection = createConnection;
+      fixtureHidTransport = this;
+    }
+    destroy() {
+      this.connection?.closeConnection();
+    }
+  },
+};
 const testDmk = {
   ...dmk,
   DeviceManagementKitBuilder: class {
-    addTransport() {
+    addTransport(factory) {
+      factory({});
       return this;
     }
     build() {
@@ -116,7 +135,11 @@ const testDmk = {
 const mod = { exports: {} };
 new Function("require", "module", "exports", built.outputFiles[0].text)(
   (name) =>
-    name === "@ledgerhq/device-management-kit" ? testDmk : require(name),
+    name === "@ledgerhq/device-management-kit"
+      ? testDmk
+      : name === "@ledgerhq/device-transport-kit-web-hid"
+        ? testWebHid
+        : require(name),
   mod,
   mod.exports,
 );
@@ -149,6 +172,14 @@ async function scenario(
       if (stage === "ack") nativeState = "idle";
     },
   });
+  let rawCloses = 0;
+  const hidDevice = {
+    productId: 0x4000,
+    async open() {},
+    async close() {
+      rawCloses++;
+    },
+  };
   const endpoint = {
     async sendApdu(apdu) {
       const cla = apdu[0],
@@ -182,20 +213,16 @@ async function scenario(
         statusCode: response.slice(-2),
       });
     },
-    async setupConnection() {},
+    async setupConnection() {
+      await hidDevice.open();
+    },
     closeConnection() {},
     getDependencies() {
-      return {};
+      return { device: hidDevice };
     },
     setDependencies() {},
   };
-  const connection = new dmk.DeviceConnectionStateMachine({
-    deviceId: "public-refresher-fixture",
-    deviceApduSender: endpoint,
-    timeoutDuration: 5000,
-    tryToReconnect() {},
-    onTerminated() {},
-  });
+  let connection;
   const connected = {
     id: "public-refresher-fixture",
     deviceModel: { id: model },
@@ -208,6 +235,15 @@ async function scenario(
     },
     async stopDiscovering() {},
     async connect(options) {
+      connection = fixtureHidTransport.createConnection({
+        deviceId: "public-refresher-fixture",
+        deviceApduSender: endpoint,
+        timeoutDuration: 5000,
+        tryToReconnect() {},
+        onTerminated() {},
+      });
+      fixtureHidTransport.connection = connection;
+      await endpoint.setupConnection();
       assert.equal(
         options.sessionRefresherOptions.isRefresherDisabled,
         true,
@@ -283,6 +319,7 @@ async function scenario(
     await client.close().catch(() => {});
     session.close();
     connection.closeConnection();
+    assert.equal(rawCloses, 1, "all cleanup paths share one physical close");
   }
   return sent;
 }

@@ -1,0 +1,45 @@
+{
+  "scope": "Synthetic host lifecycle only; no hardware or real transactions",
+  "focusedTests": 21,
+  "disconnectRegressionScenarios": 5,
+  "typecheck": "passed",
+  "sources": {
+    "apps/companion/src/ledger.ts": "d4b6cb7bc45aaa61359053fa296be4cf44c3fc53d80cf26ef5604fb79a16973d",
+    "apps/companion/test/ledger.test.ts": "cb361cfc71fd90b44cf3589692cdafdb357adb00c4fdc0f36a60dde8f1717083",
+    "apps/companion/test/disconnect-regression.mjs": "4e95e85a36233755b7872ed214c714136f0ea0c1cc03d8f2196460f32ddedccd",
+    "apps/companion/test/dmk-refresher.mjs": "00a561862e790abc81c1acaffa88fe9218f54a32dd2d00c2b53302d75dc0d2d1"
+  },
+  "pinnedSdkSources": {
+    "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/transport/WebHidTransport.js.map": "0f8c4fe181b1440de68dc7c5c7f84eae88fcea8c8165c5db24f8aaf8411b4598",
+    "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/esm/api/transport/WebHidApduSender.js.map": "fbfb3590b8bd4c85e1b582d451ab1389fea8c3a84f991af85a545c35d236bb4d",
+    "node_modules/@ledgerhq/device-transport-kit-web-hid/lib/types/api/transport/WebHidTransport.d.ts": "15adde2e8979da59c035aa878df7203ec61189ca986fbb03d3052fa4a91882fc"
+  },
+  "logs": {
+    "host-tests.log": "f2f271e4375e285cd69bec58f46bdfb4fa5fc8e742801aef126f8b7e7f05f407",
+    "host-disconnect-regression.log": "afe8c79977e602fc8ab940e22a3692234097f31d2ddb255f069061664cf47c3a",
+    "host-typecheck.log": "491f2c20e74dac6da756c186b26d2502725741239252496b16da30b350ff42c7",
+    "host-refresher.log": "11d5ec127ee550f20583700e0eba4f962a94399ed40da4210976a06700f88f15"
+  },
+  "alternative": {
+    "package": "@ledgerhq/hw-transport-webhid@6.36.0",
+    "base": "@ledgerhq/hw-transport@6.35.5",
+    "syntheticOnly": true,
+    "disconnectEmitted": true,
+    "unresponsiveEmitted": true,
+    "closeSettledBeforeResponse": false,
+    "rawCloseCallsBeforeResponse": 0,
+    "responseReleasedExchangeAndClose": true
+  },
+  "alternativePackages": {
+    "ledgerhq-hw-transport-6.35.5.tgz": "fab95271740905c3f86da1c8bb13b6a71bbc67e52a1accc9511a619e024d1676",
+    "ledgerhq-hw-transport-webhid-6.36.0.tgz": "68824f4a397f3814a25cfc0579c8a6e63ef5a9e22d5640d4e61b8b5f38918cec",
+    "ledgerhq-errors-6.37.0.tgz": "f0edb7c68fa688d28a08bef58a78e82fa959a49b345e5920039064e860eecf3f"
+  },
+  "refresherRegression": {
+    "disabledModelCases": 5,
+    "enabledControls": 2,
+    "historicalCaptureAssertions": "retained",
+    "queueBoundary": "passed",
+    "onceOnlyPhysicalClose": "passed in all seven scenarios"
+  }
+}

@@ -28,14 +28,18 @@ PRL_FAULT_CASE=account-empty-ticker,account-four-byte-ticker-zero,account-four-b
 node --import tsx apps/ledger-bitcoin-prl/prl-tests/native-review-faults.ts
 ```
 
-The existing injector only passes numeric `RAW!` SEPH events into Speculos. The
-SDK review loop, touch processing and application remain unchanged. Automatic
+The existing injector passes numeric `RAW!` SEPH events into Speculos without
+patching the tested ELF or SDK UI code. Automatic
 tickers are paused while one event is injected during public-key review. Known SDK UX events must leave review open, return no account response before
 touch, then allow normal explicit UI approval of the same account. Opaque
 one/four-byte tickers, four-byte display and four/ten-byte STATUS payloads are
 accepted; valid consumed button/finger fields may have suffixes. Short consumed
-fields, unknown events, malformed APDUs and nested commands must execute the
-native abort, with no successful response or signature. The injector constructs
+fields and unknown events must execute the native abort, with no successful
+response or signature. APDUs arriving during review, including malformed ones,
+receive the SDK busy status `6901` without replacing the original operation.
+Some tests use synthetic busy-response demultiplexing to verify that original
+commitment; this is not production-client reconnect behavior. See the
+[Bitcoin fault comparison](../../../tools/bitcoin-fault-parity/README.md). The injector constructs
 coherent SEPH envelopes; malformed outer-envelope lengths remain covered by the
 separate native guard tests, not claimed by this replay.
 
@@ -60,7 +64,7 @@ The former `usb-power-loss` case was a four-zero-byte STATUS event; it is now
 a positive SDK-status case because those bytes do not establish disconnection.
 The original 0.1.3 ticker/control results remain historical evidence.
 
-Omitting `PRL_FAULT_CASE` runs all cases, including the UX cases that require
+Omitting `PRL_FAULT_CASE` runs the model-compatible cases, including UX cases that require
 firmware with the 0.1.4 SDK-event alignment. Use a separate fresh
 evidence directory for each run. `result.json`, firmware hashes, bounded logs
 and captured public-fixture screens are written there. No Docker image, ELF,

@@ -51,6 +51,7 @@ function device({ delaySignature = false, exportedAccount = account } = {}) {
     signatureResolve,
     signatureCount = 0;
   const events = new EventTarget();
+  const hidDevice = { productId: 0x4000 };
   const endpoint = createPsbtEndpoint({
     account: exportedAccount,
     onStage: async (stage) => {
@@ -109,6 +110,8 @@ function device({ delaySignature = false, exportedAccount = account } = {}) {
     events,
     undefined,
     "bitcoin-prl",
+    undefined,
+    hidDevice,
   );
   const client = new LedgerBitcoinPrlClient(adapter, "regtest", {
     timeoutMs: 500,
@@ -117,6 +120,7 @@ function device({ delaySignature = false, exportedAccount = account } = {}) {
     sent,
     endpoint,
     events,
+    hidDevice,
     connection,
     adapter,
     client,
@@ -142,7 +146,9 @@ function reserve() {
     rawTx: tx.rawTx,
     txid: tx.txid,
   });
-  d.events.dispatchEvent(new Event("disconnect"));
+  d.events.dispatchEvent(
+    Object.assign(new Event("disconnect"), { device: d.hidDevice }),
+  );
   d.connection.eventDeviceConnected();
   await assert.rejects(
     d.adapter.exchange(Uint8Array.of(P.cla, P.GET_NETWORK_INFO, 0, 1, 0)),
@@ -178,7 +184,9 @@ function reserve() {
     (e) => e,
   );
   await d.waitForSignature();
-  d.events.dispatchEvent(new Event("disconnect"));
+  d.events.dispatchEvent(
+    Object.assign(new Event("disconnect"), { device: d.hidDevice }),
+  );
   d.connection.eventDeviceConnected();
   await signing;
   const count = d.sent.length;
@@ -213,7 +221,9 @@ function reserve() {
     d.client.signBundle(bundle(), account, {
       onProgress(phase, complete) {
         if (phase === "signatures" && complete === 1)
-          d.events.dispatchEvent(new Event("disconnect"));
+          d.events.dispatchEvent(
+            Object.assign(new Event("disconnect"), { device: d.hidDevice }),
+          );
       },
     }),
   );
@@ -325,7 +335,9 @@ globalThis.auditDelaySigned = true;
 const signing = app.signForTest();
 await committed;
 assert.equal((await app.auditJournal()).payments[0].state, "signing");
-d.events.dispatchEvent(new Event("disconnect"));
+d.events.dispatchEvent(
+  Object.assign(new Event("disconnect"), { device: d.hidDevice }),
+);
 globalThis.auditDisconnectCallback();
 release();
 await signing;

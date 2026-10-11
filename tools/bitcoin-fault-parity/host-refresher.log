@@ -1,0 +1,10 @@
+PASS historical PRL1 native capture: installed DMK parser accepts the recorded Nano S Plus idle app-info response
+PASS historical PRL1 native capture: recorded Nano S Plus BEGIN then B0 ping faults and exits; no firmware is rerun by this host test
+PASS disabled nanoSP one initial B0 only; full independently verified signed fixture across timer gaps
+PASS disabled nanoX one initial B0 only; full independently verified signed fixture across timer gaps
+PASS disabled stax one initial B0 only; full independently verified signed fixture across timer gaps
+PASS disabled flex one initial B0 only; full independently verified signed fixture across timer gaps
+PASS disabled apexp one initial B0 only; full independently verified signed fixture across timer gaps
+CONTROL enabled nanoSP periodic B0 entered signing state [ 'idle', 'interrupted' ]
+CONTROL enabled nanoSP periodic B0 entered signing state [ 'idle', 'interrupted' ]
+PASS queue boundary: polling is blocked during a command, not across the whole multi-command signing flow

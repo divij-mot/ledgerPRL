@@ -8,6 +8,7 @@
 #include "prl_review_io.h"
 #include "test-stubs.h"
 #include "seproxyhal_protocol.h"
+#include "status_words.h"
 
 unsigned char G_io_apdu_buffer[260], G_io_rx_buffer[1024], G_io_seproxyhal_spi_buffer[512];
 uint16_t G_ticks;
@@ -18,6 +19,7 @@ static unsigned char packet[1024];
 static int packet_size, pin_set, pin_valid, fail_after_rx, fail_after_ui, tick_after_ui;
 static int calls, receives, stops, exits, cases;
 static int command_age;
+static int tx_calls, tx_result, fail_after_tx, tick_after_tx;
 extern void test_set_command_start(uint16_t start);
 static jmp_buf failed;
 #if defined(USE_OS_IO_STACK) && !defined(TEST_OLD_EXIT)
@@ -57,6 +59,21 @@ unsigned char io_event(unsigned char channel) {
     if (tick_after_ui) G_ticks++;
     return 1;
 }
+int os_io_tx_cmd(unsigned char type, const unsigned char *data, unsigned short len, unsigned int *timeout) {
+    assert(type == packet[0] && len == 2 && timeout == NULL);
+    assert(data[0] == (SWO_COMMAND_NOT_ACCEPTED >> 8) && data[1] == (SWO_COMMAND_NOT_ACCEPTED & 255));
+    for (size_t i=0; i<sizeof(G_io_apdu_buffer); i++) assert(G_io_apdu_buffer[i]==0xa5);
+    assert(!test_flow_ended()); tx_calls++;
+    if (fail_after_tx) pin_valid=0;
+    if (tick_after_tx) G_ticks++;
+    return tx_result;
+}
+static int busy_type(int type) {
+    return type==OS_IO_PACKET_TYPE_RAW_APDU || type==OS_IO_PACKET_TYPE_USB_HID_APDU ||
+        type==OS_IO_PACKET_TYPE_USB_CCID_APDU || type==OS_IO_PACKET_TYPE_USB_WEBUSB_APDU ||
+        type==OS_IO_PACKET_TYPE_USB_U2F_HID_APDU || type==OS_IO_PACKET_TYPE_BLE_APDU ||
+        type==OS_IO_PACKET_TYPE_NFC_APDU;
+}
 int os_io_stop(void) { stops++; return 0; }
 void os_sched_exit(int status) {
     assert(status == -1);
@@ -76,7 +93,7 @@ static void reset(void) {
     G_ticks = 0;
     G_io_app.apdu_media = IO_APDU_MEDIA_USB_HID;
     calls = receives = stops = exits = fail_after_rx = fail_after_ui = tick_after_ui = 0;
-    command_age = -1;
+    command_age = -1; tx_calls = tx_result = fail_after_tx = tick_after_tx = 0;
     pairing_calls = 0; review_gesture = -1; count_ticker = 0; test_reset_flow();
 }
 static void envelope(unsigned char tag, unsigned len) {
@@ -196,7 +213,32 @@ int main(void) {
     for (int media = 0; media < 256; media++) {
         reset(); envelope(SEPROXYHAL_TAG_TICKER_EVENT, 0); packet[0] = media;
         int allowed = media == OS_IO_PACKET_TYPE_SE_EVT || media == OS_IO_PACKET_TYPE_SEPH;
-        check(0, !allowed, allowed);
+        check(0, !(allowed || busy_type(media)), allowed); assert(tx_calls == busy_type(media));
+    }
+    /* SDK-compatible busy replies preserve the original buffer/media/latch.
+     * A nonnegative zero return is valid for some SDK transports. */
+    for (int type=0; type<256; type++) if (busy_type(type)) {
+        for (int media=0; media<=IO_APDU_MEDIA_CDC; media++) {
+            for (int result=-2; result<=2; result++) {
+                reset(); packet[0]=type; packet_size=1;
+                G_io_app.apdu_media=media; tx_result=result;
+                check(0,result<0,0); assert(tx_calls==1 && G_io_app.apdu_media==media);
+                assert(!test_flow_ended());
+                if (result>=0) for(size_t i=0;i<sizeof(G_io_apdu_buffer);i++) assert(G_io_apdu_buffer[i]==0xa5);
+            }
+        }
+        reset(); packet[0]=type; fail_after_tx=1; check(0,1,0); assert(tx_calls==1);
+        for(int whole=0;whole<2;whole++) {
+            reset(); packet[0]=type; tick_after_tx=1;
+            if(whole) command_age=2999; else G_ticks=1199;
+            check(0,1,0);assert(tx_calls==1);
+        }
+        for(int approve=0;approve<2;approve++) {
+            reset(); packet[0]=type; check(0,0,0);assert(!test_flow_ended());
+            packet[0]=OS_IO_PACKET_TYPE_SE_EVT;
+            envelope(SEPROXYHAL_TAG_BUTTON_PUSH_EVENT,1);packet[4]=6;review_gesture=approve;
+            check(0,0,1);assert(test_flow_ended() && test_flow_response()==(approve!=0));
+        }
     }
     /* All button bytes: only release/left/right/both masks are allowed. */
     for (int mask = 0; mask < 256; mask++) {
@@ -226,12 +268,12 @@ int main(void) {
             check(0, 0, 1); assert(!test_flow_ended());
         }
     }
-    /* No nested APDU or pairing mutation is accepted during BLE review. */
+    /* Nested APDUs get busy without dispatch; pairing mutation still aborts. */
     for (int type = 0; type < 256; type++) {
         reset(); G_io_app.apdu_media = IO_APDU_MEDIA_BLE;
         envelope(SEPROXYHAL_TAG_TICKER_EVENT, 0); packet[0] = type;
         int allowed = type == OS_IO_PACKET_TYPE_SE_EVT || type == OS_IO_PACKET_TYPE_SEPH;
-        check(0, !allowed, allowed);
+        check(0, !(allowed || busy_type(type)), allowed); assert(tx_calls == busy_type(type));
         reset(); G_io_app.apdu_media = IO_APDU_MEDIA_BLE;
         envelope(SEPROXYHAL_TAG_ITC_EVENT, 1); packet[4] = type;
         check(0, type != ITC_UX_REDISPLAY, type == ITC_UX_REDISPLAY);

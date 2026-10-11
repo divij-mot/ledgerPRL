@@ -58,7 +58,7 @@ Use `flex`, `stax` or `nano-s-plus` for those devices. Close the Pearl view on y
 
 Verify a Receive address on the device before sending. Keys and the account derivation (`86'/808276'/0'`) remain unchanged.
 
-If a connection drops or you cancel on the phone/computer during review, **reject the old review on the Ledger before retrying**. The device OS manages USB/Bluetooth connections and does not guarantee that every disconnect reaches the app. A review may remain until rejection, lock, expiry, or a new command; closing the page is not a device rejection. Pearl retains its PIN, deadline and new-command checks, and never treats these OS status events as approval.
+If a connection drops or you cancel on the phone/computer during review, **reject the old review on the Ledger before retrying**. The device OS manages USB/Bluetooth connections and does not guarantee that every disconnect reaches the app. A review may remain until rejection, lock or expiry; closing the page is not a device rejection. In the held candidate, a new command receives the same busy response as Bitcoin and does not cancel the old review. Pearl retains its PIN and deadline checks, and never treats OS status events as approval.
 
 ## Build without touching a device
 

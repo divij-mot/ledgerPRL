@@ -132,14 +132,16 @@ data on another compatible chain can still create replay risk.
 
 ## Review cancellation and transport limits
 
-An unexpected APDU during trusted review, receive failure, PIN lock,
-a malformed envelope or disallowed event, or 1200 SDK ticker events causes fail-closed
-application exit. A final approval callback is checked again against expiry and
+An APDU arriving during review receives the SDK busy status `6901`; the
+original review remains active and still needs explicit approval or rejection.
+Receive failure, a reported negative busy-reply transmit result, PIN lock, a
+malformed event envelope or disallowed event, or 1200 SDK ticker events causes
+fail-closed application exit. A final approval callback is checked again against expiry and
 PIN state. No private scalar is live across review.
 An additional immutable 3000-tick whole-command deadline is checked at public
 I/O/UI boundaries; each Merkle continuation cannot restart that budget.
 
-Known ticker, display and status payloads are forwarded opaquely through the SDK after bounded framing checks. Status is not an app-visible USB/BLE liveness contract; physical disconnect need not produce an abort notification.
+Known ticker, display, status and power-button payloads are forwarded opaquely through the SDK after bounded framing checks. Status is not an app-visible USB/BLE liveness contract; physical disconnect need not produce an abort notification.
 
 Closing a browser WebHID handle or aborting JavaScript is **not necessarily a
 device event**. It does not prove that an already displayed review was cancelled.

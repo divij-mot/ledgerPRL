@@ -1,0 +1,288 @@
+{
+  "baseCommit": "ddbd551",
+  "heldCandidate": true,
+  "versionAndReleaseManifestUnchanged": true,
+  "hardwareOperations": false,
+  "broadcast": false,
+  "privateAccountMaterial": false,
+  "checkedAt": "2026-10-11T19:11:57.217876+00:00",
+  "sourceFiles": {
+    "apps/ledger-bitcoin-prl/src/boilerplate/prl_review_io.c": "3616650ffa71a92e6131c20e2e192ebbefb6b1fb4d027bcdf3210f2cf5317aad",
+    "apps/ledger-bitcoin-prl/Makefile": "6791c05dc1d7700a0218c397747b1148dabf018beef3b41e9e81f842eb909816",
+    "apps/ledger-bitcoin-prl/release.json": "f3cc4ad53db1e2d3eee7be321bf260d00a391edd1aa2c91a40c4fd576633a603",
+    "tools/ble-exit-review/review-heartbeat.c": "3e3351e33f37dd09f728b3a1c21f6f18a9acf292d3c27100b6e01865a58f3f3e",
+    "tools/ble-exit-review/review-heartbeat.py": "cd57d9d2b9b08ea3eaf402cb1eaaa5763d7ecf49226d46156fdd6e85a56720ae",
+    "apps/ledger-bitcoin-prl/prl-tests/native-review-faults.ts": "ade616748b698563b28fdf43267aea1218e2a6d3310047c7e6c1ab9b293dcb23",
+    "apps/ledger-bitcoin-prl/prl-tests/raw-protocol.ts": "28402ec3f0b52a5fe2ce37f0e1f2cb62c0817b052862bb0fefb37b5e3ba6ddbe",
+    "package-lock.json": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d"
+  },
+  "focusedRuns": {
+    "gen5": {
+      "network": "mainnet",
+      "elfSha256": "5b8d434b7458d389b55ce1d6bd441b6611866c9fd45230fe938d50f8e17c9ba0",
+      "buildManifestSha256": "eed033a9ab674d7ca623cfedf5b8c210f89dfc3c5f1cb2d7953fe42957cc47ab",
+      "cases": 10,
+      "resultSha256": "cc575160b8e52323fda29d9195902053cbdfcca0123fb0b3f73c66cc7ca98770",
+      "results": [
+        {
+          "name": "account-redisplay",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": false,
+            "originalAccountVerified": true
+          }
+        },
+        {
+          "name": "account-power-event",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": false,
+            "originalAccountVerified": true
+          }
+        },
+        {
+          "name": "account-nested-keypath",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalAccountVerified": true
+          }
+        },
+        {
+          "name": "account-malformed-apdu",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalAccountVerified": true
+          }
+        },
+        {
+          "name": "account-nested-capabilities",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalAccountVerified": true
+          }
+        },
+        {
+          "name": "sign-nested-replacement-approve",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalTransactionVerified": true,
+            "replacementSignatureRejected": true,
+            "txid": "55a8c074e59dd3aca9ff80ccc8c3da8b8209dfefe77ca7e6883f7e1610b218ef"
+          }
+        },
+        {
+          "name": "sign-nested-replacement-deny",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalDeniedWithoutYield": true,
+            "freshTransactionVerified": true,
+            "txid": "addb6dc58c1d0582a99df12c14d63dd6e3ac9b638dc64b071f93ed14bbdd145b"
+          }
+        },
+        {
+          "name": "receive-cancel-then-new-index",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": false,
+            "busyEndedHostWaiter": false,
+            "explicitOldDenial": true,
+            "sameEmulatorProcess": true,
+            "oldStatusTimerDidNotOverwriteFreshReview": true,
+            "newIndexVerified": true,
+            "newRequestAfterCancelMs": 295,
+            "freshReviewObservedMs": 5178
+          }
+        },
+        {
+          "name": "receive-qr-nested-busy",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalAddressVerified": true
+          }
+        },
+        {
+          "name": "receive-qr-nested-unfiltered-cancel",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": false,
+            "busyEndedHostWaiter": true,
+            "explicitOldDenial": true,
+            "sameEmulatorProcess": true,
+            "oldStatusTimerDidNotOverwriteFreshReview": true,
+            "newIndexVerified": true,
+            "newRequestAfterCancelMs": 285,
+            "freshReviewObservedMs": 5276
+          }
+        }
+      ]
+    },
+    "nanosp": {
+      "network": "regtest",
+      "elfSha256": "ac4b111747d5d5808bee412e8ec2e718d4f41058122fba2ec99139d2a41f36f9",
+      "buildManifestSha256": "7b6baa2f442e98bab74a5354c16e08faa4ca45d2e3bbd2784c636cd90b3ea045",
+      "cases": 8,
+      "resultSha256": "05bcf264a3e7e22d6b8c89bfaf9e6c0d4f2057aa11fb8ce1c637e75f67881002",
+      "results": [
+        {
+          "name": "account-redisplay",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": false,
+            "originalAccountVerified": true
+          }
+        },
+        {
+          "name": "account-nested-keypath",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalAccountVerified": true
+          }
+        },
+        {
+          "name": "nested-capabilities-apdu",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalTransactionVerified": true,
+            "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f"
+          }
+        },
+        {
+          "name": "nested-sign-apdu",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalTransactionVerified": true,
+            "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f"
+          }
+        },
+        {
+          "name": "bolos-version-apdu",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalTransactionVerified": true,
+            "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f"
+          }
+        },
+        {
+          "name": "malformed-apdu",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalTransactionVerified": true,
+            "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f"
+          }
+        },
+        {
+          "name": "sign-nested-replacement-approve",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalTransactionVerified": true,
+            "replacementSignatureRejected": true,
+            "txid": "c360b5676e0ce3e57ccf7e72bd8767ca48819479cb458449a8d1ebe409d62e2f"
+          }
+        },
+        {
+          "name": "sign-nested-replacement-deny",
+          "status": "passed",
+          "observations": {
+            "syntheticBusyDemultiplexing": true,
+            "originalDeniedWithoutYield": true,
+            "freshTransactionVerified": true,
+            "txid": "8aeb47e48a5fdfa652eb648ccbc1f3cd0ba6d0f03638afa54f751e284a787139"
+          }
+        }
+      ]
+    }
+  },
+  "buildOnly": {
+    "flex": {
+      "status": "passed",
+      "elfSha256": "e5e91b482bd1c175b3eed494db5ea858a1c248e116a8e333605ae9fc1f77b015",
+      "buildManifestSha256": "33c4e1dbb3982ca520437b73eac24ebf5c14d023c95836bfa16313518ea587c6",
+      "simulatorPilotRun": false
+    },
+    "stax": {
+      "status": "passed",
+      "elfSha256": "c9868a25cdf5bc670372ff8605ed1bdd5daa5f3b81499c3f66226e042637f7f3",
+      "buildManifestSha256": "ad802ccfd1158699f7faa72ea147f81c79c1dc83af0bdc94631dcaac4848ecf7",
+      "simulatorPilotRun": false
+    },
+    "nanox": {
+      "status": "passed",
+      "elfSha256": "443b73baf19721a224576737687fc66894eaf3141c924a4d2c4f4f3bba79bdab",
+      "buildManifestSha256": "023266f8cb291234bc7f9e97b023ecb98f403f13518687ff3113f54a2d1c0bad",
+      "simulatorPilotRun": false
+    }
+  },
+  "guardConfigurations": {
+    "ble": {
+      "result": "PASS 92356 independent heartbeat syscall-stub cases under ASan/UBSan",
+      "guardSha256": "3616650ffa71a92e6131c20e2e192ebbefb6b1fb4d027bcdf3210f2cf5317aad",
+      "resultSha256": "063b7a4688d6aa0e8b69489059734daccf9dbce3699068d2fc82b93d27dc0974"
+    },
+    "usb": {
+      "result": "PASS 92347 independent heartbeat syscall-stub cases under ASan/UBSan",
+      "guardSha256": "3616650ffa71a92e6131c20e2e192ebbefb6b1fb4d027bcdf3210f2cf5317aad",
+      "resultSha256": "02f83320e7086eda13e9d99a9123497dc67ad1c4f34e7c35d605be39d73f5bf7"
+    },
+    "legacy": {
+      "result": "PASS 92356 independent heartbeat syscall-stub cases under ASan/UBSan",
+      "guardSha256": "3616650ffa71a92e6131c20e2e192ebbefb6b1fb4d027bcdf3210f2cf5317aad",
+      "resultSha256": "4ae0e61f833918e58120efe09ed6d2ca32c1487fe3743012e996bd916e0da7a2"
+    },
+    "swipe": {
+      "result": "PASS 92356 independent heartbeat syscall-stub cases under ASan/UBSan",
+      "guardSha256": "3616650ffa71a92e6131c20e2e192ebbefb6b1fb4d027bcdf3210f2cf5317aad",
+      "resultSha256": "1d5e782b1233e2d67ef7e3f847de07076ef66f753d318e1591cf09eb4f1dff97"
+    }
+  },
+  "setupNote": "Initial Gen5 attempt stopped before injection: stale scratch helper used regtest coin type1 and mainnet firmware correctly returned6a82. Logs retained locally. Both final targeted runs use the current tracked helper/import graph.",
+  "testedImportGraph": {
+    "apps/ledger/tests/speculos-injector.py": "31d7a36137bb83d21ae2d756168814ef7229cb36e8a11a4bcfab3c5d09fcb0f8",
+    "apps/ledger-bitcoin-prl/prl-tests/native-review-faults.ts": "ade616748b698563b28fdf43267aea1218e2a6d3310047c7e6c1ab9b293dcb23",
+    "packages/bitcoin-prl-adapter/src/upstream/clientCommands.ts": "3087e3e6c8e3e70138e8f9135e9f95b53586f965a9eddc139679385cf5a6114b",
+    "packages/bitcoin-prl-adapter/src/upstream/varint.ts": "ad1c86d8591caa1ac1321b14765ac006ea997c8e69b2596ab25244fe82b8c112",
+    "packages/bitcoin-prl-adapter/src/upstream/policy.ts": "894a7e1b8b0822f45da6233caff5c2b01cfd9d029a21d4e10e1e57c50dba46eb",
+    "packages/bitcoin-prl-adapter/src/upstream/merkle.ts": "46845ef8d1ced9ed44aeb76ae62307b975ab5c80b96d86051a5c2d2ab7c7c7c3",
+    "packages/bitcoin-prl-adapter/src/upstream/buffertools.ts": "c42f2af89bebd8abd77b23009cf089fb41aabf841ce1111dedb420dae31b99b3",
+    "packages/bitcoin-prl-adapter/src/upstream/merkleMap.ts": "d6c02c5820d7e4b4650ce35a4b84e59ff86b5a33c2ccb7529ffa3739f130d969",
+    "apps/ledger-bitcoin-prl/prl-tests/raw-protocol.ts": "28402ec3f0b52a5fe2ce37f0e1f2cb62c0817b052862bb0fefb37b5e3ba6ddbe",
+    "packages/bitcoin-prl-adapter/src/index.ts": "e564552f552f8f482a73b6197a8d090c1a074f187654e98aa843fade1388f4ae",
+    "packages/bitcoin-prl-adapter/src/client.ts": "453541a29ca90f42d87c7dd5a6ea6461f9de784710973ad6620eeb33f1ceefa7",
+    "packages/bitcoin-prl-adapter/src/psbt.ts": "25612cff0093dcba14f8db1c376de9196ea665acb3e14f2daa2b11acabc3d1d5",
+    "packages/bitcoin-prl-adapter/src/policy.ts": "31e0276b65e1d8d7775c1df702336594e3abb10b71a711e82579e3612b5990f4",
+    "packages/sdk/src/index.ts": "bb21aa00a48dae636f924b5279a9f952582dc7e968ee3f63d93c30241288c995",
+    "packages/sdk/src/http.ts": "2ef4c1918bdf461026a66d6c8e22c1022d9118d30f6850b86e4057effd91a50c",
+    "packages/sdk/src/bytes.ts": "507877d8d5c8d0685cbc7049d42c27e6e36c92461f4b33304c3f340424af2ff0",
+    "packages/sdk/src/device.ts": "7e11c7cff4dc70b1b3eecde4772f041845f8690eb784d08975bd3e10b95f312d",
+    "packages/sdk/src/transaction.ts": "76e97724f7c5a49040c0778a6d07ed8056eadcdb2b5bd4dbf86487ee594138ca",
+    "packages/sdk/src/bundle.ts": "2e82ac5f9d0f86ae2e636cbb9131125723db8efc4b79fb74052d36f2ce2f07fa",
+    "packages/sdk/src/keys.ts": "9605948e9de97c3e3944a55bec45b245e7631334bdbacc0673e9134c21b37bb5",
+    "packages/sdk/src/network.ts": "8a3178145059cdb6f57a2ec740664db937d87e175b9b1d5cb87f15c9a72e6d91",
+    "packages/sdk/src/amount.ts": "b41107f07718e0de8bcd4cec344d8a99125c57421dd6e2d03fa26c06fca0dfc1",
+    "apps/ledger-bitcoin-prl/prl-tests/emulator.ts": "a61da51483e4eb14d7b8fead1796b26161ab994e91a0276be4d2b49eb0e061b1",
+    "apps/ledger/tests/speculos-driver.ts": "ab3d5d8a1638b9ee2841a2467f21f0cef33eab0d1ec0e6df4a5d67cfbf0f8fdf"
+  },
+  "importGraphSha256": "51959a3fb632f5866ad42d4dbf2520246f5fe8c215881476194512da55bb5437",
+  "sourceComparisonSha256": "322ae39d58bd1f2d42d17f0d3b63b120494003faf7bb8d6a223cf1394fa81554",
+  "limits": [
+    "18 focused public-fixture simulator cases on2models; other3models build-only",
+    "Synthetic busy demultiplexing proves device commitments, not production host recovery",
+    "Unfiltered waiter test is raw protocol on one open wire, not HID close/reopen",
+    "Negative TX/PIN tested with syscallstubs, not physical USB/BLE faults",
+    "No explanation or reproduction of the reported physical reset"
+  ],
+  "speculosVersion": "0.27.1",
+  "publicFixtureSeed": "BIP32 vector one:000102030405060708090a0b0c0d0e0f"
+}

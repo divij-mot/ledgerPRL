@@ -41,3 +41,7 @@ The version label and `release.json` deliberately remain unchanged. This is an i
 The timed actions at about 105 seconds do not exhaust final-tick approval races. Exact deadline guards also have stub tests; neither those tests nor a fresh emulator process establishes retail recovery behavior. No physical device was accessed and nothing was broadcast.
 
 **The reported factory reset remains unexplained.** The corrected event-dispatch defect is not a demonstrated cause of it. Hardware installation/use and release promotion remain paused. Resolving the remaining incident needs evidence about the retail SDK/OS failure path; simulator success alone cannot close it. The incident facts and exact artifact identities are ready for a Ledger investigation, but no third-party report has been sent.
+
+## Subsequent Bitcoin parity checks
+
+The [follow-up comparison](../bitcoin-fault-parity/README.md) adds SDK-style busy rejection without replacing the active review, same-process cancellation/review tests, and desktop USB cleanup fixes. Its newer source/binary hashes and test limits are separate from the power-event candidate above. The reported physical reset remains unresolved.

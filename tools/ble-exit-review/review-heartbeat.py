@@ -14,8 +14,7 @@ STUBS = r"""
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
-enum { BOLOS_TRUE=0xaa, CHANNEL_APDU=1, OS_IO_PACKET_TYPE_SEPH=1,
-       OS_IO_PACKET_TYPE_SE_EVT=2, ITC_UX_REDISPLAY=0x20, ITC_UX_ASK_BLE_PAIRING=0x22, ITC_UX_BLE_PAIRING_STATUS=0x23 };
+enum { BOLOS_TRUE=0xaa, CHANNEL_APDU=1, ITC_UX_REDISPLAY=0x20, ITC_UX_ASK_BLE_PAIRING=0x22, ITC_UX_BLE_PAIRING_STATUS=0x23 };
 enum { IO_APDU_MEDIA_NONE=0, IO_APDU_MEDIA_USB_HID=1, IO_APDU_MEDIA_BLE,
        IO_APDU_MEDIA_NFC, IO_APDU_MEDIA_USB_CCID, IO_APDU_MEDIA_USB_WEBUSB,
        IO_APDU_MEDIA_RAW, IO_APDU_MEDIA_U2F, IO_APDU_MEDIA_CDC };
@@ -37,6 +36,7 @@ extern unsigned char G_io_apdu_buffer[260], G_io_rx_buffer[1024], G_io_seproxyha
 int os_perso_is_pin_set(void);
 int os_global_pin_is_validated(void);
 int os_io_rx_evt(unsigned char *, unsigned short, unsigned int *, bool);
+int os_io_tx_cmd(unsigned char, const unsigned char *, unsigned short, unsigned int *);
 int os_io_stop(void);
 void os_sched_exit(int) __attribute__((noreturn));
 void app_exit(void) __attribute__((noreturn));
@@ -45,6 +45,10 @@ static inline uint16_t read_u16_be(const uint8_t *p, size_t off) { return (uint1
 #define U2BE(p, off) read_u16_be((p), (off))
 static inline uint32_t read_u32_be(const uint8_t *p, size_t off) { return ((uint32_t)p[off]<<24)|((uint32_t)p[off+1]<<16)|((uint32_t)p[off+2]<<8)|p[off+3]; }
 """
+packet_source = (SDK / "io/include/os_io.h").read_text()
+first_packet = packet_source.index("typedef enum {\n    OS_IO_PACKET_TYPE_NONE")
+last_packet = packet_source.index("} os_io_packet_type_t;", first_packet) + len("} os_io_packet_type_t;")
+STUBS += "\n" + packet_source[first_packet:last_packet] + "\n"
 ux_source = (SDK / "include/os_ux.h").read_text()
 first = ux_source.index("BOLOS_UX_ASYNCHMODAL_PAIRING_STATUS_CONFIRM_CODE_YES")
 last = ux_source.index("} pairing_ok;", first)
