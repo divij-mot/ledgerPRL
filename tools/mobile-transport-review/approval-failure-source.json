@@ -1,0 +1,20 @@
+{
+  "ledgerLiveCommit": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+  "mobileDmkVersion": "1.10.0",
+  "sourceHashes": {
+    "apps/ledger-live-mobile/src/hooks/deviceActions.ts": "dd350e78de783a1398fa70195ed458859a6402316c3bd43caac95c7435f32dcb",
+    "libs/ledger-live-common/src/hw/deviceAccess.ts": "f8e5d60e4c154303e846c9c1d50accc8fb2d9e44aa355d556dd6d214c57e3308",
+    "libs/ledger-live-common/src/hw/actions/app.ts": "2ecc41402ec075be58a2919e283a57be7693adde307e25e7fa337fcebba868ff",
+    "libs/ledger-live-common/src/hw/connectApp.ts": "a8d93a6e2c5857de40a09f886a50a987858301f16123d59dbeb5da9c0485b0de",
+    "libs/ledger-live-common/src/hw/openTransportAsSubject.ts": "cf7d7f3bc3c0f643644809e6bf9c1acca3e1d85d12d993e0b126c7a8c9dd5306",
+    "libs/live-dmk-mobile/src/transport/DeviceManagementKitBLETransport.ts": "e83820c2cd9b023c3f61158c6518ec790bc59aafafa645ab71148727c7be6cde",
+    "libs/live-dmk-shared/src/connectDevice/ConnectDeviceStateMachine.ts": "89d138660c91723d32187d88de761721e57f0d381ae8821747fc55a691bf331a",
+    "dmk-1.10.0/DeviceSession.ts": "8964d784a6019cec2fb4678878169e78b8cb4711b314ae9b4a88fe49b190c9d5",
+    "dmk-1.10.0/DeviceSessionRefresher.ts": "5407ce31d06d47da4291799cc8992065449d0b096c0b6021eb5b09ea3f0b3e8b",
+    "dmk-1.10.0/package-source.json": "0edac3312c4edb5ab6e1a9d7a159cb96efa3111124223ba0632cb2796dc1392f"
+  },
+  "localReadHashes": {
+    "apps/companion/src/wallet-api.ts": "d3c2901f3b30a0c77d14b2104c2129da3d6b40cfe1af79f56bd043ba2f3497c0",
+    "node_modules/@ledgerhq/wallet-api-core/lib/JSONRPC/RpcNode.js": "343e4086a5f49cef5250d3fd851592fd41882593d69fbbe64e9af0a10d8c6b6c"
+  }
+}

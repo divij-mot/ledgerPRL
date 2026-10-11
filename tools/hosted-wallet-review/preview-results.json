@@ -1,6 +1,6 @@
 {
   "origin": "https://pearl-ledger-wallet.vercel.app",
-  "checkedAt": "2026-10-11T01:19:16.300Z",
+  "checkedAt": "2026-10-11T02:12:34.469Z",
   "outcome": "passed",
   "realBroadcasts": 0,
   "walletAddresses": 0,
@@ -10,7 +10,7 @@
       "target": "/live.html",
       "status": 200,
       "bytes": 885,
-      "bodySha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
+      "bodySha256": "850e66ecb0a0499d0edc89c556c67595a1b76cca031265fec190c89d98acf122",
       "headers": {
         "content-type": "text/html; charset=utf-8",
         "cache-control": "no-store",
@@ -23,7 +23,7 @@
     },
     {
       "label": "Immutable script cache",
-      "target": "/assets/live-VcgfFvtq.js",
+      "target": "/assets/live-BeAn2FxY.js",
       "status": 200,
       "bytes": 0,
       "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -74,7 +74,7 @@
       "target": "/.env",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "4e49a8502f229354fab2f8e5fb84a6e9565fa8f5b6f790773fe3a0382b6a4041",
+      "bodySha256": "498deb135e639a3099dd11e0acfd593df714c8683c33b1d210787fd255011d29",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -90,7 +90,7 @@
       "target": "/.local-light/.owner.json",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "35fa1842275a207ccc411bddc490fd33c53766cb453b9b4af87d0860ca9d9a08",
+      "bodySha256": "012612ad04a1d1eccf42d709c38f610010a61b4b470f7c26252cb87d5661e2b4",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -106,7 +106,7 @@
       "target": "/apps/light-client/bin/pearl-watch",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "3eaced4e1db20fcbc6e4f1bad65a343164d47a9a5f4f5475649320b717afcd59",
+      "bodySha256": "3cc21b5206fccb792912b07a8ad54d2aced018df9ffe6f59904a858fea149da5",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -122,7 +122,7 @@
       "target": "/api/local/status",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "b282fee44343b343b8fc3305bf4a8bb299c97ec759e9facee760d5b077e5fa21",
+      "bodySha256": "7a541d7bae41dd79ab37b2bd4ebb20d890bdb4f9b1162f616087d0eb497921cf",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -138,7 +138,7 @@
       "target": "/api/check",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "d2a931a3fe45d5a2844757106c1c050557aa193245f12818a5164445f698443f",
+      "bodySha256": "522d001fb704a6b3869e18d7c48fb9792e934060af09994be21280d5ca2105c8",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -169,8 +169,8 @@
       "label": "Public chain status via raw adapter",
       "target": "/api/indexer/read",
       "status": 200,
-      "bytes": 779,
-      "bodySha256": "c3d10bd45e3ce34c4b6f4a0f5370712cd6fe32a2e430ebcd97c8ccb1bd293a93",
+      "bytes": 780,
+      "bodySha256": "0eab9037d0263c173737606dec08d0ccb3af26349cc22496172076da9bbddb2f",
       "headers": {
         "content-type": "application/json",
         "cache-control": "no-store",

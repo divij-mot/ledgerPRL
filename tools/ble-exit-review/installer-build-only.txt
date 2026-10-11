@@ -1,0 +1,5 @@
+# Captured output; temporary host path normalized.
+Building Pearl 0.1.2 for Nano Gen5…
+Built apex_p mainnet: /workspace/apps/ledger-bitcoin-prl/build-artifacts/apex_p-mainnet/app.elf
+Verified build: <temporary build>/workspace/apps/ledger-bitcoin-prl/build-artifacts/apex_p-mainnet/app.hex
+Build only. No Ledger device was accessed.

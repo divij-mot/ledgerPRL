@@ -1,0 +1,32 @@
+✔ capabilities: native tagged failures are bounded messages, cleaned up once without retry (2.091083ms)
+✔ open: native tagged failures are bounded messages, cleaned up once without retry (0.555792ms)
+✔ exchange: native tagged failures are bounded messages, cleaned up once without retry (1.358083ms)
+✔ existing Error identity/status and unsafe tag accessors are not rewritten or inspected (0.300709ms)
+✔ native failure at final ACK cannot replace complete verified signed bytes (155.153291ms)
+✔ Wallet API preserves raw continuation/rejection statuses and uses Buffer exchange (0.228584ms)
+✔ unsupported commands and pre-abort send no APDU and end the session (0.187375ms)
+✔ concurrent exchange/open cannot reach the shared host transport (0.141084ms)
+✔ valid final response wins synchronous abort while subsequent ACK is prohibited (0.173375ms)
+✔ abort winning exchange forbids late signature delivery or continuation (0.140834ms)
+✔ capability failure closes listeners without opening hardware (0.100625ms)
+✔ malformed response closes transport (0.103916ms)
+✔ close waits for hardware acknowledgement before permitting reconnect (0.098583ms)
+✔ unresolved close is bounded and permanently requires reopening even after late cleanup (17.605375ms)
+✔ late device open is closed before listener removal and cannot race a new open (21.252708ms)
+✔ unresolved open or exchange cannot be reused after bounded timeout (62.174459ms)
+✔ native connector refuses ordinary browser without falling back to WebHID (0.31225ms)
+✔ official client desktop native bridge preserves raw replies and rejects web peers (16.225625ms)
+✔ official client ios native bridge preserves raw replies and rejects web peers (0.734333ms)
+✔ official client android native bridge preserves raw replies and rejects web peers (0.425708ms)
+✔ failed hardware close poisons reconnect, while a rejected open can be retried (0.226541ms)
+✔ real PSBT client persists verified bytes through Wallet API before abort suppresses final ACK (85.720083ms)
+✔ browser bundle initializes the official SDK without a preexisting Buffer global (93.820875ms)
+✔ selected network requests its exact Pearl device app with no dashboard default (0.53925ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 787.503625

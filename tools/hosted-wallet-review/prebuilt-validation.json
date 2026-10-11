@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checkedAt": "2026-10-11T01:18:37.758Z",
+  "checkedAt": "2026-10-11T02:11:06.558Z",
   "outcome": "passed",
   "configSha256": "0b67e1f889c111bca61ea1b3927d5c6c2cd6fc3674a16f5f15906eaeb921992d",
   "staticFiles": {
@@ -11,14 +11,14 @@
     "assets/index-ByVGc--d.js": "2a9f3d2ad2069d9d0f6678d9788d273da097b117929b2ad3222a00968fac843c",
     "assets/index-D2rIokL7.js": "1f249402fcd873f8027991e01b1d3b1d5c2be10662d965ce0d783699de1df9b3",
     "assets/jsQR-Dk72IcmC.js": "c49ea57b007c745bc790dae9c4027ddf5dd77f337f10d5d223951f55174cc20d",
-    "assets/live-VcgfFvtq.js": "031d25e96148f097c5e81c64b8c49a4ccb7184995ce3e26484854e0e2b3e2608",
+    "assets/live-BeAn2FxY.js": "b91b37fca3d198ffd8e1c1aea7f281517d95e21baf87e9983768d94f2e77f12b",
     "assets/main-BmAxsC9p.js": "0aa70488611f5c9a84efe80ccf9e5c5e6203ecb1870d79819db5f8c894bd0053",
     "assets/pearl-apdu-CnYMOtYj.css": "491336585e237e97e220ca6925d3b20b5c1320b81f955c663e62d776e05a20da",
     "assets/pearl-apdu-DTLxDe13.js": "59bad00dc662a14465fbe60b947ec41c93b5b9e2c3f40fe4acef4bfbaaebf621",
     "assets/qr-reader-BRNRvs-M.js": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
     "index.html": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
     "ledger-live.hosted.manifest.json": "b45de0a52990d6c7caf84127a91e346351a314b3e52d7a70a88a1caa4746bb6d",
-    "live.html": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
+    "live.html": "850e66ecb0a0499d0edc89c556c67595a1b76cca031265fec190c89d98acf122",
     "third-party-notices.txt": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89"
   },
   "staticBytes": {
@@ -29,7 +29,7 @@
     "assets/index-ByVGc--d.js": 269846,
     "assets/index-D2rIokL7.js": 27563,
     "assets/jsQR-Dk72IcmC.js": 130721,
-    "assets/live-VcgfFvtq.js": 445670,
+    "assets/live-BeAn2FxY.js": 446435,
     "assets/main-BmAxsC9p.js": 493807,
     "assets/pearl-apdu-CnYMOtYj.css": 196825,
     "assets/pearl-apdu-DTLxDe13.js": 5651,
@@ -39,7 +39,7 @@
     "live.html": 885,
     "third-party-notices.txt": 299181
   },
-  "totalStaticBytes": 2227988,
+  "totalStaticBytes": 2228753,
   "assetCount": 12,
   "functions": [
     {

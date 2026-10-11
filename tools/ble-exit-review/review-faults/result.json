@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "name": "nested-capabilities-apdu",
+      "status": "passed",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/firmware/app.elf",
+        "testedSnapshot": "/workspace/evidence/review-faults/nested-capabilities-apdu/tested-firmware.elf",
+        "sha256": "7d50e28eb649f63c248f17396f4262ac06ad4b9dced6706c1054ec1a1f464942",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      }
+    },
+    {
+      "name": "nested-sign-apdu",
+      "status": "passed",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/firmware/app.elf",
+        "testedSnapshot": "/workspace/evidence/review-faults/nested-sign-apdu/tested-firmware.elf",
+        "sha256": "7d50e28eb649f63c248f17396f4262ac06ad4b9dced6706c1054ec1a1f464942",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      }
+    },
+    {
+      "name": "bolos-version-apdu",
+      "status": "passed",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/firmware/app.elf",
+        "testedSnapshot": "/workspace/evidence/review-faults/bolos-version-apdu/tested-firmware.elf",
+        "sha256": "7d50e28eb649f63c248f17396f4262ac06ad4b9dced6706c1054ec1a1f464942",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      }
+    },
+    {
+      "name": "malformed-apdu",
+      "status": "passed",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/firmware/app.elf",
+        "testedSnapshot": "/workspace/evidence/review-faults/malformed-apdu/tested-firmware.elf",
+        "sha256": "7d50e28eb649f63c248f17396f4262ac06ad4b9dced6706c1054ec1a1f464942",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      }
+    },
+    {
+      "name": "deny-and-restart-cleanly",
+      "status": "passed",
+      "firmware": {
+        "model": "nanosp",
+        "sourceElf": "/firmware/app.elf",
+        "testedSnapshot": "/workspace/evidence/review-faults/deny-and-restart-cleanly/tested-firmware.elf",
+        "sha256": "7d50e28eb649f63c248f17396f4262ac06ad4b9dced6706c1054ec1a1f464942",
+        "speculos": "0.27.1",
+        "publicTestSeed": "000102030405060708090a0b0c0d0e0f",
+        "injector": null
+      }
+    }
+  ]
+}

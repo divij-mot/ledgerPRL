@@ -72,15 +72,20 @@ def check_image(folder, release, model):
         raise RuntimeError("Installation sizes differ from the verified image")
 
 
-def loader_arguments(python, folder, model):
-    return [str(python), "-m", "ledgerblue.loadApp", "--targetId", model["targetId"],
+def loader_arguments(python, folder, model, replace=False):
+    args = [str(python), "-m", "ledgerblue.loadApp", "--targetId", model["targetId"],
             "--targetVersion", "", "--apiLevel", str(model["apiLevel"]),
             "--fileName", str(folder / "app.hex"), "--appName", "Pearl",
             "--appFlags", model["appFlags"], "--tlv", "--dataSize", str(model["dataSize"]),
             "--installparamsSize", str(model["installparamsSize"])]
+    if replace:
+        args.append("--delete")  # The loader deletes only the fixed --appName Pearl.
+    return args
 
 
-def run(model_name, install=False, sdk=None):
+def run(model_name, install=False, sdk=None, replace=False):
+    if replace and not install:
+        raise RuntimeError("--replace requires --install; build-only mode never removes an app")
     if os.name != "posix" or sys.version_info < (3, 11):
         raise RuntimeError("Use Python 3.11 or later on macOS/Linux with Docker installed")
     if install and model_name == "nano-x":
@@ -135,7 +140,9 @@ def run(model_name, install=False, sdk=None):
     # Recheck immediately before the only command permitted to open USB.
     check_image(folder, release, model)
     print(f"Close Ledger Wallet, connect/unlock your {NAMES[model_name]}, and approve Pearl installation on its screen.", flush=True)
-    call(loader_arguments(python, folder, model))
+    if replace:
+        print("Replacing only the installed Pearl app. No device reset or OS update is performed.", flush=True)
+    call(loader_arguments(python, folder, model, replace))
     print("Installation command completed. Open Pearl on the device and verify its version.", flush=True)
     return folder
 
@@ -143,14 +150,15 @@ def run(model_name, install=False, sdk=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("model", choices=NAMES)
-    parser.add_argument("--install", action="store_true", help="after verification, run the USB loader (never deletes apps)")
+    parser.add_argument("--install", action="store_true", help="after verification, run the USB loader (keeps existing apps unless --replace)")
+    parser.add_argument("--replace", action="store_true", help="with --install, remove only the old Pearl app before loading the verified image")
     parser.add_argument("--sdk", type=Path, help="reuse an existing clean pinned SDK checkout")
     args = parser.parse_args()
     try:
-        run(args.model, args.install, args.sdk)
+        run(args.model, args.install, args.sdk, args.replace)
     except (OSError, RuntimeError, ValueError, KeyError, subprocess.CalledProcessError) as error:
         print(f"Pearl setup stopped: {error}", file=sys.stderr)
-        print("No app deletion or OS update is performed. Resolve an existing-app/space error separately.", file=sys.stderr)
+        print("No OS update or device reset is performed. App replacement occurs only with --install --replace.", file=sys.stderr)
         sys.exit(1)
     except KeyboardInterrupt:
         sys.exit(130)

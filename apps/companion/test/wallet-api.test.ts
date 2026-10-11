@@ -52,6 +52,163 @@ function fixture() {
   return { events, raw, connection, connect };
 }
 
+for (const phase of ["capabilities", "open", "exchange"] as const)
+  test(`${phase}: native tagged failures are bounded messages, cleaned up once without retry`, async () => {
+    const cases: [unknown, string][] = [
+      [
+        { _tag: "DeviceDisconnectedWhileSendingError" },
+        "Ledger disconnected. Reopen Pearl and reconnect.",
+      ],
+      [
+        { _tag: "DeviceDisconnectedBeforeSendingApdu" },
+        "Ledger disconnected. Reopen Pearl and reconnect.",
+      ],
+      [
+        { name: "DisconnectedDeviceDuringOperation" },
+        "Ledger disconnected. Reopen Pearl and reconnect.",
+      ],
+      [
+        { name: "DisconnectedDevice" },
+        "Ledger disconnected. Reopen Pearl and reconnect.",
+      ],
+      [
+        { _tag: "SendApduTimeoutError" },
+        "Ledger response timed out. Reopen Pearl and reconnect.",
+      ],
+      [
+        { name: "SendCommandTimeoutError" },
+        "Ledger response timed out. Reopen Pearl and reconnect.",
+      ],
+      [
+        { _tag: "ActionRefusedError" },
+        "Request declined on your Ledger. Reopen Pearl and reconnect.",
+      ],
+      [
+        { name: "UserRefusedOnDevice" },
+        "Request declined on your Ledger. Reopen Pearl and reconnect.",
+      ],
+      [
+        { _tag: "UnknownNativeFailure" },
+        "Ledger connection failed. Reopen Pearl and reconnect.",
+      ],
+      [
+        { name: "TransportStatusError", statusCode: 0x6985 },
+        "Ledger connection failed. Reopen Pearl and reconnect.",
+      ],
+      [
+        "untrusted-native-payload",
+        "Ledger connection failed. Reopen Pearl and reconnect.",
+      ],
+      [null, "Ledger connection failed. Reopen Pearl and reconnect."],
+    ];
+    for (const [value, expected] of cases) {
+      const error =
+        value && typeof value === "object"
+          ? {
+              ...value,
+              message: "untrusted-native-payload",
+              data: { apdu: "untrusted-native-payload" },
+            }
+          : value;
+      const f = fixture();
+      let calls = 0;
+      const fail = async (): Promise<never> => {
+        calls++;
+        throw error;
+      };
+      if (phase === "capabilities") f.connection.capabilities = fail;
+      else if (phase === "open") f.connection.open = fail;
+      else f.raw.exchange = fail;
+      const operation =
+        phase === "exchange" ? (await f.connect()).exchange(APDU) : f.connect();
+      await assert.rejects(operation, (caught: unknown) => {
+        assert(caught instanceof Error);
+        assert.equal(caught.message, expected);
+        assert.equal(caught.cause, undefined);
+        assert(!String(caught).includes("untrusted-native-payload"));
+        return true;
+      });
+      assert.equal(calls, 1);
+      assert.deepEqual(
+        f.events,
+        phase === "exchange" ? ["open", "close", "disconnect"] : ["disconnect"],
+      );
+    }
+  });
+
+test("existing Error identity/status and unsafe tag accessors are not rewritten or inspected", async () => {
+  for (const phase of ["capabilities", "open", "exchange"] as const) {
+    const error = Object.assign(new Error("existing validation diagnostic"), {
+      status: 0x6985,
+    });
+    const f = fixture();
+    const fail = async (): Promise<never> => {
+      throw error;
+    };
+    if (phase === "capabilities") f.connection.capabilities = fail;
+    else if (phase === "open") f.connection.open = fail;
+    else f.raw.exchange = fail;
+    await assert.rejects(
+      phase === "exchange" ? (await f.connect()).exchange(APDU) : f.connect(),
+      (e) => e === error,
+    );
+    assert.equal(error.status, 0x6985);
+  }
+  const error = Object.defineProperty({}, "_tag", {
+    get() {
+      throw Error("Accessor must not run");
+    },
+  });
+  const f = fixture();
+  f.connection.open = async () => {
+    throw error;
+  };
+  await assert.rejects(f.connect(), {
+    message: "Ledger connection failed. Reopen Pearl and reconnect.",
+  });
+});
+
+test("native failure at final ACK cannot replace complete verified signed bytes", async () => {
+  const { LedgerBitcoinPrlClient } = await import(
+    "@pearl-ledger/bitcoin-prl-adapter"
+  );
+  const sdk = await import("@pearl-ledger/sdk");
+  const { createPsbtEndpoint, publicFixture } = await import(
+    new URL("./psbt-endpoint.mjs", import.meta.url).href
+  );
+  const endpoint = createPsbtEndpoint({
+    onStage(stage: string) {
+      if (stage === "ack")
+        throw {
+          _tag: "DeviceDisconnectedWhileSendingError",
+          data: "untrusted-native-payload",
+        };
+    },
+  });
+  const f = fixture();
+  f.raw.exchange = (apdu) => endpoint.transport.exchange(apdu);
+  const transport = await f.connect("regtest");
+  let saved: string | undefined;
+  const result = await new LedgerBitcoinPrlClient(
+    transport,
+    "regtest",
+  ).signBundle(
+    sdk.bundleFromJson(publicFixture.bundle),
+    sdk.accountFromJson(publicFixture.publicAccount),
+    {
+      onVerifiedSigned(signed) {
+        saved = signed.rawTx;
+      },
+    },
+  );
+  assert.equal(saved, publicFixture.rawTx);
+  assert.equal(result.rawTx, saved);
+  assert.equal(result.completionWarning, "device-acknowledgement-unconfirmed");
+  assert.equal(endpoint.acknowledgements(), 1);
+  assert.deepEqual(f.events, ["open", "close", "disconnect"]);
+  await assert.rejects(transport.exchange(CONTINUATION), /closed/);
+});
+
 test("Wallet API preserves raw continuation/rejection statuses and uses Buffer exchange", async () => {
   const f = fixture();
   const transport = await f.connect();

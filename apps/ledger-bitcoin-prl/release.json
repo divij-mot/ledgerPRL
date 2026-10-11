@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "network": "mainnet",
   "sdkCommit": "6709cd2bdfebb224ee070f7c1211b54254262579",
   "sdkTag": "v27.1.2",
@@ -15,9 +15,9 @@
       "bluetooth": false,
       "dataSize": 512,
       "installparamsSize": 61,
-      "elfSha256": "58fc42e36aa78107e3a10f286a7488aa49afec3da7bc140aa48d463fdd05faba",
-      "hexSha256": "e9cee17c971353b05791337eacd2c6c5303e45b2d2bf4668cb0bcbdd2e80d268",
-      "elfBytes": 236500,
+      "elfSha256": "ef01ff2fe6768286e3e1eb6262a720fcc88754485a6dcfadba1219f2260dcbb7",
+      "hexSha256": "4873347fe0fab718256622b7cb952febbbcbd1562e457409d6029d86eb82111f",
+      "elfBytes": 236376,
       "flashBytes": 67645
     },
     "nano-x": {
@@ -28,9 +28,9 @@
       "bluetooth": true,
       "dataSize": 512,
       "installparamsSize": 61,
-      "elfSha256": "8dedc49d56a83e3fd2af7ae9e827071b039059fa3384c2a5db88dc635a6fcee5",
-      "hexSha256": "fd351afb0b1064c8eb2284da7f494efa2a2231e3c4390ade085178dd45994d80",
-      "elfBytes": 236300,
+      "elfSha256": "6848b568d3ba528a12af1c5ccee1ee74b4725ded6c6e348b72015f0440d0db95",
+      "hexSha256": "3820b648e57de7fe6cb8b3a860c14ce3487730d3f57337001c4393d2352bd323",
+      "elfBytes": 236600,
       "flashBytes": 67901
     },
     "stax": {
@@ -41,9 +41,9 @@
       "bluetooth": true,
       "dataSize": 512,
       "installparamsSize": 106,
-      "elfSha256": "7d95e64d536982e6727bf0b0639a086d2d23595d7763bec850a642ddab236f17",
-      "hexSha256": "e8d5c42888ea956c2d12e3e0adcfa10ba49fde1f73a40eefd4b6f8408ef54181",
-      "elfBytes": 242984,
+      "elfSha256": "ade1e4c69782da68853023628867c7eec34c7a6f1dc7b3610a33155ba5081543",
+      "hexSha256": "bcc1a08133aba860bf462ce0c42c06b48e46a9a3529cc67f82f009298ee676fc",
+      "elfBytes": 242996,
       "flashBytes": 91242
     },
     "flex": {
@@ -54,9 +54,9 @@
       "bluetooth": true,
       "dataSize": 512,
       "installparamsSize": 137,
-      "elfSha256": "f8ac9e731008ee842a2066e79bab07bbaa5c04e8bc2d9379ec79817b47d1e0d6",
-      "hexSha256": "67b372c655fb1c94f860aa6ff993630cde74a95c914bf5fb047bbfa3675ffee3",
-      "elfBytes": 242496,
+      "elfSha256": "4820f1a915b7752dbe0e4faead981fca312af79dc5c4dc948d5cddfa6ed3c94d",
+      "hexSha256": "ffb610247ffc758956c8e47fee8330aa397add9468a51da3910f368f004e9821",
+      "elfBytes": 242512,
       "flashBytes": 91273
     },
     "gen5": {
@@ -67,14 +67,14 @@
       "bluetooth": true,
       "dataSize": 512,
       "installparamsSize": 106,
-      "elfSha256": "692446737266c98b7e4dfc1634f2441bd24db541d522a964950815647fd45934",
-      "hexSha256": "ff79e73598b8c4483e4e397d524f5e1fe72133558977bc392748cb3a399d92a1",
-      "elfBytes": 242768,
+      "elfSha256": "58128b11cc7045b3b94956ed387acf5239ab7dab5b1096bce6b7d8ca705fc464",
+      "hexSha256": "e54f595c5746589cc8c4c4dd44f6f9a26ceafba5f3069f15bdc4ceaba9202e8f",
+      "elfBytes": 242780,
       "flashBytes": 88170
     }
   },
   "sourceFiles": {
-    "Makefile": "8510417419c71a2847d0eb8eb1c2a23cb4d6cd7a8de7522a0f961eba95c7b5e7",
+    "Makefile": "d095596444ece582fa72f8ffaabf1797a80c75b5aa2e8cd237d66ef3c224d6fa",
     "glyphs/Bitcoin_48px.png": "1995c7458397c16ad92c9b0228eadc87408507b34b4bccd5947e33681485fbca",
     "glyphs/Bitcoin_64px.bmp": "5fa7ad1d2e163dc175d74ced2c5c3ca21afc5f812383fe59d366b5339d99ad3c",
     "glyphs/bitcoin_logo.gif": "1f2f34a82e73051613ba6fe13ee4fd1079a0e26ada6de31e06a0bd6fa807a13b",
@@ -115,7 +115,7 @@
     "src/boilerplate/dispatcher.h": "dbd7fc94e642926a436aa73e2c52ccaefc45c6ac7b9458f33386dbf88e0c45ab",
     "src/boilerplate/io_ext.c": "13af055f993017f94a1272bf9f0730e71eddc33e8cfab40008ae6bf0d3577439",
     "src/boilerplate/io_ext.h": "9044ae73dd98a2515ccbfb59f6f0ea42a7bee0d8fa8612c52daf26c17a8b09cc",
-    "src/boilerplate/prl_review_io.c": "d47489cb0aab657e1291c71728c2c734792c82a4b7ac758af8f6416e87c197b2",
+    "src/boilerplate/prl_review_io.c": "b847a1ddc730dc64474391533286481df84c50679b53841fe6e74a87b80788ba",
     "src/boilerplate/prl_review_io.h": "7dc22a5bfe854ae2477003402b8478a8bffa094a6d8ada03389cf3b3db4972d1",
     "src/boilerplate/sw.h": "66238c59d9e20d9ba063f6dd1242a5527730d041cdb8e3f52807cb0ec6d176e7",
     "src/commands.h": "a902acfefd26e2baad8c2ac86acd2a0c8c88d53ef626a03b242e551a6f623e8d",
@@ -242,5 +242,5 @@
     "src/ui/menu.h": "bbaf2451338e0b536d83e26f24f096341a2a6a2089ad37e068e83f3a0e04c535",
     "src/ui/menu_nbgl.c": "7294db3657adf22d33d354a5a003a394edcff8123a844d3d4a2d26c25d95a379"
   },
-  "sourceSetSha256": "258d2c41d1d36646855b5397f601b111dfd4061ad9111a43d5f5b0f73dd06c8d"
+  "sourceSetSha256": "5870a589b33a2f6cb2ffb6004dbf53775cc6d1623da7c6e0594982439cab218e"
 }

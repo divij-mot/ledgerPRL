@@ -2,7 +2,7 @@
 
 Pearl shares its wallet UI and signing/recovery engine between `/` (direct desktop WebHID) and `/live.html` (Ledger Wallet API inside Discover). The local launcher opens `/` and runs native SPV. The hosted `/live.html` entry supports independent desktop/iOS/Android clients through the fixed public-indexer API; it does not launch a native helper on the phone.
 
-The production origin is **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)**, with [`/live.html`](https://pearl-ledger-wallet.vercel.app/live.html) for Discover and `/` for desktop WebHID. Release `07a6f2a` is deployed and passed the [18 live boundary and 16 public-file checks](../tools/mobile-transport-review/release.md). Use [ledger-live.hosted.manifest.json](../apps/companion/ledger-live.hosted.manifest.json), whose exact HTTPS domain, desktop/iOS/Android platforms and four permissions passed the installed Ledger 4.23.0 schema validator. **Owner-approved desktop manifest import succeeded**, and the exact hosted page opened with Add account. Physical mobile import and Bluetooth testing remain outstanding; publication of the web page does not add it to the public catalog automatically. The separate localhost manifest remains a desktop development option.
+The production origin is **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)**, with [`/live.html`](https://pearl-ledger-wallet.vercel.app/live.html) for Discover and `/` for desktop WebHID. Release `3a4d1cc` is deployed and passed the [18 live boundary and 16 public-file checks](../tools/ble-exit-review/release.md). Use [ledger-live.hosted.manifest.json](../apps/companion/ledger-live.hosted.manifest.json), whose exact HTTPS domain, desktop/iOS/Android platforms and four permissions passed the installed Ledger 4.23.0 schema validator. **Owner-approved desktop manifest import succeeded**, and the exact hosted page opened with Add account. Physical mobile import and Bluetooth testing remain outstanding; publication of the web page does not add it to the public catalog automatically. The separate localhost manifest remains a desktop development option.
 
 This remains a developer-loaded app, not native Pearl Accounts support, a public Discover listing or Ledger endorsement. Pinned mobile source exposes raw Wallet API device transport; simulated bridge and responsive-browser checks do not qualify real iPhone/Android WebView, camera permissions or hardware transport. See the [Android assessment](../tools/hosted-wallet-review/android-assessment.md).
 
@@ -12,7 +12,7 @@ On desktop Ledger Wallet, enable Developer settings from Settings → About, ena
 
 ### iPhone with Nano Gen5 or Flex over Bluetooth
 
-1. Install **Pearl 0.1.1** for your exact device using the [installation guide](install-pearl.md). Version 0.1.0 is USB-only.
+1. Install **Pearl 0.1.2** for your exact device using the [installation guide](install-pearl.md). Version 0.1.0 is USB-only; update 0.1.1 before testing Gen5 Bluetooth.
 2. Pair your Ledger in the iPhone **Ledger Wallet** app, then open Pearl on the device.
 3. Open the [hosted manifest](https://pearl-ledger-wallet.vercel.app/ledger-live.hosted.manifest.json) and copy its complete JSON contents.
 4. In Ledger Wallet, open **Settings → Developer**, enable **Allow debug apps**, then open **Load Platform Manifest** (the next screen is titled **Load Manifest**).
