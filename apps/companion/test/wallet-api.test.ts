@@ -214,12 +214,16 @@ test("native connector refuses ordinary browser without falling back to WebHID",
   }
 });
 
-test("official client exchanges through native messaging and ignores web-origin forged replies", async () => {
-  const original = Object.getOwnPropertyDescriptor(globalThis, "window");
-  const methods: string[] = [];
-  const host = Object.assign(new EventTarget(), {
-    document: new EventTarget(),
-    ElectronWebview: {
+for (const mode of ["desktop", "ios", "android"] as const)
+  test(`official client ${mode} native bridge preserves raw replies and rejects web peers`, async () => {
+    const original = Object.getOwnPropertyDescriptor(globalThis, "window");
+    const methods: string[] = [];
+    const largeResponse = "a5".repeat(256) + "9000";
+    let exchanges = 0;
+    const host = Object.assign(new EventTarget(), {
+      document: new EventTarget(),
+    });
+    const bridge = {
       postMessage(message: string) {
         const request = JSON.parse(message) as {
           id: string;
@@ -229,59 +233,98 @@ test("official client exchanges through native messaging and ignores web-origin 
         methods.push(request.method);
         if (request.method === "device.transport")
           assert.deepEqual(request.params, { appName: "Pearl" });
+        if (request.method === "device.exchange") {
+          exchanges++;
+          assert.equal(
+            request.params.apduHex,
+            exchanges === 1 ? "e100000100" : "f801000100",
+          );
+        }
         const result =
           request.method === "wallet.capabilities"
             ? { methodIds: METHODS }
             : request.method === "device.exchange"
-              ? { responseHex: "51e000" }
+              ? { responseHex: exchanges === 1 ? "51e000" : largeResponse }
               : { transportId: "1" };
-        if (request.method === "device.exchange")
-          assert.equal(request.params.apduHex, "e100000100");
         queueMicrotask(() => {
-          // A hostile web origin must not be able to spoof missing capabilities or signature bytes.
-          host.dispatchEvent(
+          const target = mode === "android" ? host.document : host;
+          const forged = JSON.stringify({
+            id: request.id,
+            jsonrpc: "2.0",
+            result: { methodIds: [], responseHex: "dead9000" },
+          });
+          target.dispatchEvent(
             new MessageEvent("message", {
               origin: "https://attacker.invalid",
-              data: JSON.stringify({
-                id: request.id,
-                jsonrpc: "2.0",
-                result: { methodIds: [], responseHex: "dead9000" },
-              }),
+              data: forged,
             }),
           );
-          host.dispatchEvent(
-            new MessageEvent("message", {
-              origin: "null",
-              data: JSON.stringify({ id: request.id, jsonrpc: "2.0", result }),
-            }),
-          );
+          if (mode !== "desktop") {
+            const peer = new MessageEvent("message", { data: forged });
+            Object.defineProperty(peer, "source", { value: {} });
+            target.dispatchEvent(peer);
+          }
+          // RN WebView 13.16.0 iOS postMessage injects exactly data-only
+          // window MessageEvent: source=null and origin="" by default.
+          // Android uses the SDK's document listener for the same payload.
+          const reply = new MessageEvent("message", {
+            ...(mode === "desktop" ? { origin: "null" } : {}),
+            data: JSON.stringify({ id: request.id, jsonrpc: "2.0", result }),
+          });
+          if (mode !== "desktop") {
+            assert.equal(reply.source, null);
+            assert.equal(reply.origin, "");
+          }
+          target.dispatchEvent(reply);
         });
       },
-    },
-  });
-  Object.defineProperty(globalThis, "window", {
-    configurable: true,
-    value: host,
-  });
-  try {
-    const transport = await connectWalletLedger(
-      undefined,
-      "bitcoin-prl",
-      "mainnet",
+    };
+    Object.assign(
+      host,
+      mode === "desktop"
+        ? { ElectronWebview: bridge }
+        : { ReactNativeWebView: bridge },
     );
-    assert.deepEqual(await transport.exchange(APDU), Uint8Array.from(RESPONSE));
-    await transport.close();
-    assert.deepEqual(methods, [
-      "wallet.capabilities",
-      "device.transport",
-      "device.exchange",
-      "device.close",
-    ]);
-  } finally {
-    if (original) Object.defineProperty(globalThis, "window", original);
-    else Reflect.deleteProperty(globalThis, "window");
-  }
-});
+    Object.defineProperty(globalThis, "window", {
+      configurable: true,
+      value: host,
+    });
+    try {
+      const transport = await connectWalletLedger(
+        undefined,
+        "bitcoin-prl",
+        "mainnet",
+      );
+      assert.deepEqual(
+        await transport.exchange(APDU),
+        Uint8Array.from(RESPONSE),
+      );
+      assert.deepEqual(
+        await transport.exchange(CONTINUATION),
+        Uint8Array.from(Buffer.from(largeResponse, "hex")),
+      );
+      await transport.close();
+      assert.deepEqual(methods, [
+        "wallet.capabilities",
+        "device.transport",
+        "device.exchange",
+        "device.exchange",
+        "device.close",
+      ]);
+      // A settled close allows a fresh session through the same native bridge.
+      await (
+        await connectWalletLedger(undefined, "bitcoin-prl", "mainnet")
+      ).close();
+      assert.deepEqual(methods.slice(-3), [
+        "wallet.capabilities",
+        "device.transport",
+        "device.close",
+      ]);
+    } finally {
+      if (original) Object.defineProperty(globalThis, "window", original);
+      else Reflect.deleteProperty(globalThis, "window");
+    }
+  });
 
 test("failed hardware close poisons reconnect, while a rejected open can be retried", async () => {
   const f = fixture();

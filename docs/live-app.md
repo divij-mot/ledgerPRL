@@ -1,22 +1,33 @@
 # Pearl Live App
 
-Pearl shares its wallet UI and signing/recovery engine between `/` (direct desktop WebHID) and `/live.html` (Ledger Wallet API inside Discover). The local launcher opens `/` and runs native SPV. The hosted `/live.html` entry supports independent desktop/Android clients through the fixed public-indexer API; it does not launch a native helper on the phone.
+Pearl shares its wallet UI and signing/recovery engine between `/` (direct desktop WebHID) and `/live.html` (Ledger Wallet API inside Discover). The local launcher opens `/` and runs native SPV. The hosted `/live.html` entry supports independent desktop/iOS/Android clients through the fixed public-indexer API; it does not launch a native helper on the phone.
 
-The production origin is **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)**, with [`/live.html`](https://pearl-ledger-wallet.vercel.app/live.html) for Discover and `/` for desktop WebHID. Release `fca78a8` is deployed and passed the [live boundary and public-file checks](../tools/hosted-wallet-review/release.md). Use [ledger-live.hosted.manifest.json](../apps/companion/ledger-live.hosted.manifest.json), whose exact HTTPS domain, desktop/Android platforms and four permissions passed the installed Ledger 4.23.0 schema validator. **Owner-approved desktop manifest import succeeded**, and the exact hosted page opened with Add account. Android import remains untested; publication of the web page does not add it to the public catalog automatically. The separate localhost manifest remains a desktop development option.
+The production origin is **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)**, with [`/live.html`](https://pearl-ledger-wallet.vercel.app/live.html) for Discover and `/` for desktop WebHID. Release `fca78a8` is deployed and passed the [live boundary and public-file checks](../tools/hosted-wallet-review/release.md). Use [ledger-live.hosted.manifest.json](../apps/companion/ledger-live.hosted.manifest.json), whose exact HTTPS domain, desktop/iOS/Android platforms and four permissions passed the installed Ledger 4.23.0 schema validator. **Owner-approved desktop manifest import succeeded**, and the exact hosted page opened with Add account. Physical mobile import and Bluetooth testing remain outstanding; publication of the web page does not add it to the public catalog automatically. The separate localhost manifest remains a desktop development option.
 
-This remains a developer-loaded app, not native Pearl Accounts support, a public Discover listing or Ledger endorsement. Pinned mobile source exposes raw Wallet API device transport; simulated bridge and responsive-browser checks do not qualify real Android WebView, camera permissions or hardware transport. See the [Android assessment](../tools/hosted-wallet-review/android-assessment.md).
+This remains a developer-loaded app, not native Pearl Accounts support, a public Discover listing or Ledger endorsement. Pinned mobile source exposes raw Wallet API device transport; simulated bridge and responsive-browser checks do not qualify real iPhone/Android WebView, camera permissions or hardware transport. See the [Android assessment](../tools/hosted-wallet-review/android-assessment.md).
 
 ## Load the hosted entry in Discover
 
 On desktop Ledger Wallet, enable Developer settings from Settings → About, enable Allow debug apps, then use Add a local app to import [ledger-live.hosted.manifest.json](../apps/companion/ledger-live.hosted.manifest.json). Open its Pearl entry in Discover; it loads the hosted `/live.html` URL and needs no local server. Do not substitute the localhost manifest or change its URL/domain independently.
 
-Pinned Android source exposes a Developer custom-manifest screen that accepts the manifest JSON. Its platform list includes `android`, and it uses the mobile Wallet API bridge. This is source-based guidance, not a completed Android import/device test. The manifest was imported on desktop with owner approval, and its exact hosted Add account page opened; Android import remains untested. Public catalog listing requires Ledger's separate approval.
+### iPhone with Nano Gen5 or Flex over Bluetooth
+
+1. Install **Pearl 0.1.1** for your exact device using the [installation guide](install-pearl.md). Version 0.1.0 is USB-only.
+2. Pair your Ledger in the iPhone **Ledger Wallet** app, then open Pearl on the device.
+3. Open the [hosted manifest](https://pearl-ledger-wallet.vercel.app/ledger-live.hosted.manifest.json) and copy its complete JSON contents.
+4. In Ledger Wallet, open **Settings → Developer**, enable **Allow debug apps**, then open **Load Platform Manifest** (the next screen is titled **Load Manifest**).
+5. Tap **Paste**, then **Add**, and open **Pearl** under **Loaded Manifests**. It loads the hosted wallet; no Mac or local server is needed.
+6. Tap **Add account**, select the paired Ledger, approve the public account, then use **Receive** to compare the complete address before sending.
+
+These menu labels and the iOS device bridge are verified against the pinned Ledger mobile source. They may differ in another app version. The same custom-manifest screen exists on Android. Software bridge/emulator tests do not establish physical Bluetooth pairing; test that on your device. The older desktop localhost import is independent and is not needed on your phone.
+
+Stock iPhone Safari cannot connect directly over Bluetooth. [Ledger Wallet Provider](https://developers.ledger.com/docs/ledger-wallet-provider/overview) also excludes mobile browsers. The iPhone route here uses Ledger Wallet's native Bluetooth connection; desktop Chrome/Edge continue to connect directly by USB without Ledger Wallet. Public Discover catalog listing still requires Ledger's separate approval.
 
 ## Local setup
 
 Install the prerequisites once:
 
-- [Node.js](https://nodejs.org/en/download): use 24.19 or a newer 24.x release; npm is included.
+- [Node.js](https://nodejs.org/en/download): select a 24.x release at least 24.19, use its normal installer for your system, then open a new terminal. npm is included. The launcher uses the normal `node` and `npm` commands.
 - [Go](https://go.dev/doc/install): the build selects its pinned Go 1.26.6 toolchain.
 - [Rust/Cargo](https://rust-lang.org/tools/install/): after installing rustup, run `rustup toolchain install 1.90.0 --profile minimal`.
 - Python 3 and C/C++ build tools. On macOS, install Command Line Tools with `xcode-select --install` if they are absent. On Linux, install your distribution’s compiler/make/archiver packages so `/usr/bin/gcc`, `/usr/bin/g++`, `cc`, `ar`, and `make` exist.

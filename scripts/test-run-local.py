@@ -136,6 +136,17 @@ class LauncherTests(unittest.TestCase):
                 self.assertFalse(current(self.root, builder))
                 self.launch()
 
+    def test_missing_node_or_npm_explains_normal_install_without_running_commands(self):
+        for command in ("node", "npm"):
+            with self.subTest(command=command):
+                with self.assertRaises(RuntimeError) as failure:
+                    self.launch(missing=command)
+                message = str(failure.exception)
+                self.assertIn(f"Missing {command}.", message)
+                self.assertIn("https://nodejs.org/en/download", message)
+                self.assertIn("python3 scripts/run-local.py", message)
+        self.assertEqual(self.calls, [])
+
     def test_wrong_node_and_missing_prerequisites_fail_before_install(self):
         for version in ("v22.22.0", "v24.18.0", "v25.0.0"):
             self.version = version

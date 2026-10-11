@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "reviewedOn": "2026-10-10",
-  "head": "c6cd6e802bdc2efa1e9fb0fe5f91545b91e399b1",
+  "head": "8362bc52bc9e82b40a8558f91af64ffb0f9fe32f",
   "nodeVersion": "v24.19.0",
   "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
   "checks": [
@@ -4912,11 +4912,11 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "index.html",
+      "file": "live.html",
       "presentLicenseMarkers": []
     },
     {
-      "file": "live.html",
+      "file": "index.html",
       "presentLicenseMarkers": []
     }
   ],
@@ -5928,14 +5928,6 @@
       "cssModules": []
     },
     {
-      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
-      "type": "asset",
-      "bytes": 95224,
-      "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
-      "modules": [],
-      "cssModules": []
-    },
-    {
       "file": "assets/Inter-SemiBold-CudmWj5i.woff2",
       "type": "asset",
       "bytes": 95652,
@@ -5948,6 +5940,14 @@
       "type": "asset",
       "bytes": 89212,
       "sha256": "77ca56870309a85759fb7116aef2119a26e358145e808868543ca1fe16c27720",
+      "modules": [],
+      "cssModules": []
+    },
+    {
+      "file": "assets/Inter-Medium-DLI8xdiI.woff2",
+      "type": "asset",
+      "bytes": 95224,
+      "sha256": "6a74b41ee40c7b4fc8dd38ac231f8a66d17d853554f7801d983057137d711b05",
       "modules": [],
       "cssModules": []
     },
@@ -6047,10 +6047,10 @@
       "cssModules": []
     },
     {
-      "file": "index.html",
+      "file": "ledger-live.hosted.manifest.json",
       "type": "asset",
-      "bytes": 813,
-      "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
+      "bytes": 937,
+      "sha256": "b45de0a52990d6c7caf84127a91e346351a314b3e52d7a70a88a1caa4746bb6d",
       "modules": [],
       "cssModules": []
     },
@@ -6061,12 +6061,20 @@
       "sha256": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
       "modules": [],
       "cssModules": []
+    },
+    {
+      "file": "index.html",
+      "type": "asset",
+      "bytes": 813,
+      "sha256": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
+      "modules": [],
+      "cssModules": []
     }
   ],
   "workflows": [
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "8ee8bbc431639c7c07cb5dcc152ba4ea06b6b6adbc98f1eeacd43354b74b76a8",
+      "sha256": "b054e5f04a8e685cea14fd76fedfc0f1f4282cdf71bd77777501682f5ac4030d",
       "actions": [
         "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
         "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
@@ -9716,9 +9724,9 @@
     }
   ],
   "sourceHashes": {
-    ".github/workflows/ci.yml": "8ee8bbc431639c7c07cb5dcc152ba4ea06b6b6adbc98f1eeacd43354b74b76a8",
+    ".github/workflows/ci.yml": "b054e5f04a8e685cea14fd76fedfc0f1f4282cdf71bd77777501682f5ac4030d",
     ".github/workflows/ledger-review.yml": "a56bcac50ce8dc5342e5df530b561ae67de15a7f7d6aaabb7f86ea825da30fa4",
-    "README.md": "2648be8da34b92aa8bb99d0c394c0b0a72d3743d734537df75c30baa1277e0e5",
+    "README.md": "f07a1cc31b755dd9f506d2d42342d46e20218b62039a19336fb8de982c3db7dc",
     "SECURITY.md": "b0f3e53457d2cd6c57af4ce7776bb414b5b0e4976edf191b816691ef6136baf8",
     "apps/cli/package.json": "23fd6bc66bc6d89d622ad3f2d7bdeb4fb9de5a26deb99315e155b19f8c99dad5",
     "apps/companion/index.html": "0eb3a7706eba0260630874f37b0880f8353dee7c2a4a02f2e40ce3c46a6c67d1",
@@ -9785,13 +9793,13 @@
     "apps/companion/vendor/ledger-live-4.23.0/original/modals/Send/steps/StepSummary.tsx": "b6e851c1f39a31ea8215dec7931ad3fa3e0cb89d224ecf5bc8a4acaeddf25a4d",
     "apps/companion/vendor/ledger-live-4.23.0/original/mvvm/features/Send/screens/Recipient/hooks/useQrCodeScanner.ts": "a6042389d2d5fb6018e6b860b204de0bb923105f5fae718c8550277551b7b3e1",
     "apps/companion/vendor/ledger-live-4.23.0/provenance.json": "bb677aab0f855283c37a895c8408cae3f9b848e398c4a1039e6589903476f040",
-    "apps/companion/vite.config.ts": "83839a3ad1545a68cd259c0eae274e15b2146abbc49c5840388b31f8efb63dad",
+    "apps/companion/vite.config.ts": "2ee945b87afc6e1ad6e93869c38f9b7e36d65bec1cbd56ac3b549508c7bf89c9",
     "apps/ledger-bitcoin-prl/UPSTREAM.json": "7c4d361fe5e6355f22b8f40e4a9ad993d88aad49a3b0d5631481ef211aa432a8",
     "apps/ledger-bitcoin-prl/UPSTREAM_TREE.txt": "c9341199651ab43eaa2d0248a5c011c70bec639e77225b9f26aaebdff3cef1b3",
     "apps/ledger/packaging-requirements.txt": "af04b740c42c3e42ddcb673471deaab3c3b67f7c3a0b1622b5c464ccd982fee9",
     "docs/implementation-status.md": "e7ec8f183f2bf3e57183ce4ba32fa9d58605916369847b3855fd0d7451168409",
     "docs/licensing.md": "0145fe001e68952f2d6d02c4edcc956ba17003149a8363390944503904f18a5b",
-    "docs/live-app.md": "2b2309f0f9389b6345203f92b842684ff2110cbbee80402dbeee777357b5bd8e",
+    "docs/live-app.md": "a9e6bb248e9943795b05965fcb00c612239a6bccb20c3f741fb0aa8c8b9ebfd9",
     "docs/test-evidence.md": "8a09f1641edf9c0dc5799a66b4ba259f80e27d7c9d39568c691f4ced0a1560be",
     "node_modules/@inversifyjs/common/lib/esm/index.js": "96cf7f4bdbd75fa6b10472bb534562056d7892d9fa980dbc0dcc5f3adb7863a8",
     "node_modules/@inversifyjs/container/lib/esm/index.js": "6daf96b7e0314c428b94a3263a168996d3b5f239e59ec8450df7a6d904820762",

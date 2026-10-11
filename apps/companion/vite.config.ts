@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
+import { readFileSync } from "node:fs";
 import { lightMiddleware } from "./src/blockbook.js";
 import { indexerProxy } from "./src/indexer-proxy.js";
 import { createLocalLightService } from "./src/local-service.js";
@@ -14,6 +15,15 @@ export default defineConfig({
     tailwindcss(),
     {
       name: "pearl-public-watch-only",
+      generateBundle() {
+        this.emitFile({
+          type: "asset",
+          fileName: "ledger-live.hosted.manifest.json",
+          source: readFileSync(
+            new URL("./ledger-live.hosted.manifest.json", import.meta.url),
+          ),
+        });
+      },
       configureServer(server) {
         const local = createLocalLightService(origin);
         server.middlewares.use(local.middleware);

@@ -1,0 +1,115 @@
+{
+  "checkedAt": "2026-10-11T01:13:46.542850+00:00",
+  "firmwareVersion": "0.1.1",
+  "sourceSetSha256": "258d2c41d1d36646855b5397f601b111dfd4061ad9111a43d5f5b0f73dd06c8d",
+  "builds": [
+    {
+      "target": "nanos2",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "nanox",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "stax",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "flex",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "apex_p",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "target": "nanos2",
+      "network": "regtest",
+      "exitCode": 0
+    }
+  ],
+  "emulatorJobs": [
+    {
+      "label": "nanos2",
+      "target": "nanos2",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "label": "nanox",
+      "target": "nanox",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "label": "stax",
+      "target": "stax",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "label": "flex",
+      "target": "flex",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "label": "apex_p",
+      "target": "apex_p",
+      "network": "mainnet",
+      "exitCode": 0
+    },
+    {
+      "label": "adversarial",
+      "target": "nanos2",
+      "network": "regtest",
+      "exitCode": 0
+    },
+    {
+      "label": "review-faults",
+      "target": "nanos2",
+      "network": "regtest",
+      "exitCode": 0
+    }
+  ],
+  "radioTests": 0,
+  "physicalInstallations": 0,
+  "mainnetBroadcasts": 0,
+  "testSeed": "000102030405060708090a0b0c0d0e0f",
+  "speculos": "0.27.1",
+  "emulatedTransport": "HID (Speculos has no BLE transport option)",
+  "guardCasesPerConfiguration": 83446,
+  "guardConfigurations": [
+    "HAVE_BLE",
+    "USB-only"
+  ],
+  "installerTests": 10,
+  "gen5InstallerBuildOnly": "passed with exact release hash/metadata/map",
+  "loaderExecuted": false,
+  "historical010FilesPreserved": true,
+  "installerImageVerificationModels": [
+    "nano-s-plus",
+    "nano-x",
+    "stax",
+    "flex",
+    "gen5"
+  ],
+  "api27OsMapping": {
+    "source": "https://github.com/LedgerHQ/ledger-secure-sdk#about-api_level-branches",
+    "observedAt": "2026-10-10",
+    "versions": {
+      "nano-s-plus": "1.7.0",
+      "nano-x": "2.8.0",
+      "stax": "1.11.0",
+      "flex": "1.7.0",
+      "gen5": "1.2.0"
+    },
+    "physicalCompatibilityClaim": false
+  }
+}

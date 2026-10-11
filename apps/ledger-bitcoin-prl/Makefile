@@ -28,7 +28,7 @@ include $(BOLOS_SDK)/Makefile.target
 # Application version
 APPVERSION_M = 0
 APPVERSION_N = 1
-APPVERSION_P = 0
+APPVERSION_P = 1
 APPVERSION = "$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)"
 
 # Application source files
@@ -102,7 +102,9 @@ HAVE_APPLICATION_FLAG_LIBRARY = 0
 ########################################
 # Application communication interfaces #
 ########################################
-ENABLE_BLUETOOTH = 0
+# The pinned SDK enables BLE APDU and its BOLOS_SETTINGS permission only on
+# Nano X, Stax, Flex and Nano Gen5. Nano S Plus remains USB-only (flags 0x40).
+ENABLE_BLUETOOTH = 1
 ENABLE_NBGL_FOR_NANO_DEVICES = 1
 
 ########################################

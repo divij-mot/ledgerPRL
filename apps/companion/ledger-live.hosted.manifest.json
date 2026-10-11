@@ -4,7 +4,7 @@
   "private": true,
   "url": "https://pearl-ledger-wallet.vercel.app/live.html",
   "homepageUrl": "https://pearl-ledger-wallet.vercel.app/live.html",
-  "platforms": ["desktop", "android"],
+  "platforms": ["desktop", "android", "ios"],
   "apiVersion": "^2.0.0",
   "manifestVersion": "2",
   "branch": "debug",

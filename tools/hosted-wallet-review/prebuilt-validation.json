@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checkedAt": "2026-10-10T23:02:36.982Z",
+  "checkedAt": "2026-10-11T01:07:31.813Z",
   "outcome": "passed",
   "configSha256": "0b67e1f889c111bca61ea1b3927d5c6c2cd6fc3674a16f5f15906eaeb921992d",
   "staticFiles": {
@@ -17,6 +17,7 @@
     "assets/pearl-apdu-DTLxDe13.js": "59bad00dc662a14465fbe60b947ec41c93b5b9e2c3f40fe4acef4bfbaaebf621",
     "assets/qr-reader-BRNRvs-M.js": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
     "index.html": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
+    "ledger-live.hosted.manifest.json": "b45de0a52990d6c7caf84127a91e346351a314b3e52d7a70a88a1caa4746bb6d",
     "live.html": "6dbea2bae990c49e7b67fd12b243822efcdf578a51c5b46ed600207aca2d781c",
     "third-party-notices.txt": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89"
   },
@@ -34,10 +35,11 @@
     "assets/pearl-apdu-DTLxDe13.js": 5651,
     "assets/qr-reader-BRNRvs-M.js": 3269,
     "index.html": 813,
+    "ledger-live.hosted.manifest.json": 937,
     "live.html": 885,
     "third-party-notices.txt": 299181
   },
-  "totalStaticBytes": 2227051,
+  "totalStaticBytes": 2227988,
   "assetCount": 12,
   "functions": [
     {
@@ -72,7 +74,5 @@
     }
   ],
   "externalRequests": 0,
-  "broadcasts": 0,
-  "sourceCommit": "fca78a828362ea2d65cfe10872ca57626c52b866",
-  "release": "unsigned-cancellation-and-pending-status-fix"
+  "broadcasts": 0
 }
