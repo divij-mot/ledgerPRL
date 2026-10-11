@@ -1,6 +1,6 @@
 {
   "origin": "https://pearl-ledger-wallet.vercel.app",
-  "checkedAt": "2026-10-11T02:12:34.469Z",
+  "checkedAt": "2026-10-11T03:08:43.378Z",
   "outcome": "passed",
   "realBroadcasts": 0,
   "walletAddresses": 0,
@@ -70,11 +70,27 @@
       }
     },
     {
+      "label": "Persistent mobile import manifest",
+      "target": "/ledger-live.mobile.manifest.json",
+      "status": 200,
+      "bytes": 931,
+      "bodySha256": "b3fe5ac1eee18b6050a6ccf9e06a30556eb2156809d83e42babc0ee7fa0f23b7",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": "default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "permissions-policy": "hid=(self), usb=(), camera=(self), microphone=(), geolocation=(), payment=()",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
       "label": "Private/native path absent",
       "target": "/.env",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "498deb135e639a3099dd11e0acfd593df714c8683c33b1d210787fd255011d29",
+      "bodySha256": "4c983600480c06cf57763d33a47a0f5f39ab2f302529879080a8641ecb5a55a0",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -90,7 +106,7 @@
       "target": "/.local-light/.owner.json",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "012612ad04a1d1eccf42d709c38f610010a61b4b470f7c26252cb87d5661e2b4",
+      "bodySha256": "d247bfc6455279a02075fe38dd85aaecaa80be514222c5d18e4b55ad2e5f16f3",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -106,7 +122,7 @@
       "target": "/apps/light-client/bin/pearl-watch",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "3cc21b5206fccb792912b07a8ad54d2aced018df9ffe6f59904a858fea149da5",
+      "bodySha256": "eb73ec4fcc9fbf8bd192996231e9811e246779099009dd424afb5fcc39c4baee",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -122,7 +138,7 @@
       "target": "/api/local/status",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "7a541d7bae41dd79ab37b2bd4ebb20d890bdb4f9b1162f616087d0eb497921cf",
+      "bodySha256": "bac840c563b9b781168826350db13b24d438fd53834f125402cfe95e5b2d8ab8",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -138,7 +154,7 @@
       "target": "/api/check",
       "status": 404,
       "bytes": 79,
-      "bodySha256": "522d001fb704a6b3869e18d7c48fb9792e934060af09994be21280d5ca2105c8",
+      "bodySha256": "da3ca0e64aac04cf112304dda5c89b90e7a853bc2434b719f20f202f20d76f25",
       "headers": {
         "content-type": "text/plain; charset=utf-8",
         "cache-control": "no-store",
@@ -170,7 +186,7 @@
       "target": "/api/indexer/read",
       "status": 200,
       "bytes": 780,
-      "bodySha256": "0eab9037d0263c173737606dec08d0ccb3af26349cc22496172076da9bbddb2f",
+      "bodySha256": "82dcab26d9e75e6d71845600f24330cc8ac8fffefb2f0517e9f53019f3903609",
       "headers": {
         "content-type": "application/json",
         "cache-control": "no-store",

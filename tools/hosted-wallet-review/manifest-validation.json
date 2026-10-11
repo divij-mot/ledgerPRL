@@ -21,6 +21,10 @@
   "tests": {
     "localManifest": true,
     "hostedManifest": true,
+    "mobileManifest": true,
+    "mobileCacheBustingOmittedWithoutSchemaDefault": true,
+    "desktopCacheBustingUnchanged": true,
+    "mobileIdentityOriginAndPermissionsUnchanged": true,
     "exactOrigin": true,
     "exactFourPermissions": true,
     "desktopAndroidAndIos": true,
@@ -29,6 +33,7 @@
     "localManifestUnchanged": true
   },
   "hostedManifestSha256": "b45de0a52990d6c7caf84127a91e346351a314b3e52d7a70a88a1caa4746bb6d",
+  "mobileManifestSha256": "b3fe5ac1eee18b6050a6ccf9e06a30556eb2156809d83e42babc0ee7fa0f23b7",
   "localManifestSha256": "2475823a5663e19cb27061b3432d542a33a756c5aa9dcf831478274d0dd11b9b",
   "importedIntoLedger": false,
   "catalogPublished": false,

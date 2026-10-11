@@ -1,10 +1,10 @@
 {
   "origin": "https://pearl-ledger-wallet.vercel.app",
-  "checkedAt": "2026-10-11T02:12:35.644Z",
+  "checkedAt": "2026-10-11T03:08:44.744Z",
   "outcome": "passed",
-  "comparedFiles": 16,
+  "comparedFiles": 17,
   "newRequests": 13,
-  "totalMatchedBytes": 2228753,
+  "totalMatchedBytes": 2229684,
   "results": [
     {
       "file": "assets/backup-import.worker-Dtrkqa4Y.js",
@@ -141,6 +141,15 @@
       "target": "/ledger-live.hosted.manifest.json",
       "sha256": "b45de0a52990d6c7caf84127a91e346351a314b3e52d7a70a88a1caa4746bb6d",
       "bytes": 937,
+      "match": true,
+      "reusedImmediateLiveCheck": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "file": "ledger-live.mobile.manifest.json",
+      "target": "/ledger-live.mobile.manifest.json",
+      "sha256": "b3fe5ac1eee18b6050a6ccf9e06a30556eb2156809d83e42babc0ee7fa0f23b7",
+      "bytes": 931,
       "match": true,
       "reusedImmediateLiveCheck": true,
       "cacheControl": "no-store"

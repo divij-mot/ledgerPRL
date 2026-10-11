@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checkedAt": "2026-10-11T02:11:06.558Z",
+  "checkedAt": "2026-10-11T03:07:45.385Z",
   "outcome": "passed",
   "configSha256": "0b67e1f889c111bca61ea1b3927d5c6c2cd6fc3674a16f5f15906eaeb921992d",
   "staticFiles": {
@@ -18,6 +18,7 @@
     "assets/qr-reader-BRNRvs-M.js": "edfa5dba82a10a775ddfefa4f593afd65b5e733521b764a4a9f1b38d045346d0",
     "index.html": "496d8ee45ae69bcb5eebbbc1ad6e6dabca8f622177e2993bcca06ae00459cc15",
     "ledger-live.hosted.manifest.json": "b45de0a52990d6c7caf84127a91e346351a314b3e52d7a70a88a1caa4746bb6d",
+    "ledger-live.mobile.manifest.json": "b3fe5ac1eee18b6050a6ccf9e06a30556eb2156809d83e42babc0ee7fa0f23b7",
     "live.html": "850e66ecb0a0499d0edc89c556c67595a1b76cca031265fec190c89d98acf122",
     "third-party-notices.txt": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89"
   },
@@ -36,10 +37,11 @@
     "assets/qr-reader-BRNRvs-M.js": 3269,
     "index.html": 813,
     "ledger-live.hosted.manifest.json": 937,
+    "ledger-live.mobile.manifest.json": 931,
     "live.html": 885,
     "third-party-notices.txt": 299181
   },
-  "totalStaticBytes": 2228753,
+  "totalStaticBytes": 2229684,
   "assetCount": 12,
   "functions": [
     {

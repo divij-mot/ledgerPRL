@@ -1,0 +1,26 @@
+{
+  "source": "pinned actual useDBRaw + useCacheBustedLiveApps functions; controlled React-hook scheduling, not actual iOS",
+  "outcomes": [
+    {
+      "cacheBustingId": 1,
+      "initialLoadCompleted": false,
+      "storageWrites": 1,
+      "manifestCountBefore": 1,
+      "manifestCountPersistedAfter": 0
+    },
+    {
+      "cacheBustingId": 0,
+      "initialLoadCompleted": false,
+      "storageWrites": 0,
+      "manifestCountBefore": 1,
+      "manifestCountPersistedAfter": 1
+    },
+    {
+      "cacheBustingId": "omitted",
+      "initialLoadCompleted": false,
+      "storageWrites": 0,
+      "manifestCountBefore": 1,
+      "manifestCountPersistedAfter": 1
+    }
+  ]
+}

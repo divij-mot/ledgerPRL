@@ -30,7 +30,7 @@ assert(global.headers['Permissions-Policy'].includes('camera=(self)'));
 assert(config.routes.some(route => route.status === 404 && route.src === '^/api(/.*)?$'));
 assert(config.routes.some(route => route.headers?.['Cache-Control'] === 'public, max-age=31536000, immutable'));
 const publicFiles = await files(path.join(output,'static'));
-assert.equal(publicFiles.filter(f => !f.startsWith('assets/')).join(','),'index.html,ledger-live.hosted.manifest.json,live.html,third-party-notices.txt');
+assert.equal(publicFiles.filter(f => !f.startsWith('assets/')).join(','),'index.html,ledger-live.hosted.manifest.json,ledger-live.mobile.manifest.json,live.html,third-party-notices.txt');
 const publicHashes = {}, publicSizes = {};
 for (const file of publicFiles) {
   const bytes = await readFile(path.join(output,'static',file));

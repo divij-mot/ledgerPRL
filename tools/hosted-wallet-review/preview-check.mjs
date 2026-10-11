@@ -50,6 +50,10 @@ try {
   assert.deepEqual(config.platforms, ['desktop', 'android', 'ios']);
   assert.equal(config.url, 'https://pearl-ledger-wallet.vercel.app/live.html');
   assert.deepEqual(config.permissions, ['wallet.capabilities', 'device.transport', 'device.exchange', 'device.close']);
+  const mobile = JSON.parse((await check('Persistent mobile import manifest', '/ledger-live.mobile.manifest.json')).body);
+  const { cacheBustingId, platforms, ...shared } = config;
+  assert.equal(cacheBustingId, 1, 'Desktop storage partition must remain stable');
+  assert.deepEqual(mobile, { ...shared, platforms: ['ios', 'android'] });
   for (const target of ['/.env', '/.local-light/.owner.json', '/apps/light-client/bin/pearl-watch', '/api/local/status', '/api/check']) {
     await check('Private/native path absent', target, {}, [404]);
   }
