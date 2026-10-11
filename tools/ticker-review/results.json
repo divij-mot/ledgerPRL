@@ -1,0 +1,185 @@
+{
+  "checkedAt": "2026-10-11T05:03:12.591633+00:00",
+  "version": "0.1.3",
+  "sourceSetSha256": "0fcf78a0f97be7c3a63e2c1040c974d12b899c62b830d44e9356fac637c34e75",
+  "models": {
+    "nano-s-plus": {
+      "build": "passed",
+      "metadata": {
+        "ledger.target": "nanos2",
+        "ledger.target_name": "TARGET_NANOS2",
+        "ledger.target_id": "0x33100004",
+        "ledger.app_name": "Pearl",
+        "ledger.app_version": "0.1.3",
+        "ledger.api_level": "27",
+        "ledger.sdk_name": "ledger-secure-sdk",
+        "ledger.sdk_version": "v27.1.2",
+        "ledger.sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+        "ledger.sdk_graphics": "nbgl",
+        "ledger.app_flags": "0x40"
+      },
+      "elfSha256": "6a58d4734394ebc466d08c9256abd3e6d13d3da76534235f14a51da93dd92cfd",
+      "hexSha256": "98ac4b240182bf059efe55df2e96fc6862d1460e503b08830f276e3b712218ad",
+      "dataSize": 512,
+      "installparamsSize": 61,
+      "installerImageCheck": "passed",
+      "replay": {
+        "status": "passed",
+        "accountApproval": true,
+        "receiveApproval": true,
+        "independentlyVerifiedInputSignatures": 2,
+        "transport": "HID/Speculos",
+        "resultSha256": "e79ade50b9cc90eed88b9d9f30845ee6bc8bf044c31d212ad0240d9979401b31"
+      }
+    },
+    "nano-x": {
+      "build": "passed",
+      "metadata": {
+        "ledger.target": "nanox",
+        "ledger.target_name": "TARGET_NANOX",
+        "ledger.target_id": "0x33000004",
+        "ledger.app_name": "Pearl",
+        "ledger.app_version": "0.1.3",
+        "ledger.api_level": "27",
+        "ledger.sdk_name": "ledger-secure-sdk",
+        "ledger.sdk_version": "v27.1.2",
+        "ledger.sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+        "ledger.sdk_graphics": "nbgl",
+        "ledger.app_flags": "0x240"
+      },
+      "elfSha256": "1703a0a516bb798da3296ac7b7634fd832f8cb870fe7278b9b4a8269e599db26",
+      "hexSha256": "8a1f4024370d4b574de60d5c0422aa3e5070a64d87179adfe2a7a4db17209f83",
+      "dataSize": 512,
+      "installparamsSize": 61,
+      "installerImageCheck": "passed",
+      "replay": {
+        "status": "passed",
+        "accountApproval": true,
+        "receiveApproval": true,
+        "independentlyVerifiedInputSignatures": 2,
+        "transport": "HID/Speculos",
+        "resultSha256": "aa89867f6f5402a42d83956f95769d7c5c34461217188e8ecb465d484ddac48a"
+      }
+    },
+    "stax": {
+      "build": "passed",
+      "metadata": {
+        "ledger.target": "stax",
+        "ledger.target_name": "TARGET_STAX",
+        "ledger.target_id": "0x33200004",
+        "ledger.app_name": "Pearl",
+        "ledger.app_version": "0.1.3",
+        "ledger.api_level": "27",
+        "ledger.sdk_name": "ledger-secure-sdk",
+        "ledger.sdk_version": "v27.1.2",
+        "ledger.sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+        "ledger.sdk_graphics": "nbgl",
+        "ledger.app_flags": "0x240"
+      },
+      "elfSha256": "862abd6d2b402117f6bad730784047b10a99d7d68258790c07aa35ef257c165c",
+      "hexSha256": "1cd127eeca4c6c2a23ae2ad5993b8df72f6bb401cf7b5ace7c711ff01da8ff47",
+      "dataSize": 512,
+      "installparamsSize": 106,
+      "installerImageCheck": "passed",
+      "replay": {
+        "status": "passed",
+        "accountApproval": true,
+        "receiveApproval": true,
+        "independentlyVerifiedInputSignatures": 2,
+        "transport": "HID/Speculos",
+        "resultSha256": "30fdb2321fd8f8b654c16366e337840c0189cb9665c4e9e0b8d4d64c0dd90dfd"
+      }
+    },
+    "flex": {
+      "build": "passed",
+      "metadata": {
+        "ledger.target": "flex",
+        "ledger.target_name": "TARGET_FLEX",
+        "ledger.target_id": "0x33300004",
+        "ledger.app_name": "Pearl",
+        "ledger.app_version": "0.1.3",
+        "ledger.api_level": "27",
+        "ledger.sdk_name": "ledger-secure-sdk",
+        "ledger.sdk_version": "v27.1.2",
+        "ledger.sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+        "ledger.sdk_graphics": "nbgl",
+        "ledger.app_flags": "0x240"
+      },
+      "elfSha256": "439f01e591f216bd3e607f1d995b0a46bb1a0cc27bb4c049fd1ff3362e0c7e69",
+      "hexSha256": "7b0acd947cc2190ee6e61a8fda0592f012ef55d6f0350a1414d6576e539903fb",
+      "dataSize": 512,
+      "installparamsSize": 137,
+      "installerImageCheck": "passed",
+      "replay": {
+        "status": "passed",
+        "accountApproval": true,
+        "receiveApproval": true,
+        "independentlyVerifiedInputSignatures": 2,
+        "transport": "HID/Speculos",
+        "resultSha256": "68b33eaa60257b90008b684f35429ed2517b851d0e123fb787c9a46b50dea65d"
+      }
+    },
+    "gen5": {
+      "build": "passed",
+      "metadata": {
+        "ledger.target": "apex_p",
+        "ledger.target_name": "TARGET_APEX_P",
+        "ledger.target_id": "0x33400004",
+        "ledger.app_name": "Pearl",
+        "ledger.app_version": "0.1.3",
+        "ledger.api_level": "27",
+        "ledger.sdk_name": "ledger-secure-sdk",
+        "ledger.sdk_version": "v27.1.2",
+        "ledger.sdk_hash": "6709cd2bdfebb224ee070f7c1211b54254262579",
+        "ledger.sdk_graphics": "nbgl",
+        "ledger.app_flags": "0x240"
+      },
+      "elfSha256": "21b1d901912e636439315316308de4558ddd59b972abc6bf4a70839d160ebc13",
+      "hexSha256": "b9d0cf33676268a6deb55caa3f802b90def52dd5923f303d20f220b71f808a40",
+      "dataSize": 512,
+      "installparamsSize": 106,
+      "installerImageCheck": "passed",
+      "replay": {
+        "status": "passed",
+        "accountApproval": true,
+        "receiveApproval": true,
+        "independentlyVerifiedInputSignatures": 2,
+        "transport": "HID/Speculos",
+        "resultSha256": "0f4aab162d564962c40a2bcfc96aa650482058fa319e1b8333d124381d03f143"
+      }
+    }
+  },
+  "regtestHostileCases": 75,
+  "nativeLifecycleCases": [
+    "nested-capabilities-apdu",
+    "nested-sign-apdu",
+    "bolos-version-apdu",
+    "malformed-apdu",
+    "deny-and-restart-cleanly"
+  ],
+  "guardCases": {
+    "BLE_OS_STACK": 85804,
+    "USB_OS_STACK": 85795,
+    "BLE_LEGACY_STACK": 85804
+  },
+  "sharedRegressionHarness": "tools/ble-exit-review/review-heartbeat.py",
+  "tickerPayloadBytesObserved": false,
+  "physicalObservation": "Gen5 0.1.2-trace: STOP0C M1 P01 T0E H2 N8 L4",
+  "hardwareActionsByThisAgent": 0,
+  "fundedBroadcasts": 0,
+  "physical013Approval": "pending owner retest",
+  "limitations": [
+    "Synthetic payloads reproduce captured framing; actual ticker payload was not recorded",
+    "Stubbed app-boundary tick/latch tests, backed by pinned SDK source; not a real UX/radio replay",
+    "All model signing replays use Speculos HID/public fixtures, not physical Bluetooth",
+    "No other event format was widened"
+  ],
+  "buildManifestHashes": {
+    "nanos2-mainnet": "9e660f591b36141d580b362d0906c380cca940581c1f16425e0b405b69e24f67",
+    "nanox-mainnet": "3f627faea166da61aab067de89e81f32d945a652b9f78c7c41475e68909f6f23",
+    "stax-mainnet": "bdb9c220c303ec45e78275d61298d9e7bd2d5727e6b4b30e5b460d56c358f460",
+    "flex-mainnet": "41c39f9a2b7b2937c9ecf5198e963f2604320969b144a97d03f18455d8e1d60e",
+    "apex_p-mainnet": "b5505afdc80c17a4ae5d067098eb3a23ebcbb14fcc8ec3e73c16386dcbb47453",
+    "nanos2-regtest": "463111e5c641510693dccf9fbed0e5430b7b24a8e5a626a90d05b90bb85181d3"
+  }
+}

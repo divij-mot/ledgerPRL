@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "returnCode": -6,
+  "stderr": "Unexpected exit: media=1 event=14 length=4 payload0=0 payload1=0\ntest: /workspace/tools/ticker-review/review-heartbeat.c:94: check: Assertion `should_exit' failed.\n"
+}

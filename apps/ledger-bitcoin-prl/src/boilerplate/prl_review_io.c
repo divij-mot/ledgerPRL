@@ -65,6 +65,10 @@ void prl_review_heartbeat(uint16_t start_tick) {
             if (length != 5 || (payload[0] != 1 && payload[0] != 2)) prl_session_abort();
             break;
         case SEPROXYHAL_TAG_TICKER_EVENT:
+            /* Gen5/API27 also sends a four-byte ticker payload. The SDK's
+             * UX_TICKER_EVENT ignores its contents and advances one tick. */
+            if (length != 0 && length != 4) prl_session_abort();
+            break;
         case SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT:
             if (length != 0) prl_session_abort();
             break;

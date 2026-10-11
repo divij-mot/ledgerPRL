@@ -1,0 +1,15 @@
+{
+  "source": "Owner-read physical Gen5 diagnostic screen; USB, no touch before stop",
+  "diagnosticVersion": "0.1.2-trace",
+  "stopCode": "0C",
+  "media": 1,
+  "packetType": "01",
+  "eventTag": "0E",
+  "phase": 2,
+  "receivedSize": 8,
+  "declaredPayloadLength": 4,
+  "statusField": "00000000",
+  "itcField": "FF/FF",
+  "tickerPayloadRecorded": false,
+  "interpretation": "Ticker-length guard rejected a coherent four-byte ticker event. The status field is unused for ticker and does not reveal its payload."
+}

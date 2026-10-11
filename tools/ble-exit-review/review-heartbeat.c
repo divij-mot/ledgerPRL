@@ -13,7 +13,7 @@ unsigned char G_io_apdu_buffer[260], G_io_rx_buffer[1024], G_io_seproxyhal_spi_b
 uint16_t G_ticks;
 test_io_app_t G_io_app;
 bolos_ux_params_t G_ux_params;
-static int pairing_calls, review_gesture = -1;
+static int pairing_calls, review_gesture = -1, count_ticker;
 static unsigned char packet[1024];
 static int packet_size, pin_set, pin_valid, fail_after_rx, fail_after_ui, tick_after_ui;
 static int calls, receives, stops, exits, cases;
@@ -50,6 +50,7 @@ unsigned char io_event(unsigned char channel) {
     assert(packet_size >= 4);
     assert(memcmp(G_io_seproxyhal_spi_buffer, packet + 1, packet_size - 1) == 0);
     calls++;
+    if (count_ticker && packet[1] == SEPROXYHAL_TAG_TICKER_EVENT) G_ticks++;
     if (review_gesture >= 0 && packet[1] == SEPROXYHAL_TAG_BUTTON_PUSH_EVENT)
         set_ux_flow_response(review_gesture != 0);
     if (fail_after_ui) pin_valid = 0;
@@ -76,7 +77,7 @@ static void reset(void) {
     G_io_app.apdu_media = IO_APDU_MEDIA_USB_HID;
     calls = receives = stops = exits = fail_after_rx = fail_after_ui = tick_after_ui = 0;
     command_age = -1;
-    pairing_calls = 0; review_gesture = -1; test_reset_flow();
+    pairing_calls = 0; review_gesture = -1; count_ticker = 0; test_reset_flow();
 }
 static void envelope(unsigned char tag, unsigned len) {
     packet[1] = tag; packet[2] = len >> 8; packet[3] = len;
@@ -103,6 +104,40 @@ int main(void) {
     puts("PASS pairing success notification does not approve application review");
     return 0;
 #endif
+    /* Captured Gen5 framing: M1 P01 T0E N8 L4. The physical payload was
+     * NOT logged. Exercise synthetic contents and prove one tick, no approval. */
+    const uint32_t payloads[] = {0, 0xffffffffU, 0x01234567U, 0x80000000U};
+    for (unsigned n = 0; n < sizeof(payloads)/sizeof(payloads[0]); n++) {
+        reset(); count_ticker = 1; G_ticks = 10;
+        packet[0] = OS_IO_PACKET_TYPE_SEPH;
+        envelope(SEPROXYHAL_TAG_TICKER_EVENT, 4);
+        for (unsigned b = 0; b < 4; b++) packet[4+b] = payloads[n] >> (24 - 8*b);
+        check(0, 0, 1); assert(G_ticks == 11); assert(!test_flow_ended());
+    }
+    for (unsigned len = 0; len < 17; len++) {
+        reset(); count_ticker = 1;
+        envelope(SEPROXYHAL_TAG_TICKER_EVENT, len);
+        int accepted = len == 0 || len == 4;
+        check(0, !accepted, accepted); assert(G_ticks == accepted);
+        assert(!test_flow_ended());
+        reset(); envelope(SEPROXYHAL_TAG_DISPLAY_PROCESSED_EVENT, len);
+        check(0, len != 0, len == 0); assert(G_ticks == 0);
+    }
+    for (int approve = 0; approve < 2; approve++) {
+        reset(); count_ticker = 1;
+        packet[0] = OS_IO_PACKET_TYPE_SEPH; envelope(SEPROXYHAL_TAG_TICKER_EVENT, 4);
+        memset(packet + 4, 0xff, 4); check(0, 0, 1); assert(!test_flow_ended());
+        envelope(SEPROXYHAL_TAG_BUTTON_PUSH_EVENT, 1); packet[4] = 6;
+        review_gesture = approve; check(0, 0, 2);
+        assert(test_flow_ended() && test_flow_response() == (approve != 0));
+    }
+    for (int whole = 0; whole < 2; whole++) {
+        reset(); count_ticker = 1; envelope(SEPROXYHAL_TAG_TICKER_EVENT, 4);
+        if (whole) command_age = 2999; else G_ticks = 1199;
+        check(0, 1, 1);
+    }
+    reset(); count_ticker = 1; envelope(SEPROXYHAL_TAG_TICKER_EVENT, 4);
+    G_ticks = 65535; check(65535, 0, 1); assert(G_ticks == 0);
     /* All packet/media types: only two well-formed event classes may reach UX. */
     for (int media = 0; media < 256; media++) {
         reset(); envelope(SEPROXYHAL_TAG_TICKER_EVENT, 0); packet[0] = media;
