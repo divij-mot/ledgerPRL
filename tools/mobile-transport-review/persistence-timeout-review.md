@@ -1,0 +1,29 @@
+# Mobile custom-manifest persistence and pending connection
+
+Read-only investigation against Ledger Wallet mobile 4.23.0, commit `abed962b08ca4b746f20192b28ce5b6c06a6c6a4`. The reported physical failure and native database loss were not reproduced on an iPhone by this reviewer. No native application state, wallet data or device was read. Source hashes are in `persistence-timeout-source.json`.
+
+## Manifest persistence: source-level overwrite reproduced
+
+Custom manifests are intended to persist. Mobile `PlatformAppProviderWrapper.tsx` uses `useDB` for the `discover` record's `localLiveApp` field. `db.ts` supplies `storage.get`/`storage.save`; native storage uses either immediate MMKV writes or asynchronous AsyncStorage.multiSet. There is no save debounce or periodic flush timer in this inspected path. `useDBRaw` invokes saving without awaiting it or surfacing failure to the Add button.
+
+A concrete load-order bug can overwrite the saved manifest: `INITIAL_PLATFORM_STATE` already contains `cacheBustedLiveApps:{init:1}` and an empty `localLiveApp` array. On first WebView mount, the cache-busting effect in `Web3AppWebview/helpers.ts` checks that init sentinel instead of the actual `cacheBustedLoaded` flag. With manifest cacheBustingId 1, the effect can run before native storage loads. `useCacheBustedLiveApps.edit` then saves the hook's entire initial DiscoverDB with a new cache ID, including the empty manifest list. The separately mounted local-manifest provider can retain its current in-memory list, so the disappearance is only visible after restart.
+
+A controlled source-level replay executed the exact pinned `useDBRaw` and `useCacheBustedLiveApps` functions using synthetic hook scheduling and a delayed storage read. With cacheBustingId 1, one saved fixture manifest became zero; resolving the old getter afterward did not repair persisted storage. With cacheBustingId 0 or omitted, that condition made no write and retained the fixture manifest. Results: `persistence-repro.json`. This demonstrates the unsafe ordering in source; it is not an actual iOS runtime trace or proof that every restart loss has that cause.
+
+The narrow website-side mitigation is a separate mobile manifest with the same app ID and hosted origin but no cacheBustingId (or zero), so this native cache-busting branch is not requested. Reimport it through the existing supported custom-manifest screen. Preserve the desktop manifest's ID/origin/cache-busting value, because desktop uses it for persistent webview partition identity. A proper native-host fix would wait for the loaded state and avoid independent stale whole-record writes; the website cannot patch the installed Ledger app's persistence implementation.
+
+## Visibility, favorites and launch links
+
+Allow debug apps is itself saved under experimentalFlags through a serialized promise queue and restored at startup. It is not intentionally session-only. The inspected legacy local-app catalog and the Developer Loaded Manifests screen map local entries without filtering their branch through that flag. Therefore a reset toggle alone is not established as the cause of a missing Loaded Manifests entry. Checking that screen after reopening distinguishes a missing persisted entry from a Discover presentation change; no reset or storage clearing is recommended.
+
+The native remote provider accepts a configurable catalog URL internally, but the inspected mobile Developer controls expose no ordinary arbitrary catalog URL field. Replacing a global catalog would alter all app listings/trust inputs, and is not a necessary or recommended workaround here. Legacy recents store IDs. New Web3Hub recents store manifest objects, but clicking still passes only the ID and refetches from its catalog; that is not a durable custom-manifest installation mechanism.
+
+The supported discover/:platform deeplink does not import a manifest URL. Its warm-app validator searches the remote catalog only; a local Pearl ID is therefore not a reliable deep-link workaround. A cold-start path skips early catalog validation but still does not install a missing manifest. Use the native custom-manifest import/open path or a separately approved real catalog listing, rather than claiming a website can make an arbitrary local manifest permanent by a launch URL.
+
+## Yellow account-operation status
+
+A native host exchange can remain unresolved if its subject completes without a response/error: the common raw-device Promise handles next/error but has no complete rejection branch. Pearl has a 120-second per-exchange timeout plus bounded two-second Wallet API cleanup. Cleanup waits for the raw exchange Promise, not the wrapper exchange that calls cleanup, so no self-await deadlock was found. An unresolved native session deliberately prevents a new session on the same page until reopened. Cancel operation aborts the wrapper and follows the same bounded cleanup; it does not promise to cancel a review on the device.
+
+For a fresh Add account with no account and no emergency recovery, the final main.run cleanup does not perform a journal read, so no indefinite storage wait was identified in that route. For an already loaded account, its final journal/recovery reads have no independent timeout and the final render follows them; a stalled storage read could leave stale yellow DOM even after the in-memory busy flag clears. That is a separate possible UI issue, not established as the reported fresh-add failure. Mobile background timer suspension also means JavaScript deadlines are not guarantees of a visible update while the WebView is suspended.
+
+No production code changed in this review. The device-side immediate return-home event still requires the separate native diagnostic evidence; these host findings do not establish its cause.

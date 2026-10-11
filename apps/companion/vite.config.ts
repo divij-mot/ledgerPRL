@@ -16,13 +16,16 @@ export default defineConfig({
     {
       name: "pearl-public-watch-only",
       generateBundle() {
-        this.emitFile({
-          type: "asset",
-          fileName: "ledger-live.hosted.manifest.json",
-          source: readFileSync(
-            new URL("./ledger-live.hosted.manifest.json", import.meta.url),
-          ),
-        });
+        for (const fileName of [
+          "ledger-live.hosted.manifest.json",
+          "ledger-live.mobile.manifest.json",
+        ]) {
+          this.emitFile({
+            type: "asset",
+            fileName,
+            source: readFileSync(new URL(fileName, import.meta.url)),
+          });
+        }
       },
       configureServer(server) {
         const local = createLocalLightService(origin);

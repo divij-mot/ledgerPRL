@@ -74,10 +74,16 @@ const hostedPath = new URL(
   "../../apps/companion/ledger-live.hosted.manifest.json",
   import.meta.url,
 );
+const mobilePath = new URL(
+  "../../apps/companion/ledger-live.mobile.manifest.json",
+  import.meta.url,
+);
 const localBytes = await readFile(localPath);
 const hostedBytes = await readFile(hostedPath);
+const mobileBytes = await readFile(mobilePath);
 const local = JSON.parse(localBytes),
-  hosted = JSON.parse(hostedBytes);
+  hosted = JSON.parse(hostedBytes),
+  mobile = JSON.parse(mobileBytes);
 assert.equal(
   schema.safeParse(local).success,
   true,
@@ -98,6 +104,29 @@ assert.deepEqual(hosted.permissions, [
 assert.equal(hosted.private, true);
 assert.equal(hosted.branch, "debug");
 assert(!Object.hasOwn(hosted, "dapp"));
+const mobileResult = schema.safeParse(mobile);
+assert.equal(mobileResult.success, true, JSON.stringify(mobileResult.error));
+assert.deepEqual(mobile.platforms, ["ios", "android"]);
+assert.equal(hosted.cacheBustingId, 1, "Preserve desktop storage partition");
+assert(
+  !Object.hasOwn(mobile, "cacheBustingId"),
+  "Mobile cache busting must be omitted",
+);
+assert(
+  !Object.hasOwn(mobileResult.data, "cacheBustingId"),
+  "Host schema injected a mobile cache-busting default",
+);
+const {
+  platforms: hostedPlatforms,
+  cacheBustingId,
+  ...hostedContract
+} = hosted;
+const { platforms: mobilePlatforms, ...mobileContract } = mobile;
+assert.deepEqual(
+  mobileContract,
+  hostedContract,
+  "Mobile identity, origin and permissions must match desktop",
+);
 const singular = { ...hosted, platform: "all" };
 delete singular.platforms;
 assert.equal(
@@ -124,6 +153,10 @@ const report = {
   tests: {
     localManifest: true,
     hostedManifest: true,
+    mobileManifest: true,
+    mobileCacheBustingOmittedWithoutSchemaDefault: true,
+    desktopCacheBustingUnchanged: true,
+    mobileIdentityOriginAndPermissionsUnchanged: true,
     exactOrigin: true,
     exactFourPermissions: true,
     desktopAndroidAndIos: true,
@@ -132,6 +165,7 @@ const report = {
     localManifestUnchanged: true,
   },
   hostedManifestSha256: digest(hostedBytes),
+  mobileManifestSha256: digest(mobileBytes),
   localManifestSha256: digest(localBytes),
   importedIntoLedger: false,
   catalogPublished: false,

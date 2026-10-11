@@ -1,0 +1,23 @@
+{
+  "ledgerLiveCommit": "abed962b08ca4b746f20192b28ce5b6c06a6c6a4",
+  "sourceHashes": {
+    "apps/ledger-live-mobile/src/PlatformAppProviderWrapper.tsx": "cf275e29dedcce4c71eabc62abfab5819771852c8e6c9abd8eef2315f8720309",
+    "apps/ledger-live-mobile/src/db.ts": "da3eaee73f03dcaa37175a74beb1f27cd9ca8febd3744f3ad8d4e1e3105579fb",
+    "libs/ledger-live-common/src/hooks/useDBRaw.ts": "774ad5b43603a2f89f91e425e9237d24b49f003ff86d76254e0881e228a5e505",
+    "libs/ledger-live-common/src/wallet-api/constants.ts": "a9489ad9d8e8667c352a96450f63f1ba923ab1c70e01b4c0d09e011d0e14f400",
+    "libs/ledger-live-common/src/wallet-api/react.ts": "9df5290ceac62262193bc285e8145d1622381e553f2e62892d658301ff26a338",
+    "apps/ledger-live-mobile/src/components/Web3AppWebview/helpers.ts": "3759939f86bf263efb4f95fde956e680933f0c5eafc1e728f11ec5b41fc29851",
+    "apps/ledger-live-mobile/src/experimental.ts": "f7a5913bec17caef4b96dc44c6054cebc1b07c7bf91602278cf13746dc4c92b2",
+    "apps/ledger-live-mobile/src/screens/Platform/v2/hooks.ts": "809f54de7fa3527ecbf5a38088be257666c535841bc6b5cac6b57cb6a8df90ae",
+    "apps/ledger-live-mobile/src/navigation/DeeplinksProvider.tsx": "a1da84c1f6fd292dd91c89f19cd5443ca7b61606f5c0657056a32661b0974a16",
+    "apps/ledger-live-mobile/src/mvvm/storage/asyncStorageWrapper/index.ts": "c20cb44e03c776d06b4f5e5eebb71b6e26e6b5ba7dffcc4332e4b86c1ce2d386",
+    "apps/ledger-live-mobile/src/mvvm/storage/mmkvStorageWrapper/index.ts": "bfb2703f9ce71a5ae1dcc31c4991c92b53fa44efe7abcc95d77d1832fd095337",
+    "apps/ledger-live-mobile/src/mvvm/features/Web3Hub/screens/Web3HubApp/useWeb3HubAppViewModel.ts": "3d4302e3ed83357556c7b82c9c0a21e70e5ea3f54dfca2992990df1db9cb149b",
+    "apps/ledger-live-mobile/src/mvvm/features/Web3Hub/screens/Web3HubSearch/components/RecentlyUsed/useRecentlyUsedViewModel.ts": "d394a547a7f33a7fea58c3fb27996b4de2a9079fb79a6ab1e1a42c71191067bb"
+  },
+  "localReadHashes": {
+    "apps/companion/src/main.ts": "971d2e33c75a2f44d56515c65d6ef5ad2670cfb73789cdd67dcb923d3804ad9f",
+    "apps/companion/src/wallet-api.ts": "2c906312e01bc22749e615bde616a03fba2574e6f236aed591026adc0c431273",
+    "apps/companion/src/storage.ts": "fa43760192f8b77457674d947cdaf8162ef8adb4e126ec1d7cfa3197e1c684d4"
+  }
+}
