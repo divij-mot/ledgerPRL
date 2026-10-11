@@ -1,5 +1,7 @@
 # Security status and boundaries
 
+**Hardware use and installation paused.** A reported Gen5 freeze/reset is unresolved. Do not install or test Pearl on hardware. See the [incident record](tools/gen5-reset-incident/README.md).
+
 This project is development software. It has not passed an independent human audit or Ledger functional/security review. Physical qualification is limited to the specific Nano S Plus and Gen5/build/OS operations in the [current verification record](tools/ux-event-review/physical-verification.json); it is not broad hardware validation. Do not put valuable funds on development accounts. Test success does not establish security parity with Ledger's Bitcoin application.
 
 ## Custody model

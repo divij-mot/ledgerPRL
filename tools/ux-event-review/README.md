@@ -1,5 +1,7 @@
 # Pearl 0.1.4 SDK event compatibility review
 
+**Qualification withdrawn pending incident investigation:** later Gen5 QR/disconnect use was followed by a reported freeze/reset. Earlier successful operations below do not establish safety. See [incident record](../gen5-reset-incident/README.md).
+
 The physical Gen5 0.1.3 diagnostic stopped on a complete STATUS event: `M1 P01 T15 H2 N14 L10`, stop `0D`, exception `0`. Its ten payload bytes were **not captured**. The displayed zero status field was unused; it does not establish USB power loss or any flag value. `status-analysis.json` records this framing and the pinned SDK source hashes.
 
 The API27 SDK treats ticker, display-processed and status payloads as opaque OS UX data. Pearl now forwards these known events after checking the outer packet type, complete declared envelope and destination buffer bounds. Button events require the byte the SDK reads and a valid mask; finger events require five bytes (eight with hardware swipe) and a valid state. Irrelevant suffixes do not define approval or elapsed time. Unknown tags and non-allowlisted ITCs still abort. Nested commands, receive errors, PIN invalidation and command/review deadlines retain their abort behavior, including checks after SDK callbacks.

@@ -1,5 +1,7 @@
 # Install Pearl on your Ledger
 
+**Hardware use and installation paused.** A reported Gen5 freeze/reset is unresolved. Do not install or test Pearl on hardware. See the [incident record](../tools/gen5-reset-incident/README.md).
+
 Current firmware: **Pearl 0.1.4, mainnet, API 27**. Gen5, Flex, Stax and Nano X now enable the official Ledger SDK Bluetooth transport. Nano S Plus stays USB-only.
 
 | Model | SDK-mapped Ledger OS | Build / USB emulator | Bluetooth in 0.1.4 | Physical testing |

@@ -12,7 +12,7 @@
     "scripts/test-install-pearl.py": "383ef385ac6bb1bad510badecdce65cce5a76d527e3485345a6d8b0a9e3443ea",
     "tools/ble-exit-review/review-heartbeat.c": "2762f363eb89d770aa655b63ca7107b0f8089bfd521be9ca835efcf6658f98bc",
     "tools/ble-exit-review/review-heartbeat.py": "41b4b7360fafd19f71781f07ff8b3ea92b46da1039fef43bc4c3ba9963929bbe",
-    "tools/ux-event-review/README.md": "b2149a5b6656d8fc9b9c10c90b312098da3e74d6e873b33f2f833cb4a9a111d7",
+    "tools/ux-event-review/README.md": "b957d2e7b6c8bf1386ea9926011c1e8c3a3c0ff944482e596143b5035aa452d2",
     "tools/ux-event-review/after-ble.json": "bba28449118827ef95fbf5e987204e4fb2e6e5d0b4b37d272985aa33f6bff167",
     "tools/ux-event-review/after-legacy.json": "38ded9ad368a33c200584612c7663ccdd3a59dd967b8cb9fbdb273fd9982bded",
     "tools/ux-event-review/after-status.json": "9a38b3fe984851414173d2e5757f56b00ce017fe6f3507c9a0db7f85b323ac1c",
@@ -23,11 +23,17 @@
     "tools/ux-event-review/installer-tests.txt": "98497912b5a2efd2914e8ebb841b5420bfcfe126a5e57c4ec9cadebca7a1315b",
     "tools/ux-event-review/status-analysis.json": "c56344c724dc26dddc7fee9bdbca51682b04780be0ece17fde7310805f8dcfde",
     "tools/ux-event-review/results.json": "f7c0a4ef286948bd74f6cd154c6daa5b3d0d8a827c1570fd8423f62ea9f93193",
-    "tools/ux-event-review/physical-verification.json": "1896f2ab46a9e6f7b0d33f406b375b79d39bc329b3a0d7c2a48137e80cc44c61"
+    "tools/ux-event-review/physical-verification.json": "41ee62c90d0832e1423c6ccfeb60af0512b979a569b8bec1f9657731a8bff988"
   },
   "postQualificationEvidence": {
     "sourceCommit": "328bae042af6c91a42647d8ad34953280ba6a7a2",
     "firmwareAndTestSourcesUnchanged": true,
     "note": "Root added hardware observations and documentation after software qualification."
+  },
+  "subsequentIncident": {
+    "status": "release and hardware qualification blocked",
+    "record": "../gen5-reset-incident/record.json",
+    "firmwareAndTestSourcesUnchanged": true,
+    "note": "Earlier passing checks did not cover the reported QR/disconnect/freeze/reset path."
   }
 }

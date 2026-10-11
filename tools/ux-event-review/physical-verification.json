@@ -41,5 +41,10 @@
     "browserAutoSync": "passed",
     "networkIndicator": "available",
     "accountAmountsOrTransactionIdsRecorded": false
+  },
+  "subsequentIncident": {
+    "status": "release blocked; hardware safety unresolved",
+    "record": "../gen5-reset-incident/record.json",
+    "summary": "Owner reported Gen5 freeze during Receive QR/iPhone disconnection followed by welcome/reset after holding side button; subsequently restored wallet. Earlier successful flow checks do not qualify this path."
   }
 }

@@ -1,0 +1,51 @@
+{
+  "status": "unresolved; release blocked; no further hardware testing",
+  "reportedSequence": [
+    "Gen5 displaying Pearl Receive QR screen",
+    "iPhone connection disconnected",
+    "Gen5 became unresponsive",
+    "Owner held side button to restart",
+    "Device showed welcome/new-device screen",
+    "Owner reports wallet restored from existing backup; installed apps absent"
+  ],
+  "sourceCommit": "aa2da1c3ee4c5b84490ebfc8bbb2d4742086fb56",
+  "firmwareSourceCommit": "328bae042af6c91a42647d8ad34953280ba6a7a2",
+  "version": "0.1.4",
+  "device": "Nano Gen5",
+  "osVersionBeforeIncident": "1.2.0",
+  "verifiedInstalledHashBeforeIncident": "a84be6263f82c81ceb6cf4afbdee4131f6438fe6529a89b6e848c9b67198812d",
+  "elfSha256": "2737ecae15f14727ea0b1c5dcd3044da249eb04df3280294087ba9950e86f707",
+  "directIncidentCapture": false,
+  "resetCauseEstablished": false,
+  "previousSuccessfulChecksDoNotQualifyDisconnectQrRecovery": true,
+  "recoverySecretsCollected": false,
+  "containment": [
+    "Automatic merge process stopped with exit130 before merge",
+    "PR5 confirmed open/unmerged and returned to draft",
+    "Further device commands, installs and hardware reproduction stopped",
+    "Existing artifacts preserved for read-only review"
+  ],
+  "openQuestions": [
+    "Whether any reset/erase confirmation or other intermediate screen appeared",
+    "Exact QR-modal and side-button event sequence inside SDK/OS",
+    "Whether an app/SDK/OS fault or protective mechanism caused state loss"
+  ],
+  "readOnlyLeads": [
+    "PRL63-character addresses select SDK larger QR encoding/layout branch; prior tests did not qualify QR close/disconnect/restart",
+    "SDK power-button event0x1B is rejected by Pearl review allowlist rather than forwarded",
+    "No direct reset/erase/settings-write reference found so far; this does not rule out indirect OS/SDK effects"
+  ],
+  "screenIdentification": "Owner recalls QR or a similar Receive screen; no direct capture",
+  "sdkCommit": "6709cd2bdfebb224ee070f7c1211b54254262579",
+  "appFlags": "0x240",
+  "appFlagsInterpretation": "GLOBAL_PIN plus broad BOLOS_SETTINGS permission; not a narrowly scoped BLE permission",
+  "possibleProtectionMode": {
+    "ownerWording": "I think it might have been Protection mode",
+    "confirmed": false,
+    "officialGuide": "https://support.ledger.com/article/8632894981149-zd",
+    "officialBehavior": "Device enters Protection mode when it interprets an event as an attack; false positives are possible; it resets when progress reaches100%.",
+    "interpretation": "Official behavior is background only; neither this mode nor the reset trigger is established.",
+    "ownerClarification": "Owner subsequently confirmed that the device did not actually display Protection mode",
+    "status": "not observed; do not classify this incident as Protection mode"
+  }
+}
