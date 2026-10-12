@@ -41,3 +41,5 @@ These desktop findings do not explain the owner's iPhone/Gen5 reset. Discover co
 - [Independent final review](final-review.md) records source and result hashes, model/test boundaries and remaining differences from Bitcoin.
 
 No dependencies, device version or release manifest changed. No hardware was accessed, no real payment was signed or broadcast, and no deployment was performed. This update remains on the held draft branch; the physical reset investigation is still open.
+
+The subsequent [phone-session campaign](../phone-session-review/README.md) adds RPC-response ownership checks and signing/storage interruption tests for Discover. It has separate source bindings and does not change the device firmware assessed here.

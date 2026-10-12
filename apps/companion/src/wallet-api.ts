@@ -267,18 +267,57 @@ function nativeConnection(): WalletConnection {
   const logger = new Logger();
   logger.log = logger.warn = logger.debug = logger.error = () => {};
   const messages = new WindowMessageTransport(window, logger);
+  const requests = new Set<string>();
+  const send = messages.send;
+  messages.send = (message: string) => {
+    // The official client serializes requests before this public boundary.
+    const request = JSON.parse(message) as { id?: unknown; method?: unknown };
+    const id =
+      typeof request.method === "string" && typeof request.id === "string"
+        ? request.id
+        : undefined;
+    if (id) requests.add(id);
+    try {
+      send(message);
+    } catch (error) {
+      if (id) requests.delete(id);
+      throw error;
+    }
+  };
   const receive = messages._onMessageEvent;
   messages._onMessageEvent = (event: MessageEvent) => {
     // Desktop replies come from Ledger Wallet's file:// renderer. Mobile
     // dispatches native events without a Window source. Never accept web peers.
     const desktop = typeof host.ElectronWebview?.postMessage === "function";
     if (
-      desktop
+      !(desktop
         ? event.origin === "null"
         : event.source === null &&
-          (event.origin === "" || event.origin === "null")
+          (event.origin === "" || event.origin === "null"))
     )
-      receive(event);
+      return;
+    if (typeof event.data !== "string") return;
+    let message: unknown;
+    try {
+      message = JSON.parse(event.data);
+    } catch {
+      return;
+    }
+    if (!message || typeof message !== "object" || Array.isArray(message))
+      return;
+    // Stale replies can arrive after native transport ID "1" has been reused.
+    // The pinned SDK throws an unhandled rejection for an unknown RPC ID.
+    // Leave host requests/notifications to its normal handler; only consume a
+    // response once, and only when this connection actually sent its request.
+    if (!("method" in message)) {
+      if (
+        !("id" in message) ||
+        typeof message.id !== "string" ||
+        !requests.delete(message.id)
+      )
+        return;
+    }
+    receive(event);
   };
   const client = new WalletAPIClient(messages, logger);
   messages.connect();
@@ -287,7 +326,13 @@ function nativeConnection(): WalletConnection {
     // Omitting appName makes the host request BOLOS and return to the dashboard.
     // Never identify Pearl as a supported host currency or open another app as fallback.
     open: (appName) => client.device.transport({ appName }),
-    disconnect: () => messages.disconnect(),
+    disconnect: () => {
+      try {
+        messages.disconnect();
+      } finally {
+        requests.clear();
+      }
+    },
   };
 }
 

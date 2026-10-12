@@ -1,0 +1,48 @@
+{
+  "baseCommit": "fff6335",
+  "scope": "Host-only Wallet API and public-fixture PSBT tests; no native BLE or hardware execution",
+  "productionChange": "Per-connection outbound RPC request-ID ownership; ignore stale or duplicate response IDs before SDK dispatch",
+  "expandedTransportTests": 33,
+  "newTransportTests": 9,
+  "newPsbtFailureSchedules": 6,
+  "fullHostCheck": {
+    "command": "npm run check",
+    "temporaryExecutionWrapper": "caffeinate -i; ends with command; no permanent power-setting changes",
+    "nodeVersion": "24.21.0",
+    "exitCode": 0,
+    "workspaceTestCounts": [
+      33,
+      64,
+      103,
+      99,
+      35,
+      290
+    ],
+    "totalTests": 624,
+    "failures": 0,
+    "typecheck": "passed",
+    "productionBuilds": "passed",
+    "secretPatternScan": "passed",
+    "logSha256": "078dc0de115ef36cd8d2ca369a626cc424bbe71e9755911cb681338d6584f1c7"
+  },
+  "priorRuns": [
+    "An initial test typecheck required the existing dynamic-URL import pattern for the public JavaScript fixture.",
+    "A full run timed out in the payment sequence wrapper; the host slept 18:47:02\u201318:53:00 during that local-time run.",
+    "An experimental two-worker run timed out in two other UI wrappers; the host slept 20:53:21\u201320:56:17 during that run. The concurrency change was reverted.",
+    "Unchanged isolated tests passed: 15 payment sequences and both UI wrappers. The final full run passed with temporary idle-sleep prevention."
+  ],
+  "sources": {
+    "apps/companion/src/wallet-api.ts": "b3b87f957deeefb713643d15c1b323939c4de9fe32719f555624f8547df7c250",
+    "apps/companion/test/wallet-api.test.ts": "f42798321e4e7c503b93c60da1cdfae5054f5c1ebf157f6823dcc108076b059d",
+    "apps/companion/test/wallet-api-signing-faults.test.ts": "a32016e54e4550fd63836dcad33c1b45ae8910638626d586641e73a175da7228",
+    "apps/companion/test/psbt-endpoint.mjs": "2ccc78495302a4ae14c6699fdaec14e0892afa783363ff892b3f47ad66c5094b",
+    "fixtures/protocol-v1.json": "ecd8aa9d2349802d54523886b9496d7b9fae6565b21fb31da7ebf63e2586461d",
+    "package-lock.json": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974"
+  },
+  "dependenciesChanged": false,
+  "firmwareChanged": false,
+  "hardwareAccess": false,
+  "realBroadcast": false,
+  "deployed": false,
+  "resetCauseEstablished": false
+}

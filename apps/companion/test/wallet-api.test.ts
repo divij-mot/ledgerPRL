@@ -582,3 +582,289 @@ test("selected network requests its exact Pearl device app with no dashboard def
   );
   assert.deepEqual(f.events, []);
 });
+
+// Deferred gates control these schedules. Generous timers are only a fallback;
+// no test relies on winning a short real-time race.
+const scheduledTimeouts = { open: 2_000, close: 2_000, exchange: 2_000 };
+const nextTurn = () => new Promise<void>((resolve) => setImmediate(resolve));
+function scheduledConnections(failDisconnect = false) {
+  const sessions: {
+    response: ReturnType<typeof deferred<Uint8Array>>;
+    closed: ReturnType<typeof deferred<void>>;
+    exchanges: number;
+    closes: number;
+    disconnects: number;
+  }[] = [];
+  const connector = createWalletConnector(() => {
+    const session = {
+      response: deferred<Uint8Array>(),
+      closed: deferred<void>(),
+      exchanges: 0,
+      closes: 0,
+      disconnects: 0,
+    };
+    sessions.push(session);
+    return {
+      capabilities: async () => METHODS,
+      open: async () => ({
+        exchange: async () => {
+          session.exchanges++;
+          return session.response.promise;
+        },
+        close: async () => {
+          session.closes++;
+          return session.closed.promise;
+        },
+      }),
+      disconnect: () => {
+        session.disconnects++;
+        if (failDisconnect) throw new Error("Native listener removal failed");
+      },
+    };
+  }, scheduledTimeouts);
+  return {
+    sessions,
+    connect: () => connector(undefined, "bitcoin-prl", "mainnet"),
+  };
+}
+
+for (const order of ["close-first", "exchange-first"] as const)
+  for (const outcome of ["response", "error"] as const)
+    test(`explicit close ${order}/${outcome}: both old promises settle before shared host ID can reopen`, async () => {
+      const f = scheduledConnections();
+      const transport = await f.connect();
+      const old = f.sessions[0]!;
+      let delivered = false,
+        cleanupSettled = false,
+        operationSettled = false;
+      const pending = transport.exchange(APDU).then((response) => {
+        delivered = true;
+        return response;
+      });
+      const rejected = assert.rejects(pending, /cancelled/).then(() => {
+        operationSettled = true;
+      });
+      const sharedClose = transport.close();
+      const closing = sharedClose.then(() => {
+        cleanupSettled = true;
+      });
+      const settleExchange = () =>
+        outcome === "response"
+          ? old.response.resolve(RESPONSE)
+          : old.response.reject(new Error("Late old-session disconnect"));
+      if (order === "close-first") old.closed.resolve();
+      else settleExchange();
+      await nextTurn();
+      assert.equal(old.closes, 1);
+      assert.equal(cleanupSettled, false);
+      assert.equal(operationSettled, false);
+      assert.equal(old.disconnects, 0);
+      await assert.rejects(f.connect(), /already/);
+      assert.equal(
+        f.sessions.length,
+        1,
+        "Blocked reconnect created a new listener/session",
+      );
+      if (order === "close-first") settleExchange();
+      else old.closed.resolve();
+      await Promise.all([closing, rejected]);
+      assert.equal(
+        delivered,
+        false,
+        "Cancelled exchange delivered a late response",
+      );
+      assert.equal(old.disconnects, 1);
+      await assert.rejects(transport.exchange(CONTINUATION), /closed/);
+      assert.equal(
+        old.exchanges,
+        1,
+        "Old session sent a continuation or retried",
+      );
+      const fresh = await f.connect();
+      const current = f.sessions[1]!;
+      assert.equal(transport.close(), sharedClose);
+      await transport.close();
+      assert.equal(old.closes, 1);
+      assert.equal(old.disconnects, 1);
+      assert.equal(current.closes, 0);
+      assert.equal(current.disconnects, 0);
+      const response = fresh.exchange(APDU);
+      current.response.resolve(Uint8Array.of(0x77, 0x90, 0));
+      assert.deepEqual(await response, Uint8Array.of(0x77, 0x90, 0));
+      assert.equal(current.exchanges, 1);
+      current.closed.resolve();
+      await fresh.close();
+      assert.equal(current.disconnects, 1);
+    });
+
+for (const first of ["close-error", "exchange-settled"] as const)
+  test(`failed cleanup ${first}: late old settlement never reopens the shared host ID`, async () => {
+    const f = scheduledConnections();
+    const transport = await f.connect();
+    const old = f.sessions[0]!;
+    const rejected = assert.rejects(transport.exchange(APDU), /cancelled/);
+    const closing = transport.close();
+    if (first === "exchange-settled") {
+      old.response.resolve(RESPONSE);
+      await nextTurn();
+      await assert.rejects(f.connect(), /already/);
+    }
+    old.closed.reject(new Error("Native close failed"));
+    await Promise.all([closing, rejected]);
+    assert.equal(old.disconnects, 1);
+    await assert.rejects(f.connect(), /Close and reopen/);
+    if (first === "close-error")
+      old.response.reject(new Error("Late old exchange failure"));
+    await nextTurn();
+    await assert.rejects(f.connect(), /Close and reopen/);
+    assert.equal(f.sessions.length, 1);
+    assert.equal(old.exchanges, 1);
+    assert.equal(old.closes, 1);
+    await assert.rejects(transport.exchange(CONTINUATION), /closed/);
+  });
+
+test("response delivered before explicit close is retained while cleanup still gates reconnect", async () => {
+  const f = scheduledConnections();
+  const transport = await f.connect();
+  const old = f.sessions[0]!;
+  const pending = transport.exchange(APDU);
+  old.response.resolve(RESPONSE);
+  assert.deepEqual(await pending, Uint8Array.from(RESPONSE));
+  const closing = transport.close();
+  await assert.rejects(f.connect(), /already/);
+  await assert.rejects(transport.exchange(CONTINUATION), /closed/);
+  old.closed.resolve();
+  await closing;
+  const fresh = await f.connect();
+  f.sessions[1]!.closed.resolve();
+  await fresh.close();
+  assert.equal(old.exchanges, 1);
+});
+
+test("official iOS bridge isolates duplicate and old-session replies while preserving current results and errors", async () => {
+  const original = Object.getOwnPropertyDescriptor(globalThis, "window");
+  type Request = { id: string; method: string };
+  const exchanges: Request[] = [];
+  const methods: string[] = [];
+  const host = Object.assign(new EventTarget(), {
+    document: new EventTarget(),
+  });
+  const reply = (request: Request, body: object) =>
+    host.dispatchEvent(
+      new MessageEvent("message", {
+        data: JSON.stringify({ id: request.id, jsonrpc: "2.0", ...body }),
+      }),
+    );
+  Object.assign(host, {
+    ReactNativeWebView: {
+      postMessage(message: string) {
+        const request = JSON.parse(message) as Request;
+        methods.push(request.method);
+        if (request.method === "device.exchange") {
+          exchanges.push(request);
+          return;
+        }
+        queueMicrotask(() =>
+          reply(request, {
+            result:
+              request.method === "wallet.capabilities"
+                ? { methodIds: METHODS }
+                : { transportId: "1" },
+          }),
+        );
+      },
+    },
+  });
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    value: host,
+  });
+  try {
+    const old = await connectWalletLedger(undefined, "bitcoin-prl", "mainnet");
+    const pendingOld = old.exchange(APDU);
+    await nextTurn();
+    const oldRequest = exchanges[0]!;
+    reply(oldRequest, { result: { responseHex: "51e000" } });
+    assert.deepEqual(await pendingOld, Uint8Array.from(RESPONSE));
+    let sameSessionSettled = false;
+    const sameSession = old.exchange(CONTINUATION).then((value) => {
+      sameSessionSettled = true;
+      return value;
+    });
+    await nextTurn();
+    const sameSessionRequest = exchanges[1]!;
+    assert.notEqual(sameSessionRequest.id, oldRequest.id);
+    reply(oldRequest, { result: { responseHex: "dead9000" } });
+    reply(oldRequest, {
+      error: { code: -32603, message: "Duplicate old failure" },
+    });
+    await nextTurn();
+    assert.equal(sameSessionSettled, false);
+    reply(sameSessionRequest, { result: { responseHex: "889000" } });
+    assert.deepEqual(await sameSession, Uint8Array.of(0x88, 0x90, 0));
+    await old.close();
+    const fresh = await connectWalletLedger(
+      undefined,
+      "bitcoin-prl",
+      "mainnet",
+    );
+    let settled = false;
+    const pending = fresh.exchange(APDU).then((value) => {
+      settled = true;
+      return value;
+    });
+    await nextTurn();
+    const currentRequest = exchanges[2]!;
+    assert.notEqual(currentRequest.id, oldRequest.id);
+    reply(oldRequest, { result: { responseHex: "dead9000" } });
+    reply(oldRequest, {
+      error: { code: -32000, message: "Late old host failure" },
+    });
+    await nextTurn();
+    assert.equal(settled, false, "Old RPC ID crossed into the fresh exchange");
+    reply(currentRequest, { result: { responseHex: "779000" } });
+    assert.deepEqual(await pending, Uint8Array.of(0x77, 0x90, 0));
+    await assert.rejects(old.exchange(CONTINUATION), /closed/);
+    const currentError = assert.rejects(
+      fresh.exchange(APDU),
+      /Current host failure/,
+    );
+    await nextTurn();
+    reply(exchanges[3]!, {
+      error: { code: -32603, message: "Current host failure" },
+    });
+    await currentError;
+    await assert.rejects(fresh.exchange(CONTINUATION), /closed/);
+    await fresh.close();
+    assert.equal(
+      exchanges.length,
+      4,
+      "No automatic retry or continuation is permitted",
+    );
+    assert.equal(
+      methods.filter((method) => method === "device.close").length,
+      2,
+    );
+  } finally {
+    if (original) Object.defineProperty(globalThis, "window", original);
+    else Reflect.deleteProperty(globalThis, "window");
+  }
+});
+
+test("listener cleanup failure quarantines reconnect even after exchange and native close both settle", async () => {
+  const f = scheduledConnections(true);
+  const transport = await f.connect();
+  const old = f.sessions[0]!;
+  const pending = transport.exchange(APDU);
+  old.response.resolve(RESPONSE);
+  assert.deepEqual(await pending, Uint8Array.from(RESPONSE));
+  old.closed.resolve();
+  const closing = transport.close();
+  await closing;
+  assert.equal(transport.close(), closing);
+  await assert.rejects(f.connect(), /Close and reopen/);
+  assert.equal(f.sessions.length, 1);
+  assert.equal(old.disconnects, 1);
+  assert.equal(old.closes, 1);
+  await assert.rejects(transport.exchange(CONTINUATION), /closed/);
+});
