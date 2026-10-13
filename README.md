@@ -1,59 +1,44 @@
 # Pearl for Ledger
 
-**Hardware use and installation paused.** Do not install or use Pearl on hardware while a reported Gen5 freeze/reset is being investigated. See the [incident and release hold](https://github.com/divij-mot/ledgerPRL/pull/5).
+A Pearl (PRL) wallet with transaction signing on your Ledger. Use the hosted wallet or run the same interface locally with Pearl’s native light client.
 
-Send and receive Pearl (PRL) with your Ledger. Use the hosted wallet, or run the same interface locally with Pearl’s native light client.
+**[Open the web wallet](https://pearl-ledger-wallet.vercel.app/)** · **[Run locally](#run-locally)**
 
-**Trial software. Use small amounts until independent security review is complete.**
+## Web wallet
 
-## 1. Install Pearl on your Ledger
+Open **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)** in desktop Chrome or Edge with your Ledger connected by USB. The Pearl device app must already be installed.
 
-Pearl builds for **Nano S Plus, Nano X, Stax, Flex and Nano Gen5**, with button or touchscreen layouts for each model. Account export, Receive and signing pass in the emulator on all five. Physical testing is recorded for Nano S Plus with version 0.1.0; the new 0.1.2 Bluetooth builds still need physical-device qualification. See the [model support and installation guide](docs/install-pearl.md).
+1. Open Pearl on the Ledger and select **Add account** in the wallet.
+2. Approve the public account, then select **Sync**.
+3. Use **Receive** to verify an address or **Send** to enter a recipient and amount.
+4. Check the address, amount and fee on the Ledger. Approve on the device, then select **Send payment** in the wallet.
 
-Pearl is not yet available in the My Ledger app catalog. The [installer](scripts/install-pearl.py) builds and verifies the image for your exact model before loading it. For Gen5, run `python3 scripts/install-pearl.py gen5 --install` after the guide’s prerequisites. Each model needs compatible Ledger OS/API; retail Nano X installation requires Ledger’s distribution process.
+On iPhone or Android, use Pearl through **Ledger Wallet Discover**. Follow the [Discover setup guide](https://github.com/divij-mot/ledgerPRL/blob/codex/pearl-ticker-review-fix/docs/live-app.md#load-the-hosted-entry-in-discover) to import its manifest. Direct Safari access does not provide the Ledger Bluetooth connection.
 
-1. Follow the [build and installation guide](docs/install-pearl.md).
-2. Unlock your Ledger, leave it on the dashboard, and approve the installation prompts.
-3. Open **Pearl** on the device. Version 0.1.2 is required for Bluetooth; existing 0.1.0 USB installations can keep using USB.
+The hosted wallet uses Pearl’s public network service. Account caches and payment records stay in your browser; the server has no wallet database. Never enter a recovery phrase or private key into the wallet.
 
-Never enter your recovery phrase into this wallet or reset your Ledger to install it. Original Nano S is not supported.
+## Run locally
 
-## 2. Use the hosted wallet
+Local setup supports **macOS and Linux** and does not require Codex.
 
-Open **[pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/)** in desktop Chrome or Edge, with your Ledger connected by USB.
+[Download the source ZIP](https://github.com/divij-mot/ledgerPRL/archive/refs/heads/codex/pearl-ticker-review-fix.zip) and extract it. The repository is private, so your GitHub account needs access. This link selects the branch containing the current wallet updates.
 
-1. Click **Add account** and approve the public account on your Ledger.
-2. Click **Sync**.
-3. Use **Receive** to verify an address on the device, or **Send** to enter a recipient and amount.
-4. Review the address, amount and fee on your Ledger. After approving, choose **Send payment** in the wallet.
+Install **Python 3, Node.js 24.19+ within 24.x with npm, Go, Rust/Cargo with Rust 1.90.0, and C/C++ build tools**. See the [platform setup instructions](https://github.com/divij-mot/ledgerPRL/blob/codex/pearl-ticker-review-fix/docs/live-app.md#local-setup).
 
-For Ledger Wallet’s Discover interface, follow the [Discover setup instructions](docs/live-app.md#load-the-hosted-entry-in-discover). This currently uses a locally imported app, not a public catalog listing. iPhone and Android use the Discover route; [iPhone Bluetooth setup](docs/live-app.md#iphone-with-nano-gen5-or-flex-over-bluetooth) requires Pearl 0.1.2. Physical mobile testing remains outstanding.
-
-Keys stay on Ledger. The hosted service has no wallet database; account caches and payment records stay in your browser.
-
-## 3. Or run it locally
-
-The repository is currently **private**. Sign in to GitHub with an account that has access, then [download the latest source ZIP](https://github.com/divij-mot/ledgerPRL/archive/refs/heads/main.zip) and extract it.
-
-Install these prerequisites first: **Python 3, Node.js 24.19+ within 24.x, npm, Go, Rust/Cargo with Rust 1.90.0, and C/C++ build tools**. Install Node using its [normal installer](https://nodejs.org/en/download), then open a new terminal. See the [platform setup details](docs/live-app.md#local-setup).
-
-In Terminal, enter the extracted folder and run:
+From the extracted folder, run:
 
 ```sh
-cd /path/to/extracted-folder
 python3 scripts/run-local.py
 ```
 
-The launcher prepares the locked dependencies and native helper, then opens **http://127.0.0.1:5188/**. Use Chrome or Edge. Keep the terminal open; **Ctrl-C** stops the wallet.
+The launcher prepares the dependencies and native helper, then opens **http://127.0.0.1:5188/**. Use Chrome or Edge. Keep the terminal open; **Ctrl-C** stops the wallet.
 
-First build and blockchain synchronization take time. Later runs reuse the verified native helper and saved chain data in the same folder. Stop an older instance before starting another. Local sync currently supports mainnet account 0; fee estimates still use Pearl’s public service.
+The first build and blockchain sync take time. Later runs reuse the helper and chain data. Local sync currently supports mainnet account 0; fee estimates use Pearl’s public service.
 
-## More information
+## Documentation
 
-- [Local setup and Discover configuration](docs/live-app.md)
-- [Supported features and limits](docs/prl-feature-coverage.md)
-- [Security model](SECURITY.md) and [release/test evidence](tools/ble-exit-review/release.md)
-- [How to request a public Discover listing](docs/ledger-discover-submission.md)
-- [Licensing and third-party notices](docs/licensing.md)
-
-This is a community project, not a Ledger-approved app. Automated tests and AI reviews do not replace an independent security audit.
+- [Device installation and supported models](https://github.com/divij-mot/ledgerPRL/blob/codex/pearl-ticker-review-fix/docs/install-pearl.md)
+- [Local setup and Ledger Wallet Discover](https://github.com/divij-mot/ledgerPRL/blob/codex/pearl-ticker-review-fix/docs/live-app.md)
+- [Features and limits](https://github.com/divij-mot/ledgerPRL/blob/codex/pearl-ticker-review-fix/docs/prl-feature-coverage.md)
+- [Security model](https://github.com/divij-mot/ledgerPRL/blob/codex/pearl-ticker-review-fix/SECURITY.md)
+- [Licensing](https://github.com/divij-mot/ledgerPRL/blob/codex/pearl-ticker-review-fix/docs/licensing.md)
