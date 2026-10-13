@@ -1,19 +1,40 @@
 {
-  "sourceCommit": "b0ad28c4db61096b72dbad18fd0b45847e62667f",
-  "deploymentId": "dpl_9jv3VNmnhVVbnBGx7vukHS4cxNRQ",
+  "sourceCommit": "a0df22d8b1d209d9081f233ea270b62db6ca4427",
+  "deploymentId": "dpl_8GeLvidnsVxcGuqA4n3o2GkqDniv",
   "origin": "https://pearl-ledger-wallet.vercel.app",
-  "checkedAt": "2026-10-13T02:42:23.146Z",
+  "checkedAt": "2026-10-13T03:51:57.991Z",
   "status": "promoted and verified",
+  "changes": [
+    "Closing or restoring unsigned reviews releases only draft reservations; signing and complete records remain protected.",
+    "Fresh fee rates remain selectable before an amount can be priced."
+  ],
   "hostedChecksPassed": 19,
   "staticFilesMatched": 17,
-  "staticBytesMatched": 2231866,
+  "staticBytesMatched": 2232913,
+  "liveFeeTargetsChecked": [
+    1,
+    10,
+    25
+  ],
   "accountsQueried": 0,
   "transactionsBroadcast": 0,
   "nativeReleasePromoted": false,
-  "evidenceSha256": {
-    "staged-verification.json": "73cb31f11947da5a20073098327c284b62c47376af7eb1af7ce84c0bbc8d155e",
-    "tools/hosted-wallet-review/preview-results.json": "fcf6738067a84c6226e4e71c8909748ae9bfbfbdf1fd802504bec87c214449f5",
-    "tools/hosted-wallet-review/deployed-byte-comparison.json": "acd1385d606b4dc515baf404f06868d97336949773043e5ab78844562915c808"
+  "validation": {
+    "unchangedWorkspaceTestsPassed": 334,
+    "finalCompanionTestsPassed": 290,
+    "typecheck": "passed",
+    "builds": "passed",
+    "secretPatternScan": "passed",
+    "mobileWidthChromiumIndexedDbScenariosPassed": 5,
+    "physicalIosTest": false,
+    "note": "The initial broad run exposed old saved-draft expectations and mocks; those tests were updated and the entire companion suite rerun. Runtime source was unchanged during that adjustment."
   },
-  "note": "Hosted connection fixes only. This deployment does not establish resolution of the reported hardware reset."
+  "evidenceSha256": {
+    "staged-verification.json": "160cd6d8c39e4bff86fe7e450c2e8629051796a27b8e8a7db76d1e27c45c005f",
+    "tools/hosted-wallet-review/preview-results.json": "b5beea78ddf9caa2ca66356303796561a8585880764f4742a711207b0603d45b",
+    "tools/hosted-wallet-review/deployed-byte-comparison.json": "ae9edad9af745d4c537ed796eb116fd446a7bf2a32850e98381a810418099883"
+  },
+  "finalCheckLogSha256": "0b7598316360181e316eb828e6207a3c822da58e9b61724144b1d85a4749b587",
+  "browserEvidenceSha256": "ced1c9f8ffcc5923447d2983f8db7539145707f39a604002f83f9cb8a88cb298",
+  "note": "Web update only; Pearl device firmware stays at 0.1.5. The reported Gen5 reset cause remains unresolved."
 }
