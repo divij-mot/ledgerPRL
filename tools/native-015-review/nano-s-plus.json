@@ -1,0 +1,21 @@
+{
+  "version": "0.1.5",
+  "model": "Nano S Plus",
+  "osVersion": "1.7.0",
+  "sourceCommit": "ce3ef3cd523bf60a9b718dfea65273e8dea42d8c",
+  "installedHash": "48a0a7182ba566e890cecfe8809e2b49838d17ad409f6439e668679e8213741f",
+  "installedHashVerifiedAt": "2026-10-13T03:00:34.236191+00:00",
+  "elfSha256": "51175095cc6c3a601f0844ba2d1a32d36c97250f107789c750fca38e4511767b",
+  "hexSha256": "8f8d75477c14f63ecfa67a0a0dcc3177c68b1d4d5ee0b73e3fd21b9fdfd4be61",
+  "qualificationSha256": "ab31a1b23afd6b6b1e77920bca22d29ddf3e59f9b8216f5167da2d2cbdd6aeac",
+  "simulator": {
+    "normalPilot": "passed",
+    "focusedRequestHandlingCasesPassed": 8,
+    "matchingTestedImages": 9
+  },
+  "independentImageAndEvidenceReview": "passed",
+  "realPayments": 0,
+  "physicalAccountReview": "not yet performed for this version",
+  "priorGen5ResetCauseEstablished": false,
+  "publicReleaseQualified": false
+}

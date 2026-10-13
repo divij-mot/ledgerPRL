@@ -1,0 +1,19 @@
+{
+  "candidateVersion": "0.1.5",
+  "model": "Nano Gen5",
+  "osVersion": "1.2.0",
+  "installedHash": "298c8bd35b93f0632567d18491d10dbbbf90a6a37fe272407a578353b1fe971d",
+  "installedHashVerifiedAt": "2026-10-13T02:45:41.768647+00:00",
+  "usbAccountCheck": {
+    "observedAt": "2026-10-13T02:48:16.341439+00:00",
+    "identityAndMainnetProfile": "passed",
+    "publicAccountResponseValidated": true,
+    "reviewElapsedSeconds": 54.09,
+    "ownerObserved": "Review stayed visible and owner approved"
+  },
+  "normalExit": "awaiting owner observation",
+  "iphoneBle": "awaiting owner test",
+  "realPayments": 0,
+  "resetCauseEstablished": false,
+  "publicReleaseQualified": false
+}
