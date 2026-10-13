@@ -256,7 +256,8 @@ async function setup(options = {}) {
   assert.equal(t.app.auditState().hasClient, true);
   assert.equal(t.context.requests.length, 0);
   assert.equal(t.context.saves, 0);
-  assert.equal(t.context.mutations, 0);
+  assert.equal(t.context.mutations, 1, "Connect clears only abandoned unsigned reviews");
+  assert.deepEqual(t.saved(), wallet.emptyJournal());
   assert.equal(t.app.auditState().privacyConsent, false);
   assert(t.context.endpoint.commands.includes(P.GET_EXTENDED_PUBKEY));
   await t.app.auditSync();

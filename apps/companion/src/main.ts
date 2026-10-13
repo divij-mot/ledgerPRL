@@ -223,6 +223,74 @@ function notify(message: string, error = false) {
   notificationType = error ? "error" : "success";
   render();
 }
+// Unsigned reviews are temporary. Keep all recovery paths and every record
+// that has entered signing; storage serializes this with the signing claim.
+function removeUnsignedReviews(value: WalletJournal, id?: string): number {
+  const drafts = value.payments.filter(
+    (p) => p.state === "draft" && (id === undefined || p.id === id),
+  );
+  for (const payment of drafts) {
+    assert(
+      payment.rawTx === undefined &&
+        payment.txid === undefined &&
+        payment.signingAttempt === undefined,
+      "Unsigned review contains recovery data",
+    );
+    discardDraft(value, payment.id);
+  }
+  return drafts.length;
+}
+async function discardUnsignedReviews(
+  owner: AccountPublicKey,
+  id?: string,
+  expected?: string,
+) {
+  const removed = await store.mutate(accountId(owner), (value) => {
+    if (
+      expected !== undefined &&
+      JSON.stringify(value.payments.find((p) => p.id === id)) !== expected
+    )
+      return 0;
+    return removeUnsignedReviews(value, id);
+  });
+  if (removed) channel.postMessage("journal");
+}
+function resetSendForm() {
+  sendStep = 0;
+  selected.clear();
+  manualSelection = maxAmount = coinControlOpen = feeOptionsOpen = false;
+  feeSelection = "standard";
+  Object.assign(form, { recipient: "", amount: "", fee: "0.00001000" });
+}
+async function navigate(next: typeof page) {
+  if (busy) return;
+  const owner = account,
+    id = activePayment;
+  let navigated = false;
+  const openPage = () => {
+    assert(
+      account === owner && (activePayment === id || activePayment === null),
+      "Account or payment changed",
+    );
+    page = next;
+    activePayment = null;
+    receiveStep = 0;
+    resetSendForm();
+    navigated = true;
+  };
+  if (!owner || (!id && next !== "send")) {
+    openPage();
+    if (notificationType === "success") notification = "";
+    render();
+    return;
+  }
+  await run("Updating…", async () => {
+    await discardUnsignedReviews(owner, next === "send" ? undefined : id!);
+    openPage();
+  });
+  if (navigated && page === "send" && account === owner && !activePayment)
+    void refreshFeeQuotes();
+}
 async function refreshJournal() {
   const owner = account;
   const generation = ++journalRefreshGeneration;
@@ -230,6 +298,13 @@ async function refreshJournal() {
     const loaded = await store.journal(accountId(owner));
     if (account !== owner || generation !== journalRefreshGeneration) return;
     journal = loaded;
+    if (
+      activePayment &&
+      !journal.payments.some((p) => p.id === activePayment)
+    ) {
+      activePayment = null;
+      resetSendForm();
+    }
     form.changeIndex = String(
       Math.max(
         journal.nextChangeIndex,
@@ -390,7 +465,7 @@ async function checkNode(signal?: AbortSignal) {
   for (const key of selected)
     if (!snapshot.coins.some((c) => outpoint(c) === key)) selected.delete(key);
   notification = result.removed
-    ? `Node check removed ${result.removed} spent, detached or unconfirmed outputs. Rebuild any draft affected by the change.`
+    ? `Node check removed ${result.removed} spent, detached or unconfirmed outputs. Review the payment again before continuing.`
     : `Node checked ${snapshot.coins.length} outputs at block ${snapshot.tip.height}. This trusts your configured node's chain view.`;
   notificationType = result.removed ? "error" : "success";
 }
@@ -479,7 +554,7 @@ function paymentStatus(payment: PaymentRecord): string {
   if (tx?.state === "confirmed") return "Confirmed";
   if (tx?.state === "detached") return "Needs review";
   return {
-    draft: "Draft",
+    draft: "Review",
     signing: "Needs review",
     signed: "Ready to send",
     "broadcast-unknown": "Status unknown",
@@ -1197,8 +1272,22 @@ function feePolicyHint(): string {
 function feeQuoteOptions() {
   if (!snapshot || feeQuoteNetwork !== network) return [];
   return feeQuotes.map((quote) => {
+    const label = ({ 1: "Fast", 10: "Medium", 25: "Slow" } as const)[
+      quote.blocks
+    ];
+    let rate: bigint;
     try {
-      const rate = quoteRate(quote, network);
+      rate = quoteRate(quote, network);
+    } catch {
+      return {
+        blocks: quote.blocks,
+        label: `${label} · unavailable`,
+        disabled: true,
+        feePrl: null,
+      };
+    }
+    let feePrl: string | null = null;
+    try {
       const request = maxAmount
         ? maximumPaymentAtRate(
             snapshot!,
@@ -1214,26 +1303,23 @@ function feeQuoteOptions() {
             rate,
             manualSelection,
           );
-      return {
-        blocks: quote.blocks,
-        time: confirmationTime(quote.blocks),
-        selected:
-          feeSelection === quote.blocks ||
-          (feeSelection === "standard" && quote.blocks === 10),
-        label: `${({ 1: "Fast", 10: "Medium", 25: "Slow" } as const)[quote.blocks]} · ${request.feePrl} PRL`,
-        disabled: false,
-        feePrl: request.feePrl,
-      };
+      feePrl = request.feePrl;
     } catch {
-      return {
-        blocks: quote.blocks,
-        label: `${({ 1: "Fast", 10: "Medium", 25: "Slow" } as const)[quote.blocks]} · unavailable`,
-        disabled: true,
-        feePrl: null,
-      };
+      // A valid network rate remains selectable before a payment can be priced.
     }
+    return {
+      blocks: quote.blocks,
+      time: confirmationTime(quote.blocks),
+      selected:
+        feeSelection === quote.blocks ||
+        (feeSelection === "standard" && quote.blocks === 10),
+      label: feePrl === null ? label : `${label} · ${feePrl} PRL`,
+      disabled: false,
+      feePrl,
+    };
   });
 }
+
 function send(active: PaymentRecord | undefined, feedback = "") {
   if (active) return review(active, feedback);
   if (!snapshot)
@@ -1321,13 +1407,14 @@ function review(payment: PaymentRecord, feedback = "") {
       ? "Unusually high fee. Check it carefully before signing."
       : "",
     details: `<details class="transaction-details"><summary>Transaction details</summary><dl class="data-list"><div><dt>Change</dt><dd>${change ? money(change.amount) : "None"}${change ? `<br><span class="mono">${scriptToAddress(change.scriptPubKey, bundle.network)}</span>` : ""}</dd></div><div><dt>Inputs</dt><dd>${countLabel(bundle.inputs.length, "input")}</dd></div>${payment.txid ? `<div><dt>Transaction ID</dt><dd class="mono">${payment.txid}</dd></div>` : ""}</dl></details>`,
-    actions: `${payment.state === "draft" ? `${walletButton(client?.sessionState === "ready" ? "sign" : "connect-inline", client?.sessionState === "ready" ? "Confirm on Ledger" : "Connect Ledger", busy)} <button id="discard" class="ghost" ${disabled(busy)}>Discard draft</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Approved on Ledger. Your payment is ready to send." : payment.state === "accepted" ? "Payment submitted. Confirmation is still being checked. Retrying sends the same payment." : "We could not confirm whether this payment was received. It may already be sent. Retry only this same payment; its funds remain reserved."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve sending this signed payment on ${bundle.network} through ${sourceMode === "public" ? "Pearl’s public service" : sourceMode === "local" ? "the local Pearl light client" : "my configured node"}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Retry same payment" : "Send payment"}</button>` : payment.archived ? '<div class="notice success">Payment confirmed. Refresh its status before any retry.</div>' : `<div class="notice error">Signing was interrupted. A signature may already exist, so these funds remain reserved. Reconnect your Ledger to recover and review this same payment.</div><button id="recover-signing" ${disabled(busy || client?.sessionState !== "ready" || !snapshot)}>Recover payment on Ledger</button>`}`,
+    actions: `${payment.state === "draft" ? `${walletButton(client?.sessionState === "ready" ? "sign" : "connect-inline", client?.sessionState === "ready" ? "Confirm on Ledger" : "Connect Ledger", busy)} <button id="discard" class="ghost" ${disabled(busy)}>Cancel</button>` : !payment.archived && ["signed", "broadcast-unknown", "accepted"].includes(payment.state) ? `<div class="notice ${payment.state === "broadcast-unknown" ? "error" : ""}">${payment.state === "signed" ? "Approved on Ledger. Your payment is ready to send." : payment.state === "accepted" ? "Payment submitted. Confirmation is still being checked. Retrying sends the same payment." : "We could not confirm whether this payment was received. It may already be sent. Retry only this same payment; its funds remain reserved."}</div><label class="check"><input id="broadcast-approval" type="checkbox" ${disabled(busy)}>I approve sending this signed payment on ${bundle.network} through ${sourceMode === "public" ? "Pearl’s public service" : sourceMode === "local" ? "the local Pearl light client" : "my configured node"}.</label><button id="broadcast" disabled>${payment.state !== "signed" ? "Retry same payment" : "Send payment"}</button>` : payment.archived ? '<div class="notice success">Payment confirmed. Refresh its status before any retry.</div>' : `<div class="notice error">Signing was interrupted. A signature may already exist, so these funds remain reserved. Reconnect your Ledger to recover and review this same payment.</div><button id="recover-signing" ${disabled(busy || client?.sessionState !== "ready" || !snapshot)}>Recover payment on Ledger</button>`}`,
   });
 }
 function activity() {
-  const slice = pageItems(journal.payments.slice().reverse(), paymentPage);
+  const payments = journal.payments.filter((p) => p.state !== "draft");
+  const slice = pageItems(payments.slice().reverse(), paymentPage);
   paymentPage = slice.page;
-  return `${historyCard()}<section class="card"><div class="section-head"><h2>Your payments</h2><span class="tag">${countLabel(journal.payments.length, "record")}</span></div>${slice.items.length ? slice.items.map((p) => `<div class="journal-item"><div class="row"><div><b class="small">${e(paymentStatus(p))}</b><p class="hint">${e(new Date(p.createdAt).toLocaleString())}</p></div><button data-payment="${e(p.id)}" class="secondary" ${disabled(busy)}>View payment</button></div>${p.txid ? `<details><summary>Transaction ID</summary><p class="mono">${e(p.txid)}</p><button class="ghost" data-copy-txid="${e(p.txid)}" ${disabled(busy)}>Copy transaction ID</button></details>` : ""}</div>`).join("") : '<div class="empty"><h3>No payments yet</h3><p>Your payments will appear here.</p></div>'}${pagination("payments", slice.page, slice.pages)}</section>`;
+  return `${historyCard()}<section class="card"><div class="section-head"><h2>Your payments</h2><span class="tag">${countLabel(payments.length, "record")}</span></div>${slice.items.length ? slice.items.map((p) => `<div class="journal-item"><div class="row"><div><b class="small">${e(paymentStatus(p))}</b><p class="hint">${e(new Date(p.createdAt).toLocaleString())}</p></div><button data-payment="${e(p.id)}" class="secondary" ${disabled(busy)}>View payment</button></div>${p.txid ? `<details><summary>Transaction ID</summary><p class="mono">${e(p.txid)}</p><button class="ghost" data-copy-txid="${e(p.txid)}" ${disabled(busy)}>Copy transaction ID</button></details>` : ""}</div>`).join("") : '<div class="empty"><h3>No payments yet</h3><p>Your payments will appear here.</p></div>'}${pagination("payments", slice.page, slice.pages)}</section>`;
 }
 function bind() {
   document.getElementById("settings")?.addEventListener("toggle", (event) => {
@@ -1375,19 +1462,19 @@ function bind() {
   document.querySelectorAll<HTMLButtonElement>("[data-nav]").forEach(
     (el) =>
       (el.onclick = () => {
-        if (!busy) {
-          page = el.dataset.nav as typeof page;
-          sendStep = receiveStep = 0;
-          activePayment = null;
-          if (notificationType === "success") notification = "";
-          render();
-          if (page === "send") void refreshFeeQuotes();
-        }
+        void navigate(el.dataset.nav as typeof page);
       }),
   );
   document.querySelectorAll<HTMLButtonElement>("[data-payment]").forEach(
     (el) =>
       (el.onclick = () => {
+        if (
+          busy ||
+          !journal.payments.some(
+            (p) => p.id === el.dataset.payment && p.state !== "draft",
+          )
+        )
+          return;
         activePayment = el.dataset.payment!;
         page = "send";
         render();
@@ -1432,6 +1519,7 @@ function bind() {
           a = recovery.account;
         await store.mutate(accountId(a), (j) => {
           requireCurrent();
+          removeUnsignedReviews(j);
           j.issuedReceiveThrough = Math.max(
             j.issuedReceiveThrough,
             recovery.issuedReceiveThrough,
@@ -1447,6 +1535,9 @@ function bind() {
             !signal.aborted && account === owner,
             "Public recovery range saved; opening the account was cancelled. Saved ranges remain retained.",
           );
+        requireOpen();
+        if (owner && accountId(owner) !== accountId(a))
+          await discardUnsignedReviews(owner);
         requireOpen();
         await closeLocalSession(signal);
         requireOpen();
@@ -1505,9 +1596,11 @@ function bind() {
           assert(account === owner, "Account changed during backup validation");
         };
         requireCurrent();
+        removeUnsignedReviews(backup.journal);
         await store.mutate(accountId(backup.account), (j) => {
           // The storage read may have queued behind another tab's write.
           requireCurrent();
+          removeUnsignedReviews(j);
           mergeRestoredJournal(j, backup.journal);
         });
         channel.postMessage("journal");
@@ -1516,6 +1609,9 @@ function bind() {
             !signal.aborted && account === owner,
             "Backup merged; opening the restored account was cancelled. Reservations remain saved.",
           );
+        requireOpen();
+        if (owner && accountId(owner) !== accountId(backup.account))
+          await discardUnsignedReviews(owner);
         requireOpen();
         await closeLocalSession(signal);
         requireOpen();
@@ -1639,13 +1735,7 @@ function bind() {
         emergencySignedRecovery.text,
       );
   });
-  const closeFlow = () => {
-    if (!busy) {
-      page = "overview";
-      activePayment = null;
-      render();
-    }
-  };
+  const closeFlow = () => void navigate("overview");
   click("flow-close", closeFlow);
   const acceptQr = async (
     read: (signal: AbortSignal) => Promise<string>,
@@ -1755,6 +1845,10 @@ function bind() {
     "disconnect",
     () =>
       void run("Closing account", async (signal) => {
+        const owner = account;
+        if (owner) await discardUnsignedReviews(owner);
+        signal.throwIfAborted();
+        assert(account === owner, "Account changed while closing");
         await closeLocalSession(signal);
         if (
           !hostedMode &&
@@ -1782,10 +1876,16 @@ function bind() {
       }),
   );
   document.getElementById("network")?.addEventListener("change", (event) => {
-    network = (event.target as HTMLSelectElement).value as NetworkName;
-    clearPaymentForm();
-    verifiedReceive = null;
-    render();
+    const next = (event.target as HTMLSelectElement).value as NetworkName;
+    void run("Changing network…", async () => {
+      const owner = account;
+      if (owner) await discardUnsignedReviews(owner);
+      assert(account === owner, "Account changed while changing network");
+      network = next;
+      activePayment = null;
+      clearPaymentForm();
+      verifiedReceive = null;
+    });
   });
   document
     .getElementById("account-index")
@@ -2091,64 +2191,52 @@ function bind() {
             "Change index is outside light recovery bounds",
           );
         const id = crypto.randomUUID();
-        await store.mutate(accountId(owner), (j) => {
+        let preparedRecord: string | undefined;
+        try {
+          await store.mutate(accountId(owner), (j) => {
+            requireCurrent();
+            const reserved = reservedOutpoints(j);
+            if (automaticRate !== null) {
+              assert(
+                currentFeeRate() === automaticRate,
+                "Fee estimate changed. Review it before continuing.",
+              );
+              const recalculated = paymentAtRate(
+                watch,
+                request,
+                reserved,
+                automaticRate,
+                useManualSelection,
+              );
+              assert(
+                recalculated.feePrl === request.feePrl,
+                "Fee changed. Review the updated fee before continuing.",
+              );
+              request.selected = recalculated.selected;
+            } else if (!useManualSelection)
+              request.selected = selectPaymentInputs(
+                watch,
+                request.amountPrl,
+                request.feePrl,
+                reserved,
+              );
+            const bundle = preparePayment(watch, request, reserved);
+            preparedRecord = JSON.stringify(reservePayment(j, bundle, id));
+          });
           requireCurrent();
-          const reserved = reservedOutpoints(j);
-          if (automaticRate !== null) {
-            assert(
-              currentFeeRate() === automaticRate,
-              "Fee estimate changed. Review it before continuing.",
-            );
-            const recalculated = paymentAtRate(
-              watch,
-              request,
-              reserved,
-              automaticRate,
-              useManualSelection,
-            );
-            assert(
-              recalculated.feePrl === request.feePrl,
-              "Fee changed. Review the updated fee before continuing.",
-            );
-            request.selected = recalculated.selected;
-          } else if (!useManualSelection)
-            request.selected = selectPaymentInputs(
-              watch,
-              request.amountPrl,
-              request.feePrl,
-              reserved,
-            );
-          const bundle = preparePayment(watch, request, reserved);
-          reservePayment(j, bundle, id);
-        });
+        } catch (error) {
+          // A commit may have completed before cancellation reached this view.
+          // Remove only this unsigned ID; a concurrent signing claim wins.
+          if (preparedRecord !== undefined)
+            await discardUnsignedReviews(owner, id, preparedRecord);
+          throw error;
+        }
         channel.postMessage("journal");
-        assert(
-          !signal.aborted &&
-            account === owner &&
-            snapshot === watch &&
-            sourceMode === source &&
-            network === owner.network,
-          "Unsigned payment saved; opening the review was cancelled. Inputs remain reserved; review or discard the draft from activity.",
-        );
         activePayment = id;
         notification = "";
       }),
   );
-  click(
-    "discard",
-    () =>
-      void run("Discarding unsigned draft", async () => {
-        assert(account && activePayment, "No draft");
-        await store.mutate(accountId(account), (j) =>
-          discardDraft(j, activePayment!),
-        );
-        activePayment = null;
-        selected.clear();
-        channel.postMessage("journal");
-        notification =
-          "Unsigned draft discarded. Inputs released; allocated change index will not be reused.";
-      }),
-  );
+  click("discard", () => void navigate("overview"));
   click("sign", () => void signFromView());
   click("recover-signing", () => void signFromView(true));
   click("cancel-device", () => currentAbort?.abort());
@@ -2178,11 +2266,7 @@ function bind() {
     });
     void run("Sending payment…", (signal) => broadcast(signal, approval));
   });
-  click("back-payments", () => {
-    activePayment = null;
-    page = "activity";
-    render();
-  });
+  click("back-payments", () => void navigate("activity"));
 }
 async function importSnapshot(
   text: string,
@@ -2197,6 +2281,7 @@ async function importSnapshot(
   const imported = parseWatchSnapshot(text);
   await store.mutate(accountId(imported.account), (j) => {
     requireCurrent();
+    removeUnsignedReviews(j);
     recordRecoveryPaths(j, imported.coins);
   });
   channel.postMessage("journal");
@@ -2205,6 +2290,9 @@ async function importSnapshot(
       !signal?.aborted && account === owner,
       "Snapshot recovery paths saved; opening the account was cancelled. Saved ranges remain retained.",
     );
+  requireOpen();
+  if (owner && accountId(owner) !== accountId(imported.account))
+    await discardUnsignedReviews(owner);
   requireOpen();
   await closeLocalSession(signal);
   requireOpen();
@@ -2307,6 +2395,8 @@ async function connect() {
           accountId(account) === accountId(exported) &&
           (page === "send" || page === "receive");
         if (account && accountId(account) !== accountId(exported)) {
+          await discardUnsignedReviews(account);
+          signal.throwIfAborted();
           await closeLocalSession(signal);
           signal.throwIfAborted();
           clearPaymentForm();
@@ -2321,6 +2411,8 @@ async function connect() {
           receiveIndex = 0;
           selected.clear();
         }
+        if (!preserveReviewedFlow) await discardUnsignedReviews(exported);
+        signal.throwIfAborted();
         account = exported;
         await refreshJournal();
         signal.throwIfAborted();
@@ -2395,7 +2487,7 @@ async function sign(signal: AbortSignal, recovery = false) {
       !payment.archived,
     recovery
       ? "Only an interrupted signing record without saved bytes can be recovered"
-      : "Only a fresh unsigned draft may be signed",
+      : "Only a fresh unsigned payment review may be signed",
   );
   const bundle = paymentBundle(payment);
   validateBundle(bundle, owner);
@@ -3085,6 +3177,8 @@ export async function restoreSavedAccount() {
         "Invalid saved network preference",
       );
       if (!["mainnet", "testnet2"].includes(restored.network)) return;
+      await discardUnsignedReviews(restored);
+      if (account || busy || network !== initialNetwork) return;
       account = restored;
       network = restored.network;
       accountIndex = restored.account;
@@ -3121,6 +3215,8 @@ export async function restoreSavedAccount() {
       if (!saved || account || busy || network !== initialNetwork) return;
       const restored = accountFromJson(saved);
       if (restored.network !== "mainnet" || restored.account !== 0) return;
+      await discardUnsignedReviews(restored);
+      if (account || busy || network !== initialNetwork) return;
       account = restored;
       network = restored.network;
       accountIndex = restored.account;

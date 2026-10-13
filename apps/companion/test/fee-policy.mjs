@@ -41,7 +41,7 @@ export async function auditInputs(s) {
 export async function auditPublicInputs(s) {await auditInputs(s);sourceMode='public';render();}
 export function auditFeeMode(mode) {sourceMode=mode;render();}
 export function auditSelection(ids) {manualSelection=true;selected.clear();for(const id of ids)selected.add(id);render();}
-export function auditState() {return {form:{...form},hint:feePolicyHint(),journal,notification,busy,feeLoading:!!feeLoad,selected:[...selected],feeTime:feeTime(),feeOptions:feeQuoteOptions()};}
+export function auditState() {return {form:{...form},hint:feePolicyHint(),journal,notification,busy,feeLoading:!!feeLoad,selected:[...selected],feeTime:feeTime(),feeOptions:feeQuoteOptions(),feeSelection,health:networkHealth(),balances:snapshot?balances(snapshot,reservedOutpoints(journal)):null};}
 export async function auditRestore(s,bundle) {
  await auditInputs(s);const j=emptyJournal();reservePayment(j,bundle,'policy-draft',1000);
  const restored=importWalletBackup(exportWalletBackup(account,j));
@@ -50,6 +50,15 @@ export async function auditRestore(s,bundle) {
  await refreshJournal();
 }
 export async function auditSign(){await run('Policy preflight',sign);}
+export async function auditFeePresentation(s,kind) {
+ await auditPublicInputs(s);privacyConsent=true;manualSelection=false;selected.clear();feeSelection='standard';sendStep=1;
+ form.amount=kind==='blank'?'':kind==='insufficient'?'2':'0.5';
+ if(kind==='recipient')form.recipient='invalid-address';
+ if(kind==='reserved')await store.mutate(accountId(account),j=>{reservePayment(j,preparePayment(snapshot,{selected:snapshot.coins.map(outpoint),recipient:deriveAddress(account,0,18).address,amountPrl:'0.5',feePrl:'0.00001',changeIndex:20}),'historical-interrupted',1000);transitionPayment(j,'historical-interrupted','signing');});
+ await refreshJournal();feeQuotes=[1,10,25].map(blocks=>({blocks,network:'mainnet',grainsPerKvB:1000n,receivedAt:Date.now()}));feeQuoteNetwork='mainnet';render();
+}
+export function auditInvalidQuotes(kind){feeQuotes=feeQuotes.map(q=>({...q,...(kind==='expired'?{receivedAt:Date.now()-120001}:kind==='future'?{receivedAt:Date.now()+10000}:kind==='network'?{network:'testnet2'}:{grainsPerKvB:0n})}));render();}
+
 `;
 const built = await build({
   stdin: {
@@ -222,7 +231,11 @@ for (const kind of [
 
 async function clickAndSettle(id) {
   listeners.get(`${id}:click`)();
-  for (let attempt = 0; attempt < 200 && (app.auditState().busy || app.auditState().feeLoading); attempt++)
+  for (
+    let attempt = 0;
+    attempt < 200 && (app.auditState().busy || app.auditState().feeLoading);
+    attempt++
+  )
     await new Promise((resolve) => setTimeout(resolve, 0));
   assert.equal(app.auditState().busy, false, `Operation did not settle: ${id}`);
 }
@@ -313,4 +326,69 @@ assert.equal(privateRequests, 1);
 assert.deepEqual(app.auditState().form, afterChoice);
 console.log(
   "PASS: quote loading/failure leaves authorization unchanged; explicit choice sets only fee and private mode sends only anonymous fee-service paths",
+);
+
+const onePrlSnapshot = wallet.parseWatchSnapshot(
+  JSON.stringify(
+    fixtures.snapshotFixture(
+      [fixtures.rawTransaction(100_000_000n, 0, false)],
+      200,
+      "mainnet",
+    ),
+  ),
+);
+for (const kind of ["blank", "recipient", "insufficient", "reserved"]) {
+  await app.auditFeePresentation(onePrlSnapshot, kind);
+  const before = app.auditState(),
+    journal = JSON.stringify(before.journal),
+    amount = before.form.amount;
+  assert.equal(before.health.ok, true);
+  assert.equal(before.feeOptions.length, 3);
+  assert(
+    before.feeOptions.every(
+      (q) =>
+        !q.disabled &&
+        q.time &&
+        q.feePrl === null &&
+        !q.label.includes("unavailable"),
+    ),
+  );
+  if (kind === "reserved") {
+    assert.equal(before.balances.total, 100_000_000n);
+    assert.equal(before.balances.available, 0n);
+  }
+  await clickAndSettle("fee-target-1");
+  assert.equal(app.auditState().feeSelection, 1);
+  assert.equal(app.auditState().feeTime, "≈3 min");
+  assert.equal(app.auditState().form.amount, amount);
+  assert.equal(JSON.stringify(app.auditState().journal), journal);
+  await clickAndSettle("prepare");
+  assert.equal(
+    JSON.stringify(app.auditState().journal),
+    journal,
+    "Invalid payment acquired a new reservation",
+  );
+  assert.equal(app.auditState().feeSelection, 1);
+}
+console.log(
+  "PASS: fresh quote rates and ETA stay selectable with blank/invalid/insufficient/reserved payment fields; preparation still rejects without journal changes",
+);
+for (const kind of ["expired", "future", "network", "rate"]) {
+  await app.auditFeePresentation(onePrlSnapshot, "valid");
+  app.auditInvalidQuotes(kind);
+  assert(
+    app
+      .auditState()
+      .feeOptions.every((q) => q.disabled && q.feePrl === null && !q.time),
+  );
+  await clickAndSettle("fee-target-1");
+  assert.equal(
+    app.auditState().feeSelection,
+    "standard",
+    "Invalid quote became selected",
+  );
+  assert.equal(app.auditState().journal.payments.length, 0);
+}
+console.log(
+  "PASS: expired/future/wrong-network/below-floor quotes remain disabled and cannot be selected",
 );

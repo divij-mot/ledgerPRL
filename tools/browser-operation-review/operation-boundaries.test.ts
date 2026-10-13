@@ -518,7 +518,7 @@ for (const phase of ["after-update", "after-commit"]) {
     );
     assert.match(t.app.auditState().notification, /range saved.*cancelled/);
   });
-  test(`REGRESSION C2: Cancel ${phase} preserves the prepared unsigned reservation`, async () => {
+  test(`REGRESSION C2: Cancel ${phase} releases the unsigned review while preserving allocated ranges`, async () => {
     const t = await setup(),
       reached = gate(),
       release = gate();
@@ -535,13 +535,14 @@ for (const phase of ["after-update", "after-commit"]) {
     release.open();
     await t.settle();
     const saved = t.c.rows.get(wallet.accountId(fixtureAccount));
-    assert.equal(saved.payments.length, 1);
-    assert.equal(saved.payments[0].state, "draft");
-    assert.equal(wallet.reservedOutpoints(saved).size, 2);
+    assert.equal(saved.payments.length, 0);
+    assert.equal(wallet.reservedOutpoints(saved).size, 0);
+    assert.equal(saved.nextChangeIndex, 1);
+    assert.equal(saved.issuedReceiveThrough, 7);
     assert.equal(t.app.auditState().activePayment, null);
     assert.match(
       t.app.auditState().notification,
-      /Unsigned payment saved.*cancelled/,
+      /cancelled|aborted/i,
     );
   });
 }

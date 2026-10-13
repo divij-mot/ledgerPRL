@@ -35,7 +35,7 @@ const testContext = globalThis.operationReview;
 export async function auditOwnLocal(a){await localSession.start(a,[-1,-1],async()=>({}));}
 export function auditSync(){startLocalSync();}
 export function auditFlow(flow){if(flow==="busy")busy=true;else page=flow;}
-export function auditState(){return {snapshot,syncComplete,syncActive:!!localSyncAbort,receiveIndex,lastUsed,account,network,sourceMode,privacyConsent,activePayment,busy,notification,client,transport,emergency:emergencySignedRecovery,journal,verifiedReceive,form:{...form}};}
+export function auditState(){return {page,sendStep,snapshot,syncComplete,syncActive:!!localSyncAbort,receiveIndex,lastUsed,account,network,sourceMode,privacyConsent,activePayment,busy,notification,client,transport,emergency:emergencySignedRecovery,journal,verifiedReceive,form:{...form}};}
 export async function auditMount(a,b,id,options={}){
   account=a;network=a.network;sourceMode=options.source??'node';privacyConsent=options.consent??true;activePayment=id;page=options.page??'send';
   snapshot={schema:1,account:a,genesisHash:NETWORKS[a.network].genesisHash,tip:{height:200,hash:'aa'.repeat(32)},coverage:{externalScannedThrough:19,changeScannedThrough:19,gapLimit:20},coins:b.inputs.map(i=>({...i,rawTransaction:'',coinbase:false,block:{height:1,hash:'bb'.repeat(32)}}))};
@@ -45,6 +45,12 @@ export async function auditMount(a,b,id,options={}){
 }
 export function auditAlter(kind){if(kind==='owner')account={...account,chainCode:new Uint8Array(32).fill(9)};if(kind==='network')network='testnet2';if(kind==='source')sourceMode=sourceMode==='node'?'public':'node';if(kind==='payment')activePayment='another-payment';if(kind==='consent')privacyConsent=false;}
 export function auditRender(){render();}
+export function auditNavigate(next){return navigate(next);}
+export function auditCleanup(owner,id){return discardUnsignedReviews(owner,id);}
+export async function auditReloadJournal(){await refreshJournal();render();}
+export function auditAbort(){currentAbort?.abort();}
+export function auditPrepareView(){activePayment=null;page='send';sendStep=1;feeSelection='custom';form.fee='0.00001000';manualSelection=true;render();}
+export function auditEmpty(net){account=null;network=net;activePayment=null;snapshot=null;page='overview';render();}
 export async function auditVerifyEmergency(){await verifyRestoredEmergencyBackup();render();}
 export async function auditSign(){await run('Review fixture payment',sign);}
 export function auditActualDevice(t,options={}){transport=t;client=new LedgerBitcoinPrlClient(t,network,options);}
@@ -172,8 +178,15 @@ async function setup(rows = new Map<string, any>()) {
     fetch: async (route: string, options: any) => {
       if (route === "/api/indexer/read") {
         const body = JSON.parse(options.body);
-        assert.deepEqual(Object.keys(body).sort(), ["consent", "network", "path"]);
-        assert.match(body.path, /^\/api\/(?:v2\/(?:|block-index\/[0-9]+)|v1\/estimatefee\/(?:1|10|25))$/);
+        assert.deepEqual(Object.keys(body).sort(), [
+          "consent",
+          "network",
+          "path",
+        ]);
+        assert.match(
+          body.path,
+          /^\/api\/(?:v2\/(?:|block-index\/[0-9]+)|v1\/estimatefee\/(?:1|10|25))$/,
+        );
         // Anonymous estimates are separate from the owned local-process requests under test.
         throw new Error("Modeled fee service unavailable");
       }
@@ -206,6 +219,7 @@ async function setup(rows = new Map<string, any>()) {
           { status: 400 },
         );
       if (route === "/api/check") {
+        await c.checkHook?.();
         const body = JSON.parse(options.body);
         return new Response(
           JSON.stringify({
@@ -367,12 +381,12 @@ test("matching mainnet draft connection preserves review without starting anothe
   assert.equal(t.app.auditState().syncActive, false);
 });
 
-test("connecting a different Ledger clears the draft view and retains the old account reservations", async () => {
+test("connecting a different Ledger drops only the old unsigned review and keeps recovery indices", async () => {
   const id = "foreign-inline-draft",
     owner = wallet.accountId(fixtureAccount),
     journal = wallet.emptyJournal();
   wallet.reservePayment(journal, fixtureBundle, id, 1000);
-  const saved = JSON.stringify(journal),
+  const highWater = journal.nextChangeIndex,
     t = await setup(new Map([[owner, journal]]));
   const foreign = { ...fixtureAccount, chainCode: new Uint8Array(32).fill(9) };
   t.c.endpoint = createPsbtEndpoint({ account: foreign });
@@ -385,8 +399,8 @@ test("connecting a different Ledger clears the draft view and retains the old ac
   );
   assert.equal(t.app.auditState().activePayment, null);
   assert.equal(t.app.auditState().snapshot, null);
-  assert.equal(JSON.stringify(t.c.rows.get(owner)), saved);
-  assert.equal(wallet.reservedOutpoints(t.c.rows.get(owner)).size, 2);
+  assert.equal(t.c.rows.get(owner).nextChangeIndex, highWater);
+  assert.equal(wallet.reservedOutpoints(t.c.rows.get(owner)).size, 0);
   assert.equal(t.c.endpoint.commands.includes(P.SIGN_PSBT), false);
 });
 
@@ -507,3 +521,230 @@ for (const boundary of ["before-update", "after-commit"])
       boundary === "before-update" ? -1 : 0,
     );
   });
+
+function unsignedJournal(id = "temporary-review") {
+  const j = wallet.emptyJournal();
+  wallet.reservePayment(j, fixtureBundle, id, 1000);
+  return j;
+}
+
+for (const action of ["flow-close", "discard", "back-payments", "fresh-send"])
+  test(`temporary review ${action} releases inputs without rolling back recovery ranges`, async () => {
+    const id = "temporary-review",
+      owner = wallet.accountId(fixtureAccount),
+      j = unsignedJournal(id);
+    const t = await setup(new Map([[owner, j]]));
+    await t.app.auditMount(fixtureAccount, fixtureBundle, id);
+    assert.match(t.dom.innerHTML, />Cancel<\/button>/);
+    assert.doesNotMatch(t.dom.innerHTML, /Discard draft/);
+    if (action === "fresh-send") await t.app.auditNavigate("send");
+    else t.event(action);
+    await t.settle();
+    const saved = t.c.rows.get(owner);
+    assert.equal(saved.payments.length, 0);
+    assert.equal(wallet.reservedOutpoints(saved).size, 0);
+    assert.equal(saved.nextChangeIndex, j.nextChangeIndex);
+    assert.equal(saved.issuedReceiveThrough, j.issuedReceiveThrough);
+    assert.equal(t.app.auditState().activePayment, null);
+    assert.equal(t.app.auditState().form.recipient, "");
+    assert.equal(t.app.auditState().form.amount, "");
+    assert.equal(t.c.endpoint.commands.length, 0);
+  });
+
+for (const state of [
+  "signing",
+  "signed",
+  "broadcast-unknown",
+  "accepted",
+  "archived",
+])
+  test(`fresh Send never releases ${state} or changes its recovery data`, async () => {
+    const owner = wallet.accountId(fixtureAccount),
+      j = unsignedJournal();
+    wallet.transitionPayment(j, "temporary-review", "signing");
+    if (state !== "signing")
+      wallet.transitionPayment(j, "temporary-review", "signed", {
+        rawTx: f.rawTx,
+        txid: f.txid,
+      });
+    if (["broadcast-unknown", "accepted", "archived"].includes(state))
+      wallet.transitionPayment(j, "temporary-review", "broadcast-unknown");
+    if (["accepted", "archived"].includes(state))
+      wallet.transitionPayment(j, "temporary-review", "accepted");
+    if (state === "archived")
+      j.payments[0]!.archived = {
+        status: "confirmed",
+        block: { height: 100, hash: "ab".repeat(32) },
+        checkedAt: 2000,
+      };
+    const before = JSON.stringify(j),
+      t = await setup(new Map([[owner, j]]));
+    await t.app.auditMount(fixtureAccount, fixtureBundle, null);
+    await t.app.auditNavigate("send");
+    assert.equal(JSON.stringify(t.c.rows.get(owner)), before);
+    assert.equal(wallet.reservedOutpoints(t.c.rows.get(owner)).size, 2);
+  });
+
+test("restoring a saved account removes an abandoned unsigned review but retains its high-water marks", async () => {
+  const a = { ...fixtureAccount, network: "mainnet" as const },
+    b = { ...fixtureBundle, network: "mainnet" as const },
+    j = wallet.emptyJournal();
+  wallet.reservePayment(j, b, "abandoned-review", 1000);
+  const owner = wallet.accountId(a),
+    t = await setup(new Map([[owner, j]]));
+  t.app.auditEmpty("mainnet");
+  t.c.cache.set("last-account", sdk.accountToJson(a));
+  await t.app.restoreSavedAccount();
+  await until(() => !t.app.auditState().syncActive);
+  assert.equal(t.c.rows.get(owner).payments.length, 0);
+  assert.equal(t.c.rows.get(owner).nextChangeIndex, j.nextChangeIndex);
+  assert.equal(
+    t.c.rows.get(owner).issuedReceiveThrough,
+    j.issuedReceiveThrough,
+  );
+});
+
+test("public import removes a legacy unsigned review without deleting recovery indices", async () => {
+  const owner = wallet.accountId(fixtureAccount),
+    j = unsignedJournal(),
+    t = await setup(new Map([[owner, j]]));
+  await t.app.auditMount(fixtureAccount, fixtureBundle, "temporary-review");
+  const text = wallet.exportPublicRecovery(fixtureAccount, j);
+  t.event("public-file", "change", {
+    files: [{ size: text.length, text: async () => text }],
+  });
+  await t.settle();
+  assert.equal(t.c.rows.get(owner).payments.length, 0);
+  assert.equal(t.c.rows.get(owner).nextChangeIndex, j.nextChangeIndex);
+});
+
+for (const claimed of [false, true])
+  test(`cancel after prepare commit ${claimed ? "preserves a concurrent signing claim" : "releases only the just-created unsigned review"}`, async () => {
+    const owner = wallet.accountId(fixtureAccount),
+      t = await setup();
+    await t.app.auditMount(fixtureAccount, fixtureBundle, null);
+    t.app.auditPrepareView();
+    let cancelled = false,
+      allocated = 0;
+    t.c.hook = async (phase: string, _owner: string, j: any) => {
+      if (phase === "after-commit" && !cancelled && j.payments.length) {
+        cancelled = true;
+        allocated = j.nextChangeIndex;
+        if (claimed)
+          wallet.transitionPayment(
+            t.c.rows.get(owner),
+            j.payments[0].id,
+            "signing",
+          );
+        t.app.auditAbort();
+      }
+    };
+    t.event("prepare");
+    await t.settle();
+    assert.equal(cancelled, true, t.app.auditState().notification);
+    assert.equal(t.c.rows.get(owner).payments.length, claimed ? 1 : 0);
+    if (claimed) assert.equal(t.c.rows.get(owner).payments[0].state, "signing");
+    assert.equal(t.c.rows.get(owner).nextChangeIndex, allocated);
+    assert.equal(t.app.auditState().activePayment, null);
+    assert.equal(t.c.endpoint.commands.length, 0);
+  });
+
+test("queued cleanup re-reads a competing signing claim and leaves it reserved", async () => {
+  const owner = wallet.accountId(fixtureAccount),
+    j = unsignedJournal(),
+    t = await setup(new Map([[owner, j]]));
+  await t.app.auditMount(fixtureAccount, fixtureBundle, "temporary-review");
+  let once = false;
+  t.c.hook = async (phase: string) => {
+    if (phase === "before-update" && !once) {
+      once = true;
+      wallet.transitionPayment(
+        t.c.rows.get(owner),
+        "temporary-review",
+        "signing",
+      );
+    }
+  };
+  t.event("flow-close");
+  await t.settle();
+  assert.equal(t.c.rows.get(owner).payments[0].state, "signing");
+  assert.equal(wallet.reservedOutpoints(t.c.rows.get(owner)).size, 2);
+});
+
+test("cleanup winning during signing validation prevents any SIGN_PSBT", async () => {
+  const owner = wallet.accountId(fixtureAccount),
+    j = unsignedJournal(),
+    t = await setup(new Map([[owner, j]]));
+  await t.app.auditMount(fixtureAccount, fixtureBundle, "temporary-review");
+  t.app.auditActualDevice(t.c.endpoint.transport);
+  t.c.checkHook = () => t.app.auditCleanup(fixtureAccount, "temporary-review");
+  await t.app.auditSign();
+  assert.match(t.app.auditState().notification, /Payment changed/);
+  assert.equal(t.c.endpoint.commands.includes(P.SIGN_PSBT), false);
+  assert.equal(t.c.rows.get(owner).payments.length, 0);
+});
+
+test("cleanup failure keeps unsigned inputs reserved and reports the storage error", async () => {
+  const owner = wallet.accountId(fixtureAccount),
+    j = unsignedJournal(),
+    t = await setup(new Map([[owner, j]]));
+  await t.app.auditMount(fixtureAccount, fixtureBundle, "temporary-review");
+  t.c.hook = async (phase: string) => {
+    if (phase === "before-update") throw Error("Fixture storage unavailable");
+  };
+  t.event("flow-close");
+  await t.settle();
+  assert.equal(wallet.reservedOutpoints(t.c.rows.get(owner)).size, 2);
+  assert.equal(t.app.auditState().activePayment, "temporary-review");
+  assert.match(t.app.auditState().notification, /storage unavailable/);
+});
+
+test("queued fresh Send cleanup cannot navigate or reset a replacement account", async () => {
+  const owner = wallet.accountId(fixtureAccount),
+    j = unsignedJournal(),
+    t = await setup(new Map([[owner, j]]));
+  await t.app.auditMount(fixtureAccount, fixtureBundle, "temporary-review");
+  const entered = gate(),
+    release = gate();
+  let once = false;
+  t.c.hook = async (phase: string) => {
+    if (phase === "before-update" && !once) {
+      once = true;
+      entered.open();
+      await release.promise;
+    }
+  };
+  const navigating = t.app.auditNavigate("send");
+  await entered.promise;
+  const replacement = {
+    ...fixtureAccount,
+    chainCode: new Uint8Array(32).fill(9),
+  };
+  await t.app.auditMount(replacement, fixtureBundle, null, {
+    page: "overview",
+  });
+  const recipient = t.app.auditState().form.recipient;
+  release.open();
+  await navigating;
+  assert.equal(
+    wallet.accountId(t.app.auditState().account),
+    wallet.accountId(replacement),
+  );
+  assert.equal(t.app.auditState().page, "overview");
+  assert.equal(t.app.auditState().form.recipient, recipient);
+  assert.equal(t.c.rows.get(owner).payments.length, 0);
+});
+
+test("cross-tab journal refresh only clears missing active IDs and never sweeps a live review", async () => {
+  const owner = wallet.accountId(fixtureAccount),
+    j = unsignedJournal(),
+    t = await setup(new Map([[owner, j]]));
+  await t.app.auditMount(fixtureAccount, fixtureBundle, "temporary-review");
+  await t.app.auditReloadJournal();
+  assert.equal(t.c.rows.get(owner).payments.length, 1);
+  assert.equal(t.app.auditState().activePayment, "temporary-review");
+  wallet.discardDraft(t.c.rows.get(owner), "temporary-review");
+  await t.app.auditReloadJournal();
+  assert.equal(t.app.auditState().activePayment, null);
+  assert.equal(t.app.auditState().form.recipient, "");
+});

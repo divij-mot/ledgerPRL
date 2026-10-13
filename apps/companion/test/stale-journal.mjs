@@ -53,7 +53,13 @@ export function state() { return {account,journal,busy,form}; }
           contents: a.path.includes("device")
             ? 'export async function connectLedger(){throw Error("No device")}'
             : a.path.includes("storage")
-              ? 'export class WatchStorage { async journal(k){ const q=globalThis.journalQueue.shift(); if (!q) throw Error("Missing fixture journal"); return q; } }'
+              ? `export class WatchStorage {
+                  async journal(k){ const q=globalThis.journalQueue.shift(); if (!q) throw Error("Missing fixture journal"); return q; }
+                  async mutate(k,update){
+                    const j=structuredClone(globalThis.durableJournals.get(k)??{schema:1,nextChangeIndex:0,issuedReceiveThrough:-1,payments:[]});
+                    const result=update(j);globalThis.durableJournals.set(k,structuredClone(j));globalThis.journalMutations++;return result;
+                  }
+                }`
               : "",
         }));
       },
@@ -74,6 +80,8 @@ function journal(nextChangeIndex) {
 let serial = 0;
 async function fresh() {
   globalThis.journalQueue = [];
+  globalThis.durableJournals = new Map();
+  globalThis.journalMutations = 0;
   const app = await import(url + "#" + serial++);
   app.switchFixture(publicAccount);
   return app;
@@ -91,6 +99,7 @@ const results = [];
   for (let i = 0; i < 20 && app.state().busy; i++)
     await new Promise((r) => setImmediate(r));
   assert.equal(app.state().account, null);
+  assert.equal(globalThis.journalMutations, 1, "Close awaited its unsigned-review cleanup");
   pending.release(journal(10));
   await p;
   assert.equal(app.state().journal.nextChangeIndex, 0);
