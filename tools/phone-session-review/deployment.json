@@ -1,0 +1,19 @@
+{
+  "sourceCommit": "b0ad28c4db61096b72dbad18fd0b45847e62667f",
+  "deploymentId": "dpl_9jv3VNmnhVVbnBGx7vukHS4cxNRQ",
+  "origin": "https://pearl-ledger-wallet.vercel.app",
+  "checkedAt": "2026-10-13T02:42:23.146Z",
+  "status": "promoted and verified",
+  "hostedChecksPassed": 19,
+  "staticFilesMatched": 17,
+  "staticBytesMatched": 2231866,
+  "accountsQueried": 0,
+  "transactionsBroadcast": 0,
+  "nativeReleasePromoted": false,
+  "evidenceSha256": {
+    "staged-verification.json": "73cb31f11947da5a20073098327c284b62c47376af7eb1af7ce84c0bbc8d155e",
+    "tools/hosted-wallet-review/preview-results.json": "fcf6738067a84c6226e4e71c8909748ae9bfbfbdf1fd802504bec87c214449f5",
+    "tools/hosted-wallet-review/deployed-byte-comparison.json": "acd1385d606b4dc515baf404f06868d97336949773043e5ab78844562915c808"
+  },
+  "note": "Hosted connection fixes only. This deployment does not establish resolution of the reported hardware reset."
+}
