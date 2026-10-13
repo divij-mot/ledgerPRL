@@ -1,66 +1,63 @@
 # Install Pearl on your Ledger
 
-**Hardware use and installation paused.** A reported Gen5 freeze/reset is unresolved. Do not install or test Pearl on hardware. See the [incident record](../tools/gen5-reset-incident/README.md).
+The installer builds Pearl from source and verifies the image for your device before loading it. Installation uses USB, including on devices that will later connect over Bluetooth.
 
-Last investigated release image: **Pearl 0.1.4, mainnet, API 27**. The procedures below are retained as reference; do not follow them on hardware while the incident remains unresolved. The investigation candidate deliberately does not update `release.json`, so the installer rejects its changed source. Gen5, Flex, Stax and Nano X now enable the official Ledger SDK Bluetooth transport. Nano S Plus stays USB-only.
+## Requirements
 
-| Model | SDK-mapped Ledger OS | Build / USB emulator | Bluetooth in 0.1.4 | Physical testing |
-| --- | --- | --- | --- | --- |
-| Nano S Plus | 1.7.0 | Passed | No radio | 0.1.4 installed/hash-verified; USB account approval passed |
-| Nano X | 2.8.0 | Passed | Enabled | Not tested; retail sideloading unavailable |
-| Stax | 1.11.0 | Passed | Enabled | Not tested |
-| Flex | 1.7.0 | Passed | Enabled | Not tested |
-| Nano Gen5 | 1.2.0 | Passed | Enabled | Earlier account/Receive/exit checks passed; subsequent freeze/reset report unresolved |
+Install **Python 3.11 or later**, **Git**, and **Docker**, then start Docker. Open Terminal in the repository folder.
 
-Compare your device’s **Settings → About** version with the table. These are the [official SDK API-27 mappings](https://github.com/LedgerHQ/ledger-secure-sdk#about-api_level-branches), checked on 10 October 2026, not a latest-OS or retail-rollout guarantee. The installer does not update Ledger OS.
+| Model | SDK API-27 OS mapping | Connection | Installer target |
+| --- | --- | --- | --- |
+| Nano S Plus | 1.7.0 | USB | `nano-s-plus` |
+| Nano X | 2.8.0 | USB / Bluetooth | Build only; retail installation requires Ledger distribution |
+| Stax | 1.11.0 | USB / Bluetooth | `stax` |
+| Flex | 1.7.0 | USB / Bluetooth | `flex` |
+| Nano Gen5 | 1.2.0 | USB / Bluetooth | `gen5` |
 
-The original Nano S is unsupported. Emulator tests do **not** test Bluetooth radio pairing or a real iPhone. Pearl is independently built and is not listed in My Ledger's public catalog.
+Check your device’s **Settings → About** against the [SDK compatibility mapping](https://github.com/LedgerHQ/ledger-secure-sdk#about-api_level-branches). Original Nano S is unsupported.
 
-## Install on Gen5 or Flex
+## Version selection
 
-On your Mac, install **Python 3.11 or later**, **Git**, and **Docker Desktop**, then start Docker. Download/extract this repository and open Terminal in that folder.
+[release.json](../apps/ledger-bitcoin-prl/release.json) pins the source, device targets and image hashes used by the installer. It currently specifies **0.1.4**, while this branch’s app source is **0.1.5**. The commands below stop at source verification until the release manifest and source match.
 
-For **Nano Gen5**:
+## Install
+
+For Nano Gen5:
 
 ```sh
 python3 scripts/install-pearl.py gen5 --install
 ```
 
-For **Flex**:
+Replace `gen5` with `nano-s-plus`, `flex` or `stax` for your device.
 
-```sh
-python3 scripts/install-pearl.py flex --install
-```
+1. Close Ledger Wallet and any browser connection to the device.
+2. Connect the Ledger by USB, unlock it and leave it on the dashboard.
+3. Run the command and approve the Manager and Pearl installation prompts.
+4. Open Pearl and check that its version matches `release.json`.
 
-The command downloads the pinned SDK and builder if needed, builds in a separate temporary folder, verifies the source and image hashes, and prepares its own Python loader environment. It does not install global packages or modify wallet data. Initial downloads/building can take several minutes.
+The command downloads the pinned SDK and builder, builds in an isolated temporary folder, verifies the image, and prepares a Python loader environment. The first build can take several minutes. Installation does not require your recovery phrase or a device reset.
 
-Before the loader step, **close Ledger Wallet**, connect the matching device by **USB**, unlock it and leave it on its dashboard. Approve installation on the Ledger screen. Installation uses USB even when you plan to use Bluetooth afterward. Check that the installed app says **Pearl 0.1.4**.
+## Replace an existing installation
 
-No recovery phrase, reset, OS update or automatic app deletion is part of the default install command. If an existing Pearl app, insufficient space, or incompatible OS/API prevents installation, stop and resolve that separately. Do not substitute another model's image or loader flags.
-
-For Stax use `stax`; for Nano S Plus use `nano-s-plus`. **Nano X cannot use this installer’s `--install` route**: ordinary retail sideloading is unavailable according to [Ledger's guide](https://developers.ledger.com/docs/device-app/beginner/vscode-extension). Its build target remains available for development.
-
-## Update an existing Pearl installation
-
-Version 0.1.4 uses Ledger’s SDK handling for screen, timer and status events instead of assuming their payload sizes. Versions 0.1.1–0.1.3 could exit during Gen5 account review before any touch. To replace only the old **Pearl** app:
+To replace only the installed Pearl app:
 
 ```sh
 python3 scripts/install-pearl.py gen5 --install --replace
 ```
 
-Use `flex`, `stax` or `nano-s-plus` for those devices. Close the Pearl view on your phone and Ledger Wallet on the Mac first; leave the USB-connected Ledger unlocked on its dashboard. The explicit `--replace` option removes only Pearl after the new image passes verification, then loads the new version. It does not reset the device or change its recovery phrase. If loading fails afterward, Pearl may need reinstalling. Plain `--install` never deletes an existing app.
+The replacement image is checked before the existing Pearl app is removed. If loading fails afterward, rerun the installation after resolving the reported error. Plain `--install` does not delete an existing app.
 
-## Use the wallet
+## Open the wallet
 
-- **Mac + Chrome/Edge + USB:** open [the hosted Pearl wallet](https://pearl-ledger-wallet.vercel.app/), open Pearl on the Ledger, and connect directly. Ledger Wallet is optional for this route.
-- **iPhone + Gen5/Flex Bluetooth:** pair through Ledger Wallet, open Pearl on the signer, and launch the hosted Pearl app through Ledger Wallet's Discover integration. The Safari website alone cannot provide the native Bluetooth bridge. See [Discover setup](live-app.md) for the developer-loaded app; a public catalog listing is separate.
-- **Local wallet:** from the repository folder, run `python3 scripts/run-local.py` and open the address it prints.
+- **Desktop:** open [pearl-ledger-wallet.vercel.app](https://pearl-ledger-wallet.vercel.app/) in Chrome or Edge and connect by USB.
+- **iPhone or Android:** use Pearl in Ledger Wallet Discover. Follow the [Discover setup guide](live-app.md#load-the-hosted-entry-in-discover).
+- **Local instance:** run `python3 scripts/run-local.py` from the repository folder. It opens the wallet at `http://127.0.0.1:5188/`.
 
-Verify a Receive address on the device before sending. Keys and the account derivation (`86'/808276'/0'`) remain unchanged.
+Use **Receive** to verify an address on the Ledger. When sending, review the recipient, amount and fee on the device before approving.
 
-If a connection drops or you cancel on the phone/computer during review, **reject the old review on the Ledger before retrying**. The device OS manages USB/Bluetooth connections and does not guarantee that every disconnect reaches the app. A review may remain until rejection, lock or expiry; closing the page is not a device rejection. In the held candidate, a new command receives the same busy response as Bitcoin and does not cancel the old review. Pearl retains its PIN and deadline checks, and never treats OS status events as approval.
+If a device review remains open after disconnecting or closing the wallet, reject it on the Ledger before reconnecting.
 
-## Build without touching a device
+## Build without installing
 
 Omit `--install`:
 
@@ -68,10 +65,4 @@ Omit `--install`:
 python3 scripts/install-pearl.py gen5
 ```
 
-No USB loader or device call runs in this mode. The command prints the verified image location. Advanced users can reuse an existing clean SDK with `--sdk /path/to/ledger-secure-sdk`.
-
-The installer reuses the existing `tools/bitcoin-prl-port/build.sh` and provenance/ELF checks. [release.json](../apps/ledger-bitcoin-prl/release.json) pins each model's source, binary hashes, API, target ID and linker-derived sizes. The SDK is `6709cd2bdfebb224ee070f7c1211b54254262579` (`v27.1.2`); the official Linux ARM64 builder is pinned to `sha256:8d3da9179dd1b241883c769c521ee9403352b60091c80405b5bef5801a003ba2`. Compilation runs offline with a read-only SDK and no device mounts. Git LFS screenshot skipping, an empty isolated Git repository, and ZIP executable-bit handling are built into the setup.
-
-Bluetooth-capable models use flags **0x240**: the existing **0x40** plus the SDK-required **0x200 settings-write permission**, following the official Bitcoin Bluetooth setup. Nano S Plus remains **0x40**. No master-seed or library permission is added.
-
-[0.1.4 evidence and test limits](../tools/ux-event-review/README.md) records the two captured Gen5 event formats, all five builds, emulator signing checks, and actual SDK/UI event replays. Gen5 0.1.4 account approval passed over USB and iPhone Bluetooth; Receive verification matched the complete address on phone/device, and normal app exit also passed. Nano S Plus 0.1.4 installation and USB account approval also passed. The [recorded physical checks](../tools/ux-event-review/physical-verification.json) do not establish a funded 0.1.4 signing/broadcast test. The earlier [0.1.3 failed hardware retest](../tools/ticker-review/physical-013.json) and [0.1.0 Nano S Plus installation checkpoint](../tools/install-guide-review/README.md) remain historical; they do not qualify the new release.
+The command prints the verified image location. Use `--sdk /path/to/ledger-secure-sdk` to reuse a clean checkout of the pinned SDK. The same source and image checks apply to build-only commands.

@@ -1,7 +1,5 @@
 # Experimental Pearl native signer
 
-**Hardware use and installation paused.** A reported Gen5 freeze/reset is unresolved. Do not install or test Pearl on hardware. See the [incident record](../../tools/gen5-reset-incident/README.md).
-
 This is a restricted PRL adaptation of Ledger's deployed Bitcoin 2.5.1 source,
 not a Ledger-approved application. Use public test seeds only in isolated emulators.
 Bounded Gen5 and Nano S Plus physical operations are recorded in the [0.1.4 verification](../../tools/ux-event-review/physical-verification.json); broader hardware qualification and independent professional audit remain open.
