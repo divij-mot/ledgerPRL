@@ -40,6 +40,7 @@ class LauncherTests(unittest.TestCase):
         executable.chmod(0o700)
         value = {
             "schema": 1, "sourceCommit": builder["COMMIT"],
+            "buildRecipe": builder["BUILD_RECIPE"],
             "archiveSha256": builder["ARCHIVE_SHA256"],
             "executable": str(executable), "executableSha256": builder["digest"](executable),
             "buildTags": ["xmss", "zkpow"],
@@ -125,7 +126,8 @@ class LauncherTests(unittest.TestCase):
         self.launch()
 
     def test_wrong_upstream_tags_or_source_hash_are_stale(self):
-        for key, value in (("sourceCommit", "0" * 40), ("buildTags", []),
+        for key, value in (("sourceCommit", "0" * 40), ("buildRecipe", None),
+                           ("buildRecipe", 1), ("buildTags", []),
                            ("helperSources", {})):
             with self.subTest(key=key):
                 self.artifact()

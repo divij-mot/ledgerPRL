@@ -27,7 +27,8 @@ def helper_current(root, build):
                 or not private_file(executable) or not os.access(executable, os.X_OK)):
             return False
         manifest = json.loads(manifest_path.read_text())
-        if (manifest.get("schema") != 1 or manifest.get("sourceCommit") != build["COMMIT"]
+        if (manifest.get("schema") != 1 or manifest.get("buildRecipe") != build["BUILD_RECIPE"]
+                or manifest.get("sourceCommit") != build["COMMIT"]
                 or manifest.get("archiveSha256") != build["ARCHIVE_SHA256"]
                 or manifest.get("buildTags") != ["xmss", "zkpow"]
                 or manifest.get("executable") != str(executable)

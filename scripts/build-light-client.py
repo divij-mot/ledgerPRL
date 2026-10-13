@@ -16,6 +16,18 @@ COMMIT = "2f8b770cac8f8b74be05c1fc51c2baeb76ce0701"
 ARCHIVE_SHA256 = "26dec47642a249fa1728f2520670d4d3b2788696207a3c074e0382cc63237396"
 URL = f"https://codeload.github.com/pearl-research-labs/pearl/tar.gz/{COMMIT}"
 CACHE = ROOT / ".tools" / "light-client"
+BUILD_RECIPE = 2
+# Exact recipe from the checksum-pinned upstream archive. Only its object
+# directory and failure propagation are adapted; verifier sources stay unchanged.
+XMSS_RECIPE = """libxmss.a: $(SOURCES) $(HEADERS) src/xmss.cpp xmss.h
+\t@mkdir -p /tmp/xmss_build_$$$$; \\
+\tfor src in $(SOURCES); do \\
+\t\t$(CC) $(CFLAGS) -c -o /tmp/xmss_build_$$$$/`basename $$src .c`.o $$src; \\
+\tdone; \\
+\t$(CXX) $(CXXFLAGS) -c -o /tmp/xmss_build_$$$$/xmss.o src/xmss.cpp; \\
+\t$(AR) rcs $@ /tmp/xmss_build_$$$$/*.o; \\
+\trm -rf /tmp/xmss_build_$$$$
+"""
 
 
 def digest(path):
@@ -28,6 +40,18 @@ def digest(path):
 
 def run(args, cwd, env):
     subprocess.run(args, cwd=cwd, env=env, check=True)
+
+
+def build_xmss(source, staging, env):
+    makefile = source / "xmss/Makefile"
+    original = makefile.read_text()
+    if original.count(XMSS_RECIPE) != 1 or original.count("/tmp/xmss_build_$$$$") != 5:
+        raise RuntimeError("Pinned XMSS build recipe changed")
+    recipe = XMSS_RECIPE.replace("/tmp/xmss_build_$$$$", '"$$PEARL_XMSS_OBJECTS"')
+    recipe = recipe.replace("@mkdir -p", "@set -eu; mkdir -p", 1)
+    makefile.write_text(original.replace(XMSS_RECIPE, recipe))
+    with tempfile.TemporaryDirectory(prefix="xmss-objects-", dir=staging) as objects:
+        run(["make"], source / "xmss", dict(env, PEARL_XMSS_OBJECTS=objects))
 
 
 def main():
@@ -78,7 +102,7 @@ def main():
         run(["cargo", "+1.90.0", "run", "--locked", "--release", "--no-default-features",
              "--bin", "build_cache", "src/circuit/v2_cache.bin", "src/v1/v1_cache.bin"], source / "zk-pow", env)
         run(["cargo", "+1.90.0", "build", "--locked", "--release"], source / "zk-pow/bindings/go", env)
-        run(["make"], source / "xmss", env)
+        build_xmss(source, staging, env)
         helper = staging / "helper"
         shutil.copytree(ROOT / "apps/light-client", helper,
                         ignore=shutil.ignore_patterns("bin", "target"))
@@ -91,7 +115,8 @@ def main():
         run(["go", "build", "-mod=readonly", "-trimpath", "-tags=xmss,zkpow", "-o", str(binary),
              "./cmd/pearl-watch"], helper, env)
         output = CACHE / "pearl-watch"
-        manifest = {"schema": 1, "sourceCommit": COMMIT, "archiveSha256": ARCHIVE_SHA256,
+        manifest = {"schema": 1, "buildRecipe": BUILD_RECIPE,
+                    "sourceCommit": COMMIT, "archiveSha256": ARCHIVE_SHA256,
                     "executable": str(output), "executableSha256": digest(binary),
                     "buildTags": ["xmss", "zkpow"],
                     "helperSources": helper_sources}

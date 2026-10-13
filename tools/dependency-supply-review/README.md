@@ -1,6 +1,6 @@
 # Dependency and build supply-chain review
 
-Reviewed 2026-10-10 against the file hashes in `results.json`. This is a bounded source/build inspection, not an independent human audit, installed-file authenticity proof, legal opinion, Ledger approval or physical-device qualification. The recorded Git HEAD is context; the source hashes identify the measured working tree.
+Reviewed 2026-10-13 against the file hashes in `results.json`. This is a bounded source/build inspection, not an independent human audit, installed-file authenticity proof, legal opinion, Ledger approval or physical-device qualification. The recorded Git HEAD is context; the source hashes identify the measured working tree.
 
 ## Current measured graph
 
@@ -12,7 +12,7 @@ The in-memory production build includes both `index.html` and `live.html`, their
 - Notices cover 49 npm package/version instances (48 distinct names), Vite/CommonJS runtime helpers, and six adapted Ledger Bitcoin host modules, nine adapted Ledger Wallet UI/QR views/components plus their glue/styles, and the three unmodified Inter font assets.
 - The graph excludes tests, fixtures, CLI, MetaMask, private-node/server modules and the historical SDK device implementation. Known public test-seed and RPC configuration markers are absent from generated code. These bounded checks are not universal secret detection.
 - All direct dependency versions are exact and match lock metadata. Existing CI uses `npm ci --ignore-scripts`, complete action commit pins and read-only contents permissions.
-- A fresh official npm advisory lookup reports **zero known advisories** for the current lockfile. This does not establish that dependencies have no vulnerabilities. The raw response is in `npm-audit.json`.
+- The 13 October [local OSV npm match](osv-npm-20261013.json) found **zero matching advisories** for 336 locked package/version pairs. It downloaded the complete public npm dataset and matched locally; no dependency tree or package-name query was transmitted. All 205 candidate semantic-version ranges were handled, and withdrawn records were skipped. This is npm-only OSV coverage, not a fresh npm-audit result or a vulnerability-free guarantee. The earlier registry response remains in `npm-audit.json` as historical evidence.
 
 The lock SHA-256 is `e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974`. Structural integrity syntax and version checks do not cryptographically authenticate the installed package contents.
 
@@ -48,7 +48,7 @@ node --test tools/dependency-supply-review/notices.test.mjs
 
 The review builds with `write:false`, leaving `dist` untouched. The generator rejects changed lock/build inputs, installed package metadata, notice hashes and unknown virtual runtime helpers. It never overwrites the distributed file. Four tests cover exact/stale byte checks, both entries/shared chunks/worker/CSS attribution, emitted Inter font assets/full OFL retention, and the source-derived Ledger Wallet UI MIT attribution. Removing the Buffer initialization shim separately reproduced the browser startup failure caught by the Wallet API browser-bundle regression.
 
-The advisory command is read-only and transmits public dependency names/versions to npm:
+The following optional advisory command transmits dependency names/versions to npm. It was not rerun successfully for this refresh; use it only when that disclosure is authorized:
 
 ```sh
 npm audit --package-lock-only --ignore-scripts --registry=https://registry.npmjs.org --json
@@ -59,3 +59,9 @@ npm audit --package-lock-only --ignore-scripts --registry=https://registry.npmjs
 No firmware build, emulator, physical Ledger operation, live indexer, deployment or fund movement was performed by these scripts. No source-level authenticity or security claim is inferred from reuse or a passing advisory lookup. The bounded current C firmware checkpoint is recorded separately in [native evidence](../live-app-native-review/README.md); historical Rust results do not qualify it.
 
 Earlier attribution-only work on 33 upstream C/header files remains documented in [SOURCE-ATTRIBUTION.md](SOURCE-ATTRIBUTION.md), with original-byte preservation and before/after hashes. The native build provenance limitations remain in `tools/bitcoin-prl-port/README.md`; this browser review does not close those gates.
+
+## Native-build follow-up (13 October)
+
+The browser graph above does not qualify the separate native build. Review found that the pinned upstream XMSS Makefile used a predictable shared `/tmp` object directory and could mask compiler failures. The local builder now exact-matches that recipe, confines objects to a private staging directory and enables fail-fast shell execution; verifier C/Rust sources are unchanged. Manifest `buildRecipe: 2` is required by both launcher and local-service loader, so previous cached helpers require rebuilding. Three inert real-make/compiler/archive regressions, ten launcher tests, sixteen local-service/runtime tests and a private build of the pinned XMSS static library passed. No user helper/profile, native synchronization, device or funds were touched by those checks.
+
+This build fix does not qualify public firmware installation, resolve the earlier device incident, complete native dependency advisory coverage, or resolve the attribution/project-license decisions above.

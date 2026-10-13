@@ -222,7 +222,7 @@ const sourcePaths = [...new Set([
 const sourceHashes = {};
 for (const file of sourcePaths) sourceHashes[file] = hash(await fs.readFile(path.join(root, file)));
 const report = {
-  schema: 2, reviewedOn: "2026-10-10", head: execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim(),
+  schema: 2, reviewedOn: new Date().toISOString().slice(0, 10), head: execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim(),
   nodeVersion: process.version, lockfileSha256: hash(await read("package-lock.json")),
   checks, counts: { registryRecords: registryRecords.length, installedRegistryRecords: registryRecords.length - missingInstalled.length,
     missingOptionalPlatformPackages: missingInstalled.length, browserMainModules: mainModules.size, browserWorkerModules: workerModules.size,

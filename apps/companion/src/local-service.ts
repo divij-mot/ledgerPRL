@@ -56,6 +56,7 @@ export function createLocalLightService(origin: string) {
         const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
         assert(
           manifest.schema === 1 &&
+            manifest.buildRecipe === 2 &&
             manifest.sourceCommit === LIGHT_SOURCE_COMMIT &&
             manifest.executable ===
               join(root, ".tools/light-client/pearl-watch") &&

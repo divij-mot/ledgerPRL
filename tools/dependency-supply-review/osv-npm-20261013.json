@@ -1,0 +1,29 @@
+{
+  "dataset": "https://storage.googleapis.com/osv-vulnerabilities/npm/all.zip",
+  "matchedAt": "2026-10-13T16:04:01.191787+00:00",
+  "archiveSha256": "2f10e26277eb12049ddb8415c5ddec8b27f4803435c3e9ce0b64f334f8257cfe",
+  "archiveBytes": 218369346,
+  "lockSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
+  "records": 230327,
+  "withdrawnSkipped": 730,
+  "lockedNames": 298,
+  "lockedVersions": 336,
+  "candidateRecords": 92,
+  "semver": "7.7.2",
+  "matches": [],
+  "unmatched": [],
+  "limits": [
+    "npm ecosystem OSV bulk snapshot only; not an npm audit response",
+    "No runtime reachability assessment",
+    "No Go, Cargo, Python or native SDK advisory coverage in this pass",
+    "No repository or package-name query sent externally"
+  ],
+  "retrieval": {
+    "lastModified": "2026-10-13T12:47:59+00:00",
+    "httpDate": "2026-10-13T16:02:26+00:00",
+    "method": "Complete public dataset download; lock matching performed locally"
+  },
+  "matching": "Exact affected.versions or union of SEMVER introduced/fixed/last_affected/limit intervals, using semver7.7.2; withdrew records excluded; no unsupported intervals among name-matching records.",
+  "matcherSha256": "5d5a782a0c4cd6ea4388e07aa022205ec41509dc7c01a907f1b1b76161006dec",
+  "filterSha256": "d7aebf659aedd22e1464351b6813aecc49d0314f71b46c96fefd30c04d83bb1c"
+}
