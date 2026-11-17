@@ -1,9 +1,9 @@
 {
   "schema": 2,
-  "reviewedOn": "2026-10-13",
-  "head": "b0bc4129e40bde75144895f6b92882230b4aa01f",
+  "reviewedOn": "2026-11-17",
+  "head": "32eef3c3632e7706d2eca7803dbaa353d41232e2",
   "nodeVersion": "v24.21.0",
-  "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
+  "lockfileSha256": "182eac5c942ce240857a0f54b2ae89976e9fe2db361b9776a0a80ac3edf51b47",
   "checks": [
     {
       "name": "npm lockfile uses version 3",
@@ -4840,7 +4840,7 @@
     },
     {
       "name": "zod",
-      "version": "4.6.5",
+      "version": "4.6.7",
       "directory": "node_modules/zod",
       "license": "MIT",
       "moduleCount": 18,
@@ -4880,7 +4880,7 @@
       "presentLicenseMarkers": []
     },
     {
-      "file": "assets/live-kz9zoHKr.js",
+      "file": "assets/live-Cy9h_bqt.js",
       "presentLicenseMarkers": []
     },
     {
@@ -5389,10 +5389,10 @@
       "cssModules": []
     },
     {
-      "file": "assets/live-kz9zoHKr.js",
+      "file": "assets/live-Cy9h_bqt.js",
       "type": "chunk",
-      "bytes": 446829,
-      "sha256": "9123b30a542e3cd956f3e39b42d633884ee6a99dab24ff0865261f61e8167887",
+      "bytes": 447444,
+      "sha256": "253947bef8543b74985940d9ae101b9b628603ce2ed2be983edf38686102e36e",
       "modules": [
         "apps/companion/src/wallet-buffer.ts",
         "node_modules/bignumber.js/bignumber.mjs",
@@ -6074,7 +6074,7 @@
       "file": "live.html",
       "type": "asset",
       "bytes": 885,
-      "sha256": "683ff101bafb02d8b6554e1728dcb29b77097770231e448bd2f37df279ca1b83",
+      "sha256": "d2fcaecf0b25394e4b40916fb67d9cc4583c39e2972bded238386ff12e61b61b",
       "modules": [],
       "cssModules": []
     }
@@ -9724,9 +9724,9 @@
     },
     {
       "path": "node_modules/zod",
-      "version": "4.6.5",
-      "resolved": "https://registry.npmjs.org/zod/-/zod-4.6.5.tgz",
-      "integrity": "sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==",
+      "version": "4.6.7",
+      "resolved": "https://registry.npmjs.org/zod/-/zod-4.6.7.tgz",
+      "integrity": "sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==",
       "dev": false,
       "optional": false
     }
@@ -9734,8 +9734,8 @@
   "sourceHashes": {
     ".github/workflows/ci.yml": "b08ed7c61c67672de4c94785fccd02b7ac6de976c7e75ea0383d7fdd33db242b",
     ".github/workflows/ledger-review.yml": "a56bcac50ce8dc5342e5df530b561ae67de15a7f7d6aaabb7f86ea825da30fa4",
-    "README.md": "1f3b1d9fd9e3c28b8d4ff2f220e8f3a01a6f14c1173d627e650eb1b1f402b32f",
-    "SECURITY.md": "56c1d8ca16a9c6d4a6630039fb0af4f36fc7fecb434b26b2e644b52b255b6d28",
+    "README.md": "b37a603fa8be136a92c9c4ec3248364e5aec484edde442bdc399cbc71c0431af",
+    "SECURITY.md": "8a371d1f3bc4874095257f8cc09c772b29ddb897477912224c248b2ea9cac615",
     "apps/cli/package.json": "23fd6bc66bc6d89d622ad3f2d7bdeb4fb9de5a26deb99315e155b19f8c99dad5",
     "apps/companion/index.html": "0eb3a7706eba0260630874f37b0880f8353dee7c2a4a02f2e40ce3c46a6c67d1",
     "apps/companion/live.html": "4541b9bd2c27730d55a6203b0226462c434377c13ef121c70cfffcca18ab59cb",
@@ -9807,7 +9807,7 @@
     "apps/ledger/packaging-requirements.txt": "af04b740c42c3e42ddcb673471deaab3c3b67f7c3a0b1622b5c464ccd982fee9",
     "docs/implementation-status.md": "cd229f7629b577dd14f2e4d37954c231bc0f090fca422dc27cee90692014c933",
     "docs/licensing.md": "0145fe001e68952f2d6d02c4edcc956ba17003149a8363390944503904f18a5b",
-    "docs/live-app.md": "1de04bd20b956863d10a475f4ebb0cd40c430625602525998f4a03c18fa49aaf",
+    "docs/live-app.md": "ee70b55fb34a34f5f7432ddb4d5ad6d53ba1391caac3fc916dc77600b8ab6992",
     "docs/test-evidence.md": "b3bae3c4167d1d2d4805ea5b48ceb5da4297b5f33a804a9d11096378b729de7d",
     "node_modules/@inversifyjs/common/lib/esm/index.js": "96cf7f4bdbd75fa6b10472bb534562056d7892d9fa980dbc0dcc5f3adb7863a8",
     "node_modules/@inversifyjs/container/lib/esm/index.js": "6daf96b7e0314c428b94a3263a168996d3b5f239e59ec8450df7a6d904820762",
@@ -10430,12 +10430,12 @@
     "node_modules/zod/v4/core/parse.js": "fb05b91ec260f3f484f7c00a177b6126ceb8fd1b09dc90b1200afdffd4d98efd",
     "node_modules/zod/v4/core/regexes.js": "24fc98f6fc9175e50ff29d28b040e3b4ac5650de19914d45ee27b853d367ecc6",
     "node_modules/zod/v4/core/registries.js": "f04d4b2c0bc5b4ac2d6610ea34edf2e5260eade18f20976b79916dcdbeb9fa4d",
-    "node_modules/zod/v4/core/schemas.js": "e632b655441418f0593153abc6809fd81cf3e0782d810622d0a4fa50ef6e182e",
+    "node_modules/zod/v4/core/schemas.js": "0ee56e8afbae28eeb1060a162ad7e56f0675ee6fb83f0ae56bea2e088f6cdbc0",
     "node_modules/zod/v4/core/to-json-schema.js": "85b883eb8f05e9f060c71a39fce7df9345b566af29d5bc9c8fa477fe616a051d",
-    "node_modules/zod/v4/core/util.js": "728f52b496620336775eafcdb91c0a574380086e53f215b55c58eedc1422c49c",
-    "node_modules/zod/v4/core/versions.js": "63b38035ff5e2a5a5cfe5665e271af72b0cf9791e770dccf5e99d977064fb96c",
+    "node_modules/zod/v4/core/util.js": "bb08133b11b478c8e715038fff26ebea204d7fd5443fba31fe138b142d202efb",
+    "node_modules/zod/v4/core/versions.js": "28439030e50c35b90e1f88726297a346f5285e32e24da7ea4ce15618661d9ac1",
     "node_modules/zod/v4/locales/en.js": "d5930e10d137b048b37823e168e4177947e1f696ada8419c71bb0d32da4333c0",
-    "package-lock.json": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
+    "package-lock.json": "182eac5c942ce240857a0f54b2ae89976e9fe2db361b9776a0a80ac3edf51b47",
     "package.json": "377ca4d89d4d843e1d662533e3d2696bac29a0f35f3ff5f074cf18f425cfbb69",
     "packages/bitcoin-prl-adapter/package.json": "3e74a3437d5e7ddb755fdc5f4014963cd7a539f600d0029e22aa86c9bd903012",
     "packages/bitcoin-prl-adapter/src/client.ts": "453541a29ca90f42d87c7dd5a6ea6461f9de784710973ad6620eeb33f1ceefa7",

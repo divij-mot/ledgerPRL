@@ -1,8 +1,8 @@
 {
   "schema": 2,
-  "reviewedOn": "2026-10-13",
-  "sourceHead": "b0bc4129e40bde75144895f6b92882230b4aa01f",
-  "lockfileSha256": "e83c2d33be7ac05c89288f6b12ad989eaf317dfd8692a0d1021a6d26c079a974",
+  "reviewedOn": "2026-11-17",
+  "sourceHead": "32eef3c3632e7706d2eca7803dbaa353d41232e2",
+  "lockfileSha256": "182eac5c942ce240857a0f54b2ae89976e9fe2db361b9776a0a80ac3edf51b47",
   "scope": "Actual Rollup entry/shared-chunk and worker graph plus watched CSS/preset build inputs, including generated runtime helpers and copied Ledger host source; no host-only package is included merely because it appears in package-lock.json.",
   "bundles": [
     {
@@ -32,10 +32,10 @@
       ]
     },
     {
-      "file": "assets/live-kz9zoHKr.js",
+      "file": "assets/live-Cy9h_bqt.js",
       "type": "chunk",
-      "bytes": 446829,
-      "sha256": "9123b30a542e3cd956f3e39b42d633884ee6a99dab24ff0865261f61e8167887",
+      "bytes": 447444,
+      "sha256": "253947bef8543b74985940d9ae101b9b628603ce2ed2be983edf38686102e36e",
       "components": [
         "node_modules/@ledgerhq/hw-transport@6.36.0",
         "node_modules/@ledgerhq/logs@6.19.0",
@@ -48,7 +48,7 @@
         "node_modules/events@3.3.0",
         "node_modules/jssha@3.2.0",
         "node_modules/tweetnacl@1.0.3",
-        "node_modules/zod@4.6.5",
+        "node_modules/zod@4.6.7",
         "generated-runtime:vite@7.3.7"
       ]
     },
@@ -175,7 +175,7 @@
       "file": "live.html",
       "type": "asset",
       "bytes": 885,
-      "sha256": "683ff101bafb02d8b6554e1728dcb29b77097770231e448bd2f37df279ca1b83",
+      "sha256": "d2fcaecf0b25394e4b40916fb67d9cc4583c39e2972bded238386ff12e61b61b",
       "components": []
     }
   ],
@@ -465,7 +465,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/hw-transport",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -495,7 +495,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/logs",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -639,7 +639,7 @@
       "license": "Apache-2.0",
       "directory": "node_modules/@ledgerhq/wallet-api-client",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -673,7 +673,7 @@
       "license": "MIT",
       "directory": "node_modules/@ledgerhq/wallet-api-core",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1062,7 +1062,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/core",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1254,7 +1254,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/crypto",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1309,7 +1309,7 @@
       "license": "MIT",
       "directory": "node_modules/@ton/crypto-primitives",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1369,7 +1369,7 @@
       "license": "MIT",
       "directory": "node_modules/bignumber.js",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1467,7 +1467,7 @@
       "license": "MIT",
       "directory": "node_modules/events",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -1568,7 +1568,7 @@
       "license": "BSD-3-Clause",
       "directory": "node_modules/jssha",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -2013,7 +2013,7 @@
       "license": "Unlicense",
       "directory": "node_modules/tweetnacl",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -2085,14 +2085,14 @@
       ]
     },
     {
-      "id": "node_modules/zod@4.6.5",
+      "id": "node_modules/zod@4.6.7",
       "name": "zod",
-      "version": "4.6.5",
+      "version": "4.6.7",
       "kind": "npm-reachable",
       "license": "MIT",
       "directory": "node_modules/zod",
       "bundles": [
-        "assets/live-kz9zoHKr.js"
+        "assets/live-Cy9h_bqt.js"
       ],
       "sourceModules": {
         "main": [
@@ -2132,7 +2132,7 @@
       "kind": "bundler-generated-runtime",
       "license": "MIT",
       "bundles": [
-        "assets/live-kz9zoHKr.js",
+        "assets/live-Cy9h_bqt.js",
         "assets/pearl-apdu-DTLxDe13.js"
       ],
       "sourceModules": {
@@ -2252,7 +2252,7 @@
   "proposedNotices": {
     "file": "THIRD-PARTY-NOTICES.proposed.txt",
     "bytes": 299181,
-    "sha256": "40dd92da8af2355e48f439ac06ad4dbf9db77970983ab7b9db9dd5adaab40a89"
+    "sha256": "49474c6ac7c27cd66b1df58d1b42957d76617e2daf6a4f94f7b0deb2b76aca51"
   },
   "limitations": [
     "This is a technical notices artifact, not a legal opinion. Wallet API core declares MIT but omits license/copyright text in its package and exact upstream tag; that attribution gap remains unresolved.",
