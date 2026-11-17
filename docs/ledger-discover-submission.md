@@ -55,7 +55,7 @@ The publicly readable [foundations contact form linked by Ledger](https://docs.g
 
 Proposed project description:
 
-> Pearl is a hosted wallet for the Pearl chain, with desktop and Android Ledger Wallet Discover integration through Wallet API device transport. The app is live at https://pearl-ledger-wallet.vercel.app/live.html. Keys and signing remain on the Ledger device; the server has no wallet database or account history store. Our repository is private. We seek guidance on a public Discover listing and on distribution of the required Pearl device app.
+> Pearl is a hosted wallet for the Pearl chain, with desktop and Android Ledger Wallet Discover integration through Wallet API device transport. The app is live at https://pearl-ledger-wallet.vercel.app/live.html. Keys and signing remain on the Ledger device; the server has no wallet database or account history store. Our source repository is public at https://github.com/divij-mot/ledgerPRL. We seek guidance on a public Discover listing and on distribution of the required Pearl device app.
 
 Proposed questions for Ledger:
 

@@ -4,7 +4,7 @@ A seedless, watch-only wallet website for the development Pearl Ledger Bitcoin-b
 
 ## Run
 
-Use macOS or Linux with Node.js 24.19 or a newer compatible 24.x release from the [normal Node installer](https://nodejs.org/en/download), then open a new terminal. A [downloaded source ZIP](../README.md#3-or-run-it-locally) works without Git or `.git`; this private repository currently requires signed-in GitHub access. From the extracted repository root:
+Use macOS or Linux with Node.js 24.19 or a newer compatible 24.x release from the [normal Node installer](https://nodejs.org/en/download), then open a new terminal. A [downloaded source ZIP](../README.md#run-locally) works without Git or `.git`. From the extracted repository root:
 
 ```sh
 python3 scripts/run-local.py

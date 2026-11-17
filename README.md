@@ -21,7 +21,7 @@ The hosted wallet uses Pearl’s public network service. Account caches and paym
 
 Local setup supports **macOS and Linux** and does not require Codex.
 
-[Download the source ZIP](https://github.com/divij-mot/ledgerPRL/archive/refs/heads/codex/pearl-ticker-review-fix.zip) and extract it. The repository is private, so your GitHub account needs access. This link selects the branch containing the current wallet updates.
+[Download the source ZIP](https://github.com/divij-mot/ledgerPRL/archive/refs/heads/codex/pearl-ticker-review-fix.zip) and extract it. This link selects the branch containing the current wallet updates.
 
 Install **Python 3, Node.js 24.19+ within 24.x with npm, Go, Rust/Cargo with Rust 1.90.0, and C/C++ build tools**. See the [platform setup instructions](https://github.com/divij-mot/ledgerPRL/blob/codex/pearl-ticker-review-fix/docs/live-app.md#local-setup).
 
